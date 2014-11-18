@@ -1,16 +1,34 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+﻿<!DOCTYPE html>
+<head>
+    <title>HTML5 Game Engine</title>
+</head>
+<!-- When the body finishes loading, the start() function runs. -->
+<body onload="EngineCore.initializeEngine('theCanvas', new StartScreenLevel());">
+    
+    <!-- Load your dependencies, in order, here -->
+    <script type="text/javascript" src="javascript/Engine/webgl-debug.js"></script>
+    <script type="text/javascript" src="javascript/Math/gl-matrix.js"></script>
+    
+    <script type="text/javascript" src="javascript/Engine/EngineCore.js"></script>
+    <script type="text/javascript" src="javascript/Engine/Transform.js"></script>
+    <script type="text/javascript" src="javascript/Engine/Camera.js"></script>
+    <script type="text/javascript" src="javascript/Engine/GameObject.js"></script>
+    <script type="text/javascript" src="javascript/Engine/LogicComponent.js"></script>
+    <script type="text/javascript" src="javascript/Engine/ShaderProgram.js"></script>
+    <script type="text/javascript" src="javascript/Engine/Renderable2DObject.js"></script>
+    <script type="text/javascript" src="javascript/Engine/Sprite.js"></script>
+    <script type="text/javascript" src="javascript/Engine/Scene.js"></script>
+    
+    
+
+    <script type="text/javascript" src="javascript/StartScreenLevel.js"></script>
+    <script type="text/javascript" src="javascript/GameOverLevel.js"></script>
+    <script type="text/javascript" src="javascript/MainLevel.js"></script>
+    <script type="text/javascript" src="javascript/Player.js"></script>
+    <script type="text/javascript" src="javascript/EnemyManager.js"></script>
+    <script type="text/javascript" src="javascript/BackgroundGenerator.js"></script>
+
+    <canvas id="theCanvas" width="800" height="600">
+        Your browser does not support the HTML5 canvas.
+    </canvas>
+</body>

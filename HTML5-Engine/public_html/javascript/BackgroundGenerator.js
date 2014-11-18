@@ -55,6 +55,20 @@ BackgroundGenerator.prototype.preloadResources = function()
     EngineCore.Resources.loadImage("resources/GROUND_1.png");    
 };
 
+BackgroundGenerator.prototype.draw = function()
+{
+    // draw all ground sections
+    for(var i = 0; i < this.mGrounds[0].length; i++)
+    {
+        this.mGrounds[0][i].draw();
+    }
+    
+    for(var j = 0; j < this.mGrounds[1].length; j++)
+    {
+        this.mGrounds[1][j].draw();
+    }
+};
+
 BackgroundGenerator.prototype.update = function()
 {
     // Depending on player position, generate or move around the background.

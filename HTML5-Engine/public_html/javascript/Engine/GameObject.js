@@ -24,11 +24,3 @@ GameObject.prototype.hasCollidedWithGameObj = function(otherGameObj)
              thisPos[1]               < otherPos[1] + otherSize[1]&&
              thisPos[1] + thisSize[1] > otherPos[1];
 };
-
-GameObject.prototype.destroy = function()
-{
-   this.mLogic = null;
-   this.mTransform = null;
-   this.mRenderComponent.removeFromAutoDrawSet();
-   this.mRenderComponent = null;
-};

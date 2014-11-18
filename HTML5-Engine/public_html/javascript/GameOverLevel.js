@@ -47,6 +47,7 @@ GameOverLevel.prototype.update = function()
 
 GameOverLevel.prototype.draw = function()
 {
+    this.mScreenImage.draw();
     this.mCamera.draw();
 };
 

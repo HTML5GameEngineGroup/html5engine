@@ -47,6 +47,7 @@ StartScreenLevel.prototype.update = function()
 
 StartScreenLevel.prototype.draw = function()
 {
+    this.mScreenImage.draw();
     this.mCamera.draw();
 };
 

@@ -63,7 +63,7 @@ EnemyManager.prototype.update = function()
     {
         if(this.mEnemyList[j].hasCollidedWithGameObj(this.mPlayer))
         {
-            EngineCore.SceneManager.setCurrentScene(new GameOverLevel());
+            //EngineCore.SceneManager.setCurrentScene(new GameOverLevel());
             this.mEnemyList[j].mIsDead = true;
         }
     }

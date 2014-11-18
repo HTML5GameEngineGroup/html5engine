@@ -714,14 +714,34 @@ EngineCore.Resources = function () {
 
 EngineCore.Loop = function ()
 {
-    var kFPS = 60;
+    var kFPS = 60;          // Frames per second
+    var kMPF = 1000 / kFPS; // Milleseconds per frame.
+    var kUR = 1;            // Update rate. (logic, not draw)
+    
+    // Variables for timing gameloop.
+    var mPreviousTime;
+    var mLagTime;
+    var mCurrentTime;
+    var mElapsedTime;
     
     // The identifier of the current loop.
     var mIntervalID = null;
 
     // This function is exclusivly to be called in the context of a scene.
     var runLoop = function () {
-        this.update();
+        mCurrentTime = Date.now();
+        mElapsedTime = mCurrentTime - mPreviousTime;
+        mPreviousTime = mCurrentTime;
+        mLagTime += mElapsedTime;
+        
+        // Update only every Milleseconds per frame.
+        // If lag larger then update freames, update until catchup.
+        while(mLagTime >= kMPF)
+        {
+            this.update();
+            mLagTime -= kMPF;
+        }
+        
         this.draw();
     };
 
@@ -729,6 +749,9 @@ EngineCore.Loop = function ()
     var start = function()
     {
         var sceneContext = EngineCore.SceneManager.getCurrentScene();
+        mPreviousTime = Date.now();
+        mLagTime = 0.0;
+        
         mIntervalID = setInterval(function(){runLoop.call(sceneContext);}, 1000 / kFPS);
     };
     

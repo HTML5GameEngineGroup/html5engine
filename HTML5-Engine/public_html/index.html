@@ -6,9 +6,12 @@
 <body onload="EngineCore.initializeEngine('theCanvas', new StartScreenLevel());">
     
     <!-- Load your dependencies, in order, here -->
-    <script type="text/javascript" src="javascript/Engine/webgl-debug.js"></script>
-    <script type="text/javascript" src="javascript/Math/gl-matrix.js"></script>
     
+    <!-- External Libraries -->
+    <script type="text/javascript" src="javascript/Lib/webgl-debug.js"></script>
+    <script type="text/javascript" src="javascript/Lib/gl-matrix.js"></script>
+    
+    <!-- Engine Library -->
     <script type="text/javascript" src="javascript/Engine/EngineCore.js"></script>
     <script type="text/javascript" src="javascript/Engine/Transform.js"></script>
     <script type="text/javascript" src="javascript/Engine/Camera.js"></script>
@@ -20,7 +23,7 @@
     <script type="text/javascript" src="javascript/Engine/Scene.js"></script>
     
     
-
+    <!-- Client Game files -->
     <script type="text/javascript" src="javascript/StartScreenLevel.js"></script>
     <script type="text/javascript" src="javascript/GameOverLevel.js"></script>
     <script type="text/javascript" src="javascript/MainLevel.js"></script>

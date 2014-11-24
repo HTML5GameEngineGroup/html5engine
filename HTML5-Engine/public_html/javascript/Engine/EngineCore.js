@@ -72,7 +72,7 @@ EngineCore.Resources = function () {
     
     // The number of verticies each piece of geometry will have. Closely tied
     // with vertexAndTextureCoordData.
-    var numberOfVertices = 4;
+    var DEFAULT_NUM_VERTICES = 4;
     
     // Contains the vertex and texture coordinates for webgl.
     var vertexBuffer = {};
@@ -500,7 +500,8 @@ EngineCore.Resources = function () {
         playBackgroundAudio: playBackgroundAudio,
         stopBackgroundAudio: stopBackgroundAudio,
         unloadAllResources: unloadAllResources,
-        DEFAULT_TEXTURE_COORD: DEFAULT_TEXTURE_COORD
+        DEFAULT_TEXTURE_COORD: DEFAULT_TEXTURE_COORD,
+        DEFAULT_NUM_VERTICES: DEFAULT_NUM_VERTICES
     };
 
     return oPublic;

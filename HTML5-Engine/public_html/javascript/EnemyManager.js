@@ -111,7 +111,7 @@ function Enemy(transform, player, enemyShader)
         enemyShader,
         "resources/anF.png");
         
-    renderObj.setTicksPerFrame(5);
+    renderObj.mTicksPerFrame = 5;
     
     this.mIsDead = false;
     

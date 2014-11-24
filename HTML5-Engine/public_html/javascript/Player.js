@@ -10,7 +10,7 @@ function Player(transform, camera, shaderName)
         "resources/sprites/megaman.png",
         "resources/sprites/megaman.xml");
         
-    renderObj.setTicksPerFrame(5);
+    renderObj.mTicksPerFrame = 5;
     
     GameObject.call(this, transform, logic, renderObj);
 }

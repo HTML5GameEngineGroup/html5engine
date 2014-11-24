@@ -54,7 +54,7 @@ EngineCore.Resources = function () {
     var onAllAssetsLoad = null;
 
     // The default vertex and texture data. Mapped as a plane with a texture on it.
-    var vertexData =
+    var DEFAULT_VERTEX_DATA =
     [
          0.0,  0.0,  0.0,     
          1.0,  0.0,  0.0,     
@@ -62,7 +62,7 @@ EngineCore.Resources = function () {
          1.0,  1.0,  0.0     
     ];
     
-    var defaultTextureCoordData =
+    var DEFAULT_TEXTURE_COORD =
     [
         0.0,  0.0,
         1.0,  0.0,
@@ -146,7 +146,7 @@ EngineCore.Resources = function () {
         gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
 
         // Put the vertices into the buffer, as non-changing drawing data (STATIC_DRAW)
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexData), 
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(DEFAULT_VERTEX_DATA), 
             gl.STATIC_DRAW);
             
         // Remove the buffer from the binding point now that we are done manipulating it.
@@ -157,22 +157,13 @@ EngineCore.Resources = function () {
         gl.bindBuffer(gl.ARRAY_BUFFER, textureBuffer);
         
         // Make sure our drawing data is DYNAMIC, because we will update frequently.
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(defaultTextureCoordData),
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(DEFAULT_TEXTURE_COORD),
             gl.DYNAMIC_DRAW);
             
         gl.bindBuffer(gl.ARRAY_BUFFER, null);
         
     };
 
-
-    var addShaderToZList = function(shaderName, zIndex)
-    {
-        var shadObj = shaderMap[shaderName];
-        var shadSet = new ShaderSet(shaderName, shadObj);
-        
-        zDrawSets[zIndex].push(shadSet);
-    };
-    
     var addShader = function(shaderName, vertexFilepath, fragmentFilepath)
     {
         var shadObj = new ShaderProgram(gl, vertexFilepath, fragmentFilepath);
@@ -407,159 +398,8 @@ EngineCore.Resources = function () {
             for(var currentObjIndex = 0; currentObjIndex < currentDrawSet.length; currentObjIndex++)
             {
                 var currentObj = currentDrawSet[currentObjIndex];
-
-                // Setup webgl for the current shader.
-                var shadName = currentDrawSet[currentObjIndex].mShader;
-                shaderMap[shadName].setActive();
-                var shaderProgram = shaderMap[shadName].getProgram();
-
-                // Connect the vertexAndTextureCoordBuffer to the ARRAY_BUFFER global gl binding point.
-                gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-
-                // Get references to the attributes within the shaders.
-                var vertexPositionAttribute = gl.getAttribLocation(shaderProgram,
-                    "aVertexPosition");     
-
-
-                // Takes the data from the buffer into the shader.
-                // Parameters:
-                //  1: Reference to the attribute loading the data to.
-                //  2: The number of components to each vertex attribute.
-                //  3: The data type of each component.
-                //  4: Whether to normalize or not, in the vector math sense.
-                //  5: Stride, for interweaved data in a buffer. How much of the buffer will
-                //      be skipped per query of an attribute. In bytes.
-                //  6: Called a pointer to first component of the first attribute, but is
-                //      an offset in the buffer.
-                gl.vertexAttribPointer(vertexPositionAttribute, 3, gl.FLOAT, false,
-                    0, 0);
-
-
-                // Tell OpenGL that we want to use an array for that attribute input.
-                gl.enableVertexAttribArray(vertexPositionAttribute);
-
-                // Setup texture coordinates and update depending on if it is a sprite or not.
-                var textureCoordinates = [];
-                if(currentObj instanceof Sprite)
-                {
-                    // Get the information for whole spritesheet.
-                    var spriteInfo = spritesheetMap[currentObj.getSpritesheetInfo()];
-
-                    // Get information for current frame.
-                    var currentFrame = currentObj.getCurrentFrame();
-
-                    // Check if frame not already out of range, if so reset to zero.
-                    if(currentFrame >= spriteInfo.length)
-                    {
-                        currentFrame = 0;
-                        currentObj.setCurrentFrame(0);
-                    }
-
-                    // Parse xml to retrieve an array of all frame infomration, then choose the
-                    // curent one.
-                    var frameInfo = spriteInfo.getElementsByTagName("SubTexture")[currentFrame];
-
-                    var texWidth = imgMap[currentObj.getTextureName()].width;
-                    var texHeight = imgMap[currentObj.getTextureName()].height;
-
-                    // Set the texture coordinates as a percentage of texture.
-                    var x1 = frameInfo.getAttribute("x") / texWidth;
-                    var y1 = frameInfo.getAttribute("y") / texHeight;
-                    var spriteWidth = frameInfo.getAttribute("width") / texWidth;
-                    var spriteHeight = frameInfo.getAttribute("height") / texHeight;
-                    var x2 = x1 + spriteWidth;
-                    var y2 = y1 + spriteHeight;
-
-
-                    // This is how the texture coordinates would ordinarily
-                    // map to to the verticies.
-                    //textureCoordinates = [x1,  y1,
-                    //                      x2,  y1,
-                    //                      x1,  y2,
-                    //                      x2,  y2];
-
-                    // The input xml data's coordinate system starts from
-                    // the upper left corner, while our textures use the
-                    // lower left corner as the origin (because we set
-                    // UNPACK_FLIP_Y_WEBGL to true earlier). So we flip
-                    // the y-coord here.
-                    textureCoordinates = [x1,  1 - y2,
-                                          x2,  1 - y2,
-                                          x1,  1 - y1,
-                                          x2,  1 - y1];     
-
-                    // Lastly, update it's sprite information.
-                    updateAnimation(currentObj, spriteInfo);
-                }
-                else
-                {
-                    textureCoordinates = defaultTextureCoordData;
-                }
-
-                // Retrieve the texture coordinate attribute memory location to pass in.
-                var textureCoordsAttribute = gl.getAttribLocation(shaderProgram,
-                    "aTextureCoordinate");
-
-                // Bind the textureBuffer to modify it.    
-                gl.bindBuffer(gl.ARRAY_BUFFER, textureBuffer);
-                // Update our buffer.
-                gl.bufferSubData(gl.ARRAY_BUFFER, 0, new Float32Array(textureCoordinates));
-                // Point gl to our data.
-                gl.vertexAttribPointer(textureCoordsAttribute, 2, gl.FLOAT, false,
-                    0, 0); 
-                gl.enableVertexAttribArray(textureCoordsAttribute);     
-
-                // Now give the shader program the texture data.
-                gl.activeTexture(gl.TEXTURE0);
-                gl.bindTexture(gl.TEXTURE_2D, imgMap[currentObj.getTextureName()]);
-                gl.uniform1i(gl.getUniformLocation(shaderProgram, "uSampler"), 0);
-
-                // Finally, set up the Model-View-Perspective matrix
-                var vpMatrix = activeCamera.getViewPerspectiveMatrix();
-                var mvpMatrix = mat4.create();
-
-                mat4.multiply(mvpMatrix, vpMatrix, currentObj.getTransform().getMatrix());
-
-                var uniformMVP = gl.getUniformLocation(shaderProgram, "uMVPMatrix");
-                gl.uniformMatrix4fv(uniformMVP, false, mvpMatrix);
-
-                // Draw triangles, with a max of this.numberOfVerticies verticies, from the zeroth element.
-                gl.drawArrays(gl.TRIANGLE_STRIP, 0, numberOfVertices);
-            }
-        }
-    };
-    
-    /*
-     * Updates a sprite to its next frame every number of ticks.
-     * 
-     * @param {Sprite} The sprite to modify.
-     * @param {} The sprite information contained in the spritesheetMap.
-     */
-    var updateAnimation = function(sprite, spriteInfo)
-    {
-        var totalTicks = sprite.getTicksPerFrame();
-        var currentTick = sprite.getCurrentTick();
-        
-        // Update our ticks if it hasn't been reached yet.
-        if(currentTick < totalTicks)
-        {
-            sprite.setCurrentTick(currentTick + 1);
-        }
-        else // Update our frame and reset tick if total ticks has been reached.
-        {
-            sprite.setCurrentTick(0);
-            
-            var currentFrame = sprite.getCurrentFrame();
-            var totalFrames = spriteInfo.totalSpriteFrames;
-            
-            // Go to the next frame if not at end of spritesheet, then loop back.
-            if(currentFrame < totalFrames - 1)
-            {
-                sprite.setCurrentFrame(currentFrame + 1);
-            }
-            else
-            {
-                sprite.setCurrentFrame(0);
+                
+                currentObj.draw(gl, vertexBuffer, textureBuffer);
             }
         }
     };
@@ -615,6 +455,26 @@ EngineCore.Resources = function () {
         return canvas.clientHeight;
     };
 
+    var getShader = function(shaderName)
+    {
+        return shaderMap[shaderName];
+    };
+    
+    var getGLTexture = function(textureName)
+    {
+        return imgMap[textureName];
+    };
+    
+    var getSpriteInfo = function(spriteInfoName)
+    {
+        return spritesheetMap[spriteInfoName];
+    };
+    
+    var getActiveCamera = function()
+    {
+        return activeCamera;
+    };
+
     // Public interface for this object. Anything not in here will
     // not be accessable.
     var oPublic =
@@ -631,11 +491,16 @@ EngineCore.Resources = function () {
         clearDrawSet: clearDrawSet,
         getCanvasWidth: getCanvasWidth,
         getCanvasHeight: getCanvasHeight,
+        getShader: getShader,
+        getGLTexture: getGLTexture,
+        getSpriteInfo: getSpriteInfo,
+        getActiveCamera: getActiveCamera,
         loadAudio: loadAudio,
         playSound: playSound,
         playBackgroundAudio: playBackgroundAudio,
         stopBackgroundAudio: stopBackgroundAudio,
-        unloadAllResources: unloadAllResources
+        unloadAllResources: unloadAllResources,
+        DEFAULT_TEXTURE_COORD: DEFAULT_TEXTURE_COORD
     };
 
     return oPublic;

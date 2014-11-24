@@ -22,11 +22,6 @@ Player.prototype.preloadResources = function()
                                          "resources/sprites/megaman.xml");
 };
 
-Player.prototype.draw = function()
-{
-    this.mRenderComponent.draw();
-};
-
 function PlayerLogic(transform, camera)
 {
     this.mMoveSpeed = 0.3;

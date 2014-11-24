@@ -81,8 +81,8 @@ MainLevel.prototype.update = function()
 MainLevel.prototype.draw = function()
 {
     EngineCore.Resources.clearCanvas();
-    this.mEnemyManager.draw();
-    this.mBackgroundManager.draw();
-    this.mPlayer.draw();
+    this.mEnemyManager.addToDrawSet();
+    this.mBackgroundManager.addToDrawSet();
+    this.mPlayer.addToDrawSet();
     this.mCamera.draw();
 };

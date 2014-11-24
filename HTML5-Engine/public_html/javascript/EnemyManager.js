@@ -28,14 +28,14 @@ EnemyManager.prototype.preloadResources = function()
     EngineCore.Resources.loadImage("resources/anF.png");
 };
 
-EnemyManager.prototype.draw = function()
+EnemyManager.prototype.addToDrawSet = function()
 {
     // draw all enemies
     for(var i = 0; i < this.mEnemyList.length; i++)
     {
         if(!this.mEnemyList[i].mIsDead)
         {
-            this.mEnemyList[i].draw();
+            this.mEnemyList[i].addToDrawSet();
         }
     }
 };
@@ -118,11 +118,6 @@ function Enemy(transform, player, enemyShader)
     GameObject.call(this, transform, logic, renderObj);
 }
 Enemy.prototype = Object.create(GameObject.prototype);
-
-Enemy.prototype.draw = function()
-{
-    this.mRenderComponent.draw();
-};
 
 //-----------------------------------------------------------------------------
 

@@ -55,17 +55,17 @@ BackgroundGenerator.prototype.preloadResources = function()
     EngineCore.Resources.loadImage("resources/GROUND_1.png");    
 };
 
-BackgroundGenerator.prototype.draw = function()
+BackgroundGenerator.prototype.addToDrawSet = function()
 {
     // draw all ground sections
     for(var i = 0; i < this.mGrounds[0].length; i++)
     {
-        this.mGrounds[0][i].draw();
+        this.mGrounds[0][i].addToDrawSet();
     }
     
     for(var j = 0; j < this.mGrounds[1].length; j++)
     {
-        this.mGrounds[1][j].draw();
+        this.mGrounds[1][j].addToDrawSet();
     }
 };
 

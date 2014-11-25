@@ -12,6 +12,8 @@ GameObject.prototype.getTransform = function(){return this.mTransform;};
 
 GameObject.prototype.update = function(){this.mLogic.update();};
 
+GameObject.prototype.addToDrawSet = function(){this.mRenderComponent.addToDrawSet();};
+
 GameObject.prototype.hasCollidedWithGameObj = function(otherGameObj)
 {
     var thisPos = this.mTransform.getPosition();

@@ -9,6 +9,7 @@ function MainLevel()
     this.mPlayer;
     this.mEnemyManager;
     this.mBackgroundManager;
+    this.mTestString;
 }
 MainLevel.prototype = Object.create(Scene.prototype);
 
@@ -27,6 +28,10 @@ MainLevel.prototype.contentLoad = function()
     // Load sounds
     EngineCore.Resources.loadAudio("resources/game-sound.wav");
     EngineCore.Resources.loadAudio("resources/Mind_Meld.mp3");
+    
+    // Load Font
+    EngineCore.Resources.loadFont("resources/fonts/dos-font.png",
+                                  "resources/fonts/dos-font.fnt");
 };
 
 MainLevel.prototype.initialize = function()
@@ -50,6 +55,17 @@ MainLevel.prototype.initialize = function()
     this.mEnemyManager = new EnemyManager(this.mPlayer, this.mMainShader);
     
     this.mBackgroundManager = new BackgroundGenerator(this.mPlayer, this.mMainShader);
+    
+    // Text
+    var textTransform = new Transform();
+    textTransform.setPosition(5,5);
+    textTransform.setSize(1,1);
+    textTransform.setZOrder(7);
+    
+    this.mTestString = new FontTexture(textTransform, this.mMainShader,
+                                       "resources/fonts/dos-font.png",
+                                       "resources/fonts/dos-font.fnt",
+                                       "Testing Textures! 87465@#RT");
     
     // Setup background audio, can't take it any more.
     //EngineCore.Resources.playBackgroundAudio("resources/Mind_Meld.mp3");
@@ -84,5 +100,6 @@ MainLevel.prototype.draw = function()
     this.mEnemyManager.addToDrawSet();
     this.mBackgroundManager.addToDrawSet();
     this.mPlayer.addToDrawSet();
+    this.mTestString.addToDrawSet();
     this.mCamera.draw();
 };

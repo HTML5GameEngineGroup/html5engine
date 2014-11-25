@@ -44,8 +44,11 @@ EngineCore.Resources = function () {
     // The sets of drawing sets sorted by z-order.
     var zDrawSets = [];
     
-    // A map of shader objects that who's name is they key.
+    // A map of shader objects that who's name is their key.
     var shaderMap = {};
+    
+    // A map of font objects with thier name as thier key.
+    var fontMap = {};
 
     // The number of assets currently needed to load.
     var assetsToBeLoaded = 0;
@@ -268,7 +271,7 @@ EngineCore.Resources = function () {
     {
         loadImage(textureSourceString);
         
-        if (!(sheetInfoSourceString in audioMap))
+        if (!(sheetInfoSourceString in spritesheetMap))
         {
             // Cache xml object in the spritesheetMap.
             spritesheetMap[sheetInfoSourceString] = null;
@@ -288,6 +291,40 @@ EngineCore.Resources = function () {
                 spritesheetMap[sheetInfoSourceString].totalSpriteFrames =
                         spritesheetMap[sheetInfoSourceString]
                         .getElementsByTagName("SubTexture").length;
+                
+                assetsToBeLoaded--;
+                if (assetsToBeLoaded === 0 && onAllAssetsLoad !== null)
+                {
+                    onAllAssetsLoad();
+                }
+            };
+            
+            req.send();
+        }
+    };
+    
+    var loadFont = function(textureSourceString, fontInfoSourceString)
+    {
+        loadImage(textureSourceString);
+        
+        if (!(fontInfoSourceString in fontMap))
+        {
+            // Cache xml object in the spritesheetMap.
+            fontMap[fontInfoSourceString] = null;
+            
+            // Update resources in load counter.
+            assetsToBeLoaded++;
+            
+            // Asyncrounsly request the data from server.
+            var req = new XMLHttpRequest();
+            req.open('GET', fontInfoSourceString, true);
+            req.setRequestHeader('Content-Type', 'text/xml');
+            
+            req.onload = function () 
+            {
+                var parser = new DOMParser();
+                
+                fontMap[fontInfoSourceString] = parser.parseFromString(req.responseText, "text/xml");
                 
                 assetsToBeLoaded--;
                 if (assetsToBeLoaded === 0 && onAllAssetsLoad !== null)
@@ -470,6 +507,11 @@ EngineCore.Resources = function () {
         return spritesheetMap[spriteInfoName];
     };
     
+    var getFontInfo = function(fontInfoName)
+    {
+        return fontMap[fontInfoName];
+    };
+    
     var getActiveCamera = function()
     {
         return activeCamera;
@@ -495,7 +537,9 @@ EngineCore.Resources = function () {
         getGLTexture: getGLTexture,
         getSpriteInfo: getSpriteInfo,
         getActiveCamera: getActiveCamera,
+        getFontInfo: getFontInfo,
         loadAudio: loadAudio,
+        loadFont: loadFont,
         playSound: playSound,
         playBackgroundAudio: playBackgroundAudio,
         stopBackgroundAudio: stopBackgroundAudio,

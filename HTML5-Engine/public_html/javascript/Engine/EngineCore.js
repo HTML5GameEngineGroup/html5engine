@@ -513,6 +513,10 @@ EngineCore.Loop = function ()
     var kMPF = 1000 / kFPS; // Milleseconds per frame.
     //var kUR = 1;            // Update rate. (logic, not draw)
     
+    // Variable and function for ending a loop.
+    var isLoopRunning = false;
+    var givenLoopEndFunction = null;
+    
     // Variables for timing gameloop.
     var mPreviousTime;
     var mLagTime;
@@ -524,22 +528,31 @@ EngineCore.Loop = function ()
 
     // This function is exclusivly to be called in the context of a scene.
     var runLoop = function () {
-        mCurrentTime = Date.now();
-        mElapsedTime = mCurrentTime - mPreviousTime;
-        mPreviousTime = mCurrentTime;
-        mLagTime += mElapsedTime;
-        
-        EngineCore.Resources.clearDrawSet();
-        
-        // Update only every Milleseconds per frame.
-        // If lag larger then update freames, update until catchup.
-        while(mLagTime >= kMPF)
+        if(isLoopRunning)
         {
-            this.update();
-            mLagTime -= kMPF;
+            mCurrentTime = Date.now();
+            mElapsedTime = mCurrentTime - mPreviousTime;
+            mPreviousTime = mCurrentTime;
+            mLagTime += mElapsedTime;
+
+            EngineCore.Resources.clearDrawSet();
+
+            // Update only every Milleseconds per frame.
+            // If lag larger then update freames, update until catchup.
+            while(mLagTime >= kMPF)
+            {
+                this.update();
+                mLagTime -= kMPF;
+            }
+
+            this.draw();
         }
-        
-        this.draw();
+        else
+        {
+            clearInterval(mIntervalID);
+            mIntervalID = null;
+            givenLoopEndFunction();
+        }
     };
 
     // update and draw functions must be set before this.
@@ -549,18 +562,26 @@ EngineCore.Loop = function ()
         mPreviousTime = Date.now();
         mLagTime = 0.0;
         
+        isLoopRunning = true;
+        givenLoopEndFunction = null;
+        
         mIntervalID = setInterval(function(){runLoop.call(sceneContext);}, 1000 / kFPS);
     };
     
-    // Stops only after a loop is started.
-    var stop = function()
+    // Stops only after a loop is started and when the loop ends.
+    var stop = function(afterStopEventHandler)
     {
-       if(mIntervalID !== null)
-       {
-           clearInterval(mIntervalID);
-           mIntervalID = null;
-       }
+        if(mIntervalID !== null)
+        {
+            isLoopRunning = false;
+            givenLoopEndFunction = afterStopEventHandler;
+        }
+        else // If the loop hasnt started, just play the event.
+        {
+            afterStopEventHandler();
+        }
     };
+    
 
     var oPublic =
     {
@@ -665,22 +686,25 @@ EngineCore.SceneManager = function()
     
     var setCurrentScene = function(scene)
     {
-        // Stop the current gameloop
-        EngineCore.Loop.stop();
+        // Stop the current gameloop after current iteration finishes then
+        // run the flushing and swaping scene logic.
+        EngineCore.Loop.stop(function(){
+            // Remove all content from previous scene
+            EngineCore.Resources.unloadAllResources();
+
+            mCurrentScene = scene;
+
+            mCurrentScene.contentLoad();
+
+            // When all content loaded, initailze the scene, then start loop with 
+            // given update and draw.
+            EngineCore.Resources.setOnAssetsLoadFunction(function(){
+                        mCurrentScene.initialize.call(mCurrentScene);
+                        EngineCore.Loop.start();
+                        });
+        });
         
-        // Remove all content from previous scene
-        EngineCore.Resources.unloadAllResources();
-        
-        mCurrentScene = scene;
-        
-        mCurrentScene.contentLoad();
-        
-        // When all content loaded, initailze the scene, then start loop with 
-        // given update and draw.
-        EngineCore.Resources.setOnAssetsLoadFunction(function(){
-                    mCurrentScene.initialize.call(mCurrentScene);
-                    EngineCore.Loop.start();
-                    });
+
     };
     
     var getCurrentScene = function()

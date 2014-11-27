@@ -39,10 +39,7 @@ FontTexture.prototype._drawText = function(gl, shaderProgram, textureCoordBuffer
     var stringSize = this.mTransformMatrix.getScale();
     
     for(var charIndex = 0; charIndex < this.mText.length; charIndex++)
-    {
-        var offsetVector = vec3.create();
-        vec3.set(offsetVector, xAdvance, 0, 0);      
-        
+    {   
         var charInfo = this._getCharInfo(fontInfoXML, this.mText.charCodeAt(charIndex));
 
         // If the char does not exist, dont draw.
@@ -84,8 +81,23 @@ FontTexture.prototype._drawText = function(gl, shaderProgram, textureCoordBuffer
             var mvpMatrix = mat4.create();
 
             // Offset for each letter.
+            var offsetVector = vec3.create();
+            var xOffset = charInfo.getAttribute("xoffset") / texWidth;
+            //var yOffset = -charInfo.getAttribute("yoffset") / texHeight ;
+            
+            vec3.set(offsetVector, xAdvance + xOffset , 0, 0);   
+
+            // Resize for each letter.
+            var scalingVector = vec3.create();
+            vec3.set(scalingVector, spriteWidth, spriteHeight, 1);
+
+            
             var transformMatrix = mat4.create();
             mat4.translate(transformMatrix, this.mTransformMatrix.getMatrix(), offsetVector);
+            mat4.scale(transformMatrix, transformMatrix, scalingVector);
+            
+            
+            
             mat4.multiply(mvpMatrix, vpMatrix, transformMatrix);
 
             var uniformMVP = gl.getUniformLocation(shaderProgram, "uMVPMatrix");
@@ -95,14 +107,11 @@ FontTexture.prototype._drawText = function(gl, shaderProgram, textureCoordBuffer
             gl.drawArrays(gl.TRIANGLE_STRIP, 0, EngineCore.Resources.DEFAULT_NUM_VERTICES);
             
             var pxAdv = charInfo.getAttribute("xadvance"); 
-            var pxSize = charInfo.getAttribute("width");
-            if(pxSize == 0) // :( coersion with strings and numbers.
-            {
-                pxSize = pxAdv;
-            }
             
-            var bufXAdv = (pxAdv / pxSize);
-            
+            var bufXAdv;
+
+            bufXAdv = pxAdv / texWidth;
+
             xAdvance +=  bufXAdv;
         }
     } 

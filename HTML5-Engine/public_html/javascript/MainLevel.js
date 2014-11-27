@@ -88,6 +88,23 @@ MainLevel.prototype.update = function()
         EngineCore.Resources.stopBackgroundAudio();
     }
     
+    if(EngineCore.Input.isKeyDown(EngineCore.Input.LEFT))
+    {
+        this.mTestString.mTransformMatrix.getScale()[0] -= .1;
+    }
+    if(EngineCore.Input.isKeyDown(EngineCore.Input.RIGHT))
+    {
+        this.mTestString.mTransformMatrix.getScale()[0] += .1;
+    }
+    if(EngineCore.Input.isKeyDown(EngineCore.Input.UP))
+    {
+        this.mTestString.mTransformMatrix.getScale()[1] += .1;
+    }
+    if(EngineCore.Input.isKeyDown(EngineCore.Input.DOWN))
+    {
+        this.mTestString.mTransformMatrix.getScale()[1] -= .1;
+    }
+    
     // Update Scene
     this.mPlayer.update();
     this.mEnemyManager.update();

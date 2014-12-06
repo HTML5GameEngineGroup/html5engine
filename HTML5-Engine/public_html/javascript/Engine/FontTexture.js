@@ -83,9 +83,13 @@ FontTexture.prototype._drawText = function(gl, shaderProgram, textureCoordBuffer
             // Offset for each letter.
             var offsetVector = vec3.create();
             var xOffset = charInfo.getAttribute("xoffset") / texWidth;
-            //var yOffset = -charInfo.getAttribute("yoffset") / texHeight ;
             
-            vec3.set(offsetVector, xAdvance + xOffset , 0, 0);   
+            // SpriteHeight must be added to offset to get the position as it will be in
+            // world space, since the y-origin in the xml is on the top-left, while in our 
+            // world it is on the bottom left.
+            var yOffset = -(spriteHeight + (charInfo.getAttribute("yoffset") / texHeight)) ;
+            
+            vec3.set(offsetVector, xAdvance + xOffset , yOffset, 0);   
 
             // Resize for each letter.
             var scalingVector = vec3.create();

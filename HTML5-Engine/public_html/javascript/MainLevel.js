@@ -91,22 +91,22 @@ MainLevel.prototype.update = function()
         EngineCore.Resources.stopBackgroundAudio();
     }
     
-//    if(EngineCore.Input.isKeyDown(EngineCore.Input.LEFT))
-//    {
-//        this.mFPSText.mTransformMatrix.getScale()[0] -= .1;
-//    }
-//    if(EngineCore.Input.isKeyDown(EngineCore.Input.RIGHT))
-//    {
-//        this.mFPSText.mTransformMatrix.getScale()[0] += .1;
-//    }
-//    if(EngineCore.Input.isKeyDown(EngineCore.Input.UP))
-//    {
-//        this.mFPSText.mTransformMatrix.getScale()[1] += .1;
-//    }
-//    if(EngineCore.Input.isKeyDown(EngineCore.Input.DOWN))
-//    {
-//        this.mFPSText.mTransformMatrix.getScale()[1] -= .1;
-//    }
+    if(EngineCore.Input.isKeyDown(EngineCore.Input.LEFT))
+    {
+        this.mFPSText.mTransformMatrix.getScale()[0] -= .1;
+    }
+    if(EngineCore.Input.isKeyDown(EngineCore.Input.RIGHT))
+    {
+        this.mFPSText.mTransformMatrix.getScale()[0] += .1;
+    }
+    if(EngineCore.Input.isKeyDown(EngineCore.Input.UP))
+    {
+        this.mFPSText.mTransformMatrix.getScale()[1] += .1;
+    }
+    if(EngineCore.Input.isKeyDown(EngineCore.Input.DOWN))
+    {
+        this.mFPSText.mTransformMatrix.getScale()[1] -= .1;
+    }
     
     this.mFPSText.mTransformMatrix.setX(this.mCamera.getCameraX() - (this.mCamera.getCameraWidth() / 2));
     this.mFPSText.mTransformMatrix.setY(this.mCamera.getCameraY() - (this.mCamera.getCameraHieght() * .45));

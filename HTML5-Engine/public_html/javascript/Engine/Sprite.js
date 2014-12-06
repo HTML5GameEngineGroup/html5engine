@@ -60,22 +60,11 @@ Sprite.prototype._setupSpriteDrawing = function(spriteInfo)
     var y2 = y1 + spriteHeight;
 
 
-    // This is how the texture coordinates would ordinarily
-    // map to to the verticies.
-    //textureCoordinates = [x1,  y1,
-    //                      x2,  y1,
-    //                      x1,  y2,
-    //                      x2,  y2];
-
-    // The input xml data's coordinate system starts from
-    // the upper left corner, while our textures use the
-    // lower left corner as the origin (because we set
-    // UNPACK_FLIP_Y_WEBGL to true earlier). So we flip
-    // the y-coord here.
-    var textureCoordinates = [x1,  1 - y2,
-                              x2,  1 - y2,
-                              x1,  1 - y1,
-                              x2,  1 - y1];     
+    var textureCoordinates = [x1,  y2,
+                              x2,  y2,
+                              x1,  y1,
+                              x2,  y1];
+ 
 
     return textureCoordinates;
 };

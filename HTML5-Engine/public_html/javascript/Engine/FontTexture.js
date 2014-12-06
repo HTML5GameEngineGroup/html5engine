@@ -57,10 +57,10 @@ FontTexture.prototype._drawText = function(gl, shaderProgram, textureCoordBuffer
             var x2 = x1 + spriteWidth;
             var y2 = y1 + spriteHeight;
 
-            var textureCoordinates = [x1,  1 - y2,
-                                      x2,  1 - y2,
-                                      x1,  1 - y1,
-                                      x2,  1 - y1];   
+            var textureCoordinates = [x1,  y2,
+                                      x2,  y2,
+                                      x1,  y1,
+                                      x2,  y1];
 
 
             // Retrieve the texture coordinate attribute memory location to pass in.
@@ -83,9 +83,9 @@ FontTexture.prototype._drawText = function(gl, shaderProgram, textureCoordBuffer
             // Offset for each letter.
             var offsetVector = vec3.create();
             var xOffset = charInfo.getAttribute("xoffset") / texWidth;
-            //var yOffset = -charInfo.getAttribute("yoffset") / texHeight ;
+            var yOffset = -(charInfo.getAttribute("yoffset") / texHeight) ;
             
-            vec3.set(offsetVector, xAdvance + xOffset , 0, 0);   
+            vec3.set(offsetVector, xAdvance + xOffset , yOffset, 0);   
 
             // Resize for each letter.
             var scalingVector = vec3.create();

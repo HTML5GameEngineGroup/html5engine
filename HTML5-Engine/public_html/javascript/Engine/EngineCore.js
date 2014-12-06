@@ -67,10 +67,10 @@ EngineCore.Resources = function () {
     
     var DEFAULT_TEXTURE_COORD =
     [
-        0.0,  1.0,
-        1.0,  1.0,
         0.0,  0.0,
-        1.0,  0.0
+        1.0,  0.0,
+        0.0,  1.0,
+        1.0,  1.0
     ];
     
     // The number of verticies each piece of geometry will have. Closely tied
@@ -116,7 +116,7 @@ EngineCore.Resources = function () {
         gl.enable ( gl.BLEND ) ;
         
         // Set images to have a fliped y axis to match the texture coordinate space.
-        //gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
         
         // Sets the color to clear the screen with.
         gl.clearColor(0.0, 0.0, 1.0, 1.0);

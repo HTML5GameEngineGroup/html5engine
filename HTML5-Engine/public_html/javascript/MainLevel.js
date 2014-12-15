@@ -109,7 +109,7 @@ MainLevel.prototype.update = function()
     }
     
     this.mFPSText.mTransformMatrix.setX(this.mCamera.getCameraX() - (this.mCamera.getCameraWidth() / 2));
-    this.mFPSText.mTransformMatrix.setY(this.mCamera.getCameraY() - (this.mCamera.getCameraHieght() * .45));
+    this.mFPSText.mTransformMatrix.setY(this.mCamera.getCameraY() - (this.mCamera.getCameraHieght() * .4));
     
     // Update Scene
     this.mPlayer.update();

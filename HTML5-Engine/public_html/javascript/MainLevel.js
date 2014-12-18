@@ -9,6 +9,7 @@ function MainLevel()
     this.mPlayer;
     this.mEnemyManager;
     this.mBackgroundManager;
+    this.mLight;
 }
 MainLevel.prototype = Object.create(Scene.prototype);
 
@@ -16,8 +17,8 @@ MainLevel.prototype.contentLoad = function()
 {
     //Puts a shader into our game engine to use.
     EngineCore.Resources.addShader(this.mMainShader,
-        "shaders/textured-vs.glsl",
-        "shaders/textured-fs.glsl");
+        "shaders/texturedLighting-vs.glsl",
+        "shaders/texturedLighting-fs.glsl");
     
     // Preload Object Assets
     Player.prototype.preloadResources();
@@ -50,6 +51,9 @@ MainLevel.prototype.initialize = function()
     this.mEnemyManager = new EnemyManager(this.mPlayer, this.mMainShader);
     
     this.mBackgroundManager = new BackgroundGenerator(this.mPlayer, this.mMainShader);
+    
+    // added by jeb
+    //this.mLight = new Light(transform.getPosition(), vec4(1, 0, 0, 1), 3.5);
     
     // Setup background audio, can't take it any more.
     //EngineCore.Resources.playBackgroundAudio("resources/Mind_Meld.mp3");

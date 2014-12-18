@@ -1,33 +1,39 @@
 function Renderable2DObject(transform, shaderName, textureName)
 {
     this.mShader = shaderName;
-    this.mTextureString = textureName;    
+    this.mTextureString = textureName;
     this.mTransformMatrix = transform;
 }
 
-Renderable2DObject.prototype.getShaderName = function() {return this.mShader;};
-        
-Renderable2DObject.prototype.getTextureName = function() {return this.mTextureString;};
+Renderable2DObject.prototype.getShaderName = function () {
+    return this.mShader;
+};
 
-Renderable2DObject.prototype.getTransform = function() {return this.mTransformMatrix;};
+Renderable2DObject.prototype.getTextureName = function () {
+    return this.mTextureString;
+};
 
-Renderable2DObject.prototype.addToDrawSet = function()
+Renderable2DObject.prototype.getTransform = function () {
+    return this.mTransformMatrix;
+};
+
+Renderable2DObject.prototype.addToDrawSet = function ()
 {
     EngineCore.Resources.addToDrawSet(this);
 };
 
-Renderable2DObject.prototype._activateAndGetShader = function()
+Renderable2DObject.prototype._activateAndGetShader = function ()
 {
     var shaderWrapper = EngineCore.Resources.getShader(this.mShader);
     shaderWrapper.setActive();
     return shaderWrapper.getProgram();
 };
 
-Renderable2DObject.prototype._setupVertexAttrib = function(gl, shaderProgram, vertexBuffer)
+Renderable2DObject.prototype._setupVertexAttrib = function (gl, shaderProgram, vertexBuffer)
 {
     // Get references to the attributes within the shaders.
     var vertexPositionAttribute = gl.getAttribLocation(shaderProgram,
-        "aVertexPosition");     
+            "aVertexPosition");
 
     // Connect the vertexAndTextureCoordBuffer to the ARRAY_BUFFER global gl binding point.
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
@@ -44,7 +50,7 @@ Renderable2DObject.prototype._setupVertexAttrib = function(gl, shaderProgram, ve
     //  6: Called a pointer to first component of the first attribute, but is
     //      an offset in the buffer.
     gl.vertexAttribPointer(vertexPositionAttribute, 3, gl.FLOAT, false,
-        0, 0);
+            0, 0);
 
 
     // Tell OpenGL that we want to use an array for that attribute input.
@@ -52,11 +58,11 @@ Renderable2DObject.prototype._setupVertexAttrib = function(gl, shaderProgram, ve
 
 };
 
-Renderable2DObject.prototype._setupTextureCoordAttrib = function(gl, shaderProgram, textureBuffer)
+Renderable2DObject.prototype._setupTextureCoordAttrib = function (gl, shaderProgram, textureBuffer)
 {
     // Retrieve the texture coordinate attribute memory location to pass in.
     var textureCoordsAttribute = gl.getAttribLocation(shaderProgram,
-        "aTextureCoordinate");
+            "aTextureCoordinate");
 
     // Bind the textureBuffer to modify it.    
     gl.bindBuffer(gl.ARRAY_BUFFER, textureBuffer);
@@ -64,11 +70,11 @@ Renderable2DObject.prototype._setupTextureCoordAttrib = function(gl, shaderProgr
     gl.bufferSubData(gl.ARRAY_BUFFER, 0, new Float32Array(EngineCore.Resources.DEFAULT_TEXTURE_COORD));
     // Point gl to our data.
     gl.vertexAttribPointer(textureCoordsAttribute, 2, gl.FLOAT, false,
-        0, 0); 
+            0, 0);
     gl.enableVertexAttribArray(textureCoordsAttribute);
 };
 
-Renderable2DObject.prototype._setupGLTexture = function(gl, shaderProgram)
+Renderable2DObject.prototype._setupGLTexture = function (gl, shaderProgram)
 {
     // Now give the shader program the texture data.
     gl.activeTexture(gl.TEXTURE0);
@@ -76,7 +82,7 @@ Renderable2DObject.prototype._setupGLTexture = function(gl, shaderProgram)
     gl.uniform1i(gl.getUniformLocation(shaderProgram, "uSampler"), 0);
 };
 
-Renderable2DObject.prototype._setupMVPMatrix = function(gl, shaderProgram)
+Renderable2DObject.prototype._setupMVPMatrix = function (gl, shaderProgram)
 {
     // Finally, set up the Model-View-Perspective matrix
     var vpMatrix = EngineCore.Resources.getActiveCamera().getViewPerspectiveMatrix();
@@ -88,7 +94,38 @@ Renderable2DObject.prototype._setupMVPMatrix = function(gl, shaderProgram)
     gl.uniformMatrix4fv(uniformMVP, false, mvpMatrix);
 };
 
-Renderable2DObject.prototype.draw = function(gl, vertexBuffer, textureBuffer)
+//added by jeb for model view matrix
+Renderable2DObject.prototype._setupMVMatrix = function (gl, shaderProgram)
+{
+    var vMatrix = EngineCore.Resources.getActiveCamera().getViewMatrix();
+    var mvMatrix = mat4.create();
+
+    mat4.multiply(mvMatrix, vMatrix, this.mTransformMatrix.getMatrix());
+
+    var uniformMV = gl.getUniformLocation(shaderProgram, "uMVMatrix");
+    gl.uniformMatrix4fv(uniformMV, false, mvMatrix);
+};
+
+//added by jeb for projection matrix
+Renderable2DObject.prototype._setupPMatrix = function (gl, shaderProgram)
+{
+    var matrix = EngineCore.Resources.getActiveCamera().getOrthographicMatrix();
+    var uniformP = gl.getUniformLocation(shaderProgram, "uPMatrix");
+    gl.uniformMatrix4fv(uniformP, false, matrix);
+};
+
+
+//Renderable2DObject.prototype._setupLightPosAttrib = function (gl, shaderProgram, lightPosition)
+//{
+//    // Get references to the attributes within the shaders.
+//    var vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aLightPosition");
+//    gl.bindBuffer(gl.ARRAY_BUFFER, lightPosition);
+//    gl.vertexAttribPointer(vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0);
+//
+//};
+
+
+Renderable2DObject.prototype.draw = function (gl, vertexBuffer, textureBuffer)
 {
     var shaderProgram = this._activateAndGetShader();
 
@@ -98,8 +135,29 @@ Renderable2DObject.prototype.draw = function(gl, vertexBuffer, textureBuffer)
 
     this._setupGLTexture(gl, shaderProgram);
 
-    this._setupMVPMatrix(gl, shaderProgram);
+    //modified by jeb
+    //this._setupMVPMatrix(gl, shaderProgram);
+    this._setupMVMatrix(gl, shaderProgram);
+    this._setupPMatrix(gl, shaderProgram);
 
     // Draw triangles, with a max of this.numberOfVerticies verticies, from the zeroth element.
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, EngineCore.Resources.DEFAULT_NUM_VERTICES);
 };
+//
+//Renderable2DObject.prototype.draw = function (gl, vertexBuffer, textureBuffer, light)
+//{
+//    var shaderProgram = this._activateAndGetShader();
+//    this._setupVertexAttrib(gl, shaderProgram, vertexBuffer);
+//    this._setupTextureCoordAttrib(gl, shaderProgram, textureBuffer);
+//    this._setupGLTexture(gl, shaderProgram);
+//
+//    //modified by jeb
+//    this._setupMVMatrix(gl, shaderProgram);
+//    this._setupPMatrix(gl, shaderProgram);
+//    
+//    // light position
+//    this._setupVertexAttrib(gl, shaderProgram, light.getPosition());
+//
+//    // Draw triangles, with a max of this.numberOfVerticies verticies, from the zeroth element.
+//    gl.drawArrays(gl.TRIANGLE_STRIP, 0, EngineCore.Resources.DEFAULT_NUM_VERTICES);
+//};

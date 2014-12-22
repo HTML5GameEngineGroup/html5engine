@@ -10,7 +10,7 @@ function MainLevel()
     this.mEnemyManager;
     this.mBackgroundManager;
     this.mLight;
-}
+};
 MainLevel.prototype = Object.create(Scene.prototype);
 
 MainLevel.prototype.contentLoad = function()
@@ -53,7 +53,10 @@ MainLevel.prototype.initialize = function()
     this.mBackgroundManager = new BackgroundGenerator(this.mPlayer, this.mMainShader);
     
     // added by jeb
-    //this.mLight = new Light(transform.getPosition(), vec4(1, 0, 0, 1), 3.5);
+    var playerPos = transform.getPosition();
+    var lightColor = vec4.fromValues(1.0, 0, 0, 1.0);
+    this.mLight = new Light(playerPos, lightColor);
+    this.mPlayer.mRenderComponent.addLight(this.mLight);
     
     // Setup background audio, can't take it any more.
     //EngineCore.Resources.playBackgroundAudio("resources/Mind_Meld.mp3");
@@ -80,6 +83,7 @@ MainLevel.prototype.update = function()
     this.mPlayer.update();
     this.mEnemyManager.update();
     this.mBackgroundManager.update();
+    this.mLight.update(this.mPlayer.getTransform().getPosition());
 };
 
 MainLevel.prototype.draw = function()

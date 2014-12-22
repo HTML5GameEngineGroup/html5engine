@@ -31,6 +31,20 @@ function Transform()
         };
     this.getZOrder = function()
         { return zOrder;};
+        
+    this.getCenterPosition = function()
+    {
+        return vec2.fromValues(x + (scale[0] / 2), y + (scale[1]/2));
+    };
+    this.getWidth = function()
+    {
+        return scale[0];
+    };
+    
+    this.getHeight = function()
+    {
+        return scale[1];
+    };
 };
 
 Transform.prototype.getMatrix = function()

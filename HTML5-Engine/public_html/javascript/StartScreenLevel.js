@@ -1,3 +1,6 @@
+
+"use strict";
+
 /* 
  * The template for a scene.
  */
@@ -13,8 +16,8 @@ StartScreenLevel.prototype.contentLoad = function()
 {
     //Puts a shader into our game engine to use.
     EngineCore.Resources.addShader(this.mMainShader,
-        "shaders/textured-vs.glsl",
-        "shaders/textured-fs.glsl");
+        "shaders/texturedLighting-vs.glsl",
+        "shaders/texturedLighting-fs.glsl");
     EngineCore.Resources.loadImage("resources/Intro.png");
 };
 
@@ -47,6 +50,7 @@ StartScreenLevel.prototype.update = function()
 
 StartScreenLevel.prototype.draw = function()
 {
+    EngineCore.Resources.clearCanvas();
     this.mScreenImage.addToDrawSet();
     this.mCamera.draw();
 };

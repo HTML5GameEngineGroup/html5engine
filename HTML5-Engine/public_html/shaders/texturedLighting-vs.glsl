@@ -1,15 +1,11 @@
+precision highp float;
+
 // These attributes are given from outside the shader.
 attribute vec3 aVertexPosition;
 attribute vec2 aTextureCoordinate;
 
-//Light attributes
-attribute vec3 aLightPosition;
-attribute vec4 aLightColor;
-attribute float aLightIntensity;
-
 // Contains the texture coordinate that will be passed onto the fragment shader.
 varying vec2 vTexCoord;
-varying vec3 vPos;
 
 // This uniform transforms the verticies into a camera viewed position on the 
 // screen. Must be given from outside the texture.

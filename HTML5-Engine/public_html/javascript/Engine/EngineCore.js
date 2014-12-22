@@ -103,10 +103,10 @@ EngineCore.Resources = function () {
         canvas = document.getElementById(canvasID);
         
         // Get standard webgl, or experimental if failed. Wrapped in debugging tool.
-        gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+        //gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
         
-        //gl = WebGLDebugUtils.makeDebugContext(canvas.getContext("webgl") ||
-        //    canvas.getContext("experimental-webgl"));
+        gl = WebGLDebugUtils.makeDebugContext(canvas.getContext("webgl") ||
+            canvas.getContext("experimental-webgl"));
         
         // Allows transperency with textures.
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);

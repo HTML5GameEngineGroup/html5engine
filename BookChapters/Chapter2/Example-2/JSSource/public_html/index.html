@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+    <title>Example 2.2: Javascript source code file</title>
+</head>
+<!--Use embedded shader code for now, in order to remove async loading complexity.-->
+
+<body onload="DoGLDraw();">
+    
+    <!-- everything in-between the <script> tag is javascript -->
+    <script type="x-shader/x-vertex" id="VertexShader">
+        // This is the vertex shader, for now the shader is empty
+        void main(void)
+        {
+        }
+        // End of vertex shader
+    </script>
+    
+    <script type="x-shader/x-fragment" id="FragmentShader">
+        // This is the fragment (or pixel) shader, for now the shader is empty
+        void main(void)
+        {
+        }
+        // End of fragment/pixel shader
+    </script>   
+    
+    <!-- the following says there are javascript source code contained in 
+         the external source file "WebGL.js" under the "src" folder
+    -->
+    <script type="text/javascript" src="src/WebGL.js"></script>
+        
+    <canvas id="GLCanvas" width="640" height="480">
+        <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
+        Your browser does not support the HTML5 canvas.
+        <!-- this message will show only if WebGL clearing failed -->
+    </canvas>
+        
+</body>

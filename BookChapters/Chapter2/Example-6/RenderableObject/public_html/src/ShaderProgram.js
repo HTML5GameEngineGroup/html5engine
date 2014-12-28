@@ -37,7 +37,7 @@ function ShaderProgram(webglContext, vertexShaderPath, fragmentShaderPath)
     }
     
     this.mShaderVertexPositionAttribute = this.mGL.getAttribLocation(
-                    this.mCompiledShader, "SquareVertexPosition");
+                    this.mCompiledShader, "aSquareVertexPosition");
 };
 //</editor-fold>
 

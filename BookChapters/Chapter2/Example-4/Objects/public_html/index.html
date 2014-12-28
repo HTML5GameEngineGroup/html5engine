@@ -9,12 +9,12 @@
     <!-- everything in-between the <script> tag is javascript -->
     <script type="x-shader/x-vertex" id="VertexShader">
         // this is the vertex shader 
-        attribute vec3 SquareVertexPosition;  // Vertex shader expects one vertex position
+        attribute vec3 aSquareVertexPosition;  // Vertex shader expects one vertex position
         void main(void)
         {
             // Convert the vec3 into vec4 for scan conversion and
             // assign to gl_Position to pass the vertex to the fragment shader
-            gl_Position = vec4(SquareVertexPosition, 1.0); 
+            gl_Position = vec4(aSquareVertexPosition, 1.0); 
         }
         // End of vertex shader
     </script>

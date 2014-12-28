@@ -36,7 +36,7 @@ function InitShaderProgram(vertexShaderID, fragmentShaderID)
     }
     
     // Gets a reference to the SquareVertexPosition variable within the shaders.
-    gShaderVertexPositionAttribute = gGL.getAttribLocation(gShaderProgram, "SquareVertexPosition");
+    gShaderVertexPositionAttribute = gGL.getAttribLocation(gShaderProgram, "aSquareVertexPosition");
         // SquareVertexPosition: is defined in the VertexShader (in the index.html file)
 }
 

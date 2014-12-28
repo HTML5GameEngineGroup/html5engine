@@ -14,8 +14,7 @@ function MyGame(htmlCanvasID)
     this.mVertexBuffer = null;
     
     this.mWhiteSq = null;		// these are the renderable objects
-	this.mRedSq = null;
-
+    this.mRedSq = null;
     
     
     // 1. Initialize the webGL Context
@@ -49,7 +48,7 @@ function MyGame(htmlCanvasID)
     
     mat4.identity(xform); // restart
     mat4.translate(xform, xform, vec3.fromValues(0.25, -0.25, 0.0));
-    mat4.rotateZ(xform, xform, -0.2); // rotation is in radian
+    mat4.rotateZ(xform, xform, -0.785); // rotation is in radian (about -45-degree)
     mat4.scale(xform, xform, vec3.fromValues(0.4, 0.4, 1.0));
     this.mRedSq.Draw(xform);
 };

@@ -10,7 +10,6 @@
 
 function RenderableObject(shader, vertexBuffer)
 {
-    
     this.mShader = shader; // the shader for shading this object
     this.mVertexBuffer = vertexBuffer; // the vertex buffer that defines the vertices of this object
 };

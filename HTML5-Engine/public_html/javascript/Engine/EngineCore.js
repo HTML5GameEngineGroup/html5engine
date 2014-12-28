@@ -568,12 +568,16 @@ EngineCore.Loop = function ()
     var mElapsedTime;
     
     // The identifier of the current loop.
-    var mIntervalID = null;
+    var mAnimID = null;
+    
+    var mCurrentScene = null;
 
     // This function is exclusivly to be called in the context of a scene.
     var runLoop = function () {
         if(isLoopRunning)
         {
+            mAnimID = requestAnimationFrame(function(){runLoop.call(mCurrentScene);});
+            
             mCurrentTime = Date.now();
             mElapsedTime = mCurrentTime - mPreviousTime;
             mPreviousTime = mCurrentTime;
@@ -588,13 +592,13 @@ EngineCore.Loop = function ()
                 this.update();
                 mLagTime -= kMPF;
             }
-
+            
             this.draw();
         }
         else
         {
-            clearInterval(mIntervalID);
-            mIntervalID = null;
+            mAnimID = null;
+            mCurrentScene = null;
             givenLoopEndFunction();
         }
     };
@@ -602,20 +606,20 @@ EngineCore.Loop = function ()
     // update and draw functions must be set before this.
     var start = function()
     {
-        var sceneContext = EngineCore.SceneManager.getCurrentScene();
+        mCurrentScene = EngineCore.SceneManager.getCurrentScene();
         mPreviousTime = Date.now();
         mLagTime = 0.0;
         
         isLoopRunning = true;
         givenLoopEndFunction = null;
         
-        mIntervalID = setInterval(function(){runLoop.call(sceneContext);}, 1000 / kFPS);
+        mAnimID = requestAnimationFrame(function(){runLoop.call(mCurrentScene);});
     };
     
     // Stops only after a loop is started and when the loop ends.
     var stop = function(afterStopEventHandler)
     {
-        if(mIntervalID !== null)
+        if(mAnimID !== null)
         {
             isLoopRunning = false;
             givenLoopEndFunction = afterStopEventHandler;

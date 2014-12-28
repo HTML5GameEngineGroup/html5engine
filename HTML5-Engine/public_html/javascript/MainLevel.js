@@ -10,10 +10,12 @@ function MainLevel()
     this.mEnemyManager;
     this.mBackgroundManager;
     this.mFPSText;
+    this.mLogicUpdateText;
+    this.mLogicPrevTime;
     this.mMouseText;
     
     // FPS variables
-    this.mPrevTime = Date.now();
+    this.mDrawPrevTime = Date.now();
 }
 MainLevel.prototype = Object.create(Scene.prototype);
 
@@ -70,6 +72,17 @@ MainLevel.prototype.initialize = function()
                                        "resources/fonts/dos-font.png",
                                        "resources/fonts/dos-font.fnt",
                                        "Testing Textures! 87465@#RT...'");
+                                       
+    // Text 2
+    var textTransform2 = new Transform();
+    textTransform2.setPosition(5,10);
+    textTransform2.setSize(10,10);
+    textTransform2.setZOrder(7);
+    
+    this.mLogicUpdateText = new FontTexture(textTransform2, this.mMainShader,
+                                       "resources/fonts/dos-font.png",
+                                       "resources/fonts/dos-font.fnt",
+                                       "Testing Textures! 87465@#RT...'");
     
     
     // Mouse Test text
@@ -90,6 +103,10 @@ MainLevel.prototype.initialize = function()
 
 MainLevel.prototype.update = function()
 {
+    var elapsedTime = Date.now() - this.mLogicPrevTime;
+    var mpf = "Logic: MPF: " + elapsedTime  + " FPS: "+ Math.round( 1000 / elapsedTime );
+    this.mLogicUpdateText.mText = mpf;
+    
     if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.E))
     {
         EngineCore.Resources.playSound("resources/game-sound.wav");
@@ -105,23 +122,6 @@ MainLevel.prototype.update = function()
         EngineCore.Resources.stopBackgroundAudio();
     }
     
-    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.LEFT))
-    {
-        this.mFPSText.mTransformMatrix.getScale()[0] -= .1;
-    }
-    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.RIGHT))
-    {
-        this.mFPSText.mTransformMatrix.getScale()[0] += .1;
-    }
-    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.UP))
-    {
-        this.mFPSText.mTransformMatrix.getScale()[1] += .1;
-    }
-    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.DOWN))
-    {
-        this.mFPSText.mTransformMatrix.getScale()[1] -= .1;
-    }
-    
     if(EngineCore.Input.Mouse.isButtonPressed(EngineCore.Input.Mouse.MOUSE_LEFT))
     {
         var mPos = EngineCore.Input.Mouse.getMouseDownPosition();
@@ -134,17 +134,22 @@ MainLevel.prototype.update = function()
     
     this.mFPSText.mTransformMatrix.setX(this.mCamera.getCameraX() - (this.mCamera.getCameraWidth() / 2));
     this.mFPSText.mTransformMatrix.setY(this.mCamera.getCameraY() - (this.mCamera.getCameraHieght() * .4));
+    this.mLogicUpdateText.mTransformMatrix.setX(this.mCamera.getCameraX() - (this.mCamera.getCameraWidth() / 2));
+    this.mLogicUpdateText.mTransformMatrix.setY(this.mCamera.getCameraY() - (this.mCamera.getCameraHieght() * .3));
+    
     
     // Update Scene
     this.mPlayer.update();
     this.mEnemyManager.update();
     this.mBackgroundManager.update();
+    
+    this.mLogicPrevTime = Date.now();
 };
 
 MainLevel.prototype.draw = function()
 {
-    var elapsedTime = Date.now() - this.mPrevTime;
-    var mpf = "MS Per Frame: " + elapsedTime;
+    var elapsedTime = Date.now() - this.mDrawPrevTime;
+    var mpf = "Draw: MPF: " + elapsedTime  + " FPS: "+ Math.round( 1000 / elapsedTime );
     this.mFPSText.mText = mpf;
     
     EngineCore.Resources.clearCanvas();
@@ -152,7 +157,8 @@ MainLevel.prototype.draw = function()
     this.mBackgroundManager.addToDrawSet();
     this.mPlayer.addToDrawSet();
     this.mFPSText.addToDrawSet();
+    this.mLogicUpdateText.addToDrawSet();
     this.mMouseText.addToDrawSet();
     this.mCamera.draw();
-    this.mPrevTime = Date.now();
+    this.mDrawPrevTime = Date.now();
 };

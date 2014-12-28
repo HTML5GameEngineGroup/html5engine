@@ -39,6 +39,9 @@ function Transform()
     this.GetRotationInDegree = function() { return mRotationInRad * 180.0 / Math.PI; };
 };
 
+// <editor-fold desc="Public Methods">
+
+// returns the matrix the concatenates the transformations defined
 Transform.prototype.GetXform = function()
 {
     // Creates a blank identity matrix
@@ -56,3 +59,4 @@ Transform.prototype.GetXform = function()
     
     return matrix;
 };
+//</editor-fold>

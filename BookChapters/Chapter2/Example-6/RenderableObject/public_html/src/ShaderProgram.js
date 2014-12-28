@@ -42,10 +42,6 @@ function ShaderProgram(webglContext, vertexShaderPath, fragmentShaderPath)
 //</editor-fold>
 
 // <editor-fold desc="Public Methods">
-//**----------------------------------------
-// Public methods
-//     Will be accessible from the returned object
-//**----------------------------------------        
 
 // Access to the compiled shader
 ShaderProgram.prototype.GetShader = function() { return mCompiledShader; };

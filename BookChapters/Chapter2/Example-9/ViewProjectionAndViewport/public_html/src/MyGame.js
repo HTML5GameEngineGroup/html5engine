@@ -82,13 +82,13 @@ function MyGame(htmlCanvasID)
     this.mRedShader.LoadViewProjMatrix(vpMatrix);
     // </editor-fold>
     
-    // Center white, slightly rotated square
+    // Centre white, slightly rotated square
     this.mWhiteSq.GetXform().SetPosition(20, 60);
     this.mWhiteSq.GetXform().SetRotationInRad(0.2); // In Degree
     this.mWhiteSq.GetXform().SetSize(5, 5);
     this.mWhiteSq.Draw();
     
-    // center red square
+    // centre red square
     this.mRedSq.GetXform().SetPosition(20, 60);
     this.mRedSq.GetXform().SetSize(2, 2);
     this.mRedSq.Draw();

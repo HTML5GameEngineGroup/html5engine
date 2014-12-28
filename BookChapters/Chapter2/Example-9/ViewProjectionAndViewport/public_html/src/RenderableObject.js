@@ -16,9 +16,6 @@ function RenderableObject(shader, vertexBuffer)
 };
 
 //<editor-fold desc="Public Methods">
-//**-----------------------------------------
-// Public methods
-//**-----------------------------------------
 RenderableObject.prototype.Draw = function() {
     this.mShader.ActivateShader(this.mXform.GetXform());
     this.mVertexBuffer.ActivateAndDraw();

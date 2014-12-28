@@ -169,11 +169,62 @@ EngineCore.Resources = function () {
 
     var addShader = function(shaderName, vertexFilepath, fragmentFilepath)
     {
-        var shadObj = new ShaderProgram(gl, vertexFilepath, fragmentFilepath);
-        shadObj.name = shaderName;    
+        var vertexText = null;
+        var fragmentText = null;
         
-        shaderMap[shaderName] = shadObj;
+        // Asyncrounsly request the data from server.
+        assetsToBeLoaded += 2;
+        
+        var vertexReq = new XMLHttpRequest();
+        vertexReq.open('GET', vertexFilepath, true);
+
+        vertexReq.onload = function () 
+        {
+            vertexText = vertexReq.responseText;
+            
+            if(vertexText !== null && fragmentText !== null)
+            {
+                var shadObj = new ShaderProgram(gl, vertexText, fragmentText);
+                shadObj.name = shaderName;    
+
+                shaderMap[shaderName] = shadObj;
+            }
+
+            assetsToBeLoaded--;
+            if (assetsToBeLoaded === 0 && onAllAssetsLoad !== null)
+            {
+                onAllAssetsLoad();
+            }
+            
+        };
+
+        vertexReq.send();
+        
+        var fragmentReq = new XMLHttpRequest();
+        fragmentReq.open('GET', fragmentFilepath, true);
+
+        fragmentReq.onload = function () 
+        {
+            fragmentText = fragmentReq.responseText;
+            
+            if(vertexText !== null && fragmentText !== null)
+            {
+                var shadObj = new ShaderProgram(gl, vertexText, fragmentText);
+                shadObj.name = shaderName;    
+
+                shaderMap[shaderName] = shadObj;
+            }
+
+            assetsToBeLoaded--;
+            if (assetsToBeLoaded === 0 && onAllAssetsLoad !== null)
+            {
+                onAllAssetsLoad();
+            }
+            
+        };
+        fragmentReq.send();  
     };
+
     
     var setActiveCamera = function(camera)
     {

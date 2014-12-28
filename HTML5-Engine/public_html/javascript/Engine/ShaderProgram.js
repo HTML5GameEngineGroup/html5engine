@@ -62,9 +62,15 @@ ShaderProgram.prototype.setActive = function()
 
 // Returns a complied shader from shader file.
 // Returns null on on failure.
-ShaderProgram.prototype.getShader = function (shaderSource, shaderType)
+ShaderProgram.prototype.getShader = function (filepath, shaderType)
 {
-    var compiledShader = null;
+    var xmlReq, shaderSource, compiledShader = null;
+
+    // Request the text from given file location.
+    xmlReq = new XMLHttpRequest();
+    xmlReq.open('GET', filepath, false);
+    xmlReq.send();
+    shaderSource = xmlReq.responseText;
 
     if (shaderSource === null)
         return null;

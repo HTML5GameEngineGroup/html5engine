@@ -8,7 +8,7 @@ function MyGame(htmlCanvasID)
 {
     // The shaders for drawing: one red and one white
     this.mRedShader = null;
-	this.mWhiteShader = null;
+    this.mWhiteShader = null;
     
     // The vertex buffer that contains the square vertices
     this.mVertexBuffer = null;

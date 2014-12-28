@@ -3,7 +3,7 @@
 precision mediump float;
 struct Light
 {
-    vec3 uLightPosition;
+    vec4 uLightPosition;
     vec4 uLightColor;
     //float uLightIntensity;
 };
@@ -15,25 +15,27 @@ uniform vec2 uObjPosition;
 uniform vec2 uObjDimensions;
 
 varying vec2 vTexCoord;
-
+varying mat4 umvmatrix;
 
 void main(void)
 {
     vec4 texFragColor = texture2D(uSampler, vTexCoord);
-    vec3 pixelPosition = vec3(uObjDimensions.x * vTexCoord.x + (uObjPosition.x), 
-                              uObjDimensions.y * vTexCoord.y + (uObjPosition.y), 
-                              0);
-
-    vec3 v = pixelPosition - lights[0].uLightPosition;
+    vec4 theLightPos = vec4(lights[0].uLightPosition.xyz, 0);
+                           
+    vec2 v = gl_FragCoord.xy  - theLightPos.xy;
     float len = length(v);
-    
-    if(len < 15.0)
-    {
-        gl_FragColor = texFragColor;
-    }
-    else
-    {
-        gl_FragColor = vec4(1, 0, 0, 1);
-    }
+    float falloffFactor = len * len;
+    float attenuation = 1.0 - clamp((len - 50.0)/250.0, 0.0, 1.0);
+    attenuation = attenuation * attenuation;
+    //if(falloffFactor != 0.0)
+    //    attenuation = 1.0 / falloffFactor * 50.0;
+    vec4 color = vec4((texFragColor.xyz * 0.0), texFragColor.w) + (texFragColor * attenuation * (lights[0].uLightColor * 1.0));
+    gl_FragColor = color;
+
+    //if(len < 50.0)
+    //    gl_FragColor = texFragColor;
+    //else
+    //    gl_FragColor = vec4(1);
+
     
 }

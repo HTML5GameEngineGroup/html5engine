@@ -54,8 +54,9 @@ MainLevel.prototype.initialize = function()
     
     // added by jeb
     var playerPos = transform.getPosition();
-    var lightColor = vec4.fromValues(1.0, 0, 0, 1.0);
-    this.mLight = new Light(playerPos, lightColor);
+    var lightColor = vec4.fromValues(0, 1.0, 0.0, 1.0);
+    var pos = vec3.fromValues(playerPos[0], playerPos[1], 0);
+    this.mLight = new Light(pos, lightColor);
     this.mPlayer.mRenderComponent.addLight(this.mLight);
     
     // Setup background audio, can't take it any more.
@@ -83,7 +84,8 @@ MainLevel.prototype.update = function()
     this.mPlayer.update();
     this.mEnemyManager.update();
     this.mBackgroundManager.update();
-    this.mLight.update(this.mPlayer.getTransform().getPosition());
+    var playerPos = this.mPlayer.getTransform().getCenterPosition();
+    this.mLight.update(vec3.fromValues(playerPos[0], playerPos[1], 0));
 };
 
 MainLevel.prototype.draw = function()

@@ -130,12 +130,12 @@ Renderable2DObject.prototype._setupPMatrix = function (gl, shaderProgram)
     gl.uniformMatrix4fv(uniformP, false, matrix);
 };
 
-Renderable2DObject.prototype._setupPMatrix = function (gl, shaderProgram)
-{
-    var matrix = EngineCore.Resources.getActiveCamera().getOrthographicMatrix();
-    var uniformP = gl.getUniformLocation(shaderProgram, "uPMatrix");
-    gl.uniformMatrix4fv(uniformP, false, matrix);
-};
+//Renderable2DObject.prototype._setupPMatrix = function (gl, shaderProgram)
+//{
+//    var matrix = EngineCore.Resources.getActiveCamera().getOrthographicMatrix();
+//    var uniformP = gl.getUniformLocation(shaderProgram, "uPMatrix");
+//    gl.uniformMatrix4fv(uniformP, false, matrix);
+//};
 
 //Renderable2DObject.prototype._setupAttrib = function (gl, shaderProgram, data, stringName, glType, size)
 //{
@@ -152,12 +152,23 @@ Renderable2DObject.prototype._UpdateTextureProperties = function (gl, shaderProg
     try {
         var uTexturePos;
         var uTextureDimesions;
-
+        
+        //get pointers to data in shader 
         uTexturePos = gl.getUniformLocation(shaderProgram, "uObjPosition");
         uTextureDimesions = gl.getUniformLocation(shaderProgram, "uObjDimensions");
 
-        gl.uniform2fv(uTexturePos, this.mTransformMatrix.getCenterPosition());
-        gl.uniform2fv(uTextureDimesions, vec2.fromValues(this.mTransformMatrix.getWidth(), this.mTransformMatrix.getHeight()));
+        //get the camera for tranforming between coord spaces
+        var camera = EngineCore.Resources.getActiveCamera();
+        //position wc to pixel coord
+        var wcPos = this.mTransformMatrix.getCenterPosition();
+        var pixPos = camera.computePixelPosition(wcPos);
+        //size wc to pixel coord
+        var wcSize = vec2.fromValues(this.mTransformMatrix.getWidth(), this.mTransformMatrix.getHeight());
+        var pixSize = camera.computePixelSize(wcSize);
+
+        // send values to the shader
+        gl.uniform2fv(uTexturePos, pixPos);
+        gl.uniform2fv(uTextureDimesions, pixSize);
     }
     catch (E)
     {
@@ -168,18 +179,24 @@ Renderable2DObject.prototype._UpdateTextureProperties = function (gl, shaderProg
 Renderable2DObject.prototype._UpdateLightProperties = function (gl, shaderProgram)
 {
     try {
+
         if (this._mLightList.length > 0) {
             var uLight = [];
             for (var i = 0; i < this._mLightList.length; i++)
             {
                 uLight[i] = {};
-                uLight.Position = gl.getUniformLocation(shaderProgram, "lights[" + i + "].uLightPosition");
-                uLight.Color = gl.getUniformLocation(shaderProgram, "lights[" + i + "].uLightColor");
+                uLight[i].Position = gl.getUniformLocation(shaderProgram, "lights[" + i + "].uLightPosition");
+                uLight[i].Color = gl.getUniformLocation(shaderProgram, "lights[" + i + "].uLightColor");
             }
 
             for (var i = 0; i < this._mLightList.length; i++)
             {
-                gl.uniform3fv(uLight[i].Position, this._mLightList[i].mPosition);
+                var wcPos = vec2.fromValues(this._mLightList[i].mPosition[0],
+                        this._mLightList[i].mPosition[1]);
+                var camera = EngineCore.Resources.getActiveCamera();
+                var pixPos = camera.computePixelPosition(wcPos);
+                
+                gl.uniform4fv(uLight[i].Position, vec4.fromValues(pixPos[0], pixPos[1], 0, 0));
                 gl.uniform4fv(uLight[i].Color, this._mLightList[i].mColor);
             }
         }
@@ -187,7 +204,8 @@ Renderable2DObject.prototype._UpdateLightProperties = function (gl, shaderProgra
     catch (E)
     {
         console.log("ERROR: Light properties failed to update");
-    };
+    }
+    ;
 };
 
 Renderable2DObject.prototype.draw = function (gl, vertexBuffer, textureBuffer)
@@ -205,7 +223,7 @@ Renderable2DObject.prototype.draw = function (gl, vertexBuffer, textureBuffer)
     this._setupMVMatrix(gl, shaderProgram);
     this._setupPMatrix(gl, shaderProgram);
     this._UpdateLightProperties(gl, shaderProgram);
-    this._UpdateTextureProperties(gl, shaderProgram)
+    this._UpdateTextureProperties(gl, shaderProgram);
 
     // Draw triangles, with a max of this.numberOfVerticies verticies, from the zeroth element.
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, EngineCore.Resources.DEFAULT_NUM_VERTICES);

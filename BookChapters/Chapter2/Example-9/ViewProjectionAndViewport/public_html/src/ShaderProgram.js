@@ -13,7 +13,8 @@ function ShaderProgram(webglContext, vertexShaderPath, fragmentShaderPath)
     // Convention: all instance variables: mVariables
     this.mCompiledShader = null;  // reference to the compiled shader in webgl context  
     this.mShaderVertexPositionAttribute = null; // reference to SquareVertexPosition within the shader
-    this.mModelTransform = null;				// reference to model transform matrix in vertex shader
+    this.mModelTransform = null;		// reference to the model transform matrix in vertex shader
+    this.mViewProjTransform = null;             // reference to the View/Projection matrix in the vertex shader
     this.mGL = webglContext;         // keep a reference to the webgl context
          
     // start of constructor code
@@ -41,6 +42,9 @@ function ShaderProgram(webglContext, vertexShaderPath, fragmentShaderPath)
 
     this.mModelTransform = this.mGL.getUniformLocation(
                     this.mCompiledShader, "uModelTransform");
+    
+    this.mViewProjTransform = this.mGL.getUniformLocation(
+                    this.mCompiledShader, "uViewProjTransform");
 };
 //</editor-fold>
 
@@ -67,6 +71,11 @@ ShaderProgram.prototype.ActivateShader = function(modelTransform) {
         // this last function loads the modelTransform matrix into webGL
         // to be used by the vertex shader
     this.mGL.uniformMatrix4fv(this.mModelTransform, false, modelTransform);
+};
+
+ShaderProgram.prototype.LoadViewProjMatrix = function(vpMatrix) {
+    this.mGL.useProgram(this.mCompiledShader);
+    this.mGL.uniformMatrix4fv(this.mViewProjTransform, false, vpMatrix);
 };
 //-- end of public methods
 // </editor-fold>

@@ -33,20 +33,20 @@ function PlayerLogic(transform, camera)
 
 PlayerLogic.prototype.update = function()
 {
-    if(EngineCore.Input.isKeyDown(EngineCore.Input.LEFT))
+    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.LEFT))
     {
         this.mTransform.setX(this.mTransform.getX() - this.mMoveSpeed);
     }
-    else if(EngineCore.Input.isKeyDown(EngineCore.Input.RIGHT))
+    else if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.RIGHT))
     {
         this.mTransform.setX(this.mTransform.getX() + this.mMoveSpeed);
     }
 
-    if(EngineCore.Input.isKeyDown(EngineCore.Input.DOWN))
+    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.DOWN))
     {
         this.mTransform.setY(this.mTransform.getY() - this.mMoveSpeed);
     }
-    else if(EngineCore.Input.isKeyDown(EngineCore.Input.UP))
+    else if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.UP))
     {
         this.mTransform.setY(this.mTransform.getY() + this.mMoveSpeed);
     }

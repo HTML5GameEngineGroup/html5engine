@@ -10,6 +10,7 @@ function MainLevel()
     this.mEnemyManager;
     this.mBackgroundManager;
     this.mFPSText;
+    this.mMouseText;
     
     // FPS variables
     this.mPrevTime = Date.now();
@@ -70,42 +71,65 @@ MainLevel.prototype.initialize = function()
                                        "resources/fonts/dos-font.fnt",
                                        "Testing Textures! 87465@#RT...'");
     
+    
+    // Mouse Test text
+    var mouseTextXForm = new Transform();
+    mouseTextXForm.setPosition(1,10);
+    mouseTextXForm.setSize(10,10);
+    mouseTextXForm.setZOrder(7);
+    
+    this.mMouseText = new FontTexture(mouseTextXForm, this.mMainShader,
+                                       "resources/fonts/dos-font.png",
+                                       "resources/fonts/dos-font.fnt",
+                                       "Mouse");
+    
+    
     // Setup background audio, can't take it any more.
     //EngineCore.Resources.playBackgroundAudio("resources/Mind_Meld.mp3");
 };
 
 MainLevel.prototype.update = function()
 {
-    if(EngineCore.Input.isKeyDown(EngineCore.Input.E))
+    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.E))
     {
         EngineCore.Resources.playSound("resources/game-sound.wav");
     }
     
-    if(EngineCore.Input.isKeyDown(EngineCore.Input.W))
+    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.W))
     {
         EngineCore.Resources.playBackgroundAudio("resources/Mind_Meld.mp3");
     }
     
-    if(EngineCore.Input.isKeyDown(EngineCore.Input.S))
+    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.S))
     {
         EngineCore.Resources.stopBackgroundAudio();
     }
     
-    if(EngineCore.Input.isKeyDown(EngineCore.Input.LEFT))
+    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.LEFT))
     {
         this.mFPSText.mTransformMatrix.getScale()[0] -= .1;
     }
-    if(EngineCore.Input.isKeyDown(EngineCore.Input.RIGHT))
+    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.RIGHT))
     {
         this.mFPSText.mTransformMatrix.getScale()[0] += .1;
     }
-    if(EngineCore.Input.isKeyDown(EngineCore.Input.UP))
+    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.UP))
     {
         this.mFPSText.mTransformMatrix.getScale()[1] += .1;
     }
-    if(EngineCore.Input.isKeyDown(EngineCore.Input.DOWN))
+    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.DOWN))
     {
         this.mFPSText.mTransformMatrix.getScale()[1] -= .1;
+    }
+    
+    if(EngineCore.Input.Mouse.isButtonPressed(EngineCore.Input.Mouse.MOUSE_LEFT))
+    {
+        var mPos = EngineCore.Input.Mouse.getMouseDownPosition();
+        var wPos = this.mCamera.pixelToWorldCoordinates(mPos.x, mPos.y);
+        this.mMouseText.mText = "X: " + Math.round(wPos[0]) + " Y: " + Math.round(wPos[1]); 
+        
+        this.mMouseText.mTransformMatrix.setX(wPos[0]);
+        this.mMouseText.mTransformMatrix.setY(wPos[1]);
     }
     
     this.mFPSText.mTransformMatrix.setX(this.mCamera.getCameraX() - (this.mCamera.getCameraWidth() / 2));
@@ -128,6 +152,7 @@ MainLevel.prototype.draw = function()
     this.mBackgroundManager.addToDrawSet();
     this.mPlayer.addToDrawSet();
     this.mFPSText.addToDrawSet();
+    this.mMouseText.addToDrawSet();
     this.mCamera.draw();
     this.mPrevTime = Date.now();
 };

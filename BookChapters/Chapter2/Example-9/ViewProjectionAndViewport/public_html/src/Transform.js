@@ -11,7 +11,7 @@ function Transform()
     mScale = vec2.fromValues(1,1);       // this is the width (x) and height (y)
     var mRotationInRad = 0.0;            // in radians!
     
-    // Position setters and getters 
+    // <editor-fold desc="Position setters and getters ">
     this.SetPosition = function(xPos,yPos)
         { this.SetXPos(xPos); this.SetYPos(yPos); };
     this.GetPosition = function()
@@ -20,8 +20,9 @@ function Transform()
     this.SetXPos = function(xPos) { mPosition[0] = xPos;};
     this.GetYPos = function() { return mPosition[1];};
     this.SetYPos = function(yPos) { mPosition[1] = yPos;}; 
+    //</editor-fold>
     
-    // size setters and getters
+    // <editor-fold desc="size setters and getters">
     this.SetSize = function(width, height) {
         this.SetWidth(width); this.SetHeight(height); };
     this.GetSize = function(){ return mScale; };
@@ -29,14 +30,16 @@ function Transform()
     this.SetWidth = function(width) { mScale[0] = width; };
     this.GetHeight = function(){ return mScale[1]; };
     this.SetHeight = function(height) { mScale[1] = height; };
+    //</editor-fold>
     
-    // rotation getters and setters
+    // <editor-fold desc="rotation getters and setters">
     this.SetRotationInRad = function(rotationInRadians) { 
         mRotationInRad = rotationInRadians; };
     this.SetRotationInDegree = function (rotationInDegree) {
         mRotationInRad = rotationInDegree * Math.PI/180.0;  };
     this.GetRotationInRad = function() {  return mRotationInRad;};
     this.GetRotationInDegree = function() { return mRotationInRad * 180.0 / Math.PI; };
+    //</editor-fold>
 };
 
 // <editor-fold desc="Public Methods">

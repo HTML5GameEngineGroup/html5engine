@@ -7,55 +7,39 @@
 function MyGame(htmlCanvasID)
 {
     // The shaders for drawing: one red and one white
-    var mRedShader = null, mWhiteShader = null;
+    this.mRedShader = null;
+	this.mWhiteShader = null;
     
     // The vertex buffer that contains the square vertices
-    var mVertexBuffer = null;
+    this.mVertexBuffer = null;
     
-    var mWhiteSq = null, mRedSq = null;
-    
-    //**----------------------------
-    // Private methods not meant to be used by other objects
-    //**-----------------------------
-        var GetVertexBuffer = function() { return mVertexBuffer; };
-        var GetRedShader = function() { return mRedShader; };
-        var GetWhiteShader = function() { return mWhiteShader; };
-        var GetWhiteSq = function() { return mWhiteSq; };
-        var GetRedSq = function() { return mRedSq; };
-    //------ end of private mehtods
+    this.mWhiteSq = null;		// these are the renderable objects
+	this.mRedSq = null;
+
     
     
     // 1. Initialize the webGL Context
     gEngineCore.InitializeWebGL(htmlCanvasID);
     
     // 2. Now create the shaders
-    mWhiteShader = new ShaderProgram(gEngineCore.GetGL(), 
+    this.mWhiteShader = new ShaderProgram(gEngineCore.GetGL(), 
             "shaders/SimpleVertexShader.glsl",      // Path to the VertexShader 
             "shaders/WhiteFragmentShader.glsl");    // Path to the White FragmentShader
     
-    mRedShader = new ShaderProgram(gEngineCore.GetGL(), 
+    this.mRedShader = new ShaderProgram(gEngineCore.GetGL(), 
             "shaders/SimpleVertexShader.glsl",      // Path to the VertexShader 
             "shaders/RedFragmentShader.glsl");      // Path to the Red FragmentShader
     
     // 3. Now initialize the buffer with the vertex positions for the unit square
-    mVertexBuffer = new VertexBuffer(gEngineCore.GetGL());
+    this.mVertexBuffer = new VertexBuffer(gEngineCore.GetGL());
     
     // 4. Create the renderable objects:
-    mWhiteSq = new RenderableObject(mWhiteShader, mVertexBuffer);
-    mRedSq = new RenderableObject(mRedShader, mVertexBuffer);
+    this.mWhiteSq = new RenderableObject(this.mWhiteShader, this.mVertexBuffer);
+    this.mRedSq = new RenderableObject(this.mRedShader, this.mVertexBuffer);
     
     // 4. Now we can Draw!
     gEngineCore.ClearCanvas();        // 1. Clear the canvas
-    mWhiteSq.Draw();
-    mRedSq.Draw();
+    this.mWhiteSq.Draw();
+    this.mRedSq.Draw();
     
-    // returning methods to this object
-    var publicMethods = {
-        privateMethod1: GetVertexBuffer,
-        privateMethod2: GetWhiteShader,
-        privateMethod3: GetRedShader,
-        privateMethod4: GetWhiteSq,
-        privateMethod5: GetRedSq
-    };
-    return publicMethods;
 };

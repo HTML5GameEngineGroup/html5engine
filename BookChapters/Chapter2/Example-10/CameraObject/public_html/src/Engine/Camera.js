@@ -17,33 +17,33 @@
 function Camera(cameraPosition, cameraWidth, viewportArray)
 {
     // Camera and viewport position and size
-    this.mCameraPosition = cameraPosition;
-    this.mCameraWidth = cameraWidth;
-    this.mViewport = viewportArray;
-    this.mNearPlane = 0;
-    this.mFarPlane = 1000;
+    this._mCameraPosition = cameraPosition;
+    this._mCameraWidth = cameraWidth;
+    this._mViewport = viewportArray;
+    this._mNearPlane = 0;
+    this._mFarPlane = 1000;
     
     // transformation matrices
-    this.mViewMatrix = mat4.create();
-    this.mProjMatrix = mat4.create();
-    this.mVPMatrix = mat4.create();
+    this._mViewMatrix = mat4.create();
+    this._mProjMatrix = mat4.create();
+    this._mVPMatrix = mat4.create();
     
     // background color
-    this.mBgColor = [0, 0, 0, 1];
+    this._mBgColor = [0, 0, 0, 1];
     
     //<editor-fold desc="setter/getter of window and viewport">
     this.SetCameraPosition = function(xPos, yPos) { 
-        this.mCameraPosition[0] = xPos; this.mCameraPosition[1] = yPos; };
-    this.GetCameraPosition = function() { return this.mCameraPosition; };
-    this.SetCameraWidth = function(width) { this.mCameraWidth = width; };
+        this._mCameraPosition[0] = xPos; this._mCameraPosition[1] = yPos; };
+    this.GetCameraPosition = function() { return this._mCameraPosition; };
+    this.SetCameraWidth = function(width) { this._mCameraWidth = width; };
     
-    this.SetViewport = function(viewportArray) { this.mViewport = viewportArray; };
-    this.GetViewport = function() { return this.mViewport; };
+    this.SetViewport = function(viewportArray) { this._mViewport = viewportArray; };
+    this.GetViewport = function() { return this._mViewport; };
     //</editor-fold>
     
     //<editor-fold desc="setter/getter of camera background color">
-    this.SetBackgroundColor = function(newColor) { this.mBgColor = newColor; };
-    this.GetBackgroundColor = function() { return this.mBgColor; };
+    this.SetBackgroundColor = function(newColor) { this._mBgColor = newColor; };
+    this.GetBackgroundColor = function() { return this._mBgColor; };
     
     //</editor-fold>
 };
@@ -55,45 +55,45 @@ Camera.prototype.BeginDraw = function() {
     var gl = gEngineCore.GetGL();
     //<editor-fold desc="Setting up Viewport">
     // Set up the viewport: area on canvas to be drawn
-    gl.viewport(this.mViewport[0], // x position of bottom-left corner of the area to be drawn
-                this.mViewport[1], // y position of bottom-left corner of the area to be drawn
-                this.mViewport[2], // width of the area to be drawn
-                this.mViewport[3]);  // height of the area to be drawn
+    gl.viewport(this._mViewport[0], // x position of bottom-left corner of the area to be drawn
+                this._mViewport[1], // y position of bottom-left corner of the area to be drawn
+                this._mViewport[2], // width of the area to be drawn
+                this._mViewport[3]);  // height of the area to be drawn
 
-    gl.scissor( this.mViewport[0], // x position of bottom-left corner of the area to be drawn
-                this.mViewport[1], // y position of bottom-left corner of the area to be drawn
-                this.mViewport[2], // width of the area to be drawn
-                this.mViewport[3]);// height of the area to be drawn
+    gl.scissor( this._mViewport[0], // x position of bottom-left corner of the area to be drawn
+                this._mViewport[1], // y position of bottom-left corner of the area to be drawn
+                this._mViewport[2], // width of the area to be drawn
+                this._mViewport[3]);// height of the area to be drawn
 
-    gl.clearColor(this.mBgColor[0], this.mBgColor[1], this.mBgColor[2], this.mBgColor[3]);  // set the color to be cleared
+    gl.clearColor(this._mBgColor[0], this._mBgColor[1], this._mBgColor[2], this._mBgColor[3]);  // set the color to be cleared
     gl.enable(gl.SCISSOR_TEST);
         gl.clear(gl.COLOR_BUFFER_BIT); 
     gl.disable(gl.SCISSOR_TEST);
     //</editor-fold>
     
     //<editor-fold desc="Set up View and Projection matrices">    
-    mat4.lookAt(this.mViewMatrix, 
-        [this.mCameraPosition[0], this.mCameraPosition[1], 10],   // camera position
-        [this.mCameraPosition[0], this.mCameraPosition[1], 0],    // look at position
+    mat4.lookAt(this._mViewMatrix, 
+        [this._mCameraPosition[0], this._mCameraPosition[1], 10],   // camera position
+        [this._mCameraPosition[0], this._mCameraPosition[1], 0],    // look at position
         [0, 1, 0]);     // orientation vector
     
-    var halfCameraWidth = 0.5 * this.mCameraWidth;
-    var halfCameraHeight = halfCameraWidth * this.mViewport[3] / this.mViewport[2]; // viewportH/viewportW
-    mat4.ortho(this.mProjMatrix,
+    var halfCameraWidth = 0.5 * this._mCameraWidth;
+    var halfCameraHeight = halfCameraWidth * this._mViewport[3] / this._mViewport[2]; // viewportH/viewportW
+    mat4.ortho(this._mProjMatrix,
         -halfCameraWidth,   // distant to left of frustum
          halfCameraWidth,   // distant to right of frustum
         -halfCameraHeight,  // distant to bottom of frustum
          halfCameraHeight,  // distant to top of frustum
-         this.mNearPlane,   // distant to near plane of frustum
-         this.mFarPlane  // distant to far plane of frustum
+         this._mNearPlane,   // distant to near plane of frustum
+         this._mFarPlane  // distant to far plane of frustum
     );
-    mat4.multiply(this.mVPMatrix, this.mProjMatrix, this.mViewMatrix);
+    mat4.multiply(this._mVPMatrix, this._mProjMatrix, this._mViewMatrix);
     //</editor-fold>
 };
 
 // returns the matrix the concatenates the View and Projection matrix
 Camera.prototype.GetVPMatrix = function() {
-      return this.mVPMatrix;
+      return this._mVPMatrix;
 };
 
 //</editor-fold>

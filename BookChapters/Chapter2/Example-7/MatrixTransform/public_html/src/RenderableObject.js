@@ -10,8 +10,9 @@
 
 function RenderableObject(shader, vertexBuffer)
 {
-    this.mShader = shader; // the shader for shading this object
-    this.mVertexBuffer = vertexBuffer; // the vertex buffer that defines the vertices of this object
+    
+    this._mShader = shader; // the shader for shading this object
+    this._mVertexBuffer = vertexBuffer; // the vertex buffer that defines the vertices of this object
 };
 
 //<editor-fold desc="Public Methods">
@@ -19,8 +20,8 @@ function RenderableObject(shader, vertexBuffer)
 // Public methods
 //**-----------------------------------------
 RenderableObject.prototype.Draw = function(modelTransform) {
-    this.mShader.ActivateShader(modelTransform);
-    this.mVertexBuffer.ActivateAndDraw();
+    this._mShader.ActivateShader(modelTransform);
+    this._mVertexBuffer.ActivateAndDraw();
 };
 //--- end of Public Methods
 //</editor-fold>

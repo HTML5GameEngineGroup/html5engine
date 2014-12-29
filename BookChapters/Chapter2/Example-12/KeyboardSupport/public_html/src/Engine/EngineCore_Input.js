@@ -8,68 +8,69 @@
 gEngineCore.Input = function()
 {
     // Scancode constants
-    var LEFT = 37;
-    var UP = 38;
-    var RIGHT = 39;
-    var DOWN = 40;
-    var SPACE = 32;
-    var W = 87;
-    var A = 65;
-    var S = 83;
-    var D = 68;
-    var E = 69;
-    var R = 82;
-    var F = 70;
-    var J = 74;
-    var I = 73;
-    var L = 76;
-    var K = 75;
+    var kLEFT = 37;
+    var kUP = 38;
+    var kRIGHT = 39;
+    var kDOWN = 40;
+    var kSPACE = 32;
+    var kW = 87;
+    var kA = 65;
+    var kS = 83;
+    var kD = 68;
+    var kE = 69;
+    var kR = 82;
+    var kF = 70;
+    var kJ = 74;
+    var kI = 73;
+    var kL = 76;
+    var kK = 75;
     
     var kLastKeyCode = 222;
 
     // The pressed keys.
-    var mIsKeyPressed = {};
+    var _mIsKeyPressed = {};
 
+
+    // Event service functions
+    var _OnKeyDown = function (event) {
+        _mIsKeyPressed[event.keyCode] = true;  };
+    var _OnKeyUp = function (event)  {
+        _mIsKeyPressed[event.keyCode] = false; };
+    
     var Initialize = function ()
     {
         for (var i = 0; i<kLastKeyCode; i++)
-            mIsKeyPressed[i] = false;
+            _mIsKeyPressed[i] = false;
         
         // register services 
-        window.addEventListener('keyup', OnKeyUp);
-        window.addEventListener('keydown', OnKeyDown);
+        window.addEventListener('keyup', _OnKeyUp);
+        window.addEventListener('keydown', _OnKeyDown);
     };
     
-    // Event service functions
-    var OnKeyDown = function (event) {
-        mIsKeyPressed[event.keyCode] = true;  };
-    var OnKeyUp = function (event)  {
-        mIsKeyPressed[event.keyCode] = false; };
-
     // Function for GameEngine Prorammer to test if a key is pressed down
     var IsKeyDown = function (keyCode) {
-        return mIsKeyPressed[keyCode]; };
+        return _mIsKeyPressed[keyCode]; };
 
     var oPublic =
     {
         Initialize: Initialize,
         IsKeyDown: IsKeyDown,
-        UP: UP,
-        DOWN: DOWN,
-        LEFT: LEFT,
-        RIGHT: RIGHT,
-        SPACE: SPACE,
-        W: W,
-        A: A,
-        S: S,
-        D: D,
-        E: E,
-        R: R,
-        F: F,
-        J: J,
-        I: I,
-        L: L,
-        K: K
+        UP: kUP,
+        DOWN: kDOWN,
+        LEFT: kLEFT,
+        RIGHT: kRIGHT,
+        SPACE: kSPACE,
+        W: kW,
+        A: kA,
+        S: kS,
+        D: kD,
+        E: kE,
+        R: kR,
+        F: kF,
+        J: kJ,
+        I: kI,
+        L: kL,
+        K: kK
     };
     return oPublic;
 }();

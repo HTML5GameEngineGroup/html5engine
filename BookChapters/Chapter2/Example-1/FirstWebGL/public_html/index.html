@@ -5,23 +5,7 @@
 <!--Use embedded shader code for now, in order to remove async loading complexity.-->
 
 <body>
-    
-    <!-- everything in-between the <script> tag is javascript -->
-    <script type="x-shader/x-vertex" id="VertexShader">
-        // This is the vertex shader, for now the shader is empty
-        void main(void)
-        {
-        }
-        // End of vertex shader
-    </script>
-    
-    <script type="x-shader/x-fragment" id="FragmentShader">
-        // this is the fragment (or pixel) shader, for now the shader is empty
-        void main(void)
-        {
-        }
-        // End of fragment/pixel shader
-    </script>   
+        
    
     <canvas id="GLCanvas" width="640" height="480">
         <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
@@ -29,6 +13,7 @@
         <!-- this message will show only if WebGL clearing failed -->
     </canvas>
    
+    <!-- everything in-between the <script> tag is javascript -->
     <script>
         "use strict";  // Operate in Strict mode such that variables must be declared before used!
         

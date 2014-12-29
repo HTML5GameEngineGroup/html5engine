@@ -10,17 +10,20 @@
 
 function RenderableObject(shader, vertexBuffer)
 {
-    this.mShader = shader; // the shader for shading this object
-    this.mVertexBuffer = vertexBuffer; // the vertex buffer that defines the vertices of this object
-    this.mXform = new Transform();     // transform that moves this object around
+    this._mShader = shader; // the shader for shading this object
+    this._mVertexBuffer = vertexBuffer; // the vertex buffer that defines the vertices of this object
+    this._mXform = new Transform();     // transform that moves this object around
 };
 
 //<editor-fold desc="Public Methods">
+//**-----------------------------------------
+// Public methods
+//**-----------------------------------------
 RenderableObject.prototype.Draw = function() {
-    this.mShader.ActivateShader(this.mXform.GetXform());
-    this.mVertexBuffer.ActivateAndDraw();
+    this._mShader.ActivateShader(this._mXform.GetXform());
+    this._mVertexBuffer.ActivateAndDraw();
 };
 
-RenderableObject.prototype.GetXform = function() { return this.mXform; };
+RenderableObject.prototype.GetXform = function() { return this._mXform; }
 //--- end of Public Methods
 //</editor-fold>

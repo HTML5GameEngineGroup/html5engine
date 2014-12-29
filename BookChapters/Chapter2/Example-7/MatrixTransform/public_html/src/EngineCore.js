@@ -11,25 +11,25 @@ var gEngineCore = gEngineCore || function()
 {
     // instance variables
     // The graphical context to draw to
-    var mGL = null;
+    var _mGL = null;
         
     //**----------------------------
     // Public methods:
     //**-----------------------------
     //
         // Accessor of the webgl context
-        var GetGL = function() { return mGL; };
+        var GetGL = function() { return _mGL; };
         
         // initialize the WebGL, the vertex buffer and compile the shaders
         var InitializeWebGL = function(htmlCanvasID) {
             var canvas = document.getElementById(htmlCanvasID);
         
             // Get standard webgl, or experimental
-            // binds webgl the the Canvas area on the web-page to the global variable "mGL"
-            mGL = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+            // binds webgl the the Canvas area on the web-page to the global variable "_mGL"
+            _mGL = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     
-            if (mGL !== null) {
-                mGL.clearColor(0.0, 0.8, 0.0, 1.0);  // set the color to be cleared
+            if (_mGL !== null) {
+                _mGL.clearColor(0.0, 0.8, 0.0, 1.0);  // set the color to be cleared
             } else {
                 document.write("<br><b>WebGL is not supported!</b>");
             }
@@ -37,7 +37,7 @@ var gEngineCore = gEngineCore || function()
         
         // Clears the draw area and draws one square
         var ClearCanvas = function() {
-            mGL.clear(mGL.COLOR_BUFFER_BIT);      // clear to the color previously set
+            _mGL.clear(_mGL.COLOR_BUFFER_BIT);      // clear to the color previously set
         };   
         
     // -- end of public methods

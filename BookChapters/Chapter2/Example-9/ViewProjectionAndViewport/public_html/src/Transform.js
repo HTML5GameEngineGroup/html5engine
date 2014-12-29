@@ -5,40 +5,41 @@
  */
 function Transform()
 {
-    var mPosition = {};                   // says position and scale are arrays
-    var mScale = {};
-    mPosition = vec2.fromValues(0, 0);   // this is the translation
-    mScale = vec2.fromValues(1,1);       // this is the width (x) and height (y)
-    var mRotationInRad = 0.0;            // in radians!
+    this._mPosition = vec2.fromValues(0, 0);   // this is the translation
+    this._mScale = vec2.fromValues(1,1);       // this is the width (x) and height (y)
+    this._mRotationInRad = 0.0;            // in radians!
     
     // <editor-fold desc="Position setters and getters ">
     this.SetPosition = function(xPos,yPos)
         { this.SetXPos(xPos); this.SetYPos(yPos); };
     this.GetPosition = function()
-        { return mPosition;};
-    this.GetXPos = function() { return mPosition[0];};
-    this.SetXPos = function(xPos) { mPosition[0] = xPos;};
-    this.GetYPos = function() { return mPosition[1];};
-    this.SetYPos = function(yPos) { mPosition[1] = yPos;}; 
+        { return this._mPosition;};
+    this.GetXPos = function() { return this._mPosition[0];};
+    this.SetXPos = function(xPos) { this._mPosition[0] = xPos;};
+    this.GetYPos = function() { return this._mPosition[1];};
+    this.SetYPos = function(yPos) { this._mPosition[1] = yPos;}; 
     //</editor-fold>
     
     // <editor-fold desc="size setters and getters">
     this.SetSize = function(width, height) {
         this.SetWidth(width); this.SetHeight(height); };
-    this.GetSize = function(){ return mScale; };
-    this.GetWidth = function() { return mScale[0]; };    
-    this.SetWidth = function(width) { mScale[0] = width; };
-    this.GetHeight = function(){ return mScale[1]; };
-    this.SetHeight = function(height) { mScale[1] = height; };
+    this.GetSize = function(){ return this._mScale; };
+    this.GetWidth = function() { return this._mScale[0]; };    
+    this.SetWidth = function(width) { this._mScale[0] = width; };
+    this.GetHeight = function(){ return this._mScale[1]; };
+    this.SetHeight = function(height) { this._mScale[1] = height; };
     //</editor-fold>
     
     // <editor-fold desc="rotation getters and setters">
     this.SetRotationInRad = function(rotationInRadians) { 
-        mRotationInRad = rotationInRadians; };
+        this._mRotationInRad = rotationInRadians; 
+        while (this._mRotationInRad > (2*Math.PI))
+            this._mRotationInRad -= (2*Math.PI);
+    };
     this.SetRotationInDegree = function (rotationInDegree) {
-        mRotationInRad = rotationInDegree * Math.PI/180.0;  };
-    this.GetRotationInRad = function() {  return mRotationInRad;};
-    this.GetRotationInDegree = function() { return mRotationInRad * 180.0 / Math.PI; };
+        this._mRotationInRad = rotationInDegree * Math.PI/180.0;  };
+    this.GetRotationInRad = function() {  return this._mRotationInRad;};
+    this.GetRotationInDegree = function() { return this._mRotationInRad * 180.0 / Math.PI; };
     //</editor-fold>
 };
 

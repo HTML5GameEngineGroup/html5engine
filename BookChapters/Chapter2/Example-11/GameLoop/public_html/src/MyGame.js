@@ -40,12 +40,12 @@ MyGame.prototype.Initialize = function()
     
     // Now create the shaders
     this.mWhiteShader = new ShaderProgram(gEngineCore.GetGL(), 
-            "shaders/SimpleVertexShader.glsl",      // Path to the VertexShader 
-            "shaders/WhiteFragmentShader.glsl");    // Path to the White FragmentShader
+            "shaders/SimpleVS.glsl",      // Path to the VertexShader 
+            "shaders/WhiteFS.glsl");    // Path to the White FragmentShader
     
     this.mRedShader = new ShaderProgram(gEngineCore.GetGL(), 
-            "shaders/SimpleVertexShader.glsl",      // Path to the VertexShader 
-            "shaders/RedFragmentShader.glsl");      // Path to the Red FragmentShader
+            "shaders/SimpleVS.glsl",      // Path to the VertexShader 
+            "shaders/RedFS.glsl");      // Path to the Red FragmentShader
     
     // Now initialize the buffer with the vertex positions for the unit square
     this.mVertexBuffer = new VertexBuffer(gEngineCore.GetGL());

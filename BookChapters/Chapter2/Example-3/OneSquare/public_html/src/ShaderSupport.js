@@ -38,6 +38,19 @@ function InitShaderProgram(vertexShaderID, fragmentShaderID)
     // Gets a reference to the SquareVertexPosition variable within the shaders.
     gShaderVertexPositionAttribute = gGL.getAttribLocation(gShaderProgram, "aSquareVertexPosition");
         // SquareVertexPosition: is defined in the VertexShader (in the index.html file)
+   
+    // Bind the gGL vertex buffer to be used
+    gGL.bindBuffer(gGL.ARRAY_BUFFER, gSquareVertexBuffer);
+        // gSquareVertexBuffer: is defined in VertexBuffer.js and 
+        //      initialized by the InitSquareBuffer() function.
+        
+    // Describe the characteristic of the vertex position attribute
+    gGL.vertexAttribPointer(gShaderVertexPositionAttribute, // variable initialized above
+        3,          // each vertex element is a 3-float (x,y,z)
+        gGL.FLOAT,  // data type is FLOAT
+        false,      // if the content is normalized vectors
+        0,          // number of bytes to skip in between elements
+        0);         // offsets to the first element
 }
 
 // Returns a complied shader from a shader in the dom.

@@ -9,5 +9,9 @@
             <file>file:/E:/Dropbox/2014.11.HTML5_WebGL/3.BookSource/html5engine/BookChapters/Chapter2/Example-10/CameraObject/public_html/src/Engine/EngineCore.js</file>
             <file>file:/E:/Dropbox/2014.11.HTML5_WebGL/3.BookSource/html5engine/BookChapters/Chapter2/Example-10/CameraObject/public_html/shaders/RedFS.glsl</file>
         </group>
+        <group name="HTML5GameEngine">
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-10/CameraObject/public_html/index.html</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-10/CameraObject/public_html/src/MyGame.js</file>
+        </group>
     </open-files>
 </project-private>

@@ -9,12 +9,9 @@ function MyGame(htmlCanvasID)
     // The shaders for drawing: one red and one white
     this._mRedShader = null;
     this._mWhiteShader = null;
-    
-    // The vertex buffer that contains the square vertices
-    this._mVertexBuffer = null;
-    
+        
     this._mWhiteSq = null;		// these are the renderable objects
-    this._mRedSq = null;
+    this._mRedSq = null;    
     
     this._mCamera = new Camera(
             vec2.fromValues(20, 60),   // position of the camera
@@ -26,23 +23,20 @@ function MyGame(htmlCanvasID)
     gEngineCore.InitializeWebGL(htmlCanvasID);
     
     // 2. Now create the shaders
-    this._mWhiteShader = new ShaderProgram(gEngineCore.GetGL(), 
+    this._mWhiteShader = new ShaderProgram(
             "shaders/SimpleVS.glsl",      // Path to the VertexShader 
             "shaders/WhiteFS.glsl");    // Path to the White FragmentShader
     
-    this._mRedShader = new ShaderProgram(gEngineCore.GetGL(), 
+    this._mRedShader = new ShaderProgram(
             "shaders/SimpleVS.glsl",      // Path to the VertexShader 
             "shaders/RedFS.glsl");      // Path to the Red FragmentShader
     
-    // 3. Now initialize the buffer with the vertex positions for the unit square
-    this._mVertexBuffer = new VertexBuffer(gEngineCore.GetGL());
-    
-    // 4. Create the renderable objects:
-    this._mWhiteSq = new RenderableObject(this._mWhiteShader, this._mVertexBuffer);
-    this._mRedSq = new RenderableObject(this._mRedShader, this._mVertexBuffer);
+    // 3. Create the renderable objects:
+    this._mWhiteSq = new RenderableObject(this._mWhiteShader);
+    this._mRedSq = new RenderableObject(this._mRedShader);
     
     // 4. Now we can Draw!
-    gEngineCore.ClearCanvas();
+    gEngineCore.ClearCanvas();        // 1. Clear the canvas
     
     // 5. Starts the drawing by activating the camera
     this._mCamera.BeginDraw();

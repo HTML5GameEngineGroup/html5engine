@@ -9,13 +9,9 @@ function MyGame(htmlCanvasID)
     // The shaders for drawing: one red and one white
     this._mRedShader = null;
     this._mWhiteShader = null;
-    
-    // The vertex buffer that contains the square vertices
-    this._mVertexBuffer = null;
-    
-    // The two renderable objects
+        
     this._mWhiteSq = null;		// these are the renderable objects
-    this._mRedSq = null;
+    this._mRedSq = null;    
     
     // The camera to view the rectangles
     this._mCamera = null;
@@ -39,20 +35,18 @@ MyGame.prototype.Initialize = function()
             // sets the background to dark gray
     
     // Now create the shaders
-    this._mWhiteShader = new ShaderProgram(gEngineCore.GetGL(), 
+    this._mWhiteShader = new ShaderProgram( 
             "shaders/SimpleVS.glsl",      // Path to the VertexShader 
             "shaders/WhiteFS.glsl");    // Path to the White FragmentShader
     
-    this._mRedShader = new ShaderProgram(gEngineCore.GetGL(), 
+    this._mRedShader = new ShaderProgram( 
             "shaders/SimpleVS.glsl",      // Path to the VertexShader 
             "shaders/RedFS.glsl");      // Path to the Red FragmentShader
     
-    // Now initialize the buffer with the vertex positions for the unit square
-    this._mVertexBuffer = new VertexBuffer(gEngineCore.GetGL());
     
     // Create the renderable objects:
-    this._mWhiteSq = new RenderableObject(this._mWhiteShader, this._mVertexBuffer);
-    this._mRedSq = new RenderableObject(this._mRedShader, this._mVertexBuffer);
+    this._mWhiteSq = new RenderableObject(this._mWhiteShader);
+    this._mRedSq = new RenderableObject(this._mRedShader);
     
     // Centre white, slightly rotated square
     this._mWhiteSq.GetXform().SetPosition(20, 60);
@@ -88,6 +82,7 @@ MyGame.prototype.Update = function()
 {
     // For this very simple game, let's move the white square and pulse the red
     
+    // move the white square
     var whiteXform = this._mWhiteSq.GetXform();
     var deltaX = 0.05;
     

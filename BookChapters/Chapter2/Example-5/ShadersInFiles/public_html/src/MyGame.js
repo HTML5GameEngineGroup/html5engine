@@ -8,23 +8,24 @@ function MyGame(htmlCanvasID)
 {
     // The shader for drawing
     this._mShader = null;
-    
-    // The vertex buffer that contains the square vertices
-    this._mVertexBuffer = null;
        
-    // 1. Initialize the webGL Context
+    // 1. Initialize the webGL Context and the VertexBuffer
     gEngineCore.InitializeWebGL(htmlCanvasID);
     
     // 2. Now create the shaders
-    this._mShader = new ShaderProgram(gEngineCore.GetGL(), 
+    this._mShader = new ShaderProgram(
             "shaders/SimpleVS.glsl",      // Path to the VertexShader 
             "shaders/WhiteFS.glsl");    // Path to the FragmentShader
     
-    // 3. Now initialize the buffer with the vertex positions for the unit square
-    this._mVertexBuffer = new VertexBuffer(gEngineCore.GetGL());
     
-    // 4. Now we can Draw!
-    gEngineCore.ClearCanvas();        // 1. Clear the canvas
-    this._mShader.ActivateShader();           // 2. Activate the proper shader
-    this._mVertexBuffer.ActivateAndDraw();    // 3. Draw with the geometry
+    // 3. Now we can Draw!
+        // step 1. Clear the canvas
+        gEngineCore.ClearCanvas();        
+        
+        // 2. Activate the proper shader
+        this._mShader.ActivateShader(); 
+        
+        // 3. Draw with the currently activated geometry (by the shader)
+        var gl = gEngineCore.GetGL();
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 };

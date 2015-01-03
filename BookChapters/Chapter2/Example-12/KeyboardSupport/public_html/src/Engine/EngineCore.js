@@ -23,6 +23,7 @@ var gEngineCore = gEngineCore || function()
         // initialize all of the EngineCore components
         var InitializeEngineCore = function(htmlCanvasID) {
             _InitializeWebGL(htmlCanvasID);
+            gEngineCore.VertexBuffer.Initialize();
             gEngineCore.Input.Initialize();
         };
         
@@ -48,11 +49,11 @@ var gEngineCore = gEngineCore || function()
         
     // -- end of public methods
 
-    var publicMethods = {
+    var oPublic = {
         GetGL: GetGL,
         InitializeEngineCore: InitializeEngineCore,
         ClearCanvas: ClearCanvas
     };
 
-    return publicMethods;
+    return oPublic;
 }();

@@ -33,6 +33,9 @@ var gEngineCore = gEngineCore || function()
             } else {
                 document.write("<br><b>WebGL is not supported!</b>");
             }
+            
+            // now initialize the VertexBuffer
+            gEngineCore.VertexBuffer.Initialize();
         };
         
         // Clears the draw area and draws one square
@@ -42,11 +45,11 @@ var gEngineCore = gEngineCore || function()
         
     // -- end of public methods
 
-    var publicMethods = {
+    var oPublic = {
         GetGL: GetGL,
         InitializeWebGL: InitializeWebGL,
         ClearCanvas: ClearCanvas
     };
 
-    return publicMethods;
+    return oPublic;
 }();

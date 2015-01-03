@@ -7,40 +7,55 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 //<editor-fold desc="constructor">
-// constructor of ShaderProgram object: takes three parameters
-function ShaderProgram(webglContext, vertexShaderPath, fragmentShaderPath)
+// constructor of ShaderProgram object
+function ShaderProgram(vertexShaderPath, fragmentShaderPath)
 {
     // instance variables
     // Convention: all instance variables: mVariables
     this._mCompiledShader = null;  // reference to the compiled shader in webgl context  
     this._mShaderVertexPositionAttribute = null; // reference to SquareVertexPosition within the shader
     this._mModelTransform = null;				// reference to model transform matrix in vertex shader
-    this._mGL = webglContext;         // keep a reference to the webgl context
+    
+    var gl = gEngineCore.GetGL();
          
     // start of constructor code
     // 
     // load and compile the shaders
-    var vertexShader = this._LoadAndCompileShader(vertexShaderPath, this._mGL.VERTEX_SHADER);
-    var fragmentShader = this._LoadAndCompileShader(fragmentShaderPath, this._mGL.FRAGMENT_SHADER);
+    var vertexShader = this._LoadAndCompileShader(vertexShaderPath, gl.VERTEX_SHADER);
+    var fragmentShader = this._LoadAndCompileShader(fragmentShaderPath, gl.FRAGMENT_SHADER);
     
     // Create and link the program.
-    this._mCompiledShader = this._mGL.createProgram();
-    this._mGL.attachShader(this._mCompiledShader, vertexShader);
-    this._mGL.attachShader(this._mCompiledShader, fragmentShader);
+    this._mCompiledShader = gl.createProgram();
+    gl.attachShader(this._mCompiledShader, vertexShader);
+    gl.attachShader(this._mCompiledShader, fragmentShader);
     
-    this._mGL.linkProgram(this._mCompiledShader);
+    gl.linkProgram(this._mCompiledShader);
 
     // Show error if failed.
-    if (!this._mGL.getProgramParameter(this._mCompiledShader, this._mGL.LINK_STATUS))
+    if (!gl.getProgramParameter(this._mCompiledShader, gl.LINK_STATUS))
     {
         alert("Error linking shader");
         return null;
     }
     
-    this._mShaderVertexPositionAttribute = this._mGL.getAttribLocation(
+    // Now initialize the aSquareVertexPosition attribute
+    this._mShaderVertexPositionAttribute = gl.getAttribLocation(
                     this._mCompiledShader, "aSquareVertexPosition");
 
-    this._mModelTransform = this._mGL.getUniformLocation(
+    
+    // binds the gl attribute reference with the vertex buffer
+    gl.bindBuffer(gl.ARRAY_BUFFER, gEngineCore.VertexBuffer.GetGLVertexRef());
+    
+    /// tells GL the format of the vertex buffer: each element is a 3-float
+    gl.vertexAttribPointer(this._mShaderVertexPositionAttribute, 
+        3,              // each element is a 3-float (x,y.z)
+        gl.FLOAT,       // data type is FLOAT
+        false,          // if the content is normalized vectors
+        0,              // number of bytes to skip in between elements
+        0);             // offsets to the first element
+    
+    // create the reference to the uniform attribute "uModelTransform" 
+    this._mModelTransform = gl.getUniformLocation(
                     this._mCompiledShader, "uModelTransform");
 };
 //</editor-fold>
@@ -52,18 +67,12 @@ ShaderProgram.prototype.GetShader = function() { return _mCompiledShader; };
 
 // Activate the shader for rendering
 ShaderProgram.prototype.ActivateShader = function(modelTransform) {
-    this._mGL.useProgram(this._mCompiledShader);
-    this._mGL.enableVertexAttribArray(this._mShaderVertexPositionAttribute);
-    this._mGL.vertexAttribPointer(this._mShaderVertexPositionAttribute, 
-        3,              // a total of 3 elements 
-        this._mGL.FLOAT, // data type is FLOAT
-        false,          // if the content is normalized vectors
-        0,              // number of bytes to skip in between elements
-        0);             // offsets to the first element
-        
+    var gl = gEngineCore.GetGL();
+    gl.useProgram(this._mCompiledShader);
+    gl.enableVertexAttribArray(this._mShaderVertexPositionAttribute);
         // this last function loads the modelTransform matrix into webGL
         // to be used by the vertex shader
-    this._mGL.uniformMatrix4fv(this._mModelTransform, false, modelTransform);
+    gl.uniformMatrix4fv(this._mModelTransform, false, modelTransform);
 };
 //-- end of public methods
 // </editor-fold>
@@ -79,6 +88,7 @@ ShaderProgram.prototype.ActivateShader = function(modelTransform) {
 // The id is the id of the script in the html tag.
 ShaderProgram.prototype._LoadAndCompileShader = function(filePath, shaderType)
 {
+    var gl = gEngineCore.GetGL();
     var xmlReq, shaderSource = null, compiledShader = null;
 
     // Request the text from the given file location.
@@ -98,20 +108,20 @@ ShaderProgram.prototype._LoadAndCompileShader = function(filePath, shaderType)
     }
 
     // Create the shader based on the input type.
-    compiledShader = this._mGL.createShader(shaderType);
+    compiledShader = gl.createShader(shaderType);
 
     // Give the source to the shader to be compiled.
-    this._mGL.shaderSource(compiledShader, shaderSource);
+    gl.shaderSource(compiledShader, shaderSource);
 
     // Complie shader program
-    this._mGL.compileShader(compiledShader);
+    gl.compileShader(compiledShader);
 
     // Check if successful, if not display log and return null.
     // The log info is how shader compilation errors are typically displayed.
     // This is useful for debugging the shaders.
-    if (!this._mGL.getShaderParameter(compiledShader, this._mGL.COMPILE_STATUS))
+    if (!gl.getShaderParameter(compiledShader, gl.COMPILE_STATUS))
     {
-        alert("A shader compliling error occurred: " + this._mGL.getShaderInfoLog(compiledShader));
+        alert("A shader compliling error occurred: " + gl.getShaderInfoLog(compiledShader));
     }
 
     return compiledShader;

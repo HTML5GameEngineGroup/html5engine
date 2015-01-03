@@ -8,11 +8,9 @@
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function RenderableObject(shader, vertexBuffer)
+function RenderableObject(shader)
 {
-    
     this._mShader = shader; // the shader for shading this object
-    this._mVertexBuffer = vertexBuffer; // the vertex buffer that defines the vertices of this object
 };
 
 //<editor-fold desc="Public Methods">
@@ -20,8 +18,9 @@ function RenderableObject(shader, vertexBuffer)
 // Public methods
 //**-----------------------------------------
 RenderableObject.prototype.Draw = function() {
+    var gl = gEngineCore.GetGL();
     this._mShader.ActivateShader();
-    this._mVertexBuffer.ActivateAndDraw();
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 };
 //--- end of Public Methods
 //</editor-fold>

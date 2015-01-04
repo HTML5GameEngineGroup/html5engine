@@ -13,7 +13,7 @@ function MyGame(htmlCanvasID)
     gEngineCore.InitializeWebGL(htmlCanvasID);
     
     // 2. Now create the shaders
-    this._mShader = new ShaderProgram(
+    this._mShader = new SimpleShader(
             "shaders/SimpleVS.glsl",      // Path to the VertexShader 
             "shaders/WhiteFS.glsl");    // Path to the FragmentShader
     

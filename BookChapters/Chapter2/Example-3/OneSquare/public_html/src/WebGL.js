@@ -28,9 +28,9 @@ function InitializeGL()
                 // This function is defined in the VertexBuffer.js file
                 
         // 2. now load and compile the vertex and fragment shaders
-        InitShaderProgram("VertexShader", "FragmentShader");
+        InitSimpleShader("VertexShader", "FragmentShader");
                 // the two shaders are defined in the index.html file
-                // InitShaderProgram() funciton is defined in ShaderSupport.js file
+                // InitSimpleShader() funciton is defined in ShaderSupport.js file
                 
     } else {
         document.write("<br><b>WebGL is not supported!</b>");
@@ -43,7 +43,7 @@ function DrawSquare() {
     gGL.clear(gGL.COLOR_BUFFER_BIT);      // clear to the color previously set
     
     // 1. Enable the shader to use
-        gGL.useProgram(gShaderProgram);
+        gGL.useProgram(gSimpleShader);
     
     // 2. Enables the vertex position attribute to pass vertex buffer content
     //       to the vertex shader

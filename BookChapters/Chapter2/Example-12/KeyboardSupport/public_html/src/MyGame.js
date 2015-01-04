@@ -35,11 +35,11 @@ MyGame.prototype.Initialize = function()
             // sets the background to dark gray
     
     // Now create the shaders
-    this._mWhiteShader = new ShaderProgram( 
+    this._mWhiteShader = new SimpleShader( 
             "shaders/SimpleVS.glsl",      // Path to the VertexShader 
             "shaders/WhiteFS.glsl");    // Path to the White FragmentShader
     
-    this._mRedShader = new ShaderProgram( 
+    this._mRedShader = new SimpleShader( 
             "shaders/SimpleVS.glsl",      // Path to the VertexShader 
             "shaders/RedFS.glsl");      // Path to the Red FragmentShader
     

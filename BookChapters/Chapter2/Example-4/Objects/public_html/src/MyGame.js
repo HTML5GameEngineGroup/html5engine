@@ -13,7 +13,7 @@ function MyGame(htmlCanvasID)
     gEngineCore.InitializeWebGL(htmlCanvasID);
     
     // 2. Now create the shaders
-    this._mShader = new ShaderProgram("VertexShader", "FragmentShader");
+    this._mShader = new SimpleShader("VertexShader", "FragmentShader");
     
     // 3. Now we can Draw!
         // step 1. Clear the canvas

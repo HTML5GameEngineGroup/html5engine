@@ -7,8 +7,14 @@
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-12/KeyboardSupport/public_html/index.html</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-12/KeyboardSupport/public_html/src/Engine/EngineCore.js</file>
         </group>
-        <group name="Chapter2">
+        <group name="Chapter3">
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-12/KeyboardSupport/public_html/src/MyGame.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-12/KeyboardSupport/public_html/src/Engine/EngineCore_VertexBuffer.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-12/KeyboardSupport/public_html/src/Engine/ShaderProgram.js</file>
+        </group>
+        <group name="AllBookProjects">
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-12/KeyboardSupport/public_html/src/MyGame.js</file>
         </group>
+        <group name="Chapter2"/>
     </open-files>
 </project-private>

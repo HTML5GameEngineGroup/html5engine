@@ -1,13 +1,13 @@
 /* 
- * File: ShadderProgram.js
+ * File: SimpleShader.js
  * 
- * Implements a ShaderProgram object.
+ * Implements a SimpleShader object.
  * 
  */
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-// constructor of ShaderProgram object: takes three parameters
-function ShaderProgram(webglContext, vertexShaderPath, fragmentShaderPath)
+// constructor of SimpleShader object: takes three parameters
+function SimpleShader(webglContext, vertexShaderPath, fragmentShaderPath)
 {
     // private instance variables
     // Convention: all instance variables: mVariables

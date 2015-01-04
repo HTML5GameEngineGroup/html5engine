@@ -8,13 +8,14 @@
 
 //<editor-fold desc="constructor">
 // constructor of ShaderProgram object
-function ShaderProgram(vertexShaderPath, fragmentShaderPath)
+function SimpleShader(vertexShaderPath, fragmentShaderPath)
 {
     // instance variables
     // Convention: all instance variables: mVariables
     this._mCompiledShader = null;  // reference to the compiled shader in webgl context  
     this._mShaderVertexPositionAttribute = null; // reference to SquareVertexPosition within the shader
-    this._mModelTransform = null;				// reference to model transform matrix in vertex shader
+    this._mModelTransform = null;		// reference to the model transform matrix in vertex shader
+    this._mViewProjTransform = null;             // reference to the View/Projection matrix in the vertex shader
     
     var gl = gEngineCore.GetGL();
          
@@ -41,6 +42,7 @@ function ShaderProgram(vertexShaderPath, fragmentShaderPath)
     // Now initialize the aSquareVertexPosition attribute
     this._mShaderVertexPositionAttribute = gl.getAttribLocation(
                     this._mCompiledShader, "aSquareVertexPosition");
+
     
     // binds the gl attribute reference with the vertex buffer
     gl.bindBuffer(gl.ARRAY_BUFFER, gEngineCore.VertexBuffer.GetGLVertexRef());
@@ -56,27 +58,33 @@ function ShaderProgram(vertexShaderPath, fragmentShaderPath)
     // create the reference to the uniform attribute "uModelTransform" 
     this._mModelTransform = gl.getUniformLocation(
                     this._mCompiledShader, "uModelTransform");
+    
+    // create the reference to the uniform attribute "uViewProjTransform"
+    this._mViewProjTransform = gl.getUniformLocation(
+                    this._mCompiledShader, "uViewProjTransform");
 };
 //</editor-fold>
 
 // <editor-fold desc="Public Methods">
 
+
 // Access to the compiled shader
-ShaderProgram.prototype.GetShader = function() { return _mCompiledShader; };
+SimpleShader.prototype.GetShader = function() { return _mCompiledShader; };
 
 // Activate the shader for rendering
-ShaderProgram.prototype.ActivateShader = function() {
+SimpleShader.prototype.ActivateShader = function(vpMatrix) {
     var gl = gEngineCore.GetGL();
     gl.useProgram(this._mCompiledShader);
+    gl.uniformMatrix4fv(this._mViewProjTransform, false, vpMatrix);
     gl.enableVertexAttribArray(this._mShaderVertexPositionAttribute);
 };
-
 // Loads per-object model transform to the vertex shader
-ShaderProgram.prototype.LoadObjectTransform = function(modelTransform) {
+SimpleShader.prototype.LoadObjectTransform = function(modelTransform) {
     var gl = gEngineCore.GetGL();
         // loads the modelTransform matrix into webGL to be used by the vertex shader
     gl.uniformMatrix4fv(this._mModelTransform, false, modelTransform);
 };
+
 //-- end of public methods
 // </editor-fold>
 
@@ -89,7 +97,7 @@ ShaderProgram.prototype.LoadObjectTransform = function(modelTransform) {
 // 
 // Returns a complied shader from a shader in the dom.
 // The id is the id of the script in the html tag.
-ShaderProgram.prototype._LoadAndCompileShader = function(filePath, shaderType)
+SimpleShader.prototype._LoadAndCompileShader = function(filePath, shaderType)
 {
     var gl = gEngineCore.GetGL();
     var xmlReq, shaderSource = null, compiledShader = null;

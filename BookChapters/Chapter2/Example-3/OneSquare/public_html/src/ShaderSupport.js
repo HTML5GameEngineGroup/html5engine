@@ -5,38 +5,38 @@
  * Notice:  although in a different file, we have access to 
  *          global variables defined in WebGL.js: gGL
  *          
- *          In the same way, the global variable gShaderProgram defined in this
+ *          In the same way, the global variable gSimpleShader defined in this
  *          file will be accessible to any other javascript source code in 
  *          our projetc.
  * 
  */
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-var gShaderProgram = null;
+var gSimpleShader = null;
     // Reference to the shader program stored in gGL context.
     
 var gShaderVertexPositionAttribute = null;
     // gGL reference to the attribute to be used by the VertexShader
 
 // Loads/compiles/links shader programs to gGL context
-function InitShaderProgram(vertexShaderID, fragmentShaderID)
+function InitSimpleShader(vertexShaderID, fragmentShaderID)
 {
     var vertexShader = LoadAndCompileShader(vertexShaderID, gGL.VERTEX_SHADER);
     var fragmentShader = LoadAndCompileShader(fragmentShaderID, gGL.FRAGMENT_SHADER);
 
     // Create and link the program.
-    gShaderProgram = gGL.createProgram();
-    gGL.attachShader(gShaderProgram, vertexShader);
-    gGL.attachShader(gShaderProgram, fragmentShader);
-    gGL.linkProgram(gShaderProgram);
+    gSimpleShader = gGL.createProgram();
+    gGL.attachShader(gSimpleShader, vertexShader);
+    gGL.attachShader(gSimpleShader, fragmentShader);
+    gGL.linkProgram(gSimpleShader);
 
     // Show error if failed.
-    if (!gGL.getProgramParameter(gShaderProgram, gGL.LINK_STATUS))  {
+    if (!gGL.getProgramParameter(gSimpleShader, gGL.LINK_STATUS))  {
         alert("Error linking shader");
     }
     
     // Gets a reference to the SquareVertexPosition variable within the shaders.
-    gShaderVertexPositionAttribute = gGL.getAttribLocation(gShaderProgram, "aSquareVertexPosition");
+    gShaderVertexPositionAttribute = gGL.getAttribLocation(gSimpleShader, "aSquareVertexPosition");
         // SquareVertexPosition: is defined in the VertexShader (in the index.html file)
    
     // Bind the gGL vertex buffer to be used

@@ -1,14 +1,14 @@
 /* 
- * File: ShadderProgram.js
+ * File: SimpleShader.js
  * 
- * Implements a ShaderProgram object.
+ * Implements a SimpleShader object.
  * 
  */
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 //<editor-fold desc="constructor">
-// constructor of ShaderProgram object
-function ShaderProgram(vertexShaderID, fragmentShaderID)
+// constructor of SimpleShader object
+function SimpleShader(vertexShaderID, fragmentShaderID)
 {
     // instance variables
     // Convention: all instance variables: mVariables
@@ -57,10 +57,10 @@ function ShaderProgram(vertexShaderID, fragmentShaderID)
 // <editor-fold desc="Public Methods">
 
 // Access to the compiled shader
-ShaderProgram.prototype.GetShader = function() { return _mCompiledShader; };
+SimpleShader.prototype.GetShader = function() { return _mCompiledShader; };
 
 // Activate the shader for rendering
-ShaderProgram.prototype.ActivateShader = function() {
+SimpleShader.prototype.ActivateShader = function() {
     var gl = gEngineCore.GetGL();
     gl.useProgram(this._mCompiledShader);
     gl.enableVertexAttribArray(this._mShaderVertexPositionAttribute);
@@ -77,7 +77,7 @@ ShaderProgram.prototype.ActivateShader = function() {
 // 
 // Returns a complied shader from a shader in the dom.
 // The id is the id of the script in the html tag.
-ShaderProgram.prototype._LoadAndCompileShader = function(id, shaderType)
+SimpleShader.prototype._LoadAndCompileShader = function(id, shaderType)
 {
     var shaderText, shaderSource, compiledShader;
     var gl = gEngineCore.GetGL();

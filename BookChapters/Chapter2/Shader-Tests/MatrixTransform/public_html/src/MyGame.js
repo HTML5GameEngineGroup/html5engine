@@ -29,11 +29,11 @@ function MyGame(htmlCanvasID)
     gEngineCore.InitializeWebGL(htmlCanvasID);
     
     // 2. Now create the shaders
-    mWhiteShader = new ShaderProgram(gEngineCore.GetGL(), 
+    mWhiteShader = new SimpleShader(gEngineCore.GetGL(), 
             "shaders/SimpleVertexShader.glsl",      // Path to the VertexShader 
             "shaders/WhiteFragmentShader.glsl");    // Path to the White FragmentShader
     
-    mRedShader = new ShaderProgram(gEngineCore.GetGL(), 
+    mRedShader = new SimpleShader(gEngineCore.GetGL(), 
             "shaders/SimpleVertexShader.glsl",      // Path to the VertexShader 
             "shaders/RedFragmentShader.glsl");      // Path to the Red FragmentShader
     

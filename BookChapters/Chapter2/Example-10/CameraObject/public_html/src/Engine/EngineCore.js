@@ -32,6 +32,7 @@ var gEngineCore = gEngineCore || function()
                 _mGL.clearColor(0.0, 0.8, 0.0, 1.0);  // set the color to be cleared
             } else {
                 document.write("<br><b>WebGL is not supported!</b>");
+                return;
             }
             
             // now initialize the VertexBuffer

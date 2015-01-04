@@ -31,7 +31,11 @@ function MyGame(htmlCanvasID)
     
     // 4. Now we can Draw!
     gEngineCore.ClearCanvas();        // 1. Clear the canvas
-    this._mWhiteSq.Draw();
-    this._mRedSq.Draw();
+    
+    this._mWhiteShader.ActivateShader();
+        this._mWhiteSq.Draw();
+    
+    this._mRedShader.ActivateShader();
+        this._mRedSq.Draw();
     
 };

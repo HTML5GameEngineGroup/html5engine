@@ -69,11 +69,13 @@ MyGame.prototype.Draw = function()
     
     // Draw with mCamera
     this._mCamera.BeginDraw();
-        // sets the shader VPMatrix
-        this._mWhiteShader.LoadViewProjMatrix(this._mCamera.GetVPMatrix());
-        this._mRedShader.LoadViewProjMatrix(this._mCamera.GetVPMatrix());
-        this._mWhiteSq.Draw();   
-        this._mRedSq.Draw();
+    
+        // draw for the white shader
+        this._mWhiteShader.ActivateShader(this._mCamera.GetVPMatrix());
+            this._mWhiteSq.Draw();
+        
+        this._mRedShader.ActivateShader(this._mCamera.GetVPMatrix());
+            this._mRedSq.Draw();
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw

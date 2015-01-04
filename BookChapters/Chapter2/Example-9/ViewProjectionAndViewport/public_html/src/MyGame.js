@@ -11,7 +11,11 @@ function MyGame(htmlCanvasID)
     this._mWhiteShader = null;
         
     this._mWhiteSq = null;		// these are the renderable objects
-    this._mRedSq = null;    
+    this._mRedSq = null;
+    this._mTLSq = null;     // top-left square
+    this._mTRSq = null;     // top-right
+    this._mBLSq = null;     // bottom-left
+    this._mBRSq = null;     // bottom-right
     
     // 1. Initialize the webGL Context
     gEngineCore.InitializeWebGL(htmlCanvasID);
@@ -28,6 +32,10 @@ function MyGame(htmlCanvasID)
     // 3. Create the renderable objects:
     this._mWhiteSq = new RenderableObject(this._mWhiteShader);
     this._mRedSq = new RenderableObject(this._mRedShader);
+    this._mTLSq = new RenderableObject(this._mRedShader);
+    this._mTRSq = new RenderableObject(this._mRedShader);
+    this._mBLSq = new RenderableObject(this._mRedShader);
+    this._mBRSq = new RenderableObject(this._mRedShader);
     
     // 4. Now we can Draw!
     gEngineCore.ClearCanvas();        // 1. Clear the canvas
@@ -71,34 +79,36 @@ function MyGame(htmlCanvasID)
     );
     var vpMatrix = mat4.create();
     mat4.multiply(vpMatrix, projMatrix, viewMatrix);
-    this._mWhiteShader.LoadViewProjMatrix(vpMatrix);
-    this._mRedShader.LoadViewProjMatrix(vpMatrix);
     // </editor-fold>
     
-    // Centre white, slightly rotated square
-    this._mWhiteSq.GetXform().SetPosition(20, 60);
-    this._mWhiteSq.GetXform().SetRotationInRad(0.2); // In Degree
-    this._mWhiteSq.GetXform().SetSize(5, 5);
-    this._mWhiteSq.Draw();
+    // Draw with the white shader
+    this._mWhiteShader.ActivateShader(vpMatrix);
+        // Centre white, slightly rotated square
+        this._mWhiteSq.GetXform().SetPosition(20, 60);
+        this._mWhiteSq.GetXform().SetRotationInRad(0.2); // In Degree
+        this._mWhiteSq.GetXform().SetSize(5, 5);
+        this._mWhiteSq.Draw();
     
-    // centre red square
-    this._mRedSq.GetXform().SetPosition(20, 60);
-    this._mRedSq.GetXform().SetSize(2, 2);
-    this._mRedSq.Draw();
-    
-    // top left
-    this._mRedSq.GetXform().SetPosition(10, 65);
-    this._mRedSq.Draw();
-    
-    // top right
-    this._mRedSq.GetXform().SetPosition(30, 65);
-    this._mRedSq.Draw();
-    
-    // bottom right
-    this._mRedSq.GetXform().SetPosition(30, 55);
-    this._mRedSq.Draw();
-    
-    // bottom left
-    this._mRedSq.GetXform().SetPosition(10, 55);
-    this._mRedSq.Draw();
+    // Draw with the red shader
+    this._mRedShader.ActivateShader(vpMatrix);
+        // centre red square
+        this._mRedSq.GetXform().SetPosition(20, 60);
+        this._mRedSq.GetXform().SetSize(2, 2);
+        this._mRedSq.Draw();
+
+        // top left
+        this._mTLSq.GetXform().SetPosition(10, 65);
+        this._mTLSq.Draw();
+
+        // top right
+        this._mTRSq.GetXform().SetPosition(30, 65);
+        this._mTRSq.Draw();
+
+        // bottom right
+        this._mBRSq.GetXform().SetPosition(30, 55);
+        this._mBRSq.Draw();
+
+        // bottom left
+        this._mBLSq.GetXform().SetPosition(10, 55);
+        this._mBLSq.Draw();
 };

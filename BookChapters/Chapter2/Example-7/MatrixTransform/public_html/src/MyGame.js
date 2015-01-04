@@ -34,14 +34,21 @@ function MyGame(htmlCanvasID)
     // instead of simply drawing the squares, let's apply simple transforms
     var xform = mat4.create();
         
+    
+    // compute the white square transform
     mat4.translate(xform, xform, vec3.fromValues(-0.25, 0.25, 0.0));
     mat4.rotateZ(xform, xform, 0.2); // rotation is in radian
     mat4.scale(xform, xform, vec3.fromValues(1.2, 1.2, 1.0));
-    this._mWhiteSq.Draw(xform);
+    // draw the white square
+    this._mWhiteShader.ActivateShader();  // activates the shader
+        this._mWhiteSq.Draw(xform);       // draw all objects of this shader
     
+    // compute the red square transform
     mat4.identity(xform); // restart
     mat4.translate(xform, xform, vec3.fromValues(0.25, -0.25, 0.0));
     mat4.rotateZ(xform, xform, -0.785); // rotation is in radian (about -45-degree)
     mat4.scale(xform, xform, vec3.fromValues(0.4, 0.4, 1.0));
-    this._mRedSq.Draw(xform);
+    // draw the red square
+    this._mRedShader.ActivateShader();  // activates the shader  
+        this._mRedSq.Draw(xform);       // draw all objects of this shader
 };

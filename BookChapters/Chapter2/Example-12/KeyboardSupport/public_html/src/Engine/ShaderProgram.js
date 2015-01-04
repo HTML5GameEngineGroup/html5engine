@@ -72,20 +72,19 @@ function ShaderProgram(vertexShaderPath, fragmentShaderPath)
 ShaderProgram.prototype.GetShader = function() { return _mCompiledShader; };
 
 // Activate the shader for rendering
-ShaderProgram.prototype.ActivateShader = function(modelTransform) {
+ShaderProgram.prototype.ActivateShader = function(vpMatrix) {
     var gl = gEngineCore.GetGL();
     gl.useProgram(this._mCompiledShader);
+    gl.uniformMatrix4fv(this._mViewProjTransform, false, vpMatrix);
     gl.enableVertexAttribArray(this._mShaderVertexPositionAttribute);
-        // this last function loads the modelTransform matrix into webGL
-        // to be used by the vertex shader
+};
+// Loads per-object model transform to the vertex shader
+ShaderProgram.prototype.LoadObjectTransform = function(modelTransform) {
+    var gl = gEngineCore.GetGL();
+        // loads the modelTransform matrix into webGL to be used by the vertex shader
     gl.uniformMatrix4fv(this._mModelTransform, false, modelTransform);
 };
 
-ShaderProgram.prototype.LoadViewProjMatrix = function(vpMatrix) {
-    var gl = gEngineCore.GetGL();    
-    gl.useProgram(this._mCompiledShader);
-    gl.uniformMatrix4fv(this._mViewProjTransform, false, vpMatrix);
-};
 //-- end of public methods
 // </editor-fold>
 

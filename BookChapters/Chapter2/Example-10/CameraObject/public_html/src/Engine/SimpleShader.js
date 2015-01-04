@@ -1,5 +1,5 @@
 /* 
- * File: ShadderProgram.js
+ * File: ShaderProgram.js
  * 
  * Implements a ShaderProgram object.
  * 

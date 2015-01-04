@@ -9,6 +9,8 @@
         <group name="AllBookProjects">
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-11/GameLoop/public_html/src/MyGame.js</file>
         </group>
-        <group name="Chapter2"/>
+        <group name="Chapter2">
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-11/GameLoop/public_html/src/Engine/SimpleShader.js</file>
+        </group>
     </open-files>
 </project-private>

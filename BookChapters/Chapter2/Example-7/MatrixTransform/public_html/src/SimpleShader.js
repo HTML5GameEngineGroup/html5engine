@@ -1,13 +1,13 @@
 /* 
- * File: ShaderProgram.js
+ * File: SimpleShader.js
  * 
- * Implements a ShaderProgram object.
+ * Implements a SimpleShader object.
  * 
  */
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 //<editor-fold desc="constructor">
-// constructor of ShaderProgram object
+// constructor of SimpleShader object
 function SimpleShader(vertexShaderPath, fragmentShaderPath)
 {
     // instance variables

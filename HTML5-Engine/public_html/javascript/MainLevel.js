@@ -16,6 +16,7 @@ function MainLevel()
     
     // FPS variables
     this.mDrawPrevTime = Date.now();
+    this.mLogicPrevTime = Date.now();
 }
 MainLevel.prototype = Object.create(Scene.prototype);
 
@@ -84,7 +85,6 @@ MainLevel.prototype.initialize = function()
                                        "resources/fonts/dos-font.fnt",
                                        "Testing Textures! 87465@#RT...'");
     
-    
     // Mouse Test text
     var mouseTextXForm = new Transform();
     mouseTextXForm.setPosition(1,10);
@@ -103,9 +103,7 @@ MainLevel.prototype.initialize = function()
 
 MainLevel.prototype.update = function()
 {
-    var elapsedTime = Date.now() - this.mLogicPrevTime;
-    var mpf = "Logic: MPF: " + elapsedTime  + " FPS: "+ Math.round( 1000 / elapsedTime );
-    this.mLogicUpdateText.mText = mpf;
+    this.mLogicPrevTime = Date.now();
     
     if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.E))
     {
@@ -143,14 +141,16 @@ MainLevel.prototype.update = function()
     this.mEnemyManager.update();
     this.mBackgroundManager.update();
     
-    this.mLogicPrevTime = Date.now();
+    // Logic elapse time
+    var elapsedTime = Date.now() - this.mLogicPrevTime;
+    var mpf = "Logic: MPF: " + elapsedTime  + " FPS: "+ Math.round( 1000 / elapsedTime );
+    this.mLogicUpdateText.mText = mpf;
+
 };
 
 MainLevel.prototype.draw = function()
 {
-    var elapsedTime = Date.now() - this.mDrawPrevTime;
-    var mpf = "Draw: MPF: " + elapsedTime  + " FPS: "+ Math.round( 1000 / elapsedTime );
-    this.mFPSText.mText = mpf;
+    this.mDrawPrevTime = Date.now();
     
     EngineCore.Resources.clearCanvas();
     this.mEnemyManager.addToDrawSet();
@@ -160,5 +160,8 @@ MainLevel.prototype.draw = function()
     this.mLogicUpdateText.addToDrawSet();
     this.mMouseText.addToDrawSet();
     this.mCamera.draw();
-    this.mDrawPrevTime = Date.now();
+    
+    var elapsedTime = Date.now() - this.mDrawPrevTime;
+    var mpf = "Draw: MPF: " + elapsedTime  + " FPS: "+ Math.round( 1000 / elapsedTime );
+    this.mFPSText.mText = mpf;
 };

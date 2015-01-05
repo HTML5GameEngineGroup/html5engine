@@ -11,8 +11,6 @@
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-7/MatrixTransform/public_html/src/MyGame.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-7/MatrixTransform/public_html/src/RenderableObject.js</file>
         </group>
-        <group name="Chapter2">
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-7/MatrixTransform/public_html/src/SimpleShader.js</file>
-        </group>
+        <group name="Chapter2"/>
     </open-files>
 </project-private>

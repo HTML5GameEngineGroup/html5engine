@@ -43,13 +43,29 @@ function DrawSquare() {
     gGL.clear(gGL.COLOR_BUFFER_BIT);      // clear to the color previously set
     
     // 1. Enable the shader to use
-        gGL.useProgram(gSimpleShader);
-    
-    // 2. Enables the vertex position attribute to pass vertex buffer content
+    gGL.useProgram(gSimpleShader);
+        
+    // 2. Gets a reference to the SquareVertexPosition variable within the shaders.
+    var shaderVertexPositionAttribute = gGL.getAttribLocation(gSimpleShader, "aSquareVertexPosition");
+        
+    // 3. Enables the vertex position attribute to pass vertex buffer content
     //       to the vertex shader
-        gGL.enableVertexAttribArray(gShaderVertexPositionAttribute);
+     gGL.enableVertexAttribArray(shaderVertexPositionAttribute);
+        
+    // 4. Describe the characteristic of the vertex position attribute
+    gGL.vertexAttribPointer(shaderVertexPositionAttribute, // variable initialized above
+        3,          // each vertex element is a 3-float (x,y,z)
+        gGL.FLOAT,  // data type is FLOAT
+        false,      // if the content is normalized vectors
+        0,          // number of bytes to skip in between elements
+        0);         // offsets to the first element
+        
+    // 5. Bind the gGL vertex buffer to be used
+    gGL.bindBuffer(gGL.ARRAY_BUFFER, gSquareVertexBuffer);
+        // gSquareVertexBuffer: is defined in VertexBuffer.js and 
+        //      initialized by the InitSquareBuffer() function.
     
-    // 3. finally, draw with the above settings
+    // 6. finally, draw with the above settings
         gGL.drawArrays(gGL.TRIANGLE_STRIP, 0, 4);    
 }
 

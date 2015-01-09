@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <title>Example 2.10: Camera Object</title>
+</head>
+<!--Use embedded shader code for now, in order to remove async loading complexity.-->
+
+<body onload="new MyGame('GLCanvas');">
+    
+    <!-- the following says there are javascript source code contained in 
+         the external source files
+    -->
+    <script type="text/javascript" src="src/lib/gl-matrix.js"></script>
+     
+    <script type="text/javascript" src="src/Engine/EngineCore.js"></script>
+    <script type="text/javascript" src="src/Engine/EngineCore_VertexBuffer.js"></script>
+    <script type="text/javascript" src="src/Engine/SimpleShader.js"></script>
+    <script type="text/javascript" src="src/Engine/RenderableObject.js"></script>
+    <script type="text/javascript" src="src/Engine/Transform.js"></script>
+    <script type="text/javascript" src="src/Engine/Camera.js"></script>
+    
+    <script type="text/javascript" src="src/MyGame.js"></script>
+    
+    <canvas id="GLCanvas" width="640" height="480">
+        <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
+        Your browser does not support the HTML5 canvas.
+        <!-- this message will show only if WebGL clearing failed -->
+    </canvas>
+        
+</body>

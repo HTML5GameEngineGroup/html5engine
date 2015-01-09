@@ -54,11 +54,11 @@ Transform.prototype.GetXform = function()
     // The matricies that opengl uses are transposed, thus the typical matrix
     // operations must be in reverse.
     
-    // First translate it, for now z is always at 0.0
+    // Step 1: compute translation, for now z is always at 0.0
     mat4.translate(matrix, matrix, vec3.fromValues(this.GetXPos(), this.GetYPos(), 0.0));
-    // Then rotate it.
+    // Step 2: concatenate with rotation.
     mat4.rotateZ(matrix, matrix, this.GetRotationInRad());
-    // Finally, scale it.
+    // Step 3: concatenate with scaling
     mat4.scale(matrix, matrix, vec3.fromValues(this.GetWidth(), this.GetHeight(), 1.0));
     
     return matrix;

@@ -23,22 +23,22 @@ gEngineCore.Loop = function()
     // This function assumes it is sub-classed from MyGame
     var _RunLoop = function () {
         if(_mIsLoopRunning) {
-            // 1. compute how much time has elapsed since we last RunLoop was execuated
+            // Step 1: compute how much time has elapsed since we last RunLoop was execuated
             _mCurrentTime = Date.now();
             _mElapsedTime = _mCurrentTime - _mPreviousTime;
             _mPreviousTime = _mCurrentTime;
             _mLagTime += _mElapsedTime;
 
-            // 2. Make sure we update the game the appropriate number of times.
-            //      Update only every Milleseconds per frame.
-            //      If lag larger then update freames, update until catchup.
+            // Step 2: Make sure we update the game the appropriate number of times.
+            //        Update only every Milleseconds per frame.
+            //        If lag larger then update freames, update until catchup.
             while(_mLagTime >= kMPF)
             {
                 this.Update();      // call MyGame.Update()
                 _mLagTime -= kMPF;
             }
             
-            // 3. now let's draw
+            // Step 3. Draw
             this.Draw();    // Call MyGame.Draw()
         }
         else

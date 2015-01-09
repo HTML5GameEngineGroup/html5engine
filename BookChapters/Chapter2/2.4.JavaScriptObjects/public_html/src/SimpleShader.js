@@ -19,32 +19,31 @@ function SimpleShader(vertexShaderID, fragmentShaderID)
          
     // start of constructor code
     // 
-    // load and compile the shaders
+    // Step 1: load and compile vertex and fragment shaders
     var vertexShader = this._LoadAndCompileShader(vertexShaderID, gl.VERTEX_SHADER);
     var fragmentShader = this._LoadAndCompileShader(fragmentShaderID, gl.FRAGMENT_SHADER);
     
-    // Create and link the program.
+    // Step 2: Create and link the shaders into a program.
     this._mCompiledShader = gl.createProgram();
     gl.attachShader(this._mCompiledShader, vertexShader);
     gl.attachShader(this._mCompiledShader, fragmentShader);
-    
     gl.linkProgram(this._mCompiledShader);
 
-    // Show error if failed.
+    // Step 3: check for error
     if (!gl.getProgramParameter(this._mCompiledShader, gl.LINK_STATUS))
     {
         alert("Error linking shader");
         return null;
     }
     
-    // Now initialize the aSquareVertexPosition attribute
+    // Step 4: Gets a reference to the SquareVertexPosition variable within the shaders.
     this._mShaderVertexPositionAttribute = gl.getAttribLocation(
                     this._mCompiledShader, "aSquareVertexPosition");
     
-    // binds the gl attribute reference with the vertex buffer
+    // Step 5: Activates the vertex buffer loaded in EngineCore_VertexBuffer.js
     gl.bindBuffer(gl.ARRAY_BUFFER, gEngineCore.VertexBuffer.GetGLVertexRef());
     
-    /// tells GL the format of the vertex buffer: each element is a 3-float
+    /// Step 6: Describe the characteristic of the vertex position attribute
     gl.vertexAttribPointer(this._mShaderVertexPositionAttribute, 
         3,              // each element is a 3-float (x,y.z)
         gl.FLOAT,       // data type is FLOAT
@@ -81,23 +80,19 @@ SimpleShader.prototype._LoadAndCompileShader = function(id, shaderType)
 {
     var shaderText, shaderSource, compiledShader;
     var gl = gEngineCore.GetGL();
-    
-    // Get the shader source in DOM format
-    shaderText = document.getElementById(id);
 
-    // Get shader source as a string.
+    // Step 1: Get the shader source from index.html
+    shaderText = document.getElementById(id);
     shaderSource = shaderText.firstChild.textContent;
 
-    // Create the shader based on the input type.
+    // Step 2: Create the shader based on the shader type: vertex or fragment
     compiledShader = gl.createShader(shaderType);
 
-    // Give the source to the shader to be compiled.
-    gl.shaderSource(compiledShader, shaderSource);
-
-    // Complie shader program
+    // Step 3: Complie the created shader
+    gl.shaderSource(compiledShader, shaderSource);    
     gl.compileShader(compiledShader);
 
-    // Check if successful, if not display log and return null.
+    // Step 4: check for errors and return results (null if error)
     // The log info is how shader compilation errors are typically displayed.
     // This is useful for debugging the shaders.
     if (!gl.getShaderParameter(compiledShader, gl.COMPILE_STATUS))

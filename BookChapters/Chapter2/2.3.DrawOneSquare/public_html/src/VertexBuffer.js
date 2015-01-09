@@ -11,7 +11,7 @@ var gSquareVertexBuffer = null;
 
 function InitSquareBuffer()
 {    
-    // Hardcoded vertex positions.
+    // First: define the vertices for a square
     var verticesOfSquare =
     [
         0.5, 0.5, 0.0,
@@ -20,12 +20,12 @@ function InitSquareBuffer()
         -0.5, -0.5, 0.0
     ];
     
-    // Create a buffer on the gGL context for our vertex positions
+    // Step 1: Create a buffer on the gGL context for our vertex positions
     gSquareVertexBuffer = gGL.createBuffer();
 
-    // Connect the vertexBuffer to the ARRAY_BUFFER global gGL binding point.
+    // Step 2: Activate vertexBuffer
     gGL.bindBuffer(gGL.ARRAY_BUFFER, gSquareVertexBuffer);    
 
-    // Put the verticesOfSquare into the vertexBuffer, as non-changing drawing data (STATIC_DRAW)
+    // Step 3: Loads verticesOfSquare into the vertexBuffer
     gGL.bufferData(gGL.ARRAY_BUFFER, new Float32Array(verticesOfSquare), gGL.STATIC_DRAW);
 }

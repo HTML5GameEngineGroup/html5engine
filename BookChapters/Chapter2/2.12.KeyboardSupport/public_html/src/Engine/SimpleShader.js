@@ -21,33 +21,32 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
          
     // start of constructor code
     // 
-    // load and compile the shaders
+    // Step 1: load and compile vertex and fragment shaders
     var vertexShader = this._LoadAndCompileShader(vertexShaderPath, gl.VERTEX_SHADER);
     var fragmentShader = this._LoadAndCompileShader(fragmentShaderPath, gl.FRAGMENT_SHADER);
     
-    // Create and link the program.
+    // Step 2: Create and link the shaders into a program.
     this._mCompiledShader = gl.createProgram();
     gl.attachShader(this._mCompiledShader, vertexShader);
     gl.attachShader(this._mCompiledShader, fragmentShader);
-    
     gl.linkProgram(this._mCompiledShader);
 
-    // Show error if failed.
+    // Step 3: check for error
     if (!gl.getProgramParameter(this._mCompiledShader, gl.LINK_STATUS))
     {
         alert("Error linking shader");
         return null;
     }
     
-    // Now initialize the aSquareVertexPosition attribute
+    // Step 4: Gets a reference to the SquareVertexPosition variable within the shaders.
     this._mShaderVertexPositionAttribute = gl.getAttribLocation(
                     this._mCompiledShader, "aSquareVertexPosition");
 
     
-    // binds the gl attribute reference with the vertex buffer
+    // Step 5: Activates the vertex buffer loaded in EngineCore_VertexBuffer.js
     gl.bindBuffer(gl.ARRAY_BUFFER, gEngineCore.VertexBuffer.GetGLVertexRef());
     
-    /// tells GL the format of the vertex buffer: each element is a 3-float
+    /// Step 6: Describe the characteristic of the vertex position attribute
     gl.vertexAttribPointer(this._mShaderVertexPositionAttribute, 
         3,              // each element is a 3-float (x,y.z)
         gl.FLOAT,       // data type is FLOAT
@@ -55,11 +54,11 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
         0,              // number of bytes to skip in between elements
         0);             // offsets to the first element
     
-    // create the reference to the uniform attribute "uModelTransform" 
+    // Step 7: create the reference to the uniform attribute "uModelTransform" 
     this._mModelTransform = gl.getUniformLocation(
                     this._mCompiledShader, "uModelTransform");
     
-    // create the reference to the uniform attribute "uViewProjTransform"
+    // Step 8: create the reference to the uniform attribute "uViewProjTransform"
     this._mViewProjTransform = gl.getUniformLocation(
                     this._mCompiledShader, "uViewProjTransform");
 };
@@ -103,7 +102,7 @@ SimpleShader.prototype._LoadAndCompileShader = function(filePath, shaderType)
     var gl = gEngineCore.GetGL();
     var xmlReq, shaderSource = null, compiledShader = null;
 
-    // Request the text from the given file location.
+    // Step 1: Request the text from the given file location.
     xmlReq = new XMLHttpRequest();
     xmlReq.open('GET', filePath, false);
     try {
@@ -119,16 +118,14 @@ SimpleShader.prototype._LoadAndCompileShader = function(filePath, shaderType)
         return null;
     }
 
-    // Create the shader based on the input type.
+    // Step 2: Create the shader based on the shader type: vertex or fragment
     compiledShader = gl.createShader(shaderType);
 
-    // Give the source to the shader to be compiled.
-    gl.shaderSource(compiledShader, shaderSource);
-
-    // Complie shader program
+    // Step 3: Complie the created shader
+    gl.shaderSource(compiledShader, shaderSource);    
     gl.compileShader(compiledShader);
 
-    // Check if successful, if not display log and return null.
+    // Step 4: check for errors and return results (null if error)
     // The log info is how shader compilation errors are typically displayed.
     // This is useful for debugging the shaders.
     if (!gl.getShaderParameter(compiledShader, gl.COMPILE_STATUS))

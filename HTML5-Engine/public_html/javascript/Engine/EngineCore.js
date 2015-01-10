@@ -8,7 +8,7 @@ var EngineCore = EngineCore || { };
 EngineCore.initializeEngine = function(htmlCanvasID, startScene)
 {
     EngineCore.Resources.init(htmlCanvasID);
-    EngineCore.Input.init();
+    EngineCore.Input.init(htmlCanvasID);
     EngineCore.SceneManager.setCurrentScene(startScene);
 };
 
@@ -568,12 +568,16 @@ EngineCore.Loop = function ()
     var mElapsedTime;
     
     // The identifier of the current loop.
-    var mIntervalID = null;
+    var mAnimID = null;
+    
+    var mCurrentScene = null;
 
     // This function is exclusivly to be called in the context of a scene.
     var runLoop = function () {
         if(isLoopRunning)
         {
+            mAnimID = requestAnimationFrame(function(){runLoop.call(mCurrentScene);});
+            
             mCurrentTime = Date.now();
             mElapsedTime = mCurrentTime - mPreviousTime;
             mPreviousTime = mCurrentTime;
@@ -588,13 +592,13 @@ EngineCore.Loop = function ()
                 this.update();
                 mLagTime -= kMPF;
             }
-
+            
             this.draw();
         }
         else
         {
-            clearInterval(mIntervalID);
-            mIntervalID = null;
+            mAnimID = null;
+            mCurrentScene = null;
             givenLoopEndFunction();
         }
     };
@@ -602,20 +606,20 @@ EngineCore.Loop = function ()
     // update and draw functions must be set before this.
     var start = function()
     {
-        var sceneContext = EngineCore.SceneManager.getCurrentScene();
+        mCurrentScene = EngineCore.SceneManager.getCurrentScene();
         mPreviousTime = Date.now();
         mLagTime = 0.0;
         
         isLoopRunning = true;
         givenLoopEndFunction = null;
         
-        mIntervalID = setInterval(function(){runLoop.call(sceneContext);}, 1000 / kFPS);
+        mAnimID = requestAnimationFrame(function(){runLoop.call(mCurrentScene);});
     };
     
     // Stops only after a loop is started and when the loop ends.
     var stop = function(afterStopEventHandler)
     {
-        if(mIntervalID !== null)
+        if(mAnimID !== null)
         {
             isLoopRunning = false;
             givenLoopEndFunction = afterStopEventHandler;
@@ -637,7 +641,101 @@ EngineCore.Loop = function ()
     
 }();
 
-EngineCore.Input = function ()
+// Set aside namespace for Input
+EngineCore.Input = {};
+
+EngineCore.Input.init = function(canvasID)
+{
+    EngineCore.Input.Mouse.init(canvasID);
+    EngineCore.Input.Keyboard.init();
+};
+      
+EngineCore.Input.Mouse = function()
+{
+    // Mouse Button Constants
+    var MOUSE_LEFT = 0;
+    var MOUSE_MIDDLE = 1;
+    var MOUSE_RIGHT = 2;
+        
+    var isPressed = {};
+    
+    isPressed[MOUSE_LEFT] = false;
+    isPressed[MOUSE_MIDDLE] = false;
+    isPressed[MOUSE_RIGHT] = false;
+    
+    // Mouse coords of latest mousedown event
+    var mouseDownPos = {x:0, y:0};
+    
+    // Mouse coords of latest mouseup event
+    var mouseUpPos = {x:0, y:0};
+
+    // The canvas the mouse operates on.
+    var theCanvas;
+
+    var init = function (canvas)
+    {
+        theCanvas = document.getElementById(canvas);
+        
+        // Initialize Mouse
+        window.addEventListener('mousedown', onMouseDown);
+        window.addEventListener('mouseup', onMouseUp);
+        
+    };
+    
+    var onMouseDown = function(event)
+    {
+        var bBox = theCanvas.getBoundingClientRect();
+        // In client space now.
+        //mouseDownPos.x = event.clientX - bBox.left;
+        //mouseDownPos.y = event.clientY - bBox.top;
+        
+        // In Canvas Space now. Convert via ratio from canvas to client.
+        mouseDownPos.x = Math.round((event.clientX - bBox.left) * (theCanvas.width / bBox.width));
+        mouseDownPos.y = Math.round((event.clientY - bBox.top) * (theCanvas.width / bBox.width));
+        
+        isPressed[event.button] = true;
+    };
+    
+    var onMouseUp = function(event)
+    {
+        var bBox = theCanvas.getBoundingClientRect();
+
+        mouseUpPos.x = Math.round((event.clientX - bBox.left) * (theCanvas.width / bBox.width));
+        mouseUpPos.y = Math.round((event.clientY - bBox.top) * (theCanvas.width / bBox.width));
+        
+        isPressed[event.button] = false;
+    };
+    
+    var isButtonPressed = function(buttonCode)
+    {
+        return isPressed[buttonCode];
+    };
+    
+    var getMouseDownPosition = function()
+    {
+        return mouseDownPos;
+    };
+
+    var getMouseUpPosition = function()
+    {
+        return mouseUpPos;
+    };
+
+    var oPublic =
+    {
+        init: init,
+        MOUSE_LEFT: MOUSE_LEFT,
+        MOUST_MIDDLE: MOUSE_MIDDLE,
+        MOUSE_RIGHT: MOUSE_RIGHT,
+        isButtonPressed: isButtonPressed,
+        getMouseUpPosition: getMouseUpPosition,
+        getMouseDownPosition: getMouseDownPosition
+    };
+
+    return oPublic;
+}();
+      
+EngineCore.Input.Keyboard = function ()
 {
     // Scancode constants
     var LEFT = 37;
@@ -656,47 +754,48 @@ EngineCore.Input = function ()
     var I = 73;
     var L = 76;
     var K = 75;
-
+    
     // The pressed keys.
-    var isPressed = {};
+    var isKeyPressed = {};
+    
+    // Initialize Keyboard
+    isKeyPressed[LEFT] = false;
+    isKeyPressed[UP] = false;
+    isKeyPressed[RIGHT] = false;
+    isKeyPressed[DOWN] = false;
+    isKeyPressed[SPACE] = false;
+    isKeyPressed[W] = false;
+    isKeyPressed[A] = false;
+    isKeyPressed[S] = false;
+    isKeyPressed[D] = false;
+    isKeyPressed[E] = false;
+    isKeyPressed[R] = false;
+    isKeyPressed[F] = false;
+    isKeyPressed[J] = false;
+    isKeyPressed[I] = false;
+    isKeyPressed[L] = false;
+    isKeyPressed[K] = false;
 
     var init = function ()
     {
-        isPressed[LEFT] = false;
-        isPressed[UP] = false;
-        isPressed[RIGHT] = false;
-        isPressed[DOWN] = false;
-        isPressed[SPACE] = false;
-        isPressed[W] = false;
-        isPressed[A] = false;
-        isPressed[S] = false;
-        isPressed[D] = false;
-        isPressed[E] = false;
-        isPressed[R] = false;
-        isPressed[F] = false;
-        isPressed[J] = false;
-        isPressed[I] = false;
-        isPressed[L] = false;
-        isPressed[K] = false;
-
         window.addEventListener('keyup', onKeyUp);
-        window.addEventListener('keydown', onKeyDown);
+        window.addEventListener('keydown', onKeyDown);       
     };
 
     var isKeyDown = function (keyCode)
     {
-        return isPressed[keyCode];
+        return isKeyPressed[keyCode];
     };
 
     // Functions to pass to window.
     var onKeyDown = function (event)
     {
-        isPressed[event.keyCode] = true;
+        isKeyPressed[event.keyCode] = true;
     };
 
     var onKeyUp = function (event)
     {
-        isPressed[event.keyCode] = false;
+        isKeyPressed[event.keyCode] = false;
     };
 
     var oPublic =

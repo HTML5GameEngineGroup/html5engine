@@ -197,5 +197,31 @@ function Camera(cameraPosition, cameraWidth, viewportX, viewportY, viewportWidth
         mViewportWidth = width;
         reorientCamera();
     };
+    
+    this.pixelToWorldCoordinates = function(xPix,yPix)
+    { 
+        // Canvas to viewport
+        var viewX = xPix - mViewportX;
+        var viewY = yPix - mViewportY;
+        
+        // Transform Y coordinate so origin is on bottom.
+        viewY = mViewportHeight - viewY;
+        
+        
+        // viewport to gl normalized Viewport
+        var nvX = ((2 * viewX) / mViewportWidth) - 1;
+        var nvY = ((2 * viewY) / mViewportHeight) - 1;
+        
+        // As a vector
+        var nvPos = vec4.fromValues(nvX, nvY, 0, 1); // ---------------------------------------------------------- check with 0 as w.
+        
+        // Use view-perspective matrix inverted to obtain the position in world space.
+        var wPos = vec4.create();
+        var invertedVPM = mat4.create();
+        mat4.invert(invertedVPM, this.getViewPerspectiveMatrix());
+        vec4.transformMat4( wPos, nvPos, invertedVPM);
+        
+        return wPos;
+    };
 };
 

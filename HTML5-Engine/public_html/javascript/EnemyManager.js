@@ -43,7 +43,7 @@ EnemyManager.prototype.addToDrawSet = function()
 EnemyManager.prototype.update = function()
 {    
     // Spawn as neccessary.
-    if(EngineCore.Input.isKeyDown(EngineCore.Input.SPACE))
+    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.SPACE))
     {
         this.addEnemy(this.mPlayer.getTransform().getX() + (Math.random() * 20 - 10),
                       this.mPlayer.getTransform().getY() + (Math.random() * 20 - 10),

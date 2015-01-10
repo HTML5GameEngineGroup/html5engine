@@ -39,7 +39,7 @@ StartScreenLevel.prototype.initialize = function()
 
 StartScreenLevel.prototype.update = function()
 {
-    if(EngineCore.Input.isKeyDown(EngineCore.Input.SPACE))
+    if(EngineCore.Input.Keyboard.isKeyDown(EngineCore.Input.Keyboard.SPACE))
     {
         EngineCore.SceneManager.setCurrentScene(new MainLevel());
     }

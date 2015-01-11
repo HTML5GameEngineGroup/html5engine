@@ -10,11 +10,9 @@
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/Example-11/GameLoop/public_html/src/MyGame.js</file>
         </group>
         <group name="Chapter2">
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/2.11.GameLoop/public_html/src/Engine/EngineCore_Loop.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/2.11.GameLoop/public_html/src/Engine/EngineCore_VertexBuffer.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/2.11.GameLoop/public_html/src/Engine/EngineCore.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/2.11.GameLoop/public_html/src/Engine/RenderableObject.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/2.11.GameLoop/public_html/src/Engine/EngineCore_GameLoop.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/2.11.GameLoop/public_html/src/MyGame.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter2/2.11.GameLoop/public_html/index.html</file>
         </group>
     </open-files>
 </project-private>

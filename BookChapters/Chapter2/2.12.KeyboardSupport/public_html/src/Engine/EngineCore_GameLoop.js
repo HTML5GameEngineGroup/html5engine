@@ -5,7 +5,7 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-gEngineCore.Loop = function()
+gEngineCore.GameLoop = function()
 {
     var kFPS = 60;          // Frames per second
     var kMPF = 1000 / kFPS; // Milleseconds per frame.

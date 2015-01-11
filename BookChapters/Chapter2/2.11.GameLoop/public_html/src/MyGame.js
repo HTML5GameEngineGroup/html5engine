@@ -59,7 +59,7 @@ MyGame.prototype.Initialize = function()
     this._mRedSq.GetXform().SetSize(2, 2);
     
     // Step 6: Start the game loop running
-    gEngineCore.Loop.StartLoop(this);
+    gEngineCore.GameLoop.StartLoop(this);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more

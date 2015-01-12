@@ -1,5 +1,5 @@
 /* 
- * 
+ * This is a camera.
  */
 function Camera(cameraPosition, cameraWidth, viewportX, viewportY, viewportWidth, viewportHeight)
 {

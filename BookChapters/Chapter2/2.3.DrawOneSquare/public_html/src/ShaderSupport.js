@@ -31,21 +31,21 @@ function InitSimpleShader(vertexShaderID, fragmentShaderID)
     gGL.attachShader(gSimpleShader, fragmentShader);
     gGL.linkProgram(gSimpleShader);
 
-    // Step 3: check for error
+    // Step C: check for error
     if (!gGL.getProgramParameter(gSimpleShader, gGL.LINK_STATUS))  {
         alert("Error linking shader");
     }
     
-    // Step 4: Gets a reference to the SquareVertexPosition variable within the shaders.
+    // Step D: Gets a reference to the SquareVertexPosition variable within the shaders.
     gShaderVertexPositionAttribute = gGL.getAttribLocation(gSimpleShader, "aSquareVertexPosition");
         // SquareVertexPosition: is defined in the VertexShader (in the index.html file)
    
-    // Step 5: Activates the vertex buffer loaded in VertexBuffer.js
+    // Step E: Activates the vertex buffer loaded in VertexBuffer.js
     gGL.bindBuffer(gGL.ARRAY_BUFFER, gSquareVertexBuffer);
         // gSquareVertexBuffer: is defined in VertexBuffer.js and 
         //      initialized by the InitSquareBuffer() function.
         
-    // Step 6: Describe the characteristic of the vertex position attribute
+    // Step F: Describe the characteristic of the vertex position attribute
     gGL.vertexAttribPointer(gShaderVertexPositionAttribute, // variable initialized above
         3,          // each vertex element is a 3-float (x,y,z)
         gGL.FLOAT,  // data type is FLOAT
@@ -67,11 +67,11 @@ function LoadAndCompileShader(id, shaderType)
     // Step B: Create the shader based on the shader type: vertex or fragment
     compiledShader = gGL.createShader(shaderType);
 
-    // Step 3: Compile the created shader
+    // Step C: Compile the created shader
     gGL.shaderSource(compiledShader, shaderSource);
     gGL.compileShader(compiledShader);
 
-    // Step 4: check for errors and return results (null if error)
+    // Step D: check for errors and return results (null if error)
     if (!gGL.getShaderParameter(compiledShader, gGL.COMPILE_STATUS)) {
         alert("A shader compliling error occurred: " + gGL.getShaderInfoLog(compiledShader));
     }

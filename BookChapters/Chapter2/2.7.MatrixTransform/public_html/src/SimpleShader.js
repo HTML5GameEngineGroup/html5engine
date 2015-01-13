@@ -44,7 +44,7 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
     // Step E: Activates the vertex buffer loaded in EngineCore_VertexBuffer.js
     gl.bindBuffer(gl.ARRAY_BUFFER, gEngine.VertexBuffer.GetGLVertexRef());
     
-    /// Step F: Describe the characteristic of the vertex position attribute
+    // Step F: Describe the characteristic of the vertex position attribute
     gl.vertexAttribPointer(this._mShaderVertexPositionAttribute, 
         3,              // each element is a 3-float (x,y.z)
         gl.FLOAT,       // data type is FLOAT

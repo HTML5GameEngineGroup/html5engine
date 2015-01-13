@@ -48,7 +48,7 @@ function DrawSquare() {
     // Step B. Enables the vertex position attribute
         gGL.enableVertexAttribArray(gShaderVertexPositionAttribute);
     
-    // Step 3. draw with the above settings
+    // Step C. draw with the above settings
         gGL.drawArrays(gGL.TRIANGLE_STRIP, 0, 4);    
 }
 

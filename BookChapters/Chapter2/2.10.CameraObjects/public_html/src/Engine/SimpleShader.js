@@ -46,7 +46,7 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
     // Step  E: Activates the vertex buffer loaded in EngineCore_VertexBuffer.js
     gl.bindBuffer(gl.ARRAY_BUFFER, gEngine.VertexBuffer.GetGLVertexRef());
     
-    /// Step F: Describe the characteristic of the vertex position attribute
+    // Step F: Describe the characteristic of the vertex position attribute
     gl.vertexAttribPointer(this._mShaderVertexPositionAttribute, 
         3,              // each element is a 3-float (x,y.z)
         gl.FLOAT,       // data type is FLOAT
@@ -117,14 +117,14 @@ SimpleShader.prototype._LoadAndCompileShader = function(filePath, shaderType)
         return null;
     }
 
-    // Step  B: Create the shader based on the shader type: vertex or fragment
+    // Step B: Create the shader based on the shader type: vertex or fragment
     compiledShader = gl.createShader(shaderType);
 
-    // Step  C: Complie the created shader
+    // Step C: Complie the created shader
     gl.shaderSource(compiledShader, shaderSource);    
     gl.compileShader(compiledShader);
 
-    // Step  D: check for errors and return results (null if error)
+    // Step D: check for errors and return results (null if error)
     // The log info is how shader compilation errors are typically displayed.
     // This is useful for debugging the shaders.
     if (!gl.getShaderParameter(compiledShader, gl.COMPILE_STATUS))

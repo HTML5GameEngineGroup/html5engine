@@ -21,11 +21,11 @@ var gShaderVertexPositionAttribute = null;
 // Loads/compiles/links shader programs to gGL context
 function InitSimpleShader(vertexShaderID, fragmentShaderID)
 {
-    // Step 1: load and compile vertex and fragment shaders
+    // Step A: load and compile vertex and fragment shaders
     var vertexShader = LoadAndCompileShader(vertexShaderID, gGL.VERTEX_SHADER);
     var fragmentShader = LoadAndCompileShader(fragmentShaderID, gGL.FRAGMENT_SHADER);
 
-    // Step 2: Create and link the shaders into a program.
+    // Step B: Create and link the shaders into a program.
     gSimpleShader = gGL.createProgram();
     gGL.attachShader(gSimpleShader, vertexShader);
     gGL.attachShader(gSimpleShader, fragmentShader);
@@ -60,11 +60,11 @@ function LoadAndCompileShader(id, shaderType)
 {
     var shaderText, shaderSource, compiledShader;
 
-    // Step 1: Get the shader source from index.html
+    // Step A: Get the shader source from index.html
     shaderText = document.getElementById(id);
     shaderSource = shaderText.firstChild.textContent;
 
-    // Step 2: Create the shader based on the shader type: vertex or fragment
+    // Step B: Create the shader based on the shader type: vertex or fragment
     compiledShader = gGL.createShader(shaderType);
 
     // Step 3: Compile the created shader

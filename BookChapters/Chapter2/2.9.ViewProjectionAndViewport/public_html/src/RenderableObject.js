@@ -10,8 +10,8 @@
 
 function RenderableObject(shader)
 {
-    this._mShader = shader; // the shader for shading this object
-    this._mXform = new Transform();     // transform that moves this object around
+    this._mShader = shader;         // the shader for shading this object
+    this._mXform = new Transform(); // transform that moves this object around
 };
 
 //<editor-fold desc="Public Methods">
@@ -19,11 +19,11 @@ function RenderableObject(shader)
 // Public methods
 //**-----------------------------------------
 RenderableObject.prototype.Draw = function() {
-    var gl = gEngineCore.GetGL();    
+    var gl = gEngine.Core.GetGL();    
     this._mShader.LoadObjectTransform(this._mXform.GetXform());
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 };
 
-RenderableObject.prototype.GetXform = function() { return this._mXform; }
+RenderableObject.prototype.GetXform = function() { return this._mXform; };
 //--- end of Public Methods
 //</editor-fold>

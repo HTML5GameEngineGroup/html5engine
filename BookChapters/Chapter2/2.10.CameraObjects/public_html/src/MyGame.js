@@ -18,17 +18,17 @@ function MyGame(htmlCanvasID)
     this._mBLSq = null;     // bottom-left
     this._mBRSq = null;     // bottom-right
     
-    // Step 1: Initialize the webGL Context
-    gEngineCore.InitializeWebGL(htmlCanvasID);
+    // Step A: Initialize the webGL Context
+    gEngine.Core.InitializeWebGL(htmlCanvasID);
     
-    // Step 2: Setup the camera
+    // Step B: Setup the camera
     this._mCamera = new Camera(
             vec2.fromValues(20, 60),   // position of the camera
             20,                        // width of camera
             [20, 40, 600, 300]         // viewport (orgX, orgY, width, height)
             );
 
-    // Step 3: Create the shaders: white and then the red shader
+    // Step C: Create the shaders: white and then the red shader
     this._mWhiteShader = new SimpleShader(
             "shaders/SimpleVS.glsl",      // Path to the VertexShader 
             "shaders/WhiteFS.glsl");    // Path to the White FragmentShader
@@ -37,7 +37,7 @@ function MyGame(htmlCanvasID)
             "shaders/SimpleVS.glsl",      // Path to the VertexShader 
             "shaders/RedFS.glsl");      // Path to the Red FragmentShader
     
-    // Step 4: Create the renderable objects:
+    // Step D: Create the renderable objects:
     this._mWhiteSq = new RenderableObject(this._mWhiteShader);
     this._mRedSq = new RenderableObject(this._mRedShader);
     this._mTLSq = new RenderableObject(this._mRedShader);
@@ -45,14 +45,14 @@ function MyGame(htmlCanvasID)
     this._mBLSq = new RenderableObject(this._mRedShader);
     this._mBRSq = new RenderableObject(this._mRedShader);
     
-    // Step 5: Clear the canvas
-    gEngineCore.ClearCanvas();        // 1. Clear the canvas
+    // Step E: Clear the canvas
+    gEngine.Core.ClearCanvas();        // 1. Clear the canvas
     
-    // Step 6: Starts the drawing by activating the camera
+    // Step F: Starts the drawing by activating the camera
     this._mCamera.BeginDraw();
     
       
-    // Step 7: Draw with the white shader
+    // Step G: Draw with the white shader
     this._mWhiteShader.ActivateShader(this._mCamera.GetVPMatrix());
         // Centre white, slightly rotated square
         this._mWhiteSq.GetXform().SetPosition(20, 60);
@@ -60,7 +60,7 @@ function MyGame(htmlCanvasID)
         this._mWhiteSq.GetXform().SetSize(5, 5);
         this._mWhiteSq.Draw();
     
-    // Step 8: Draw with the red shader
+    // Step H: Draw with the red shader
     this._mRedShader.ActivateShader(this._mCamera.GetVPMatrix());
         // centre red square
         this._mRedSq.GetXform().SetPosition(20, 60);

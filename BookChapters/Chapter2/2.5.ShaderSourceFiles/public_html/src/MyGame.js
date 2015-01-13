@@ -9,23 +9,23 @@ function MyGame(htmlCanvasID)
     // The shader for drawing
     this._mShader = null;
        
-    // Step 1: Initialize the webGL Context and the VertexBuffer
-    gEngineCore.InitializeWebGL(htmlCanvasID);
+    // Step A: Initialize the webGL Context and the VertexBuffer
+    gEngine.Core.InitializeWebGL(htmlCanvasID);
     
-    // Step 2: Create, load and compile the shaders
+    // Step B: Create, load and compile the shaders
     this._mShader = new SimpleShader(
             "shaders/SimpleVS.glsl",      // Path to the VertexShader 
             "shaders/WhiteFS.glsl");    // Path to the FragmentShader
     
     
-    // Step 3: Draw!
-        // Step 3a: Clear the canvas
-        gEngineCore.ClearCanvas();        
+    // Step C: Draw!
+        // Step C1: Clear the canvas
+        gEngine.Core.ClearCanvas();        
         
-        // Step 3b: Activate the proper shader
+        // Step C2: Activate the proper shader
         this._mShader.ActivateShader(); 
         
-        // Step 3c: Draw with the currently activated geometry and the activated shader
-        var gl = gEngineCore.GetGL();
+        // Step C3: Draw with the currently activated geometry and the activated shader
+        var gl = gEngine.Core.GetGL();
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 };

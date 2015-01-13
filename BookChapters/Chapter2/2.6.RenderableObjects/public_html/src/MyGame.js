@@ -14,10 +14,10 @@ function MyGame(htmlCanvasID)
     this._mWhiteSq = null;		// these are the renderable objects
     this._mRedSq = null;    
     
-    // Step 1: Initialize the webGL Context
-    gEngineCore.InitializeWebGL(htmlCanvasID);
+    // Step A: Initialize the webGL Context
+    gEngine.Core.InitializeWebGL(htmlCanvasID);
     
-    // Step 2: Create the shaders: white and then the red shader
+    // Step B: Create the shaders: white and then the red shader
     this._mWhiteShader = new SimpleShader(
             "shaders/SimpleVS.glsl",      // Path to the VertexShader 
             "shaders/WhiteFS.glsl");    // Path to the White FragmentShader
@@ -26,18 +26,18 @@ function MyGame(htmlCanvasID)
             "shaders/SimpleVS.glsl",      // Path to the VertexShader 
             "shaders/RedFS.glsl");      // Path to the Red FragmentShader
     
-    // Step 3. Create the renderable objects:
+    // Step C: Create the renderable objects:
     this._mWhiteSq = new RenderableObject(this._mWhiteShader);
     this._mRedSq = new RenderableObject(this._mRedShader);
     
-    // Step 4: Draw!
-    gEngineCore.ClearCanvas();        // 1. Clear the canvas
+    // Step D: Draw!
+    gEngine.Core.ClearCanvas();        // 1. Clear the canvas
     
-	// Step 4.1: Activate and draw renderable objects with the white shader
+	// Step D1: Activate and draw renderable objects with the white shader
     this._mWhiteShader.ActivateShader();
         this._mWhiteSq.Draw();
     
-    // Step 4.2: Activate and draw renderable objects with the red shader
+    // Step D2: Activate and draw renderable objects with the red shader
     this._mRedShader.ActivateShader();
         this._mRedSq.Draw();
     

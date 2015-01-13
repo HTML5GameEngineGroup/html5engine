@@ -20,10 +20,10 @@ function InitSquareBuffer()
         -0.5, -0.5, 0.0
     ];
     
-    // Step 1: Create a buffer on the gGL context for our vertex positions
+    // Step A: Create a buffer on the gGL context for our vertex positions
     gSquareVertexBuffer = gGL.createBuffer();
 
-    // Step 2: Activate vertexBuffer
+    // Step B: Activate vertexBuffer
     gGL.bindBuffer(gGL.ARRAY_BUFFER, gSquareVertexBuffer);    
 
     // Step 3: Loads verticesOfSquare into the vertexBuffer

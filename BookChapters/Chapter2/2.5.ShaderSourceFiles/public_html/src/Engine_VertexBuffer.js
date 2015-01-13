@@ -8,8 +8,10 @@
  */
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+var gEngine = gEngine || { };
+
 // The VertexBuffer object
-gEngineCore.VertexBuffer = function()
+gEngine.VertexBuffer = function()
 {    
     // reference to the vertex positions for the square in the gl context
     var _mSquareVertexBuffer = null;
@@ -24,15 +26,15 @@ gEngineCore.VertexBuffer = function()
     ];
     
     var Initialize = function() {
-        var gl = gEngineCore.GetGL();
+        var gl = gEngine.Core.GetGL();
 
-        // Step 1: Create a buffer on the gGL context for our vertex positions
+        // Step A: Create a buffer on the gGL context for our vertex positions
         _mSquareVertexBuffer = gl.createBuffer();
 
-        // Step 2: Activate vertexBuffer
+        // Step B: Activate vertexBuffer
         gl.bindBuffer(gl.ARRAY_BUFFER, _mSquareVertexBuffer);    
 
-        // Step 3: Loads verticesOfSquare into the vertexBuffer
+        // Step C: Loads verticesOfSquare into the vertexBuffer
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verticesOfSquare), gl.STATIC_DRAW);
     };
     

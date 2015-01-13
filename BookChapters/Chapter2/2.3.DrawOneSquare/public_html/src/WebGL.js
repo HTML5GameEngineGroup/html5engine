@@ -42,10 +42,10 @@ function InitializeGL()
 function DrawSquare() {
     gGL.clear(gGL.COLOR_BUFFER_BIT);      // clear to the color previously set
     
-    // Step 1: Enable the shader to use
+    // Step A: Enable the shader to use
         gGL.useProgram(gSimpleShader);
     
-    // Step 2. Enables the vertex position attribute
+    // Step B. Enables the vertex position attribute
         gGL.enableVertexAttribArray(gShaderVertexPositionAttribute);
     
     // Step 3. draw with the above settings

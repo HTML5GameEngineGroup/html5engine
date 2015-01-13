@@ -18,7 +18,7 @@ function RenderableObject(shader)
 // Public methods
 //**-----------------------------------------
 RenderableObject.prototype.Draw = function() {
-    var gl = gEngineCore.GetGL();
+    var gl = gEngine.Core.GetGL();
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 };
 //--- end of Public Methods

@@ -7,7 +7,9 @@
 //  the following syntax enforces there can only be one instance of EngineCore object
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-var gEngineCore = gEngineCore || function() 
+var gEngine = gEngine || { };
+
+gEngine.Core = function() 
 {
     // instance variables
     // The graphical context to draw to
@@ -36,12 +38,11 @@ var gEngineCore = gEngineCore || function()
             }
             
             // now initialize the VertexBuffer
-            gEngineCore.VertexBuffer.Initialize();
+            gEngine.VertexBuffer.Initialize();
         };
         
         // Clears the draw area and draws one square
-        var ClearCanvas = function(color) {
-            _mGL.clearColor(color[0], color[1], color[2], color[3]);  // set the color to be cleared
+        var ClearCanvas = function() {
             _mGL.clear(_mGL.COLOR_BUFFER_BIT);      // clear to the color previously set
         };   
         

@@ -11,7 +11,7 @@ function MyGame(htmlCanvasID)
     this._mWhiteShader = null;
         
     // variables for the squares
-    this._mWhiteSq = null;		// these are the renderable objects
+    this._mWhiteSq = null;        // these are the renderable objects
     this._mRedSq = null;
     this._mTLSq = null;     // top-left square
     this._mTRSq = null;     // top-right

@@ -14,7 +14,7 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
     // Convention: all instance variables: mVariables
     this._mCompiledShader = null;  // reference to the compiled shader in webgl context  
     this._mShaderVertexPositionAttribute = null; // reference to SquareVertexPosition within the shader
-    this._mModelTransform = null;				// reference to model transform matrix in vertex shader
+    this._mModelTransform = null;                // reference to model transform matrix in vertex shader
     
     var gl = gEngine.Core.GetGL();
          

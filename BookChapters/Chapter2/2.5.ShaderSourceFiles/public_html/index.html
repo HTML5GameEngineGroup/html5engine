@@ -9,10 +9,13 @@
     <!-- the following says there are javascript source code contained in 
          the external source files
     -->
-    <script type="text/javascript" src="src/Engine_Core.js"></script>
-    <script type="text/javascript" src="src/Engine_VertexBuffer.js"></script>
-    <script type="text/javascript" src="src/SimpleShader.js"></script>
-    <script type="text/javascript" src="src/MyGame.js"></script>
+    <!-- Engine code -->
+        <script type="text/javascript" src="src/Engine/Engine_Core.js"></script>
+        <script type="text/javascript" src="src/Engine/Engine_VertexBuffer.js"></script>
+        <script type="text/javascript" src="src/Engine/SimpleShader.js"></script>
+    
+    <!-- Client game code -->
+        <script type="text/javascript" src="src/MyGame/MyGame.js"></script>
     
     <canvas id="GLCanvas" width="640" height="480">
         <!-- GLCanvas is the area we will draw in: a 640x480 area. -->

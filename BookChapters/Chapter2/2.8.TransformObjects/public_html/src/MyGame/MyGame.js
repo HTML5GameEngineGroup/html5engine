@@ -11,7 +11,7 @@ function MyGame(htmlCanvasID)
     this._mWhiteShader = null;
         
     // variables for the squares
-    this._mWhiteSq = null;		// these are the renderable objects
+    this._mWhiteSq = null;        // these are the renderable objects
     this._mRedSq = null;    
     
     // Step A: Initialize the webGL Context
@@ -34,7 +34,7 @@ function MyGame(htmlCanvasID)
     gEngine.Core.ClearCanvas();        // 1. Clear the canvas
     
     // instead of simply drawing the squares, let's apply simple transforms
-	// Step E: sets the white renderable object's transform
+    // Step E: sets the white renderable object's transform
     this._mWhiteSq.GetXform().SetPosition(-0.25, 0.25);
     this._mWhiteSq.GetXform().SetRotationInRad(0.2); // In Degree
     this._mWhiteSq.GetXform().SetSize(1.2, 1.2);

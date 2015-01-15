@@ -11,7 +11,7 @@ function MyGame(htmlCanvasID)
     this._mWhiteShader = null;
         
     // variables for the squares
-    this._mWhiteSq = null;		// these are the renderable objects
+    this._mWhiteSq = null;        // these are the renderable objects
     this._mRedSq = null;    
     
     // Step A: Initialize the webGL Context
@@ -33,12 +33,24 @@ function MyGame(htmlCanvasID)
     // Step D: Draw!
     gEngine.Core.ClearCanvas();        // 1. Clear the canvas
     
-	// Step D1: Activate and draw renderable objects with the white shader
-    this._mWhiteShader.ActivateShader();
-        this._mWhiteSq.Draw();
+    // instead of simply drawing the squares, let's apply simple transforms
+    var xform = mat4.create();
+        
     
-    // Step D2: Activate and draw renderable objects with the red shader
-    this._mRedShader.ActivateShader();
-        this._mRedSq.Draw();
+    // Step E: compute the white square transform 
+    mat4.translate(xform, xform, vec3.fromValues(-0.25, 0.25, 0.0));
+    mat4.rotateZ(xform, xform, 0.2); // rotation is in radian
+    mat4.scale(xform, xform, vec3.fromValues(1.2, 1.2, 1.0));
+    // Step F: draw the white square with the computed transform
+    this._mWhiteShader.ActivateShader();  // activates the shader
+        this._mWhiteSq.Draw(xform);       // draw all objects of this shader
     
+    // Step G: compute the red square transform
+    mat4.identity(xform); // restart
+    mat4.translate(xform, xform, vec3.fromValues(0.25, -0.25, 0.0));
+    mat4.rotateZ(xform, xform, -0.785); // rotation is in radian (about -45-degree)
+    mat4.scale(xform, xform, vec3.fromValues(0.4, 0.4, 1.0));
+    // Step H: draw the red square with the computed transform
+    this._mRedShader.ActivateShader();  // activates the shader  
+        this._mRedSq.Draw(xform);       // draw all objects of this shader
 };

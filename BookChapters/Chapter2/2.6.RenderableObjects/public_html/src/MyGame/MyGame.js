@@ -5,15 +5,7 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function MyGame(htmlCanvasID)
-{
-    // variables of the shaders for drawing: one red and one white
-    this._mRedShader = null;
-    this._mWhiteShader = null;
-        
-    // variables for the squares
-    this._mWhiteSq = null;        // these are the renderable objects
-    this._mRedSq = null;    
-    
+{   
     // Step A: Initialize the webGL Context
     gEngine.Core.InitializeWebGL(htmlCanvasID);
     

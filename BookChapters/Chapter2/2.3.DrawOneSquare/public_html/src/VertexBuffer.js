@@ -26,6 +26,6 @@ function InitSquareBuffer()
     // Step B: Activate vertexBuffer
     gGL.bindBuffer(gGL.ARRAY_BUFFER, gSquareVertexBuffer);    
 
-    // Step 3: Loads verticesOfSquare into the vertexBuffer
+    // Step C: Loads verticesOfSquare into the vertexBuffer
     gGL.bufferData(gGL.ARRAY_BUFFER, new Float32Array(verticesOfSquare), gGL.STATIC_DRAW);
 }

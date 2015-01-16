@@ -8,6 +8,7 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 var gEngine = gEngine || { };
+    // initialize the variable whhile ensuring it is not redfined
 
 gEngine.Core = function() 
 {
@@ -26,8 +27,8 @@ gEngine.Core = function()
         var InitializeWebGL = function(htmlCanvasID) {
             var canvas = document.getElementById(htmlCanvasID);
         
-            // Get standard webgl, or experimental
-            // binds webgl the the Canvas area on the web-page to the global variable "_mGL"
+            // Get the standard or experimental webgl and binds to the Canvas area
+            // store the results to the instance variable _mGL
             _mGL = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     
             if (_mGL !== null) {

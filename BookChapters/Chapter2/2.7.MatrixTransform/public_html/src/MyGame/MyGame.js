@@ -33,7 +33,7 @@ function MyGame(htmlCanvasID)
     // Step D: Draw!
     gEngine.Core.ClearCanvas();        // 1. Clear the canvas
     
-    // instead of simply drawing the squares, let's apply simple transforms
+    // create a new identify transform operator
     var xform = mat4.create();
         
     

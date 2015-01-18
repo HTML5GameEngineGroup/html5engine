@@ -38,12 +38,12 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
         return null;
     }
     
-    // Step  D: Gets a reference to the SquareVertexPosition variable within the shaders.
+    // Step D: Gets a reference to the SquareVertexPosition variable within the shaders.
     this._mShaderVertexPositionAttribute = gl.getAttribLocation(
                     this._mCompiledShader, "aSquareVertexPosition");
 
     
-    // Step  E: Activates the vertex buffer loaded in EngineCore_VertexBuffer.js
+    // Step E: Activates the vertex buffer loaded in EngineCore_VertexBuffer.js
     gl.bindBuffer(gl.ARRAY_BUFFER, gEngine.VertexBuffer.GetGLVertexRef());
     
     // Step F: Describe the characteristic of the vertex position attribute
@@ -58,7 +58,7 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
     this._mModelTransform = gl.getUniformLocation(
                     this._mCompiledShader, "uModelTransform");
     
-    // Step H: create the reference to the uniform attribute "uViewProjTransform"
+    // Step H: store the reference to the uniform attribute "uViewProjTransform"
     this._mViewProjTransform = gl.getUniformLocation(
                     this._mCompiledShader, "uViewProjTransform");
 };

@@ -5,26 +5,14 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function MyGame(htmlCanvasID)
-{
-    // variables of the shaders for drawing: one red and one white
-    this._mRedShader = null;
-    this._mWhiteShader = null;
-        
-    // variables for the squares
-    this._mWhiteSq = null;        // these are the renderable objects
-    this._mRedSq = null;
-    this._mTLSq = null;     // top-left square
-    this._mTRSq = null;     // top-right
-    this._mBLSq = null;     // bottom-left
-    this._mBRSq = null;     // bottom-right
-    
+{   
     // Step A: Initialize the webGL Context
     gEngine.Core.InitializeWebGL(htmlCanvasID);
     
     // Step B: Setup the camera
     this._mCamera = new Camera(
-            vec2.fromValues(20, 60),   // position of the camera
-            20,                        // width of camera
+            vec2.fromValues(20, 60),   // center of the WC
+            20,                        // width of WC
             [20, 40, 600, 300]         // viewport (orgX, orgY, width, height)
             );
 
@@ -46,11 +34,10 @@ function MyGame(htmlCanvasID)
     this._mBRSq = new RenderableObject(this._mRedShader);
     
     // Step E: Clear the canvas
-    gEngine.Core.ClearCanvas();        // 1. Clear the canvas
+    gEngine.Core.ClearCanvas();        // Clear the canvas
     
     // Step F: Starts the drawing by activating the camera
     this._mCamera.BeginDraw();
-    
       
     // Step G: Draw with the white shader
     this._mWhiteShader.ActivateShader(this._mCamera.GetVPMatrix());

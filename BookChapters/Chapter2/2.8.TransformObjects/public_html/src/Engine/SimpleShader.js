@@ -65,7 +65,7 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
 SimpleShader.prototype.GetShader = function() { return _mCompiledShader; };
 
 // Activate the shader for rendering
-SimpleShader.prototype.ActivateShader = function(vpMatrix) {
+SimpleShader.prototype.ActivateShader = function() {
     var gl = gEngine.Core.GetGL();
     gl.useProgram(this._mCompiledShader);
     gl.enableVertexAttribArray(this._mShaderVertexPositionAttribute);

@@ -7,8 +7,6 @@
 // Constructor
 function BeginLevel()
 {
-    Scene.call(this); // call super class constructor
-    
     // constant string
     this._kUserPrompt = "Your Choice?";
     

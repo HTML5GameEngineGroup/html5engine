@@ -5,8 +5,6 @@
 
 function TextureLevel(htmlCanvasID)
 {
-    Scene.call(this); // call super class constructor
-    //
     // variables of the shaders for drawing: 
     this._mRedShader = null;
     this._mTextureShader = null;

@@ -6,8 +6,6 @@
 
 function MyGame(htmlCanvasID)
 {
-    Scene.call(this); // call super class constructor
-    
     // audio clips to be loaded
     this._kBgAudio = "resources/sounds/Mind_Meld.mp3";
     
@@ -28,8 +26,10 @@ MyGame.prototype.Update = function()
         gEngine.AudioClips.PlayBackgroundAudio(this._kBgAudio);
         
     // now start the game loop with BeginLevel
-    var beginLevel = new BeginLevel();
-    this.LoadNextScene(beginLevel);
+    // var beginLevel = new BeginLevel();
+    // this.LoadNextScene(beginLevel);
+    
+    this.LoadNextScene( new BoundCheck() );
 };
 
 MyGame.prototype.Initialize = function() {
@@ -46,5 +46,3 @@ MyGame.prototype.UnloadContent = function() {
     // NOT unloading the bg because it is going
     // to run throughout!
 };
-
-

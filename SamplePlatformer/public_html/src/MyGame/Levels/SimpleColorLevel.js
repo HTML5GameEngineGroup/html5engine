@@ -6,8 +6,6 @@
 
 function SimpleColorLevel()
 {
-    Scene.call(this); // call super class constructor
-    //
     // variables of the shaders for drawing: one red and one white
     // variables of the shaders for drawing: one red and one white
     this._mRedShader = null;

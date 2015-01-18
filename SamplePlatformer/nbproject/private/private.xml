@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>public_html/src/Engine/Transform.js</url>
+            <bookmark id="1">
+                <name/>
+                <line>41</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>public_html/src/Engine/Core/Engine_GameLoop.js</url>
+            <bookmark id="2">
+                <name/>
+                <line>58</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group/>
+        <group name="Chapter2">
+            <file>file:/E:/Dropbox/2014.11.HTML5_WebGL/3.BookSource/html5engine/BookChapters/Chapter3/Example-1/DrawingWithFileTexture/public_html/index.html</file>
+            <file>file:/E:/Dropbox/2014.11.HTML5_WebGL/3.BookSource/html5engine/BookChapters/Chapter3/Example-1/DrawingWithFileTexture/public_html/src/Engine/EngineCore_Textures.js</file>
+            <file>file:/E:/Dropbox/2014.11.HTML5_WebGL/3.BookSource/html5engine/BookChapters/Chapter3/Example-1/DrawingWithFileTexture/public_html/shaders/SimpleTextureVS.glsl</file>
+            <file>file:/E:/Dropbox/2014.11.HTML5_WebGL/3.BookSource/html5engine/BookChapters/Chapter3/Example-1/DrawingWithFileTexture/public_html/shaders/SimpleTextureFS.glsl</file>
+            <file>file:/E:/Dropbox/2014.11.HTML5_WebGL/3.BookSource/html5engine/BookChapters/Chapter3/Example-1/DrawingWithFileTexture/public_html/src/Engine/RenderableObject.js</file>
+            <file>file:/E:/Dropbox/2014.11.HTML5_WebGL/3.BookSource/html5engine/BookChapters/Chapter3/Example-1/DrawingWithFileTexture/public_html/src/Engine/ShaderProgram.js</file>
+            <file>file:/E:/Dropbox/2014.11.HTML5_WebGL/3.BookSource/html5engine/BookChapters/Chapter3/Example-1/DrawingWithFileTexture/public_html/src/Engine/Transform.js</file>
+            <file>file:/E:/Dropbox/2014.11.HTML5_WebGL/3.BookSource/html5engine/BookChapters/Chapter3/Example-1/DrawingWithFileTexture/public_html/src/Engine/VertexBuffer.js</file>
+            <file>file:/E:/Dropbox/2014.11.HTML5_WebGL/3.BookSource/html5engine/BookChapters/Chapter3/Example-1/DrawingWithFileTexture/public_html/src/MyGame.js</file>
+        </group>
+        <group name="HTML5GameEngine">
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter3/Example-1/FileTextures/public_html/src/Engine/EngineCore_VertexBuffer.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter3/Example-1/FileTextures/public_html/src/MyGame.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter3/Example-1/FileTextures/public_html/src/Engine/EngineCore_Textures.js</file>
+        </group>
+        <group name="Chapter3"/>
+        <group name="AllBookProjects"/>
+        <group name="HTML5-Engine">
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Camera.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Core/Resources/Engine_AudioClips.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Shaders/TextureShader.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/PlatformObject.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/GameObjects/GameObject.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/index.html</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Core/Resources/Engine_Textures.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/HeroObject.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Core/Resources/Engine_ResourceMap.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/BeginLevel.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/GameObjects/TextureObject.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/BoundCheck.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/MyGame.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Transform.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/TextureLevel.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/GameObjects/TextObject.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/GameObjects/RenderableObject.js</file>
+        </group>
+    </open-files>
+</project-private>

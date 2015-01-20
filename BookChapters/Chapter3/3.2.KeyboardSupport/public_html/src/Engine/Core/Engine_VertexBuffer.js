@@ -31,10 +31,10 @@ gEngine.VertexBuffer = function()
         // Step A: Create a buffer on the gGL context for our vertex positions
         _mSquareVertexBuffer = gl.createBuffer();
 
-        // Step  B: Activate vertexBuffer
+        // Step B: Activate vertexBuffer
         gl.bindBuffer(gl.ARRAY_BUFFER, _mSquareVertexBuffer);    
 
-        // Step  C: Loads verticesOfSquare into the vertexBuffer
+        // Step C: Loads verticesOfSquare into the vertexBuffer
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verticesOfSquare), gl.STATIC_DRAW);
     };
     

@@ -121,7 +121,7 @@ MyGame.prototype.Update = function()
     }
     
     // Step  B: test for textured square rotation
-    if (gEngine.Input.IsKeyDown(gEngine.Input.UP))
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.UP))
         texXform.IncRotationByDegree(1);
     
     

@@ -99,7 +99,7 @@ SimpleColorLevel.prototype.Update = function()
     }
     
     // Step  B: test for white square rotation
-    if (gEngine.Input.IsKeyDown(gEngine.Input.UP)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.UP)) {
         whiteXform.IncRotationByDegree(1);
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
     }
@@ -115,7 +115,7 @@ SimpleColorLevel.prototype.Update = function()
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
     }
     
-    if (gEngine.Input.IsKeyDown(gEngine.Input.Three)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Three)) {
         this.LoadNextScene( new TextureLevel() );
     }
 };

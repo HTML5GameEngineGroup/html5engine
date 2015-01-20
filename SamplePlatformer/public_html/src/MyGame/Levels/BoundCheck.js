@@ -142,8 +142,8 @@ BoundCheck.prototype.Update = function()
     landed = landed || this._mRedSqs[0].TouchesHero(this._mHero);
     
     
-    if (!landed)  // landed should be tested a or-condition for all of the platforms
-        this._mHero.SetShouldFall(true);
+    // landed should be tested a or-condition for all of the platforms
+    this._mHero.SetShouldFall(!landed);
     
     var s = this._mCamera.CollideWCBound(this._mHero);
     switch (s) {

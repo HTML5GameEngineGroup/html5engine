@@ -143,7 +143,7 @@ MyGame.prototype.Update = function()
     }
     
     // Rotate the textured square
-    if (gEngine.Input.IsKeyDown(gEngine.Input.UP)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.UP)) {
         texXform.IncRotationByDegree(1);
         this._mMyText.GetXform().IncRotationByDegree(1);
     }

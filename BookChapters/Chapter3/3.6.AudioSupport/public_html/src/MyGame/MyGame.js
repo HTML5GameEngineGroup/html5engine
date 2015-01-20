@@ -154,7 +154,7 @@ MyGame.prototype.Update = function()
     }
     
     // Rotate the textured square
-    if (gEngine.Input.IsKeyDown(gEngine.Input.UP)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.UP)) {
         texXform.IncRotationByDegree(1);
         this._mMyText.GetXform().IncRotationByDegree(1);
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
@@ -206,9 +206,9 @@ MyGame.prototype.Update = function()
     
     
     // <editor-fold desc="background music control">
-    if (gEngine.Input.IsKeyDown(gEngine.Input.S))
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.S))
         gEngine.AudioClips.StopBackgroundAudio(this._kBgAudio);
-    if (gEngine.Input.IsKeyDown(gEngine.Input.A)) 
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.A)) 
         gEngine.AudioClips.PlayBackgroundAudio(this._kBgAudio);
     // </editor-fold>
 };

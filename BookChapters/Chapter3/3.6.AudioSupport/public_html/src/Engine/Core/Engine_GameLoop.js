@@ -18,8 +18,7 @@ gEngine.GameLoop = function()
     var _mCurrentTime;
     var _mElapsedTime;
     
-    // The identifier of the current loop.
-    var _mAnimationID = null;
+    // The current loop state (running or should stop)
     var _mIsLoopRunning = false;
     
     var _mMyGame = null;
@@ -27,8 +26,9 @@ gEngine.GameLoop = function()
     // This function assumes it is sub-classed from MyGame
     var _RunLoop = function () {
         if(_mIsLoopRunning) {
-            // Step A: set up for next call to _RunLoop
-            _mAnimationID = requestAnimationFrame( function(){_RunLoop.call(_mMyGame);});
+            // Step A: set up for next call to _RunLoop and update input!
+            requestAnimationFrame( function(){_RunLoop.call(_mMyGame);});
+            gEngine.Input.Update();
             
             // Step B: compute how much time has elapsed since we last RunLoop was execuated
             _mCurrentTime = Date.now();
@@ -48,11 +48,6 @@ gEngine.GameLoop = function()
             // Step D: now let's draw
             this.Draw();    // Call Scene.Draw()
         }
-        else
-        {
-            // no more requests to _RunLoop
-            _mAnimationID = null;
-        }
     };
 
     // update and draw functions must be set before this.
@@ -66,10 +61,10 @@ gEngine.GameLoop = function()
         _mIsLoopRunning = true;
             
         // Step C: request _RunLoop to start when loading is done
-        _mAnimationID = requestAnimationFrame(function(){_RunLoop.call(_mMyGame);});
+        requestAnimationFrame(function(){_RunLoop.call(_mMyGame);});
     };
     
-    var Start= function(myGame)
+    var Start = function(myGame)
     {
         _mMyGame = myGame;
         // _StartLoop(); // start the loop

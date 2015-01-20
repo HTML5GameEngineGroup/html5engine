@@ -58,6 +58,9 @@ gEngine.GameLoop = function()
             _mElapsedTime = _mCurrentTime - _mPreviousTime;
             _mPreviousTime = _mCurrentTime;
             _mLagTime += _mElapsedTime;
+            
+            // Step B1: Update the input state (keep a copy for click detection)
+            gEngine.Input.Update();
 
             // Step C: Make sure we update the game the appropriate number of times.
             //      Update only every Milleseconds per frame.

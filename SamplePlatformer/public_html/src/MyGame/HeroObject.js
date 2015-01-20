@@ -9,7 +9,7 @@ function HeroObject(renderableObj)
     this._mVelocity = vec2.fromValues(0, 0);
     
     this._mGravity = 0.001;
-    this._mFly = 0.01;
+    this._mFly = 0.05;
   
 }
 gEngine.Core.InheritPrototype(HeroObject, GameObject);
@@ -22,7 +22,7 @@ HeroObject.prototype.Update = function() {
                gEngine.Input.UP,
                gEngine.Input.DOWN);
                
-     if (gEngine.Input.IsKeyDown(gEngine.Input.SPACE)) {
+     if (gEngine.Input.IsKeyClicked(gEngine.Input.SPACE)) {
          this._mVelocity[1] += this._mFly;
          this.SetShouldFall(true);
      }

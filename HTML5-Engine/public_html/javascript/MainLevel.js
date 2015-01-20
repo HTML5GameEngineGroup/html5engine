@@ -17,6 +17,9 @@ function MainLevel()
     // FPS variables
     this.mDrawPrevTime = Date.now();
     this.mLogicPrevTime = Date.now();
+    
+    // Line Test Variables
+    this.mLineTest;
 }
 MainLevel.prototype = Object.create(Scene.prototype);
 
@@ -39,6 +42,9 @@ MainLevel.prototype.contentLoad = function()
     // Load Font
     EngineCore.Resources.loadFont("resources/fonts/dos-font.png",
                                   "resources/fonts/dos-font.fnt");
+                                  
+    // Load Line resources
+    LinePrimative.prototype.preloadShader();
 };
 
 MainLevel.prototype.initialize = function()
@@ -59,8 +65,19 @@ MainLevel.prototype.initialize = function()
 
     this.mPlayer = new Player(transform, this.mCamera, this.mMainShader);
     
-    this.mEnemyManager = new EnemyManager(this.mPlayer, this.mMainShader);
+    // Setup Line test
+    var lineTrans = new Transform();
     
+    lineTrans.setPosition(10, 8);
+    lineTrans.setSize(2,2);
+    lineTrans.setZOrder(10);
+    
+    // Points are in model space. Transform puts in world space.
+    this.mLineTest = new LinePrimative(lineTrans, -0.5, 0.5,
+                                                  0.5, 0.5);
+            
+    // Other managers
+    this.mEnemyManager = new EnemyManager(this.mPlayer, this.mMainShader);
     this.mBackgroundManager = new BackgroundGenerator(this.mPlayer, this.mMainShader);
     
     // Text
@@ -153,12 +170,13 @@ MainLevel.prototype.draw = function()
     this.mDrawPrevTime = Date.now();
     
     EngineCore.Resources.clearCanvas();
-    this.mEnemyManager.addToDrawSet();
-    this.mBackgroundManager.addToDrawSet();
-    this.mPlayer.addToDrawSet();
-    this.mFPSText.addToDrawSet();
-    this.mLogicUpdateText.addToDrawSet();
-    this.mMouseText.addToDrawSet();
+    //this.mEnemyManager.addToDrawSet();
+    //this.mBackgroundManager.addToDrawSet();
+    //this.mPlayer.addToDrawSet();
+    //this.mFPSText.addToDrawSet();
+    //this.mLogicUpdateText.addToDrawSet();
+    //this.mMouseText.addToDrawSet();
+    this.mLineTest.addToDrawSet();
     this.mCamera.draw();
     
     var elapsedTime = Date.now() - this.mDrawPrevTime;

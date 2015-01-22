@@ -83,18 +83,9 @@ TextureLevel.prototype.Draw = function()
     // Step B: Activate the drawing Camera
     this._mCamera.BeginDraw();
         
-    // Step C: Activates textured shader and draw the texturedSq
-    this._mTextureShader.ActivateShader(this._mCamera.GetVPMatrix());
-        // Step C1: Draws the associated renderable object
-        this._mNoAlphaTexSq.Draw();
-                
-        // Step C2: Draws the associated renderable object
-        this._mAlpahTexSq.Draw();
-    
-    // Step D: Activate the red shader and draw the redSq
-    this._mRedShader.ActivateShader(this._mCamera.GetVPMatrix());        
-        this._mRedSq.Draw();
-    
+    this._mNoAlphaTexSq.Draw(this._mCamera.GetVPMatrix());
+    this._mAlpahTexSq.Draw(this._mCamera.GetVPMatrix());
+    this._mRedSq.Draw(this._mCamera.GetVPMatrix());
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
@@ -107,7 +98,7 @@ TextureLevel.prototype.Update = function()
     var deltaX = 0.05;
     
     // Step A: test for textured square movement
-    if (gEngine.Input.IsKeyDown(gEngine.Input.RIGHT)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.RIGHT)) {
         if (texXform.GetXPos() > 30)  // this is the right-bound of the window
             texXform.SetPosition(10, texXform.GetYPos());
         texXform.IncXPosBy(deltaX);
@@ -124,7 +115,7 @@ TextureLevel.prototype.Update = function()
     var redXform = this._mRedSq.GetXform();
     
     // Step C: test for pulsing the red square
-    if (gEngine.Input.IsKeyDown(gEngine.Input.DOWN)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.DOWN)) {
         if (redXform.GetWidth() > 5)
             redXform.SetSize(2, 2);
         redXform.IncSizeBy(0.05);

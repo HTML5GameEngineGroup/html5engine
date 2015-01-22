@@ -18,10 +18,10 @@ gEngine.Core.InheritPrototype(TextureObject, RenderableObject);
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
-TextureObject.prototype.Draw = function() {
+TextureObject.prototype.Draw = function(vpMatrix) {
     // activate the texture
     gEngine.Textures.ActivateTexture(this._mTexture);
-    RenderableObject.prototype.Draw.call(this);
+    RenderableObject.prototype.Draw.call(this, vpMatrix);
 };
 
 TextureObject.prototype.GetTexture = function() { return this._mTexture; };

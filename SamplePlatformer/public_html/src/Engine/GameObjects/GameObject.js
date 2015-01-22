@@ -10,7 +10,8 @@ GameObject.prototype.GetXform = function(){return this._mRenderComponent.GetXfor
 
 GameObject.prototype.update = function(){};
 
-GameObject.prototype.Draw = function(){this._mRenderComponent.Draw();};
+GameObject.prototype.Draw = function(vpMatrix){
+    this._mRenderComponent.Draw(vpMatrix);};
 
 GameObject.prototype.HasCollidedWithGameObj = function(otherGameObj)
 {

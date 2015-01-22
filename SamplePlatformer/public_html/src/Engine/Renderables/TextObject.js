@@ -20,7 +20,7 @@ function TextObject(aSpriteShader, aString)
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
-TextObject.prototype.Draw = function() {
+TextObject.prototype.Draw = function(vpMatrix) {
     // we will draw the text string by calling to _mOneChar for each of the
     // chars in the _mText string.
     var widthOfOneChar = this._mXform.GetWidth() / this._mText.length;
@@ -51,7 +51,7 @@ TextObject.prototype.Draw = function() {
         this._mOneChar.GetXform().SetPosition(xPos - xOffset, yPos - yOffset);        
         //
         
-        this._mOneChar.Draw();
+        this._mOneChar.Draw(vpMatrix);
         
         xPos += widthOfOneChar;
     }

@@ -25,12 +25,10 @@ function MyGame(htmlCanvasID)
     // Step D: Draw!
     gEngine.Core.ClearCanvas();        // 1. Clear the canvas
     
-    // Step D1: Activate and draw renderable objects with the white shader
-    this._mWhiteShader.ActivateShader();
-        this._mWhiteSq.Draw();
+    // Step D1: Draw renderable objects with the white shader
+    this._mWhiteSq.Draw();
     
-    // Step D2: Activate and draw renderable objects with the red shader
-    this._mRedShader.ActivateShader();
-        this._mRedSq.Draw();
+    // Step D2: Draw renderable objects with the red shader
+    this._mRedSq.Draw();
     
 };

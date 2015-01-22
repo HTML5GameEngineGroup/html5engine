@@ -97,18 +97,14 @@ MyGame.prototype.Draw = function()
     
     // Draw with mCamera
     this._mCamera.BeginDraw();
-    
-    // Activates textured shader and draw the texturedSq
-    this._mTextureShader.ActivateShader(this._mCamera.GetVPMatrix());
-        this._mTexSq.Draw();
         
-    this._mSpriteShader.ActivateShader(this._mCamera.GetVPMatrix());
-        this._mSpriteFontSq.Draw();
-        this._mSpriteBoySq.Draw();
+    // Draw the two sprite objects
+    this._mSpriteFontSq.Draw(this._mCamera.GetVPMatrix());
+    this._mSpriteBoySq.Draw(this._mCamera.GetVPMatrix());
         
-    // Activate the red shader and draw the redSq
-    this._mRedShader.ActivateShader(this._mCamera.GetVPMatrix());        
-        this._mRedSq.Draw();
+    // Draw the texturedSq and the redSq
+    this._mTexSq.Draw(this._mCamera.GetVPMatrix());
+    this._mRedSq.Draw(this._mCamera.GetVPMatrix());
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
@@ -121,7 +117,7 @@ MyGame.prototype.Update = function()
     var deltaX = 0.05;
     
     // Move the textured square
-    if (gEngine.Input.IsKeyDown(gEngine.Input.RIGHT)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.RIGHT)) {
         if (texXform.GetXPos() > 30)  // this is the right-bound of the window
             texXform.SetPosition(10, texXform.GetYPos());
         texXform.IncXPosBy(deltaX);
@@ -135,7 +131,7 @@ MyGame.prototype.Update = function()
     var redXform = this._mRedSq.GetXform();
     
     // pulse the red square
-    if (gEngine.Input.IsKeyDown(gEngine.Input.DOWN)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.DOWN)) {
         if (redXform.GetWidth() > 5)
             redXform.SetSize(2, 2);
         redXform.IncSizeBy(0.05);

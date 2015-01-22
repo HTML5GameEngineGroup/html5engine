@@ -38,35 +38,35 @@ function MyGame(htmlCanvasID)
     
     // Step F: Starts the drawing by activating the camera
     this._mCamera.BeginDraw();
-      
+    var vpMatrix = this._mCamera.GetVPMatrix();
+    
     // Step G: Draw with the white shader
-    this._mWhiteShader.ActivateShader(this._mCamera.GetVPMatrix());
         // Centre white, slightly rotated square
         this._mWhiteSq.GetXform().SetPosition(20, 60);
         this._mWhiteSq.GetXform().SetRotationInRad(0.2); // In Degree
         this._mWhiteSq.GetXform().SetSize(5, 5);
-        this._mWhiteSq.Draw();
+        this._mWhiteSq.Draw(vpMatrix);
     
     // Step H: Draw with the red shader
     this._mRedShader.ActivateShader(this._mCamera.GetVPMatrix());
         // centre red square
         this._mRedSq.GetXform().SetPosition(20, 60);
         this._mRedSq.GetXform().SetSize(2, 2);
-        this._mRedSq.Draw();
+        this._mRedSq.Draw(vpMatrix);
 
         // top left
         this._mTLSq.GetXform().SetPosition(10, 65);
-        this._mTLSq.Draw();
+        this._mTLSq.Draw(vpMatrix);
 
         // top right
         this._mTRSq.GetXform().SetPosition(30, 65);
-        this._mTRSq.Draw();
+        this._mTRSq.Draw(vpMatrix);
 
         // bottom right
         this._mBRSq.GetXform().SetPosition(30, 55);
-        this._mBRSq.Draw();
+        this._mBRSq.Draw(vpMatrix);
 
         // bottom left
         this._mBLSq.GetXform().SetPosition(10, 55);
-        this._mBLSq.Draw();
+        this._mBLSq.Draw(vpMatrix);
 };

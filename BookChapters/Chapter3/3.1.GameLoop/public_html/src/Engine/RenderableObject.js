@@ -18,8 +18,9 @@ function RenderableObject(shader)
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
-RenderableObject.prototype.Draw = function() {
+RenderableObject.prototype.Draw = function(vpMatrix) {
     var gl = gEngine.Core.GetGL();    
+    this._mShader.ActivateShader(vpMatrix);  // always activate the shader first!
     this._mShader.LoadObjectTransform(this._mXform.GetXform());
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 };

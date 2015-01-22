@@ -39,8 +39,7 @@ function MyGame(htmlCanvasID)
     this._mWhiteSq.GetXform().SetRotationInRad(0.2); // In Degree
     this._mWhiteSq.GetXform().SetSize(1.2, 1.2);
     // Step F: draws the white square (transform behavior in the object)
-    this._mWhiteShader.ActivateShader();  // activates the shader
-        this._mWhiteSq.Draw();
+    this._mWhiteSq.Draw();
 
     // Step G: sets the red square transform    
     this._mRedSq.GetXform().SetXPos(0.25);
@@ -49,6 +48,5 @@ function MyGame(htmlCanvasID)
     this._mRedSq.GetXform().SetWidth(0.4);
     this._mRedSq.GetXform().SetHeight(0.4);
     // Step H: draw the red square (transform in the object)
-    this._mRedShader.ActivateShader();  // activates the shader    
-        this._mRedSq.Draw();
+    this._mRedSq.Draw();
 };

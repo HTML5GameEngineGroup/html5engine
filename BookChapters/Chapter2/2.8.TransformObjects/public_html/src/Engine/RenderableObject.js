@@ -20,6 +20,7 @@ function RenderableObject(shader)
 //**-----------------------------------------
 RenderableObject.prototype.Draw = function() {
     var gl = gEngine.Core.GetGL();    
+    this._mShader.ActivateShader();  // always activate the shader first!
     this._mShader.LoadObjectTransform(this._mXform.GetXform());
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 };

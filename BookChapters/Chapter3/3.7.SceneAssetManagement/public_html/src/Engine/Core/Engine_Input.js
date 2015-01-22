@@ -1,4 +1,4 @@
-/*
+ /*
  * File: EngineCore_Input.js 
  * Provides input support
  */
@@ -68,24 +68,24 @@ gEngine.Input = function()
     
     var Update = function() {
         for (var i = 0; i<kLastKeyCode; i++) {
-             _mIsKeyClicked[i] = _mKeyPreviousState[i] && (!_mIsKeyPressed[i])
+             _mIsKeyClicked[i] = (!_mKeyPreviousState[i]) && _mIsKeyPressed[i];
             _mKeyPreviousState[i] = _mIsKeyPressed[i];
         }
     };
     
     // Function for GameEngine Prorammer to test if a key is pressed down
-    var IsKeyDown = function (keyCode) {
+    var IsKeyPressed = function (keyCode) {
         return _mIsKeyPressed[keyCode]; };
 
     var IsKeyClicked = function(keyCode) {
         return (_mIsKeyClicked[keyCode]); 
-    }; 
+    };
     
     var oPublic =
     {
         Initialize: Initialize,
         Update: Update,
-        IsKeyDown: IsKeyDown,
+        IsKeyPressed: IsKeyPressed,
         IsKeyClicked: IsKeyClicked,
         UP: kUP,
         DOWN: kDOWN,

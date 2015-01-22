@@ -44,7 +44,7 @@ MainLevel.prototype.contentLoad = function()
                                   "resources/fonts/dos-font.fnt");
                                   
     // Load Line resources
-    LinePrimative.prototype.preloadShader();
+    LineStrip.prototype.preloadShader();
 };
 
 MainLevel.prototype.initialize = function()
@@ -73,8 +73,10 @@ MainLevel.prototype.initialize = function()
     lineTrans.setZOrder(10);
     
     // Points are in model space. Transform puts in world space.
-    this.mLineTest = new LinePrimative(lineTrans, -0.5, 0.5,
-                                                  0.5, 0.5);
+    this.mLineTest = new LineStrip(lineTrans, true, [-0.5,  0.5,
+                                                      0.5,  0.5,
+                                                      0.5, -0.5,
+                                                     -0.5, -0.5]);
             
     // Other managers
     this.mEnemyManager = new EnemyManager(this.mPlayer, this.mMainShader);

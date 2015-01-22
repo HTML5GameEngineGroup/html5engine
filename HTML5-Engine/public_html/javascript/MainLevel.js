@@ -66,17 +66,13 @@ MainLevel.prototype.initialize = function()
     this.mPlayer = new Player(transform, this.mCamera, this.mMainShader);
     
     // Setup Line test
-    var lineTrans = new Transform();
-    
-    lineTrans.setPosition(10, 8);
-    lineTrans.setSize(2,2);
-    lineTrans.setZOrder(10);
-    
     // Points are in model space. Transform puts in world space.
-    this.mLineTest = new LineStrip(lineTrans, true, [-0.5,  0.5,
-                                                      0.5,  0.5,
-                                                      0.5, -0.5,
-                                                     -0.5, -0.5]);
+    // These match up to the default verticies of DEFAULT_VERTICES in
+    // EngineCore.
+    this.mLineTest = new LineStrip(transform, true, [0.0,  0.0,     
+                                                     1.0,  0.0,
+                                                     1.0,  1.0,
+                                                     0.0,  1.0]);
             
     // Other managers
     this.mEnemyManager = new EnemyManager(this.mPlayer, this.mMainShader);
@@ -172,12 +168,12 @@ MainLevel.prototype.draw = function()
     this.mDrawPrevTime = Date.now();
     
     EngineCore.Resources.clearCanvas();
-    //this.mEnemyManager.addToDrawSet();
-    //this.mBackgroundManager.addToDrawSet();
-    //this.mPlayer.addToDrawSet();
-    //this.mFPSText.addToDrawSet();
-    //this.mLogicUpdateText.addToDrawSet();
-    //this.mMouseText.addToDrawSet();
+    this.mEnemyManager.addToDrawSet();
+    this.mBackgroundManager.addToDrawSet();
+    this.mPlayer.addToDrawSet();
+    this.mFPSText.addToDrawSet();
+    this.mLogicUpdateText.addToDrawSet();
+    this.mMouseText.addToDrawSet();
     this.mLineTest.addToDrawSet();
     this.mCamera.draw();
     

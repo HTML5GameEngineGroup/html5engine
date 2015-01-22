@@ -6,11 +6,11 @@
 
 function MyGame(htmlCanvasID)
 {
-    // audio clips to be loaded
-    this._kBgAudio = "resources/sounds/Mind_Meld.mp3";
     
     // Initialize the webGL Context
     gEngine.Core.InitializeEngineCore(htmlCanvasID);
+   
+    gMyGame.GameState.Initialize();
    
     // start game loop going
     gEngine.GameLoop.Start(this);
@@ -18,13 +18,7 @@ function MyGame(htmlCanvasID)
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
 MyGame.prototype.Update = function()
-{
-    // starts the background audio playing
-    // this can only be called after GameLoop started:
-    // when we know all resource loading is done
-    if (!gEngine.AudioClips.IsBackgroundAudioPlaying())
-        gEngine.AudioClips.PlayBackgroundAudio(this._kBgAudio);
-        
+{   
     // now start the game loop with BeginLevel
     // var beginLevel = new BeginLevel();
     // this.LoadNextScene(beginLevel);
@@ -33,13 +27,11 @@ MyGame.prototype.Update = function()
 };
 
 MyGame.prototype.Initialize = function() {
-    // nothing here
+    
 };
 
 
 MyGame.prototype.LoadContent = function() {
-     // load audio clips
-    gEngine.AudioClips.LoadAudio(this._kBgAudio);
 };
 
 MyGame.prototype.UnloadContent = function() {

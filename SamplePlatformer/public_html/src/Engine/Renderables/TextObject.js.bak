@@ -20,7 +20,7 @@ function TextObject(aSpriteShader, aString)
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
-TextObject.prototype.Draw = function(vpMatrix) {
+TextObject.prototype.Draw = function() {
     // we will draw the text string by calling to _mOneChar for each of the
     // chars in the _mText string.
     var widthOfOneChar = this._mXform.GetWidth() / this._mText.length;
@@ -51,7 +51,7 @@ TextObject.prototype.Draw = function(vpMatrix) {
         this._mOneChar.GetXform().SetPosition(xPos - xOffset, yPos - yOffset);        
         //
         
-        this._mOneChar.Draw(vpMatrix);
+        this._mOneChar.Draw();
         
         xPos += widthOfOneChar;
     }
@@ -60,7 +60,13 @@ TextObject.prototype.Draw = function(vpMatrix) {
 
 TextObject.prototype.GetXform = function() { return this._mXform; };
 TextObject.prototype.GetText = function() { return this._mText; };
-TextObject.prototype.SetText = function(t) { this._mText = t; };
+TextObject.prototype.SetText = function(t) { 
+        this._mText = t; 
+        // use height as a reference to set the width
+        var w = t.length * this.GetXform().GetHeight();
+        this.GetXform().SetWidth(w);
+};
+
 TextObject.prototype.GetFont = function() { return this._mFont; };
 TextObject.prototype.SetFont = function(f) { this._mFont = f; };
 //--- end of Public Methods

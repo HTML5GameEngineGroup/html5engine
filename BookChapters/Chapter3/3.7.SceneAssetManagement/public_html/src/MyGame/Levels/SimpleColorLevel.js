@@ -73,12 +73,10 @@ SimpleColorLevel.prototype.Draw = function()
     this._mCamera.BeginDraw();
     
         // Step  C: Activate the white shader to draw
-        this._mWhiteShader.ActivateShader(this._mCamera.GetVPMatrix());
-            this._mWhiteSq.Draw();
+        this._mWhiteSq.Draw(this._mCamera.GetVPMatrix());
         
         // Step  D: Activate the red shader to draw
-        this._mRedShader.ActivateShader(this._mCamera.GetVPMatrix());
-            this._mRedSq.Draw();
+        this._mRedSq.Draw(this._mCamera.GetVPMatrix());
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
@@ -91,7 +89,7 @@ SimpleColorLevel.prototype.Update = function()
     var deltaX = 0.05;
     
     // Step A: test for white square movement
-    if (gEngine.Input.IsKeyDown(gEngine.Input.RIGHT)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.RIGHT)) {
         if (whiteXform.GetXPos() > 30)  // this is the right-bound of the window
             whiteXform.SetPosition(10, 60);
         whiteXform.IncXPosBy(deltaX);
@@ -99,7 +97,7 @@ SimpleColorLevel.prototype.Update = function()
     }
     
     // Step  B: test for white square rotation
-    if (gEngine.Input.IsKeyDown(gEngine.Input.UP)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.UP)) {
         whiteXform.IncRotationByDegree(1);
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
     }
@@ -108,14 +106,14 @@ SimpleColorLevel.prototype.Update = function()
     var redXform = this._mRedSq.GetXform();
     
     // Step  C: test for pulsing the red square
-    if (gEngine.Input.IsKeyDown(gEngine.Input.DOWN)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.DOWN)) {
         if (redXform.GetWidth() > 5)
             redXform.SetSize(2, 2);
         redXform.IncSizeBy(0.05);
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
     }
     
-    if (gEngine.Input.IsKeyDown(gEngine.Input.Three)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Three)) {
         this.LoadNextScene( new TextureLevel() );
     }
 };

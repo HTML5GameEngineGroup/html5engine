@@ -1,4 +1,4 @@
-/*
+ /*
  * File: EngineCore_Input.js 
  * Provides input support
  */
@@ -39,8 +39,12 @@ gEngine.Input = function()
     
     var kLastKeyCode = 222;
 
+    // Previous key state
+    var _mKeyPreviousState = {};
     // The pressed keys.
     var _mIsKeyPressed = {};
+    // Click events: once an event is set, it will remain there until polled
+    var _mIsKeyClicked = {};
 
 
     // Event service functions
@@ -51,22 +55,38 @@ gEngine.Input = function()
     
     var Initialize = function ()
     {
-        for (var i = 0; i<kLastKeyCode; i++)
+        for (var i = 0; i<kLastKeyCode; i++) {
             _mIsKeyPressed[i] = false;
+            _mKeyPreviousState[i] = false;
+            _mIsKeyClicked[i] = false;
+        }
         
         // register services 
         window.addEventListener('keyup', _OnKeyUp);
         window.addEventListener('keydown', _OnKeyDown);
     };
     
+    var Update = function() {
+        for (var i = 0; i<kLastKeyCode; i++) {
+             _mIsKeyClicked[i] = (!_mKeyPreviousState[i]) && _mIsKeyPressed[i];
+            _mKeyPreviousState[i] = _mIsKeyPressed[i];
+        }
+    };
+    
     // Function for GameEngine Prorammer to test if a key is pressed down
-    var IsKeyDown = function (keyCode) {
+    var IsKeyPressed = function (keyCode) {
         return _mIsKeyPressed[keyCode]; };
 
+    var IsKeyClicked = function(keyCode) {
+        return (_mIsKeyClicked[keyCode]); 
+    };
+    
     var oPublic =
     {
         Initialize: Initialize,
-        IsKeyDown: IsKeyDown,
+        Update: Update,
+        IsKeyPressed: IsKeyPressed,
+        IsKeyClicked: IsKeyClicked,
         UP: kUP,
         DOWN: kDOWN,
         LEFT: kLEFT,

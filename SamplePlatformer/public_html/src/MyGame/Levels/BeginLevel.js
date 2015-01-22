@@ -69,11 +69,10 @@ BeginLevel.prototype.Draw = function()
     this._mCamera.BeginDraw();
     
     // Activates textured shader and draw the texturedSq
-    this._mFontShader.ActivateShader(this._mCamera.GetVPMatrix());
-        this._mMessage.Draw();
-        this._mSimpleColorMsg.Draw();
-        this._mTextureSceneMsg.Draw();
-        this._mUserMsg.Draw();
+        this._mMessage.Draw(this._mCamera.GetVPMatrix());
+        this._mSimpleColorMsg.Draw(this._mCamera.GetVPMatrix());
+        this._mTextureSceneMsg.Draw(this._mCamera.GetVPMatrix());
+        this._mUserMsg.Draw(this._mCamera.GetVPMatrix());
 
 };
 
@@ -82,19 +81,24 @@ BeginLevel.prototype.Draw = function()
 BeginLevel.prototype.Update = function()
 {
     // Move the textured square and the text
-    if (gEngine.Input.IsKeyDown(gEngine.Input.Zero)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Zero)) {
         this._mUserMsg.SetText(this._kUserPrompt + " 0 (not legal)!");
         this._mUserMsg.GetXform().SetWidth(3.2);
     }
     
-    if (gEngine.Input.IsKeyDown(gEngine.Input.One)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.One)) {
         this._mUserMsg.SetText(this._kUserPrompt + " 1 => Simple Color");
         this.LoadNextScene( new SimpleColorLevel() );
     }
     
-    if (gEngine.Input.IsKeyDown(gEngine.Input.Two)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Two)) {
         this._mUserMsg.SetText(this._kUserPrompt + " 2 => Texture Level");
         this.LoadNextScene( new TextureLevel() );
+    }
+    
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Three)) {
+        this._mUserMsg.SetText(this._kUserPrompt + " 3 => Bound Test ");
+        this.LoadNextScene( new BoundCheck() );
     }
 };
 

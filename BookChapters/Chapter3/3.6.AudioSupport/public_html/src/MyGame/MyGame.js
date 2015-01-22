@@ -112,19 +112,17 @@ MyGame.prototype.Draw = function()
     
     // Draw with mCamera
     this._mCamera.BeginDraw();
-    
-    // Activates textured shader and draw the texturedSq
-    this._mTextureShader.ActivateShader(this._mCamera.GetVPMatrix());
-        this._mTexSq.Draw();
         
-    this._mSpriteShader.ActivateShader(this._mCamera.GetVPMatrix());
-        this._mSpriteFontSq.Draw();
-        this._mSpriteBoySq.Draw();
-        this._mMyText.Draw();
+    // Draw the two sprite objects
+    this._mSpriteFontSq.Draw(this._mCamera.GetVPMatrix());
+    this._mSpriteBoySq.Draw(this._mCamera.GetVPMatrix());
         
-    // Activate the red shader and draw the redSq
-    this._mRedShader.ActivateShader(this._mCamera.GetVPMatrix());        
-        this._mRedSq.Draw();
+    // Draw the texturedSq and the redSq
+    this._mTexSq.Draw(this._mCamera.GetVPMatrix());
+    this._mRedSq.Draw(this._mCamera.GetVPMatrix());
+
+    // The test string
+    this._mMyText.Draw(this._mCamera.GetVPMatrix());
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
@@ -137,7 +135,7 @@ MyGame.prototype.Update = function()
     var deltaX = 0.05;
     
     // Move the textured square and the text
-    if (gEngine.Input.IsKeyDown(gEngine.Input.RIGHT)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.RIGHT)) {
         if (texXform.GetXPos() < 30) {  // this is the right-bound of the window
             texXform.IncXPosBy(deltaX);
             this._mMyText.GetXform().IncXPosBy(deltaX);
@@ -145,7 +143,7 @@ MyGame.prototype.Update = function()
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
     }
     
-    if (gEngine.Input.IsKeyDown(gEngine.Input.LEFT)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.LEFT)) {
         if (texXform.GetXPos() > 14) {  // this is the right-bound of the window
             texXform.IncXPosBy(-deltaX);
             this._mMyText.GetXform().IncXPosBy(-deltaX);
@@ -154,7 +152,7 @@ MyGame.prototype.Update = function()
     }
     
     // Rotate the textured square
-    if (gEngine.Input.IsKeyDown(gEngine.Input.UP)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.UP)) {
         texXform.IncRotationByDegree(1);
         this._mMyText.GetXform().IncRotationByDegree(1);
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
@@ -164,7 +162,7 @@ MyGame.prototype.Update = function()
     var redXform = this._mRedSq.GetXform();
     
     // pulse the red square
-    if (gEngine.Input.IsKeyDown(gEngine.Input.DOWN)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.DOWN)) {
         if (redXform.GetWidth() > 5) {
             redXform.SetSize(2, 2);
             this._mMyText.GetXform().SetSize(6, 0.5);
@@ -206,9 +204,9 @@ MyGame.prototype.Update = function()
     
     
     // <editor-fold desc="background music control">
-    if (gEngine.Input.IsKeyDown(gEngine.Input.S))
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.S))
         gEngine.AudioClips.StopBackgroundAudio(this._kBgAudio);
-    if (gEngine.Input.IsKeyDown(gEngine.Input.A)) 
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.A)) 
         gEngine.AudioClips.PlayBackgroundAudio(this._kBgAudio);
     // </editor-fold>
 };

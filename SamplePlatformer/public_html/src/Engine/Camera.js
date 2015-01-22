@@ -49,6 +49,10 @@ Camera.prototype.SetWCCenter = function(xPos, yPos) {
     this._mWCCenter[0] = xPos; this._mWCCenter[1] = yPos; };
 Camera.prototype.GetWCCenter = function() { return this._mWCCenter; };
 Camera.prototype.SetWCWidth = function(width) { this._mWCWidth = width; };
+Camera.prototype.GetWCWidth = function() { return this._mWCWidth; };
+Camera.prototype.ZoomByDelta = function(delta) { 
+    if (this._mWCWidth > delta)
+        this.SetWCWidth(this._mWCWidth - delta); };
 
 Camera.prototype.SetViewport = function(viewportArray) { this._mViewport = viewportArray; };
 Camera.prototype.GetViewport = function() { return this._mViewport; };
@@ -111,15 +115,40 @@ Camera.prototype.BeginDraw = function() {
     //</editor-fold>
 };
 
-Camera.prototype.CollideWCBound = function(gameObj) {
-    var objPos = gameObj.GetXform().GetPosition();
-    var objSize = gameObj.GetXform().GetSize();
+Camera.prototype.ContainsPoint = function(x, y, safeBound) {
+    var useZone = 1.0;
+    if (safeBound !== undefined)
+        useZone = safeBound;
+    
+    var wcHalfW = 0.5 * this._mWCWidth * useZone;
+    var wcHalfH = wcHalfW * this._mViewport[3] / this._mViewport[2]; // viewportH/viewportW
+    var wcLeft = this._mWCCenter[0] - wcHalfW;
+    var wcRight = this._mWCCenter[0] + wcHalfW;
+    var wcTop = this._mWCCenter[1] + wcHalfH;
+    var wcBot = this._mWCCenter[1] - wcHalfH;  
+    
+    return (x > wcLeft) && (x < wcRight) && (y > wcBot) && (y < wcTop);
+};
+
+//
+// gameObj is a GameObject
+// safeBound is a percentage representing the "safty zone"
+//    e.g., 0.8 says, we are touching the 80% zone of WC bound
+//          1.2 says we are testing for bounds 1.2-times the WC bound
+// it is ok to not pass safeBound, defualt to 1.0
+Camera.prototype.CollideWCBound = function(xform, safeBound) {
+    var useZone = 1.0;
+    if (safeBound !== undefined)
+        useZone = safeBound;
+        
+    var objPos = xform.GetPosition();
+    var objSize = xform.GetSize();
     var objLeft = objPos[0] - (objSize[0]/2);
     var objRight = objPos[0] + (objSize[0]/2);
     var objTop = objPos[1] + (objSize[1]/2);
     var objBot = objPos[1] - (objSize[1]/2);
     
-    var wcHalfW = 0.5 * this._mWCWidth;
+    var wcHalfW = 0.5 * this._mWCWidth * useZone;
     var wcHalfH = wcHalfW * this._mViewport[3] / this._mViewport[2]; // viewportH/viewportW
     var wcLeft = this._mWCCenter[0] - wcHalfW;
     var wcRight = this._mWCCenter[0] + wcHalfW;

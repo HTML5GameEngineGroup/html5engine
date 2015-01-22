@@ -21,12 +21,12 @@ gEngine.Core.InheritPrototype(SpriteObject, TextureObject);
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
-SpriteObject.prototype.Draw = function(vpMatrix) {
+SpriteObject.prototype.Draw = function() {
     // set the current texture coordinate
     // 
     // activate the texture
     this._mShader.SetTextureCoordinate(this.GetTexArray());
-    TextureObject.prototype.Draw.call(this, vpMatrix);
+    TextureObject.prototype.Draw.call(this);
 };
 
 SpriteObject.prototype.SetTextureCoordinate = function(left, right, bottom, top)

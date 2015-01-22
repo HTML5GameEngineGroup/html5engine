@@ -17,6 +17,9 @@ function MainLevel()
     // FPS variables
     this.mDrawPrevTime = Date.now();
     this.mLogicPrevTime = Date.now();
+    
+    // Line Test Variables
+    this.mLineTest;
 }
 MainLevel.prototype = Object.create(Scene.prototype);
 
@@ -39,6 +42,9 @@ MainLevel.prototype.contentLoad = function()
     // Load Font
     EngineCore.Resources.loadFont("resources/fonts/dos-font.png",
                                   "resources/fonts/dos-font.fnt");
+                                  
+    // Load Line resources
+    LineStrip.prototype.preloadShader();
 };
 
 MainLevel.prototype.initialize = function()
@@ -59,8 +65,17 @@ MainLevel.prototype.initialize = function()
 
     this.mPlayer = new Player(transform, this.mCamera, this.mMainShader);
     
+    // Setup Line test
+    // Points are in model space. Transform puts in world space.
+    // These match up to the default verticies of DEFAULT_VERTICES in
+    // EngineCore.
+    this.mLineTest = new LineStrip(transform, true, [0.0,  0.0,     
+                                                     1.0,  0.0,
+                                                     1.0,  1.0,
+                                                     0.0,  1.0]);
+            
+    // Other managers
     this.mEnemyManager = new EnemyManager(this.mPlayer, this.mMainShader);
-    
     this.mBackgroundManager = new BackgroundGenerator(this.mPlayer, this.mMainShader);
     
     // Text
@@ -159,6 +174,7 @@ MainLevel.prototype.draw = function()
     this.mFPSText.addToDrawSet();
     this.mLogicUpdateText.addToDrawSet();
     this.mMouseText.addToDrawSet();
+    this.mLineTest.addToDrawSet();
     this.mCamera.draw();
     
     var elapsedTime = Date.now() - this.mDrawPrevTime;

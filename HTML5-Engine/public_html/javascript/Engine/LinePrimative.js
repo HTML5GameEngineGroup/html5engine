@@ -3,7 +3,7 @@ function LinePrimative(transform, x1,y1,x2,y2)
     this.mLineColor = vec4.fromValues(1.0,1.0,1.0,1.0);
     this.mPointColor = vec4.fromValues(1.0,0.0,0.0,1.0);
     this.mLineWidth = 1.0; // Only supported Width!!!!!!!!!
-    this.mPointSize = 20.0;
+    this.mPointSize = 5.0;
     this.mTransformMatrix = transform;
     
     this._mLineShader = "line-vs-line-fs";
@@ -115,5 +115,9 @@ LinePrimative.prototype.draw = function(gl, vertexBuffer, textureBuffer)
     gl.uniform4fv(uniformColor, this.mLineColor);
     // Draw triangles, with a max of 2, from the zeroth element.
     gl.drawArrays(gl.LINES, 0, 2);
+    
+    // Reset Colors for points  
+    gl.uniform4fv(uniformColor, this.mPointColor);
+    
     gl.drawArrays(gl.POINTS, 0, 2);
 };

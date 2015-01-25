@@ -1,17 +1,43 @@
 <MyGameLevel>
-  <Hero PosX="20" PosY="40" />
+
+<!--  *** be careful!! comma (,) is not a supported syntax!!  -->
+<!--  make sure there are no comma in between attributes -->
+<!--  e.g., do NOT do:  PosX="20", PosY="30" -->
+<!--  notice the "comma" between PosX and PosY: Syntax error! -->
+
+
+
+  <Dye PosX="20" PosY="30" />
   
   <!-- cameras -->
-  <MainCamera CenterX="32" CenterY="24" Width="64" 
-              ViewportX="0" ViewportY="0" 
-              ViewportWidth="640" ViewportHeight="480"/>
-  <MapCamera  CenterX="32" CenterY="24" Width="128" 
-              ViewportX="470" ViewportY="410" 
-              ViewportWidth="160" ViewportHeight="60"/>
+                <!-- Viewport: x, y, w, h -->
+  <MainCamera CenterX="35" CenterY="20" Width="70" 
+              Viewport="0 0 700 400"   
+              BgColor="0.9 0.9 0.9 1.0"
+              />
+              <!-- Viewport: x, y, w, h -->
+  <MapCamera  CenterX="35" CenterY="17" Width="140" 
+              Viewport="450 410 200 90"
+              BgColor="0.7 0.7 0.7 1.0"
+              />
               
-  <!-- platforms -->
-  <Platform PosX="30" PosY="40" Width="10", Height="5"/>
-  <Platform PosX="40" PosY="20" Width="5", Height="2.5"/>
-  <Platform PosX="20" PosY="10" Width="15", Height="7.5"/>
+ <!-- platforms -->
+ <StaticPlatform PosX="30" PosY="30" Width="10" Height="2" />
+ <StaticPlatform PosX="40" PosY="20" Width="10" Height="1" />
+ <StaticPlatform PosX="20" PosY="10" Width="15" Height="3"/>
+ <StaticPlatform PosX="0" PosY="20" Width="10" Height="1" />
+ <StaticPlatform PosX="10" PosY="20" Width="10" Height="1" /> 
+ <StaticPlatform PosX="70" PosY="20" Width="10" Height="1" /> 
+ <StaticPlatform PosX="90" PosY="20" Width="10" Height="1" /> 
+ <StaticPlatform PosX="110" PosY="20" Width="10" Height="1" /> 
+ <StaticPlatform PosX="130" PosY="20" Width="10" Height="1" /> 
+ <StaticPlatform PosX="-10" PosY="20" Width="10" Height="1" /> 
+ <StaticPlatform PosX="-30" PosY="20" Width="10" Height="1" /> 
+ 
+ <FloorPlatform PosX="0" PosY="0" Width="1" Height="1"/>
+ <FloorPlatform PosX="0" PosY="40" Width="1" Height="1"/>
+ <FloorPlatform PosX="70" PosY="0" Width="1" Height="1"/>
+ <FloorPlatform PosX="70" PosY="40" Width="1" Height="1"/>
+ <FloorPlatform PosX="32" PosY="1" Width="65" Height="1" />
   
 </MyGameLevel>

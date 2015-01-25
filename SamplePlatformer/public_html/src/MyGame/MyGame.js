@@ -23,7 +23,7 @@ MyGame.prototype.Update = function()
     // var beginLevel = new BeginLevel();
     // this.LoadNextScene(beginLevel);
     
-    this.LoadNextScene( new BoundCheck() );
+    this.LoadNextScene( new LevelOne() );
 };
 
 MyGame.prototype.Initialize = function() {

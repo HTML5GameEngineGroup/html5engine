@@ -32,6 +32,7 @@ gEngine.Input = function()
     var kE = 69;
     var kR = 82;
     var kF = 70;
+    var kG = 71;
     var kJ = 74;
     var kI = 73;
     var kL = 76;
@@ -103,6 +104,7 @@ gEngine.Input = function()
         I: kI,
         L: kL,
         K: kK,
+        G: kG,
         Zero: k0,
         One: k1,
         Two: k2,

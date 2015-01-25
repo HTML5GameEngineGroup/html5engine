@@ -97,8 +97,8 @@ BeginLevel.prototype.Update = function()
     }
     
     if (gEngine.Input.IsKeyClicked(gEngine.Input.Three)) {
-        this._mUserMsg.SetText(this._kUserPrompt + " 3 => Bound Test ");
-        this.LoadNextScene( new BoundCheck() );
+        this._mUserMsg.SetText(this._kUserPrompt + " 3 => Level One ");
+        this.LoadNextScene( new LevelOne() );
     }
 };
 

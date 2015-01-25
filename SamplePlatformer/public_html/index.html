@@ -44,21 +44,27 @@
     <!-- our programmer's game logic -->
         <script type="text/javascript" src="src/MyGame/MyGame.js"></script>
         <script type="text/javascript" src="src/MyGame/MyGame_GameState.js"></script>
-        <script type="text/javascript" src="src/MyGame/HeroObject.js"></script>
-        <script type="text/javascript" src="src/MyGame/PlatformObject.js"></script>
-        <script type="text/javascript" src="src/MyGame/TexturedPlatform.js"></script>
-        <script type="text/javascript" src="src/MyGame/GameObjectSet.js"></script>
-        <script type="text/javascript" src="src/MyGame/GameObjectSetIterator.js"></script>
-        <script type="text/javascript" src="src/MyGame/Bullet.js"></script>
+        
+        <!-- My Game objects-->
+            <script type="text/javascript" src="src/MyGame/Objects/Dye.js"></script>
+            <script type="text/javascript" src="src/MyGame/Objects/Bullet.js"></script>
+            <!-- Platforms -->
+            <script type="text/javascript" src="src/MyGame/Objects/Platforms/PlatformObject.js"></script>
+            <script type="text/javascript" src="src/MyGame/Objects/Platforms/StaticPlatform.js"></script>
+            <script type="text/javascript" src="src/MyGame/Objects/Platforms/FloorPlatform.js"></script>
+        <!-- My Game utilities -->
+            <script type="text/javascript" src="src/MyGame/Utils/GameObjectSet.js"></script>
+            <script type="text/javascript" src="src/MyGame/Utils/GameObjectSetIterator.js"></script>
+            <script type="text/javascript" src="src/MyGame/Utils/LevelFileParser.js"></script>
         
         <!-- the levels -->
             <script type="text/javascript" src="src/MyGame/Levels/BeginLevel.js"></script>
             <script type="text/javascript" src="src/MyGame/Levels/SimpleColorLevel.js"></script>
             <script type="text/javascript" src="src/MyGame/Levels/TextureLevel.js"></script>
-            <script type="text/javascript" src="src/MyGame/Levels/BoundCheck.js"></script>
-            <script type="text/javascript" src="src/MyGame/Levels/BoundCheck_World.js"></script>
+            <script type="text/javascript" src="src/MyGame/Levels/LevelOne.js"></script>
+            <script type="text/javascript" src="src/MyGame/Levels/LevelOne_Bg.js"></script>
     
-    <canvas id="GLCanvas" width="640" height="480">
+    <canvas id="GLCanvas" width="700" height="500">
         <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
         Your browser does not support the HTML5 canvas.
         <!-- this message will show only if WebGL clearing failed -->

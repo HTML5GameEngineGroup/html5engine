@@ -38,11 +38,16 @@ gEngine.XmlLoader = function()
         }
     };
     
+    var UnloadXMLFile= function(fileName) {
+        gEngine.ResourceMap.DecAssetRefCount(fileName);
+    };
+    
     // Public interface for this object. Anything not in here will
     // not be accessable.
     var oPublic =
     {
-        LoadXMLFile: LoadXMLFile
+        LoadXMLFile: LoadXMLFile,
+        UnloadXMLFile: UnloadXMLFile
     };
     return oPublic;
 }();

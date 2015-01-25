@@ -39,23 +39,28 @@
         <group name="Chapter3"/>
         <group name="AllBookProjects"/>
         <group name="HTML5-Engine">
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/GameObjects/GameObject.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Shaders/TextureShader.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/shaders/WhiteFS.glsl</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Core/Engine_GameLoop.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/MyGame.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Shaders/SimpleShader.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Renderables/RenderableObject.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Shaders/SpriteShader.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Renderables/SpriteObject.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Renderables/TextureObject.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/GameObjectSetIterator.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/GameObjectSet.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Camera.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Core/Resources/Engine_AudioClips.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Shaders/TextureShader.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/PlatformObject.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/GameObjects/GameObject.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Core/Engine_Input.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/index.html</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Core/Resources/Engine_Textures.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/HeroObject.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Core/Resources/Engine_ResourceMap.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/BeginLevel.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/GameObjects/TextureObject.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/BoundCheck.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/MyGame.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Transform.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/TextureLevel.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/GameObjects/TextObject.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/GameObjects/RenderableObject.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/BeginLevel.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/BoundCheck_World.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Transform.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/HeroObject.js</file>
         </group>
     </open-files>
 </project-private>

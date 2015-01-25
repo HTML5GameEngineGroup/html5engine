@@ -1,0 +1,17 @@
+<MyGameLevel>
+  <Hero PosX="20" PosY="40" />
+  
+  <!-- cameras -->
+  <MainCamera CenterX="32" CenterY="24" Width="64" 
+              ViewportX="0" ViewportY="0" 
+              ViewportWidth="640" ViewportHeight="480"/>
+  <MapCamera  CenterX="32" CenterY="24" Width="128" 
+              ViewportX="470" ViewportY="410" 
+              ViewportWidth="160" ViewportHeight="60"/>
+              
+  <!-- platforms -->
+  <Platform PosX="30" PosY="40" Width="10", Height="5"/>
+  <Platform PosX="40" PosY="20" Width="5", Height="2.5"/>
+  <Platform PosX="20" PosY="10" Width="15", Height="7.5"/>
+  
+</MyGameLevel>

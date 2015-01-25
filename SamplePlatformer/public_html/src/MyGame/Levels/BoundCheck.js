@@ -7,6 +7,7 @@ var _gWorldZoomFactor = 0.5;
 
 function BoundCheck()
 {
+    this._LevelFile = "resources/levels/level1.xml";
     this._mAllObjs = new GameObjectSet();
     
     // variable for renderable objects
@@ -24,28 +25,49 @@ function BoundCheck()
     this._mBoundCheck = new BoundCheck_World();
        
     // Initialize the game
-    this.Initialize();
+    gEngine.XmlLoader.LoadXMLFile(this._LevelFile, this.Initialize.bind(this));
 };
 gEngine.Core.InheritPrototype(BoundCheck, Scene);
 
+// <editor-fold desc="Camera parsing">
+    
+BoundCheck.prototype._parseCamera = function(level, useTag)
+{
+    var camElm = level.getElementsByTagName(useTag);
+    var cx = camElm[0].getAttribute("CenterX");
+    var cy = camElm[0].getAttribute("CenterX");
+    var w = camElm[0].getAttribute("Width");
+    var vx = camElm[0].getAttribute("ViewportX");
+    var vy = camElm[0].getAttribute("ViewportY");
+    var vw = camElm[0].getAttribute("ViewportWidth");
+    var vh = camElm[0].getAttribute("ViewportHeight");
+    
+    var cam = new Camera(
+            vec2.fromValues(cx, cy),   // position of the camera
+            w,                        // width of camera
+            [vx, vy, vw, vh]         // viewport (orgX, orgY, width, height)
+            );
+    return cam;
+};
+// </editor-fold> 
+ 
 BoundCheck.prototype.Initialize = function() 
 {
+    var level = gEngine.ResourceMap.RetrieveAsset(this._LevelFile);
+    var heroElm = level.getElementsByTagName("Hero");
+    var heroX = heroElm[0].getAttribute("PosX");// heroInfo.getAttribute("PosX");
+    var heroY = heroElm[0].getAttribute("PosY");
+    
+    
+    
     // Step A: set up the cameras
-    this._mCamera = new Camera(
-            vec2.fromValues(30, 20),   // position of the camera
-            64,                        // width of camera
-            [0, 0, 640, 480]         // viewport (orgX, orgY, width, height)
-            );
+    this._mCamera = this._parseCamera(level, "MainCamera");
     this._mCamera.SetBackgroundColor([0.9, 0.9, 0.9, 1]);
             // sets the background to light gray
    
-    this._mMapCamera = new Camera(
-            vec2.fromValues(30, 20),
-            128 ,
-            [470, 410, 160, 60]
-            );
+    this._mMapCamera = this._parseCamera(level, "MapCamera");
     this._mMapCamera.SetBackgroundColor([0.7, 0.7, 0.7, 1.0]);
-        
+    
     
     // Step C: Create the renderable objects:
     this._mHero = new HeroObject();
@@ -62,14 +84,16 @@ BoundCheck.prototype.Initialize = function()
     this._mRedSqs[0] = r;
     
     // Step D: Initialize the alpha textured object
-    this._mHero.GetXform().SetPosition(50, 30);
-    this._mHero.GetXform().SetSize(5, 7.5);
+    this._mHero.GetXform().SetPosition(heroX, heroY);
+    this._mHero.GetXform().SetSize(4, 6);
     
     // Step E: Initialize the top-left object with no transparency
     this._mWhiteSq.GetXform().SetPosition(20, 10);
     this._mWhiteSq.GetXform().SetSize(25, 5);
     
     this._mBoundCheck.SetObjs(this._mAllObjs);
+    
+    this.LoadContent();
 };
 
 
@@ -187,9 +211,9 @@ BoundCheck.prototype.Update = function()
 };
 
 BoundCheck.prototype.LoadContent = function() {
-
+    
 };
 
 BoundCheck.prototype.UnloadContent = function() {
-
+    gEngine.ResourceMap.DecAssetRefCount(this._LevelFile);
 };

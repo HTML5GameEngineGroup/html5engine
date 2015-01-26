@@ -9,6 +9,6 @@ gEngine.Core.InheritPrototype(FloorPlatform, PlatformObject);
 
 FloorPlatform.prototype.CreateRenderable = function()
 {
-    var renderableObj = new RenderableObject(gMyGame.GameState.GetRedShader());
+    var renderableObj = new Renderable(gMyGame.GameState.GetRedShader());
     return renderableObj;
 };

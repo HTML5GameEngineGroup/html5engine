@@ -5,7 +5,7 @@ var _gDyePackSizeY = 0.5;
 
 function DyePack(posX, posY)
 {
-    var renderableObj = new RenderableObject(gMyGame.GameState.GetWhiteShader());
+    var renderableObj = new Renderable(gMyGame.GameState.GetWhiteShader());
     GameObject.call(this, renderableObj);
     
     this.GetXform().SetPosition(posX, posY);

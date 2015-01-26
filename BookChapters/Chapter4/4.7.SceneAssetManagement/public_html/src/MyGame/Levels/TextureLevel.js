@@ -54,9 +54,9 @@ TextureLevel.prototype.Initialize = function()
     
     
     // Step C: Create the renderable objects:
-    this._mAlpahTexSq = new TextureObject(this._mTextureShader, this._kTextureWithAlpha);
-    this._mNoAlphaTexSq = new TextureObject(this._mTextureShader, this._kTextureNoAlpha);
-    this._mRedSq = new RenderableObject(this._mRedShader);
+    this._mAlpahTexSq = new TextureRenderable(this._mTextureShader, this._kTextureWithAlpha);
+    this._mNoAlphaTexSq = new TextureRenderable(this._mTextureShader, this._kTextureNoAlpha);
+    this._mRedSq = new Renderable(this._mRedShader);
     
     // Step D: Initialize the alpha textured object
     this._mAlpahTexSq.GetXform().SetPosition(26, 58);

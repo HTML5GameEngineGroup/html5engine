@@ -20,12 +20,12 @@ function MyGame(htmlCanvasID)
             "src/GLSLShaders/RedFS.glsl");      // Path to the Red FragmentShader
     
     // Step C: Create the renderable objects:
-    this._mWhiteSq = new RenderableObject(this._mWhiteShader);
-    this._mRedSq = new RenderableObject(this._mRedShader);
-    this._mTLSq = new RenderableObject(this._mRedShader);
-    this._mTRSq = new RenderableObject(this._mRedShader);
-    this._mBLSq = new RenderableObject(this._mRedShader);
-    this._mBRSq = new RenderableObject(this._mRedShader);
+    this._mWhiteSq = new Renderable(this._mWhiteShader);
+    this._mRedSq = new Renderable(this._mRedShader);
+    this._mTLSq = new Renderable(this._mRedShader);
+    this._mTRSq = new Renderable(this._mRedShader);
+    this._mBLSq = new Renderable(this._mRedShader);
+    this._mBRSq = new Renderable(this._mRedShader);
     
     // Step D: Clear the entire canvas first
     gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1]);   // Clear the canvas

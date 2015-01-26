@@ -38,23 +38,23 @@ BeginLevel.prototype.Initialize = function()
         
     // Step  B: create the shaders   
     this._mFontShader = new SpriteShader(
-            "shaders/TextureVS.glsl",
-            "shaders/TextureFS.glsl");    
+            "src/GLSLShaders/TextureVS.glsl",
+            "src/GLSLShaders/TextureFS.glsl");    
     
     // Step  C: Create the renderable objects:
-    this._mMessage = new TextObject(this._mFontShader, "Welcome!");
+    this._mMessage = new TextRenderable(this._mFontShader, "Welcome!");
     this._mMessage.GetXform().SetSize(4, 1);
     this._mMessage.GetXform().SetPosition(2, 5);
     
-    this._mSimpleColorMsg = new TextObject(this._mFontShader, "Type 1: to choose the SimpleColor Level!");
+    this._mSimpleColorMsg = new TextRenderable(this._mFontShader, "Type 1: to choose the SimpleColor Level!");
     this._mSimpleColorMsg.GetXform().SetSize(4.2, 0.3);
     this._mSimpleColorMsg.GetXform().SetPosition(2, 3.5);
     
-    this._mTextureSceneMsg = new TextObject(this._mFontShader, "Type 2: to choose the Texture Level!");
+    this._mTextureSceneMsg = new TextRenderable(this._mFontShader, "Type 2: to choose the Texture Level!");
     this._mTextureSceneMsg.GetXform().SetSize(3.8, 0.3);
     this._mTextureSceneMsg.GetXform().SetPosition(2, 3);
     
-    this._mUserMsg = new TextObject(this._mFontShader,  this._kUserPrompt);
+    this._mUserMsg = new TextRenderable(this._mFontShader,  this._kUserPrompt);
     this._mUserMsg.GetXform().SetSize(1.5, 0.4);
     this._mUserMsg.GetXform().SetPosition(2, 1);
 };

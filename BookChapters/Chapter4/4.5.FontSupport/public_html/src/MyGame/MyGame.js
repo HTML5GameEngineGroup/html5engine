@@ -59,11 +59,11 @@ MyGame.prototype.Initialize = function()
     
     
     // Step  C: Create the renderable objects:
-    this._mTexSq = new TextureObject(this._mTextureShader, this._kTextureWithAlpha);
-    this._mSpriteFontSq = new SpriteObject(this._mSpriteShader, this._kFontSprite);
-    this._mSpriteBoySq = new SpriteObject(this._mSpriteShader, this._kBoySprite);
-    this._mRedSq = new RenderableObject(this._mRedShader);
-    this._mMyText = new TextObject(this._mSpriteShader, "This Is A Test");
+    this._mTexSq = new TextureRenderable(this._mTextureShader, this._kTextureWithAlpha);
+    this._mSpriteFontSq = new SpriteRenderable(this._mSpriteShader, this._kFontSprite);
+    this._mSpriteBoySq = new SpriteRenderable(this._mSpriteShader, this._kBoySprite);
+    this._mRedSq = new Renderable(this._mRedShader);
+    this._mMyText = new TextRenderable(this._mSpriteShader, "This Is A Test");
     
     // The transparent W 
     this._mTexSq.GetXform().SetPosition(26, 58);

@@ -51,9 +51,9 @@ MyGame.prototype.Initialize = function()
     
     
     // Step  C: Create the renderable objects:
-    this._mAlpahTexSq = new RenderableObject(this._mTextureShader);
-    this._mNoAlphaTexSq = new RenderableObject(this._mTextureShader);
-    this._mRedSq = new RenderableObject(this._mRedShader);
+    this._mAlpahTexSq = new Renderable(this._mTextureShader);
+    this._mNoAlphaTexSq = new Renderable(this._mTextureShader);
+    this._mRedSq = new Renderable(this._mRedShader);
     
     // Step  D: Initialize the alpha textured object
     this._mAlpahTexSq.GetXform().SetPosition(26, 58);

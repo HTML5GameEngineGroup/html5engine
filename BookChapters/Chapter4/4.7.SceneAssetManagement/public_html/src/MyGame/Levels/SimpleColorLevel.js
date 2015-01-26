@@ -49,8 +49,8 @@ SimpleColorLevel.prototype.Initialize = function()
     
     
     // Step  C: Create the renderable objects:
-    this._mWhiteSq = new RenderableObject(this._mWhiteShader);
-    this._mRedSq = new RenderableObject(this._mRedShader);
+    this._mWhiteSq = new Renderable(this._mWhiteShader);
+    this._mRedSq = new Renderable(this._mRedShader);
     
     // Step  D: Initialize the white renderable object: centred, 5x5, rotated
     this._mWhiteSq.GetXform().SetPosition(20, 60);

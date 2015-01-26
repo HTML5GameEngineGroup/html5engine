@@ -72,23 +72,23 @@ gMyGame.GameState = function()
     var Initialize = function() {
         // shaders
         _mTextureShader = new TextureShader(
-            "shaders/TextureVS.glsl",      // Path to the VertexShader 
-            "shaders/TextureFS.glsl");    // Path to the White FragmentShader
+            "src/GLSLShaders/TextureVS.glsl",      // Path to the VertexShader 
+            "src/GLSLShaders/TextureFS.glsl");    // Path to the White FragmentShader
     
         _mRedShader = new SimpleShader( 
-            "shaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "shaders/RedFS.glsl");      // Path to the Red FragmentShader
+            "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
+            "src/GLSLShaders/RedFS.glsl");      // Path to the Red FragmentShader
     
         _mWhiteShader = new SimpleShader( 
-            "shaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "shaders/WhiteFS.glsl");      // Path to the Red FragmentShader
+            "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
+            "src/GLSLShaders/WhiteFS.glsl");      // Path to the Red FragmentShader
             
         _mSpriteShader = new SpriteShader(
-            "shaders/TextureVS.glsl",
-            "shaders/TextureFS.glsl");    
+            "src/GLSLShaders/TextureVS.glsl",
+            "src/GLSLShaders/TextureFS.glsl");    
 
         // initialize the global status
-        _mStatus = new TextObject(_mSpriteShader, kStatus);
+        _mStatus = new TextRenderable(_mSpriteShader, kStatus);
         _mStatus.GetXform().SetPosition(-1, 43);
         _mStatus.GetXform().SetSize(8, 1);
         

@@ -43,18 +43,18 @@ TextureLevel.prototype.Initialize = function()
         
     // Step B: create the shaders
     this._mTextureShader = new TextureShader(
-            "shaders/TextureVS.glsl",      // Path to the VertexShader 
-            "shaders/TextureFS.glsl");    // Path to the White FragmentShader
+            "src/GLSLShaders/TextureVS.glsl",      // Path to the VertexShader 
+            "src/GLSLShaders/TextureFS.glsl");    // Path to the White FragmentShader
     
     this._mRedShader = new SimpleShader( 
-            "shaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "shaders/RedFS.glsl");      // Path to the Red FragmentShader
+            "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
+            "src/GLSLShaders/RedFS.glsl");      // Path to the Red FragmentShader
     
     
     // Step C: Create the renderable objects:
-    this._mAlpahTexSq = new TextureObject(this._mTextureShader, this._kTextureWithAlpha);
-    this._mNoAlphaTexSq = new TextureObject(this._mTextureShader, this._kTextureNoAlpha);
-    this._mRedSq = new RenderableObject(this._mRedShader);
+    this._mAlpahTexSq = new TextureRenderable(this._mTextureShader, this._kTextureWithAlpha);
+    this._mNoAlphaTexSq = new TextureRenderable(this._mTextureShader, this._kTextureNoAlpha);
+    this._mRedSq = new Renderable(this._mRedShader);
     
     // Step D: Initialize the alpha textured object
     this._mAlpahTexSq.GetXform().SetPosition(26, 58);

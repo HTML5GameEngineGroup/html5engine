@@ -14,12 +14,12 @@ function LevelOne_Bg()
 {
     var x = _gBgUnitSize / 2;
     this._mBg = {};
-    this._mBg[0] = new SpriteObject(gMyGame.GameState.GetSpriteShader(), gMyGame.GameState.GetBg1Texture());
+    this._mBg[0] = new SpriteRenderable(gMyGame.GameState.GetSpriteShader(), gMyGame.GameState.GetBg1Texture());
     this._mBg[0].SetTextureCoordinate(0.05, 1910/2048, 0, 1080/2048);
     this._mBg[0].GetXform().SetPosition(x, _gBgYPosotion);
     this._mBg[0].GetXform().SetSize(_gBgUnitSize + _gBgSizeFudge, 54);
     
-    this._mBg[1] = new SpriteObject(gMyGame.GameState.GetSpriteShader(), gMyGame.GameState.GetBg2Texture());
+    this._mBg[1] = new SpriteRenderable(gMyGame.GameState.GetSpriteShader(), gMyGame.GameState.GetBg2Texture());
     this._mBg[1].SetTextureCoordinate(0.05, 1910/2048, 0, 1080/2048);
     this._mBg[1].GetXform().SetPosition(x, _gBgYPosotion);
     this._mBg[1].GetXform().SetSize(_gBgUnitSize + _gBgSizeFudge, 54);

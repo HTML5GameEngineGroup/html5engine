@@ -1,7 +1,7 @@
 /* 
  * File: Transform.js
  * Encapsulates the matrix transformation functionality, meant to work with
- * RenderableObject
+ * Renderable
  */
 function Transform()
 {

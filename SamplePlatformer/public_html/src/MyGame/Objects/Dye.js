@@ -10,7 +10,7 @@ var _gHeroHeight = 6;
 
 function Dye(xPos, yPos)
 {
-    var renderableObj = new SpriteObject(gMyGame.GameState.GetSpriteShader(), gMyGame.GameState.GetDyeTexture());
+    var renderableObj = new SpriteRenderable(gMyGame.GameState.GetSpriteShader(), gMyGame.GameState.GetDyeTexture());
     renderableObj.SetTextureCoordinate(0, 200/512, 0, 300/512);
     GameObject.call(this, renderableObj);
     

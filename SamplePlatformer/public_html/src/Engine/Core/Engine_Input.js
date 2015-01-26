@@ -38,6 +38,10 @@ gEngine.Input = function()
     var kL = 76;
     var kK = 75;
     
+    var _kKeys = { 
+        K: 75, 
+        S: 83 };
+    
     var kLastKeyCode = 222;
 
     // Previous key state
@@ -88,6 +92,7 @@ gEngine.Input = function()
         Update: Update,
         IsKeyPressed: IsKeyPressed,
         IsKeyClicked: IsKeyClicked,
+        Keys: _kKeys,
         UP: kUP,
         DOWN: kDOWN,
         LEFT: kLEFT,

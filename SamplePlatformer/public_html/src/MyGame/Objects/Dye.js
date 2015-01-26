@@ -43,6 +43,7 @@ Dye.prototype.Update = function(useCamera) {
     
     if (gEngine.Input.IsKeyClicked(gEngine.Input.Seven)) {
         _gHeroGravity = 0;
+        this._mVelocity[1] = 0;
     }
     if (gEngine.Input.IsKeyClicked(gEngine.Input.Eight)) {
         _gHeroGravity = 0.001;

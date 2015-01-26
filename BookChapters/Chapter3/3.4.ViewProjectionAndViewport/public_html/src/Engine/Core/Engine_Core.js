@@ -30,9 +30,7 @@ gEngine.Core = function()
             // binds webgl the the Canvas area on the web-page to the global variable "_mGL"
             _mGL = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     
-            if (_mGL !== null) {
-                _mGL.clearColor(0.9, 0.9, 0.9, 1.0);  // set the color to be cleared
-            } else {
+            if (_mGL === null) {
                 document.write("<br><b>WebGL is not supported!</b>");
                 return;
             }
@@ -42,7 +40,8 @@ gEngine.Core = function()
         };
         
         // Clears the draw area and draws one square
-        var ClearCanvas = function() {
+        var ClearCanvas = function(color) {
+            _mGL.clearColor(color[0], color[1], color[2], color[3]);  // set the color to be cleared
             _mGL.clear(_mGL.COLOR_BUFFER_BIT);      // clear to the color previously set
         };   
         

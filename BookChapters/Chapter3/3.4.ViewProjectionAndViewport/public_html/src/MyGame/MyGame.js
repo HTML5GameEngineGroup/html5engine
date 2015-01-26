@@ -28,7 +28,7 @@ function MyGame(htmlCanvasID)
     this._mBRSq = new RenderableObject(this._mRedShader);
     
     // Step D: Clear the entire canvas first
-    gEngine.Core.ClearCanvas();        // Clear the canvas
+    gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1]);   // Clear the canvas
     
     //<editor-fold desc="Step E: Setting up Viewport">
     // Step E1: Set up the viewport: area on canvas to be drawn
@@ -44,24 +44,22 @@ function MyGame(htmlCanvasID)
                 40,     // y position of bottom-left corner of the area to be drawn
                 600,    // width of the area to be drawn
                 300    // height of the area to be drawn
-            );
-    // Step E3: set the color to be clear to light gray
-    gl.clearColor(0.8, 0.8, 0.8, 1.0);  // set the color to be cleared
-    // Step E4: enable the scissor area, clear, and then disable the scissor area
+            );    
+    // Step E3: enable the scissor area, clear, and then disable the scissor area
     gl.enable(gl.SCISSOR_TEST);
-        gEngine.Core.ClearCanvas();  // clear the scissor area
+        gEngine.Core.ClearCanvas([0.8, 0.8, 0.8, 1.0]);  // clear the scissor area
     gl.disable(gl.SCISSOR_TEST);    
     //</editor-fold>
     
     //<editor-fold desc="Step 6: Set up View and Projection matrices">
     var viewMatrix = mat4.create();
     var projMatrix = mat4.create();
-    // Step 6a: define the view matrix
+    // Step F1: define the view matrix
     mat4.lookAt(viewMatrix, 
         [20, 60, 10],   // camera position
         [20, 60, 0],    // look at position
         [0, 1, 0]);     // orientation 
-    // Step 6b: define the view volume
+    // Step F2: define the view volume
     mat4.ortho(projMatrix,
         -10,  // distant to left of WC
          10,  // distant to right of WC

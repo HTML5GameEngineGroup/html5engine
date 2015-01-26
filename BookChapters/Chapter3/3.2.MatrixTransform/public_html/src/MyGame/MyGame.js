@@ -31,7 +31,7 @@ function MyGame(htmlCanvasID)
     this._mRedSq = new RenderableObject(this._mRedShader);
     
     // Step D: Draw!
-    gEngine.Core.ClearCanvas();        // 1. Clear the canvas
+    gEngine.Core.ClearCanvas([0, 0.8, 0, 1]);   // 1. Clear the canvas
     
     // create a new identify transform operator
     var xform = mat4.create();

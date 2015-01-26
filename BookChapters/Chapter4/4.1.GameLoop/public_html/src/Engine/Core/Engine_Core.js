@@ -30,9 +30,7 @@ gEngine.Core = function()
             // binds webgl the the Canvas area on the web-page to the global variable "_mGL"
             _mGL = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     
-            if (_mGL !== null) {
-                _mGL.clearColor(0.0, 0.8, 0.0, 1.0);  // set the color to be cleared
-            } else {
+            if (_mGL === null) {
                 document.write("<br><b>WebGL is not supported!</b>");
                 return;
             }

@@ -48,7 +48,6 @@ gEngine.Core = function()
 
             if (_mGL === null) {
                 document.write("<br><b>WebGL is not supported!</b>");
-                return;
             }
         };
             

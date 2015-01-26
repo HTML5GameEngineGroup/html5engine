@@ -17,7 +17,7 @@ function MyGame(htmlCanvasID)
     
     // Step C: Draw!
         // Step C1: Clear the canvas
-        gEngine.Core.ClearCanvas();        
+        gEngine.Core.ClearCanvas([0, 0.8, 0, 1]);        
         
         // Step C2: Activate the proper shader
         this._mShader.ActivateShader(); 

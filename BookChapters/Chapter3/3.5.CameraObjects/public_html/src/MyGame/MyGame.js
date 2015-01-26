@@ -34,7 +34,7 @@ function MyGame(htmlCanvasID)
     this._mBRSq = new RenderableObject(this._mRedShader);
     
     // Step E: Clear the canvas
-    gEngine.Core.ClearCanvas();        // Clear the canvas
+    gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1]);        // Clear the canvas
     
     // Step F: Starts the drawing by activating the camera
     this._mCamera.BeginDraw();

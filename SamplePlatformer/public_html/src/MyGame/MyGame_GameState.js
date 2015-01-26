@@ -34,7 +34,7 @@ gMyGame.GameState = function()
     };
     
     var _ToggleBgMusic = function() {
-        if (gEngine.Input.IsKeyClicked(gEngine.Input.Zero)) {
+        if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Zero)) {
             if (gEngine.AudioClips.IsBackgroundAudioPlaying())
                 gEngine.AudioClips.StopBackgroundAudio();
             else

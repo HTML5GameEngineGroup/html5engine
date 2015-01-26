@@ -37,7 +37,6 @@
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/BookChapters/Chapter3/Example-1/FileTextures/public_html/src/Engine/EngineCore_Textures.js</file>
         </group>
         <group name="Chapter3"/>
-        <group name="AllBookProjects"/>
         <group name="HTML5-Engine">
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/GameObjects/GameObject.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Shaders/TextureShader.js</file>
@@ -61,6 +60,15 @@
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/BoundCheck_World.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Transform.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/HeroObject.js</file>
+        </group>
+        <group name="AllBookProjects">
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Core/Engine_Input.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/BeginLevel.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/LevelOne.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/SimpleColorLevel.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/TextureLevel.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/MyGame_GameState.js</file>
+            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Objects/Dye.js</file>
         </group>
     </open-files>
 </project-private>

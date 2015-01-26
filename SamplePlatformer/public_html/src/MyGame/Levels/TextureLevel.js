@@ -103,7 +103,7 @@ TextureLevel.prototype.Update = function()
     var deltaX = 0.05;
     
     // Step A: test for textured square movement
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.RIGHT)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
         if (texXform.GetXPos() > 30)  // this is the right-bound of the window
             texXform.SetPosition(10, texXform.GetYPos());
         texXform.IncXPosBy(deltaX);
@@ -111,7 +111,7 @@ TextureLevel.prototype.Update = function()
     }
     
     // Step B: test for textured square rotation
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.UP)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Up)) {
         texXform.IncRotationByDegree(1);
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
     }
@@ -120,14 +120,14 @@ TextureLevel.prototype.Update = function()
     var redXform = this._mRedSq.GetXform();
     
     // Step C: test for pulsing the red square
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.DOWN)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Down)) {
         if (redXform.GetWidth() > 5)
             redXform.SetSize(2, 2);
         redXform.IncSizeBy(0.05);
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
     }
     
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Four)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Four)) {
         this.LoadNextScene( new BeginLevel() );
     }
     

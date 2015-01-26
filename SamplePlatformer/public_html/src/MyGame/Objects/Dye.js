@@ -27,25 +27,25 @@ gEngine.Core.InheritPrototype(Dye, GameObject);
 
 Dye.prototype.Update = function(useCamera) {
     
-    this._MoveXform(gEngine.Input.A,
-                        gEngine.Input.D,
-                        gEngine.Input.W,
-                        gEngine.Input.S);
+    this._MoveXform(gEngine.Input.Keys.A,
+                        gEngine.Input.Keys.D,
+                        gEngine.Input.Keys.W,
+                        gEngine.Input.Keys.S);
                
-     if (gEngine.Input.IsKeyClicked(gEngine.Input.SPACE)) {
+     if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Space)) {
          this._mVelocity[1] += _gHeroFly;
          this.SetShouldFall(true);
      }
      
-     if (gEngine.Input.IsKeyClicked(gEngine.Input.F)) {
+     if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.F)) {
         this._SendDyePack();
     }
     
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Seven)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Seven)) {
         _gHeroGravity = 0;
         this._mVelocity[1] = 0;
     }
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Eight)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Eight)) {
         _gHeroGravity = 0.001;
     }
      

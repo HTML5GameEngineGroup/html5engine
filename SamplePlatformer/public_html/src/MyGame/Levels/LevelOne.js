@@ -142,19 +142,19 @@ LevelOne.prototype.Update = function()
     //<editor-fold desc="map camera control">
     var pos = this._mHero.GetXform().GetPosition();
     this._mMapCamera.SetWCCenter(pos[0], pos[1]);
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.One))
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.One))
         this._mShowMap = !this._mShowMap;
   
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Two))
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Two))
         this._mMapCamera.ZoomByDelta(_gWorldZoomFactor);
     
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Three))
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Three))
         this._mMapCamera.ZoomByDelta(-_gWorldZoomFactor);
     //</editor-fold>
     
     // this._mLevelOne.UpdateBound(this._mCamera, this._mHero);
     
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Nine))
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Nine))
         this.LoadNextScene( new BeginLevel() );
 };
 

@@ -8,7 +8,6 @@
             <file>file:/E:/Dropbox/2014.11.HTML5_WebGL/3.BookSource/html5engine/HTML5-Engine/public_html/shaders/textured-vs.glsl</file>
             <file>file:/E:/Dropbox/2014.11.HTML5_WebGL/3.BookSource/html5engine/HTML5-Engine/public_html/shaders/textured-fs.glsl</file>
         </group>
-        <group name="AllBookProjects"/>
         <group name="HTML5-Engine">
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/HTML5-Engine/public_html/javascript/Engine/Renderable2DObject.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/HTML5-Engine/public_html/javascript/EnemyManager.js</file>
@@ -16,5 +15,6 @@
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/HTML5-Engine/public_html/javascript/Engine/LogicComponent.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/HTML5-Engine/public_html/javascript/MainLevel.js</file>
         </group>
+        <group name="AllBookProjects"/>
     </open-files>
 </project-private>

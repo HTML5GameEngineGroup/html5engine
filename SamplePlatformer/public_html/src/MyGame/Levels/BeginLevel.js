@@ -81,22 +81,22 @@ BeginLevel.prototype.Draw = function()
 BeginLevel.prototype.Update = function()
 {
     // Move the textured square and the text
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Zero)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Zero)) {
         this._mUserMsg.SetText(this._kUserPrompt + " 0 (not legal)!");
         this._mUserMsg.GetXform().SetWidth(3.2);
     }
     
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.One)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.One)) {
         this._mUserMsg.SetText(this._kUserPrompt + " 1 => Simple Color");
         this.LoadNextScene( new SimpleColorLevel() );
     }
     
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Two)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Two)) {
         this._mUserMsg.SetText(this._kUserPrompt + " 2 => Texture Level");
         this.LoadNextScene( new TextureLevel() );
     }
     
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Three)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Three)) {
         this._mUserMsg.SetText(this._kUserPrompt + " 3 => Level One ");
         this.LoadNextScene( new LevelOne() );
     }

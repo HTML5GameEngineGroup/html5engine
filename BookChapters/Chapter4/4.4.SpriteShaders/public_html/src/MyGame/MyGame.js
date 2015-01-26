@@ -117,21 +117,21 @@ MyGame.prototype.Update = function()
     var deltaX = 0.05;
     
     // Move the textured square
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.RIGHT)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
         if (texXform.GetXPos() > 30)  // this is the right-bound of the window
             texXform.SetPosition(10, texXform.GetYPos());
         texXform.IncXPosBy(deltaX);
     }
     
     // Rotate the textured square
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.UP))
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Up))
         texXform.IncRotationByDegree(1);
     
     
     var redXform = this._mRedSq.GetXform();
     
     // pulse the red square
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.DOWN)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Down)) {
         if (redXform.GetWidth() > 5)
             redXform.SetSize(2, 2);
         redXform.IncSizeBy(0.05);

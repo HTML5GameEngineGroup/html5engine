@@ -10,32 +10,42 @@ var gEngine = gEngine || { };
 gEngine.Input = function()
 {
     // Scancode constants
-    var kLEFT = 37;
-    var kUP = 38;
-    var kRIGHT = 39;
-    var kDOWN = 40;
-    var kSPACE = 32;
-    var k0 = 48;
-    var k1 = 49;
-    var k2 = 50;
-    var k3 = 51;
-    var k4 = 52;
-    var k5 = 53;
-    var k6 = 54;
-    var k7 = 55;
-    var k8 = 56;
-    var k9 = 57;
-    var kW = 87;
-    var kA = 65;
-    var kS = 83;
-    var kD = 68;
-    var kE = 69;
-    var kR = 82;
-    var kF = 70;
-    var kJ = 74;
-    var kI = 73;
-    var kL = 76;
-    var kK = 75;
+    var _kKeys = { 
+        // arrows
+        Left: 37,
+        Up: 38,
+        Right: 39,
+        Down: 40,
+        
+        // space bar
+        Space: 32,
+        
+        // numbers 
+        Zero: 48,
+        One: 49,
+        Two: 50,
+        Three: 51,
+        Four: 52,
+        Five : 53,
+        Six : 54,
+        Seven : 55,
+        Eight : 56,
+        Nine : 57,
+    
+        // Alphabets
+        A : 65,  
+        D : 68,
+        E : 69,
+        F : 70,
+        G : 71,
+        I : 73,
+        J : 74,
+        K : 75,
+        L : 76,
+        R : 82,
+        S : 83,
+        W : 87
+        };
     
     var kLastKeyCode = 222;
 
@@ -87,32 +97,7 @@ gEngine.Input = function()
         Update: Update,
         IsKeyPressed: IsKeyPressed,
         IsKeyClicked: IsKeyClicked,
-        UP: kUP,
-        DOWN: kDOWN,
-        LEFT: kLEFT,
-        RIGHT: kRIGHT,
-        SPACE: kSPACE,
-        W: kW,
-        A: kA,
-        S: kS,
-        D: kD,
-        E: kE,
-        R: kR,
-        F: kF,
-        J: kJ,
-        I: kI,
-        L: kL,
-        K: kK,
-        Zero: k0,
-        One: k1,
-        Two: k2,
-        Three: k3,
-        Four: k4,
-        Five: k5,
-        Six: k6,
-        Seven: k7,
-        Eight: k8,
-        Nine: k9
+        Keys: _kKeys
     };
     return oPublic;
 }();

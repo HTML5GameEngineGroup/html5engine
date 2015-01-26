@@ -126,14 +126,14 @@ MyGame.prototype.Update = function()
     var deltaX = 0.05;
     
     // Move the textured square and the text
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.RIGHT)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
         if (texXform.GetXPos() < 30) {  // this is the right-bound of the window
             texXform.IncXPosBy(deltaX);
             this._mMyText.GetXform().IncXPosBy(deltaX);
         }
     }
     
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.LEFT)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
         if (texXform.GetXPos() > 14) {  // this is the right-bound of the window
             texXform.IncXPosBy(-deltaX);
             this._mMyText.GetXform().IncXPosBy(-deltaX);
@@ -141,7 +141,7 @@ MyGame.prototype.Update = function()
     }
     
     // Rotate the textured square
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.UP)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Up)) {
         texXform.IncRotationByDegree(1);
         this._mMyText.GetXform().IncRotationByDegree(1);
     }
@@ -150,7 +150,7 @@ MyGame.prototype.Update = function()
     var redXform = this._mRedSq.GetXform();
     
     // pulse the red square
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.DOWN)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Down)) {
         if (redXform.GetWidth() > 5) {
             redXform.SetSize(2, 2);
             this._mMyText.GetXform().SetSize(6, 0.5);

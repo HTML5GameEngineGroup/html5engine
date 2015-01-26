@@ -89,7 +89,7 @@ SimpleColorLevel.prototype.Update = function()
     var deltaX = 0.05;
     
     // Step A: test for white square movement
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.RIGHT)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
         if (whiteXform.GetXPos() > 30)  // this is the right-bound of the window
             whiteXform.SetPosition(10, 60);
         whiteXform.IncXPosBy(deltaX);
@@ -97,7 +97,7 @@ SimpleColorLevel.prototype.Update = function()
     }
     
     // Step  B: test for white square rotation
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.UP)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Up)) {
         whiteXform.IncRotationByDegree(1);
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
     }
@@ -106,14 +106,14 @@ SimpleColorLevel.prototype.Update = function()
     var redXform = this._mRedSq.GetXform();
     
     // Step  C: test for pulsing the red square
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.DOWN)) {
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Down)) {
         if (redXform.GetWidth() > 5)
             redXform.SetSize(2, 2);
         redXform.IncSizeBy(0.05);
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
     }
     
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Three)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Three)) {
         this.LoadNextScene( new TextureLevel() );
     }
 };

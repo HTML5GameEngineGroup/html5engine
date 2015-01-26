@@ -40,8 +40,8 @@ BeginLevel.prototype.Initialize = function()
         
     // Step  B: create the shaders   
     this._mFontShader = new SpriteShader(
-            "shaders/TextureVS.glsl",
-            "shaders/TextureFS.glsl");    
+            "src/GLSLShaders/TextureVS.glsl",
+            "src/GLSLShaders/TextureFS.glsl");    
     
     // Step  C: Create the renderable objects:
     this._mMessage = new TextObject(this._mFontShader, "Welcome!");

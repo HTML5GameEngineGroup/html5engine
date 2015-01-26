@@ -14,8 +14,8 @@ function MyGame(htmlCanvasID)
     
     // Step B: Create, load and compile the shaders
     this._mShader = new SimpleShader(
-            "shaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "shaders/WhiteFS.glsl");    // Path to the FragmentShader
+            "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
+            "src/GLSLShaders/WhiteFS.glsl");    // Path to the FragmentShader
     
     
     // Step C: Draw!

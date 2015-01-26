@@ -19,12 +19,12 @@ function MyGame(htmlCanvasID)
     
     // Step B: Create the shaders: white and then the red shader
     this._mWhiteShader = new SimpleShader(
-            "shaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "shaders/WhiteFS.glsl");    // Path to the White FragmentShader
+            "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
+            "src/GLSLShaders/WhiteFS.glsl");    // Path to the White FragmentShader
     
     this._mRedShader = new SimpleShader(
-            "shaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "shaders/RedFS.glsl");      // Path to the Red FragmentShader
+            "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
+            "src/GLSLShaders/RedFS.glsl");      // Path to the Red FragmentShader
     
     // Step C: Create the renderable objects:
     this._mWhiteSq = new RenderableObject(this._mWhiteShader);

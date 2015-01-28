@@ -16,8 +16,7 @@ gMyGame.GameState = function()
     // the shaders
     var _mSpriteShader = null;
     var _mTextureShader = null;
-    var _mRedShader = null;
-    var _mWhiteShader = null;
+    var _mConstColorShader = null;
     
     var _mStatus = null; // this is the global status!
     var _mStatusMsg = kStatus;
@@ -57,8 +56,7 @@ gMyGame.GameState = function()
     };
     
 
-    var GetRedShader = function() { return _mRedShader; };
-    var GetWhiteShader = function() { return _mWhiteShader; };
+    var GetSimpleShader = function() { return _mConstColorShader; };
     var GetTextureShader = function() { return _mTextureShader; };
     var GetSpriteShader = function() { return _mSpriteShader; };
     
@@ -75,13 +73,9 @@ gMyGame.GameState = function()
             "src/GLSLShaders/TextureVS.glsl",      // Path to the VertexShader 
             "src/GLSLShaders/TextureFS.glsl");    // Path to the White FragmentShader
     
-        _mRedShader = new SimpleShader( 
+        _mConstColorShader = new SimpleShader( 
             "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/RedFS.glsl");      // Path to the Red FragmentShader
-    
-        _mWhiteShader = new SimpleShader( 
-            "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/WhiteFS.glsl");      // Path to the Red FragmentShader
+            "src/GLSLShaders/SimpleFS.glsl");      // Path to the simple FragmentShader
             
         _mSpriteShader = new SpriteShader(
             "src/GLSLShaders/TextureVS.glsl",
@@ -103,8 +97,7 @@ gMyGame.GameState = function()
         Initialize: Initialize,
         
         // shaders
-        GetWhiteShader: GetWhiteShader,
-        GetRedShader: GetRedShader,
+        GetSimpleShader: GetSimpleShader,
         GetTextureShader: GetTextureShader,
         GetSpriteShader: GetSpriteShader,
         

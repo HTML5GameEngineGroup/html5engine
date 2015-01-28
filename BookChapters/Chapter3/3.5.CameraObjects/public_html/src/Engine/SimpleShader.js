@@ -16,7 +16,8 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
     this._mShaderVertexPositionAttribute = null; // reference to SquareVertexPosition within the shader
     this._mModelTransform = null;        // reference to the model transform matrix in vertex shader
     this._mViewProjTransform = null;             // reference to the View/Projection matrix in the vertex shader
-    
+    this._mPixelColor = null;                    // reference to the pixelColor uniform in the fragment shader
+
     var gl = gEngine.Core.GetGL();
          
     // start of constructor code
@@ -54,11 +55,11 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
         0,              // number of bytes to skip in between elements
         0);             // offsets to the first element
     
-    // Step G: create the reference to the uniform attribute "uModelTransform" 
+    // Step G: references: uniforms: uModelTransform, uPixelColor, and uViewProjTransform
     this._mModelTransform = gl.getUniformLocation(
                     this._mCompiledShader, "uModelTransform");
-    
-    // Step H: store the reference to the uniform attribute "uViewProjTransform"
+    this._mPixelColor = gl.getUniformLocation(
+                    this._mCompiledShader, "uPixelColor");
     this._mViewProjTransform = gl.getUniformLocation(
                     this._mCompiledShader, "uViewProjTransform");
 };
@@ -71,11 +72,12 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
 SimpleShader.prototype.GetShader = function() { return _mCompiledShader; };
 
 // Activate the shader for rendering
-SimpleShader.prototype.ActivateShader = function(vpMatrix) {
+SimpleShader.prototype.ActivateShader = function(pixelColor, vpMatrix) {
     var gl = gEngine.Core.GetGL();
     gl.useProgram(this._mCompiledShader);
     gl.uniformMatrix4fv(this._mViewProjTransform, false, vpMatrix);
     gl.enableVertexAttribArray(this._mShaderVertexPositionAttribute);
+    gl.uniform4fv(this._mPixelColor, pixelColor);
 };
 // Loads per-object model transform to the vertex shader
 SimpleShader.prototype.LoadObjectTransform = function(modelTransform) {

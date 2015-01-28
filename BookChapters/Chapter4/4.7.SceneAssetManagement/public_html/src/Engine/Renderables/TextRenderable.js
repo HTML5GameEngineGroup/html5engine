@@ -60,7 +60,13 @@ TextRenderable.prototype.Draw = function(vpMatrix) {
 
 TextRenderable.prototype.GetXform = function() { return this._mXform; };
 TextRenderable.prototype.GetText = function() { return this._mText; };
-TextRenderable.prototype.SetText = function(t) { this._mText = t; };
+TextRenderable.prototype.SetText = function(t) { 
+        this._mText = t; 
+        // use height as a reference to set the width
+        var w = t.length * this.GetXform().GetHeight();
+        this.GetXform().SetWidth(w);
+};
+
 TextRenderable.prototype.GetFont = function() { return this._mFont; };
 TextRenderable.prototype.SetFont = function(f) { this._mFont = f; };
 //--- end of Public Methods

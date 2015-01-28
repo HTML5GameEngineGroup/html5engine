@@ -7,6 +7,8 @@
 // Constructor
 function BeginLevel()
 {
+    Scene.call(this); // call super class constructor
+    
     // constant string
     this._kUserPrompt = "Your Choice?";
     
@@ -68,11 +70,11 @@ BeginLevel.prototype.Draw = function()
     // Draw with mCamera
     this._mCamera.BeginDraw();
     
-    // Activates textured shader and draw the texturedSq
-        this._mMessage.Draw(this._mCamera.GetVPMatrix());
-        this._mSimpleColorMsg.Draw(this._mCamera.GetVPMatrix());
-        this._mTextureSceneMsg.Draw(this._mCamera.GetVPMatrix());
-        this._mUserMsg.Draw(this._mCamera.GetVPMatrix());
+    // draw the texturedSq
+    this._mMessage.Draw(this._mCamera.GetVPMatrix());
+    this._mSimpleColorMsg.Draw(this._mCamera.GetVPMatrix());
+    this._mTextureSceneMsg.Draw(this._mCamera.GetVPMatrix());
+    this._mUserMsg.Draw(this._mCamera.GetVPMatrix());
 
 };
 

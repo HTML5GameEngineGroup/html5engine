@@ -12,6 +12,7 @@ function Renderable(shader)
 {
     this._mShader = shader;         // the shader for shading this object
     this._mXform = new Transform(); // transform that moves this object around
+    this._mColor = [1, 1, 1, 1];
 };
 
 //<editor-fold desc="Public Methods">
@@ -20,11 +21,13 @@ function Renderable(shader)
 //**-----------------------------------------
 Renderable.prototype.Draw = function(vpMatrix) {
     var gl = gEngine.Core.GetGL();    
-    this._mShader.ActivateShader(vpMatrix);  // always activate the shader first!
+    this._mShader.ActivateShader(this._mColor, vpMatrix);  // always activate the shader first!
     this._mShader.LoadObjectTransform(this._mXform.GetXform());
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 };
 
 Renderable.prototype.GetXform = function() { return this._mXform; };
+Renderable.prototype.SetColor = function(color) { this._mColor = color; };
+Renderable.prototype.GetColor = function() { return this._mColor; };
 //--- end of Public Methods
 //</editor-fold>

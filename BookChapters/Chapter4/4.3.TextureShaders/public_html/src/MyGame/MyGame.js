@@ -7,11 +7,11 @@
 function MyGame(htmlCanvasID)
 {
     // variables of the shaders for drawing: 
-    this._mRedShader = null;
+    this._mConstColorShader = null;
     this._mTextureShader = null;
     
     // variable for renderable objects
-    this._mAlpahTexSq = null;        // these are the renderable objects
+    this._mAlphaTexSq = null;        // these are the renderable objects
     this._mNoAlphaTexSq = null;
     this._mRedSq = null;
     
@@ -45,20 +45,23 @@ MyGame.prototype.Initialize = function()
             "src/GLSLShaders/TextureVS.glsl",      // Path to the VertexShader 
             "src/GLSLShaders/TextureFS.glsl");    // Path to the White FragmentShader
     
-    this._mRedShader = new SimpleShader( 
+    this._mConstColorShader = new SimpleShader( 
             "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/RedFS.glsl");      // Path to the Red FragmentShader
+            "src/GLSLShaders/SimpleFS.glsl");      // Path to the simple FragmentShader
     
     
     // Step  C: Create the renderable objects:
-    this._mAlpahTexSq = new Renderable(this._mTextureShader);
+    this._mAlphaTexSq = new Renderable(this._mTextureShader);
+    this._mAlphaTexSq.SetColor([1, 0, 0, 0]);
     this._mNoAlphaTexSq = new Renderable(this._mTextureShader);
-    this._mRedSq = new Renderable(this._mRedShader);
+    this._mNoAlphaTexSq.SetColor([1, 1, 0, 0]);
+    this._mRedSq = new Renderable(this._mConstColorShader);
+    this._mRedSq.SetColor([1, 0, 0, 1]);
     
     // Step  D: Initialize the alpha textured object
-    this._mAlpahTexSq.GetXform().SetPosition(26, 58);
-    this._mAlpahTexSq.GetXform().SetRotationInRad(0.2); // In Degree
-    this._mAlpahTexSq.GetXform().SetSize(5, 5);
+    this._mAlphaTexSq.GetXform().SetPosition(26, 58);
+    this._mAlphaTexSq.GetXform().SetRotationInRad(0.2); // In Degree
+    this._mAlphaTexSq.GetXform().SetSize(5, 5);
     
     // Step  E: Initialize the top-left object with no transparency
     this._mNoAlphaTexSq.GetXform().SetPosition(14, 62);
@@ -96,7 +99,7 @@ MyGame.prototype.Draw = function()
         // Step D1: Activate the transparent texture
         gEngine.Textures.ActivateTexture(this._kTextureWithAlpha);
         // Step D2: Draws the associated renderable object
-        this._mAlpahTexSq.Draw(this._mCamera.GetVPMatrix());
+        this._mAlphaTexSq.Draw(this._mCamera.GetVPMatrix());
     
     // Step E: draw the redSq
         this._mRedSq.Draw(this._mCamera.GetVPMatrix());
@@ -109,7 +112,7 @@ MyGame.prototype.Update = function()
 {
     // For this very simple game, let's move the textured square and pulse the red
     
-    var texXform = this._mAlpahTexSq.GetXform();
+    var texXform = this._mAlphaTexSq.GetXform();
     var deltaX = 0.05;
     
     // Step A: test for textured square movement
@@ -125,11 +128,25 @@ MyGame.prototype.Update = function()
     
     
     var redXform = this._mRedSq.GetXform();
-    
     // Step  C: test for pulsing the red square
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Down)) {
         if (redXform.GetWidth() > 5)
             redXform.SetSize(2, 2);
         redXform.IncSizeBy(0.05);
     }
+    
+    // Step  D: test for texture tinting
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Left)) {
+        this._TintRenderable(this._mAlphaTexSq);
+        this._TintRenderable(this._mNoAlphaTexSq);
+    }
+};
+
+MyGame.prototype._TintRenderable = function(renderable)
+{
+    var c = renderable.GetColor();
+    c[3] += 0.05;
+    if (c[3] > 1) 
+        c[3] = 0;
+    renderable.SetColor(c);
 };

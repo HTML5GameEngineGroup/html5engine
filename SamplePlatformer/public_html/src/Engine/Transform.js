@@ -68,9 +68,9 @@ Transform.prototype.GetXform = function()
     
     // Step A: compute translation, for now z is always at 0.0
     mat4.translate(matrix, matrix, vec3.fromValues(this.GetXPos(), this.GetYPos(), 0.0));
-    // Step  B: concatenate with rotation.
+    // Step B: concatenate with rotation.
     mat4.rotateZ(matrix, matrix, this.GetRotationInRad());
-    // Step  C: concatenate with scaling
+    // Step C: concatenate with scaling
     mat4.scale(matrix, matrix, vec3.fromValues(this.GetWidth(), this.GetHeight(), 1.0));
     
     return matrix;

@@ -71,7 +71,7 @@ Camera.prototype.BeginDraw = function() {
                 this._mViewport[3]);// height of the area to be drawn
     // Step A3: set the color to be clear to black
     gl.clearColor(this._mBgColor[0], this._mBgColor[1], this._mBgColor[2], this._mBgColor[3]);  // set the color to be cleared
-    // Step A:d: enable the scissor area, clear, and then disable the scissor area
+    // Step A4: enable the scissor area, clear, and then disable the scissor area
     gl.enable(gl.SCISSOR_TEST);
         gl.clear(gl.COLOR_BUFFER_BIT); 
     gl.disable(gl.SCISSOR_TEST);

@@ -8,7 +8,7 @@ function TextureLevel(htmlCanvasID)
     Scene.call(this); // call super class constructor
     //
     // variables of the shaders for drawing: 
-    this._mRedShader = null;
+    this._mConstColorShader = null;
     this._mTextureShader = null;
     
     // variable for renderable objects
@@ -48,15 +48,16 @@ TextureLevel.prototype.Initialize = function()
             "src/GLSLShaders/TextureVS.glsl",      // Path to the VertexShader 
             "src/GLSLShaders/TextureFS.glsl");    // Path to the White FragmentShader
     
-    this._mRedShader = new SimpleShader( 
+    this._mConstColorShader = new SimpleShader( 
             "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/RedFS.glsl");      // Path to the Red FragmentShader
+            "src/GLSLShaders/SimpleFS.glsl");      // Path to the Red FragmentShader
     
     
     // Step C: Create the renderable objects:
     this._mAlpahTexSq = new TextureRenderable(this._mTextureShader, this._kTextureWithAlpha);
     this._mNoAlphaTexSq = new TextureRenderable(this._mTextureShader, this._kTextureNoAlpha);
-    this._mRedSq = new Renderable(this._mRedShader);
+    this._mRedSq = new Renderable(this._mConstColorShader);
+    this._mRedSq.SetColor([1, 0, 0, 1]);
     
     // Step D: Initialize the alpha textured object
     this._mAlpahTexSq.GetXform().SetPosition(26, 58);

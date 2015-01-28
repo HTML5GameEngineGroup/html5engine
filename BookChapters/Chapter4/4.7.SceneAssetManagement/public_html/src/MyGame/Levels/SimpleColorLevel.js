@@ -8,10 +8,8 @@ function SimpleColorLevel()
 {
     Scene.call(this); // call super class constructor
     //
-    // variables of the shaders for drawing: one red and one white
-    // variables of the shaders for drawing: one red and one white
-    this._mRedShader = null;
-    this._mWhiteShader = null;
+    // The shader
+    this._mConstColorShader = null;
         
     // variables for the squares
     this._mWhiteSq = null;        // these are the renderable objects
@@ -38,19 +36,16 @@ SimpleColorLevel.prototype.Initialize = function()
     this._mCamera.SetBackgroundColor([0.4, 0.4, 0.4, 1]);
             // sets the background to dark gray
     
-    // Step  B: create the shaders
-    this._mWhiteShader = new SimpleShader( 
+    // Step  B: create the shader
+    this._mConstColorShader = new SimpleShader( 
             "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/WhiteFS.glsl");    // Path to the White FragmentShader
-    
-    this._mRedShader = new SimpleShader( 
-            "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/RedFS.glsl");      // Path to the Red FragmentShader
-    
+            "src/GLSLShaders/SimpleFS.glsl");    // Path to the FragmentShader   
     
     // Step  C: Create the renderable objects:
-    this._mWhiteSq = new Renderable(this._mWhiteShader);
-    this._mRedSq = new Renderable(this._mRedShader);
+    this._mWhiteSq = new Renderable(this._mConstColorShader);
+    this._mWhiteSq.SetColor([1, 1, 1, 1]);
+    this._mRedSq = new Renderable(this._mConstColorShader);
+    this._mRedSq.SetColor([1, 0, 0, 1]);
     
     // Step  D: Initialize the white renderable object: centred, 5x5, rotated
     this._mWhiteSq.GetXform().SetPosition(20, 60);

@@ -10,7 +10,10 @@
 function TextureRenderable(shader, myTexture)
 {
     Renderable.call(this, shader);
+    Renderable.prototype.SetColor.call(this, [1, 1, 1, 0]);  
+            // Alpha of 0: switch of tinting of texture
     this._mTexture = myTexture;          // texture for this object, null is not defined.
+    
 };
 gEngine.Core.InheritPrototype(TextureRenderable, Renderable);
 

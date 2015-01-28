@@ -6,8 +6,8 @@
 
 function MyGame(htmlCanvasID)
 {
-    // variables of the shaders for drawing: one red and one white
-    this._mRedShader = null;
+    // variables of the shaders for drawing: 
+    this._mConstColorShader = null;
     this._mTextureShader = null;
     this._mSpriteShader = null;
     
@@ -57,16 +57,17 @@ MyGame.prototype.Initialize = function()
             "src/GLSLShaders/TextureVS.glsl",
             "src/GLSLShaders/TextureFS.glsl");
             
-    this._mRedShader = new SimpleShader( 
+    this._mConstColorShader = new SimpleShader( 
             "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/RedFS.glsl");      // Path to the Red FragmentShader
+            "src/GLSLShaders/SimpleFS.glsl");      // Path to the simple FragmentShader
     
     
     // Step  C: Create the renderable objects:
     this._mTexSq = new TextureRenderable(this._mTextureShader, this._kTextureWithAlpha);
     this._mSpriteFontSq = new SpriteRenderable(this._mSpriteShader, this._kFontSprite);
     this._mSpriteBoySq = new SpriteRenderable(this._mSpriteShader, this._kBoySprite);
-    this._mRedSq = new Renderable(this._mRedShader);
+    this._mRedSq = new Renderable(this._mConstColorShader);
+    this._mRedSq.SetColor([1, 0, 0, 1]);
     this._mMyText = new TextRenderable(this._mSpriteShader, "This Is A Test");
     
     // The transparent W 
@@ -89,7 +90,6 @@ MyGame.prototype.Initialize = function()
     // Text object, at the very bottom
     this._mMyText.GetXform().SetSize(6, 0.5);
     this._mMyText.GetXform().SetPosition(14, 57);
-    
     
     // load in images to draw with
     gEngine.Textures.LoadTexture(this._kTextureWithAlpha);

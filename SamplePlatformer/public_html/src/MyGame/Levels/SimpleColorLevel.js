@@ -6,10 +6,10 @@
 
 function SimpleColorLevel()
 {
-    // variables of the shaders for drawing: one red and one white
-    // variables of the shaders for drawing: one red and one white
-    this._mRedShader = null;
-    this._mWhiteShader = null;
+    Scene.call(this); // call super class constructor
+    //
+    // The shader
+    this._mConstColorShader = null;
         
     // variables for the squares
     this._mWhiteSq = null;        // these are the renderable objects
@@ -36,19 +36,16 @@ SimpleColorLevel.prototype.Initialize = function()
     this._mCamera.SetBackgroundColor([0.4, 0.4, 0.4, 1]);
             // sets the background to dark gray
     
-    // Step  B: create the shaders
-    this._mWhiteShader = new SimpleShader( 
+    // Step  B: create the shader
+    this._mConstColorShader = new SimpleShader( 
             "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/WhiteFS.glsl");    // Path to the White FragmentShader
-    
-    this._mRedShader = new SimpleShader( 
-            "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/RedFS.glsl");      // Path to the Red FragmentShader
-    
+            "src/GLSLShaders/SimpleFS.glsl");    // Path to the FragmentShader   
     
     // Step  C: Create the renderable objects:
-    this._mWhiteSq = new Renderable(this._mWhiteShader);
-    this._mRedSq = new Renderable(this._mRedShader);
+    this._mWhiteSq = new Renderable(this._mConstColorShader);
+    this._mWhiteSq.SetColor([1, 1, 1, 1]);
+    this._mRedSq = new Renderable(this._mConstColorShader);
+    this._mRedSq.SetColor([1, 0, 0, 1]);
     
     // Step  D: Initialize the white renderable object: centred, 5x5, rotated
     this._mWhiteSq.GetXform().SetPosition(20, 60);
@@ -71,10 +68,10 @@ SimpleColorLevel.prototype.Draw = function()
     this._mCamera.BeginDraw();
     
         // Step  C: Activate the white shader to draw
-            this._mWhiteSq.Draw(this._mCamera.GetVPMatrix());
+        this._mWhiteSq.Draw(this._mCamera.GetVPMatrix());
         
         // Step  D: Activate the red shader to draw
-            this._mRedSq.Draw(this._mCamera.GetVPMatrix());
+        this._mRedSq.Draw(this._mCamera.GetVPMatrix());
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
@@ -95,7 +92,7 @@ SimpleColorLevel.prototype.Update = function()
     }
     
     // Step  B: test for white square rotation
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Up)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Up)) {
         whiteXform.IncRotationByDegree(1);
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
     }
@@ -111,7 +108,7 @@ SimpleColorLevel.prototype.Update = function()
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
     }
     
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Three)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Three)) {
         this.LoadNextScene( new TextureLevel() );
     }
 };

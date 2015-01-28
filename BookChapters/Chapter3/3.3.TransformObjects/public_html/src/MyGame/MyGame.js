@@ -6,40 +6,37 @@
 
 function MyGame(htmlCanvasID)
 {
-    // variables of the shaders for drawing: one red and one white
-    this._mRedShader = null;
-    this._mWhiteShader = null;
+    // variables of the shader for drawing: one shader to be shared by two renderables
+    this._mConstColorShader = null;
         
     // variables for the squares
-    this._mWhiteSq = null;        // these are the renderable objects
+    this._mBlueSq = null;        // these are the renderable objects
     this._mRedSq = null;    
     
     // Step A: Initialize the webGL Context
     gEngine.Core.InitializeWebGL(htmlCanvasID);
     
-    // Step B: Create the shaders: white and then the red shader
-    this._mWhiteShader = new SimpleShader(
+    // Step B: Create the shader
+    this._mConstColorShader = new SimpleShader(
             "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/WhiteFS.glsl");    // Path to the White FragmentShader
-    
-    this._mRedShader = new SimpleShader(
-            "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/RedFS.glsl");      // Path to the Red FragmentShader
+            "src/GLSLShaders/SimpleFS.glsl");    // Path to the simple FragmentShader
     
     // Step C: Create the renderable objects:
-    this._mWhiteSq = new Renderable(this._mWhiteShader);
-    this._mRedSq = new Renderable(this._mRedShader);
+    this._mBlueSq = new Renderable(this._mConstColorShader);
+    this._mBlueSq.SetColor([0.25, 0.25, 0.95, 1]);
+    this._mRedSq = new Renderable(this._mConstColorShader);
+    this._mRedSq.SetColor([1, 0.25, 0.25, 1]);
     
     // Step D: Draw!
     gEngine.Core.ClearCanvas([0, 0.8, 0, 1]);   // 1. Clear the canvas
     
     // instead of simply drawing the squares, let's apply simple transforms
-    // Step E: sets the white renderable object's transform
-    this._mWhiteSq.GetXform().SetPosition(-0.25, 0.25);
-    this._mWhiteSq.GetXform().SetRotationInRad(0.2); // In Degree
-    this._mWhiteSq.GetXform().SetSize(1.2, 1.2);
-    // Step F: draws the white square (transform behavior in the object)
-    this._mWhiteSq.Draw();
+    // Step E: sets the blue renderable object's transform
+    this._mBlueSq.GetXform().SetPosition(-0.25, 0.25);
+    this._mBlueSq.GetXform().SetRotationInRad(0.2); // In Degree
+    this._mBlueSq.GetXform().SetSize(1.2, 1.2);
+    // Step F: draws the blue square (transform behavior in the object)
+    this._mBlueSq.Draw();
 
     // Step G: sets the red square transform    
     this._mRedSq.GetXform().SetXPos(0.25);

@@ -5,8 +5,10 @@
 
 function TextureLevel(htmlCanvasID)
 {
+    Scene.call(this); // call super class constructor
+    //
     // variables of the shaders for drawing: 
-    this._mRedShader = null;
+    this._mConstColorShader = null;
     this._mTextureShader = null;
     
     // variable for renderable objects
@@ -46,15 +48,16 @@ TextureLevel.prototype.Initialize = function()
             "src/GLSLShaders/TextureVS.glsl",      // Path to the VertexShader 
             "src/GLSLShaders/TextureFS.glsl");    // Path to the White FragmentShader
     
-    this._mRedShader = new SimpleShader( 
+    this._mConstColorShader = new SimpleShader( 
             "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/RedFS.glsl");      // Path to the Red FragmentShader
+            "src/GLSLShaders/SimpleFS.glsl");      // Path to the Red FragmentShader
     
     
     // Step C: Create the renderable objects:
     this._mAlpahTexSq = new TextureRenderable(this._mTextureShader, this._kTextureWithAlpha);
     this._mNoAlphaTexSq = new TextureRenderable(this._mTextureShader, this._kTextureNoAlpha);
-    this._mRedSq = new Renderable(this._mRedShader);
+    this._mRedSq = new Renderable(this._mConstColorShader);
+    this._mRedSq.SetColor([1, 0, 0, 1]);
     
     // Step D: Initialize the alpha textured object
     this._mAlpahTexSq.GetXform().SetPosition(26, 58);
@@ -81,16 +84,9 @@ TextureLevel.prototype.Draw = function()
     // Step B: Activate the drawing Camera
     this._mCamera.BeginDraw();
         
-    // Step C: Activates textured shader and draw the texturedSq
-        // Step C1: Draws the associated renderable object
-        this._mNoAlphaTexSq.Draw(this._mCamera.GetVPMatrix());
-                
-        // Step C2: Draws the associated renderable object
-        this._mAlpahTexSq.Draw(this._mCamera.GetVPMatrix());
-    
-    // Step D: Activate the red shader and draw the redSq
-        this._mRedSq.Draw(this._mCamera.GetVPMatrix());
-    
+    this._mNoAlphaTexSq.Draw(this._mCamera.GetVPMatrix());
+    this._mAlpahTexSq.Draw(this._mCamera.GetVPMatrix());
+    this._mRedSq.Draw(this._mCamera.GetVPMatrix());
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
@@ -111,7 +107,7 @@ TextureLevel.prototype.Update = function()
     }
     
     // Step B: test for textured square rotation
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Up)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Up)) {
         texXform.IncRotationByDegree(1);
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
     }
@@ -127,7 +123,7 @@ TextureLevel.prototype.Update = function()
         gEngine.AudioClips.PlaySound(this._kKeyClicked);
     }
     
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Four)) {
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Four)) {
         this.LoadNextScene( new BeginLevel() );
     }
     

@@ -41,7 +41,7 @@ function MyGame(htmlCanvasID)
     mat4.rotateZ(xform, xform, 0.2); // rotation is in radian
     mat4.scale(xform, xform, vec3.fromValues(1.2, 1.2, 1.0));
     // Step F: draw the white square with the computed transform
-    this._mWhiteSq.Draw(xform);       // draw all objects of this shader
+    this._mWhiteSq.Draw(xform);
     
     // Step G: compute the red square transform
     mat4.identity(xform); // restart
@@ -49,5 +49,5 @@ function MyGame(htmlCanvasID)
     mat4.rotateZ(xform, xform, -0.785); // rotation is in radian (about -45-degree)
     mat4.scale(xform, xform, vec3.fromValues(0.4, 0.4, 1.0));
     // Step H: draw the red square with the computed transform
-    this._mRedSq.Draw(xform);       // draw all objects of this shader
+    this._mRedSq.Draw(xform); 
 };

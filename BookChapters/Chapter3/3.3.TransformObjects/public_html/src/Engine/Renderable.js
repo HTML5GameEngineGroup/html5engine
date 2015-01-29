@@ -12,7 +12,7 @@ function Renderable(shader)
 {
     this._mShader = shader;         // the shader for shading this object
     this._mXform = new Transform(); // transform that moves this object around
-    this._mColor = [1, 1, 1, 1];
+    this._mColor = [1, 1, 1, 1];    // color of pixel
 };
 
 //<editor-fold desc="Public Methods">

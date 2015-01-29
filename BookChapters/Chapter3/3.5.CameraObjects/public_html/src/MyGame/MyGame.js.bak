@@ -17,12 +17,19 @@ function MyGame(htmlCanvasID)
     gEngine.Core.InitializeWebGL(htmlCanvasID);
     var gl = gEngine.Core.GetGL();
     
-    // Step B: Create the shader
+    // Step B: Setup the camera
+    this._mCamera = new Camera(
+            vec2.fromValues(20, 60),   // center of the WC
+            20,                        // width of WC
+            [20, 40, 600, 300]         // viewport (orgX, orgY, width, height)
+            );
+
+    // Step C: Create the shader
     this._mConstColorShader = new SimpleShader(
             "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
             "src/GLSLShaders/SimpleFS.glsl");    // Path to the simple FragmentShader
     
-    // Step C: Create the renderable objects:
+    // Step D: Create the renderable objects:
     this._mBlueSq = new Renderable(this._mConstColorShader);
     this._mBlueSq.SetColor([0.25, 0.25, 0.95, 1]);
     this._mRedSq = new Renderable(this._mConstColorShader);
@@ -36,53 +43,14 @@ function MyGame(htmlCanvasID)
     this._mBLSq = new Renderable(this._mConstColorShader);
     this._mBLSq.SetColor([0.1, 0.1, 0.1, 1]);
     
-    // Step D: Clear the entire canvas first
-    gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1]);   // Clear the canvas
+    // Step E: Clear the canvas
+    gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1]);        // Clear the canvas
     
-    //<editor-fold desc="Step E: Setting up Viewport">
-    // Step E1: Set up the viewport: area on canvas to be drawn
-    gl.viewport(
-                20,     // x position of bottom-left corner of the area to be drawn
-                40,     // y position of bottom-left corner of the area to be drawn
-                600,    // width of the area to be drawn
-                300     // height of the area to be drawn
-            );
-    // Step E2: set up the corresponding scissor area to limit clear area
-    gl.scissor(
-                20,     // x position of bottom-left corner of the area to be drawn
-                40,     // y position of bottom-left corner of the area to be drawn
-                600,    // width of the area to be drawn
-                300    // height of the area to be drawn
-            );    
-    // Step E3: enable the scissor area, clear, and then disable the scissor area
-    gl.enable(gl.SCISSOR_TEST);
-        gEngine.Core.ClearCanvas([0.8, 0.8, 0.8, 1.0]);  // clear the scissor area
-    gl.disable(gl.SCISSOR_TEST);    
-    //</editor-fold>
+    // Step F: Starts the drawing by activating the camera
+    this._mCamera.BeginDraw();
+    var vpMatrix = this._mCamera.GetVPMatrix();
     
-    //<editor-fold desc="Step F: Set up View and Projection matrices">
-    var viewMatrix = mat4.create();
-    var projMatrix = mat4.create();
-    // Step F1: define the view matrix
-    mat4.lookAt(viewMatrix, 
-        [20, 60, 10],   // camera position
-        [20, 60, 0],    // look at position
-        [0, 1, 0]);     // orientation 
-    // Step F2: define the view volume
-    mat4.ortho(projMatrix,
-        -10,  // distant to left of WC
-         10,  // distant to right of WC
-        -5,   // distant to bottom of WC
-         5,   // distant to top of WC
-         0,   // distant to near plane 
-         1000  // distant to far plane 
-    );
-    // Step F3: concatenate to form the View-Projection operator
-    var vpMatrix = mat4.create();
-    mat4.multiply(vpMatrix, projMatrix, viewMatrix);
-    // </editor-fold>
-    
-    // Step G: Draw the blue square
+    // Step G: Draw the blue shader
          // Centre Blue, slightly rotated square
         this._mBlueSq.GetXform().SetPosition(20, 60);
         this._mBlueSq.GetXform().SetRotationInRad(0.2); // In Radians

@@ -98,7 +98,6 @@ Camera.prototype.BeginDraw = function() {
     
     // Step B3: concatnate view and project matrices
     mat4.multiply(this._mVPMatrix, this._mProjMatrix, this._mViewMatrix);
-    //</editor-fold>
 };
 
 //</editor-fold>

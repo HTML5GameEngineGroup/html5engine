@@ -41,7 +41,7 @@ function MyGame(htmlCanvasID)
     this._mBRSq = new Renderable(this._mConstColorShader);
     this._mBRSq.SetColor([0.1, 0.1, 0.9, 1]);
     this._mBLSq = new Renderable(this._mConstColorShader);
-    this._mBLSq.SetColor([0.1, 0.9, 0.9, 1]);
+    this._mBLSq.SetColor([0.1, 0.1, 0.1, 1]);
     
     // Step E: Clear the canvas
     gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1]);        // Clear the canvas
@@ -50,7 +50,7 @@ function MyGame(htmlCanvasID)
     this._mCamera.BeginDraw();
     var vpMatrix = this._mCamera.GetVPMatrix();
     
-    // Step G: Draw the blue shader
+    // Step G: Draw the blue square
          // Centre Blue, slightly rotated square
         this._mBlueSq.GetXform().SetPosition(20, 60);
         this._mBlueSq.GetXform().SetRotationInRad(0.2); // In Radians

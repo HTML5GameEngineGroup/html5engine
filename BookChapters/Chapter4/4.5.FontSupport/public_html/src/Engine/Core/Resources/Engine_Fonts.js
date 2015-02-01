@@ -19,6 +19,14 @@ gEngine.Fonts = function()
         LoadFont(_kDefaultFont);
     };
     
+    var StoreLoadedFont = function(fontInfoSourceString) {
+        var fontName = fontInfoSourceString.slice(0, -4);  // trims the .fnt extension
+        var fontInfo = gEngine.ResourceMap.RetrieveAsset(fontInfoSourceString);
+        fontInfo.FontImage = fontName + ".png";
+        gEngine.ResourceMap.AsyncLoadRequested(fontName); // to register an entry in the map
+        gEngine.ResourceMap.AsyncLoadCompleted(fontName, fontInfo); // to store the actual font info
+    };
+    
     var LoadFont = function(fontName) {
         if (!(gEngine.ResourceMap.IsAssetLoaded(fontName)))
         {
@@ -26,24 +34,7 @@ gEngine.Fonts = function()
             var textureSourceString = fontName + ".png";
             
             gEngine.Textures.LoadTexture(textureSourceString);
-            
-            // Update resources in load counter.
-            gEngine.ResourceMap.AsyncLoadRequested(fontName);
-                        
-            // Asyncrounsly request the data from server.
-            var req = new XMLHttpRequest();
-            req.open('GET', fontInfoSourceString, true);
-            req.setRequestHeader('Content-Type', 'text/xml');
-            
-            req.onload = function () 
-            {
-                var parser = new DOMParser();
-                var fontInfo = parser.parseFromString(req.responseText, "text/xml");
-                fontInfo.FontImage = textureSourceString;
-                gEngine.ResourceMap.AsyncLoadCompleted(fontName, fontInfo);
-            };
-            
-            req.send();
+            gEngine.XmlLoader.LoadXMLFile(fontInfoSourceString, StoreLoadedFont);
         } else {
             gEngine.ResourceMap.IncAssetRefCount(fontName);
         }

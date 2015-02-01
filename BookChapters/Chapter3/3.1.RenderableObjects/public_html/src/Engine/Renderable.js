@@ -10,7 +10,8 @@
 
 function Renderable(shader)
 {
-    this._mShader = shader; // the shader for shading this object
+    this._mShader = shader;       // the shader for shading this object
+    this._mColor = [1, 1, 1, 1];  // Color for fragment shader
 };
 
 //<editor-fold desc="Public Methods">
@@ -19,8 +20,10 @@ function Renderable(shader)
 //**-----------------------------------------
 Renderable.prototype.Draw = function() {
     var gl = gEngine.Core.GetGL();
-    this._mShader.ActivateShader();
+    this._mShader.ActivateShader(this._mColor);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 };
+Renderable.prototype.SetColor = function(color) { this._mColor = color; };
+Renderable.prototype.GetColor = function() { return this._mColor; };
 //--- end of Public Methods
 //</editor-fold>

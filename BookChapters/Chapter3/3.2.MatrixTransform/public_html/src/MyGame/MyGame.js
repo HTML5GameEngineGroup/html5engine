@@ -5,33 +5,23 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function MyGame(htmlCanvasID)
-{
-    // variables of the shaders for drawing: one red and one white
-    this._mRedShader = null;
-    this._mWhiteShader = null;
-        
-    // variables for the squares
-    this._mWhiteSq = null;        // these are the renderable objects
-    this._mRedSq = null;    
-    
+{   
     // Step A: Initialize the webGL Context
     gEngine.Core.InitializeWebGL(htmlCanvasID);
     
-    // Step B: Create the shaders: white and then the red shader
-    this._mWhiteShader = new SimpleShader(
+    // Step B: Create the shader
+    this._mConstColorShader = new SimpleShader(
             "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/WhiteFS.glsl");    // Path to the White FragmentShader
-    
-    this._mRedShader = new SimpleShader(
-            "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/RedFS.glsl");      // Path to the Red FragmentShader
+            "src/GLSLShaders/SimpleFS.glsl");     // Path to the Simple FragmentShader
     
     // Step C: Create the renderable objects:
-    this._mWhiteSq = new Renderable(this._mWhiteShader);
-    this._mRedSq = new Renderable(this._mRedShader);
+    this._mWhiteSq = new Renderable(this._mConstColorShader);
+    this._mWhiteSq.SetColor([1, 1, 1, 1]);
+    this._mRedSq = new Renderable(this._mConstColorShader);
+    this._mRedSq.SetColor([1, 0, 0, 1]);
     
     // Step D: Draw!
-    gEngine.Core.ClearCanvas([0, 0.8, 0, 1]);   // 1. Clear the canvas
+    gEngine.Core.ClearCanvas([0, 0.8, 0, 1]);  // 1. Clear the canvas
     
     // create a new identify transform operator
     var xform = mat4.create();

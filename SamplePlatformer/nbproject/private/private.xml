@@ -60,15 +60,6 @@
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Transform.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/HeroObject.js</file>
         </group>
-        <group name="AllBookProjects">
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/Engine/Core/Engine_Input.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/BeginLevel.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/LevelOne.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/SimpleColorLevel.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/TextureLevel.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/MyGame_GameState.js</file>
-            <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Objects/Dye.js</file>
-        </group>
         <group>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/BeginLevel.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/MyGame_GameState.js</file>
@@ -76,5 +67,6 @@
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/TextureLevel.js</file>
             <file>file:/E:/Work/2.Projects/2015.1.HTML5Book/BookSourceCode/html5engine/SamplePlatformer/public_html/src/MyGame/Levels/SimpleColorLevel.js</file>
         </group>
+        <group name="AllBookProjects"/>
     </open-files>
 </project-private>

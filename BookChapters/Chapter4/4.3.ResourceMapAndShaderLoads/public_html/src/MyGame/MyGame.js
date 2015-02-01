@@ -6,9 +6,6 @@
 
 function MyGame(htmlCanvasID)
 {
-    // variables of the constant color shader
-    this._mConstColorShader = null;
-        
     // variables for the squares
     this._mWhiteSq = null;        // these are the renderable objects
     this._mRedSq = null;    
@@ -17,10 +14,7 @@ function MyGame(htmlCanvasID)
     this._mCamera = null;
     
     // Initialize the webGL Context
-    gEngine.Core.InitializeEngineCore(htmlCanvasID);
-    
-    // Initialize the game
-    this.Initialize();
+    gEngine.Core.InitializeEngineCore(htmlCanvasID, this.Initialize.bind(this));
 };
 
 MyGame.prototype.Initialize = function() 
@@ -34,15 +28,10 @@ MyGame.prototype.Initialize = function()
     this._mCamera.SetBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
     
-    // Step  B: create the shader
-    this._mConstColorShader = new SimpleShader( 
-            "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/SimpleFS.glsl");    // Path to the Simple FragmentShader    
-    
     // Step  C: Create the renderable objects:
-    this._mWhiteSq = new Renderable(this._mConstColorShader);
+    this._mWhiteSq = new Renderable(gEngine.SystemResoruces.GetConstColorShader());
     this._mWhiteSq.SetColor([1, 1, 1, 1]);
-    this._mRedSq = new Renderable(this._mConstColorShader);
+    this._mRedSq = new Renderable(gEngine.SystemResoruces.GetConstColorShader());
     this._mRedSq.SetColor([1, 0, 0, 1]);
     
     // Step  D: Initialize the white renderable object: centred, 5x5, rotated

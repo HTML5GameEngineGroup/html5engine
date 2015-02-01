@@ -34,7 +34,7 @@ gEngine.Fonts = function()
             var textureSourceString = fontName + ".png";
             
             gEngine.Textures.LoadTexture(textureSourceString);
-            gEngine.XmlLoader.LoadXMLFile(fontInfoSourceString, StoreLoadedFont);
+            gEngine.TextFileLoader.LoadTextFile(fontInfoSourceString, gEngine.TextFileLoader.eTextFileType.eXMLFile, StoreLoadedFont);   
         } else {
             gEngine.ResourceMap.IncAssetRefCount(fontName);
         }

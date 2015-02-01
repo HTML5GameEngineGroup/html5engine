@@ -22,8 +22,8 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
     // start of constructor code
     // 
     // Step A: load and compile vertex and fragment shaders
-    var vertexShader = this._LoadAndCompileShader(vertexShaderPath, gl.VERTEX_SHADER);
-    var fragmentShader = this._LoadAndCompileShader(fragmentShaderPath, gl.FRAGMENT_SHADER);
+    var vertexShader = this._CompileShader(vertexShaderPath, gl.VERTEX_SHADER);
+    var fragmentShader = this._CompileShader(fragmentShaderPath, gl.FRAGMENT_SHADER);
     
     // Step B: Create and link the shaders into a program.
     this._mCompiledShader = gl.createProgram();
@@ -37,6 +37,7 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
         alert("Error linking shader");
         return null;
     }
+
     
     // Step D: Gets a reference to the SquareVertexPosition variable within the shaders.
     this._mShaderVertexPositionAttribute = gl.getAttribLocation(
@@ -94,21 +95,13 @@ SimpleShader.prototype.LoadObjectTransform = function(modelTransform) {
 // 
 // Returns a complied shader from a shader in the dom.
 // The id is the id of the script in the html tag.
-SimpleShader.prototype._LoadAndCompileShader = function(filePath, shaderType)
+SimpleShader.prototype._CompileShader = function(filePath, shaderType)
 {
     var gl = gEngine.Core.GetGL();
-    var xmlReq, shaderSource = null, compiledShader = null;
+    var shaderSource = null, compiledShader = null;
 
-    // Step A: Request the text from the given file location.
-    xmlReq = new XMLHttpRequest();
-    xmlReq.open('GET', filePath, false);
-    try {
-        xmlReq.send();
-    } catch (error) {
-        alert("Failed to load shader: " + filePath);
-        return null;
-    }
-    shaderSource = xmlReq.responseText;
+    // Step A: Access the shader textfile
+    shaderSource = gEngine.ResourceMap.RetrieveAsset(filePath);
 
     if (shaderSource === null) {
         alert("WARNING: Loading of:" + filePath + " Failed!");

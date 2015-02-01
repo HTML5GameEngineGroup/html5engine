@@ -24,7 +24,7 @@ function LevelOne()
     this._mPlatforms = new GameObjectSet();
        
     // Initialize the game
-    gEngine.XmlLoader.LoadXMLFile(this._LevelFile, this.Initialize.bind(this));
+    gEngine.TextFileLoader.LoadTextFile(this._LevelFile, gEngine.TextFileLoader.eTextFileType.eXMLFile, this.Initialize.bind(this));
 };
 gEngine.Core.InheritPrototype(LevelOne, Scene);
  

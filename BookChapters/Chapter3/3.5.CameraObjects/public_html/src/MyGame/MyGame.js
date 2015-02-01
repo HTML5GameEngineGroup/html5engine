@@ -47,7 +47,7 @@ function MyGame(htmlCanvasID)
     gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1]);        // Clear the canvas
     
     // Step F: Starts the drawing by activating the camera
-    this._mCamera.BeginDraw();
+    this._mCamera.SetupViewProjection();
     var vpMatrix = this._mCamera.GetVPMatrix();
     
     // Step G: Draw the blue square

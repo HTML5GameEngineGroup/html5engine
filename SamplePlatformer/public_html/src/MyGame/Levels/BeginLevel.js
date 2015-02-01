@@ -68,7 +68,7 @@ BeginLevel.prototype.Draw = function()
     gEngine.Core.ClearCanvas([0.3, 0.3, 0.3, 1.0]); // clear to dark gray
     
     // Draw with mCamera
-    this._mCamera.BeginDraw();
+    this._mCamera.SetupViewProjection();
     
     // draw the texturedSq
     this._mMessage.Draw(this._mCamera.GetVPMatrix());

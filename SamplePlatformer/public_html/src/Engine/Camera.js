@@ -70,7 +70,7 @@ Camera.prototype.GetVPMatrix = function() {
 // </editor-fold>
 
 // Initializes the camera to begin drawing
-Camera.prototype.BeginDraw = function() {
+Camera.prototype.SetupViewProjection = function() {
     var gl = gEngine.Core.GetGL();
     //<editor-fold desc="Step A: Set up and clear the Viewport">
     // Step A1: Set up the viewport: area on canvas to be drawn

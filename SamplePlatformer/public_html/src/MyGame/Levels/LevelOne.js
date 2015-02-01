@@ -48,7 +48,7 @@ LevelOne.prototype.Initialize = function()
 
 LevelOne.prototype._DrawWorld = function(camera)
 {
-    camera.BeginDraw();      
+    camera.SetupViewProjection();      
     
     this._mBg.DrawBg(camera); // 
     

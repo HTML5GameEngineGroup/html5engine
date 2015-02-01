@@ -65,7 +65,7 @@ SimpleColorLevel.prototype.Draw = function()
     gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
     
     // Step  B: Activate the drawing Camera
-    this._mCamera.BeginDraw();
+    this._mCamera.SetupViewProjection();
     
         // Step  C: Activate the white shader to draw
         this._mWhiteSq.Draw(this._mCamera.GetVPMatrix());

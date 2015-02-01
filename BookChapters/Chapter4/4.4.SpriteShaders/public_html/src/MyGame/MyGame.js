@@ -96,7 +96,7 @@ MyGame.prototype.Draw = function()
     gEngine.Core.ClearCanvas([0.3, 0.3, 0.3, 1.0]); // clear to dark gray
     
     // Draw with mCamera
-    this._mCamera.BeginDraw();
+    this._mCamera.SetupViewProjection();
         
     // Draw the two sprite objects
     this._mSpriteFontSq.Draw(this._mCamera.GetVPMatrix());

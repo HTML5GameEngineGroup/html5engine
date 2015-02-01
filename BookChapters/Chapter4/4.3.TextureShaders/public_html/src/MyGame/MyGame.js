@@ -87,7 +87,7 @@ MyGame.prototype.Draw = function()
     gEngine.Core.ClearCanvas([0.3, 0.3, 0.3, 1.0]); // clear to dark gray
     
     // Step  B: Activate the drawing Camera
-    this._mCamera.BeginDraw();
+    this._mCamera.SetupViewProjection();
         
     // Step C draw the texturedSq
         // Step C1: Activate the opaque texture

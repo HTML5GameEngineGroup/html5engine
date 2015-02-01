@@ -51,9 +51,9 @@ MyGame.prototype.Initialize = function()
     
     
     // Step  C: Create the renderable objects:
-    this._mAlphaTexSq = new Renderable(this._mTextureShader);
+    this._mAlphaTexSq = new TextureRenderable(this._mTextureShader, this._kTextureWithAlpha);
     this._mAlphaTexSq.SetColor([1, 0, 0, 0]);
-    this._mNoAlphaTexSq = new Renderable(this._mTextureShader);
+    this._mNoAlphaTexSq = new TextureRenderable(this._mTextureShader, this._kTextureNoAlpha);
     this._mNoAlphaTexSq.SetColor([1, 1, 0, 0]);
     this._mRedSq = new Renderable(this._mConstColorShader);
     this._mRedSq.SetColor([1, 0, 0, 1]);
@@ -89,16 +89,10 @@ MyGame.prototype.Draw = function()
     // Step  B: Activate the drawing Camera
     this._mCamera.SetupViewProjection();
         
-    // Step C draw the texturedSq
-        // Step C1: Activate the opaque texture
-        gEngine.Textures.ActivateTexture(this._kTextureNoAlpha);
-        // Step C2: Draws the associated renderable object
+    // Step C draw square texture without alpha
         this._mNoAlphaTexSq.Draw(this._mCamera.GetVPMatrix());
                 
-    // Step D:     
-        // Step D1: Activate the transparent texture
-        gEngine.Textures.ActivateTexture(this._kTextureWithAlpha);
-        // Step D2: Draws the associated renderable object
+    // Step D: draw the texture with alpha
         this._mAlphaTexSq.Draw(this._mCamera.GetVPMatrix());
     
     // Step E: draw the redSq

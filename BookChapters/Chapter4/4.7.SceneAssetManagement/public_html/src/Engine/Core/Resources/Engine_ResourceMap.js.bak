@@ -29,6 +29,9 @@ gEngine.ResourceMap = function()
      */
     var AsyncLoadRequested = function(rName)
     {
+        if (_mLoadCompleteCallback !== null) 
+            alert("gEngine.IncAsyncLoadCount: callback should be registered AFTER all resource loading");
+        
         _mResourceMap[rName] = new _MapEntry(rName); // place holder
         ++_mNumOutstandingLoads;
     };

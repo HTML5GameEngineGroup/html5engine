@@ -18,27 +18,23 @@ function BlueLevel()
     
     // The camera to view the rectangles
     this._mCamera = null;
-    
-    // Always calls load content at the end of initialization
-    this.LoadContent();
 };
 gEngine.Core.InheritPrototype(BlueLevel, Scene);
 
-BlueLevel.prototype.LoadContent = function() 
+BlueLevel.prototype.BeginScene = function() 
 {
     // load the scene file
-    gEngine.TextFileLoader.LoadTextFile(this._kSceneFile, 
-                gEngine.TextFileLoader.eTextFileType.eXMLFile);
+    gEngine.TextFileLoader.LoadTextFile(this._kSceneFile, gEngine.TextFileLoader.eTextFileType.eXMLFile); 
                 
     // loads the audios
     gEngine.AudioClips.LoadAudio(this._kBgClip);
     gEngine.AudioClips.LoadAudio(this._kCue);
-    gEngine.ResourceMap.SetLoadCompleteCallback(this.Initialize.bind(this));
-                    // ==> always calls initializaiton after loading is done
+    
+    gEngine.GameLoop.Start(this);
 };
 
-BlueLevel.prototype.UnloadContent = function() 
-{    
+BlueLevel.prototype.EndScene = function() 
+{
     // stop the background audio
     gEngine.AudioClips.StopBackgroundAudio();
     
@@ -47,7 +43,8 @@ BlueLevel.prototype.UnloadContent = function()
     gEngine.AudioClips.UnloadAudio(this._kBgClip);
     gEngine.AudioClips.UnloadAudio(this._kCue);
     
-     new MyGame();  // load the next level
+    var nextLevel = new MyGame();  // load the next level
+    nextLevel.BeginScene();
 };
 
 BlueLevel.prototype.Initialize = function() 
@@ -63,8 +60,6 @@ BlueLevel.prototype.Initialize = function()
     // now start the bg music ...
     gEngine.AudioClips.PlayBackgroundAudio(this._kBgClip);
     
-    // Step C: Always starts the game loop at the end
-    gEngine.GameLoop.Start(this);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -104,7 +99,7 @@ BlueLevel.prototype.Update = function()
         gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) { // this is the left-bundary
-            gEngine.GameLoop.Stop(this.UnloadContent.bind(this));
+            gEngine.GameLoop.Stop(this.EndScene.bind(this));
         }
     }
 };

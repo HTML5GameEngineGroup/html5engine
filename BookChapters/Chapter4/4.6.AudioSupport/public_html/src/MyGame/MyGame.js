@@ -19,24 +19,24 @@ function MyGame(htmlCanvasID)
     
     // Initialize the webGL Context if have not done this
     if (gEngine.Core.GetGL() === null)
-        gEngine.Core.InitializeEngineCore(htmlCanvasID, this.LoadContent.bind(this));
+        gEngine.Core.InitializeEngineCore(htmlCanvasID, this.BeginScene.bind(this));
                             // can call initialize directly since there is nothing to load
-    else
-        this.LoadContent();
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
-MyGame.prototype.LoadContent = function() 
+MyGame.prototype.BeginScene = function() 
 {
-   // loads the audios
+   // Step A: loads the audios
     gEngine.AudioClips.LoadAudio(this._kBgClip);
     gEngine.AudioClips.LoadAudio(this._kCue);
-    gEngine.ResourceMap.SetLoadCompleteCallback(this.Initialize.bind(this));  
-                    // ==> always calls initializaiton after loading is done
+
+    // Step B: Start the game loop running
+    gEngine.GameLoop.Start(this);
 };
 
-MyGame.prototype.UnloadContent = function() 
+MyGame.prototype.EndScene = function() 
 {
+    // Step A: Game loop not running, unload all assets
     // stop the background audio
     gEngine.AudioClips.StopBackgroundAudio();
     
@@ -46,8 +46,9 @@ MyGame.prototype.UnloadContent = function()
     //      So you decide to not unload this clip!!
     gEngine.AudioClips.UnloadAudio(this._kCue);
     
-    // when all is done, start next level
-    new BlueLevel();  // will start BlueLevel();
+    // Step B: starts the next level
+    var nextLevel = new BlueLevel();  // next level to be loaded
+    nextLevel.BeginScene();
 };
 
 MyGame.prototype.Initialize = function() 
@@ -76,8 +77,6 @@ MyGame.prototype.Initialize = function()
     // now start the bg music ...
     gEngine.AudioClips.PlayBackgroundAudio(this._kBgClip);
     
-    // Step D: Start the game loop running
-    gEngine.GameLoop.Start(this);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -117,7 +116,7 @@ MyGame.prototype.Update = function()
         gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) {  // this is the left-bound of the window
-            gEngine.GameLoop.Stop(this.UnloadContent.bind(this));
+            gEngine.GameLoop.Stop(this.EndScene.bind(this));
         }
     }
     

@@ -15,23 +15,27 @@ function MyGame(htmlCanvasID)
     
     // Initialize the webGL Context if have not done this
     if (gEngine.Core.GetGL() === null)
-        gEngine.Core.InitializeEngineCore(htmlCanvasID, this.LoadContent.bind(this));
+        gEngine.Core.InitializeEngineCore(htmlCanvasID, this.LoadAndBeginScene.bind(this));
                             // can call initialize directly since there is nothing to load
-    else
-        this.LoadContent();
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
-MyGame.prototype.LoadContent = function() 
+MyGame.prototype.LoadAndBeginScene = function() 
 {
-    // nothing for this game level, so calls initialize
-    this.Initialize();
+    // Step A: Load assests (nothing for this game level)
+    
+    // Step B: Start the game loop running
+    gEngine.GameLoop.Start(this);
 };
 
-MyGame.prototype.UnloadContent = function() 
+MyGame.prototype.UnloadScene = function() 
 {
-    // only strat the next level after the loop is not running
-    new BlueLevel();  // will start BlueLevel();
+    // Step A: Game loop not running, unload all assets
+    //          nothing for this level
+    
+    // Step B: starts the next level
+    var nextLevel = new BlueLevel();  // next level to be loaded
+    nextLevel.LoadAndBeginScene();
 };
 
 MyGame.prototype.Initialize = function() 
@@ -56,9 +60,6 @@ MyGame.prototype.Initialize = function()
     this._mHero.SetColor([0, 0, 1, 1]);
     this._mHero.GetXform().SetPosition(20, 60);
     this._mHero.GetXform().SetSize(2, 3);
-    
-    // Step D: Start the game loop running
-    gEngine.GameLoop.Start(this);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -96,7 +97,7 @@ MyGame.prototype.Update = function()
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) {  // this is the left-bound of the window
-            gEngine.GameLoop.Stop(this.UnloadContent.bind(this));
+            gEngine.GameLoop.Stop(this.UnloadScene.bind(this));
         }
     }
     

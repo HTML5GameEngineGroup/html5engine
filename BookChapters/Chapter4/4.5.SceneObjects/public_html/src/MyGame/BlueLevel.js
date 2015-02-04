@@ -13,26 +13,23 @@ function BlueLevel()
     
     // The camera to view the rectangles
     this._mCamera = null;
-    
-    // Always calls load content at the end of initialization
-    this.LoadContent();
 };
 gEngine.Core.InheritPrototype(BlueLevel, Scene);
 
-BlueLevel.prototype.LoadContent = function() 
+BlueLevel.prototype.LoadAndBeginScene = function() 
 {
-    gEngine.TextFileLoader.LoadTextFile(this._kSceneFile, 
-                gEngine.TextFileLoader.eTextFileType.eXMLFile); 
-    gEngine.ResourceMap.SetLoadCompleteCallback(this.Initialize.bind(this));  
-    // ==> always calls initializaiton after loading is done
+    // load the scene file
+    gEngine.TextFileLoader.LoadTextFile(this._kSceneFile, gEngine.TextFileLoader.eTextFileType.eXMLFile); 
+    gEngine.GameLoop.Start(this);
 };
 
-BlueLevel.prototype.UnloadContent = function() 
+BlueLevel.prototype.UnloadScene = function() 
 {
     // unload the scene flie
     gEngine.TextFileLoader.UnloadTextFile(this._kSceneFile);
     
-    new MyGame();  // load the next level
+    var nextLevel = new MyGame();  // load the next level
+    nextLevel.LoadAndBeginScene();
 };
 
 BlueLevel.prototype.Initialize = function() 
@@ -45,8 +42,6 @@ BlueLevel.prototype.Initialize = function()
     // Step B: Read all the squares
     sceneParser.ParseSquares(this._mSqSet);
     
-    // Step C: Always starts the game loop at the end
-    gEngine.GameLoop.Start(this);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -84,7 +79,7 @@ BlueLevel.prototype.Update = function()
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) { // this is the left-bundary
-            gEngine.GameLoop.Stop(this.UnloadContent.bind(this));
+            gEngine.GameLoop.Stop(this.UnloadScene.bind(this));
         }
     }
 };

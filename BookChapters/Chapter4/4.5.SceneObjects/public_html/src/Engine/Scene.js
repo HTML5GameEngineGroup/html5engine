@@ -3,29 +3,25 @@
  */
 
 // Constructor
-function Scene()
-{
-    // when all memory properly initialized, should call LoadContent()
-    this.LoadContent();
-}
+function Scene() {};
 
 //<editor-fold desc="functions subclass should override">
-// Loads all the level specific resources, 
+
+// Begin Scene: must load all the scene contents
 // when done 
-// => Should call Initialize()!
-Scene.prototype.LoadContent = function() {
+//  => start the GameLoop
+// The game loop will call initialize and then Update/Draw
+Scene.prototype.LoadAndBeginScene = function() {
     // override to load scene specific contents
     // when done loading, call initialize to 
     // initilaize the level 
-    this.Initialize();
+    gEngine.GameLoop.Start(this);
 };
 
 // Performs all initialization functions
 //   => Should call gEngine.GameLoop.Start(this)!
 Scene.prototype.Initialize = function(){
-    // initialize the level, when done
-    // start gameLoop for this level
-    gEngine.GameLoop.Start(this);
+    // initialize the level (called from GameLoop)
 };
 
 // Update function to be called form EngineCore.GameLoop
@@ -34,8 +30,8 @@ Scene.prototype.Update = function(){};
 // Draw function to be called from EngineCore.GameLoop
 Scene.prototype.Draw = function(){};
 
-// Unloads all resources
-Scene.prototype.UnloadContent = function() {
+// Must unload all resources
+Scene.prototype.UnloadScene = function() {
     gEngine.GameLoop.Stop();    // stops game loop!
     // .. unload all resoruces
 };

@@ -27,7 +27,6 @@ gEngine.Core = function()
             _InitializeWebGL(htmlCanvasID);
             gEngine.VertexBuffer.Initialize();
             gEngine.Input.Initialize();
-            gEngine.AudioClips.InitAudioContext();
             gEngine.SystemResoruces.Initialize(callbackFunction);
         };
         

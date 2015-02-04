@@ -6,10 +6,6 @@
 
 function MyGame(htmlCanvasID)
 {           
-     // audio clips: supports both mp3 and wav formats
-    this._kBgClip = "resources/sounds/MyGame_BG.mp3";
-    this._kCue = "resources/sounds/MyGame_cue.wav";
-    
     // The camera to view the rectangles
     this._mCamera = null;
     
@@ -28,23 +24,13 @@ gEngine.Core.InheritPrototype(MyGame, Scene);
 
 MyGame.prototype.LoadContent = function() 
 {
-   // loads the audios
-    gEngine.AudioClips.LoadAudio(this._kBgClip);
-    gEngine.AudioClips.LoadAudio(this._kCue);
-    gEngine.ResourceMap.SetLoadCompleteCallback(this.Initialize.bind(this));  
-                    // ==> always calls initializaiton after loading is done
+    // nothing for this game level, so calls initialize
+    this.Initialize();
 };
 
 MyGame.prototype.UnloadContent = function() 
 {
-    // stop the background audio
-    gEngine.AudioClips.StopBackgroundAudio();
-    
-    // unload the scene flie (called from LoadNextScene())
-    gEngine.AudioClips.UnloadAudio(this._kBgClip);
-    gEngine.AudioClips.UnloadAudio(this._kCue);
-    
-    // when all is done, start next level
+    // only strat the next level after the loop is not running
     new BlueLevel();  // will start BlueLevel();
 };
 
@@ -70,9 +56,6 @@ MyGame.prototype.Initialize = function()
     this._mHero.SetColor([0, 0, 1, 1]);
     this._mHero.GetXform().SetPosition(20, 60);
     this._mHero.GetXform().SetSize(2, 3);
-    
-    // now start the bg music ...
-    gEngine.AudioClips.PlayBackgroundAudio(this._kBgClip);
     
     // Step D: Start the game loop running
     gEngine.GameLoop.Start(this);
@@ -105,14 +88,12 @@ MyGame.prototype.Update = function()
     
     // Support hero movements
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
-        gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(deltaX);
         if (xform.GetXPos() > 30)  // this is the right-bound of the window
             xform.SetPosition(12, 60);
     }
     
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
-        gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) {  // this is the left-bound of the window
             gEngine.GameLoop.Stop(this.UnloadContent.bind(this));

@@ -20,7 +20,9 @@ function MyGame(htmlCanvasID)
 
 MyGame.prototype.LoadContent = function() 
 {
-    gEngine.TextFileLoader.LoadTextFile(this._kSceneFile, gEngine.TextFileLoader.eTextFileType.eXMLFile, this.Initialize.bind(this));
+    gEngine.TextFileLoader.LoadTextFile(this._kSceneFile, 
+                gEngine.TextFileLoader.eTextFileType.eXMLFile, 
+                this.Initialize.bind(this));
 };
 
 MyGame.prototype.Initialize = function() 

@@ -1,6 +1,5 @@
 /*
- * File: EngineCore_Texture.js 
- * Provides support for loading and unloading of textures (images)
+ * File: Engine_ResourceMap.js 
  */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -9,9 +8,9 @@ var gEngine = gEngine || { };
 
 gEngine.ResourceMap = function()
 {   
-    function _MapEntry(rName) {
-     this.mAsset = rName;
-     this.mRefCount = 1;
+    var _MapEntry = function(rName) {
+        this.mAsset = rName;
+        this.mRefCount = 1;
     };
     
     //<editor-fold desc="Asynchronous resource loading support">
@@ -44,8 +43,12 @@ gEngine.ResourceMap = function()
     };
     
     var _CheckForAllLoadCompleted = function() {
-        if ((_mNumOutstandingLoads === 0) && (_mLoadCompleteCallback !== null) )
-            _mLoadCompleteCallback();
+        if ((_mNumOutstandingLoads === 0) && (_mLoadCompleteCallback !== null) ) {
+            // ensures the load complete call back will only be called once!
+            var funToCall = _mLoadCompleteCallback;
+            _mLoadCompleteCallback = null;
+            funToCall();
+        }
     };
     
     // Make sure to set the callback _AFTER_ all load commands are issued

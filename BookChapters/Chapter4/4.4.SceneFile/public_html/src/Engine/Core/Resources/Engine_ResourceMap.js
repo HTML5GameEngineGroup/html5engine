@@ -43,8 +43,12 @@ gEngine.ResourceMap = function()
     };
     
     var _CheckForAllLoadCompleted = function() {
-        if ((_mNumOutstandingLoads === 0) && (_mLoadCompleteCallback !== null) )
-            _mLoadCompleteCallback();
+        if ((_mNumOutstandingLoads === 0) && (_mLoadCompleteCallback !== null) ) {
+            // ensures the load complete call back will only be called once!
+            var funToCall = _mLoadCompleteCallback;
+            _mLoadCompleteCallback = null;
+            funToCall();
+        }
     };
     
     // Make sure to set the callback _AFTER_ all load commands are issued

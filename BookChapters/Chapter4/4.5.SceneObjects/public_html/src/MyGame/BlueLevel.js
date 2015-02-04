@@ -15,18 +15,16 @@ function BlueLevel()
     this._mCamera = null;
     
     // Always calls load content at the end of initialization
-    gEngine.TextFileLoader.LoadTextFile(this._kSceneFile, 
-                gEngine.TextFileLoader.eTextFileType.eXMLFile, 
-                this.LoadContent.bind(this));  
+    this.LoadContent();
 };
 gEngine.Core.InheritPrototype(BlueLevel, Scene);
 
 BlueLevel.prototype.LoadContent = function() 
 {
-    // nothing for now, wait for later projects to experience
-    // with loading of external resourecs.
+    gEngine.TextFileLoader.LoadTextFile(this._kSceneFile, 
+                gEngine.TextFileLoader.eTextFileType.eXMLFile); 
+    gEngine.ResourceMap.SetLoadCompleteCallback(this.Initialize.bind(this));  
     // ==> always calls initializaiton after loading is done
-    this.Initialize();
 };
 
 BlueLevel.prototype.UnloadContent = function() 

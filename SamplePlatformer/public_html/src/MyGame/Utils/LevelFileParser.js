@@ -4,6 +4,8 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 var _gWorldZoomFactor = 0.5;
+var _gGameSpeed = 0.01;
+
 
 function LevelFileParser(levelFile)
 {
@@ -26,6 +28,15 @@ LevelFileParser.prototype.ParseDye = function()
     return new Dye(dyeX, dyeY);
 };
 
+LevelFileParser.prototype.ParseGameSpeed = function()
+{
+    var elm = this._GetElm("GameSpeed");
+    var s = _gGameSpeed;
+    if (elm.length > 0)
+        s = elm[0].getAttribute("x");
+    return Number(s);
+};
+
 LevelFileParser.prototype.ParseCamera = function(cameraName)
 {
     var camElm = this._GetElm(cameraName);
@@ -44,16 +55,23 @@ LevelFileParser.prototype.ParseCamera = function(cameraName)
     return cam;
 };
 
- LevelFileParser.prototype.ParsePlatforms = function(platformTag, platformSet, func)
- {
+LevelFileParser.prototype.ParsePlatforms = function(platformTag, motion, platformSet, func)
+{
+     var p = null;
      var elm = this._GetElm(platformTag);
      for (var i=0; i<elm.length; i++) {
          var x = elm.item(i).attributes.getNamedItem("PosX").value;
          var y = elm.item(i).attributes.getNamedItem("PosY").value;
-         var w = elm.item(i).attributes.getNamedItem("Width").value;
-         var h = elm.item(i).attributes.getNamedItem("Height").value;
-         var p = func(x, y, w, h);
+         var s = elm.item(i).attributes.getNamedItem("Size").value;
+         if (motion) {
+             var min = elm.item(i).attributes.getNamedItem("Min").value;
+             var max = elm.item(i).attributes.getNamedItem("Max").value;
+             var speed = elm.item(i).attributes.getNamedItem("Speed").value;
+             p = func(x, y, s, min, max, speed);
+         } else {
+            p = func(x, y, s);
+        }
          platformSet.AddToSet(p);
      }
- };
+};
  

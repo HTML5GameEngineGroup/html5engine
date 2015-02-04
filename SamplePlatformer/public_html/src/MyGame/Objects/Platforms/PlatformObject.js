@@ -16,6 +16,10 @@ PlatformObject.prototype.CreateRenderable = function()
     alert("Platform Object: pure virtual!!");
 };
 
+PlatformObject.prototype.Update = function(hero) {
+    this.TouchesHero(hero);
+};
+
 PlatformObject.prototype.TouchesHero = function(hero) {
     var hasLanded = this.HasCollidedWithGameObj(hero);
     if (hasLanded ) {

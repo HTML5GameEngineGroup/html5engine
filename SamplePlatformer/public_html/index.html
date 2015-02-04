@@ -51,7 +51,9 @@
             <!-- Platforms -->
             <script type="text/javascript" src="src/MyGame/Objects/Platforms/PlatformObject.js"></script>
             <script type="text/javascript" src="src/MyGame/Objects/Platforms/StaticPlatform.js"></script>
-            <script type="text/javascript" src="src/MyGame/Objects/Platforms/FloorPlatform.js"></script>
+            <script type="text/javascript" src="src/MyGame/Objects/Platforms/StaticHPlatform.js"></script>
+            <script type="text/javascript" src="src/MyGame/Objects/Platforms/StaticVPlatform.js"></script>
+            <script type="text/javascript" src="src/MyGame/Objects/Platforms/MotionPlatform.js"></script>
         <!-- My Game utilities -->
             <script type="text/javascript" src="src/MyGame/Utils/GameObjectSet.js"></script>
             <script type="text/javascript" src="src/MyGame/Utils/GameObjectSetIterator.js"></script>
@@ -63,8 +65,10 @@
             <script type="text/javascript" src="src/MyGame/Levels/TextureLevel.js"></script>
             <script type="text/javascript" src="src/MyGame/Levels/LevelOne.js"></script>
             <script type="text/javascript" src="src/MyGame/Levels/LevelOne_Bg.js"></script>
+            <script type="text/javascript" src="src/MyGame/Levels/LevelOne_Update.js"></script>
+            <script type="text/javascript" src="src/MyGame/Levels/LevelOne_Draw.js"></script>
     
-    <canvas id="GLCanvas" width="700" height="500">
+    <canvas id="GLCanvas" width="700" height="600">
         <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
         Your browser does not support the HTML5 canvas.
         <!-- this message will show only if WebGL clearing failed -->

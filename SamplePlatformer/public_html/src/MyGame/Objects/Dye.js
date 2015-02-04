@@ -17,8 +17,8 @@ function Dye(xPos, yPos)
     this.GetXform().SetSize(_gHeroWidth, _gHeroHeight);
     this.GetXform().SetPosition(xPos, yPos);
     
-    this._mShouldFall = true;
-    this._mGravityOn = true;
+    this._mShouldFall = false;
+    this._mGravityOn = false;
     this._mVelocity = vec2.fromValues(0, 0);
     
     this._mDyeCollection = new GameObjectSet();
@@ -55,14 +55,18 @@ Dye.prototype.Update = function(useCamera) {
      }
      
      // make sure all my dyepacks are ok
-     this._mDyeCollection.Update();
+     this._mDyeCollection.Update(); 
      this._mDyeCollection.CleanUp(useCamera);
 };
 
 Dye.prototype.SetShouldFall = function(b) {
     this._mShouldFall = b;
     if (!b)
-        this._mVelocity[1] = 0;
+        this.CancelYVelocity();
+};
+
+Dye.prototype.CancelYVelocity = function() {
+    this._mVelocity[1] = 0;
 };
 
 Dye.prototype.SetVelocity = function(v) {

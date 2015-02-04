@@ -83,7 +83,7 @@ gMyGame.GameState = function()
 
         // initialize the global status
         _mStatus = new TextRenderable(_mSpriteShader, kStatus);
-        _mStatus.GetXform().SetPosition(-1, 43);
+        _mStatus.GetXform().SetPosition(1, 59);
         _mStatus.GetXform().SetSize(8, 1);
         
         _LoadResources();

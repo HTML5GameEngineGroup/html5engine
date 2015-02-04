@@ -42,6 +42,7 @@ gEngine.Input = function()
         J : 74,
         K : 75,
         L : 76,
+        M : 77,
         R : 82,
         S : 83,
         W : 87

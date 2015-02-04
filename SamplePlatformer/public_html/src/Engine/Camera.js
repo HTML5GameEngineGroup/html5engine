@@ -176,4 +176,61 @@ Camera.prototype.CollideWCBound = function(xform, safeBound) {
             return this.eWCCollideStatus.eOutside;
         }
 };
+
+
+//
+// gameObj is a GameObject
+// safeBound is a percentage representing the "safty zone"
+//    e.g., 0.8 says, we are touching the 80% zone of WC bound
+//          1.2 says we are testing for bounds 1.2-times the WC bound
+// it is ok to not pass safeBound, defualt to 1.0
+Camera.prototype.ClampAtWCBound = function(xform, safeBound) {
+    var useZone = 1.0;
+    if (safeBound !== undefined)
+        useZone = safeBound;
+        
+    var objPos = xform.GetPosition();
+    var objSize = xform.GetSize();
+    var objHalfW = objSize[0]/2;
+    var objHalfH = objSize[1]/2;
+    var objLeft = objPos[0] - objHalfW;
+    var objRight = objPos[0] + objHalfW;
+    var objTop = objPos[1] + objHalfH;
+    var objBot = objPos[1] - objHalfH;
+    
+    var wcHalfW = 0.5 * this._mWCWidth * useZone;
+    var wcHalfH = wcHalfW * this._mViewport[3] / this._mViewport[2]; // viewportH/viewportW
+    var wcLeft = this._mWCCenter[0] - wcHalfW;
+    var wcRight = this._mWCCenter[0] + wcHalfW;
+    var wcTop = this._mWCCenter[1] + wcHalfH;
+    var wcBot = this._mWCCenter[1] - wcHalfH;
+    
+    if ((objLeft < wcRight) && (objRight > wcLeft) &&
+        (objBot < wcTop) && (objTop > wcBot)) {
+            // inside
+            if (objLeft < wcLeft) {
+                objPos[0] = wcLeft + objHalfW;
+                return this.eWCCollideStatus.eCollideLeft;
+            }
+            
+            if (objRight > wcRight) {
+                objPos[0] = wcRight - objHalfW;
+                return this.eWCCollideStatus.eCollideRight;
+            }
+            
+            if (objBot < wcBot) {
+                objPos[1] = wcBot + objHalfH;
+                return this.eWCCollideStatus.eCollideBottom;
+            }
+            
+            if (objTop > wcTop) {
+                objPos[1] = wcTop - objHalfH;
+                return this.eWCCollideStatus.eCollideTop;
+            }
+            return this.eWCCollideStatus.eInside;
+            
+        } else {
+            return this.eWCCollideStatus.eOutside;
+        }
+};
 //</editor-fold>

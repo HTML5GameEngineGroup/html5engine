@@ -57,7 +57,7 @@ gEngine.AudioClips = function()
     };
     
     var UnloadAudio = function(clipName) {
-        gEngine.ResourceMap.DecAssetRefCount(clipName);
+        gEngine.ResourceMap.UnloadAsset(clipName);
     };
     
     var PlaySound = function(clipName)

@@ -52,7 +52,7 @@ gEngine.TextFileLoader = function()
     };
     
     var UnloadTextFile= function(fileName) {
-        gEngine.ResourceMap.DecAssetRefCount(fileName);
+        gEngine.ResourceMap.UnloadAsset(fileName);
     };
     
     // Public interface for this object. Anything not in here will

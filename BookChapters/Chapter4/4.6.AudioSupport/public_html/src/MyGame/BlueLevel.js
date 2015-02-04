@@ -10,7 +10,7 @@ function BlueLevel()
     this._kSceneFile = "resources/BlueLevel.xml";
     
     // audio clips: supports both mp3 and wav formats
-    this._kBgClip = "resources/sounds/BlueLevel_BG.mp3";
+    this._kBgClip = "resources/sounds/BGClip.mp3";
     this._kCue = "resources/sounds/BlueLevel_cue.wav";
     
     // all square
@@ -29,9 +29,10 @@ gEngine.Core.InheritPrototype(BlueLevel, Scene);
 BlueLevel.prototype.LoadContent = function() 
 {
     // loads the audios
+    // 
     gEngine.AudioClips.LoadAudio(this._kBgClip);
     gEngine.AudioClips.LoadAudio(this._kCue);
-    gEngine.ResourceMap.SetLoadCompleteCallback(this.Initialize.bind(this));  
+    gEngine.ResourceMap.SetLoadCompleteCallback(this.Initialize.bind(this));
                     // ==> always calls initializaiton after loading is done
 };
 
@@ -40,7 +41,7 @@ BlueLevel.prototype.UnloadContent = function()
     // stop the background audio
     gEngine.AudioClips.StopBackgroundAudio();
     
-    // unload the scene flie (called from LoadNextScene())
+    // unload the scene flie and loaded resoruces
     gEngine.TextFileLoader.UnloadTextFile(this._kSceneFile);
     gEngine.AudioClips.UnloadAudio(this._kBgClip);
     gEngine.AudioClips.UnloadAudio(this._kCue);

@@ -7,7 +7,7 @@
 function MyGame(htmlCanvasID)
 {           
      // audio clips: supports both mp3 and wav formats
-    this._kBgClip = "resources/sounds/MyGame_BG.mp3";
+    this._kBgClip = "resources/sounds/BGClip.mp3";
     this._kCue = "resources/sounds/MyGame_cue.wav";
     
     // The camera to view the rectangles
@@ -40,8 +40,10 @@ MyGame.prototype.UnloadContent = function()
     // stop the background audio
     gEngine.AudioClips.StopBackgroundAudio();
     
-    // unload the scene flie (called from LoadNextScene())
-    gEngine.AudioClips.UnloadAudio(this._kBgClip);
+    // unload the scene resources
+    // gEngine.AudioClips.UnloadAudio(this._kBgClip);
+    //      You know this clip will be used else where in the game
+    //      So you decide to not unload this clip!!
     gEngine.AudioClips.UnloadAudio(this._kCue);
     
     // when all is done, start next level

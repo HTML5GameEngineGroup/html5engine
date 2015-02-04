@@ -75,7 +75,7 @@ gEngine.ResourceMap = function()
         _mResourceMap[rName].mRefCount += 1;
     };
     
-    var DecAssetRefCount = function(rName) {
+    var UnloadAsset = function(rName) {
         var c = 0;
         if (rName in _mResourceMap) {
             _mResourceMap[rName].mRefCount -= 1;
@@ -83,13 +83,6 @@ gEngine.ResourceMap = function()
             if (c === 0)
                 delete _mResourceMap[rName];
         }
-        return c;
-    };
-    
-    var GetAssetRefCount = function(rName) {
-        var c = 0;
-        if (rName in _mResourceMap)
-            c = _mResourceMap[rName].mRefCount;
         return c;
     };
     //</editor-fold>
@@ -106,11 +99,10 @@ gEngine.ResourceMap = function()
         //</editor-fold>
         //<editor-fold desc="resource storage and reference count support">
         RetrieveAsset: RetrieveAsset,
+        UnloadAsset: UnloadAsset,
         IsAssetLoaded: IsAssetLoaded,
         
-        IncAssetRefCount: IncAssetRefCount,
-        DecAssetRefCount: DecAssetRefCount,
-        GetAssetRefCount: GetAssetRefCount
+        IncAssetRefCount: IncAssetRefCount
         //</editor-fold>
     };
     return oPublic;

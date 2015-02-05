@@ -79,7 +79,7 @@ BlueLevel.prototype.Update = function()
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) { // this is the left-bundary
-            gEngine.GameLoop.Stop(this.UnloadScene.bind(this));
+            gEngine.GameLoop.Stop();
         }
     }
 };

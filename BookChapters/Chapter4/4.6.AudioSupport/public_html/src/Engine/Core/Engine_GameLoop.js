@@ -22,7 +22,6 @@ gEngine.GameLoop = function()
     var _mIsLoopRunning = false;
     
     var _mMyGame = null;
-    var _mLoopEndCallback = null;
 
     // This function assumes it is sub-classed from MyGame
     var _RunLoop = function () {
@@ -49,9 +48,8 @@ gEngine.GameLoop = function()
             // Step D: now let's draw
             this.Draw();    // Call Scene.Draw()
         } else {
-            if (_mLoopEndCallback !== null) {
-                _mLoopEndCallback();
-            }
+            // this scene is done, unload it!
+            _mMyGame.UnloadScene();
         }
     };
 
@@ -64,7 +62,6 @@ gEngine.GameLoop = function()
         
         // Step B: remember that loop is now running
         _mIsLoopRunning = true;
-        _mLoopEndCallback = null;
             
         // Step C: request _RunLoop to start when loading is done
         requestAnimationFrame(function(){_RunLoop.call(_mMyGame);});
@@ -80,11 +77,9 @@ gEngine.GameLoop = function()
                 });
     };
     
-    var Stop = function(callback)
+    var Stop = function()
     {
-        _mMyGame = null;
         _mIsLoopRunning = false;
-        _mLoopEndCallback = callback;
     };
     
     var oPublic =

@@ -77,15 +77,10 @@ gEngine.GameLoop = function()
                 });
     };
     
-    var Stop = function()
-    {
-        _mIsLoopRunning = false;
-    };
     
     var oPublic =
     {
-        Start: Start,
-        Stop: Stop
+        Start: Start
     };
     return oPublic;
    

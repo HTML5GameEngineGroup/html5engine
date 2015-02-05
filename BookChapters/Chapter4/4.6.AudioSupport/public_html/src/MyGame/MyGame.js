@@ -4,7 +4,7 @@
  */
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function MyGame(htmlCanvasID)
+function MyGame()
 {           
      // audio clips: supports both mp3 and wav formats
     this._kBgClip = "resources/sounds/BGClip.mp3";
@@ -16,15 +16,10 @@ function MyGame(htmlCanvasID)
     // the hero and the support objects
     this._mHero = null;
     this._mSupport = null;
-    
-    // Initialize the webGL Context if have not done this
-    if (gEngine.Core.GetGL() === null)
-        gEngine.Core.InitializeEngineCore(htmlCanvasID, this.BeginScene.bind(this));
-                            // can call initialize directly since there is nothing to load
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
-MyGame.prototype.BeginScene = function() 
+MyGame.prototype.LoadAndBeginScene = function() 
 {
    // Step A: loads the audios
     gEngine.AudioClips.LoadAudio(this._kBgClip);
@@ -34,7 +29,7 @@ MyGame.prototype.BeginScene = function()
     gEngine.GameLoop.Start(this);
 };
 
-MyGame.prototype.EndScene = function() 
+MyGame.prototype.UnloadScene = function() 
 {
     // Step A: Game loop not running, unload all assets
     // stop the background audio
@@ -48,7 +43,7 @@ MyGame.prototype.EndScene = function()
     
     // Step B: starts the next level
     var nextLevel = new BlueLevel();  // next level to be loaded
-    nextLevel.BeginScene();
+    nextLevel.LoadAndBeginScene();
 };
 
 MyGame.prototype.Initialize = function() 
@@ -116,7 +111,7 @@ MyGame.prototype.Update = function()
         gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) {  // this is the left-bound of the window
-            gEngine.GameLoop.Stop(this.EndScene.bind(this));
+            gEngine.GameLoop.Stop();
         }
     }
     

@@ -4,10 +4,7 @@
 </head>
 <!--Use embedded shader code for now, in order to remove async loading complexity.-->
 
-<body onload="
-        var myGame = new MyGame();
-        gEngine.Core.InitializeEngineCore('GLCanvas', myGame.LoadAndBeginScene.bind(myGame));
-            ">
+<body onload="new MyGame('GLCanvas');">
     
     <!-- the following says there are javascript source code contained in 
          the external source files

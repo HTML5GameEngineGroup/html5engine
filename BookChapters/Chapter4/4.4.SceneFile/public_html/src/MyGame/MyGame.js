@@ -4,7 +4,7 @@
  */
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function MyGame(htmlCanvasID)
+function MyGame()
 {       
     // scene file name
     this._kSceneFile = "resources/scene.xml"
@@ -13,16 +13,18 @@ function MyGame(htmlCanvasID)
     
     // The camera to view the rectangles
     this._mCamera = null;
-    
-    // Initialize the webGL Context
-    gEngine.Core.InitializeEngineCore(htmlCanvasID, this.LoadContent.bind(this));
 };
 
-MyGame.prototype.LoadContent = function() 
+MyGame.prototype.LoadAndBeginScene = function() 
 {
     gEngine.TextFileLoader.LoadTextFile(this._kSceneFile, 
                 gEngine.TextFileLoader.eTextFileType.eXMLFile);
-    gEngine.ResourceMap.SetLoadCompleteCallback(this.Initialize.bind(this));
+    gEngine.GameLoop.Start(this);
+};
+
+MyGame.prototype.UnloadScene = function()
+{
+    gEngine.TextFileLoader.UnloadTextFile(this._kSceneFile);
 };
 
 MyGame.prototype.Initialize = function() 
@@ -34,9 +36,6 @@ MyGame.prototype.Initialize = function()
     
     // Step B: Read all the squares
     sceneParser.ParseSquares(this._mSqSet);
-    
-    // Step C: Start the game loop running
-    gEngine.GameLoop.Start(this);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more

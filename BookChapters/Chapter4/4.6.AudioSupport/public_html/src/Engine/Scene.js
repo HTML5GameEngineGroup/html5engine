@@ -11,7 +11,7 @@ function Scene() {};
 // when done 
 //  => start the GameLoop
 // The game loop will call initialize and then Update/Draw
-Scene.prototype.BeginScene = function() {
+Scene.prototype.LoadAndBeginScene = function() {
     // override to load scene specific contents
     // when done loading, call initialize to 
     // initilaize the level 
@@ -25,14 +25,16 @@ Scene.prototype.Initialize = function(){
 };
 
 // Update function to be called form EngineCore.GameLoop
-Scene.prototype.Update = function(){};
+Scene.prototype.Update = function(){
+    // when done with this level should call:
+    // GameLoop.Stop() ==> which will call this.UnloadScene();
+};
 
 // Draw function to be called from EngineCore.GameLoop
 Scene.prototype.Draw = function(){};
 
 // Must unload all resources
-Scene.prototype.EndScene = function() {
-    gEngine.GameLoop.Stop();    // stops game loop!
+Scene.prototype.UnloadScene = function() {
     // .. unload all resoruces
 };
 //</editor-fold>

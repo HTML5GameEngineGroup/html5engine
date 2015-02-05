@@ -25,10 +25,7 @@ Scene.prototype.Initialize = function(){
 };
 
 // Update function to be called form EngineCore.GameLoop
-Scene.prototype.Update = function(){
-    // when done with this level should call:
-    // GameLoop.Stop() ==> which will call this.UnloadScene();
-};
+Scene.prototype.Update = function(){};
 
 // Draw function to be called from EngineCore.GameLoop
 Scene.prototype.Draw = function(){};

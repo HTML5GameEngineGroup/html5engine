@@ -67,8 +67,13 @@ gEngine.GameLoop = function()
     var Start = function(myGame)
     {
         _mMyGame = myGame;
-        _StartLoop();
+        gEngine.ResourceMap.SetLoadCompleteCallback(
+                function() {
+                    _mMyGame.Initialize();
+                    _StartLoop();
+                });
     };
+    
     
     var oPublic =
     {

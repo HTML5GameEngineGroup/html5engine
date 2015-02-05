@@ -4,7 +4,7 @@
  */
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function MyGame()
+function MyGame(htmlCanvasID)
 {           
     // The camera to view the rectangles
     this._mCamera = null;
@@ -12,6 +12,11 @@ function MyGame()
     // the hero and the support objects
     this._mHero = null;
     this._mSupport = null;
+    
+    // Initialize the webGL Context if have not done this
+    if (gEngine.Core.GetGL() === null)
+        gEngine.Core.InitializeEngineCore(htmlCanvasID, this.LoadAndBeginScene.bind(this));
+                            // can call initialize directly since there is nothing to load
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 

@@ -4,33 +4,51 @@
  */
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function MyGame()
+function MyGame(htmlCanvasID)
 {           
+     // audio clips: supports both mp3 and wav formats
+    this._kBgClip = "resources/sounds/BGClip.mp3";
+    this._kCue = "resources/sounds/MyGame_cue.wav";
+    
     // The camera to view the rectangles
     this._mCamera = null;
     
     // the hero and the support objects
     this._mHero = null;
     this._mSupport = null;
+    
+    // Initialize the webGL Context if have not done this
+    if (gEngine.Core.GetGL() === null)
+        gEngine.Core.InitializeEngineCore(htmlCanvasID, this.BeginScene.bind(this));
+                            // can call initialize directly since there is nothing to load
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
-MyGame.prototype.LoadAndBeginScene = function() 
+MyGame.prototype.BeginScene = function() 
 {
-    // Step A: Load assests (nothing for this game level)
-    
+   // Step A: loads the audios
+    gEngine.AudioClips.LoadAudio(this._kBgClip);
+    gEngine.AudioClips.LoadAudio(this._kCue);
+
     // Step B: Start the game loop running
     gEngine.GameLoop.Start(this);
 };
 
-MyGame.prototype.UnloadScene = function() 
+MyGame.prototype.EndScene = function() 
 {
     // Step A: Game loop not running, unload all assets
-    //          nothing for this level
+    // stop the background audio
+    gEngine.AudioClips.StopBackgroundAudio();
+    
+    // unload the scene resources
+    // gEngine.AudioClips.UnloadAudio(this._kBgClip);
+    //      You know this clip will be used else where in the game
+    //      So you decide to not unload this clip!!
+    gEngine.AudioClips.UnloadAudio(this._kCue);
     
     // Step B: starts the next level
     var nextLevel = new BlueLevel();  // next level to be loaded
-    nextLevel.LoadAndBeginScene();
+    nextLevel.BeginScene();
 };
 
 MyGame.prototype.Initialize = function() 
@@ -55,6 +73,10 @@ MyGame.prototype.Initialize = function()
     this._mHero.SetColor([0, 0, 1, 1]);
     this._mHero.GetXform().SetPosition(20, 60);
     this._mHero.GetXform().SetSize(2, 3);
+    
+    // now start the bg music ...
+    gEngine.AudioClips.PlayBackgroundAudio(this._kBgClip);
+    
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -84,15 +106,17 @@ MyGame.prototype.Update = function()
     
     // Support hero movements
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
+        gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(deltaX);
         if (xform.GetXPos() > 30)  // this is the right-bound of the window
             xform.SetPosition(12, 60);
     }
     
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
+        gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) {  // this is the left-bound of the window
-            gEngine.GameLoop.Stop();
+            gEngine.GameLoop.Stop(this.EndScene.bind(this));
         }
     }
     

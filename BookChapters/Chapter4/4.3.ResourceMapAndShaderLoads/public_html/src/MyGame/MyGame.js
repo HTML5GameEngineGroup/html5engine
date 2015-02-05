@@ -4,7 +4,7 @@
  */
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function MyGame(htmlCanvasID)
+function MyGame()
 {
     // variables for the squares
     this._mWhiteSq = null;        // these are the renderable objects
@@ -12,9 +12,6 @@ function MyGame(htmlCanvasID)
     
     // The camera to view the rectangles
     this._mCamera = null;
-    
-    // Initialize the webGL Context
-    gEngine.Core.InitializeEngineCore(htmlCanvasID, this.Initialize.bind(this));
 };
 
 MyGame.prototype.Initialize = function() 

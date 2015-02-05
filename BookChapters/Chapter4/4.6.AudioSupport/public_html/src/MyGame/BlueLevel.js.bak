@@ -21,7 +21,7 @@ function BlueLevel()
 };
 gEngine.Core.InheritPrototype(BlueLevel, Scene);
 
-BlueLevel.prototype.LoadAndBeginScene = function() 
+BlueLevel.prototype.BeginScene = function() 
 {
     // load the scene file
     gEngine.TextFileLoader.LoadTextFile(this._kSceneFile, gEngine.TextFileLoader.eTextFileType.eXMLFile); 
@@ -33,7 +33,7 @@ BlueLevel.prototype.LoadAndBeginScene = function()
     gEngine.GameLoop.Start(this);
 };
 
-BlueLevel.prototype.UnloadScene = function() 
+BlueLevel.prototype.EndScene = function() 
 {
     // stop the background audio
     gEngine.AudioClips.StopBackgroundAudio();
@@ -44,7 +44,7 @@ BlueLevel.prototype.UnloadScene = function()
     gEngine.AudioClips.UnloadAudio(this._kCue);
     
     var nextLevel = new MyGame();  // load the next level
-    nextLevel.LoadAndBeginScene();
+    nextLevel.BeginScene();
 };
 
 BlueLevel.prototype.Initialize = function() 
@@ -99,7 +99,7 @@ BlueLevel.prototype.Update = function()
         gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) { // this is the left-bundary
-            gEngine.GameLoop.Stop();
+            gEngine.GameLoop.Stop(this.EndScene.bind(this));
         }
     }
 };

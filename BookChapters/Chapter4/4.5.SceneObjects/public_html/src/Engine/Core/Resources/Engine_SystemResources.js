@@ -1,12 +1,12 @@
 /*
- * File: Engine_SystemResoruces.js 
+ * File: Engine_SystemResources.js 
  */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 var gEngine = gEngine || { };
 
-gEngine.SystemResoruces = function()
+gEngine.SystemResources = function()
 {   
     // Simple Shader
     var _kSimpleVS = "src/GLSLShaders/SimpleVS.glsl";  // Path to the VertexShader 

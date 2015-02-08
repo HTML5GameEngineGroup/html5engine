@@ -22,8 +22,8 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
     // start of constructor code
     // 
     // Step A: load and compile vertex and fragment shaders
-    var vertexShader = this._LoadAndCompileShader(vertexShaderPath, gl.VERTEX_SHADER);
-    var fragmentShader = this._LoadAndCompileShader(fragmentShaderPath, gl.FRAGMENT_SHADER);
+    var vertexShader = this._CompileShader(vertexShaderPath, gl.VERTEX_SHADER);
+    var fragmentShader = this._CompileShader(fragmentShaderPath, gl.FRAGMENT_SHADER);
     
     // Step B: Create and link the shaders into a program.
     this._mCompiledShader = gl.createProgram();
@@ -43,7 +43,6 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
     this._mShaderVertexPositionAttribute = gl.getAttribLocation(
                     this._mCompiledShader, "aSquareVertexPosition");
 
-    
     // Step E: Activates the vertex buffer loaded in EngineCore_VertexBuffer.js
     gl.bindBuffer(gl.ARRAY_BUFFER, gEngine.VertexBuffer.GetGLVertexRef());
     
@@ -55,13 +54,10 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
         0,              // number of bytes to skip in between elements
         0);             // offsets to the first element
     
-    // Step G: references: uniforms: uModelTransform, uPixelColor, and uViewProjTransform
-    this._mModelTransform = gl.getUniformLocation(
-                    this._mCompiledShader, "uModelTransform");
-    this._mPixelColor = gl.getUniformLocation(
-                    this._mCompiledShader, "uPixelColor");
-    this._mViewProjTransform = gl.getUniformLocation(
-                    this._mCompiledShader, "uViewProjTransform");
+    // Step G: references: uniforms: uPixelColor, uModelTransform, and uViewProjTransform
+    this._mPixelColor = gl.getUniformLocation(this._mCompiledShader, "uPixelColor");
+    this._mModelTransform = gl.getUniformLocation(this._mCompiledShader, "uModelTransform");   
+    this._mViewProjTransform = gl.getUniformLocation(this._mCompiledShader, "uViewProjTransform");
 };
 //</editor-fold>
 
@@ -99,21 +95,13 @@ SimpleShader.prototype.LoadObjectTransform = function(modelTransform) {
 // 
 // Returns a complied shader from a shader in the dom.
 // The id is the id of the script in the html tag.
-SimpleShader.prototype._LoadAndCompileShader = function(filePath, shaderType)
+SimpleShader.prototype._CompileShader = function(filePath, shaderType)
 {
     var gl = gEngine.Core.GetGL();
-    var xmlReq, shaderSource = null, compiledShader = null;
+    var shaderSource = null, compiledShader = null;
 
-    // Step A: Request the text from the given file location.
-    xmlReq = new XMLHttpRequest();
-    xmlReq.open('GET', filePath, false);
-    try {
-        xmlReq.send();
-    } catch (error) {
-        alert("Failed to load shader: " + filePath);
-        return null;
-    }
-    shaderSource = xmlReq.responseText;
+    // Step A: Access the shader textfile
+    shaderSource = gEngine.ResourceMap.RetrieveAsset(filePath);
 
     if (shaderSource === null) {
         alert("WARNING: Loading of:" + filePath + " Failed!");

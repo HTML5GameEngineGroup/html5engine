@@ -27,7 +27,7 @@ gEngine.Core = function()
             _InitializeWebGL(htmlCanvasID);
             gEngine.VertexBuffer.Initialize();
             gEngine.Input.Initialize();
-            gEngine.SystemResources.Initialize(callbackFunction);
+            gEngine.DefaultResources.Initialize(callbackFunction);
         };
         
         // initialize the WebGL, the vertex buffer and compile the shaders

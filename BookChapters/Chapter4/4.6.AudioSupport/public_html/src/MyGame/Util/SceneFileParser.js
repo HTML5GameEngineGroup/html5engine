@@ -44,7 +44,7 @@ SceneFileParser.prototype.ParseSquares = function(sqSet)
         var h = elm.item(i).attributes.getNamedItem("Height").value;
         var r = elm.item(i).attributes.getNamedItem("Rotation").value;
         var c = elm.item(i).attributes.getNamedItem("Color").value.split(" ");
-        var sq = new Renderable(gEngine.SystemResources.GetConstColorShader());
+        var sq = new Renderable(gEngine.DefaultResources.GetConstColorShader());
         sq.SetColor(c);
         sq.GetXform().SetPosition(x, y);
         sq.GetXform().SetRotationInDegree(r); // In Degree

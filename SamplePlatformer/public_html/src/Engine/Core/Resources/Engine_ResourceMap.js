@@ -36,7 +36,7 @@ gEngine.ResourceMap = function()
     var AsyncLoadCompleted = function(rName, loadedAsset)
     {
         if (!IsAssetLoaded(rName))
-            alert("gEnine.AsyncLoadCompleted: [" + rName + "not in map!");
+            alert("gEngine.AsyncLoadCompleted: [" + rName + "not in map!");
         
         _mResourceMap[rName].mAsset = loadedAsset;
         --_mNumOutstandingLoads;

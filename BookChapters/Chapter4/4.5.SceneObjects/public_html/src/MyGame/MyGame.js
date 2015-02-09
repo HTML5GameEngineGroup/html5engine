@@ -45,13 +45,13 @@ MyGame.prototype.Initialize = function()
             // sets the background to gray
     
     // Step B: Create the support object in red
-    this._mSupport = new Renderable(gEngine.SystemResources.GetConstColorShader());
+    this._mSupport = new Renderable(gEngine.DefaultResources.GetConstColorShader());
     this._mSupport.SetColor([1, 0, 0, 1]);
     this._mSupport.GetXform().SetPosition(20, 60);
     this._mSupport.GetXform().SetSize(5, 5);
     
     // Setp C: Create the hero object in blue
-    this._mHero = new Renderable(gEngine.SystemResources.GetConstColorShader());
+    this._mHero = new Renderable(gEngine.DefaultResources.GetConstColorShader());
     this._mHero.SetColor([0, 0, 1, 1]);
     this._mHero.GetXform().SetPosition(20, 60);
     this._mHero.GetXform().SetSize(2, 3);

@@ -5,7 +5,7 @@
 <!--Use embedded shader code for now, in order to remove async loading complexity.-->
 
 <body onload="
-        var myGame = new MyGame('GLCanvas');
+        var myGame = new MyGame();
         gEngine.Core.InitializeEngineCore('GLCanvas', myGame.Initialize.bind(myGame));
             ">
     
@@ -24,7 +24,7 @@
             <!-- Resource support -->
                 <script type="text/javascript" src="src/Engine/Core/Resources/Engine_ResourceMap.js"></script>
                 <script type="text/javascript" src="src/Engine/Core/Resources/Engine_TextFileLoader.js"></script>
-                <script type="text/javascript" src="src/Engine/Core/Resources/Engine_SystemResources.js"></script>
+                <script type="text/javascript" src="src/Engine/Core/Resources/Engine_DefaultResources.js"></script>
         <script type="text/javascript" src="src/Engine/Transform.js"></script>
         <script type="text/javascript" src="src/Engine/Camera.js"></script>
         <script type="text/javascript" src="src/Engine/SimpleShader.js"></script>

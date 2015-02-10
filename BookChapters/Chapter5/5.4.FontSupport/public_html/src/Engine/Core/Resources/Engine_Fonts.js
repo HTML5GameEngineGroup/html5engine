@@ -13,9 +13,9 @@ var gEngine = gEngine || { };
 gEngine.Fonts = function()
 {    
     
- ==> Should store into gEngine.DefaultResources!!
+ // ==> Should store into gEngine.DefaultResources!!
  
-    var _kDefaultFont = "resources/fonts/system-default-font";
+    var _kDefaultFont = "resources/fonts/Consolas-72-NoKerning";
     
     var InitFont = function()
     {

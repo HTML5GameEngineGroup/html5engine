@@ -105,7 +105,8 @@ MyGame.prototype.Initialize = function()
     this._mHero.GetXform().SetPosition(20, 60);
     this._mHero.GetXform().SetSize(2, 3);
     
-    this._mText = new FontRenderable("This is green text");
+    // this._mText = new FontRenderable("This is green text");
+    this._mText = new FontRenderable("apagajayaz");
     this._mText.SetColor([0, 1, 0, 1]);
     this._mText.GetXform().SetPosition(12, 57);
     this._mText.GetXform().SetSize(9, 0.6);

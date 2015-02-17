@@ -13,7 +13,7 @@ function MyGame()
     // textures: 
     this._kPortal = "resources/minion_portal.png";      // supports png with transparency
     this._kCollector = "resources/minion_collector.png";      
-    this._kFontImage = "resources/dos-font.png";
+    this._kFontImage = "resources/Consolas-72.png";
     this._kRegular = "resources/minion_regular_sprite.png";
     
     // The camera to view the rectangles
@@ -106,10 +106,10 @@ MyGame.prototype.Initialize = function()
     this._mHero.GetXform().SetSize(2, 3);
     
     // this._mText = new FontRenderable("This is green text");
-    this._mText = new FontRenderable("apagajayaz");
-    this._mText.SetColor([0, 1, 0, 1]);
+    this._mText = new FontRenderable("This is a good test!");
+    this._mText.SetColor([0, 0, 0, 1]);
     this._mText.GetXform().SetPosition(12, 57);
-    this._mText.GetXform().SetSize(9, 0.6);
+    this._mText.GetXform().SetSize(4, 0.4); // default system font, each char H is about 2W
     
     // now start the bg music ...
     gEngine.AudioClips.PlayBackgroundAudio(this._kBgClip);
@@ -208,5 +208,25 @@ MyGame.prototype.Update = function()
    this._mRegular.SetTextureCoordinate(
            l, texCoord[sh.eTextureCoordArray.eRight],
            texCoord[sh.eTextureCoordArray.eBottom], t);
-            
+  
+     
+     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Up)) {
+         if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.X)) {
+             this._mText.GetXform().IncWidthBy(0.005);
+         } 
+         if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Y)) {
+            this._mText.GetXform().IncHeightBy(0.005);
+        }
+        this._mText.SetText(this._mText.GetXform().GetWidth().toFixed(2) + "x" + this._mText.GetXform().GetHeight().toFixed(2));
+    }
+    
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Down)) {
+         if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.X)) {
+             this._mText.GetXform().IncWidthBy(-0.005);
+         }
+         if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Y)) {
+            this._mText.GetXform().IncHeightBy(-0.005);
+        }
+        this._mText.SetText(this._mText.GetXform().GetWidth().toFixed(2) + "x" + this._mText.GetXform().GetHeight().toFixed(2));
+    }
 };

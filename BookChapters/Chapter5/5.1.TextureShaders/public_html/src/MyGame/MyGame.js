@@ -70,18 +70,18 @@ MyGame.prototype.Initialize = function()
             // sets the background to gray
     
     // Step B: Create the support objects
-    this._mPortal = new TextureRenderable(gEngine.DefaultResources.GetTextureShader(), this._kPortal);
+    this._mPortal = new TextureRenderable(this._kPortal);
     this._mPortal.SetColor([1, 0, 0, 0.2]);  // tints red
     this._mPortal.GetXform().SetPosition(25, 60);
     this._mPortal.GetXform().SetSize(3, 3);
     
-    this._mCollector = new TextureRenderable(gEngine.DefaultResources.GetTextureShader(), this._kCollector);
+    this._mCollector = new TextureRenderable(this._kCollector);
     this._mCollector.SetColor([0, 0, 0, 0]);  // No tinting
     this._mCollector.GetXform().SetPosition(15, 60);
     this._mCollector.GetXform().SetSize(3, 3);
     
     // Setp C: Create the hero object in blue
-    this._mHero = new Renderable(gEngine.DefaultResources.GetConstColorShader());
+    this._mHero = new Renderable();
     this._mHero.SetColor([0, 0, 1, 1]);
     this._mHero.GetXform().SetPosition(20, 60);
     this._mHero.GetXform().SetSize(2, 3);
@@ -103,8 +103,9 @@ MyGame.prototype.Draw = function()
     
         // Step  C: Draw everything
         this._mPortal.Draw(this._mCamera.GetVPMatrix());
-        this._mCollector.Draw(this._mCamera.GetVPMatrix());
         this._mHero.Draw(this._mCamera.GetVPMatrix());
+        this._mCollector.Draw(this._mCamera.GetVPMatrix());
+        
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw

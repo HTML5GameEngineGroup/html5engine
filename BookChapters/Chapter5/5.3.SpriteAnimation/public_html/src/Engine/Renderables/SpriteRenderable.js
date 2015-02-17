@@ -1,3 +1,4 @@
+
 /*
  * File: SpriteRenderable.js
  *  
@@ -75,6 +76,7 @@ SpriteRenderable.prototype.GetTexCoordinateArray = function() {
       this._mTexLeft,   this._mTexBottom
     ];
 };
+
 //--- end of Public Methods
 //
 //</editor-fold>

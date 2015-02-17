@@ -62,7 +62,7 @@ FontRenderable.prototype.SetText = function(t) {
         this._mText = t; 
         // use height as a reference to set the width
         var w = t.length * this.GetXform().GetHeight();
-        this.GetXform().SetWidth(w);
+        // this.GetXform().SetWidth(w);
 };
 
 FontRenderable.prototype.GetFont = function() { return this._mFont; };

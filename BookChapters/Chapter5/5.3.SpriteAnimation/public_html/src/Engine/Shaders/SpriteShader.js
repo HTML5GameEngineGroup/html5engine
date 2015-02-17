@@ -30,7 +30,6 @@ function SpriteShader(vertexShaderPath, fragmentShaderPath)
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initTexCoord), gl.DYNAMIC_DRAW);
             // DYNAMIC_DRAW: says buffer content may change!
 };
-
 // get all the prototype functions from SimpleShader
 gEngine.Core.InheritPrototype(SpriteShader, TextureShader);
 

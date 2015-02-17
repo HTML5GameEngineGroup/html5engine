@@ -15,7 +15,8 @@ gEngine.Fonts = function()
     
  // ==> Should store into gEngine.DefaultResources!!
  
-    var _kDefaultFont = "resources/fonts/Consolas-72-NoKerning";
+ //LOAD SYSTEM DEFAULT FONT!
+    var _kDefaultFont = "resources/fonts/Consolas-72";
     
     var InitFont = function()
     {

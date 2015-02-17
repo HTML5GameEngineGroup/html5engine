@@ -30,7 +30,6 @@ function SpriteShader(vertexShaderPath, fragmentShaderPath)
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initTexCoord), gl.DYNAMIC_DRAW);
             // DYNAMIC_DRAW: says buffer content may change!
 };
-
 // get all the prototype functions from SimpleShader
 gEngine.Core.InheritPrototype(SpriteShader, TextureShader);
 
@@ -38,6 +37,19 @@ gEngine.Core.InheritPrototype(SpriteShader, TextureShader);
 
 // <editor-fold desc="Public Methods">
 
+// the expected texture cooridnate array is an array of 8 floats where elements:
+    //  [0] [1]: is x/y cooridnate of Top-Right 
+    //  [2] [3]: is x/y coordinate of Top-Left
+    //  [4] [5]: is x/y coordinate of Bottom-Right
+    //  [6] [7]: is x/y coordinate of Bottom-Left
+    // Convention: eName is an enumerated data type
+SpriteShader.eTextureCoordArray = Object.freeze({
+            eLeft: 2,
+            eRight: 0,
+            eTop: 1,
+            eBottom: 5
+});
+    
 // Overriding the Activation of the shader for rendering
 SpriteShader.prototype.ActivateShader = function(pixelColor, vpMatrix) {
     // fist call the super class's activate

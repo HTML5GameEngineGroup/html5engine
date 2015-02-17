@@ -24,7 +24,8 @@ function MyGame()
     this._mPortal = null;
     this._mCollector = null;
     this._mFontImage = null;
-    this._mMinion = null;
+    this._mRightMinion = null;
+    this._mLeftMinion = null;
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
@@ -92,10 +93,32 @@ MyGame.prototype.Initialize = function()
     this._mFontImage.GetXform().SetPosition(13, 62);
     this._mFontImage.GetXform().SetSize(4, 4);
     
-    this._mMinion= new SpriteRenderable(this._kMinionSprite);
-    this._mMinion.SetColor([1, 1, 1, 0]);
-    this._mMinion.GetXform().SetPosition(26, 56);
-    this._mMinion.GetXform().SetSize(5, 2.5);
+    // The right minion
+    this._mRightMinion= new SpriteAnimateRenderable(this._kMinionSprite);
+    this._mRightMinion.SetColor([1, 1, 1, 0]);
+    this._mRightMinion.GetXform().SetPosition(26, 56.5);
+    this._mRightMinion.GetXform().SetSize(4, 3.2);
+    this._mRightMinion.SetSpriteSequence(512, 0,     // first element pixel position: top-right 512 is top of image, 0 is right of image
+                                    204,164,    // widthxheight in pixels
+                                    5,          // number of elements in this sequence
+                                    0);         // horizontal padding in between
+    this._mRightMinion.SetAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateRight);
+    this._mRightMinion.SetAnimationSpeed(50);
+                                // show each element for _mAnimSpeed updates
+    
+    // the left minion
+    this._mLeftMinion= new SpriteAnimateRenderable(this._kMinionSprite);
+    this._mLeftMinion.SetColor([1, 1, 1, 0]);
+    this._mLeftMinion.GetXform().SetPosition(15, 56.5);
+    this._mLeftMinion.GetXform().SetSize(4, 3.2);
+    this._mLeftMinion.SetSpriteSequence(348, 0,     // first element pixel position: top-right 164 from 512 is top of image, 0 is right of image
+                                    204,164,    // widthxheight in pixels
+                                    5,          // number of elements in this sequence
+                                    0);         // horizontal padding in between
+    this._mLeftMinion.SetAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateRight);
+    this._mLeftMinion.SetAnimationSpeed(50);
+                                // show each element for _mAnimSpeed updates
+
     
     // Setp D: Create the hero object with texture from lower-left corner of 
     this._mHero = new SpriteRenderable(this._kMinionSprite);
@@ -124,7 +147,8 @@ MyGame.prototype.Draw = function()
         this._mCollector.Draw(this._mCamera.GetVPMatrix());
         this._mHero.Draw(this._mCamera.GetVPMatrix());
         this._mFontImage.Draw(this._mCamera.GetVPMatrix());
-        this._mMinion.Draw(this._mCamera.GetVPMatrix());
+        this._mRightMinion.Draw(this._mCamera.GetVPMatrix());
+        this._mLeftMinion.Draw(this._mCamera.GetVPMatrix());
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
@@ -177,28 +201,28 @@ MyGame.prototype.Update = function()
        b = 0;
    if (r < 0)
        r = 1.0;
-   
-   this._mFontImage.SetTexCoordinate(
-           texCoord[SpriteRenderable.eTexCoordArray.eLeft], r,
-           b, texCoord[SpriteRenderable.eTexCoordArray.eTop]);
-           
-    // For regular: zoom to the bottom right corner by changing top left
-    var texCoord = this._mMinion.GetTexCoordinateArray();
-            // The 8 elements:
-            //      _mTexRight,  _mTexTop,          // x,y of top-right
-            //      _mTexLeft,   _mTexTop,
-            //      _mTexRight,  _mTexBottom,
-            //      _mTexLeft,   _mTexBottom
-   var t = texCoord[SpriteRenderable.eTexCoordArray.eTop] - deltaT;
-   var l = texCoord[SpriteRenderable.eTexCoordArray.eLeft] + deltaT;
-   
-   if (l > 0.5)
-       l = 0;
-   if (t < 0.5)
-       t = 1.0;
-   
-   this._mMinion.SetTexCoordinate(
-           l, texCoord[SpriteRenderable.eTexCoordArray.eRight],
-           texCoord[SpriteRenderable.eTexCoordArray.eBottom], t);
-            
+
+    // remember to update this._mRightMinion's animation
+    this._mRightMinion.UpdateAnimation();
+    this._mLeftMinion.UpdateAnimation();
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.One)) {
+        this._mRightMinion.SetAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateLeft);
+        this._mLeftMinion.SetAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateLeft);
+    }
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Two)) {
+        this._mRightMinion.SetAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateSwing);
+        this._mLeftMinion.SetAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateSwing);
+    }
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Three)) {
+        this._mRightMinion.SetAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateRight);
+        this._mLeftMinion.SetAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateRight);
+    }
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Four)) {
+        this._mRightMinion.IncAnimationSpeed(-2);
+        this._mLeftMinion.IncAnimationSpeed(-2);
+    }
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Five)) {
+        this._mRightMinion.IncAnimationSpeed(2);
+        this._mLeftMinion.IncAnimationSpeed(2);
+    }
 };

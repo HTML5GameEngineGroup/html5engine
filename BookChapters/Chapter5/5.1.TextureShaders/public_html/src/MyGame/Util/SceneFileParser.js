@@ -3,9 +3,9 @@
  */
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function SceneFileParser(sceneFile)
+function SceneFileParser(sceneFilePath)
 {
-    this._mSceneXml = gEngine.ResourceMap.RetrieveAsset(sceneFile);
+    this._mSceneXml = gEngine.ResourceMap.RetrieveAsset(sceneFilePath);
 };
 
 SceneFileParser.prototype._GetElm = function(tagElm)

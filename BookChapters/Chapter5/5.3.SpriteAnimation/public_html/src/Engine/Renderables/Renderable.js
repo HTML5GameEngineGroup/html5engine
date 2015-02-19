@@ -30,6 +30,6 @@ Renderable.prototype.GetXform = function() { return this._mXform; };
 Renderable.prototype.SetColor = function(color) { this._mColor = color; };
 Renderable.prototype.GetColor = function() { return this._mColor; };
 //--- end of Public Methods
-//
-Renderable.prototype._SetShader = function(s) { this._mShader = s; };
 //</editor-fold>
+
+Renderable.prototype._SetShader = function(s) { this._mShader = s; };

@@ -15,8 +15,8 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
     this._mCompiledShader = null;  // reference to the compiled shader in webgl context  
     this._mShaderVertexPositionAttribute = null; // reference to SquareVertexPosition within the shader
     this._mModelTransform = null;        // reference to the model transform matrix in vertex shader
-    this._mViewProjTransform = null;             // reference to the View/Projection matrix in the vertex shader
-    this._mPixelColor = null;                    // reference to the pixelColor uniform in the fragment shader
+    this._mViewProjTransform = null;     // reference to the View/Projection matrix in the vertex shader
+    this._mPixelColor = null;            // reference to the pixelColor uniform in the fragment shader
 
     var gl = gEngine.Core.GetGL();
          
@@ -43,7 +43,6 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
     this._mShaderVertexPositionAttribute = gl.getAttribLocation(
                     this._mCompiledShader, "aSquareVertexPosition");
 
-    
     // Step E: Activates the vertex buffer loaded in EngineCore_VertexBuffer.js
     gl.bindBuffer(gl.ARRAY_BUFFER, gEngine.VertexBuffer.GetGLVertexRef());
     
@@ -55,13 +54,10 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
         0,              // number of bytes to skip in between elements
         0);             // offsets to the first element
     
-    // Step G: references: uniforms: uModelTransform, uPixelColor, and uViewProjTransform
-    this._mModelTransform = gl.getUniformLocation(
-                    this._mCompiledShader, "uModelTransform");
-    this._mPixelColor = gl.getUniformLocation(
-                    this._mCompiledShader, "uPixelColor");
-    this._mViewProjTransform = gl.getUniformLocation(
-                    this._mCompiledShader, "uViewProjTransform");
+    // Step G: references: uniforms: uPixelColor, uModelTransform, and uViewProjTransform
+    this._mPixelColor = gl.getUniformLocation(this._mCompiledShader, "uPixelColor");
+    this._mModelTransform = gl.getUniformLocation(this._mCompiledShader, "uModelTransform");   
+    this._mViewProjTransform = gl.getUniformLocation(this._mCompiledShader, "uViewProjTransform");
 };
 //</editor-fold>
 

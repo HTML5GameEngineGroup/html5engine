@@ -51,8 +51,10 @@ gEngine.GameLoop = function()
     };
 
     // update and draw functions must be set before this.
-    var _StartLoop = function()
+    var Start = function(myGame)
     {
+        _mMyGame = myGame;
+        
         // Step A: reset frame time 
         _mPreviousTime = Date.now();
         _mLagTime = 0.0;
@@ -64,11 +66,9 @@ gEngine.GameLoop = function()
         requestAnimationFrame(function(){_RunLoop.call(_mMyGame);});
     };
     
-    var Start = function(myGame)
-    {
-        _mMyGame = myGame;
-        _StartLoop();
-    };
+    // No Stop or Pause function, as all input are pull during the loop
+    // once stopped, tricky to start the loop
+    // You should implement pausing of game in game update.
     
     var oPublic =
     {

@@ -97,7 +97,7 @@ BlueLevel.prototype.Update = function()
     var xform = this._mSqSet[0].GetXform();
     var deltaX = 0.05;
     
-    /// MOve right and swap ovre
+    /// Move right and swap ovre
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
         gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(deltaX);
@@ -109,7 +109,7 @@ BlueLevel.prototype.Update = function()
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
         gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(-deltaX);
-        if (xform.GetXPos() < 11) { // this is the left-bundary
+        if (xform.GetXPos() < 11) { // this is the left-boundary
             gEngine.GameLoop.Stop();
         }
     }

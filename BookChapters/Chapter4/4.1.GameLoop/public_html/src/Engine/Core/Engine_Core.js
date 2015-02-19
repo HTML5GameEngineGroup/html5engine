@@ -27,7 +27,7 @@ gEngine.Core = function()
             var canvas = document.getElementById(htmlCanvasID);
         
             // Get standard webgl, or experimental
-            // binds webgl the the Canvas area on the web-page to the global variable "_mGL"
+            // binds webgl the the Canvas area on the web-page to the variable "_mGL"
             _mGL = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     
             if (_mGL === null) {

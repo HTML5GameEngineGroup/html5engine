@@ -68,7 +68,7 @@ BlueLevel.prototype.Update = function()
     var xform = this._mSqSet[1].GetXform();
     var deltaX = 0.05;
     
-    /// MOve right and swap ovre
+    /// Move right and swap ovre
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
         xform.IncXPosBy(deltaX);
         if (xform.GetXPos() > 30)  // this is the right-bound of the window
@@ -78,7 +78,7 @@ BlueLevel.prototype.Update = function()
     // Step A: test for white square movement
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
         xform.IncXPosBy(-deltaX);
-        if (xform.GetXPos() < 11) { // this is the left-bundary
+        if (xform.GetXPos() < 11) { // this is the left-boundary
             gEngine.GameLoop.Stop();
         }
     }

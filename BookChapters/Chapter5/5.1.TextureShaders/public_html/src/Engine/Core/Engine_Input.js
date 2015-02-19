@@ -44,17 +44,19 @@ gEngine.Input = function()
         L : 76,
         R : 82,
         S : 83,
-        W : 87
+        W : 87,
+        
+        LastKeyCode: 222
         };
     
-    var kLastKeyCode = 222;
+    
 
     // Previous key state
-    var _mKeyPreviousState = {};
+    var _mKeyPreviousState = Array();
     // The pressed keys.
-    var _mIsKeyPressed = {};
+    var _mIsKeyPressed = Array();
     // Click events: once an event is set, it will remain there until polled
-    var _mIsKeyClicked = {};
+    var _mIsKeyClicked = Array();
 
 
     // Event service functions
@@ -65,7 +67,7 @@ gEngine.Input = function()
     
     var Initialize = function ()
     {
-        for (var i = 0; i<kLastKeyCode; i++) {
+        for (var i = 0; i<_kKeys.LastKeyCode; i++) {
             _mIsKeyPressed[i] = false;
             _mKeyPreviousState[i] = false;
             _mIsKeyClicked[i] = false;
@@ -77,7 +79,7 @@ gEngine.Input = function()
     };
     
     var Update = function() {
-        for (var i = 0; i<kLastKeyCode; i++) {
+        for (var i = 0; i<_kKeys.LastKeyCode; i++) {
              _mIsKeyClicked[i] = (!_mKeyPreviousState[i]) && _mIsKeyPressed[i];
             _mKeyPreviousState[i] = _mIsKeyPressed[i];
         }

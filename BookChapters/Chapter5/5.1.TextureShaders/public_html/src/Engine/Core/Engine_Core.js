@@ -23,12 +23,12 @@ gEngine.Core = function()
         var GetGL = function() { return _mGL; };
         
         // initialize all of the EngineCore components
-        var InitializeEngineCore = function(htmlCanvasID, callbackFunction) {
+        var InitializeEngineCore = function(htmlCanvasID, myGame) {
             _InitializeWebGL(htmlCanvasID);
             gEngine.VertexBuffer.Initialize();
             gEngine.Input.Initialize();
             gEngine.AudioClips.InitAudioContext();
-            gEngine.DefaultResources.Initialize(callbackFunction);
+            gEngine.DefaultResources.Initialize(myGame.LoadAndBeginScene.bind(myGame));
         };
         
         // initialize the WebGL, the vertex buffer and compile the shaders
@@ -36,7 +36,7 @@ gEngine.Core = function()
             var canvas = document.getElementById(htmlCanvasID);
         
             // Get standard webgl, or experimental
-            // binds webgl the the Canvas area on the web-page to the global variable "_mGL"
+            // binds webgl the the Canvas area on the web-page to the variable _mGL
             _mGL = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
             
             // Allows transperency with textures.

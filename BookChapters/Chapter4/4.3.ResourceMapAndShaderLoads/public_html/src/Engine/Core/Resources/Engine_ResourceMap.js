@@ -29,6 +29,7 @@ gEngine.ResourceMap = function()
     {
         _mResourceMap[rName] = new _MapEntry(rName); // place holder
         ++_mNumOutstandingLoads;
+        return true;
     };
     
     var AsyncLoadCompleted = function(rName, loadedAsset)
@@ -90,7 +91,7 @@ gEngine.ResourceMap = function()
         //<editor-fold desc="resource storage and reference count support">
         RetrieveAsset: RetrieveAsset,
         UnloadAsset: UnloadAsset,
-        IsAssetLoaded: IsAssetLoaded,
+        IsAssetLoaded: IsAssetLoaded
         //</editor-fold>
     };
     return oPublic;

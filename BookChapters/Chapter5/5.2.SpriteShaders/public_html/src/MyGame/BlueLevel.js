@@ -117,7 +117,6 @@ BlueLevel.prototype.Update = function()
     // continously change texture tinting
     var c = this._mSqSet[1].GetColor();
     var ca = c[3] + deltaX;
-    if (ca > 1)
-        ca = 0;
+    if (ca > 1) ca = 0;
     c[3] = ca;
 };

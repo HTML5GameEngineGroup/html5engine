@@ -33,7 +33,7 @@ gEngine.Input = function()
         Nine : 57,
     
         // Alphabets
-        A : 65,  
+        A : 65,
         D : 68,
         E : 69,
         F : 70,

@@ -44,7 +44,7 @@ MyGame.prototype.LoadAndBeginScene = function()
 
 MyGame.prototype.UnloadScene = function() 
 {
-    // Step A: Game loop not running, unload all assets
+    // Game loop not running, unload all assets
     // stop the background audio
     gEngine.AudioClips.StopBackgroundAudio();
     
@@ -57,7 +57,7 @@ MyGame.prototype.UnloadScene = function()
     gEngine.Textures.UnloadTexture(this._kFontImage);
     gEngine.Textures.UnloadTexture(this._kMinionSprite);
 
-    // Step B: starts the next level
+    // starts the next level
     var nextLevel = new BlueLevel();  // next level to be loaded
     nextLevel.LoadAndBeginScene();
 };
@@ -156,11 +156,14 @@ MyGame.prototype.Update = function()
     // continously change texture tinting
     var c = this._mPortal.GetColor();
     var ca = c[3] + deltaX;
-    if (ca > 1)
-        ca = 0;
+    if (ca > 1) ca = 0;
     c[3] = ca;
     
+    
+    // New update code for changing the sub-texture regions being shown"
     var deltaT = 0.001;
+    
+    // <editor-fold desc="The font image:">
     // zoom into the texture by updating texture coordinate
     // For font: zoom to the upper left corner by changing bottom right
     var texCoord = this._mFontImage.GetTexCoordinateArray();
@@ -169,36 +172,31 @@ MyGame.prototype.Update = function()
             //      _mTexLeft,   _mTexTop,
             //      _mTexRight,  _mTexBottom,
             //      _mTexLeft,   _mTexBottom
-   var sh = gEngine.DefaultResources.GetSpriteShader();
    var b = texCoord[SpriteRenderable.eTexCoordArray.eBottom] + deltaT;
    var r = texCoord[SpriteRenderable.eTexCoordArray.eRight] - deltaT;
-   
-   if (b > 1.0)
-       b = 0;
-   if (r < 0)
-       r = 1.0;
-   
+   if (b > 1.0)  b = 0;
+   if (r < 0)   r = 1.0;
    this._mFontImage.SetTexCoordinate(
            texCoord[SpriteRenderable.eTexCoordArray.eLeft], r,
            b, texCoord[SpriteRenderable.eTexCoordArray.eTop]);
+    // </editor-fold>
            
-    // For regular: zoom to the bottom right corner by changing top left
+    // <editor-fold desc="The minion image:">
+    // For minion: zoom to the bottom right corner by changing top left
     var texCoord = this._mMinion.GetTexCoordinateArray();
             // The 8 elements:
             //      _mTexRight,  _mTexTop,          // x,y of top-right
             //      _mTexLeft,   _mTexTop,
             //      _mTexRight,  _mTexBottom,
             //      _mTexLeft,   _mTexBottom
-   var t = texCoord[SpriteRenderable.eTexCoordArray.eTop] - deltaT;
-   var l = texCoord[SpriteRenderable.eTexCoordArray.eLeft] + deltaT;
+    var t = texCoord[SpriteRenderable.eTexCoordArray.eTop] - deltaT;
+    var l = texCoord[SpriteRenderable.eTexCoordArray.eLeft] + deltaT;
    
-   if (l > 0.5)
-       l = 0;
-   if (t < 0.5)
-       t = 1.0;
+    if (l > 0.5) l = 0;
+    if (t < 0.5) t = 1.0;
    
-   this._mMinion.SetTexCoordinate(
+    this._mMinion.SetTexCoordinate(
            l, texCoord[SpriteRenderable.eTexCoordArray.eRight],
            texCoord[SpriteRenderable.eTexCoordArray.eBottom], t);
-            
+    // </editor-fold>
 };

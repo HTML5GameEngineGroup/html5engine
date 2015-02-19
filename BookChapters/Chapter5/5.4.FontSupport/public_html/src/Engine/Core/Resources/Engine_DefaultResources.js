@@ -19,6 +19,9 @@ gEngine.DefaultResources = function()
     var _mTextureShader = null;
     var _mSpriteShader = null;
     
+    // Default font
+    var _kDefaultFont = "resources/fonts/system-default-font";
+    var _GetDefaultFont = function() { return _kDefaultFont; };
     
     var _CreateShaders = function(callBackFunction) {
         gEngine.ResourceMap.SetLoadCompleteCallback(null);
@@ -41,6 +44,9 @@ gEngine.DefaultResources = function()
         gEngine.TextFileLoader.LoadTextFile(_kTextureVS, gEngine.TextFileLoader.eTextFileType.eTextFile);
         gEngine.TextFileLoader.LoadTextFile(_kTextureFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
         
+        // load default font
+        gEngine.Fonts.LoadFont(_kDefaultFont);
+        
         gEngine.ResourceMap.SetLoadCompleteCallback(function() {_CreateShaders(callBackFunction);});
     };
     
@@ -51,7 +57,8 @@ gEngine.DefaultResources = function()
         Initialize: _Initialize,
         GetConstColorShader: _GetConstColorShader,
         GetTextureShader: _GetTextureShader,
-        GetSpriteShader: _GetSpriteShader
+        GetSpriteShader: _GetSpriteShader,
+        GetDefaultFont: _GetDefaultFont
     };
     return oPublic;
 }();

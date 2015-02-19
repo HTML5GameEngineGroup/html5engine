@@ -25,19 +25,6 @@ function SpriteShader(vertexShaderPath, fragmentShaderPath)
     
     var gl = gEngine.Core.GetGL();
     this._mTexCoordBuffer = gl.createBuffer();
-    
-    // the expected texture cooridnate array is an array of 8 floats where elements:
-    //  [0] [1]: is x/y cooridnate of Top-Right 
-    //  [2] [3]: is x/y coordinate of Top-Left
-    //  [4] [5]: is x/y coordinate of Bottom-Right
-    //  [6] [7]: is x/y coordinate of Bottom-Left
-    // Convention: eName is an enumerated data type
-    this.eTextureCoordArray = Object.freeze({
-            eLeft: 2,
-            eRight: 0,
-            eTop: 1,
-            eBottom: 5
-        });
 
     gl.bindBuffer(gl.ARRAY_BUFFER, this._mTexCoordBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initTexCoord), gl.DYNAMIC_DRAW);
@@ -50,7 +37,7 @@ gEngine.Core.InheritPrototype(SpriteShader, TextureShader);
 //</editor-fold>
 
 // <editor-fold desc="Public Methods">
-    
+
 // Overriding the Activation of the shader for rendering
 SpriteShader.prototype.ActivateShader = function(pixelColor, vpMatrix) {
     // fist call the super class's activate

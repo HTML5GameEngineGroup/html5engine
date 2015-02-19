@@ -12,22 +12,10 @@ var gEngine = gEngine || { };
 //    with the exact same name, with ".png" extension.
 gEngine.Fonts = function()
 {    
-    
- // ==> Should store into gEngine.DefaultResources!!
- 
- //LOAD SYSTEM DEFAULT FONT!
-    var _kDefaultFont = "resources/fonts/Consolas-72";
-    
-    var InitFont = function()
-    {
-        LoadFont(_kDefaultFont);
-    };
-    
     var StoreLoadedFont = function(fontInfoSourceString) {
         var fontName = fontInfoSourceString.slice(0, -4);  // trims the .fnt extension
         var fontInfo = gEngine.ResourceMap.RetrieveAsset(fontInfoSourceString);
         fontInfo.FontImage = fontName + ".png";
-        gEngine.ResourceMap.AsyncLoadRequested(fontName); // to register an entry in the map
         gEngine.ResourceMap.AsyncLoadCompleted(fontName, fontInfo); // to store the actual font info
     };
     
@@ -36,6 +24,8 @@ gEngine.Fonts = function()
         {
             var fontInfoSourceString = fontName + ".fnt";
             var textureSourceString = fontName + ".png";
+            
+            gEngine.ResourceMap.AsyncLoadRequested(fontName); // to register an entry in the map
             
             gEngine.Textures.LoadTexture(textureSourceString);
             gEngine.TextFileLoader.LoadTextFile(fontInfoSourceString, 
@@ -49,7 +39,14 @@ gEngine.Fonts = function()
     // be available for subsequent garbage collection
     var UnloadFont = function(fontName)
     {
-        gEngine.ResourceMap.DecAssetRefCount(fontName);
+        gEngine.ResourceMap.UnloadAsset(fontName);
+        if (!(gEngine.ResourceMap.IsAssetLoaded(fontName))) {
+            var fontInfoSourceString = fontName + ".fnt";
+            var textureSourceString = fontName + ".png";
+            
+            gEngine.Textures.UnloadTexture(textureSourceString);
+            gEngine.TextFileLoader.UnloadTextFile(fontInfoSourceString); 
+        };
     };
     
     var GetCharInfo = function(fontName, aChar)
@@ -72,14 +69,16 @@ gEngine.Fonts = function()
 
         returnInfo = new CharacterInfo();
         var texInfo = gEngine.Textures.GetTextureInfo(fontInfo.FontImage);
-        var width = charInfo.getAttribute("width") / texInfo.mWidth;
-        var height = charInfo.getAttribute("height") / texInfo.mHeight;
+        var leftPixel = Number(charInfo.getAttribute("x"));
+        var rightPixel = leftPixel + Number(charInfo.getAttribute("width")) - 1;
+        var topPixel = (texInfo.mHeight-1) - Number(charInfo.getAttribute("y"));
+        var bottomPixel = topPixel - Number(charInfo.getAttribute("height")) + 1;
 
         // texture coordinate information
-        returnInfo.mTexCoordLeft = charInfo.getAttribute("x") / texInfo.mWidth;
-        returnInfo.mTexCoordTop = 1 - (charInfo.getAttribute("y") / texInfo.mHeight);
-        returnInfo.mTexCoordRight = returnInfo.mTexCoordLeft + width;
-        returnInfo.mTexCoordBottom = returnInfo.mTexCoordTop - height;
+        returnInfo.mTexCoordLeft = leftPixel / (texInfo.mWidth-1);
+        returnInfo.mTexCoordTop = topPixel / (texInfo.mHeight-1);
+        returnInfo.mTexCoordRight = rightPixel / (texInfo.mWidth-1);
+        returnInfo.mTexCoordBottom = bottomPixel / (texInfo.mHeight-1);
         
         // relative character size
         var charWidth = charInfo.getAttribute("xadvance");
@@ -87,6 +86,7 @@ gEngine.Fonts = function()
         returnInfo.mCharHeight = charInfo.getAttribute("height") / charHeight;
         returnInfo.mCharWidthOffset = charInfo.getAttribute("xoffset") / charWidth;
         returnInfo.mCharHeightOffset = charInfo.getAttribute("yoffset") / charHeight;
+        returnInfo.mCharAspectRatio = charWidth / charHeight;
 
         return returnInfo;
     };
@@ -97,9 +97,7 @@ gEngine.Fonts = function()
     {
         LoadFont: LoadFont,
         UnloadFont: UnloadFont,
-        GetCharInfo: GetCharInfo,
-        InitFont: InitFont,
-        DefaultFont: _kDefaultFont
+        GetCharInfo: GetCharInfo
     };
     return oPublic;
 }();
@@ -120,4 +118,7 @@ function CharacterInfo()
   this.mCharHeight = 1;
   this.mCharWidthOffset = 0;
   this.mCharHeightOffset = 0;
+  
+  // reference of char width/height ration
+  this.mCharAspectRatio = 1;
 };

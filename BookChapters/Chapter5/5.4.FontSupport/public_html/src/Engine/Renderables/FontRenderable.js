@@ -8,7 +8,7 @@
 
 function FontRenderable(aString)
 {
-    this._mFont = gEngine.Fonts.DefaultFont;
+    this._mFont = gEngine.DefaultResources.GetDefaultFont();
     this._mOneChar = new SpriteRenderable(this._mFont + ".png");
     this._mXform = new Transform(); // transform that moves this object around
     this._mText = aString;
@@ -23,7 +23,7 @@ FontRenderable.prototype.Draw = function(vpMatrix) {
     // chars in the _mText string.
     var widthOfOneChar = this._mXform.GetWidth() / this._mText.length;
     var heightOfOneChar = this._mXform.GetHeight();
-    this._mOneChar.GetXform().SetRotationInRad(this._mXform.GetRotationInRad());
+    // this._mOneChar.GetXform().SetRotationInRad(this._mXform.GetRotationInRad());
     var yPos = this._mXform.GetYPos();
     
     // center position of the first char
@@ -34,7 +34,7 @@ FontRenderable.prototype.Draw = function(vpMatrix) {
         var charInfo = gEngine.Fonts.GetCharInfo(this._mFont, aChar);
         
         // set the texture coordinate
-        this._mOneChar.SetTextureCoordinate(charInfo.mTexCoordLeft, charInfo.mTexCoordRight,
+        this._mOneChar.SetTexCoordinate(charInfo.mTexCoordLeft, charInfo.mTexCoordRight,
                 charInfo.mTexCoordBottom, charInfo.mTexCoordTop);
         
         // now the size of the char
@@ -47,7 +47,6 @@ FontRenderable.prototype.Draw = function(vpMatrix) {
         var yOffset = heightOfOneChar * charInfo.mCharHeightOffset * 0.5;
         
         this._mOneChar.GetXform().SetPosition(xPos - xOffset, yPos - yOffset);        
-        //
         
         this._mOneChar.Draw(vpMatrix);
         
@@ -59,14 +58,21 @@ FontRenderable.prototype.Draw = function(vpMatrix) {
 FontRenderable.prototype.GetXform = function() { return this._mXform; };
 FontRenderable.prototype.GetText = function() { return this._mText; };
 FontRenderable.prototype.SetText = function(t) { 
-        this._mText = t; 
-        // use height as a reference to set the width
-        var w = t.length * this.GetXform().GetHeight();
-        // this.GetXform().SetWidth(w);
+    this._mText = t;
+    this.SetTextHeight(this.GetXform().GetHeight());
+};
+FontRenderable.prototype.SetTextHeight = function(h) { 
+    var charInfo = gEngine.Fonts.GetCharInfo(this._mFont, "A".charCodeAt(0)); // this is for "A"
+    var w = h * charInfo.mCharAspectRatio;
+    this.GetXform().SetSize(w * this._mText.length, h);
 };
 
+
 FontRenderable.prototype.GetFont = function() { return this._mFont; };
-FontRenderable.prototype.SetFont = function(f) { this._mFont = f; };
+FontRenderable.prototype.SetFont = function(f) { 
+    this._mFont = f; 
+    this._mOneChar.SetTexture(this._mFont + ".png");
+};
 
 FontRenderable.prototype.SetColor = function(c) { this._mOneChar.SetColor(c); };
 FontRenderable.prototype.GetColor = function() { return this._mOneChar.GetColor(); };

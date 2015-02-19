@@ -40,7 +40,7 @@ MyGame.prototype.LoadAndBeginScene = function()
 
 MyGame.prototype.UnloadScene = function() 
 {
-    // Step A: Game loop not running, unload all assets
+    // Game loop not running, unload all assets
     // stop the background audio
     gEngine.AudioClips.StopBackgroundAudio();
     
@@ -53,7 +53,7 @@ MyGame.prototype.UnloadScene = function()
     gEngine.Textures.UnloadTexture(this._kPortal);
     gEngine.Textures.UnloadTexture(this._kCollector);
 
-    // Step B: starts the next level
+    // starts the next level
     var nextLevel = new BlueLevel();  // next level to be loaded
     nextLevel.LoadAndBeginScene();
 };
@@ -69,7 +69,7 @@ MyGame.prototype.Initialize = function()
     this._mCamera.SetBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
     
-    // Step B: Create the support objects
+    // Step B: Create the game objects
     this._mPortal = new TextureRenderable(this._kPortal);
     this._mPortal.SetColor([1, 0, 0, 0.2]);  // tints red
     this._mPortal.GetXform().SetPosition(25, 60);
@@ -88,7 +88,6 @@ MyGame.prototype.Initialize = function()
     
     // now start the bg music ...
     gEngine.AudioClips.PlayBackgroundAudio(this._kBgClip);
-    
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -137,7 +136,6 @@ MyGame.prototype.Update = function()
     // continously change texture tinting
     var c = this._mPortal.GetColor();
     var ca = c[3] + deltaX;
-    if (ca > 1)
-        ca = 0;
+    if (ca > 1) ca = 0;
     c[3] = ca;
 };

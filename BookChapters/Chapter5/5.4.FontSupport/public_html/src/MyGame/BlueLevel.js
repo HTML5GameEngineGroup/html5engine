@@ -9,10 +9,6 @@ function BlueLevel()
     // scene file name
     this._kSceneFile = "resources/BlueLevel.xml";
     
-    // audio clips: supports both mp3 and wav formats
-    this._kBgClip = "resources/sounds/BGClip.mp3";
-    this._kCue = "resources/sounds/BlueLevel_cue.wav";
-    
      // textures: 
     this._kPortal = "resources/minion_portal.jpg";      // jpg does not support transparency
     this._kCollector = "resources/minion_collector.jpg";      
@@ -29,11 +25,7 @@ BlueLevel.prototype.LoadAndBeginScene = function()
 {
     // load the scene file
     gEngine.TextFileLoader.LoadTextFile(this._kSceneFile, gEngine.TextFileLoader.eTextFileType.eXMLFile); 
-                
-    // loads the audios
-    gEngine.AudioClips.LoadAudio(this._kBgClip);
-    gEngine.AudioClips.LoadAudio(this._kCue);
-    
+                    
     // load the textures
     gEngine.Textures.LoadTexture(this._kPortal);
     gEngine.Textures.LoadTexture(this._kCollector);
@@ -42,14 +34,9 @@ BlueLevel.prototype.LoadAndBeginScene = function()
 };
 
 BlueLevel.prototype.UnloadScene = function() 
-{
-    // stop the background audio
-    gEngine.AudioClips.StopBackgroundAudio();
-    
+{    
     // unload the scene flie and loaded resoruces
     gEngine.TextFileLoader.UnloadTextFile(this._kSceneFile);
-    gEngine.AudioClips.UnloadAudio(this._kBgClip);
-    gEngine.AudioClips.UnloadAudio(this._kCue);
     gEngine.Textures.UnloadTexture(this._kPortal);
     gEngine.Textures.UnloadTexture(this._kCollector);
     
@@ -66,11 +53,7 @@ BlueLevel.prototype.Initialize = function()
     
     // Step B: Read all the squares and textureSquares
     sceneParser.ParseSquares(this._mSqSet);
-    sceneParser.ParseTextureSquares(this._mSqSet);
-    
-    // now start the bg music ...
-    gEngine.AudioClips.PlayBackgroundAudio(this._kBgClip);
-    
+    sceneParser.ParseTextureSquares(this._mSqSet);    
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -99,7 +82,6 @@ BlueLevel.prototype.Update = function()
     
     /// MOve right and swap ovre
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
-        gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(deltaX);
         if (xform.GetXPos() > 30)  // this is the right-bound of the window
             xform.SetPosition(12, 60);
@@ -107,17 +89,9 @@ BlueLevel.prototype.Update = function()
     
     // Step A: test for white square movement
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
-        gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) { // this is the left-bundary
             gEngine.GameLoop.Stop();
         }
     }
-    
-    // continously change texture tinting
-    var c = this._mSqSet[1].GetColor();
-    var ca = c[3] + deltaX;
-    if (ca > 1)
-        ca = 0;
-    c[3] = ca;
 };

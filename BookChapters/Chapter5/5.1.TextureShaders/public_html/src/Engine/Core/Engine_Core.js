@@ -28,11 +28,9 @@ gEngine.Core = function()
             gEngine.VertexBuffer.Initialize();
             gEngine.Input.Initialize();
             gEngine.AudioClips.InitAudioContext();
-            gEngine.DefaultResources.Initialize(
-                    function(){
-                        myGame.LoadAndBeginScene.bind(myGame);
-                        gEngine.GameLoop.Start(this);
-                    });
+            
+            // Function to be called within an anomynous function to not call immediatly.
+            gEngine.DefaultResources.Initialize(function(){StartScene(myGame);});
         };
         
         // initialize the WebGL, the vertex buffer and compile the shaders
@@ -67,13 +65,20 @@ gEngine.Core = function()
             prototype.constructor = subClass;
             subClass.prototype = prototype;
         };
+        
+        var StartScene = function(scene)
+        {
+            scene.LoadScene.call(scene); // Called in this way to keep correct context
+            gEngine.GameLoop.Start(scene);
+        };
     // -- end of public methods
 
     var oPublic = {
         GetGL: GetGL,
         InitializeEngineCore: InitializeEngineCore,
         ClearCanvas: ClearCanvas,
-        InheritPrototype: InheritPrototype
+        InheritPrototype: InheritPrototype,
+        StartScene: StartScene
     };
 
     return oPublic;

@@ -11,11 +11,9 @@ function Scene() {};
 // when done 
 //  => start the GameLoop
 // The game loop will call initialize and then Update/Draw
-Scene.prototype.LoadAndBeginScene = function() {
+Scene.prototype.LoadScene = function() {
     // override to load scene specific contents
-    // when done loading, call initialize to 
-    // initilaize the level 
-    gEngine.GameLoop.Start(this);
+    // when done loading
 };
 
 // Performs all initialization functions

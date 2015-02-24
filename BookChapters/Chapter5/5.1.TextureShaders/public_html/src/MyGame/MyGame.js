@@ -24,7 +24,7 @@ function MyGame()
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
-MyGame.prototype.LoadAndBeginScene = function() 
+MyGame.prototype.LoadScene = function() 
 {
    // Step A: loads the audios
    gEngine.AudioClips.LoadAudio(this._kBgClip);
@@ -33,9 +33,6 @@ MyGame.prototype.LoadAndBeginScene = function()
    // Step B: loads the textures
    gEngine.Textures.LoadTexture(this._kPortal);
    gEngine.Textures.LoadTexture(this._kCollector);
-
-    // Step C: Start the game loop running
-    gEngine.GameLoop.Start(this);
 };
 
 MyGame.prototype.UnloadScene = function() 
@@ -55,7 +52,7 @@ MyGame.prototype.UnloadScene = function()
 
     // starts the next level
     var nextLevel = new BlueLevel();  // next level to be loaded
-    nextLevel.LoadAndBeginScene();
+    gEngine.Core.StartScene(nextLevel);
 };
 
 MyGame.prototype.Initialize = function() 

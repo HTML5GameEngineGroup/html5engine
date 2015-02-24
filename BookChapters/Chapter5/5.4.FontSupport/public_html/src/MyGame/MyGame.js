@@ -36,7 +36,7 @@ function MyGame()
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
-MyGame.prototype.LoadAndBeginScene = function() 
+MyGame.prototype.LoadScene = function() 
 {
    // Step A: loads the textures
    gEngine.Textures.LoadTexture(this._kFontImage);
@@ -48,9 +48,6 @@ MyGame.prototype.LoadAndBeginScene = function()
     gEngine.Fonts.LoadFont(this._kFontCon32);
     gEngine.Fonts.LoadFont(this._kFontCon72);
     gEngine.Fonts.LoadFont(this._kFontSeg96);
-
-    // Step C: Start the game loop running
-    gEngine.GameLoop.Start(this);
 };
 
 MyGame.prototype.UnloadScene = function() 
@@ -66,8 +63,8 @@ MyGame.prototype.UnloadScene = function()
     gEngine.Fonts.UnloadFont(this._kFontSeg96);
 
     // Step B: starts the next level
-    var nextLevel = new BlueLevel();  // next level to be loaded
-    nextLevel.LoadAndBeginScene();
+    var nextLevel = new GameOver();  // next level to be loaded
+    gEngine.Core.StartScene(nextLevel);
 };
 
 MyGame.prototype.Initialize = function() 

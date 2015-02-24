@@ -16,11 +16,11 @@ function BlueLevel()
 };
 gEngine.Core.InheritPrototype(BlueLevel, Scene);
 
-BlueLevel.prototype.LoadAndBeginScene = function() 
+BlueLevel.prototype.LoadScene = function() 
 {
     // load the scene file
     gEngine.TextFileLoader.LoadTextFile(this._kSceneFile, gEngine.TextFileLoader.eTextFileType.eXMLFile); 
-    gEngine.GameLoop.Start(this);
+                
 };
 
 BlueLevel.prototype.UnloadScene = function() 
@@ -29,7 +29,7 @@ BlueLevel.prototype.UnloadScene = function()
     gEngine.TextFileLoader.UnloadTextFile(this._kSceneFile);
     
     var nextLevel = new MyGame();  // load the next level
-    nextLevel.LoadAndBeginScene();
+    gEngine.Core.StartScene(nextLevel);
 };
 
 BlueLevel.prototype.Initialize = function() 

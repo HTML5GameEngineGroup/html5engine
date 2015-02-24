@@ -39,9 +39,6 @@ MyGame.prototype.Initialize = function()
     // Step  E: Initialize the red renderable object: centered 2x2
     this._mRedSq.GetXform().SetPosition(20, 60);
     this._mRedSq.GetXform().SetSize(2, 2);
-    
-    // Step F: Start the game loop running
-    gEngine.GameLoop.Start(this);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more

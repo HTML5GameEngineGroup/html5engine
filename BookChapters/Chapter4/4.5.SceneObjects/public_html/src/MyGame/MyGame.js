@@ -15,12 +15,9 @@ function MyGame()
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
-MyGame.prototype.LoadAndBeginScene = function() 
+MyGame.prototype.LoadScene = function() 
 {
-    // Step A: Load assests (nothing for this game level)
-    
-    // Step B: Start the game loop running
-    gEngine.GameLoop.Start(this);
+    // nothing for this game level
 };
 
 MyGame.prototype.UnloadScene = function() 
@@ -30,7 +27,7 @@ MyGame.prototype.UnloadScene = function()
     
     // Step B: starts the next level
     var nextLevel = new BlueLevel();  // next level to be loaded
-    nextLevel.LoadAndBeginScene();
+    gEngine.Core.StartScene(nextLevel);
 };
 
 MyGame.prototype.Initialize = function() 

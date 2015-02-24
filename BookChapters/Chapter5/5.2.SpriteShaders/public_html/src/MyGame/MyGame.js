@@ -5,16 +5,10 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function MyGame()
-{           
-     // audio clips: supports both mp3 and wav formats
-    this._kBgClip = "resources/sounds/BGClip.mp3";
-    this._kCue = "resources/sounds/MyGame_cue.wav";
-    
+{               
     // textures: 
-    this._kPortal = "resources/minion_portal.png";      // supports png with transparency
-    this._kCollector = "resources/minion_collector.png";      
     this._kFontImage = "resources/Consolas-72.png";
-    this._kMinionSprite = "resources/minion_sprite.png";
+    this._kMinionSprite = "resources/minion_sprite.png";  // Portal and Collector are embbeded here
     
     // The camera to view the rectangles
     this._mCamera = null;
@@ -28,38 +22,18 @@ function MyGame()
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
-MyGame.prototype.LoadAndBeginScene = function() 
+MyGame.prototype.LoadScene = function() 
 {
-   // Step A: loads the audios
-   gEngine.AudioClips.LoadAudio(this._kBgClip);
-   gEngine.AudioClips.LoadAudio(this._kCue);
-    
-   // Step B: loads the textures
+   // loads the textures
    gEngine.Textures.LoadTexture(this._kFontImage);
    gEngine.Textures.LoadTexture(this._kMinionSprite);
 
-    // Step C: Start the game loop running
-    gEngine.GameLoop.Start(this);
 };
 
 MyGame.prototype.UnloadScene = function() 
-{
-    // Game loop not running, unload all assets
-    // stop the background audio
-    gEngine.AudioClips.StopBackgroundAudio();
-    
-    // unload the scene resources
-    // gEngine.AudioClips.UnloadAudio(this._kBgClip);
-    //      You know this clip will be used else where in the game
-    //      So you decide to not unload this clip!!
-    gEngine.AudioClips.UnloadAudio(this._kCue);
-   
+{  
     gEngine.Textures.UnloadTexture(this._kFontImage);
     gEngine.Textures.UnloadTexture(this._kMinionSprite);
-
-    // starts the next level
-    var nextLevel = new BlueLevel();  // next level to be loaded
-    nextLevel.LoadAndBeginScene();
 };
 
 MyGame.prototype.Initialize = function() 
@@ -149,7 +123,7 @@ MyGame.prototype.Update = function()
         gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) {  // this is the left-bound of the window
-            gEngine.GameLoop.Stop();
+            xform.SetXPos(20);
         }
     }
     

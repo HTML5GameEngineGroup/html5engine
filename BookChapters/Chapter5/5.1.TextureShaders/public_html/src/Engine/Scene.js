@@ -13,7 +13,6 @@ function Scene() {};
 // The game loop will call initialize and then Update/Draw
 Scene.prototype.LoadScene = function() {
     // override to load scene specific contents
-    // when done loading
 };
 
 // Performs all initialization functions

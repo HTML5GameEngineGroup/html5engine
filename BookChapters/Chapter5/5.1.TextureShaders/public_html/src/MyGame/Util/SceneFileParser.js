@@ -19,11 +19,16 @@ SceneFileParser.prototype._GetElm = function(tagElm)
 SceneFileParser.prototype.ParseCamera = function()
 {
     var camElm = this._GetElm("Camera");
-    var cx = camElm[0].getAttribute("CenterX");
-    var cy = camElm[0].getAttribute("CenterY");
-    var w = camElm[0].getAttribute("Width");
+    var cx = Number(camElm[0].getAttribute("CenterX"));
+    var cy = Number(camElm[0].getAttribute("CenterY"));
+    var w = Number(camElm[0].getAttribute("Width"));
     var viewport = camElm[0].getAttribute("Viewport").split(" ");
     var bgColor = camElm[0].getAttribute("BgColor").split(" ");
+    // make sure viewprot and color are number
+    for (var j = 0; j<4; j++) {
+        bgColor[j] = Number(bgColor[j]);
+        viewport[j] = Number(viewport[j]);
+    }
     
     var cam = new Camera(
             vec2.fromValues(cx, cy),   // position of the camera
@@ -52,7 +57,7 @@ SceneFileParser.prototype.ParseSquares = function(sqSet)
         sq.GetXform().SetPosition(x, y);
         sq.GetXform().SetRotationInDegree(r); // In Degree
         sq.GetXform().SetSize(w, h);
-        sqSet[sqSet.length] = sq;
+        sqSet.push(sq);
      }
 };
 
@@ -75,6 +80,6 @@ SceneFileParser.prototype.ParseTextureSquares = function(sqSet)
         sq.GetXform().SetPosition(x, y);
         sq.GetXform().SetRotationInDegree(r); // In Degree
         sq.GetXform().SetSize(w, h);
-        sqSet[sqSet.length] = sq;
+        sqSet.push(sq);
      }
 };

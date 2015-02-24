@@ -61,4 +61,13 @@ SpriteShader.prototype.SetTextureCoordinate = function(texCoord)
     gl.bindBuffer(gl.ARRAY_BUFFER, this._mTexCoordBuffer);
     gl.bufferSubData(gl.ARRAY_BUFFER, 0, new Float32Array(texCoord));
 };
+
+SpriteShader.prototype.CleanUp = function()
+{
+    var gl = gEngine.Core.GetGL();
+    gl.deleteBuffer(this._mTexCoordBuffer);
+    
+    // now call super class's clean up ...
+    SimpleShader.prototype.CleanUp.call(this);
+};
 //</editor-fold>

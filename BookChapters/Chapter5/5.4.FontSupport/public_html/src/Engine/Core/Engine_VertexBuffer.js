@@ -66,10 +66,17 @@ gEngine.VertexBuffer = function()
     var GetGLVertexRef = function() { return _mSquareVertexBuffer; };
     var GetGLTexCoordRef = function() { return _mTextureCoordBuffer; };
     
+    var CleanUp = function() {
+        var gl = gEngine.Core.GetGL();
+        gl.deleteBuffer(_mSquareVertexBuffer);
+        gl.deleteBuffer(_mTextureCoordBuffer);
+    };
+    
     var oPublic = {
         Initialize: Initialize,
         GetGLVertexRef: GetGLVertexRef,
-        GetGLTexCoordRef: GetGLTexCoordRef
+        GetGLTexCoordRef: GetGLTexCoordRef,
+        CleanUp: CleanUp
     };
     
     return oPublic;

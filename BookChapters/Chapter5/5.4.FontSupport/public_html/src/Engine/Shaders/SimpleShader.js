@@ -12,6 +12,8 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
 {
     // instance variables
     // Convention: all instance variables: mVariables
+    this._mVertexShader = null;
+    this._mFragmentShader = null;
     this._mCompiledShader = null;  // reference to the compiled shader in webgl context  
     this._mShaderVertexPositionAttribute = null; // reference to SquareVertexPosition within the shader
     this._mModelTransform = null;        // reference to the model transform matrix in vertex shader
@@ -22,13 +24,13 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
     // start of constructor code
     // 
     // Step A: load and compile vertex and fragment shaders
-    var vertexShader = this._CompileShader(vertexShaderPath, gl.VERTEX_SHADER);
-    var fragmentShader = this._CompileShader(fragmentShaderPath, gl.FRAGMENT_SHADER);
+    this._mVertexShader = this._CompileShader(vertexShaderPath, gl.VERTEX_SHADER);
+    this._mFragmentShader = this._CompileShader(fragmentShaderPath, gl.FRAGMENT_SHADER);
     
     // Step B: Create and link the shaders into a program.
     this._mCompiledShader = gl.createProgram();
-    gl.attachShader(this._mCompiledShader, vertexShader);
-    gl.attachShader(this._mCompiledShader, fragmentShader);
+    gl.attachShader(this._mCompiledShader, this._mVertexShader);
+    gl.attachShader(this._mCompiledShader, this._mFragmentShader);
     gl.linkProgram(this._mCompiledShader);
 
     // Step C: check for error
@@ -83,6 +85,13 @@ SimpleShader.prototype.LoadObjectTransform = function(modelTransform) {
     gl.uniformMatrix4fv(this._mModelTransform, false, modelTransform);
 };
 
+SimpleShader.prototype.CleanUp = function() {
+    var gl = gEngine.Core.GetGL();
+    gl.detachShader(this._mCompiledShader, this._mVertexShader);
+    gl.detachShader(this._mCompiledShader, this._mFragmentShader);
+    gl.deleteShader(this._mVertexShader);
+    gl.deleteShader(this._mFragmentShader);
+};
 //-- end of public methods
 // </editor-fold>
 

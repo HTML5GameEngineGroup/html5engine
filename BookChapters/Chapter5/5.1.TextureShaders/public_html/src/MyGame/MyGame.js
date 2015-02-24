@@ -33,6 +33,8 @@ MyGame.prototype.LoadScene = function()
    // Step B: loads the textures
    gEngine.Textures.LoadTexture(this._kPortal);
    gEngine.Textures.LoadTexture(this._kCollector);
+    // Step B: Start the game loop running
+    gEngine.GameLoop.Start(this);
 };
 
 MyGame.prototype.UnloadScene = function() 
@@ -78,7 +80,7 @@ MyGame.prototype.Initialize = function()
     this._mCollector.GetXform().SetSize(3, 3);
     
     // Setp C: Create the hero object in blue
-    this._mHero = new Renderable();
+    this._mHero = new Renderable(gEngine.DefaultResources.GetConstColorShader());
     this._mHero.SetColor([0, 0, 1, 1]);
     this._mHero.GetXform().SetPosition(20, 60);
     this._mHero.GetXform().SetSize(2, 3);

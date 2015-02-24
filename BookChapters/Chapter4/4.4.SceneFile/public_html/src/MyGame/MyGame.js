@@ -15,11 +15,10 @@ function MyGame()
     this._mCamera = null;
 };
 
-MyGame.prototype.LoadAndBeginScene = function() 
+MyGame.prototype.LoadScene = function() 
 {
     gEngine.TextFileLoader.LoadTextFile(this._kSceneFile, 
                 gEngine.TextFileLoader.eTextFileType.eXMLFile);
-    gEngine.GameLoop.Start(this);
 };
 
 MyGame.prototype.UnloadScene = function()

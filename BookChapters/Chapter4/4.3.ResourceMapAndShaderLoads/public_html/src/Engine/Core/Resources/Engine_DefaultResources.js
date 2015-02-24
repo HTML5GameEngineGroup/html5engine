@@ -15,7 +15,6 @@ gEngine.DefaultResources = function()
     var _mConstColorShader = null;
     
     var _CreateShaders = function(callBackFunction) {
-        gEngine.ResourceMap.SetLoadCompleteCallback(null);
         _mConstColorShader = new SimpleShader(_kSimpleVS, _kSimpleFS);
         callBackFunction();
     };

@@ -79,6 +79,9 @@ gEngine.Textures = function()
     // be available for subsequent garbage collection
     var UnloadTexture = function(textureName)
     {
+        var gl = gEngine.Core.GetGL();
+        var texInfo = gEngine.ResourceMap.RetrieveAsset(textureName);
+        gl.deleteTexture(texInfo.mGLTexID);
         gEngine.ResourceMap.UnloadAsset(textureName);
     };
     

@@ -27,7 +27,9 @@ gEngine.Core = function()
             _InitializeWebGL(htmlCanvasID);
             gEngine.VertexBuffer.Initialize();
             gEngine.Input.Initialize();
-            gEngine.DefaultResources.Initialize(myGame.Initialize.bind(myGame));
+            
+            // Function to be called within an anomynous function to not call immediatly.
+            gEngine.DefaultResources.Initialize(function(){StartScene(myGame);});
         };
         
         // initialize the WebGL, the vertex buffer and compile the shaders
@@ -49,12 +51,18 @@ gEngine.Core = function()
             _mGL.clear(_mGL.COLOR_BUFFER_BIT);      // clear to the color previously set
         };   
         
+        var StartScene = function(myGame)
+        {
+            myGame.Initialize.call(myGame); // Called in this way to keep correct context
+            gEngine.GameLoop.Start(myGame); // start the game loop after initialization is done
+        };
     // -- end of public methods
 
     var oPublic = {
         GetGL: GetGL,
         InitializeEngineCore: InitializeEngineCore,
-        ClearCanvas: ClearCanvas
+        ClearCanvas: ClearCanvas,
+        StartScene: StartScene
     };
 
     return oPublic;

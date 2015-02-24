@@ -40,7 +40,7 @@ gEngine.DefaultResources = function()
         gEngine.TextFileLoader.LoadTextFile(_kSimpleVS, gEngine.TextFileLoader.eTextFileType.eTextFile);
         gEngine.TextFileLoader.LoadTextFile(_kSimpleFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
         
-        // textuire shader: 
+        // texture shader: 
         gEngine.TextFileLoader.LoadTextFile(_kTextureVS, gEngine.TextFileLoader.eTextFileType.eTextFile);
         gEngine.TextFileLoader.LoadTextFile(_kTextureFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
         
@@ -48,6 +48,23 @@ gEngine.DefaultResources = function()
         gEngine.Fonts.LoadFont(_kDefaultFont);
         
         gEngine.ResourceMap.SetLoadCompleteCallback(function() {_CreateShaders(callBackFunction);});
+    };
+    
+    // Unload all resources
+    var _CleanUp = function() {
+        _mConstColorShader.CleanUp();
+        _mTextureShader.CleanUp();
+        _mSpriteShader.CleanUp();
+        
+        gEngine.TextFileLoader.UnloadTextFile(_kSimpleVS);
+        gEngine.TextFileLoader.UnloadTextFile(_kSimpleFS);
+        
+        // textuire shader: 
+        gEngine.TextFileLoader.UnloadTextFile(_kTextureVS);
+        gEngine.TextFileLoader.UnloadTextFile(_kTextureFS);
+        
+        // default font
+        gEngine.Fonts.UnloadFont(_kDefaultFont);
     };
     
     // Public interface for this object. Anything not in here will
@@ -58,7 +75,8 @@ gEngine.DefaultResources = function()
         GetConstColorShader: _GetConstColorShader,
         GetTextureShader: _GetTextureShader,
         GetSpriteShader: _GetSpriteShader,
-        GetDefaultFont: _GetDefaultFont
+        GetDefaultFont: _GetDefaultFont,
+        CleanUp: _CleanUp
     };
     return oPublic;
 }();

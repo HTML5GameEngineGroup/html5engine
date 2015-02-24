@@ -28,7 +28,11 @@ gEngine.Core = function()
             gEngine.VertexBuffer.Initialize();
             gEngine.Input.Initialize();
             gEngine.AudioClips.InitAudioContext();
-            gEngine.DefaultResources.Initialize(myGame.LoadAndBeginScene.bind(myGame));
+            gEngine.DefaultResources.Initialize(
+                    function(){
+                        myGame.LoadAndBeginScene.bind(myGame);
+                        gEngine.GameLoop.Start(this);
+                    });
         };
         
         // initialize the WebGL, the vertex buffer and compile the shaders

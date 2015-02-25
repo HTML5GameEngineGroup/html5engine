@@ -33,8 +33,7 @@ MyGame.prototype.LoadScene = function()
    // Step B: loads the textures
    gEngine.Textures.LoadTexture(this._kPortal);
    gEngine.Textures.LoadTexture(this._kCollector);
-    // Step B: Start the game loop running
-    gEngine.GameLoop.Start(this);
+    
 };
 
 MyGame.prototype.UnloadScene = function() 

@@ -6,10 +6,6 @@
 
 function MyGame()
 {           
-     // audio clips: supports both mp3 and wav formats
-    this._kBgClip = "resources/sounds/BGClip.mp3";
-    this._kCue = "resources/sounds/MyGame_cue.wav";
-    
     // textures: 
     this._kPortal = "resources/minion_portal.png";      // supports png with transparency
     this._kCollector = "resources/minion_collector.png";      
@@ -25,12 +21,8 @@ function MyGame()
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
 MyGame.prototype.LoadScene = function() 
-{
-   // Step A: loads the audios
-   gEngine.AudioClips.LoadAudio(this._kBgClip);
-   gEngine.AudioClips.LoadAudio(this._kCue);
-    
-   // Step B: loads the textures
+{    
+   // loads the textures
    gEngine.Textures.LoadTexture(this._kPortal);
    gEngine.Textures.LoadTexture(this._kCollector);
     
@@ -39,15 +31,7 @@ MyGame.prototype.LoadScene = function()
 MyGame.prototype.UnloadScene = function() 
 {
     // Game loop not running, unload all assets
-    // stop the background audio
-    gEngine.AudioClips.StopBackgroundAudio();
-    
-    // unload the scene resources
-    // gEngine.AudioClips.UnloadAudio(this._kBgClip);
-    //      You know this clip will be used else where in the game
-    //      So you decide to not unload this clip!!
-    gEngine.AudioClips.UnloadAudio(this._kCue);
-   
+       
     gEngine.Textures.UnloadTexture(this._kPortal);
     gEngine.Textures.UnloadTexture(this._kCollector);
 
@@ -79,13 +63,10 @@ MyGame.prototype.Initialize = function()
     this._mCollector.GetXform().SetSize(3, 3);
     
     // Setp C: Create the hero object in blue
-    this._mHero = new Renderable(gEngine.DefaultResources.GetConstColorShader());
+    this._mHero = new Renderable();
     this._mHero.SetColor([0, 0, 1, 1]);
     this._mHero.GetXform().SetPosition(20, 60);
     this._mHero.GetXform().SetSize(2, 3);
-    
-    // now start the bg music ...
-    gEngine.AudioClips.PlayBackgroundAudio(this._kBgClip);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -117,14 +98,12 @@ MyGame.prototype.Update = function()
     
     // Support hero movements
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
-        gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(deltaX);
         if (xform.GetXPos() > 30)  // this is the right-bound of the window
             xform.SetPosition(12, 60);
     }
     
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
-        gEngine.AudioClips.PlaySound(this._kCue);
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) {  // this is the left-bound of the window
             gEngine.GameLoop.Stop();

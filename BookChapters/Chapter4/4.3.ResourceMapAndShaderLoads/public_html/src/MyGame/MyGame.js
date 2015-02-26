@@ -26,9 +26,10 @@ MyGame.prototype.Initialize = function()
             // sets the background to gray
     
     // Step  C: Create the renderable objects:
-    this._mWhiteSq = new Renderable(gEngine.DefaultResources.GetConstColorShader());
+    var constColorShader = gEngine.DefaultResources.GetConstColorShader();
+    this._mWhiteSq = new Renderable(constColorShader);
     this._mWhiteSq.SetColor([1, 1, 1, 1]);
-    this._mRedSq = new Renderable(gEngine.DefaultResources.GetConstColorShader());
+    this._mRedSq = new Renderable(constColorShader);
     this._mRedSq.SetColor([1, 0, 0, 1]);
     
     // Step  D: Initialize the white renderable object: centred, 5x5, rotated

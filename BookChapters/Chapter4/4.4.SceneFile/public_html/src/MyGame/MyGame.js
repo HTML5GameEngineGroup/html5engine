@@ -30,10 +30,10 @@ MyGame.prototype.Initialize = function()
 {
     var sceneParser = new SceneFileParser(this._kSceneFile);
     
-    // Step A: Read in the camera
+    // Step A: Parse the camera
     this._mCamera = sceneParser.ParseCamera();
     
-    // Step B: Read all the squares
+    // Step B: Parse for all the squares
     sceneParser.ParseSquares(this._mSqSet);
 };
 

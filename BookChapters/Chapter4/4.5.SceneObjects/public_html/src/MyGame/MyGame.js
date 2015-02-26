@@ -15,10 +15,6 @@ function MyGame()
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
-MyGame.prototype.LoadScene = function() 
-{
-    // nothing for this game level
-};
 
 MyGame.prototype.UnloadScene = function() 
 {

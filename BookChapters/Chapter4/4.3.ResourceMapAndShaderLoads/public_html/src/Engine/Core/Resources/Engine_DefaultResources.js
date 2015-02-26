@@ -14,12 +14,14 @@ gEngine.DefaultResources = function()
     
     var _mConstColorShader = null;
     
+    var _GetConstColorShader = function() { return _mConstColorShader; };
+    
+    
     var _CreateShaders = function(callBackFunction) {
         _mConstColorShader = new SimpleShader(_kSimpleVS, _kSimpleFS);
         callBackFunction();
     };
     
-    var _GetConstColorShader = function() { return _mConstColorShader; };
     
     var _Initialize = function(callBackFunction) {
         // constant color shader: SimpleVS, and SimpleFS

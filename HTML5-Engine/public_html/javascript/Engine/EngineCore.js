@@ -78,7 +78,14 @@ EngineCore.Resources = function () {
     var vertexBuffer = {};
     
     var textureBuffer = {};
-
+ 
+    // the framebuffer to render to when effects are needed
+    var framebuffer;
+    
+    //the texture attached to the framebuffer object
+    var framebufferTexture;
+    
+    
     /*
      * Initializes the asset pipeline with WebGL given an html canvas id.
      * @param {string} htmlCanvasID
@@ -103,10 +110,10 @@ EngineCore.Resources = function () {
         canvas = document.getElementById(canvasID);
         
         // Get standard webgl, or experimental if failed. Wrapped in debugging tool.
-        //gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+        gl = canvas.getContext("webgl",{depth: true, stencil: true, antialias: false});
         
-        gl = WebGLDebugUtils.makeDebugContext(canvas.getContext("webgl") ||
-            canvas.getContext("experimental-webgl"));
+        //gl = WebGLDebugUtils.makeDebugContext(canvas.getContext("webgl") ||
+        //    canvas.getContext("experimental-webgl"));
         
         // Allows transperency with textures.
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
@@ -119,7 +126,7 @@ EngineCore.Resources = function () {
         gl.clearColor(0.0, 0.0, 1.0, 1.0);
 
         // Enable depth buffer untilites.
-        //gl.enable(gl.DEPTH_TEST);
+//        gl.enable(gl.DEPTH_TEST);
         gl.depthFunc(gl.LEQUAL);   
         gl.depthMask(false);
     };
@@ -377,7 +384,7 @@ EngineCore.Resources = function () {
 
     var clearCanvas = function()
     {
-        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+        gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT | gl.STENCIL_BUFFER_BIT);
     };
 
     // Draws all of the content in the drawsets with the currently active camera.
@@ -393,16 +400,106 @@ EngineCore.Resources = function () {
             }
             
             var currentDrawSet = zDrawSets[currentZIndex];
-            
+
             // For every object in the z-indexed drawset
             for(var currentObjIndex = 0; currentObjIndex < currentDrawSet.length; currentObjIndex++)
             {
                 var currentObj = currentDrawSet[currentObjIndex];
-                
-                currentObj.draw(gl, vertexBuffer, textureBuffer);
+                //if (currentObj.mShaderOn === false)
+                    currentObj.draw(gl, vertexBuffer, textureBuffer);
+                //else
+                    //currentObj.DrawShadow(gl, vertexBuffer, textureBuffer);
             }
         }
     };
+    
+    var GetFramebuffer = function ()
+    {
+        return framebuffer;
+    };
+    
+    var GetFramebufferTexture = function ()
+    {
+        //if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) == gl.FRAMEBUFFER_COMPLETE)
+            return framebufferTexture;
+    };
+    
+    var ShadowRecieverFramebufferOn = function ()
+    {
+        gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
+        gl.clearColor(1, 1, 0, 1);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+    };
+      
+    var ShadowRecieverFramebufferOff = function ()
+    {
+       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+       //gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
+       gl.clearColor(1, 0, 0, 1);
+       gl.clear(gl.COLOR_BUFFER_BIT);
+    };
+
+    // Create basic frame buffer and bind a fresh texture
+    var SetupShadowRecieverFrameBuffer = function ()
+    {
+        //setup the frame buffer
+        framebuffer = gl.createFramebuffer();
+        gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
+        framebuffer.width = 2048;
+        framebuffer.height = 2048;
+
+        //setup the texture and bind it to the frame buffer
+        framebufferTexture = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, framebufferTexture);
+        
+        //must apply texture settinds for the framebuffer to be considered complete
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, framebuffer.width, framebuffer.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, framebufferTexture, 0);
+        
+//        var renderbuffer = gl.createRenderbuffer();
+//        gl.bindRenderbuffer(gl.RENDERBUFFER, renderBuffer);
+//        gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_STENCIL, framebuffer.width, framebuffer.height);
+//        gl.framebufferRenderbuffer(
+//        gl.FRAMEBUFFER, gl.DEPTH_STENCIL_ATTACHMENT, gl.RENDERBUFFER, renderbuffer);
+    
+    };
+    
+    var ShadowRecieverStencilOn = function ()
+    {
+        //var maskid  = 1;
+        //gl.clear(gl.DEPTH_BUFFER_BIT)
+        gl.enable(gl.STENCIL_TEST);
+        //gl.colorMask(true, true, true, true);
+        //gl.depthMask(false);
+        gl.stencilFunc(gl.NEVER, 1, 0xFF);
+        gl.stencilOp(gl.REPLACE,gl.KEEP, gl.KEEP);
+        //gl.stencilMask(0xFF);
+        //gl.clear(gl.STENCIL_BUFFER_BIT);
+
+        
+    };
+    
+    var ShadowRecieverStencilOff = function ()
+    {
+        //gl.depthMask(gl.TRUE);
+        //gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
+        //gl.colorMask( gl.FALSE, gl.FALSE, gl.FALSE, gl.FALSE );
+        //gl.stencilMask(0x00);
+        gl.stencilFunc(gl.EQUAL, 1, 0xFF);
+        //gl.colorMask( true, true, true, true );
+    };
+    
+    var ShadowRecieverStencilDisable = function ()
+    {
+        gl.disable(gl.STENCIL_TEST); 
+    };
+    
+    
 
     /*
      * Adds to the drawsets of engine. 
@@ -500,6 +597,14 @@ EngineCore.Resources = function () {
         playBackgroundAudio: playBackgroundAudio,
         stopBackgroundAudio: stopBackgroundAudio,
         unloadAllResources: unloadAllResources,
+        SetupShadowRecieverFrameBuffer: SetupShadowRecieverFrameBuffer,
+        GetFramebuffer: GetFramebuffer,
+        ShadowRecieverFramebufferOn: ShadowRecieverFramebufferOn,
+        ShadowRecieverFramebufferOff: ShadowRecieverFramebufferOff,
+        GetFramebufferTexture: GetFramebufferTexture,
+        ShadowRecieverStencilOn: ShadowRecieverStencilOn,
+        ShadowRecieverStencilOff: ShadowRecieverStencilOff,
+        ShadowRecieverStencilDisable: ShadowRecieverStencilDisable,
         DEFAULT_TEXTURE_COORD: DEFAULT_TEXTURE_COORD,
         DEFAULT_NUM_VERTICES: DEFAULT_NUM_VERTICES
     };

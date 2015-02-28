@@ -19,6 +19,7 @@ StartScreenLevel.prototype.contentLoad = function()
         "shaders/texturedLighting-vs.glsl",
         "shaders/texturedLighting-fs.glsl");
     EngineCore.Resources.loadImage("resources/Intro.png");
+    EngineCore.Resources.loadImage("resources/normal_4.png");
 };
 
 StartScreenLevel.prototype.initialize = function()
@@ -37,7 +38,8 @@ StartScreenLevel.prototype.initialize = function()
     
     this.mScreenImage = new Renderable2DObject(transform,
         this.mMainShader,
-        "resources/Intro.png");    
+        "resources/Intro.png",
+        "resources/normal_4.png");    
 };
 
 StartScreenLevel.prototype.update = function()

@@ -1,3 +1,5 @@
+"use strict";
+
 /* 
  * 
  */
@@ -6,11 +8,12 @@ function BackgroundGenerator(player, groundShader)
     this.mPlayer = player;
     this.mCurrentGroundList = 1;
     this.kGROUND_TEXTURE = "resources/GROUND_1.png";
+    this.kGROUND_NORMAL = "resources/normal_4.png";
     this.kGROUND_SHADER = groundShader;
     this.kGROUND_LIST_SIZE = 8;
-    this.kGROUND_HEIGHT = 5;
-    this.kGROUND_WIDTH = 5;
-    this.kGROUND_OFFSET = 5;
+    this.kGROUND_HEIGHT = 20;
+    this.kGROUND_WIDTH = 20;
+    this.kGROUND_OFFSET = 20;
     this.kBACKGROUND_Z = 1;
     
     // 2 arrays keeping track of ground background objects.
@@ -29,7 +32,8 @@ function BackgroundGenerator(player, groundShader)
         
         var renderObj = new Renderable2DObject(transform,
         this.kGROUND_SHADER,
-        this.kGROUND_TEXTURE);
+        this.kGROUND_TEXTURE,
+        this.kGROUND_NORMAL);
         
         mGroundList1.push(renderObj);
     }
@@ -44,7 +48,8 @@ function BackgroundGenerator(player, groundShader)
         
         var renderObj = new Renderable2DObject(transform,
         this.kGROUND_SHADER,
-        this.kGROUND_TEXTURE);
+        this.kGROUND_TEXTURE,
+        this.kGROUND_NORMAL);
         
         mGroundList2.push(renderObj);
     }
@@ -52,7 +57,8 @@ function BackgroundGenerator(player, groundShader)
 
 BackgroundGenerator.prototype.preloadResources = function()
 {
-    EngineCore.Resources.loadImage("resources/GROUND_1.png");    
+    EngineCore.Resources.loadImage("resources/GROUND_1.png");
+    EngineCore.Resources.loadImage("resources/normal_4.png");
 };
 
 BackgroundGenerator.prototype.addToDrawSet = function()
@@ -69,30 +75,32 @@ BackgroundGenerator.prototype.addToDrawSet = function()
     }
 };
 
+
+
 BackgroundGenerator.prototype.update = function()
 {
     // Depending on player position, generate or move around the background.
     
     // When the player is past the current ground list, the one visible,
     // move the other one in front.
-    var playerX = this.mPlayer.getTransform().getX();
-    var gMidX = this.mGrounds[this.mCurrentGroundList][this.kGROUND_LIST_SIZE / 2].getTransform().getX();
-    
-    if( playerX > gMidX )
-    {
-        var otherGroundList = 1 - this.mCurrentGroundList;
-        
-        // The x coordinate where the grounds end.
-        var endOfCurrentGroundsX = 
-                this.mGrounds[this.mCurrentGroundList][this.kGROUND_LIST_SIZE - 1].
-                getTransform().getX() + this.kGROUND_OFFSET;
-        
-        for(var i = 0; i < this.kGROUND_LIST_SIZE; i++)
-        {
-            this.mGrounds[otherGroundList][i].getTransform().
-                    setX(endOfCurrentGroundsX + (i * this.kGROUND_OFFSET));
-        }
-        
-        this.mCurrentGroundList = otherGroundList;
-    }
+//    var playerX = this.mPlayer.getTransform().getX();
+//    var gMidX = this.mGrounds[this.mCurrentGroundList][this.kGROUND_LIST_SIZE / 2].getTransform().getX();
+//    
+//    if( playerX > gMidX )
+//    {
+//        var otherGroundList = 1 - this.mCurrentGroundList;
+//        
+//        // The x coordinate where the grounds end.
+//        var endOfCurrentGroundsX = 
+//                this.mGrounds[this.mCurrentGroundList][this.kGROUND_LIST_SIZE - 1].
+//                getTransform().getX() + this.kGROUND_OFFSET;
+//        
+//        for(var i = 0; i < this.kGROUND_LIST_SIZE; i++)
+//        {
+//            this.mGrounds[otherGroundList][i].getTransform().
+//                    setX(endOfCurrentGroundsX + (i * this.kGROUND_OFFSET));
+//        }
+//        
+//        this.mCurrentGroundList = otherGroundList;
+//    }
 };

@@ -1,9 +1,9 @@
 /* 
  * 
  */
-function Sprite(transform, shaderName, spriteTextureName, spritesheetInfo)
+function Sprite(transform, shaderName, spriteTextureName, spritesheetInfo, normalMap)
 {   
-    Renderable2DObject.call(this, transform, shaderName, spriteTextureName);
+    Renderable2DObject.call(this, transform, shaderName, spriteTextureName, normalMap);
     this.mCurrentFrame = 0;
     this.mSpritesheetInfo = spritesheetInfo;
     this.mTicksPerFrame = 0;

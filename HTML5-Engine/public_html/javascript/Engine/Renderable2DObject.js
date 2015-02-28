@@ -1,10 +1,24 @@
-function Renderable2DObject(transform, shaderName, textureName)
+"use strict";
+
+function Renderable2DObject(transform, shaderName, textureName, normalMap)
 {
+    this.mShaderOn = false;
     this.mShader = shaderName;
     this.mTextureString = textureName;
+    this.mTextureID = null;
+    this.mNormalMapString = normalMap;
     this.mTransformMatrix = transform;
     this._mLightList = [];
+    this._mAmbientStrength = 0.1;
+    this._mAmbientColor = vec4.fromValues(1, 1, 0, 1);
+    this._mDiffuseStrength  = 1.0;
+    this._mDiffuseColor = vec4.fromValues(0, 1, 0, 1);
 }
+
+Renderable2DObject.prototype.SwitchShader = function (shader, shaderState) {
+    this.mShader = shader;
+    this.mShaderOn = shaderState;
+};
 
 Renderable2DObject.prototype.getShaderName = function () {
     return this.mShader;
@@ -12,6 +26,10 @@ Renderable2DObject.prototype.getShaderName = function () {
 
 Renderable2DObject.prototype.getTextureName = function () {
     return this.mTextureString;
+};
+
+Renderable2DObject.prototype.getNormalMapName = function () {
+    return this.mNormalMapString;
 };
 
 Renderable2DObject.prototype.getTransform = function () {
@@ -93,9 +111,20 @@ Renderable2DObject.prototype._setupTextureCoordAttrib = function (gl, shaderProg
 Renderable2DObject.prototype._setupGLTexture = function (gl, shaderProgram)
 {
     // Now give the shader program the texture data.
+    var texID = this.mTextureID;
+    if(texID === null)
+        texID = EngineCore.Resources.getGLTexture(this.mTextureString);
+        
     gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, EngineCore.Resources.getGLTexture(this.mTextureString));
+    gl.bindTexture(gl.TEXTURE_2D, texID);
     gl.uniform1i(gl.getUniformLocation(shaderProgram, "uSampler"), 0);
+};
+
+Renderable2DObject.prototype._setupGLNormalMap = function (gl, shaderProgram)
+{
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, EngineCore.Resources.getGLTexture(this.mNormalMapString));
+    gl.uniform1i(gl.getUniformLocation(shaderProgram, "uNormalSampler"), 1);
 };
 
 Renderable2DObject.prototype._setupMVPMatrix = function (gl, shaderProgram)
@@ -130,32 +159,23 @@ Renderable2DObject.prototype._setupPMatrix = function (gl, shaderProgram)
     gl.uniformMatrix4fv(uniformP, false, matrix);
 };
 
-//Renderable2DObject.prototype._setupPMatrix = function (gl, shaderProgram)
-//{
-//    var matrix = EngineCore.Resources.getActiveCamera().getOrthographicMatrix();
-//    var uniformP = gl.getUniformLocation(shaderProgram, "uPMatrix");
-//    gl.uniformMatrix4fv(uniformP, false, matrix);
-//};
-
-//Renderable2DObject.prototype._setupAttrib = function (gl, shaderProgram, data, stringName, glType, size)
-//{
-//    // Get references to the attributes within the shaders.
-//    var vertexPositionAttribute = gl.getAttribLocation(shaderProgram, stringName);
-//    gl.bindBuffer(gl.ARRAY_BUFFER, data);
-//    gl.vertexAttribPointer(vertexPositionAttribute, size, glType, false, 0, 0);
-//    gl.enableVertexAttribArray(vertexPositionAttribute);
-//
-//};
-
 Renderable2DObject.prototype._UpdateTextureProperties = function (gl, shaderProgram)
 {
     try {
         var uTexturePos;
         var uTextureDimesions;
+        var ambientStrength;
+        var ambientColor;
+        var diffuseStrength;
+        var diffuseColor;
         
         //get pointers to data in shader 
         uTexturePos = gl.getUniformLocation(shaderProgram, "uObjPosition");
         uTextureDimesions = gl.getUniformLocation(shaderProgram, "uObjDimensions");
+        ambientStrength = gl.getUniformLocation(shaderProgram, "uAmbientStrength");
+        ambientColor = gl.getUniformLocation(shaderProgram, "uAmbientColor");
+        diffuseStrength = gl.getUniformLocation(shaderProgram, "uDiffuseStrength");
+        diffuseColor = gl.getUniformLocation(shaderProgram, "uDiffuseColor");
 
         //get the camera for tranforming between coord spaces
         var camera = EngineCore.Resources.getActiveCamera();
@@ -169,6 +189,10 @@ Renderable2DObject.prototype._UpdateTextureProperties = function (gl, shaderProg
         // send values to the shader
         gl.uniform2fv(uTexturePos, pixPos);
         gl.uniform2fv(uTextureDimesions, pixSize);
+        gl.uniform1f(ambientStrength, this._mAmbientStrength);
+        gl.uniform4fv(ambientColor, this._mAmbientColor);
+        gl.uniform1f(diffuseStrength, this._mDiffuseStrength);
+        gl.uniform4fv(diffuseColor, this._mDiffuseColor);
     }
     catch (E)
     {
@@ -185,19 +209,27 @@ Renderable2DObject.prototype._UpdateLightProperties = function (gl, shaderProgra
             for (var i = 0; i < this._mLightList.length; i++)
             {
                 uLight[i] = {};
-                uLight[i].Position = gl.getUniformLocation(shaderProgram, "lights[" + i + "].uLightPosition");
-                uLight[i].Color = gl.getUniformLocation(shaderProgram, "lights[" + i + "].uLightColor");
+                uLight[i].Position = gl.getUniformLocation(shaderProgram, "lights[" + i + "].uPosition");
+                uLight[i].Color = gl.getUniformLocation(shaderProgram, "lights[" + i + "].uColor");
+                uLight[i].Inner = gl.getUniformLocation(shaderProgram, "lights[" + i + "].uInner");
+                uLight[i].Outer = gl.getUniformLocation(shaderProgram, "lights[" + i + "].uOuter");
+                uLight[i].Intensity = gl.getUniformLocation(shaderProgram, "lights[" + i + "].uIntensity");
             }
 
             for (var i = 0; i < this._mLightList.length; i++)
             {
-                var wcPos = vec2.fromValues(this._mLightList[i].mPosition[0],
-                        this._mLightList[i].mPosition[1]);
+                var wcPos = vec2.fromValues(this._mLightList[i].mPosition[0], this._mLightList[i].mPosition[1]);
                 var camera = EngineCore.Resources.getActiveCamera();
                 var pixPos = camera.computePixelPosition(wcPos);
-                
-                gl.uniform4fv(uLight[i].Position, vec4.fromValues(pixPos[0], pixPos[1], 0, 0));
+                var z = camera.computeFakePixelPositionZ(this._mLightList[i].mPosition[2]);
+                gl.uniform4fv(uLight[i].Position, vec4.fromValues(pixPos[0], pixPos[1], z, 0));
                 gl.uniform4fv(uLight[i].Color, this._mLightList[i].mColor);
+                var inner = this._mLightList[i].getInnerRadiusSize();
+                var outer = this._mLightList[i].getOuterRadiusSize();
+                var intensity = this._mLightList[i].getIntensity();
+                gl.uniform1f(uLight[i].Inner, inner);
+                gl.uniform1f(uLight[i].Outer, outer);
+                gl.uniform1f(uLight[i].Intensity, intensity);
             }
         }
     }
@@ -208,6 +240,72 @@ Renderable2DObject.prototype._UpdateLightProperties = function (gl, shaderProgra
     ;
 };
 
+Renderable2DObject.prototype._UpdateCameraProp = function (gl, shaderProgram)
+{
+    //active camera
+    var camera = EngineCore.Resources.getActiveCamera();
+    
+    //get position of the camera and convert to pixel space
+    var pos = camera.getCameraPosition();
+    var newPos = camera.computePixelPosition(pos);
+    
+    //estimate the z position and convert to pixel space
+    var z = camera.getCameraZ() + camera.getCameraWidth();
+    var newZ = camera.computeFakePixelPositionZ(z);
+    
+    //create vec3
+    var finalPos3 = vec3.fromValues(newPos[0], newPos[1], newZ);
+    
+    //get the ref from the shader and load the values
+    var uCameraPos = gl.getUniformLocation(shaderProgram, "uCameraPosition");
+    gl.uniform3fv(uCameraPos, finalPos3);
+    
+};
+
+Renderable2DObject.prototype._setupShadowTexture = function (gl, shaderProgram)
+{
+//    gl.activeTexture(gl.TEXTURE1);
+//    gl.bindTexture(gl.TEXTURE_2D, EngineCore.Resources.GetFramebufferTexture());
+//    gl.uniform1i(gl.getUniformLocation(shaderProgram, "uShadowRecieverSampler"), 1);
+
+};
+
+Renderable2DObject.prototype._UpdateShadowRecieverProperties = function (gl, shaderProgram)
+{ 
+  
+//    var reciever = vec2.fromValues(2048, 2048);
+//    var view = vec2.fromValues(gl.viewportWidth, gl.viewportHeight);
+//    
+//    //get the ref from the shader and load the values
+//    var uRecieverDim = gl.getUniformLocation(shaderProgram, "uShadowRecieverDimensions");
+//    gl.uniform3fv(uRecieverDim, reciever);
+//    
+//    var uViewDim = gl.getUniformLocation(shaderProgram, "uViewportDimensions");
+//    gl.uniform3fv(uViewDim, view);
+};
+
+
+Renderable2DObject.prototype.DrawShadow = function (gl, vertexBuffer, textureBuffer)
+{
+//    var shaderProgram = this._activateAndGetShader();
+//
+//    this._setupVertexAttrib(gl, shaderProgram, vertexBuffer);
+//
+//    this._setupTextureCoordAttrib(gl, shaderProgram, textureBuffer);
+//
+//    this._setupGLTexture(gl, shaderProgram);
+//    this._setupShadowTexture(gl, shaderProgram);
+//    
+//    this._setupMVMatrix(gl, shaderProgram);
+//    this._setupPMatrix(gl, shaderProgram);
+//    
+//    this._UpdateShadowRecieverProperties(gl, shaderProgram);
+//    
+//    // Draw triangles, with a max of this.numberOfVerticies verticies, from the zeroth element.
+//    gl.drawArrays(gl.TRIANGLE_STRIP, 0, EngineCore.Resources.DEFAULT_NUM_VERTICES);
+};
+
+
 Renderable2DObject.prototype.draw = function (gl, vertexBuffer, textureBuffer)
 {
     var shaderProgram = this._activateAndGetShader();
@@ -217,15 +315,20 @@ Renderable2DObject.prototype.draw = function (gl, vertexBuffer, textureBuffer)
     this._setupTextureCoordAttrib(gl, shaderProgram, textureBuffer);
 
     this._setupGLTexture(gl, shaderProgram);
-
-    //modified by jeb
-    //this._setupMVPMatrix(gl, shaderProgram);
+    this._setupGLNormalMap(gl, shaderProgram);
+    
     this._setupMVMatrix(gl, shaderProgram);
     this._setupPMatrix(gl, shaderProgram);
+    
     this._UpdateLightProperties(gl, shaderProgram);
     this._UpdateTextureProperties(gl, shaderProgram);
 
+    this._UpdateCameraProp(gl, shaderProgram);
+    
     // Draw triangles, with a max of this.numberOfVerticies verticies, from the zeroth element.
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, EngineCore.Resources.DEFAULT_NUM_VERTICES);
 };
+
+
+
 

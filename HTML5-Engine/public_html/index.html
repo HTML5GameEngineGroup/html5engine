@@ -3,7 +3,7 @@
     <title>HTML5 Game Engine</title>
 </head>
 <!-- When the body finishes loading, the start() function runs. -->
-<body onload="EngineCore.initializeEngine('theCanvas', new StartScreenLevel());">
+<body onload="EngineCore.initializeEngine('theCanvas', new MainLevel());">
     
     <!-- Load your dependencies, in order, here -->
     
@@ -31,7 +31,7 @@
     <script type="text/javascript" src="javascript/EnemyManager.js"></script>
     <script type="text/javascript" src="javascript/BackgroundGenerator.js"></script>
 
-    <canvas id="theCanvas" width="800" height="600">
+    <canvas id="theCanvas" width="1200" height="768">
         Your browser does not support the HTML5 canvas.
     </canvas>
 </body>

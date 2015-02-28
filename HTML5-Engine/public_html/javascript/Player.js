@@ -1,3 +1,4 @@
+"use strict";
 /*
  * A player which a camera is locked onto its position.
  */
@@ -8,10 +9,11 @@ function Player(transform, camera, shaderName)
     var renderObj = new Sprite(transform,
         shaderName,
         "resources/sprites/megaman.png",
-        "resources/sprites/megaman.xml");
+        "resources/sprites/megaman.xml",
+        "resources/normal_4.png");
         
     renderObj.mTicksPerFrame = 5;
-    
+       
     GameObject.call(this, transform, logic, renderObj);
 }
 Player.prototype = Object.create(GameObject.prototype);
@@ -77,4 +79,6 @@ PlayerLogic.prototype.update = function()
     //this.mCamera.setCameraX(this.mTransform.getX());
     //this.mCamera.setCameraY(this.mTransform.getY());
 };
+
+
 

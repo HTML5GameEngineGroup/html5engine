@@ -1,3 +1,4 @@
+"use strict";
 /* 
  * 
  */
@@ -115,7 +116,7 @@ function Camera(cameraPosition, cameraWidth, viewportX, viewportY, viewportWidth
 
     this.getCameraPosition = function ()
     {
-        return [mViewMatrix[12], mViewMatrix, [13]];
+        return [-mViewMatrix[12], -mViewMatrix[13]];
     };
 
     this.setCameraX = function (xPos)
@@ -136,6 +137,11 @@ function Camera(cameraPosition, cameraWidth, viewportX, viewportY, viewportWidth
     this.getCameraY = function ()
     {
         return -mViewMatrix[13];
+    };
+    
+    this.getCameraZ = function ()
+    {
+        return -mViewMatrix[14];
     };
 
     /*
@@ -211,9 +217,15 @@ function Camera(cameraPosition, cameraWidth, viewportX, viewportY, viewportWidth
         // Convert the position to pixel space
         var x = ((position[0] - originX) * ratio) + 0.5;
         var y = ((position[1] - originY) * ratio) + 0.5;
-        //probably not needed for glsl/opengl
-        //y = mViewportHeight - y;
+
         return vec2.fromValues(x, y);
+    };
+    
+    this.computeFakePixelPositionZ = function (z)
+    {
+        var ratio = this.cameraWindowToPixelRatio();
+        var newZ = ratio * z;
+        return newZ;
     };
 
     this.computePixelSize = function (size)
@@ -222,6 +234,7 @@ function Camera(cameraPosition, cameraWidth, viewportX, viewportY, viewportWidth
 
         var width = (size[0] * ratio) + 0.5;
         var height = (size[1] * ratio) + 0.5;
+        
         return vec2.fromValues(width, height);
     };
 

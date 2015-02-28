@@ -1,3 +1,5 @@
+"use strict";
+
 /* 
  * Manages enemies that react to player.
  */
@@ -109,7 +111,8 @@ function Enemy(transform, player, enemyShader)
     
     var renderObj = new Renderable2DObject(transform,
         enemyShader,
-        "resources/anF.png");
+        "resources/anF.png",
+        "resources/normal_4.png");
         
     renderObj.mTicksPerFrame = 5;
     

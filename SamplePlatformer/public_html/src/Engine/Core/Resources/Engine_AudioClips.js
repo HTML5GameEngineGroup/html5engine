@@ -60,7 +60,7 @@ gEngine.AudioClips = function()
         gEngine.ResourceMap.DecAssetRefCount(clipName);
     };
     
-    var PlaySound = function(clipName)
+    var PlayACue = function(clipName)
     {
         var clipInfo = gEngine.ResourceMap.RetrieveAsset(clipName);
         if (clipInfo !== null)
@@ -111,7 +111,7 @@ gEngine.AudioClips = function()
         InitAudioContext: InitAudioContext,
         LoadAudio: LoadAudio,
         UnloadAudio: UnloadAudio,
-        PlaySound: PlaySound,
+        PlayACue: PlayACue,
         PlayBackgroundAudio: PlayBackgroundAudio,
         StopBackgroundAudio: StopBackgroundAudio,
         IsBackgroundAudioPlaying: IsBackgroundAudioPlaying

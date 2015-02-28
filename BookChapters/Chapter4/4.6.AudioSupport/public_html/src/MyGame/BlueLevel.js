@@ -6,12 +6,12 @@
 
 function BlueLevel()
 {       
-    // scene file name
-    this._kSceneFile = "resources/BlueLevel.xml";
-    
     // audio clips: supports both mp3 and wav formats
     this._kBgClip = "resources/sounds/BGClip.mp3";
     this._kCue = "resources/sounds/BlueLevel_cue.wav";
+    
+    // scene file name
+    this._kSceneFile = "resources/BlueLevel.xml";
     
     // all square
     this._mSqSet = new Array();        // these are the renderable objects
@@ -85,7 +85,7 @@ BlueLevel.prototype.Update = function()
     
     /// Move right and swap ovre
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
-        gEngine.AudioClips.PlaySound(this._kCue);
+        gEngine.AudioClips.PlayACue(this._kCue);
         xform.IncXPosBy(deltaX);
         if (xform.GetXPos() > 30)  // this is the right-bound of the window
             xform.SetPosition(12, 60);
@@ -93,7 +93,7 @@ BlueLevel.prototype.Update = function()
     
     // Step A: test for white square movement
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
-        gEngine.AudioClips.PlaySound(this._kCue);
+        gEngine.AudioClips.PlayACue(this._kCue);
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) { // this is the left-boundary
             gEngine.GameLoop.Stop();

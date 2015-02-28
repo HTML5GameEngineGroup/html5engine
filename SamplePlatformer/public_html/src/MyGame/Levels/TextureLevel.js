@@ -103,13 +103,13 @@ TextureLevel.prototype.Update = function()
         if (texXform.GetXPos() > 30)  // this is the right-bound of the window
             texXform.SetPosition(10, texXform.GetYPos());
         texXform.IncXPosBy(deltaX);
-        gEngine.AudioClips.PlaySound(this._kKeyClicked);
+        gEngine.AudioClips.PlayACue(this._kKeyClicked);
     }
     
     // Step B: test for textured square rotation
     if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Up)) {
         texXform.IncRotationByDegree(1);
-        gEngine.AudioClips.PlaySound(this._kKeyClicked);
+        gEngine.AudioClips.PlayACue(this._kKeyClicked);
     }
     
     
@@ -120,7 +120,7 @@ TextureLevel.prototype.Update = function()
         if (redXform.GetWidth() > 5)
             redXform.SetSize(2, 2);
         redXform.IncSizeBy(0.05);
-        gEngine.AudioClips.PlaySound(this._kKeyClicked);
+        gEngine.AudioClips.PlayACue(this._kKeyClicked);
     }
     
     if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Four)) {

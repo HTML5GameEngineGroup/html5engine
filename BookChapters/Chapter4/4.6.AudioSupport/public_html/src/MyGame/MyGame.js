@@ -99,14 +99,14 @@ MyGame.prototype.Update = function()
     
     // Support hero movements
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
-        gEngine.AudioClips.PlaySound(this._kCue);
+        gEngine.AudioClips.PlayACue(this._kCue);
         xform.IncXPosBy(deltaX);
         if (xform.GetXPos() > 30)  // this is the right-bound of the window
             xform.SetPosition(12, 60);
     }
     
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
-        gEngine.AudioClips.PlaySound(this._kCue);
+        gEngine.AudioClips.PlayACue(this._kCue);
         xform.IncXPosBy(-deltaX);
         if (xform.GetXPos() < 11) {  // this is the left-bound of the window
             gEngine.GameLoop.Stop();

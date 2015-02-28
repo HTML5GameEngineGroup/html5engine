@@ -77,11 +77,9 @@ gEngine.ResourceMap = function()
     };
     
     var UnloadAsset = function(rName) {
-        var c = 0;
         if (rName in _mResourceMap) {
             _mResourceMap[rName].mRefCount -= 1;
-            c = _mResourceMap[rName].mRefCount;
-            if (c === 0)
+            if (_mResourceMap[rName].mRefCount === 0)
                 delete _mResourceMap[rName];
         }
         return c;

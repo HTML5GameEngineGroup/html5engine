@@ -36,8 +36,6 @@ TextureRenderable.prototype.SetColorArray = function () {
 };
 
 TextureRenderable.prototype.GetTexelAlpha = function (x, y) {
-    y += this._mTexBottomIndex;
-    x += this._mTexLeftIndex;
     x = x * 4;
     y = y * 4;
     return this._mColorArray[(y*this._mTextureInfo.mWidth) + x  + 3];

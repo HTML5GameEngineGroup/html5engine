@@ -1,6 +1,6 @@
 TextureRenderable.prototype.PixelTouches = function(other, wcTouchPos) {
     var pixelTouch = false;
-    var xIndex = this._mTexLeftIndex;
+    var xIndex = 0;
     var otherIndex = [0, 0];
     
     var xDir = [1, 0];
@@ -12,14 +12,14 @@ TextureRenderable.prototype.PixelTouches = function(other, wcTouchPos) {
     vec2.rotate(otherXDir, otherXDir, other._mXform.GetRotationInRad());
     vec2.rotate(otherYDir, otherYDir, other._mXform.GetRotationInRad());
         
-    while ((!pixelTouch) && (xIndex<=this._mTexRightIndex)) {
-        var yIndex = this._mTexBottomIndex;
-        while ((!pixelTouch) && (yIndex<=this._mTexTopIndex)) {
+    while ((!pixelTouch) && (xIndex<this._mTexWidth)) {
+        var yIndex = 0;
+        while ((!pixelTouch) && (yIndex<this._mTexHeight)) {
             if (this.GetTexelAlpha(xIndex, yIndex) > 0) {
                 this.IndexToWCPosition(wcTouchPos, xIndex, yIndex, xDir, yDir);
                 other.WCPositionToIndex(otherIndex, wcTouchPos, otherXDir, otherYDir);
-                if ((otherIndex[0] >= other._mTexLeftIndex) && (otherIndex[0] <= other._mTexRightIndex) &&
-                    (otherIndex[1] >= other._mTexBottomIndex) && (otherIndex[1] <= other._mTexTopIndex)) {
+                if ((otherIndex[0] > 0) && (otherIndex[0] < other._mTexWidth) &&
+                    (otherIndex[1] > 0) && (otherIndex[1] < other._mTexHeight)) {
                     pixelTouch = other.GetTexelAlpha(otherIndex[0], otherIndex[1]) > 0;
                 }
             }
@@ -36,6 +36,8 @@ TextureRenderable.prototype.SetColorArray = function () {
 };
 
 TextureRenderable.prototype.GetTexelAlpha = function (x, y) {
+    y += this._mTexBottomIndex;
+    x += this._mTexLeftIndex;
     x = x * 4;
     y = y * 4;
     return this._mColorArray[(y*this._mTextureInfo.mWidth) + x  + 3];

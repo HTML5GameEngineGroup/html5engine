@@ -12,5 +12,8 @@ varying vec2 vTexCoord;
 
 void main(void)
 {
-    gl_FragColor = texture2D(uSampler, vec2(vTexCoord.s, vTexCoord.t));
+    vec4 fragColor = texture2D(uSampler, vec2(vTexCoord.s, vTexCoord.t));
+    if(fragColor.a < 1.0)
+        discard;
+    gl_FragColor = fragColor;
 }

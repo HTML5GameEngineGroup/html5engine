@@ -13,6 +13,8 @@ function Renderable2DObject(transform, shaderName, textureName, normalMap)
     this._mAmbientColor = vec4.fromValues(1, 1, 0, 1);
     this._mDiffuseStrength  = 1.0;
     this._mDiffuseColor = vec4.fromValues(0, 1, 0, 1);
+    this._mShadowColor = vec4.fromValues(0, 0, 0, 0.5);
+    this._mShadowOffset = vec3.fromValues(0, 0, 0);
 }
 
 Renderable2DObject.prototype.SwitchShader = function (shader, shaderState) {
@@ -142,10 +144,13 @@ Renderable2DObject.prototype._setupMVPMatrix = function (gl, shaderProgram)
 //added by jeb for model view matrix
 Renderable2DObject.prototype._setupMVMatrix = function (gl, shaderProgram)
 {
+    var renderableMatrix = this.mTransformMatrix.getMatrix();
+    mat4.translate(renderableMatrix, renderableMatrix, vec3.fromValues(this._mShadowOffset[0], this._mShadowOffset[1], 0));
+    
     var vMatrix = EngineCore.Resources.getActiveCamera().getViewMatrix();
     var mvMatrix = mat4.create();
 
-    mat4.multiply(mvMatrix, vMatrix, this.mTransformMatrix.getMatrix());
+    mat4.multiply(mvMatrix, vMatrix, renderableMatrix);
 
     var uniformMV = gl.getUniformLocation(shaderProgram, "uMVMatrix");
     gl.uniformMatrix4fv(uniformMV, false, mvMatrix);
@@ -284,30 +289,66 @@ Renderable2DObject.prototype._UpdateShadowRecieverProperties = function (gl, sha
 //    gl.uniform3fv(uViewDim, view);
 };
 
-
-Renderable2DObject.prototype.DrawShadow = function (gl, vertexBuffer, textureBuffer)
-{
-//    var shaderProgram = this._activateAndGetShader();
-//
-//    this._setupVertexAttrib(gl, shaderProgram, vertexBuffer);
-//
-//    this._setupTextureCoordAttrib(gl, shaderProgram, textureBuffer);
-//
-//    this._setupGLTexture(gl, shaderProgram);
-//    this._setupShadowTexture(gl, shaderProgram);
-//    
-//    this._setupMVMatrix(gl, shaderProgram);
-//    this._setupPMatrix(gl, shaderProgram);
-//    
-//    this._UpdateShadowRecieverProperties(gl, shaderProgram);
-//    
-//    // Draw triangles, with a max of this.numberOfVerticies verticies, from the zeroth element.
-//    gl.drawArrays(gl.TRIANGLE_STRIP, 0, EngineCore.Resources.DEFAULT_NUM_VERTICES);
+Renderable2DObject.prototype._UpdateShadowColor = function (gl, shaderProgram)
+{ 
+        var color = gl.getUniformLocation(shaderProgram, "uColor");
+        gl.uniform4fv(color, this._mShadowColor);
 };
 
+//Basicly draws with the modifed shadow position
+Renderable2DObject.prototype._UpdateShadowAtPosition = function (gl, vertexBuffer, textureBuffer)
+{ 
+  
+    var shaderProgram = this._activateAndGetShader();
 
+    this._setupVertexAttrib(gl, shaderProgram, vertexBuffer);
+
+    this._setupTextureCoordAttrib(gl, shaderProgram, textureBuffer);
+
+    this._setupGLTexture(gl, shaderProgram);
+    //this._setupShadowTexture(gl, shaderProgram);
+    
+    this._setupMVMatrix(gl, shaderProgram, this._mShadowOffset);
+    this._setupPMatrix(gl, shaderProgram);
+    
+    this._UpdateShadowColor(gl, shaderProgram);
+    
+    
+    
+    // Draw triangles, with a max of this.numberOfVerticies verticies, from the zeroth element.
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, EngineCore.Resources.DEFAULT_NUM_VERTICES);
+    
+};
+
+// Loops through all lights and draws shadows for them all
+// warning very expensive should ignore lights at a distance
+Renderable2DObject.prototype.DrawShadow = function (gl, vertexBuffer, textureBuffer)
+{
+    for(var i = 0; i < this._mLightList.length; i++ )
+    {
+        //should have an if statement to check if it is a directional light or 
+        //a point light and respond accordingly, for now assuming a point light
+        //and calculating position
+        var vecToLight = vec3.create();
+        vec3.subtract(vecToLight, vec3.fromValues(this.mTransformMatrix.getX(),this.mTransformMatrix.getY(), 0),   this._mLightList[i].mPosition);
+        var length = vec3.length(vecToLight);
+        var norm = vec3.create();
+        if(length > 0)
+            vec3.normalize(norm, vecToLight);
+        else 
+            norm = vec3.fromValues(0,0,0);
+        
+        //var shadowOffset = vec3.create();
+        vec3.scale(this._mShadowOffset, norm, 0.2); //this should NOT be 0.2 but the distance from the renderable to the shadow reciever layer 
+        this._UpdateShadowAtPosition(gl, vertexBuffer, textureBuffer);
+        
+    }
+};
+
+// draws with light properties
 Renderable2DObject.prototype.draw = function (gl, vertexBuffer, textureBuffer)
 {
+    this._mShadowOffset = vec3.fromValues(0, 0, 0);
     var shaderProgram = this._activateAndGetShader();
 
     this._setupVertexAttrib(gl, shaderProgram, vertexBuffer);

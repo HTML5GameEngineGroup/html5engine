@@ -405,10 +405,10 @@ EngineCore.Resources = function () {
             for(var currentObjIndex = 0; currentObjIndex < currentDrawSet.length; currentObjIndex++)
             {
                 var currentObj = currentDrawSet[currentObjIndex];
-                //if (currentObj.mShaderOn === false)
+                if (currentObj.mShaderOn === false)
                     currentObj.draw(gl, vertexBuffer, textureBuffer);
-                //else
-                    //currentObj.DrawShadow(gl, vertexBuffer, textureBuffer);
+                else
+                    currentObj.DrawShadow(gl, vertexBuffer, textureBuffer);
             }
         }
     };
@@ -424,14 +424,14 @@ EngineCore.Resources = function () {
             return framebufferTexture;
     };
     
-    var ShadowRecieverFramebufferOn = function ()
+    var FramebufferOn = function ()
     {
         gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
         gl.clearColor(1, 1, 0, 1);
         gl.clear(gl.COLOR_BUFFER_BIT);
     };
       
-    var ShadowRecieverFramebufferOff = function ()
+    var FramebufferOff = function ()
     {
        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
        //gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
@@ -440,7 +440,7 @@ EngineCore.Resources = function () {
     };
 
     // Create basic frame buffer and bind a fresh texture
-    var SetupShadowRecieverFrameBuffer = function ()
+    var SetupFrameBuffer = function ()
     {
         //setup the frame buffer
         framebuffer = gl.createFramebuffer();
@@ -461,11 +461,6 @@ EngineCore.Resources = function () {
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, framebuffer.width, framebuffer.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
         gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, framebufferTexture, 0);
         
-//        var renderbuffer = gl.createRenderbuffer();
-//        gl.bindRenderbuffer(gl.RENDERBUFFER, renderBuffer);
-//        gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_STENCIL, framebuffer.width, framebuffer.height);
-//        gl.framebufferRenderbuffer(
-//        gl.FRAMEBUFFER, gl.DEPTH_STENCIL_ATTACHMENT, gl.RENDERBUFFER, renderbuffer);
     
     };
     
@@ -474,24 +469,24 @@ EngineCore.Resources = function () {
         //var maskid  = 1;
         //gl.clear(gl.DEPTH_BUFFER_BIT)
         gl.enable(gl.STENCIL_TEST);
-        //gl.colorMask(true, true, true, true);
-        //gl.depthMask(false);
+        gl.colorMask(true, true, true, true);
+        gl.depthMask(false);
         gl.stencilFunc(gl.NEVER, 1, 0xFF);
         gl.stencilOp(gl.REPLACE,gl.KEEP, gl.KEEP);
-        //gl.stencilMask(0xFF);
-        //gl.clear(gl.STENCIL_BUFFER_BIT);
+        gl.stencilMask(0xFF);
+        gl.clear(gl.STENCIL_BUFFER_BIT);
 
         
     };
     
     var ShadowRecieverStencilOff = function ()
     {
-        //gl.depthMask(gl.TRUE);
-        //gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
-        //gl.colorMask( gl.FALSE, gl.FALSE, gl.FALSE, gl.FALSE );
-        //gl.stencilMask(0x00);
+        gl.depthMask(gl.TRUE);
+        gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
+        gl.colorMask( gl.FALSE, gl.FALSE, gl.FALSE, gl.FALSE );
+        gl.stencilMask(0x00);
         gl.stencilFunc(gl.EQUAL, 1, 0xFF);
-        //gl.colorMask( true, true, true, true );
+        gl.colorMask( true, true, true, true );
     };
     
     var ShadowRecieverStencilDisable = function ()
@@ -597,10 +592,10 @@ EngineCore.Resources = function () {
         playBackgroundAudio: playBackgroundAudio,
         stopBackgroundAudio: stopBackgroundAudio,
         unloadAllResources: unloadAllResources,
-        SetupShadowRecieverFrameBuffer: SetupShadowRecieverFrameBuffer,
+        SetupFrameBuffer: SetupFrameBuffer,
         GetFramebuffer: GetFramebuffer,
-        ShadowRecieverFramebufferOn: ShadowRecieverFramebufferOn,
-        ShadowRecieverFramebufferOff: ShadowRecieverFramebufferOff,
+        FramebufferOn: FramebufferOn,
+        FramebufferOff: FramebufferOff,
         GetFramebufferTexture: GetFramebufferTexture,
         ShadowRecieverStencilOn: ShadowRecieverStencilOn,
         ShadowRecieverStencilOff: ShadowRecieverStencilOff,

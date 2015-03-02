@@ -163,36 +163,30 @@ MainLevel.prototype.update = function()
 
 MainLevel.prototype.draw = function()
 {
+
     EngineCore.Resources.clearCanvas();
     //very hacky
-    //draw to the framebuffer texture
-
-//    EngineCore.Resources.ShadowRecieverFramebufferOn();
-//    this.mBackgroundManager.addToDrawSet();
-//    this.mCamera.draw();
-//    EngineCore.Resources.ShadowRecieverFramebufferOff();
-
-//    EngineCore.Resources.ShadowRecieverStencilOn();
-//    this.mBackgroundManager.addToDrawSet();
-//    this.mCamera.draw();
-//    EngineCore.Resources.ShadowRecieverStencilOff();
+    //draw to stencil
+    EngineCore.Resources.ShadowRecieverStencilOn();
+    this.mBackgroundManager.addToDrawSet();
+    this.mCamera.draw();
+    EngineCore.Resources.ShadowRecieverStencilOff();
     
-    //draw all objects that have shadows
-    //this.mPlayer.mRenderComponent.SwitchShader(this.mShadowShader, true);
-    //this.mPlayer.addToDrawSet();
-    //this.mCamera.draw();
-    //this.mPlayer.mRenderComponent.SwitchShader(this.mMainShader, false); //remember to switch back
+    //draw all shadows to stencil
+    this.mPlayer.mRenderComponent.SwitchShader(this.mShadowShader, true);
+    this.mPlayer.addToDrawSet();
+    this.mCamera.draw();
+    this.mPlayer.mRenderComponent.SwitchShader(this.mMainShader, false); //remember to switch back
+    EngineCore.Resources.clearDrawSet();
     
-    //test results
-    //this.mShadowTester.mTextureID = EngineCore.Resources.GetFramebufferTexture();
-    //this.mShadowTester.addToDrawSet();
-    //this.mCamera.draw();
+    //turn of drawing stencil
+    EngineCore.Resources.ShadowRecieverStencilDisable();
     
     //draw all objects
-    this.mBackgroundManager.addToDrawSet();
+    //this.mBackgroundManager.addToDrawSet();
     this.mEnemyManager.addToDrawSet();
     this.mPlayer.addToDrawSet();
     this.mCamera.draw();
-    EngineCore.Resources.ShadowRecieverStencilDisable();
+    
     
 };

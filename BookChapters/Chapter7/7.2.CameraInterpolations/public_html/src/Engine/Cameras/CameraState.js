@@ -15,8 +15,13 @@ CameraState.prototype.GetWidth = function() { return this._mWidth.GetValue(); };
 CameraState.prototype.SetCenter = function(c) { this._mCenter.SetFinalValue(c); };
 CameraState.prototype.SetWidth = function(w) { this._mWidth.SetFinalValue(w); };
 
-CameraState.prototype.UpdateCameraState = function() { 
+CameraState.prototype.UpdateCameraState = function() {   
     this._mCenter.UpdateInterpolation();
     this._mWidth.UpdateInterpolation();
+};
+
+CameraState.prototype.ConfigInterpolation = function(stiffness, duration) {
+    this._mCenter.ConfigInterpolation(stiffness, duration);
+    this._mWidth.ConfigInterpolation(stiffness, duration);
 };
 // </editor-fold>

@@ -31,6 +31,13 @@ function Camera(wcCenter, wcWidth, viewportArray)
     this._mBgColor = [0.8, 0.8, 0.8, 1]; // RGB and Alpha
 };
 
+Camera.eViewport = Object.freeze({
+            eOrgX: 0,
+            eOrgY: 1,
+            eWidth: 2,
+            eHeight: 3
+});
+    
 // <editor-fold desc="Public Methods">
 // <editor-fold desc="Getter/Setter">
 // <editor-fold desc="setter/getter of WC and viewport">
@@ -40,7 +47,7 @@ Camera.prototype.SetWCCenter = function(xPos, yPos) {
 Camera.prototype.GetWCCenter = function() { return this._mCameraState.GetCenter(); };
 Camera.prototype.SetWCWidth = function(width) { this._mCameraState.SetWidth(width); };
 Camera.prototype.GetWCWidth = function() { return this._mCameraState.GetWidth(); };
-Camera.prototype.GetWCHeight = function() { return this._mCameraState.GetWidth() * this._mViewport[3] / this._mViewport[2]; };
+Camera.prototype.GetWCHeight = function() { return this._mCameraState.GetWidth() * this._mViewport[Camera.eViewport.eHeight] / this._mViewport[Camera.eViewport.eWidth]; };
                                                                         // viewportH/viewportW
 
 Camera.prototype.SetViewport = function(viewportArray) { this._mViewport = viewportArray; };

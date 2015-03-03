@@ -19,9 +19,9 @@ function Renderable()
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
-Renderable.prototype.Draw = function(vpMatrix) {
+Renderable.prototype.Draw = function(aCamera) {
     var gl = gEngine.Core.GetGL();    
-    this._mShader.ActivateShader(this._mColor, vpMatrix);  // always activate the shader first!
+    this._mShader.ActivateShader(this._mColor, aCamera);  // always activate the shader first!
     this._mShader.LoadObjectTransform(this._mXform.GetXform());
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 };

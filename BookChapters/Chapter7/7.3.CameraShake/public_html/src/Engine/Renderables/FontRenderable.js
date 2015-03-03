@@ -18,7 +18,7 @@ function FontRenderable(aString)
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
-FontRenderable.prototype.Draw = function(vpMatrix) {
+FontRenderable.prototype.Draw = function(aCamera) {
     // we will draw the text string by calling to _mOneChar for each of the
     // chars in the _mText string.
     var widthOfOneChar = this._mXform.GetWidth() / this._mText.length;
@@ -48,7 +48,7 @@ FontRenderable.prototype.Draw = function(vpMatrix) {
         
         this._mOneChar.GetXform().SetPosition(xPos - xOffset, yPos - yOffset);        
         
-        this._mOneChar.Draw(vpMatrix);
+        this._mOneChar.Draw(aCamera);
         
         xPos += widthOfOneChar;
     }

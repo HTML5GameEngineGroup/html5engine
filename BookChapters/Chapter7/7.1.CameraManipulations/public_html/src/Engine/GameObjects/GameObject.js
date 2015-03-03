@@ -67,7 +67,7 @@ GameObject.prototype.Update = function() {
     vec2.scaleAndAdd(pos, pos, this.GetCurrentFrontDir(), this.GetSpeed());
 };
 
-GameObject.prototype.Draw = function(vpMatrix){
+GameObject.prototype.Draw = function(aCamera){
     if (this.IsVisible())
-        this._mRenderComponent.Draw(vpMatrix);
+        this._mRenderComponent.Draw(aCamera);
 };

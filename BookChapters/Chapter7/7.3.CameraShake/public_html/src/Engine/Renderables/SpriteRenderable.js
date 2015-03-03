@@ -39,12 +39,12 @@ SpriteRenderable.eTexCoordArray = Object.freeze({
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
-SpriteRenderable.prototype.Draw = function(pixelColor, vpMatrix) {
+SpriteRenderable.prototype.Draw = function(pixelColor, aCamera) {
     // set the current texture coordinate
     // 
     // activate the texture
     this._mShader.SetTextureCoordinate(this.GetTexCoordinateArray());
-    TextureRenderable.prototype.Draw.call(this, pixelColor, vpMatrix);
+    TextureRenderable.prototype.Draw.call(this, pixelColor, aCamera);
 };
 
 // specify subtexture region by texture coordinate (between 0 to 1)

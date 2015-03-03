@@ -105,7 +105,11 @@ Camera.prototype.SetupViewProjection = function() {
 };
 //</editor-fold>
 
-Camera.prototype.CollideWCBound = function(aBBox) {
-    var cameraBound = new BoundingBox(this._mWCCenter, this._mWCWidth, this.GetWCHeight());
-    return cameraBound.BoundCollideStatus(aBBox);
+
+Camera.prototype.CollideWCBound = function(aXform, zone) {
+    var bbox = new BoundingBox(aXform.GetPosition(), aXform.GetWidth(), aXform.GetHeight());
+    var w = zone * this.GetWCWidth();
+    var h = zone * this.GetWCHeight();
+    var cameraBound = new BoundingBox(this.GetWCCenter(), w, h);
+    return cameraBound.BoundCollideStatus(bbox);
 };

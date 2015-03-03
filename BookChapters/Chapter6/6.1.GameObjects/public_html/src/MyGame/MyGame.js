@@ -10,6 +10,7 @@ function MyGame()
     // The camera to view the rectangles
     this._mCamera = null;
     
+    // For echo message
     this._mMsg = null;
     
     // the hero and the support objects
@@ -40,9 +41,10 @@ MyGame.prototype.Initialize = function()
     this._mCamera.SetBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
       
-    // The right minion
+    // Step B: The dye pack: simple another GameObject
     this._mDyePack= new DyePack(this._kMinionSprite);
     
+    // Step C: A set of Minions
     this._mMinionSet = new GameObjectSet();
     // create 5 minions at random Y values
     for (var i = 0; i< 5; i++) {
@@ -51,10 +53,10 @@ MyGame.prototype.Initialize = function()
         this._mMinionSet.AddToSet(aMinion);
     }
         
-    
-    // Setp D: Create the hero object with texture from lower-left corner of 
+    // Setp D: Create the hero object
     this._mHero = new Hero(this._kMinionSprite);
-        
+    
+    // Step E: Create and initialize message output
     this._mMsg = new FontRenderable("Status Message");
     this._mMsg.SetColor([0, 0, 0, 1]);
     this._mMsg.GetXform().SetPosition(1, 2);
@@ -72,10 +74,10 @@ MyGame.prototype.Draw = function()
     this._mCamera.SetupViewProjection();
     
         // Step  C: Draw everything
-        this._mHero.Draw(this._mCamera.GetVPMatrix());
-        this._mMinionSet.Draw(this._mCamera.GetVPMatrix());
-        this._mDyePack.Draw(this._mCamera.GetVPMatrix());
-        this._mMsg.Draw(this._mCamera.GetVPMatrix());
+        this._mHero.Draw(this._mCamera);
+        this._mMinionSet.Draw(this._mCamera);
+        this._mDyePack.Draw(this._mCamera);
+        this._mMsg.Draw(this._mCamera);
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw

@@ -30,9 +30,9 @@ gEngine.Core.InheritPrototype(TextureShader, SimpleShader);
 // <editor-fold desc="Public Methods">
 
 // Overriding the Activation of the shader for rendering
-TextureShader.prototype.ActivateShader = function(pixelColor, vpMatrix) {
+TextureShader.prototype.ActivateShader = function(pixelColor, aCamera) {
     // fist call the super class's activate
-    SimpleShader.prototype.ActivateShader.call(this, pixelColor, vpMatrix);
+    SimpleShader.prototype.ActivateShader.call(this, pixelColor, aCamera);
     
     // now our own functionality: enable texture coordinate array
     var gl = gEngine.Core.GetGL();

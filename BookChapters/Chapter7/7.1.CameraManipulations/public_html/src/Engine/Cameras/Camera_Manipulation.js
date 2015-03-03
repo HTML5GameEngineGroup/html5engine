@@ -5,21 +5,22 @@ Camera.prototype.PanBy = function(dx, dy) {
 
 // pan the camera to ensure aXform is within camera bounds
 // this is complementary to the ClampAtBound: instead of clamping aXform, now, move the camera
-Camera.prototype.PanWith = function(aXform) {
-    var status = this.CollideWCBound(aXform);
+Camera.prototype.PanWith = function(aXform, zone) {
+    var status = this.CollideWCBound(aXform, zone);
     if (status !== BoundingBox.eBoundCollideStatus.eInside) {
        var pos = aXform.GetPosition();
+       var newC = this.GetWCCenter();
        if ((status & BoundingBox.eBoundCollideStatus.eCollideTop) !== 0) {
-           this._mWCCenter[1] = pos[1] + (aXform.GetHeight()/2) - (this.GetWCHeight()/2);
+           newC[1] = pos[1] + (aXform.GetHeight()/2) - (zone * this.GetWCHeight()/2);
         }
         if ((status & BoundingBox.eBoundCollideStatus.eCollideBottom) !== 0) {
-            this._mWCCenter[1] = pos[1] - (aXform.GetHeight()/2) + (this.GetWCHeight()/2);
+            newC[1] = pos[1] - (aXform.GetHeight()/2) + (zone * this.GetWCHeight()/2);
         }
         if ((status & BoundingBox.eBoundCollideStatus.eCollideRight) !== 0) {
-            this._mWCCenter[0] = pos[0] + (aXform.GetWidth()/2) - (this.GetWCWidth()/2);
+            newC[0] = pos[0] + (aXform.GetWidth()/2) - (zone * this.GetWCWidth()/2);
         }
         if ((status & BoundingBox.eBoundCollideStatus.eCollideLeft) !== 0) {
-            this._mWCCenter[0] = pos[0] - (aXform.GetWidth()/2) + (this.GetWCWidth()/2);
+            newC[0] = pos[0] - (aXform.GetWidth()/2) + (zone * this.GetWCWidth()/2);
         }
     }
 };

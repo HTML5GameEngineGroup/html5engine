@@ -103,14 +103,14 @@ MyGame.prototype.Initialize = function()
 
 MyGame.prototype.DrawCamera = function(camera) {
     camera.SetupViewProjection();
-        this._mBg.Draw(camera.GetVPMatrix());
-        this._mHero.Draw(camera.GetVPMatrix());
-        this._mBrain.Draw(camera.GetVPMatrix());
-        this._mPortal.Draw(camera.GetVPMatrix());
-        this._mLMinion.Draw(camera.GetVPMatrix());
-        this._mRMinion.Draw(camera.GetVPMatrix());
-        this._mDyePack.Draw(camera.GetVPMatrix());
-        this._mDyeHit.Draw(camera.GetVPMatrix());
+        this._mBg.Draw(camera);
+        this._mHero.Draw(camera);
+        this._mBrain.Draw(camera);
+        this._mPortal.Draw(camera);
+        this._mLMinion.Draw(camera);
+        this._mRMinion.Draw(camera);
+        this._mDyePack.Draw(camera);
+        this._mDyeHit.Draw(camera);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -122,7 +122,7 @@ MyGame.prototype.Draw = function()
     
     // Step  B: Draw with all three cameras
     this.DrawCamera(this._mCamera);
-        this._mMsg.Draw(this._mCamera.GetVPMatrix());   // only draw status in the main camera
+        this._mMsg.Draw(this._mCamera);   // only draw status in the main camera
     this.DrawCamera(this._mHeroCam);
     this.DrawCamera(this._mBrainCam);
 };

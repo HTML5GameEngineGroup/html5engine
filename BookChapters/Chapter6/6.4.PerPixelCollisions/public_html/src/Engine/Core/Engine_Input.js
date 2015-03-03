@@ -34,6 +34,8 @@ gEngine.Input = function()
     
         // Alphabets
         A : 65,
+        B : 66,
+        C : 67,
         D : 68,
         E : 69,
         F : 70,
@@ -45,6 +47,9 @@ gEngine.Input = function()
         L : 76,
         M : 77,
         N : 78,
+        O : 79,
+        P : 80,
+        Q : 81,
         R : 82,
         S : 83,
         T : 84,

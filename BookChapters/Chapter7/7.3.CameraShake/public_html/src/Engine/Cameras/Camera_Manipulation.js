@@ -67,6 +67,11 @@ Camera.prototype.ZoomTowards = function(pos, zoom) {
     this._mCameraState.SetCenter(newC);
 };
 
+Camera.prototype.ConfigInterpolation = function(stiffness, duration)
+{
+    this._mCameraState.ConfigInterpolation(stiffness, duration);
+};
+
 Camera.prototype.Shake = function(xDelta, yDelta, shakeFrequency, duration) {
     this._mCameraShake = new CameraShake(this._mCameraState, xDelta, yDelta, shakeFrequency, duration);
 };

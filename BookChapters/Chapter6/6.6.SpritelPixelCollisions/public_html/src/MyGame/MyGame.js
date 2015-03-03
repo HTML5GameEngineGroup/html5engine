@@ -17,15 +17,15 @@ function MyGame()
     // the hero and the support objects
     this._mHero = null;
     this._mBrain = null;
-    this._mDyePack = null;
-    this._mDyeHit = null;
+    this._mPortalHit = null;
+    this._mHeroHit = null;
     
     this._mPortal = null;
     this._mLMinion = null;
     this._mRMinion = null;
     
     this._mCollide = null;
-    this._mChoice = 'D';
+    this._mChoice = 'H';
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
@@ -57,10 +57,10 @@ MyGame.prototype.Initialize = function()
     // Setp D: Create the hero object with texture from lower-left corner of 
     this._mHero = new Hero(this._kMinionSprite);
     
-    this._mDyePack = new DyePack(this._kMinionSprite);
-    this._mDyePack.SetVisibility(false);
-    this._mDyeHit = new DyePack(this._kMinionSprite);
-    this._mDyeHit.SetVisibility(false);
+    this._mPortalHit = new DyePack(this._kMinionSprite);
+    this._mPortalHit.SetVisibility(false);
+    this._mHeroHit = new DyePack(this._kMinionSprite);
+    this._mHeroHit.SetVisibility(false);
     
     this._mPortal = new Generic(this._kMinionPortal, 50, 30, 10, 10);
     
@@ -86,14 +86,14 @@ MyGame.prototype.Draw = function()
     this._mCamera.SetupViewProjection();
     
         // Step  C: Draw everything
-        this._mHero.Draw(this._mCamera.GetVPMatrix());
-        this._mBrain.Draw(this._mCamera.GetVPMatrix());
-        this._mPortal.Draw(this._mCamera.GetVPMatrix());
-        this._mLMinion.Draw(this._mCamera.GetVPMatrix());
-        this._mRMinion.Draw(this._mCamera.GetVPMatrix());
-        this._mDyePack.Draw(this._mCamera.GetVPMatrix());
-        this._mDyeHit.Draw(this._mCamera.GetVPMatrix());
-        this._mMsg.Draw(this._mCamera.GetVPMatrix());
+        this._mHero.Draw(this._mCamera);
+        this._mBrain.Draw(this._mCamera);
+        this._mPortal.Draw(this._mCamera);
+        this._mLMinion.Draw(this._mCamera);
+        this._mRMinion.Draw(this._mCamera);
+        this._mPortalHit.Draw(this._mCamera);
+        this._mHeroHit.Draw(this._mCamera);
+        this._mMsg.Draw(this._mCamera);
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
@@ -113,27 +113,26 @@ MyGame.prototype.Update = function()
     
     var h = [];
     
-    // Portal's resultion is 1/16 that of Collector!
-    // if (this._mCollector.PixelTouches(this._mPortal, h)) {  // <-- VERY EXPENSIVE!!
+    // Portal intersects with which ever is selected
     if (this._mPortal.PixelTouches(this._mCollide, h)) {
-        this._mDyePack.SetVisibility(true);
-        this._mDyePack.GetXform().SetXPos(h[0]);
-        this._mDyePack.GetXform().SetYPos(h[1]);
+        this._mPortalHit.SetVisibility(true);
+        this._mPortalHit.GetXform().SetXPos(h[0]);
+        this._mPortalHit.GetXform().SetYPos(h[1]);
     } else 
-        this._mDyePack.SetVisibility(false);
+        this._mPortalHit.SetVisibility(false);
     
-    
+    // hero always collide with Brain (Brain chases hero)
     if (!this._mHero.PixelTouches(this._mBrain, h)) {
         this._mBrain.RotateObjPointTo(this._mHero.GetXform().GetPosition(), 0.05);
         GameObject.prototype.Update.call(this._mBrain);
-        this._mDyeHit.SetVisibility(false);
+        this._mHeroHit.SetVisibility(false);
     } else {
-        this._mDyeHit.SetVisibility(true);
-        this._mDyeHit.GetXform().SetPosition(h[0], h[1]);
+        this._mHeroHit.SetVisibility(true);
+        this._mHeroHit.GetXform().SetPosition(h[0], h[1]);
     }
     
-    
-    
+  
+    // decide which to collide
     if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.L)) {
         this._mCollide = this._mLMinion;
         this._mChoice = 'L';

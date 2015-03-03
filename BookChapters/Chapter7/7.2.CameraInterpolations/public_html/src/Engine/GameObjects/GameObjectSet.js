@@ -21,9 +21,9 @@ GameObjectSet.prototype.Update = function()
     }
 };
 
-GameObjectSet.prototype.Draw = function(vpMatrix)
+GameObjectSet.prototype.Draw = function(aCamera)
 {
     for (var i = 0; i<this._mSet.length; i++) {
-        this._mSet[i].Draw(vpMatrix);
+        this._mSet[i].Draw(aCamera);
     }
 };

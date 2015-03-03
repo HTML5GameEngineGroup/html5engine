@@ -14,19 +14,8 @@ function MyGame()
     
     this._mMsg = null;
     
-    // the hero and the support objects
-    this._mHero = null;
-    this._mBrain = null;
-    this._mDyePack = null;
-    
     this._mCollector = null;
     this._mPortal = null;
-    
-    // mode of running: 
-    //   H: Player drive brain
-    //   J: Dye drive brain, immediate orientation change
-    //   K: Dye drive brain, gradual orientation change
-    this._mMode = 'h';
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
@@ -54,15 +43,9 @@ MyGame.prototype.Initialize = function()
             );
     this._mCamera.SetBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
-      
-    this._mBrain = new Brain(this._kMinionSprite);        
-    
-    // Setp D: Create the hero object with texture from lower-left corner of 
-    this._mHero = new Hero(this._kMinionSprite);
-    
+            
     this._mDyePack = new DyePack(this._kMinionSprite);
     this._mDyePack.SetVisibility(false);
-    
     
     this._mCollector = new Generic(this._kMinionCollector, 70, 30, 30, 30);
     this._mPortal = new Generic(this._kMinionPortal, 50, 30, 10, 10);
@@ -84,12 +67,10 @@ MyGame.prototype.Draw = function()
     this._mCamera.SetupViewProjection();
     
         // Step  C: Draw everything
-        //this._mHero.Draw(this._mCamera.GetVPMatrix());
-        //this._mBrain.Draw(this._mCamera.GetVPMatrix());
-        this._mPortal.Draw(this._mCamera.GetVPMatrix());
-        this._mCollector.Draw(this._mCamera.GetVPMatrix());
-        this._mDyePack.Draw(this._mCamera.GetVPMatrix());
-        this._mMsg.Draw(this._mCamera.GetVPMatrix());
+        this._mPortal.Draw(this._mCamera);
+        this._mCollector.Draw(this._mCamera);
+        this._mDyePack.Draw(this._mCamera);
+        this._mMsg.Draw(this._mCamera);
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw

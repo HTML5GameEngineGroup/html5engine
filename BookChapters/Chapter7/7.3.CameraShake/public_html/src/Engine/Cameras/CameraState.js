@@ -19,4 +19,9 @@ CameraState.prototype.UpdateCameraState = function() {
     this._mCenter.UpdateInterpolation();
     this._mWidth.UpdateInterpolation();
 };
+
+CameraState.prototype.ConfigInterpolation = function(stiffness, duration) {
+    this._mCenter.ConfigInterpolation(stiffness, duration);
+    this._mWidth.ConfigInterpolation(stiffness, duration);
+};
 // </editor-fold>

@@ -95,15 +95,15 @@ MyGame.prototype.Draw = function()
     this._mCamera.SetupViewProjection();
     
         // Step  C: Draw everything
-        this._mBg.Draw(this._mCamera.GetVPMatrix());
-        this._mHero.Draw(this._mCamera.GetVPMatrix());
-        this._mBrain.Draw(this._mCamera.GetVPMatrix());
-        this._mPortal.Draw(this._mCamera.GetVPMatrix());
-        this._mLMinion.Draw(this._mCamera.GetVPMatrix());
-        this._mRMinion.Draw(this._mCamera.GetVPMatrix());
-        this._mDyePack.Draw(this._mCamera.GetVPMatrix());
-        this._mDyeHit.Draw(this._mCamera.GetVPMatrix());
-        this._mMsg.Draw(this._mCamera.GetVPMatrix());
+        this._mBg.Draw(this._mCamera);
+        this._mHero.Draw(this._mCamera);
+        this._mBrain.Draw(this._mCamera);
+        this._mPortal.Draw(this._mCamera);
+        this._mLMinion.Draw(this._mCamera);
+        this._mRMinion.Draw(this._mCamera);
+        this._mDyePack.Draw(this._mCamera);
+        this._mDyeHit.Draw(this._mCamera);
+        this._mMsg.Draw(this._mCamera);
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
@@ -166,7 +166,7 @@ MyGame.prototype.Update = function()
     this._mCamera.ClampAtBoundary(this._mBrain.GetXform());
     this._mCamera.ClampAtBoundary(this._mPortal.GetXform());
     
-    this._mCamera.PanWith(this._mHero.GetXform());
+    this._mCamera.PanWith(this._mHero.GetXform(), 0.9);
     
     this._mMsg.SetText(msg + this._mChoice);
 };

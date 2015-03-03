@@ -7,7 +7,7 @@ precision mediump float;
 // Must be set outside the shader.
 uniform sampler2D uSampler;
 
-// to transform the vertex position
+// Color of the object
 uniform vec4 uPixelColor;  
 
 // The "varying" keyword is for signifing that the texture coordinate will be

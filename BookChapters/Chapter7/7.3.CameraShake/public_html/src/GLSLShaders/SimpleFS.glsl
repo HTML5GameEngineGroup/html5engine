@@ -4,7 +4,7 @@
 precision mediump float; 
     // sets the precision for floating point computation
 
-// to transform the vertex position
+// Color of the object
 uniform vec4 uPixelColor;  
 
 void main(void)  {

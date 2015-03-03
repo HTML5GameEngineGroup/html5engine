@@ -9,6 +9,8 @@ GameObject.prototype.GetXform = function(){return this._mRenderComponent.GetXfor
 
 GameObject.prototype.update = function(){};
 
-GameObject.prototype.Draw = function(vpMatrix){
-    this._mRenderComponent.Draw(vpMatrix);
+GameObject.prototype.GetRenderable = function() { return this._mRenderComponent; }
+
+GameObject.prototype.Draw = function(aCamera){
+    this._mRenderComponent.Draw(aCamera);
 };

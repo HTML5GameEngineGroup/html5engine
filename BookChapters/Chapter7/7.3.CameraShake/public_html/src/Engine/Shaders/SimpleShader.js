@@ -67,13 +67,13 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
 
 
 // Access to the compiled shader
-SimpleShader.prototype.GetShader = function() { return _mCompiledShader; };
+SimpleShader.prototype.GetShader = function() { return this._mCompiledShader; };
 
 // Activate the shader for rendering
-SimpleShader.prototype.ActivateShader = function(pixelColor, vpMatrix) {
+SimpleShader.prototype.ActivateShader = function(pixelColor, aCamera) {
     var gl = gEngine.Core.GetGL();
     gl.useProgram(this._mCompiledShader);
-    gl.uniformMatrix4fv(this._mViewProjTransform, false, vpMatrix);
+    gl.uniformMatrix4fv(this._mViewProjTransform, false, aCamera.GetVPMatrix());
     gl.enableVertexAttribArray(this._mShaderVertexPositionAttribute);
     gl.uniform4fv(this._mPixelColor, pixelColor);
 };

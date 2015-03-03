@@ -30,6 +30,12 @@ Interpolate.prototype.UpdateInterpolation = function() {
         this._InterpolateValue();
     }
 };
+
+// stiffness of 1 switches off interpolation
+Interpolate.prototype.ConfigInterpolation = function(stiffness, duration) { 
+    this._mRate = stiffness;
+    this._mCycles = duration;
+};
 // </editor-fold>
 
 // subclass should override this function for non-scalar values

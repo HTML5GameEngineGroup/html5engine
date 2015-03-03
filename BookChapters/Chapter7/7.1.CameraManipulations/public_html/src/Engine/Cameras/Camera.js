@@ -105,29 +105,31 @@ Camera.prototype.SetupViewProjection = function() {
 };
 //</editor-fold>
 
-Camera.prototype.CollideWCBound = function(aXform) {
+Camera.prototype.CollideWCBound = function(aXform, zone) {
     var bbox = new BoundingBox(aXform.GetPosition(), aXform.GetWidth(), aXform.GetHeight());
-    var cameraBound = new BoundingBox(this._mWCCenter, this._mWCWidth, this.GetWCHeight());
+    var w = zone * this.GetWCWidth();
+    var h = zone * this.GetWCHeight();
+    var cameraBound = new BoundingBox(this.GetWCCenter(), w, h);
     return cameraBound.BoundCollideStatus(bbox);
 };
 
 // prevents the xform from moving outside of the WC boundary.
 // by clamping the aXfrom at the boundary of WC, 
-Camera.prototype.ClampAtBoundary = function(aXform) {
-    var status = this.CollideWCBound(aXform);
+Camera.prototype.ClampAtBoundary = function(aXform, zone) {
+    var status = this.CollideWCBound(aXform, zone);
     if (status !== BoundingBox.eBoundCollideStatus.eInside) {
         var pos = aXform.GetPosition();
         if ((status & BoundingBox.eBoundCollideStatus.eCollideTop) !== 0) {
-            pos[1] = this._mWCCenter[1] + (this.GetWCHeight()/2) - (aXform.GetHeight()/2);
+            pos[1] = (this.GetWCCenter())[1] + (zone * this.GetWCHeight()/2) - (aXform.GetHeight()/2);
         }
         if ((status & BoundingBox.eBoundCollideStatus.eCollideBottom) !== 0) {
-            pos[1] = this._mWCCenter[1] - (this.GetWCHeight()/2) + (aXform.GetHeight()/2);
+            pos[1] = (this.GetWCCenter())[1] - (zone * this.GetWCHeight()/2) + (aXform.GetHeight()/2);
         }
         if ((status & BoundingBox.eBoundCollideStatus.eCollideRight) !== 0) {
-            pos[0] = this._mWCCenter[0] + (this.GetWCWidth()/2) - (aXform.GetWidth()/2);
+            pos[0] = (this.GetWCCenter())[0] + (zone * this.GetWCWidth()/2) - (aXform.GetWidth()/2);
         }
         if ((status & BoundingBox.eBoundCollideStatus.eCollideLeft) !== 0) {
-            pos[0] = this._mWCCenter[0] - (this.GetWCWidth()/2) + (aXform.GetWidth()/2);
+            pos[0] = (this.GetWCCenter())[0] - (zone * this.GetWCWidth()/2) + (aXform.GetWidth()/2);
         }
     }
     return status;

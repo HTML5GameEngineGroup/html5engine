@@ -31,10 +31,10 @@ gEngine.Core.InheritPrototype(TextureRenderable, Renderable);
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
-TextureRenderable.prototype.Draw = function(vpMatrix) {
+TextureRenderable.prototype.Draw = function(aCamera) {
     // activate the texture
     gEngine.Textures.ActivateTexture(this._mTexture);
-    Renderable.prototype.Draw.call(this, vpMatrix);
+    Renderable.prototype.Draw.call(this, aCamera);
 };
 
 TextureRenderable.prototype.GetTexture = function() { return this._mTexture; };

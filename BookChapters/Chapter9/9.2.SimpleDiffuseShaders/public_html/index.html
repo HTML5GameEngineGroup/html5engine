@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>Example 7.5: Mouse Input</title>
+    <title>Example 9.2: Simple Diffuse Shaders</title>
 </head>
 <!--Use embedded shader code for now, in order to remove async loading complexity.-->
 
@@ -29,6 +29,7 @@
                 <script type="text/javascript" src="src/Engine/Core/Resources/Engine_Textures.js"></script>
                 <script type="text/javascript" src="src/Engine/Core/Resources/Engine_Fonts.js"></script>
         <script type="text/javascript" src="src/Engine/Scene.js"></script>
+        <script type="text/javascript" src="src/Engine/Light.js"></script>
         <!-- Utilities -->
             <script type="text/javascript" src="src/Engine/Utils/Transform.js"></script>
             <script type="text/javascript" src="src/Engine/Utils/BoundingBox.js"></script>
@@ -43,6 +44,7 @@
             <script type="text/javascript" src="src/Engine/Renderables/SpriteRenderable_PixelCollision.js"></script>
             <script type="text/javascript" src="src/Engine/Renderables/SpriteAnimateRenderable.js"></script>
             <script type="text/javascript" src="src/Engine/Renderables/FontRenderable.js"></script>
+            <script type="text/javascript" src="src/Engine/Renderables/DiffuseRenderable.js"></script>
         <!-- GameObject -->
             <script type="text/javascript" src="src/Engine/GameObjects/GameObject.js"></script>
             <script type="text/javascript" src="src/Engine/GameObjects/GameObject_PixelCollision.js"></script>
@@ -51,10 +53,13 @@
             <script type="text/javascript" src="src/Engine/Shaders/SimpleShader.js"></script>
             <script type="text/javascript" src="src/Engine/Shaders/TextureShader.js"></script>
             <script type="text/javascript" src="src/Engine/Shaders/SpriteShader.js"></script>
+            <script type="text/javascript" src="src/Engine/Shaders/DiffuseShader.js"></script>
+            <script type="text/javascript" src="src/Engine/Shaders/LightLoader.js"></script>
         <!-- Camera -->
             <script type="text/javascript" src="src/Engine/Cameras/Camera.js"></script>
             <script type="text/javascript" src="src/Engine/Cameras/Camera_Manipulation.js"></script>
             <script type="text/javascript" src="src/Engine/Cameras/Camera_Input.js"></script>
+            <script type="text/javascript" src="src/Engine/CAmeras/Camera_Xform.js"></script>
             <script type="text/javascript" src="src/Engine/Cameras/CameraState.js"></script>
             <script type="text/javascript" src="src/Engine/CAmeras/CameraShake.js"></script>
             
@@ -62,11 +67,8 @@
     <!-- Client game code -->
         <script type="text/javascript" src="src/MyGame/MyGame.js"></script>
         <!-- Objects -->
-            <script type="text/javascript" src="src/MyGame/Objects/DyePack.js"></script>
             <script type="text/javascript" src="src/MyGame/Objects/Hero.js"></script>
-            <script type="text/javascript" src="src/MyGame/Objects/Brain.js"></script>
             <script type="text/javascript" src="src/MyGame/Objects/Minion.js"></script>
-            <script type="text/javascript" src="src/MyGame/Objects/Generic.js"></script>
     
     <canvas id="GLCanvas" width="640" height="480">
         <!-- GLCanvas is the area we will draw in: a 640x480 area. -->

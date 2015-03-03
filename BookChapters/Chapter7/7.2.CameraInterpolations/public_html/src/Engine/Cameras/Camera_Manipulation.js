@@ -58,3 +58,8 @@ Camera.prototype.ZoomTowards = function(pos, zoom) {
     this.ZoomBy(zoom);
     this._mCameraState.SetCenter(newC);
 };
+
+Camera.prototype.ConfigInterpolation = function(stiffness, duration)
+{
+    this._mCameraState.ConfigInterpolation(stiffness, duration);
+};

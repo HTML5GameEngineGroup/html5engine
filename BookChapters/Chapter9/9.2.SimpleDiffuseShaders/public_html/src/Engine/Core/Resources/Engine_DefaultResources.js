@@ -37,7 +37,7 @@ gEngine.DefaultResources = function()
         _mConstColorShader = new SimpleShader(_kSimpleVS, _kSimpleFS);
         _mTextureShader = new TextureShader(_kTextureVS, _kTextureFS);
         _mSpriteShader =  new SpriteShader(_kTextureVS, _kTextureFS);
-        _mDiffuseShader = new DiffuseShader(_kTextureVS, _kDiffuseFS);
+        _mDiffuseShader = new SpriteShader(_kTextureVS, _kDiffuseFS);
         callBackFunction();
     };
     

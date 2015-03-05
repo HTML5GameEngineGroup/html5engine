@@ -11,6 +11,7 @@ function MyGame()
     
     // The camera to view the rectangles
     this._mCamera = null;
+    this._mBg = null;
     
     this._mMsg = null;
     
@@ -26,11 +27,13 @@ gEngine.Core.InheritPrototype(MyGame, Scene);
 MyGame.prototype.LoadScene = function() 
 {
    gEngine.Textures.LoadTexture(this._kMinionSprite);
+   gEngine.Textures.LoadTexture(this._kBg);
 };
 
 MyGame.prototype.UnloadScene = function() 
 {  
     gEngine.Textures.UnloadTexture(this._kMinionSprite);
+    gEngine.Textures.UnloadTexture(this._kBg);
 };
 
 MyGame.prototype.Initialize = function() 
@@ -46,12 +49,21 @@ MyGame.prototype.Initialize = function()
         
     // the light
     this._mTheLight = new Light();
-    this._mTheLight.SetRadius(4);
+    this._mTheLight.SetRadius(8);
     this._mTheLight.SetZPos(2);
     this._mTheLight.SetXPos(30);
     this._mTheLight.SetYPos(30);  // Position above LMinion
     this._mTheLight.SetColor([0.5, 0.5, 0.2, 1]);
     
+    // the Background
+    var bgR = new DiffuseRenderable(this._kBg);
+    bgR.SetTexPixelPositions(0, 1900, 0, 1000);
+    bgR.GetXform().SetSize(380, 200);
+    bgR.GetXform().SetPosition(50, 35);
+    bgR.AddLight(this._mTheLight);
+    this._mBg = new GameObject(bgR);
+     
+    // 
     // the objects
     this._mHero = new Hero(this._kMinionSprite);
     this._mHero.GetRenderable().AddLight(this._mTheLight);
@@ -70,10 +82,23 @@ MyGame.prototype.Initialize = function()
 
 
 MyGame.prototype.DrawCamera = function(camera) {
+    
+    // Step A: set up the View Projection matrix
     camera.SetupViewProjection();
+        // Step B: make sure light is loaded in the shader
+        //    the light must be loaded into each shader that 
+        //    needed to be illuminated by this light
+        //    for now, just the DiffuseShader
+        this._mTheLight.LoadToShader(
+                    gEngine.DefaultResources.GetDiffuseShader().GetShader(), 
+                    camera);
+                    
+        // Step C: Now draws each primitive
+        this._mBg.Draw(camera);
         this._mHero.Draw(camera);
         this._mLMinion.Draw(camera);
         this._mRMinion.Draw(camera);
+        
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more

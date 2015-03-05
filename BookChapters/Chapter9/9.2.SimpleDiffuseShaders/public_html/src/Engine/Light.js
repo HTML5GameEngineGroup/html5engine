@@ -28,5 +28,11 @@ Light.prototype.GetPosition = function() { return this._mPosition; };
 Light.prototype.SetRadius = function(r) { this._mRadius = r; };
 Light.prototype.GetRadius = function() { return this._mRadius; };
 
-Light.prototype.GetLightLoader = function() { return this._mLightLoader; };
+Light.prototype.LoadToShader = function(shader, aCamera) {
+    this._mLightLoader.LoadToShader(shader, aCamera);
+};
+
+Light.prototype.SetLightOn = function(isOn) {
+    this._mLightLoader.SetLightOn(isOn);
+};
 //</editor-fold>

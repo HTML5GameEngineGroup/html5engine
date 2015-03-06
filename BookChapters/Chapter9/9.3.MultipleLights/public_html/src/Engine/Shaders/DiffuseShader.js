@@ -12,7 +12,7 @@ function DiffuseShader(vertexShaderPath, fragmentShaderPath)
     // Call sper class constructor
     SpriteShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
     
-    this._mLight = null; 
+    this._mLights = null; 
 };
 gEngine.Core.InheritPrototype(DiffuseShader, SpriteShader);
 //</editor-fold>
@@ -25,11 +25,13 @@ DiffuseShader.prototype.ActivateShader = function(pixelColor, aCamera) {
     SpriteShader.prototype.ActivateShader.call(this, pixelColor, aCamera);
     
     // now push the light information to the shader
-    if (this._mLight !== null)
-        this._mLight.LoadToShader(aCamera);
+    if (this._mLights !== null) {
+        for (var i = 0; i<this._mLights.length; i++)
+            this._mLights[i].LoadToShader(aCamera);
+    }
 };
 
-DiffuseShader.prototype.SetLight = function(l) {
-    this._mLight = l;
+DiffuseShader.prototype.SetLights = function(l) {
+    this._mLights = l;
 };
 //</editor-fold>

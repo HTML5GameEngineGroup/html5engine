@@ -3,7 +3,7 @@
  */
 
 //<editor-fold desc="public functions">
-Light.prototype.LoadToShader = function(aCamera) {
+LightAtShaderIndex.prototype.LoadToShader = function(aCamera) {
     var gl = gEngine.Core.GetGL();
     gl.uniform1i(this._mIsOnRef, this._mIsOn);
     if (this._mIsOn) {
@@ -17,11 +17,10 @@ Light.prototype.LoadToShader = function(aCamera) {
         gl.uniform1f(this._mInnerConeRef, ic);
         gl.uniform1f(this._mOutterConeRef, oc);
         gl.uniform1f(this._mIntensityRef, this.GetIntensity());
-        gl.uniform1i(this._mLightOn, true); // initially, all off
     }
 };
 
-Light.prototype.SwitchOffLight = function() {
+LightAtShaderIndex.prototype.SwitchOffLightInShader = function() {
     var gl = gEngine.Core.GetGL();
     gl.uniform1i(this._mIsOnRef, false);
 };
@@ -30,7 +29,7 @@ Light.prototype.SwitchOffLight = function() {
 //</editor-fold>
 
 //<editor-fold desc="private functions">
-Light.prototype._SetShaderReferences = function(aDiffuseShader, index) {
+LightAtShaderIndex.prototype._SetShaderReferences = function(aDiffuseShader, index) {
     var gl = gEngine.Core.GetGL();
     gl.useProgram(aDiffuseShader);
     this._mColorRef = gl.getUniformLocation(aDiffuseShader,      "uLights[" + index + "].Color");
@@ -38,7 +37,7 @@ Light.prototype._SetShaderReferences = function(aDiffuseShader, index) {
     this._mInnerConeRef = gl.getUniformLocation(aDiffuseShader,  "uLights[" + index + "].Inner");
     this._mOutterConeRef = gl.getUniformLocation(aDiffuseShader, "uLights[" + index + "].Outer");
     this._mIntensityRef = gl.getUniformLocation(aDiffuseShader,  "uLights[" + index + "].Intensity");
-    this._mLightOn = gl.getUniformLocation(aDiffuseShader,       "uLights[" + index + "].IsOn");
+    this._mIsOnRef = gl.getUniformLocation(aDiffuseShader,       "uLights[" + index + "].IsOn");
     
     gl.uniform4fv(this._mColorRef, vec4.fromValues(index/4, 0, 0, 1));
 };

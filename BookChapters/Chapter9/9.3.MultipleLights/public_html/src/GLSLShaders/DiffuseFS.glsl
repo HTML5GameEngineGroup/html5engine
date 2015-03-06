@@ -31,10 +31,19 @@ varying vec2 vTexCoord;
 vec4 LightEffect(Light lgt)
 {
     vec4 result = vec4(0);
+    float atten = 0.0;
     float dist = length(lgt.Position.xyz - gl_FragCoord.xyz);
-    if (dist <= lgt.Inner)
-        result = lgt.Intensity * lgt.Color;
-
+    if (dist <= lgt.Outer) {
+        if (dist <= lgt.Inner)
+            atten = 1.0;  //  no attenuation
+        else {
+            // simple quadratic drop off
+            float n = dist - lgt.Inner;
+            float d = lgt.Outer - lgt.Inner;
+            atten = smoothstep(0.0, 1.0, 1.0-(n*n)/(d*d)); // blended attenuation
+        }   
+    }
+    result = atten * lgt.Intensity * lgt.Color;
     return result;
 }
 
@@ -46,9 +55,9 @@ void main(void)  {
     // now decide if we should illuminate by the light
     if (diffuse.a > 0.0) {
         for (int i=0; i<4; i++) { 
-            //if (uLights[i].IsOn) { 
-                lgtResult +=  LightEffect(uLights[i]); // * diffuse;
-            //}
+            if (uLights[i].IsOn) { 
+                lgtResult +=  LightEffect(uLights[i]) * diffuse;
+            }
         }
     }
 

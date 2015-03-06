@@ -21,6 +21,11 @@ function MyGame()
     this._mRMinion = null;
     
     this._mGlobalLightSet = null;
+
+    this._mBlock1 = null;   // to verify swiitching between shaders is fine
+    this._mBlock2 = null;
+    
+    this._mLgtIndex = 0;    // the light to move
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
@@ -64,6 +69,9 @@ MyGame.prototype.Initialize = function()
     this._mHero = new Hero(this._kMinionSprite);
     this._mHero.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(0));   // hero light
     this._mHero.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(3));   // center light
+    // Uncomment the following to see how light affects Dye
+    //      this._mHero.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(1)); 
+    //      this._mHero.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(2)); 
         
     this._mLMinion = new Minion(this._kMinionSprite, 30, 30);
     this._mLMinion.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(1));   // LMinion light
@@ -71,13 +79,24 @@ MyGame.prototype.Initialize = function()
         
     
     this._mRMinion = new Minion(this._kMinionSprite, 70, 30);
-    this._mRMinion.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(1));   // LMinion light
+    this._mRMinion.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(2));   // RMinion light
     this._mRMinion.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(3));   // center light
             
     this._mMsg = new FontRenderable("Status Message");
-    this._mMsg.SetColor([0, 0, 0, 1]);
+    this._mMsg.SetColor([1, 1, 1, 1]);
     this._mMsg.GetXform().SetPosition(1, 2);
     this._mMsg.SetTextHeight(3);
+    
+    this._mBlock1 = new Renderable();
+    this._mBlock1.SetColor([1, 0, 0, 1]);
+    this._mBlock1.GetXform().SetSize(5, 5);
+    this._mBlock1.GetXform().SetPosition(30, 50);
+    
+    this._mBlock2 = new Renderable();
+    this._mBlock2.SetColor([0, 1, 0, 1]);
+    this._mBlock2.GetXform().SetSize(5, 5);
+    this._mBlock2.GetXform().SetPosition(70, 50);
+
 };
 
 
@@ -85,11 +104,12 @@ MyGame.prototype.DrawCamera = function(camera) {
     
     // Step A: set up the View Projection matrix
     camera.SetupViewProjection();
-                    
         // Step C: Now draws each primitive
         this._mBg.Draw(camera);
+        this._mBlock1.Draw(camera);
+        this._mLMinion.Draw(camera);    
+        this._mBlock2.Draw(camera);        
         this._mHero.Draw(camera);
-        this._mLMinion.Draw(camera);
         this._mRMinion.Draw(camera);
         
 };
@@ -110,8 +130,7 @@ MyGame.prototype.Draw = function()
 // anything from this function!
 MyGame.prototype.Update = function()
 {
-    var msg = "";
-    var deltaC = 0.01;
+    var msg = "Selected Light=" + this._mLgtIndex + " ";
     
     this._mCamera.Update();  // to ensure proper interploated movement effects
     
@@ -120,18 +139,8 @@ MyGame.prototype.Update = function()
     
     this._mHero.Update();  // allow keyboard control to move
         
-    this._mCamera.PanWith(this._mHero.GetXform(), 0.8);
-
-    /*
-    if (gEngine.Input.IsButtonPressed(gEngine.Input.MouseButton.Left))
-        this._mGlobalLightSet.Set2DPosition(this._mHero.GetXform().GetPosition());
-    
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
-        var c = this._mGlobalLightSet.GetColor();
-        for (var i = 0; i<4; i++)
-            c[i] += deltaC;
-    }
-    */
+    // control the selected light
+    msg += this._LightControl();
     
     this._mMsg.SetText(msg);
 };

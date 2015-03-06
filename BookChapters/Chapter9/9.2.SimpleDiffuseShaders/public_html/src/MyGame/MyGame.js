@@ -78,7 +78,7 @@ MyGame.prototype.Initialize = function()
     // RMinion did not addAdd and thus does not get illuminated by the light!
         
     this._mMsg = new FontRenderable("Status Message");
-    this._mMsg.SetColor([0, 0, 0, 1]);
+    this._mMsg.SetColor([1, 1, 1, 1]);
     this._mMsg.GetXform().SetPosition(1, 2);
     this._mMsg.SetTextHeight(3);
     

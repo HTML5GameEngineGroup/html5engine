@@ -7,11 +7,17 @@ function Light() {
     this._mColor = vec4.fromValues(0.1, 0.1, 0.1, 1);  // light color
     this._mPosition = vec3.fromValues(0, 0, 5); // light position in WC
     this._mRadius = 10;  // effective radius in WC
+    this._mIsOn = true;
     
-    // 
+    // glsl uniform position references
+    this._mColorRef = null;
+    this._mPosRef = null;
+    this._mRadiusRef = null;
+    this._mIsOnRef = null;
+    
+    // only knows how to load light to a DiffuseShader!
     var aDiffuseShader = gEngine.DefaultResources.GetDiffuseShader().GetShader();
-    this._mLightLoader = new LightLoader(aDiffuseShader, this); 
-            // only knows how to load light to a DiffuseShader!
+    this._SetShaderReferences(aDiffuseShader);
 };
 
 //<editor-fold desc="public functions">
@@ -28,11 +34,7 @@ Light.prototype.GetPosition = function() { return this._mPosition; };
 Light.prototype.SetRadius = function(r) { this._mRadius = r; };
 Light.prototype.GetRadius = function() { return this._mRadius; };
 
-Light.prototype.LoadToShader = function(shader, aCamera) {
-    this._mLightLoader.LoadToShader(shader, aCamera);
-};
-
 Light.prototype.SetLightOn = function(isOn) {
-    this._mLightLoader.SetLightOn(isOn);
+    this._mIsOn = isOn;
 };
 //</editor-fold>

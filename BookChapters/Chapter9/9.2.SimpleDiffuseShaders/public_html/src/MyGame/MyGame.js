@@ -21,6 +21,9 @@ function MyGame()
     this._mRMinion = null;
     
     this._mTheLight = null;
+    
+    this._mBlock1 = null;   // to verify swiitching between shaders is fine
+    this._mBlock2 = null;
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
@@ -78,6 +81,17 @@ MyGame.prototype.Initialize = function()
     this._mMsg.SetColor([0, 0, 0, 1]);
     this._mMsg.GetXform().SetPosition(1, 2);
     this._mMsg.SetTextHeight(3);
+    
+    this._mBlock1 = new Renderable();
+    this._mBlock1.SetColor([1, 0, 0, 1]);
+    this._mBlock1.GetXform().SetSize(5, 5);
+    this._mBlock1.GetXform().SetPosition(30, 50);
+    
+    this._mBlock2 = new Renderable();
+    this._mBlock2.SetColor([0, 1, 0, 1]);
+    this._mBlock2.GetXform().SetSize(5, 5);
+    this._mBlock2.GetXform().SetPosition(70, 50);
+
 };
 
 
@@ -85,19 +99,19 @@ MyGame.prototype.DrawCamera = function(camera) {
     
     // Step A: set up the View Projection matrix
     camera.SetupViewProjection();
-        // Step B: make sure light is loaded in the shader
-        //    the light must be loaded into each shader that 
-        //    needed to be illuminated by this light
-        //    for now, just the DiffuseShader
-        this._mTheLight.LoadToShader(
-                    gEngine.DefaultResources.GetDiffuseShader().GetShader(), 
-                    camera);
                     
-        // Step C: Now draws each primitive
+        // Step B: Now draws each renderable
         this._mBg.Draw(camera);
-        this._mHero.Draw(camera);
+        
+
+        this._mBlock1.Draw(camera);
+
         this._mLMinion.Draw(camera);
         this._mRMinion.Draw(camera);
+        
+        this._mBlock2.Draw(camera);
+        
+    this._mHero.Draw(camera);
         
 };
 

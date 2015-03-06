@@ -22,15 +22,12 @@ gEngine.Core.InheritPrototype(DiffuseRenderable, SpriteAnimateRenderable);
 // Public methods
 //**-----------------------------------------
 DiffuseRenderable.prototype.Draw = function(aCamera) {
-    if (this._mLight !== null)
-        this._mLight.SetLightOn(true);   // <-- must be a DiffuseRenderable
     
+    this._mShader.SetLight(this._mLight);  // <-- assumes a DiffuseShader
     SpriteAnimateRenderable.prototype.Draw.call(this, aCamera);
-    
-    // since light is shared by all renderables, we must switch off after use
+    // since DiffuseShader is shared, must reset to initial state
     if (this._mLight !== null)
-        this._mLight.SetLightOn(false);
-    
+        this._mLight.SwitchOffLight();
 };
 
 DiffuseRenderable.prototype.GetLight = function() {

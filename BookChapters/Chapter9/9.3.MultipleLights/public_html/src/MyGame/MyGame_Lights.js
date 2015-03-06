@@ -4,7 +4,7 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 MyGame.prototype._CreateALight = function(index, pos, color, inner, outer, intensity) {
-    var light = new LightAtShaderIndex(index);
+    var light = new Light();
     light.SetColor(color);
     light.SetXPos(pos[0]);
     light.SetYPos(pos[1]);

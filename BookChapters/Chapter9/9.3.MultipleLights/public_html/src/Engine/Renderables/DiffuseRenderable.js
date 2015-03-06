@@ -24,9 +24,6 @@ gEngine.Core.InheritPrototype(DiffuseRenderable, SpriteAnimateRenderable);
 DiffuseRenderable.prototype.Draw = function(aCamera) {
     this._mShader.SetLights(this._mLights);
     SpriteAnimateRenderable.prototype.Draw.call(this, aCamera);
-    for (var i = 0; i<this._mLights.length; i++)
-        this._mLights[i].SwitchOffLightInShader();
-        // remember lights are shared, set to known state
 };
 
 DiffuseRenderable.prototype.GetLightAt = function(index) {

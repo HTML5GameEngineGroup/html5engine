@@ -102,16 +102,11 @@ MyGame.prototype.DrawCamera = function(camera) {
                     
         // Step B: Now draws each renderable
         this._mBg.Draw(camera);
-        
-
         this._mBlock1.Draw(camera);
-
         this._mLMinion.Draw(camera);
         this._mRMinion.Draw(camera);
-        
         this._mBlock2.Draw(camera);
-        
-    this._mHero.Draw(camera);
+        this._mHero.Draw(camera);
         
 };
 
@@ -140,8 +135,6 @@ MyGame.prototype.Update = function()
     this._mRMinion.Update();
     
     this._mHero.Update();  // allow keyboard control to move
-        
-    this._mCamera.PanWith(this._mHero.GetXform(), 0.8);
     
     if (gEngine.Input.IsButtonPressed(gEngine.Input.MouseButton.Left))
         this._mTheLight.Set2DPosition(this._mHero.GetXform().GetPosition());

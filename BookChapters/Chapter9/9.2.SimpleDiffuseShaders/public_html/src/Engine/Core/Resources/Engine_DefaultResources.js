@@ -73,9 +73,12 @@ gEngine.DefaultResources = function()
         gEngine.TextFileLoader.UnloadTextFile(_kSimpleVS);
         gEngine.TextFileLoader.UnloadTextFile(_kSimpleFS);
         
-        // textuire shader: 
+        // texture shader: 
         gEngine.TextFileLoader.UnloadTextFile(_kTextureVS);
         gEngine.TextFileLoader.UnloadTextFile(_kTextureFS);
+        
+        // Diffuse Shader
+        gEngine.TextFileLoader.UnloadTextFile(_kDiffuseFS);
         
         // default font
         gEngine.Fonts.UnloadFont(_kDefaultFont);

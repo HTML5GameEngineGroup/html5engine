@@ -99,53 +99,164 @@
 <h1>Chapter 6: Creating Basic Behaviors for Game Objects</h1>
 
 <ul>
-    <li>Game Object Abstraction</li>
-    <li>Vectors</li>
-    <li>Front and Gradual turning and Home in</li>
-    <li>Z-Ordering, all the layers</li>
+    <li>6.1. <a href="Chapter6/6.1.GameObjects/public_html/index.html">Game Object Abstraction</a><ul>
+		<li>WASD: to move Dye. Yeah, boring.</li>
+	</ul>
+	</li>
+    <li>6.2. <a href="Chapter6/6.2.FrontAndChase/public_html/index.html">Vectors: 
+	Front Direction and Chase</a><ul>
+		<li>H: drive the brain with arrows</li>
+		<li>J: WASD move Dye and Brain points to Dye immediately<ul>
+			<li>Oscillates when Brain eventually gets to Dye</li>
+		</ul>
+
+		</li>
+		<li>K: moves Dye and Brain points to Dye gradually/smoothly<ul>
+			<li>Orbits around a small circle when catches up to Dye</li>
+		</ul>
+		</li>
+		<li>Would be nice if we can detect collision and stop </li>
+	</ul>
+	</li>
+    <li>6.3. <a href="Chapter6/6.3.BBoxAndCollisions/public_html/index.html">
+	Bounding Box and Collisions</a><ul>
+		<li>Exactly the same control as above</li>
+		<li>Brain: now stops when it touches Dye&#39;s bound (not touching Dye)</li>
+		<li>Dye touches WC bound is detected (nothing is done yet)</li>
+	</ul>
+	</li>
+    <li>6.4. <a href="Chapter6/6.4.PerPixelCollisions/public_html/index.html">
+	Per Pixel Collisions</a><ul>
+		<li>WASD: move one</li>
+		<li>Arrows: move another</li>
+		<li>When pixel touches, shows DyePack at the first intersection found.
+		</li>
+	</ul>
+	</li>
+	<li>6.5.
+	<a href="Chapter6/6.5.GeneralPixelCollisions/public_html/index.html">Per 
+	Pixel Collisions with Rotated Image</a><ul>
+		<li>Same behavior as above</li>
+		<li>E/P: keys rotate the texture, behavior exactly the same</li>
+	</ul>
+	</li>
+	<li>6.6.
+	<a href="Chapter6/6.6.SpritelPixelCollisions/public_html/index.html">Sprite 
+	Per Pixel Collisions</a><ul>
+		<li>Exact the same as above</li>
+	</ul>
+	</li>
 </ul>
 
 
 <h1>Chapter 7: Revisiting the Camera</h1>
 
 <ul>
-    <li>Multiple Camera and Viewports</li>
-    <li>Camera Manipulation: boundary, zoom, delay and edge movement</li>
-    <li>Mouse Input Support</li>
+    <li>7.1. <a href="Chapter7/7.1.CameraManipulations/public_html/index.html">
+	Simple Camera Manipulations</a><ul>
+		<li>WASD: move hero to push window (at 90% of the bound region)</li>
+		<li>Portal and Brain: are always kept within the window bound
+</li>
+		<li>L/R: pan the center of the camera to center on the corresponding objects
+</li>
+		<li>N/M: zoom with respect to the center of the window
+</li>
+		<li>J/K: zoom with respect to either Hero (H) or Portal (P)
+		<ul>
+			<li>Put your finger on the screen over the Hero, select H, and then J/K to see hero’s relative position does not change as the window zooms
+			</li>
+		</ul>
+</li>
+	</ul>
+	</li>
+    <li>7.2. <a href="Chapter7/7.2.CameraInterpolations/public_html/index.html">
+	Delayed Camera Movement: Interpolations</a><ul>
+		<li>Exactly the same as above, camera interpolates and does not jump</li>
+	</ul>
+	</li>
+    <li>7.3. <a href="Chapter7/7.3.CameraShake/public_html/index.html">Camera 
+	Shake</a><ul>
+		<li>Same as above</li>
+		<li>Q: to shake the camera</li>
+	</ul>
+	</li>
+	<li>7.4. <a href="Chapter7/7.4.MultipleCamera/public_html/index.html">
+	Multiple Cameras</a><ul>
+		<li>Move Dye to see BrainCam chase</li>
+		<li>Moveing DyeCam for fun</li>
+	</ul>
+	</li>
+	<li>7.5. <a href="Chapter7/7.5.MouseInput/public_html/index.html">Mouse 
+	Input</a><ul>
+		<li>LMB Press in main: drag Portal
+</li>
+		<li>&nbsp;MMB Press in HeroCam: drag hero
+</li>
+		<li>RMB Click in main: Portal disappear
+</li>
+		<li>MMB Click in main: Portal reappear
+</li>
+	</ul>
+	</li>
 </ul>
 
 
 <h1>Chapter 8: Creating Physics for Game Objects</h1>
 
 <ul>
-    <li>Linear and angulate displacements, velocity, and acceleration</li>
-    <li>Particles and Softbodies</li>
-    <li>Collision and Response</li>
+    <li>To come ...</li>
 </ul>
 
 
-<h1>Chapter 9: Creating Sprite Animations for Game Objects</h1>
+<h1>Chapter 9: Creating Graphical and Illumination Effects for Game Objects</h1>
 
 <ul>
-    <li>Sprite Sheets</li>
-    <li>Animation with Sprtie Sheets</li>
-    <li>Player control of sprite sheet animations</li>
-    <li>Effects with sprite sheet animaiotns: explosions</li>
-    <li>Sprite elements and pixel-accurate collsion</li>
+    <li>9.1. <a href="Chapter9/9.1.GlobalAmbient/public_html/index.html">Simple 
+	Global Ambient</a><ul>
+		<li>LMB/MMB: to increase/decrease global red ambient</li>
+	</ul>
+	</li>
+    <li>9.2. <a href="Chapter9/9.2.SimpleDiffuseShaders/public_html/index.html">
+	Simple Diffuse Shader: One Light Source</a><ul>
+		<li>WASD: moves Dye
+</li>
+		<li>LMB + WASD:  moves Dye with the light source
+</li>
+		<li>Left/Right arrow: increase/decrease the light intensity
+</li>
+		<li>Notice: negative light can be interesting (since we are only adding)
+		</li>
+		<li>Notice: Right-Minion is not illumindated</li>
+	</ul>
+	</li>
+    <li>9.3. <a href="Chapter9/9.3.MultipleLights/public_html/index.html">
+	Diffuse Shader with Multiple Light Sources</a><ul>
+		<li>Lights:<ul>
+			<li>0: Dye&nbsp; + Background only</li>
+			<li>1: Left Minion + Background</li>
+			<li>2: Right Minion + Background</li>
+			<li>3: Dye + Background</li>
+		</ul>
+		</li>
+		<li>WASD: moves Dye
+</li>
+		<li>0, 1, 2, 3: select light</li>
+		<li>Arrow: move selected light</li>
+		<li>Z/X: inc/dec z of the selected light</li>
+		<li>C/V: inc/dec inner cone </li>
+		<li>B/N: inc/dec outer cone</li>
+		<li>K/L: inc/dec intensity (try negative light!)</li>
+	</ul>
+	</li>
+    <li>9.4. <a href="Chapter9/9.4.NormalMaps/public_html/index.html">
+	Illumi/nation Shader: Multiple Lights with Normal Map</a><ul>
+		<li>Command same as above.</li>
+	</ul>
+	</li>
 </ul>
 
 
-<h1>Chapter 10: Creating Graphical and Illumination Effects for Game Objects</h1>
-
-<ul>
-    <li>Particle systems and emitters</li>
-    <li>Illumination model: light source types and material properties</li>
-    <li>Shadow</li>
-    <li>2D Effects: bloom and blur</li>
-</ul>
-
-
-<h1>Chapter 11: Building the Game Engine Architecture</h1>
+<h1>Chapter 10: Building the Game Engine Architecture/h1>
 
 <ul>
     <li>Layer Manager (done?): Parallex, Shadow Catcher, Actors, Front Layer, HUD</li>
@@ -156,7 +267,7 @@
 </ul>
 
 
-<h1>Chapter 12: Understanding and Supporting Game States</h1>
+<h1>Chapter 11: Understanding and Supporting Game States</h1>
 
 <ul>
     <li>Finite State Machines</li>
@@ -165,7 +276,7 @@
 </ul>
 
 
-<h1>Chapter 13: Building a Simple Game: From Design to Complete</h1>
+<h1>Chapter 12: Building a Simple Game: From Design to Complete</h1>
 
 <ul>
     <li>Steps in designing a complete game</li>
@@ -174,5 +285,6 @@
     <li>Agile development process</li>
     <li>Source code analysis</li>
 </ul>
+
 
 

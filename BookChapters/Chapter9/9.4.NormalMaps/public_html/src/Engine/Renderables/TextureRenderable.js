@@ -28,7 +28,7 @@ function TextureRenderable(myTexture)
 gEngine.Core.InheritPrototype(TextureRenderable, Renderable);
 
 //<editor-fold desc="Public Methods">
-
+//**-----------------------------------------
 // Public methods
 //**-----------------------------------------
 TextureRenderable.prototype.Draw = function(aCamera) {
@@ -39,5 +39,5 @@ TextureRenderable.prototype.Draw = function(aCamera) {
 
 TextureRenderable.prototype.GetTexture = function() { return this._mTexture; };
 TextureRenderable.prototype.SetTexture = function(t) { this._mTexture = t; };
-//--- end of Public Methods//**-----------------------------------------
+//--- end of Public Methods
 //</editor-fold>

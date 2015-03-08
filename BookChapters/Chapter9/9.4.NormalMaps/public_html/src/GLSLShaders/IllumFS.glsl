@@ -22,7 +22,6 @@ struct Light  {
     bool  IsOn;
 };
 uniform Light uLights[4];  // Maximum array of lights this shader supports
-uniform int uNumLights;     // Number of light is switch on at each rendering
 
 // The "varying" keyword is for signifing that the texture coordinate will be
 // interpolated and thus varies. 
@@ -47,7 +46,7 @@ vec4 LightEffect(Light lgt, vec3 N) {
         float NdotL = max(0.0, dot(N, L));   
         atten = atten *= NdotL;
     }
-    result = vec4(atten, atten, atten, 1.0); // atten * lgt.Intensity * lgt.Color;
+    result = atten * lgt.Intensity * lgt.Color;
     return result;
 }
 
@@ -58,10 +57,6 @@ void main(void)  {
     vec4 normalMap = (2.0 * normal) - 1.0;
     
     normalMap.y = -normalMap.y;  // flip Y
-
-// gl_FragColor = diffuse + normal;
-//diffuse += 0.5 * normalMap;
-
     vec3 N = normalize(normalMap.xyz);
    
     vec4 lgtResult = diffuse;

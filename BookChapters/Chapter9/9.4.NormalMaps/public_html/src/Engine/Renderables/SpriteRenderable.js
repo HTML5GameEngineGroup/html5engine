@@ -41,8 +41,6 @@ SpriteRenderable.eTexCoordArray = Object.freeze({
 //**-----------------------------------------
 SpriteRenderable.prototype.Draw = function(pixelColor, aCamera) {
     // set the current texture coordinate
-    // 
-    // activate the texture
     this._mShader.SetTextureCoordinate(this.GetTexCoordinateArray());
     TextureRenderable.prototype.Draw.call(this, pixelColor, aCamera);
 };

@@ -65,6 +65,7 @@ MyGame.prototype._LightControl = function() {
         msg = " Intensity=" + (lgt.GetIntensity() - delta).toPrecision(3);
     }
     
+    
     return msg;
 };
 

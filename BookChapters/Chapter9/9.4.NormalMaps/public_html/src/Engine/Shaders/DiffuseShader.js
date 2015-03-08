@@ -14,9 +14,12 @@ function DiffuseShader(vertexShaderPath, fragmentShaderPath)
     
     this._mLights = null;  // lights from the renderable
     
-    this._kNumShaderLights = 4;  // <-- make sure this is the same as DiffuseFS.glsl
+    //*****************************
+    // this number MUST correspond to the GLSL uLight[] array size (for DiffuseFS.glsl and IllumFS.glsl)
+    //**********************************
+    this._kGLSLuLightArraySize = 4;  // <-- make sure this is the same as DiffuseFS.glsl and IllumFS.glsl
     this._mShaderLights = [];
-    for (var i = 0; i<this._kNumShaderLights; i++) {
+    for (var i = 0; i<this._kGLSLuLightArraySize; i++) {
         var ls = new ShaderLightAtIndex(this._mCompiledShader, i);
         this._mShaderLights.push(ls);
     }

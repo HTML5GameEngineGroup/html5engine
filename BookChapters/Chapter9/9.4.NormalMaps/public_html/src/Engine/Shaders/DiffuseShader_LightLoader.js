@@ -36,7 +36,5 @@ ShaderLightAtIndex.prototype._SetShaderReferences = function(aDiffuseShader, ind
     this._mOutterConeRef = gl.getUniformLocation(aDiffuseShader, "uLights[" + index + "].Outer");
     this._mIntensityRef = gl.getUniformLocation(aDiffuseShader,  "uLights[" + index + "].Intensity");
     this._mIsOnRef = gl.getUniformLocation(aDiffuseShader,       "uLights[" + index + "].IsOn");
-    
-    gl.uniform4fv(this._mColorRef, vec4.fromValues(index/4, 0, 0, 1));
 };
 //</editor-fold>

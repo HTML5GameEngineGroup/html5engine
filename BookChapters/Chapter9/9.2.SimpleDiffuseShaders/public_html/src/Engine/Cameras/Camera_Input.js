@@ -13,10 +13,12 @@ Camera.prototype.IsMouseInViewport = function() {
 };
 
 Camera.prototype.MouseWCX = function() {
-    return (this._MouseDCX() * (this.GetWCWidth()/this._mViewport[Camera.eViewport.eWidth]));
+    var minWCX = this.GetWCCenter()[0] - this.GetWCWidth()/2;
+    return minWCX + (this._MouseDCX() * (this.GetWCWidth()/this._mViewport[Camera.eViewport.eWidth]));
 };
 
 Camera.prototype.MouseWCY = function() {
-    return (this._MouseDCY() * (this.GetWCHeight()/this._mViewport[Camera.eViewport.eHeight]));
+    var minWCY = this.GetWCCenter()[1] - this.GetWCHeight()/2;
+    return minWCY + (this._MouseDCY() * (this.GetWCHeight()/this._mViewport[Camera.eViewport.eHeight]));
 };
 

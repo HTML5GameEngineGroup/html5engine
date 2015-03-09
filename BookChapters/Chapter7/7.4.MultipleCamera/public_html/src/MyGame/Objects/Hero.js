@@ -6,7 +6,7 @@ function Hero(spriteTexture) {
     
     this._mDye = new SpriteRenderable(spriteTexture);
     this._mDye.SetColor([1, 1, 1, 0]);
-    this._mDye.GetXform().SetPosition(35, 50);
+    this._mDye.GetXform().SetPosition(35, 20);
     this._mDye.GetXform().SetSize(9, 12);
     this._mDye.SetTexPixelPositions(0, 120, 0, 180);
     GameObject.call(this, this._mDye);

@@ -113,7 +113,7 @@ gEngine.Textures = function()
     var GetTextureInfo = function(textureName)
     {
         return gEngine.ResourceMap.RetrieveAsset(textureName);
-    }
+    };
     // Public interface for this object. Anything not in here will
     // not be accessable.
     var oPublic =

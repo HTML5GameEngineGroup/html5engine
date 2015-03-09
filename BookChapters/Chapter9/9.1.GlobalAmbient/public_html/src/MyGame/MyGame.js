@@ -38,9 +38,9 @@ MyGame.prototype.Initialize = function()
 {
     // Step A: set up the cameras
     this._mCamera = new Camera(
-            vec2.fromValues(50, 33),   // position of the camera
+            vec2.fromValues(50, 37.5), // position of the camera
             100,                       // width of camera
-            [0, 0, 600, 400]           // viewport (orgX, orgY, width, height)
+            [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
             );
     this._mCamera.SetBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray

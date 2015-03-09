@@ -1,9 +1,8 @@
 /* 
  *
  */
-function Generic(texture, x, y, w, h) {
+function TextureObject(texture, x, y, w, h) {
     this._kDelta = 0.2;
-    this._kRDelta = 0.1; // radian
     
     this._mRenderable = new TextureRenderable(texture);
     this._mRenderable.SetColor([1, 1, 1, 0.1]);
@@ -11,9 +10,9 @@ function Generic(texture, x, y, w, h) {
     this._mRenderable.GetXform().SetSize(w, h)
     GameObject.call(this, this._mRenderable);
 };
-gEngine.Core.InheritPrototype(Generic, GameObject);
+gEngine.Core.InheritPrototype(TextureObject, GameObject);
 
-Generic.prototype.Update = function(up, down, left, right, rot) {
+TextureObject.prototype.Update = function(up, down, left, right) {
     var xform = this.GetXform();
     if (gEngine.Input.IsKeyPressed(up))
         xform.IncYPosBy(this._kDelta);
@@ -23,6 +22,4 @@ Generic.prototype.Update = function(up, down, left, right, rot) {
         xform.IncXPosBy(-this._kDelta);
     if (gEngine.Input.IsKeyPressed(right)) 
         xform.IncXPosBy(this._kDelta);
-    if (gEngine.Input.IsKeyPressed(rot)) 
-        xform.IncRotationByRad(this._kRDelta);
 };

@@ -48,9 +48,9 @@ MyGame.prototype.Initialize = function()
 {
     // Step A: set up the cameras
     this._mCamera = new Camera(
-            vec2.fromValues(50, 33),   // position of the camera
+            vec2.fromValues(50, 26.6), // position of the camera
             100,                       // width of camera
-            [0, 0, 600, 400]           // viewport (orgX, orgY, width, height)
+            [0, 0, 640, 340]           // viewport (orgX, orgY, width, height)
             );
     this._mCamera.SetBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
@@ -76,7 +76,7 @@ MyGame.prototype.Initialize = function()
     // Objects in the scene
     this._mBrain = new Brain(this._kMinionSprite);        
     this._mHero = new Hero(this._kMinionSprite);
-    this._mPortal = new Generic(this._kMinionPortal, 50, 30, 10, 10);
+    this._mPortal = new TextureObject(this._kMinionPortal, 50, 30, 10, 10);
     this._mLMinion = new Minion(this._kMinionSprite, 30, 30);
     this._mRMinion = new Minion(this._kMinionSprite, 70, 30);
     this._mFocusObj = this._mHero;

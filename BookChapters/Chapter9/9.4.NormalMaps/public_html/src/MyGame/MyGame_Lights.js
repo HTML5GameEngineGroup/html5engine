@@ -21,34 +21,34 @@ MyGame.prototype._InitializeLights = function()
     this._mGlobalLightSet = new LightSet(gEngine.DefaultResources.GetDiffuseShader().GetShader());
    
     var l = this._CreateALight(0,
-                [15, 50, 5],  // Hero
-                [1, 0, 1, 1],       // blue color
-                8, 20,                   // inner and outer cones
-                1.5                     // intensity
+                [15, 50, 5],       // Hero
+                [0, 0.6, 0.6, 1],  // some color
+                8, 20,             // inner and outer cones
+                8                  // intensity
     );
     this._mGlobalLightSet.AddToSet(l);
     
     l = this._CreateALight(1,
-                [17, 15, 4],  // Left minion position
-                [1, 1, 1, 1],         // red color
-                10, 15,                  // inner and outer cones
-                0.5                     // intensity
+                [17, 15, 4],           // Left minion position
+                [0.7, 0.7, 0.7, 1],    // color
+                10, 15,                // inner and outer cones
+                6                      // intensity
     );
     this._mGlobalLightSet.AddToSet(l);
     
     l = this._CreateALight(2,
-                [87, 15, 3],  // Right minion position
-                [1, 1, 1, 1],         // red color
-                10, 15,                  // inner and outer cones
-                0.5                     // intensity
+                [87, 15, 3],            // Right minion position
+                [0.7, 0.7, 0.7, 1],     // color
+                10, 15,                 // inner and outer cones
+                1                       // intensity
     );
     this._mGlobalLightSet.AddToSet(l);
     
     l = this._CreateALight(3,
-                [50, 33, 3],  // Center of camera 
-                [1, 1, 1, 1],     // white color
-                8, 15,                  // inner and outer cones
-                0.2                     // intensity
+                [50, 33, 2],            // Center of camera 
+                [0.8, 0.2, 0.6, 1],     //  color
+                15, 20,                 // inner and outer cones
+                5                       // intensity
     );
     this._mGlobalLightSet.AddToSet(l);
 };

@@ -36,10 +36,13 @@ DiffuseShader.prototype.ActivateShader = function(pixelColor, aCamera) {
     SpriteShader.prototype.ActivateShader.call(this, pixelColor, aCamera);
     
     // now push the light information to the shader
+    var numLight = 0;
     if (this._mLights !== null) {
-        for (var i = 0; i<this._mLights.length; i++)
-            this._mShaderLights[i].LoadToShader(aCamera, this._mLights[i]);
+        for (; numLight<this._mLights.length; numLight++)
+            this._mShaderLights[numLight].LoadToShader(aCamera, this._mLights[numLight]);
     }
+    for (; numLight < 4; numLight++)
+        this._mShaderLights[numLight].SwitchOffLight(); // switch off unused lights
 };
 
 DiffuseShader.prototype.SetLights = function(l) {

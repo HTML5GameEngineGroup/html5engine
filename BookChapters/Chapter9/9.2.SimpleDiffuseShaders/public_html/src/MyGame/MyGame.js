@@ -56,7 +56,7 @@ MyGame.prototype.Initialize = function()
     this._mTheLight.SetZPos(2);
     this._mTheLight.SetXPos(30);
     this._mTheLight.SetYPos(30);  // Position above LMinion
-    this._mTheLight.SetColor([0.5, 0.5, 0.2, 1]);
+    this._mTheLight.SetColor([0.9, 0.9, 0.2, 1]);
     
     // the Background
     var bgR = new DiffuseRenderable(this._kBg);
@@ -91,7 +91,6 @@ MyGame.prototype.Initialize = function()
     this._mBlock2.SetColor([0, 1, 0, 1]);
     this._mBlock2.GetXform().SetSize(5, 5);
     this._mBlock2.GetXform().SetPosition(70, 50);
-
 };
 
 
@@ -107,7 +106,6 @@ MyGame.prototype.DrawCamera = function(camera) {
         this._mRMinion.Draw(camera);
         this._mBlock2.Draw(camera);
         this._mHero.Draw(camera);
-        
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more

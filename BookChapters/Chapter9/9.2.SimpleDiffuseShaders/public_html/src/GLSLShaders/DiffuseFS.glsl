@@ -9,7 +9,8 @@ uniform sampler2D uSampler;
 
 // Color of the object
 uniform vec4 uPixelColor;  
-uniform vec4 uGlobalAmbient; // this is shared globally
+uniform vec4 uGlobalAmbientColor; // this is shared globally
+uniform float uGlobalAmbientIntensity;
 
 // Light information
 uniform bool uLightOn;
@@ -24,18 +25,19 @@ varying vec2 vTexCoord;
 void main(void)  {
     // simple tint based on uPixelColor setting
     vec4 diffuse = texture2D(uSampler, vec2(vTexCoord.s, vTexCoord.t));
+    vec4 lgtResults = diffuse * uGlobalAmbientIntensity * uGlobalAmbientColor;
 
     // now decide if we should illuminate by the light
     if (uLightOn && (diffuse.a > 0.0)) {
         float dist = length(uLightPosition.xyz - gl_FragCoord.xyz);
         if (dist <= uLightRadius)
-            diffuse = diffuse + uLightColor;
+            lgtResults += diffuse * uLightColor;
     }
 
     // tint the textured area, and leave transparent area as defined by the texture
-    vec3 r = vec3(diffuse) * (1.0-uPixelColor.a) + vec3(uPixelColor) * uPixelColor.a;
-    vec4 result = vec4(r, diffuse.a);
+    vec3 r = vec3(lgtResults) * (1.0-uPixelColor.a) + vec3(uPixelColor) * uPixelColor.a;
+    vec4 result = vec4(r, lgtResults.a);
 
-    gl_FragColor = result + uGlobalAmbient;
+    gl_FragColor = result;
 }
         

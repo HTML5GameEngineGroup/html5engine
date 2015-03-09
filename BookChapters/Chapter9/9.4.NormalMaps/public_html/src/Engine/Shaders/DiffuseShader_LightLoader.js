@@ -24,6 +24,10 @@ ShaderLightAtIndex.prototype.LoadToShader = function(aCamera, aLight) {
     }
 };
 
+ShaderLightAtIndex.prototype.SwitchOffLight = function() {
+    var gl = gEngine.Core.GetGL();
+    gl.uniform1i(this._mIsOnRef, false);
+};
 //</editor-fold>
 
 //<editor-fold desc="private functions">

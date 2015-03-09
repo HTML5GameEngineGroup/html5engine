@@ -114,6 +114,12 @@ MyGame.prototype.Initialize = function()
     this._mBlock2.SetColor([0, 1, 0, 1]);
     this._mBlock2.GetXform().SetSize(5, 5);
     this._mBlock2.GetXform().SetPosition(70, 50);
+    
+    
+    this._mT = new LineRenderable();
+    this._mT.SetVertices(10, 20, 40, 60);
+    this._mT.SetColor([1, 0, 0, 1]);
+
 
 };
 
@@ -130,6 +136,8 @@ MyGame.prototype.DrawCamera = function(camera) {
         this._mHero.Draw(camera);
         this._mRMinion.Draw(camera);
         this._mRingHero.Draw(camera);
+        
+        this._mT.Draw(camera);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more

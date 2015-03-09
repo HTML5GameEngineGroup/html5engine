@@ -9,7 +9,10 @@ var gEngine = gEngine || { };
 gEngine.DefaultResources = function()
 {   
     // Global Ambient color
-    var _mGlobalAmbientColor = [0.01, 0.01, 0.01, 0];
+    var _mGlobalAmbientColor = [0.3, 0.3, 0.3, 1];
+    var _mGlobalAmbientIntensity = 1;
+    var _GetGlobalAmbientIntensity = function() { return _mGlobalAmbientIntensity; };
+    var _SetGlobalAmbientIntensity = function(v) { _mGlobalAmbientIntensity = v; };
     var _GetGlobalAmbientColor = function() { return _mGlobalAmbientColor; };
     var _SetGlobalAmbientColor = function(v) { _mGlobalAmbientColor = vec4.fromValues(v[0], v[1], v[2], v[3]); };
     
@@ -23,6 +26,7 @@ gEngine.DefaultResources = function()
     var _kTextureFS = "src/GLSLShaders/TextureFS.glsl";  // Path to the texture FragmentShader
     var _mTextureShader = null;
     var _mSpriteShader = null;
+    var _mLineShader = null;
     
     // Default font
     var _kDefaultFont = "resources/fonts/system-default-font";
@@ -33,12 +37,14 @@ gEngine.DefaultResources = function()
         _mConstColorShader = new SimpleShader(_kSimpleVS, _kSimpleFS);
         _mTextureShader = new TextureShader(_kTextureVS, _kTextureFS);
         _mSpriteShader =  new SpriteShader(_kTextureVS, _kTextureFS);
+        _mLineShader =  new LineShader(_kSimpleVS, _kSimpleFS);
         callBackFunction();
     };
     
     var _GetConstColorShader = function() { return _mConstColorShader; };
     var _GetTextureShader = function() { return _mTextureShader; };
     var _GetSpriteShader = function() { return _mSpriteShader; };
+    var _GetLineShader = function() { return _mLineShader; };
     
     var _Initialize = function(callBackFunction) {
         // constant color shader: SimpleVS, and SimpleFS
@@ -64,7 +70,7 @@ gEngine.DefaultResources = function()
         gEngine.TextFileLoader.UnloadTextFile(_kSimpleVS);
         gEngine.TextFileLoader.UnloadTextFile(_kSimpleFS);
         
-        // textuire shader: 
+        // texture shader: 
         gEngine.TextFileLoader.UnloadTextFile(_kTextureVS);
         gEngine.TextFileLoader.UnloadTextFile(_kTextureFS);
         
@@ -80,9 +86,12 @@ gEngine.DefaultResources = function()
         GetConstColorShader: _GetConstColorShader,
         GetTextureShader: _GetTextureShader,
         GetSpriteShader: _GetSpriteShader,
+        GetLineShader: _GetLineShader,
         GetDefaultFont: _GetDefaultFont,
         GetGlobalAmbientColor: _GetGlobalAmbientColor,
         SetGlobalAmbientColor: _SetGlobalAmbientColor,
+        GetGlobalAmbientIntensity: _GetGlobalAmbientIntensity,
+        SetGlobalAmbientIntensity: _SetGlobalAmbientIntensity,
         CleanUp: _CleanUp
     };
     return oPublic;

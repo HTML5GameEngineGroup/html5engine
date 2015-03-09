@@ -10,7 +10,8 @@ uniform sampler2D uNormalSampler;
 
 // Color of the object
 uniform vec4 uPixelColor;  
-uniform vec4 uGlobalAmbient; // this is shared globally
+uniform vec4 uGlobalAmbientColor; // this is shared globally
+uniform float uGlobalAmbientIntensity; 
 
 // Light information
 struct Light  {
@@ -52,7 +53,7 @@ vec4 LightEffect(Light lgt, vec3 N) {
 
 void main(void)  {
     // simple tint based on uPixelColor setting
-    vec4 diffuse = texture2D(uSampler, vTexCoord);
+    vec4 diffuse = texture2D(uSampler, vTexCoord) * uGlobalAmbientColor * uGlobalAmbientIntensity;
     vec4 normal = texture2D(uNormalSampler, vNormalMapCoord);
     vec4 normalMap = (2.0 * normal) - 1.0;
     
@@ -74,6 +75,6 @@ void main(void)  {
     vec3 r = vec3(lgtResult) * (1.0-uPixelColor.a) + vec3(uPixelColor) * uPixelColor.a;
     vec4 result = vec4(r, diffuse.a);
 
-     gl_FragColor = result + uGlobalAmbient; 
+     gl_FragColor = result; 
 }
         

@@ -109,6 +109,14 @@ MyGame.prototype.Update = function()
         v[0] -= deltaAmbient;
     }
     
-    msg += " red=" + v[0].toPrecision(3);
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
+        gEngine.DefaultResources.SetGlobalAmbientIntensity(gEngine.DefaultResources.GetGlobalAmbientIntensity() - deltaAmbient);
+    }
+    
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
+        gEngine.DefaultResources.SetGlobalAmbientIntensity(gEngine.DefaultResources.GetGlobalAmbientIntensity() + deltaAmbient);
+    }
+    
+    msg += " Red=" + v[0].toPrecision(3) + " Intensity=" + gEngine.DefaultResources.GetGlobalAmbientIntensity().toPrecision(3);
     this._mMsg.SetText(msg);
 };

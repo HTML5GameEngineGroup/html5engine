@@ -23,6 +23,7 @@ gEngine.DefaultResources = function()
     var _kTextureFS = "src/GLSLShaders/TextureFS.glsl";  // Path to the texture FragmentShader
     var _mTextureShader = null;
     var _mSpriteShader = null;
+    var _mLineShader = null;
     
     // Diffuse Shader
     var _kDiffuseFS = "src/GLSLShaders/DiffuseFS.glsl";  // Path to the Diffuse FragmentShader
@@ -43,6 +44,7 @@ gEngine.DefaultResources = function()
         _mConstColorShader = new SimpleShader(_kSimpleVS, _kSimpleFS);
         _mTextureShader = new TextureShader(_kTextureVS, _kTextureFS);
         _mSpriteShader =  new SpriteShader(_kTextureVS, _kTextureFS);
+        _mLineShader =  new LineShader(_kSimpleVS, _kSimpleFS);
         _mDiffuseShader = new DiffuseShader(_kTextureVS, _kDiffuseFS);
         _mIllumShader = new IllumShader(_kIllumVS, _kIllumFS);
         callBackFunction();
@@ -51,6 +53,7 @@ gEngine.DefaultResources = function()
     var _GetConstColorShader = function() { return _mConstColorShader; };
     var _GetTextureShader = function() { return _mTextureShader; };
     var _GetSpriteShader = function() { return _mSpriteShader; };
+    var _GetLineShader = function() { return _mLineShader; };
     var _GetDiffuseShader = function() { return _mDiffuseShader; };
     var _GetIllumShader = function() { return _mIllumShader; };
     
@@ -109,6 +112,7 @@ gEngine.DefaultResources = function()
         GetTextureShader: _GetTextureShader,
         GetSpriteShader: _GetSpriteShader,
         GetDiffuseShader: _GetDiffuseShader,
+        GetLineShader: _GetLineShader,
         GetIllumShader: _GetIllumShader,
         GetDefaultFont: _GetDefaultFont,
         GetGlobalAmbientColor: _GetGlobalAmbientColor,

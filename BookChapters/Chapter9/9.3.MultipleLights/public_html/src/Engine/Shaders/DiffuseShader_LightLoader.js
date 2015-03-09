@@ -24,6 +24,10 @@ ShaderLightAtIndex.prototype.LoadToShader = function(aCamera, aLight) {
     }
 };
 
+ShaderLightAtIndex.prototype.SwitchOffLight = function() {
+    var gl = gEngine.Core.GetGL();
+    gl.uniform1i(this._mIsOnRef, false);
+};
 //</editor-fold>
 
 //<editor-fold desc="private functions">
@@ -37,4 +41,6 @@ ShaderLightAtIndex.prototype._SetShaderReferences = function(aDiffuseShader, ind
     this._mIntensityRef = gl.getUniformLocation(aDiffuseShader,  "uLights[" + index + "].Intensity");
     this._mIsOnRef = gl.getUniformLocation(aDiffuseShader,       "uLights[" + index + "].IsOn");
 };
+
+
 //</editor-fold>

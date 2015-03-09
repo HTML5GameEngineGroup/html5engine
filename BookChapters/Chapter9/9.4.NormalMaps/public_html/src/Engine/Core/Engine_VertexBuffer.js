@@ -37,6 +37,15 @@ gEngine.VertexBuffer = function()
         0,0, 0.0
     ];
     
+    // this is to support the debugging of physics engine
+    var verticesOfLine =
+    [
+        0.5, 0.5, 0.0,
+        -0.5, -0.5, 0.0
+    ];
+    // reference to the texture positions for the square vertices in the gl context
+    var _mLineVertexBuffer = null;
+    
     var Initialize = function() {
         var gl = gEngine.Core.GetGL();
 
@@ -61,21 +70,35 @@ gEngine.VertexBuffer = function()
             // load the textureCoordinates into the vertexBuffer, as non-changing drawing data (STATIC_DRAW)!
             gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoordinates), gl.STATIC_DRAW);
         // </editor-fold>
+        
+        // <editor-fold desc="Step A: Allocate and store vertex positions into the webGL context">
+            // Create a buffer on the gGL context for our vertex positions
+            _mLineVertexBuffer = gl.createBuffer();
+
+            // Connect the vertexBuffer to the ARRAY_BUFFER global gl binding point.
+            gl.bindBuffer(gl.ARRAY_BUFFER, _mLineVertexBuffer);    
+
+            // Put the verticesOfSquare into the vertexBuffer, as non-changing drawing data (STATIC_DRAW)
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verticesOfLine), gl.STATIC_DRAW);
+        //<editor-fold>
     };
     
     var GetGLVertexRef = function() { return _mSquareVertexBuffer; };
     var GetGLTexCoordRef = function() { return _mTextureCoordBuffer; };
+    var GetGLLineVertexRef = function() { return _mLineVertexBuffer; };
     
     var CleanUp = function() {
         var gl = gEngine.Core.GetGL();
         gl.deleteBuffer(_mSquareVertexBuffer);
         gl.deleteBuffer(_mTextureCoordBuffer);
+        gl.deleteBuffer(_mLineVertexBuffer);
     };
     
     var oPublic = {
         Initialize: Initialize,
         GetGLVertexRef: GetGLVertexRef,
         GetGLTexCoordRef: GetGLTexCoordRef,
+        GetGLLineVertexRef: GetGLLineVertexRef,
         CleanUp: CleanUp
     };
     

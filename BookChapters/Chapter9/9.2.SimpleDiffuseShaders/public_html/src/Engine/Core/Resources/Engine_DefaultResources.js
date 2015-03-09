@@ -9,7 +9,10 @@ var gEngine = gEngine || { };
 gEngine.DefaultResources = function()
 {   
     // Global Ambient color
-    var _mGlobalAmbientColor = [0.01, 0.01, 0.01, 0];
+    var _mGlobalAmbientColor = [0.3, 0.3, 0.3, 1];
+    var _mGlobalAmbientIntensity = 1;
+    var _GetGlobalAmbientIntensity = function() { return _mGlobalAmbientIntensity; };
+    var _SetGlobalAmbientIntensity = function(v) { _mGlobalAmbientIntensity = v; };
     var _GetGlobalAmbientColor = function() { return _mGlobalAmbientColor; };
     var _SetGlobalAmbientColor = function(v) { _mGlobalAmbientColor = vec4.fromValues(v[0], v[1], v[2], v[3]); };
     
@@ -23,6 +26,7 @@ gEngine.DefaultResources = function()
     var _kTextureFS = "src/GLSLShaders/TextureFS.glsl";  // Path to the texture FragmentShader
     var _mTextureShader = null;
     var _mSpriteShader = null;
+    var _mLineShader = null;
     
     // Diffuse Shader
     var _kDiffuseFS = "src/GLSLShaders/DiffuseFS.glsl";  // Path to the Diffuse FragmentShader
@@ -37,6 +41,7 @@ gEngine.DefaultResources = function()
         _mConstColorShader = new SimpleShader(_kSimpleVS, _kSimpleFS);
         _mTextureShader = new TextureShader(_kTextureVS, _kTextureFS);
         _mSpriteShader =  new SpriteShader(_kTextureVS, _kTextureFS);
+        _mLineShader =  new LineShader(_kSimpleVS, _kSimpleFS);
         _mDiffuseShader = new DiffuseShader(_kTextureVS, _kDiffuseFS);
         callBackFunction();
     };
@@ -44,6 +49,7 @@ gEngine.DefaultResources = function()
     var _GetConstColorShader = function() { return _mConstColorShader; };
     var _GetTextureShader = function() { return _mTextureShader; };
     var _GetSpriteShader = function() { return _mSpriteShader; };
+    var _GetLineShader = function() { return _mLineShader; };
     var _GetDiffuseShader = function() { return _mDiffuseShader; };
     
     var _Initialize = function(callBackFunction) {
@@ -92,10 +98,13 @@ gEngine.DefaultResources = function()
         GetConstColorShader: _GetConstColorShader,
         GetTextureShader: _GetTextureShader,
         GetSpriteShader: _GetSpriteShader,
+        GetLineShader: _GetLineShader,
         GetDiffuseShader: _GetDiffuseShader,
         GetDefaultFont: _GetDefaultFont,
         GetGlobalAmbientColor: _GetGlobalAmbientColor,
         SetGlobalAmbientColor: _SetGlobalAmbientColor,
+        GetGlobalAmbientIntensity: _GetGlobalAmbientIntensity,
+        SetGlobalAmbientIntensity: _SetGlobalAmbientIntensity,
         CleanUp: _CleanUp
     };
     return oPublic;

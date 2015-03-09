@@ -22,11 +22,14 @@ ShakePosition.prototype.ShakeDone = function() {
 ShakePosition.prototype.GetShakeResults = function() { 
     this._mNumCyclesLeft--;
     var c = [];
-    var f = 0;
-    if (!this.ShakeDone())
-        f = this._f();
-    c[0] = this._mXMag * f;
-    c[1] = this._mYMag * f;
+    var fx = 0;
+    var fy = 0;
+    if (!this.ShakeDone()) {
+        fx = this._f();
+        fy = this._f();
+    }
+    c[0] = this._mXMag * fx;
+    c[1] = this._mYMag * fy;
     return c;
 };
 

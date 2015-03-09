@@ -47,7 +47,7 @@ MyGame.prototype.Initialize = function()
     
     var bgR = new SpriteRenderable(this._kBg);
     bgR.SetTexPixelPositions(0, 1900, 0, 1000);
-    bgR.GetXform().SetSize(380, 200);
+    bgR.GetXform().SetSize(190, 100);
     bgR.GetXform().SetPosition(50, 35);
     this._mBg = new GameObject(bgR);
       

@@ -21,8 +21,6 @@ ShaderLightAtIndex.prototype.LoadToShader = function(aCamera, aLight) {
         gl.uniform1f(this._mInnerConeRef, ic);
         gl.uniform1f(this._mOutterConeRef, oc);
         gl.uniform1f(this._mIntensityRef, aLight.GetIntensity());
-        gl.uniform1f(this._mSpecIntensityRef, aLight.GetSpecularIntensity());
-        gl.uniform1f(this._mShinningnessRef, aLight.GetShinningness());
     }
 };
 
@@ -35,14 +33,11 @@ ShaderLightAtIndex.prototype.SwitchOffLight = function() {
 //<editor-fold desc="private functions">
 ShaderLightAtIndex.prototype._SetShaderReferences = function(aLightShader, index) {
     var gl = gEngine.Core.GetGL();
-    gl.useProgram(aLightShader);
     this._mColorRef = gl.getUniformLocation(aLightShader,      "uLights[" + index + "].Color");
     this._mPosRef = gl.getUniformLocation(aLightShader,        "uLights[" + index + "].Position");
     this._mInnerConeRef = gl.getUniformLocation(aLightShader,  "uLights[" + index + "].Inner");
     this._mOutterConeRef = gl.getUniformLocation(aLightShader, "uLights[" + index + "].Outer");
     this._mIntensityRef = gl.getUniformLocation(aLightShader,  "uLights[" + index + "].Intensity");
-    this._mSpecIntensityRef = gl.getUniformLocation(aLightShader,  "uLights[" + index + "].SpecIntensity");
-    this._mShinningnessRef = gl.getUniformLocation(aLightShader,  "uLights[" + index + "].Shinningness");
     this._mIsOnRef = gl.getUniformLocation(aLightShader,       "uLights[" + index + "].IsOn");
 };
 //</editor-fold>

@@ -10,14 +10,19 @@ uniform sampler2D uNormalSampler;
 
 // Color of the object
 uniform vec4 uPixelColor;  
-uniform vec4 uGlobalAmbient; // this is shared globally
+uniform vec4 uGlobalAmbientColor; // this is shared globally
+uniform float uGlobalAmbientIntensity; 
 
+// for supporting a simple Phong-like illumination model
 uniform vec3 uCameraPosition; // for computing the V-vector
-
-// illumination properties
-vec4 uKs;   // Specular color
-float uShinningness;  // how sharp isthe specularity
-vec4 uKd;   // Diffuse Color 
+// material properties
+struct Material {
+    vec4 Ka;    // simple boosting of color
+    vec4 Kd;    // Diffuse 
+    vec4 Ks;    // Specular
+    float Shinningness; // this is the "n"
+};
+uniform Material uMaterial;
 
 // Light information
 struct Light  {
@@ -25,7 +30,7 @@ struct Light  {
     vec4 Color;
     float Inner;     // distance in pixel space
     float Outer;     // distance in pixel space
-    float Intensity; // Diffuse component intenstity
+    float Intensity;
     bool  IsOn;
 };
 uniform Light uLights[4];  // Maximum array of lights this shader supports
@@ -58,11 +63,11 @@ float LightAttenuation(Light lgt, out vec3 L) {
 vec4 SpecularResult(vec3 N, vec3 L) {
     vec3 V = normalize(uCameraPosition - gl_FragCoord.xyz);
     vec3 H = (L + V) * 0.5;
-    return uKs * pow(max(0.0, dot(N, H)), uShinningness);
+    return uMaterial.Ks * pow(max(0.0, dot(N, H)), uMaterial.Shinningness);
 }
 
 vec4 DiffuseResult(vec3 N, vec3 L, vec4 diffuseMapColor) {
-    return uKd * max(0.0, dot(N, L)) * diffuseMapColor;
+    return uMaterial.Kd * max(0.0, dot(N, L)) * diffuseMapColor;
 }
 
 vec4 ShadedResult(Light lgt, vec3 N, vec4 diffuseMapColor) {
@@ -70,20 +75,20 @@ vec4 ShadedResult(Light lgt, vec3 N, vec4 diffuseMapColor) {
     float atten = LightAttenuation(lgt, L);
     vec4  diffuse = DiffuseResult(N, L, diffuseMapColor);
     vec4  specular = SpecularResult(N, L);
-    result = lgt.Intensity * lgt.Color + (diffuse + specular);
+    vec4 result = atten * lgt.Intensity * lgt.Color * (diffuse + specular);
     return result;
 }
 
 void main(void)  {
     // simple tint based on uPixelColor setting
-    vec4 diffuseMapColor = texture2D(uSampler, vTexCoord);
+    vec4 diffuseMapColor = texture2D(uSampler, vTexCoord) * uGlobalAmbientColor * uGlobalAmbientIntensity;
     vec4 normal = texture2D(uNormalSampler, vNormalMapCoord);
     vec4 normalMap = (2.0 * normal) - 1.0;
     
     normalMap.y = -normalMap.y;  // flip Y
     vec3 N = normalize(normalMap.xyz);
    
-    vec4 shadedResult = vec4(0);
+    vec4 shadedResult = uMaterial.Ka + diffuseMapColor;
 
     // now decide if we should illuminate by the light
     if (diffuseMapColor.a > 0.0) {
@@ -96,8 +101,8 @@ void main(void)  {
 
     // tint the textured area, and leave transparent area as defined by the texture
     vec3 tintResult = vec3(shadedResult) * (1.0-uPixelColor.a) + vec3(uPixelColor) * uPixelColor.a;
-    vec4 result = vec4(tintResult, diffuse.a);
+    vec4 result = vec4(tintResult, diffuseMapColor.a);
 
-     gl_FragColor = result + uGlobalAmbient; 
+     gl_FragColor = result; 
 }
         

@@ -21,9 +21,8 @@ function IllumRenderable(myTexture, myNormalMap)
     this._mNormalMapBottom = 0.0;
     this._mMormapMapTop = 1.0;
     
-    this._mKs = vec4.fromValues(0.1, 0.1, 0.1, 1);
-    this._mKd = vec4.fromValues(0.5, 0.5, 0.5, 1);
-    this._mShinningness = 1;
+    // Material for this renderable
+    this._mMaterial = new Material();
 };
 gEngine.Core.InheritPrototype(IllumRenderable, LightRenderable);
 
@@ -34,13 +33,13 @@ gEngine.Core.InheritPrototype(IllumRenderable, LightRenderable);
 IllumRenderable.prototype.Draw = function(aCamera) {
     gEngine.Textures.ActivateNormalMap(this._mNormalMap);
     this._mShader.SetNormalMapTexCoordinate(this.GetNormalMapCoordinateArray());
+    this._mShader.SetMaterialAndCameraPos(this._mMaterial, aCamera.GetPosInPixelSpace());
     LightRenderable.prototype.Draw.call(this, aCamera);
 };
 
 
 // specify subtexture region by texture coordinate (between 0 to 1)
-IllumRenderable.prototype.SetNormalMapTexCoordinate = function(left, right, bottom, top)
-{
+IllumRenderable.prototype.SetNormalMapTexCoordinate = function(left, right, bottom, top) {
     this._mNormalMapLeft = left;
     this._mNormalMapRight = right;
     this._mNormalMapBottom = bottom;
@@ -48,8 +47,7 @@ IllumRenderable.prototype.SetNormalMapTexCoordinate = function(left, right, bott
 };
 
 // specify subtexture region by pixel positions (between 0 to image resolutions)
-SpriteRenderable.prototype.SetNormalMapPixelPositions = function(left, right, bottom, top)
-{
+SpriteRenderable.prototype.SetNormalMapPixelPositions = function(left, right, bottom, top) {
     var texInfo = gEngine.Textures.GetTextureInfo(this._mNormalMap);
     var imageW = texInfo.mWidth;
     var imageH = texInfo.mHeight;
@@ -69,9 +67,13 @@ IllumRenderable.prototype.GetNormalMapCoordinateArray = function() {
     ];
 };
 //
+
+IllumRenderable.prototype.GetMaterial = function() { return this._mMaterial; };
+//--- end of Public Methods
+
+
 //*** MUST OVERRIDE _SetElement_ from SpriteAnimateRenderable()!!!
-IllumRenderable.prototype._SetSpriteElement = function()
-{
+IllumRenderable.prototype._SetSpriteElement = function() {
     var left = this._mFirstElmLeft + (this._mCurrentElm * (this._mElmWidth + this._mWidthPadding));
     var right = left+this._mElmWidth;
     var top = this._mElmTop-this._mElmHeight;
@@ -79,15 +81,4 @@ IllumRenderable.prototype._SetSpriteElement = function()
     SpriteRenderable.prototype.SetTexCoordinate.call(this, left, right, top, bot);
     this.SetNormalMapTexCoordinate(left, right, top, bot);
 };
-
-IllumRenderable.prototype.SetSpecularity = function(s) { this._mKs = vec4.clone(s); };
-IllumRenderable.prototype.GetSpecularity = function() { return this._mKs; };
-
-IllumRenderable.prototype.SetDiffuse = function(d) { this._mKd = vec4.clone(d); };
-IllumRenderable.prototype.GetDiffuse = function() { return this._mKd; };
-
-IllumRenderable.prototype.SetShinningness = function(s) { this._mShinningness= s; };
-IllumRenderable.prototype.GetShinningness = function() { return this._mShinningness; };
-//--- end of Public Methods
-
 //</editor-fold>

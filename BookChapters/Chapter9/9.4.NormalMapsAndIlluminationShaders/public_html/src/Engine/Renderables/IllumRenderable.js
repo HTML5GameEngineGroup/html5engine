@@ -35,8 +35,7 @@ IllumRenderable.prototype.Draw = function(aCamera) {
 
 
 // specify subtexture region by texture coordinate (between 0 to 1)
-IllumRenderable.prototype.SetNormalMapTexCoordinate = function(left, right, bottom, top)
-{
+IllumRenderable.prototype.SetNormalMapTexCoordinate = function(left, right, bottom, top) {
     this._mNormalMapLeft = left;
     this._mNormalMapRight = right;
     this._mNormalMapBottom = bottom;
@@ -44,8 +43,7 @@ IllumRenderable.prototype.SetNormalMapTexCoordinate = function(left, right, bott
 };
 
 // specify subtexture region by pixel positions (between 0 to image resolutions)
-SpriteRenderable.prototype.SetNormalMapPixelPositions = function(left, right, bottom, top)
-{
+SpriteRenderable.prototype.SetNormalMapPixelPositions = function(left, right, bottom, top) {
     var texInfo = gEngine.Textures.GetTextureInfo(this._mNormalMap);
     var imageW = texInfo.mWidth;
     var imageH = texInfo.mHeight;

@@ -33,7 +33,6 @@ ShaderLightAtIndex.prototype.SwitchOffLight = function() {
 //<editor-fold desc="private functions">
 ShaderLightAtIndex.prototype._SetShaderReferences = function(aLightShader, index) {
     var gl = gEngine.Core.GetGL();
-    gl.useProgram(aLightShader);
     this._mColorRef = gl.getUniformLocation(aLightShader,      "uLights[" + index + "].Color");
     this._mPosRef = gl.getUniformLocation(aLightShader,        "uLights[" + index + "].Position");
     this._mInnerConeRef = gl.getUniformLocation(aLightShader,  "uLights[" + index + "].Inner");

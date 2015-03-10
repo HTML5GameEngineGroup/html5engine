@@ -8,11 +8,20 @@
 // constructor 
 function IllumShader(vertexShaderPath, fragmentShaderPath)
 {
+    var gl = gEngine.Core.GetGL();
+    
     // Call sper class constructor
     LightShader.call(this, vertexShaderPath, fragmentShaderPath);  // call super class constructor
     
+    // this is the material property of the renderable
+    this._mMaterial = null;
+    this._mMaterialLoader = new ShaderMaterial(this._mCompiledShader);
+    
+    // Reference to the camera position
+    this._mCameraPos = null;  // points to a vec3
+    this._mCameraPosRef = gl.getUniformLocation(this._mCompiledShader, "uCameraPosition");
+    
     // reference to the normal map sampler
-    var gl = gEngine.Core.GetGL();
     this._mNormalSamlerRef = gl.getUniformLocation(this._mCompiledShader, "uNormalSampler");
     
     // now define normal map texture coordinate buffer
@@ -40,7 +49,7 @@ gEngine.Core.InheritPrototype(IllumShader, LightShader);
 // Overriding the Activation of the shader for rendering
 IllumShader.prototype.ActivateShader = function(pixelColor, aCamera) {
     // fist call the super class's activate
-    LightShader.prototype.ActivateShader.call(this, pixelColor, aCamera);
+    LightShader.prototype.ActivateShader.call(this, pixelColor, aCamera);    
     var gl = gEngine.Core.GetGL();
     gl.uniform1i(this._mNormalSamlerRef, 1); // binds to texture unit 1
     
@@ -53,6 +62,8 @@ IllumShader.prototype.ActivateShader = function(pixelColor, aCamera) {
             0,        
             0);
     gl.enableVertexAttribArray(this._mNormalMapTexCoordAttribute);
+    this._mMaterialLoader.LoadToShader(this._mMaterial);
+    gl.uniform3fv(this._mCameraPosRef, this._mCameraPos);
 };
 
 IllumShader.prototype.SetNormalMapTexCoordinate = function(texCoord)
@@ -69,5 +80,10 @@ IllumShader.prototype.CleanUp = function()
     
     // now call super class's clean up ...
     LightShader.prototype.CleanUp.call(this);
+};
+
+IllumShader.prototype.SetMaterialAndCameraPos = function(m, p) { 
+    this._mMaterial = m; 
+    this._mCameraPos = p;
 };
 //</editor-fold>

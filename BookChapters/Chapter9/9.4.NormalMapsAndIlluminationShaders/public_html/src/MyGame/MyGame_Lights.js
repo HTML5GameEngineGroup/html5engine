@@ -14,7 +14,7 @@ MyGame.prototype._CreateALight = function(index, pos, color, inner, outer, inten
     light.SetIntensity(intensity);
     
     return light;
-}
+};
 
 MyGame.prototype._InitializeLights = function() 
 {

@@ -17,6 +17,7 @@ function MyGame()
     this._mBg = null;
     
     this._mMsg = null;
+    this._mMatMsg = null;
     
     // the hero and the support objects
     this._mHero = null;
@@ -30,6 +31,7 @@ function MyGame()
     this._mBlock2 = null;
     
     this._mLgtIndex = 0;    // the light to move
+    this._mSlectedCh = null; // the selected character
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
@@ -105,6 +107,11 @@ MyGame.prototype.Initialize = function()
     this._mMsg.GetXform().SetPosition(1, 2);
     this._mMsg.SetTextHeight(3);
     
+    this._mMatMsg = new FontRenderable("Status Message");
+    this._mMatMsg.SetColor([1, 1, 1, 1]);
+    this._mMatMsg.GetXform().SetPosition(1, 73);
+    this._mMatMsg.SetTextHeight(3);
+    
     this._mBlock1 = new Renderable();
     this._mBlock1.SetColor([1, 0, 0, 1]);
     this._mBlock1.GetXform().SetSize(5, 5);
@@ -115,12 +122,9 @@ MyGame.prototype.Initialize = function()
     this._mBlock2.GetXform().SetSize(5, 5);
     this._mBlock2.GetXform().SetPosition(70, 50);
     
-    
-    this._mT = new LineRenderable();
-    this._mT.SetVertices(10, 20, 40, 60);
-    this._mT.SetColor([1, 0, 0, 1]);
-
-
+    this._mSlectedCh = this._mRingHero;
+    this._mSelectedChMsg = "R:";
+    this._mMaterialCh = this._mSlectedCh.GetRenderable().GetMaterial().GetDiffuse();  // to support interactive changing
 };
 
 
@@ -136,8 +140,6 @@ MyGame.prototype.DrawCamera = function(camera) {
         this._mHero.Draw(camera);
         this._mRMinion.Draw(camera);
         this._mRingHero.Draw(camera);
-        
-        this._mT.Draw(camera);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -150,23 +152,46 @@ MyGame.prototype.Draw = function()
     // Step  B: Draw with all three cameras
     this.DrawCamera(this._mCamera);
         this._mMsg.Draw(this._mCamera);   // only draw status in the main camera
+        this._mMatMsg.Draw(this._mCamera);
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGame.prototype.Update = function()
-{
-    var msg = "Selected Light=" + this._mLgtIndex + " ";
-    
+{    
     this._mCamera.Update();  // to ensure proper interploated movement effects
     
     this._mLMinion.Update(); // ensure sprite animation
     this._mRMinion.Update();
     
     this._mHero.Update();  // allow keyboard control to move
-        
+           
     // control the selected light
+    var msg = "L=" + this._mLgtIndex + " ";
     msg += this._LightControl();
-    
     this._mMsg.SetText(msg);
+    
+    msg = this._SelectCharacter();
+    msg += this._MaterialControl();
+    this._mMatMsg.SetText(msg);
+};
+
+MyGame.prototype._SelectCharacter = function() {
+    // select which character to work with
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Four)) {
+        this._mSlectedCh = this._mRingHero;
+        this._mMaterialCh = this._mSlectedCh.GetRenderable().GetMaterial().GetDiffuse();
+        this._mSelectedChMsg = "R:";
+    }
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Five)) {
+        this._mSlectedCh = this._mLMinion;
+        this._mMaterialCh = this._mSlectedCh.GetRenderable().GetMaterial().GetDiffuse();
+        this._mSelectedChMsg = "L:";
+    }
+    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Six)) {
+        this._mSlectedCh = this._mHero;
+        this._mMaterialCh = this._mSlectedCh.GetRenderable().GetMaterial().GetDiffuse();
+        this._mSelectedChMsg = "H:";
+    }
+    return this._mSelectedChMsg;
 };

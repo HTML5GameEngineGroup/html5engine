@@ -24,6 +24,8 @@ function Camera(wcCenter, wcWidth, viewportArray)
     this._mNearPlane = 0;
     this._mFarPlane = 1000;
     
+    this._kCameraZ = 10;  // This is for illumination computation
+    
     // transformation matrices
     this._mViewMatrix = mat4.create();
     this._mProjMatrix = mat4.create();
@@ -43,8 +45,9 @@ function Camera(wcCenter, wcWidth, viewportArray)
 
 function PerRenderCache() {
     this.mWCToPixelRatio = 1;  // WC to pixel transformation
-    this.mCameraOrgX = 1; // Lower-left corner of camera in WC 
+    this.mCameraOrgX = 1;      // Lower-left corner of camera in WC 
     this.mCameraOrgY = 1; 
+    this.mCameraPosInPixelSpace = vec3.fromValues(0, 0, 0); // 
 };
 
 Camera.eViewport = Object.freeze({
@@ -61,6 +64,7 @@ Camera.prototype.SetWCCenter = function(xPos, yPos) {
     var p = vec2.fromValues(xPos, yPos); 
     this._mCameraState.SetCenter(p); };
 Camera.prototype.GetWCCenter = function() { return this._mCameraState.GetCenter(); };
+Camera.prototype.GetPosInPixelSpace = function() { return this._mRenderCache.mCameraPosInPixelSpace; };
 Camera.prototype.SetWCWidth = function(width) { this._mCameraState.SetWidth(width); };
 Camera.prototype.GetWCWidth = function() { return this._mCameraState.GetWidth(); };
 Camera.prototype.GetWCHeight = function() { return this._mCameraState.GetWidth() * this._mViewport[Camera.eViewport.eHeight] / this._mViewport[Camera.eViewport.eWidth]; };
@@ -137,6 +141,10 @@ Camera.prototype.SetupViewProjection = function() {
     this._mRenderCache.mWCToPixelRatio = this._mViewport[Camera.eViewport.eWidth] / this.GetWCWidth();
     this._mRenderCache.mCameraOrgX = center[0] - (this.GetWCWidth()/2);
     this._mRenderCache.mCameraOrgY = center[1] - (this.GetWCHeight()/2);
+    var p = this.WCPosToPixel(this.GetWCCenter());
+    this._mRenderCache.mCameraPosInPixelSpace[0] = p[0];
+    this._mRenderCache.mCameraPosInPixelSpace[1] = p[1];
+    this._mRenderCache.mCameraPosInPixelSpace[2] = this.FakeZInPixelSpace(this._kCameraZ);
 };
 //</editor-fold>
 

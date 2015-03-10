@@ -28,7 +28,6 @@ gEngine.GameLoop = function()
         if(_mIsLoopRunning) {
             // Step A: set up for next call to _RunLoop and update input!
             requestAnimationFrame( function(){_RunLoop.call(_mMyGame);});
-            gEngine.Input.Update();
             
             // Step B: compute how much time has elapsed since we last RunLoop was execuated
             _mCurrentTime = Date.now();
@@ -39,8 +38,8 @@ gEngine.GameLoop = function()
             // Step C: Make sure we update the game the appropriate number of times.
             //      Update only every Milleseconds per frame.
             //      If lag larger then update freames, update until catchup.
-            while ((_mLagTime >= kMPF) && (_mIsLoopRunning))
-            {
+            while ((_mLagTime >= kMPF) && (_mIsLoopRunning)) {
+                gEngine.Input.Update();
                 this.Update();      // call Scene.Update()
                 _mLagTime -= kMPF;
             }

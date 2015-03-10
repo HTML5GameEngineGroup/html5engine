@@ -50,21 +50,21 @@ vec4 LightEffect(Light lgt)
 
 void main(void)  {
     // simple tint based on uPixelColor setting
-    vec4 diffuse = texture2D(uSampler, vec2(vTexCoord.s, vTexCoord.t));
-    vec4 lgtResults = diffuse * uGlobalAmbientIntensity * uGlobalAmbientColor;
+    vec4 textureMapColor = texture2D(uSampler, vec2(vTexCoord.s, vTexCoord.t));
+    vec4 lgtResults = textureMapColor * uGlobalAmbientIntensity * uGlobalAmbientColor;
 
     // now decide if we should illuminate by the light
-    if (diffuse.a > 0.0) {
+    if (textureMapColor.a > 0.0) {
         for (int i=0; i<4; i++) { 
             if (uLights[i].IsOn) { 
-                lgtResults +=  LightEffect(uLights[i]) * diffuse;
+                lgtResults +=  LightEffect(uLights[i]) * textureMapColor;
             }
         }
     }
 
     // tint the textured area, and leave transparent area as defined by the texture
     vec3 r = vec3(lgtResults) * (1.0-uPixelColor.a) + vec3(uPixelColor) * uPixelColor.a;
-    vec4 result = vec4(r, diffuse.a);
+    vec4 result = vec4(r, lgtResults.a);
 
      gl_FragColor = result;
 }

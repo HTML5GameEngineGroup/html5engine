@@ -66,14 +66,14 @@ vec4 SpecularResult(vec3 N, vec3 L) {
     return uMaterial.Ks * pow(max(0.0, dot(N, H)), uMaterial.Shinningness);
 }
 
-vec4 DiffuseResult(vec3 N, vec3 L, vec4 diffuseMapColor) {
-    return uMaterial.Kd * max(0.0, dot(N, L)) * diffuseMapColor;
+vec4 DiffuseResult(vec3 N, vec3 L, vec4 textureMapColor) {
+    return uMaterial.Kd * max(0.0, dot(N, L)) * textureMapColor;
 }
 
-vec4 ShadedResult(Light lgt, vec3 N, vec4 diffuseMapColor) {
+vec4 ShadedResult(Light lgt, vec3 N, vec4 textureMapColor) {
     vec3 L;
     float atten = LightAttenuation(lgt, L);
-    vec4  diffuse = DiffuseResult(N, L, diffuseMapColor);
+    vec4  diffuse = DiffuseResult(N, L, textureMapColor);
     vec4  specular = SpecularResult(N, L);
     vec4 result = atten * lgt.Intensity * lgt.Color * (diffuse + specular);
     return result;
@@ -81,27 +81,27 @@ vec4 ShadedResult(Light lgt, vec3 N, vec4 diffuseMapColor) {
 
 void main(void)  {
     // simple tint based on uPixelColor setting
-    vec4 diffuseMapColor = texture2D(uSampler, vTexCoord) * uGlobalAmbientColor * uGlobalAmbientIntensity;
+    vec4 textureMapColor = texture2D(uSampler, vTexCoord);
     vec4 normal = texture2D(uNormalSampler, vNormalMapCoord);
     vec4 normalMap = (2.0 * normal) - 1.0;
     
     normalMap.y = -normalMap.y;  // flip Y
     vec3 N = normalize(normalMap.xyz);
    
-    vec4 shadedResult = uMaterial.Ka + diffuseMapColor;
+    vec4 shadedResult = uMaterial.Ka + (textureMapColor  * uGlobalAmbientColor * uGlobalAmbientIntensity);
 
     // now decide if we should illuminate by the light
-    if (diffuseMapColor.a > 0.0) {
+    if (textureMapColor.a > 0.0) {
         for (int i=0; i<4; i++) { 
             if (uLights[i].IsOn) { 
-                shadedResult += ShadedResult(uLights[i], N, diffuseMapColor);
+                shadedResult += ShadedResult(uLights[i], N, textureMapColor);
             }
         }
     }
 
     // tint the textured area, and leave transparent area as defined by the texture
     vec3 tintResult = vec3(shadedResult) * (1.0-uPixelColor.a) + vec3(uPixelColor) * uPixelColor.a;
-    vec4 result = vec4(tintResult, diffuseMapColor.a);
+    vec4 result = vec4(tintResult, shadedResult.a);
 
      gl_FragColor = result; 
 }

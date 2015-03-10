@@ -7,10 +7,10 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function Material() {    
-    this._mKa = vec4.fromValues(0.01, 0.01, 0.01, 1);
-    this._mKs = vec4.fromValues(0.1, 0.1, 0.1, 1);
-    this._mKd = vec4.fromValues(0.1, 0.1, 0.1, 1);
-    this._mShinningness = 1;
+    this._mKa = vec4.fromValues(0.0, 0.0, 0.0, 0);
+    this._mKs = vec4.fromValues(0.2, 0.2, 0.2, 1);
+    this._mKd = vec4.fromValues(1.0, 1.0, 1.0, 1);
+    this._mShinningness = 20;
 };
 
 //<editor-fold desc="Public Methods">

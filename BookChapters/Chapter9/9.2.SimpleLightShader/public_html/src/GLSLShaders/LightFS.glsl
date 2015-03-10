@@ -24,14 +24,14 @@ varying vec2 vTexCoord;
 
 void main(void)  {
     // simple tint based on uPixelColor setting
-    vec4 diffuse = texture2D(uSampler, vec2(vTexCoord.s, vTexCoord.t));
-    vec4 lgtResults = diffuse * uGlobalAmbientIntensity * uGlobalAmbientColor;
+    vec4 textureMapColor = texture2D(uSampler, vec2(vTexCoord.s, vTexCoord.t));
+    vec4 lgtResults = textureMapColor * uGlobalAmbientIntensity * uGlobalAmbientColor;
 
     // now decide if we should illuminate by the light
-    if (uLightOn && (diffuse.a > 0.0)) {
+    if (uLightOn && (textureMapColor.a > 0.0)) {
         float dist = length(uLightPosition.xyz - gl_FragCoord.xyz);
         if (dist <= uLightRadius)
-            lgtResults += diffuse * uLightColor;
+            lgtResults += textureMapColor * uLightColor;
     }
 
     // tint the textured area, and leave transparent area as defined by the texture

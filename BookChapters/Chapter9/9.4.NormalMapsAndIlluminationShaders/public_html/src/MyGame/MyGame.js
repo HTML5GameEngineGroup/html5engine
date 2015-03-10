@@ -148,7 +148,7 @@ MyGame.prototype.Draw = function()
 // anything from this function!
 MyGame.prototype.Update = function()
 {
-    var msg = "Selected Light=" + this._mLgtIndex + " ";
+    var msg = "Light=" + this._mLgtIndex + " ";
     
     this._mCamera.Update();  // to ensure proper interploated movement effects
     

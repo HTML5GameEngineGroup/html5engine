@@ -24,7 +24,7 @@ MyGame.prototype._InitializeLights = function()
                 [15, 50, 5],       // Hero
                 [0, 0.6, 0.6, 1],  // some color
                 8, 20,             // inner and outer cones
-                8                  // intensity
+                2.5                  // intensity
     );
     this._mGlobalLightSet.AddToSet(l);
     
@@ -32,7 +32,7 @@ MyGame.prototype._InitializeLights = function()
                 [17, 15, 4],           // Left minion position
                 [0.7, 0.7, 0.7, 1],    // color
                 10, 15,                // inner and outer cones
-                6                      // intensity
+                1.8                      // intensity
     );
     this._mGlobalLightSet.AddToSet(l);
     
@@ -48,7 +48,7 @@ MyGame.prototype._InitializeLights = function()
                 [50, 33, 2],            // Center of camera 
                 [0.8, 0.2, 0.6, 1],     //  color
                 15, 20,                 // inner and outer cones
-                5                       // intensity
+                2                       // intensity
     );
     this._mGlobalLightSet.AddToSet(l);
 };

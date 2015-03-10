@@ -9,10 +9,7 @@ var gEngine = gEngine || { };
 gEngine.DefaultResources = function()
 {   
     // Global Ambient color
-    var _mGlobalAmbientColor = [0.3, 0.3, 0.3, 1];
-    var _mGlobalAmbientIntensity = 1;
-    var _GetGlobalAmbientIntensity = function() { return _mGlobalAmbientIntensity; };
-    var _SetGlobalAmbientIntensity = function(v) { _mGlobalAmbientIntensity = v; };
+    var _mGlobalAmbientColor = [0.01, 0.01, 0.01, 0];
     var _GetGlobalAmbientColor = function() { return _mGlobalAmbientColor; };
     var _SetGlobalAmbientColor = function(v) { _mGlobalAmbientColor = vec4.fromValues(v[0], v[1], v[2], v[3]); };
     
@@ -114,14 +111,12 @@ gEngine.DefaultResources = function()
         GetConstColorShader: _GetConstColorShader,
         GetTextureShader: _GetTextureShader,
         GetSpriteShader: _GetSpriteShader,
-        GetLineShader: _GetLineShader,
         GetLightShader: _GetLightShader,
+        GetLineShader: _GetLineShader,
         GetIllumShader: _GetIllumShader,
         GetDefaultFont: _GetDefaultFont,
         GetGlobalAmbientColor: _GetGlobalAmbientColor,
         SetGlobalAmbientColor: _SetGlobalAmbientColor,
-        GetGlobalAmbientIntensity: _GetGlobalAmbientIntensity,
-        SetGlobalAmbientIntensity: _SetGlobalAmbientIntensity,
         CleanUp: _CleanUp
     };
     return oPublic;

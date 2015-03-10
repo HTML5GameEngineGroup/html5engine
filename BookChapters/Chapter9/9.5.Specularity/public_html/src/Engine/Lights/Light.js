@@ -1,6 +1,6 @@
 /* 
  * Simple light source
- *      Assumes DiffuseShader has an array of Light, the name of the array is assum to be "uLights[]"
+ *      Assumes LightShader has an array of Light, the name of the array is assum to be "uLights[]"
  */
 
 // Constructor

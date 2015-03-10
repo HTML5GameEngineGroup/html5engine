@@ -9,7 +9,7 @@
 
 function IllumRenderable(myTexture, myNormalMap)
 {
-    DiffuseRenderable.call(this, myTexture);
+    LightRenderable.call(this, myTexture);
     Renderable.prototype._SetShader.call(this, gEngine.DefaultResources.GetIllumShader());
     
     // here is the normal map resoruce id
@@ -25,7 +25,7 @@ function IllumRenderable(myTexture, myNormalMap)
     this._mKd = vec4.fromValues(0.5, 0.5, 0.5, 1);
     this._mShinningness = 1;
 };
-gEngine.Core.InheritPrototype(IllumRenderable, DiffuseRenderable);
+gEngine.Core.InheritPrototype(IllumRenderable, LightRenderable);
 
 //<editor-fold desc="Public Methods">
 //**-----------------------------------------
@@ -34,7 +34,7 @@ gEngine.Core.InheritPrototype(IllumRenderable, DiffuseRenderable);
 IllumRenderable.prototype.Draw = function(aCamera) {
     gEngine.Textures.ActivateNormalMap(this._mNormalMap);
     this._mShader.SetNormalMapTexCoordinate(this.GetNormalMapCoordinateArray());
-    DiffuseRenderable.prototype.Draw.call(this, aCamera);
+    LightRenderable.prototype.Draw.call(this, aCamera);
 };
 
 
@@ -83,8 +83,8 @@ IllumRenderable.prototype._SetSpriteElement = function()
 IllumRenderable.prototype.SetSpecularity = function(s) { this._mKs = vec4.clone(s); };
 IllumRenderable.prototype.GetSpecularity = function() { return this._mKs; };
 
-IllumRenderable.prototype.SetDiffuse = function(d) { this._mKd = vec4.clone(d); };
-IllumRenderable.prototype.GetDiffuse = function() { return this._mKd; };
+IllumRenderable.prototype.SetLight = function(d) { this._mKd = vec4.clone(d); };
+IllumRenderable.prototype.GetLight = function() { return this._mKd; };
 
 IllumRenderable.prototype.SetShinningness = function(s) { this._mShinningness= s; };
 IllumRenderable.prototype.GetShinningness = function() { return this._mShinningness; };

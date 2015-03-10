@@ -19,8 +19,7 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
     this._mModelTransform = null;        // reference to the model transform matrix in vertex shader
     this._mViewProjTransform = null;     // reference to the View/Projection matrix in the vertex shader
     this._mPixelColor = null;            // reference to the pixelColor uniform in the fragment shader
-    this._mGlobalAmbientColor = null;
-    this._mGlobalAmbientIntensity = null;
+    this._mGlobalAmbient = null;
     var gl = gEngine.Core.GetGL();
          
     // start of constructor code
@@ -51,8 +50,7 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
     this._mPixelColor = gl.getUniformLocation(this._mCompiledShader, "uPixelColor");
     this._mModelTransform = gl.getUniformLocation(this._mCompiledShader, "uModelTransform");   
     this._mViewProjTransform = gl.getUniformLocation(this._mCompiledShader, "uViewProjTransform");
-    this._mGlobalAmbientColor = gl.getUniformLocation(this._mCompiledShader, "uGlobalAmbientColor");
-    this._mGlobalAmbientIntensity = gl.getUniformLocation(this._mCompiledShader, "uGlobalAmbientIntensity");
+    this._mGlobalAmbient = gl.getUniformLocation(this._mCompiledShader, "uGlobalAmbient");
 };
 //</editor-fold>
 
@@ -76,8 +74,7 @@ SimpleShader.prototype.ActivateShader = function(pixelColor, aCamera) {
         0);             // offsets to the first element
     gl.enableVertexAttribArray(this._mShaderVertexPositionAttribute);
     gl.uniform4fv(this._mPixelColor, pixelColor);
-    gl.uniform4fv(this._mGlobalAmbientColor, gEngine.DefaultResources.GetGlobalAmbientColor());
-    gl.uniform1f(this._mGlobalAmbientIntensity, gEngine.DefaultResources.GetGlobalAmbientIntensity());
+    gl.uniform4fv(this._mGlobalAmbient, gEngine.DefaultResources.GetGlobalAmbientColor());
 };
 
 // Loads per-object model transform to the vertex shader

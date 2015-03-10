@@ -20,10 +20,6 @@ function IllumRenderable(myTexture, myNormalMap)
     this._mNormalMapRight = 1.0;
     this._mNormalMapBottom = 0.0;
     this._mMormapMapTop = 1.0;
-    
-    this._mKs = vec4.fromValues(0.1, 0.1, 0.1, 1);
-    this._mKd = vec4.fromValues(0.5, 0.5, 0.5, 1);
-    this._mShinningness = 1;
 };
 gEngine.Core.InheritPrototype(IllumRenderable, LightRenderable);
 
@@ -80,14 +76,6 @@ IllumRenderable.prototype._SetSpriteElement = function()
     this.SetNormalMapTexCoordinate(left, right, top, bot);
 };
 
-IllumRenderable.prototype.SetSpecularity = function(s) { this._mKs = vec4.clone(s); };
-IllumRenderable.prototype.GetSpecularity = function() { return this._mKs; };
-
-IllumRenderable.prototype.SetDiffuse = function(d) { this._mKd = vec4.clone(d); };
-IllumRenderable.prototype.GetDiffuse = function() { return this._mKd; };
-
-IllumRenderable.prototype.SetShinningness = function(s) { this._mShinningness= s; };
-IllumRenderable.prototype.GetShinningness = function() { return this._mShinningness; };
 //--- end of Public Methods
 
 //</editor-fold>

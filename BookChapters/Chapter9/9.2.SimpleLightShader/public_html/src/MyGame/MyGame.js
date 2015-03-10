@@ -20,12 +20,10 @@ function MyGame()
     this._mLMinion = null;
     this._mRMinion = null;
     
-    this._mGlobalLightSet = null;
-
+    this._mTheLight = null;
+    
     this._mBlock1 = null;   // to verify swiitching between shaders is fine
     this._mBlock2 = null;
-    
-    this._mLgtIndex = 0;    // the light to move
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
@@ -53,35 +51,32 @@ MyGame.prototype.Initialize = function()
             // sets the background to gray
         
     // the light
-    this._InitializeLights();   // defined in MyGame_Lights.js
+    this._mTheLight = new Light();
+    this._mTheLight.SetRadius(8);
+    this._mTheLight.SetZPos(2);
+    this._mTheLight.SetXPos(30);
+    this._mTheLight.SetYPos(30);  // Position above LMinion
+    this._mTheLight.SetColor([0.9, 0.9, 0.2, 1]);
     
     // the Background
     var bgR = new LightRenderable(this._kBg);
     bgR.SetTexPixelPositions(0, 1900, 0, 1000);
     bgR.GetXform().SetSize(380, 200);
     bgR.GetXform().SetPosition(50, 35);
-    for (var i =0; i<4; i++)
-        bgR.AddLight(this._mGlobalLightSet.GetLightAt(i));   // all the lights
+    bgR.AddLight(this._mTheLight);
     this._mBg = new GameObject(bgR);
      
     // 
     // the objects
     this._mHero = new Hero(this._kMinionSprite);
-    this._mHero.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(0));   // hero light
-    this._mHero.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(3));   // center light
-    // Uncomment the following to see how light affects Dye
-    //      this._mHero.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(1)); 
-    //      this._mHero.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(2)); 
+    this._mHero.GetRenderable().AddLight(this._mTheLight);
         
     this._mLMinion = new Minion(this._kMinionSprite, 30, 30);
-    this._mLMinion.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(1));   // LMinion light
-    this._mLMinion.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(3));   // center light
-        
+    this._mLMinion.GetRenderable().AddLight(this._mTheLight);
     
     this._mRMinion = new Minion(this._kMinionSprite, 70, 30);
-    this._mRMinion.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(2));   // RMinion light
-    this._mRMinion.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(3));   // center light
-            
+    // RMinion did not addAdd and thus does not get illuminated by the light!
+        
     this._mMsg = new FontRenderable("Status Message");
     this._mMsg.SetColor([1, 1, 1, 1]);
     this._mMsg.GetXform().SetPosition(1, 2);
@@ -103,13 +98,14 @@ MyGame.prototype.DrawCamera = function(camera) {
     
     // Step A: set up the View Projection matrix
     camera.SetupViewProjection();
-        // Step C: Now draws each primitive
+                    
+        // Step B: Now draws each renderable
         this._mBg.Draw(camera);
         this._mBlock1.Draw(camera);
-        this._mLMinion.Draw(camera);    
-        this._mBlock2.Draw(camera);        
-        this._mHero.Draw(camera);
+        this._mLMinion.Draw(camera);
         this._mRMinion.Draw(camera);
+        this._mBlock2.Draw(camera);
+        this._mHero.Draw(camera);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -128,7 +124,8 @@ MyGame.prototype.Draw = function()
 // anything from this function!
 MyGame.prototype.Update = function()
 {
-    var msg = "Selected Light=" + this._mLgtIndex + " ";
+    var msg;
+    var deltaC = 0.01;
     
     this._mCamera.Update();  // to ensure proper interploated movement effects
     
@@ -136,9 +133,24 @@ MyGame.prototype.Update = function()
     this._mRMinion.Update();
     
     this._mHero.Update();  // allow keyboard control to move
-        
-    // control the selected light
-    msg += this._LightControl();
     
+    if (gEngine.Input.IsButtonPressed(gEngine.Input.MouseButton.Left))
+        this._mTheLight.Set2DPosition(this._mHero.GetXform().GetPosition());
+    
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
+        var c = this._mTheLight.GetColor();
+        for (var i = 0; i<4; i++)
+            c[i] += deltaC;
+    }
+    
+    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
+        var c = this._mTheLight.GetColor();
+        for (var i = 0; i<4; i++)
+            c[i] -= deltaC;
+    
+    }
+    var c = this._mTheLight.GetColor();
+    msg = "LightColor:" + c[0].toPrecision(4) + " " + c[1].toPrecision(4) +  
+                    " " + c[2].toPrecision(4) + " " + c[3].toPrecision(4);
     this._mMsg.SetText(msg);
 };

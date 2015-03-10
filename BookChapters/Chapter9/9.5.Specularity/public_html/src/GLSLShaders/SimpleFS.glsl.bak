@@ -6,11 +6,10 @@ precision mediump float;
 
 // Color of the object
 uniform vec4 uPixelColor;  
-uniform vec4 uGlobalAmbientColor;  // this is shared globally
-uniform float uGlobalAmbientIntensity;  // this is shared globally
+uniform vec4 uGlobalAmbient;  // this is shared globally
 
 void main(void)  {
     // for every pixel called (within the square) sets
     // constant color red with alpha-channel value of 1.0
-    gl_FragColor = uPixelColor * uGlobalAmbientIntensity * uGlobalAmbientColor;
+    gl_FragColor = uPixelColor + uGlobalAmbient;
 }

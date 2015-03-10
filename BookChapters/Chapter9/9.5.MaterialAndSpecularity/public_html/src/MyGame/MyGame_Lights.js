@@ -22,7 +22,7 @@ MyGame.prototype._InitializeLights = function()
    
     var l = this._CreateALight(0,
                 [15, 50, 5],       // Hero
-                [0, 0.6, 0.6, 1],  // some color
+                [0.6, 0.6, 0.6, 1],  // some color
                 8, 20,             // inner and outer cones
                 2.5                  // intensity
     );

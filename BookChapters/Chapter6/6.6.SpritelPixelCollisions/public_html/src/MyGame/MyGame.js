@@ -6,8 +6,8 @@
 
 function MyGame()
 {   
-    this._kMinionSprite = "Resources/minion_sprite.png";
-    this._kMinionPortal = "Resources/minion_portal.png";
+    this._kMinionSprite = "resources/minion_sprite.png";
+    this._kMinionPortal = "resources/minion_portal.png";
     
     // The camera to view the rectangles
     this._mCamera = null;

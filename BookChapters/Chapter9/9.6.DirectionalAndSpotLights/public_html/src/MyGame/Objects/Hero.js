@@ -1,17 +1,23 @@
 /* 
- *
  */
-function Hero(spriteTexture, normalMap) {
+function Hero(spriteTexture, normalMap, atX, atY, lgtSet) {
     this._kDelta = 0.3;
-    
-    this._mDye = new IllumRenderable(spriteTexture, normalMap);
+   
+    if (normalMap !== null) {
+        this._mDye = new IllumRenderable(spriteTexture, normalMap);
+        this._mDye.SetNormalMapPixelPositions(0, 120, 0, 180);  // left, right, bot, top
+    } else {
+        this._mDye = new LightRenderable(spriteTexture);
+    }
     this._mDye.SetColor([1, 1, 1, 0]);
-    this._mDye.GetXform().SetPosition(15, 50);
-    //this._mDye.GetXform().SetSize(9, 12);
+    this._mDye.GetXform().SetPosition(atX, atY);
     this._mDye.GetXform().SetSize(18, 24);
     this._mDye.SetTexPixelPositions(0, 120, 0, 180);
-    this._mDye.SetNormalMapPixelPositions(0, 120, 0, 180);  // left, right, bot, top
+        
     GameObject.call(this, this._mDye);
+    
+    for (var i = 0; i<4; i++)
+        this._mDye.AddLight(lgtSet.GetLightAt(i));
 };
 gEngine.Core.InheritPrototype(Hero, GameObject);
 

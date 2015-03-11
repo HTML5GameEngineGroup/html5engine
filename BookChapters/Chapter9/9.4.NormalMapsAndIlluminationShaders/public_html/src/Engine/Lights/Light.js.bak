@@ -7,8 +7,8 @@
 function Light() { 
     this._mColor = vec4.fromValues(1, 1, 1, 1);  // light color
     this._mPosition = vec4.fromValues(0, 0, 5, 1); // light position in WC
-    this._mNear = 5;  // within Near is fully lighted
-    this._mFar = 10;  // farther than Far is not lighted
+    this._mNear = 5;  // effective radius in WC
+    this._mOuter = 10;
     this._mIntensity = 1;
     this._mIsOn = true;
 };
@@ -27,8 +27,8 @@ Light.prototype.GetPosition = function() { return this._mPosition; };
 Light.prototype.SetNear = function(r) { this._mNear = r; };
 Light.prototype.GetNear = function() { return this._mNear; };
 
-Light.prototype.SetFar = function(r) { this._mFar = r; };
-Light.prototype.GetFar = function() { return this._mFar; };
+Light.prototype.SetOuter = function(r) { this._mOuter = r; };
+Light.prototype.GetOuter = function() { return this._mOuter; };
 
 Light.prototype.SetIntensity = function(i) { this._mIntensity = i; };
 Light.prototype.GetIntensity = function() { return this._mIntensity; };

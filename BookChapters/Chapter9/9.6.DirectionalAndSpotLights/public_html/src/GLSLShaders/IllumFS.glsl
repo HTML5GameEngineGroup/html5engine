@@ -25,12 +25,34 @@ struct Material {
 uniform Material uMaterial;
 
 // Light information
+//   Three light types are encoded:
+//     Direction.w == 1: says direction should be used
+//     DropOff > 0 says SpotLight
+//  PointLight:
+//     Direction.w == 0
+//     DropOff < 0
+//     Inner/Outer: are distance in pixel space to the Position
+//
+//  Directoinal Light
+//     Directoin.w == 1
+//     DropOff < 0
+//     Inner/Outer: are distance in pixel space to the Position
+//
+//  SpotLight
+//     Direction.W == 1
+//     DropOff >= 0
+//     Inner/Outer: are angles measured from the Direction
+//     No distance attenuation
 struct Light  {
     vec4 Position;   // in pixel space!
+    vec4 Direction;  // Light direction
     vec4 Color;
-    float Inner;     // distance in pixel space
-    float Outer;     // distance in pixel space
+    float Near;
+    float Far;
+    float Inner;     // cone angle for spotlight
+    float Outer;     // cone angle for spotlight
     float Intensity;
+    float DropOff;   // for spotlight
     bool  IsOn;
 };
 uniform Light uLights[4];  // Maximum array of lights this shader supports
@@ -41,21 +63,35 @@ varying vec2 vTexCoord;
 varying vec2 vNormalMapCoord;
 
 // Computes the L-vector, and returns attenuation
-float LightAttenuation(Light lgt, out vec3 L) {
+float AngularDropOff(Light lgt, vec3 lgtDir, vec3 L) {
     float atten = 0.0;
-    L = lgt.Position.xyz - gl_FragCoord.xyz;  
-    float dist = length(L);
-    L = L / dist;
-    if (dist <= lgt.Outer) {
-        if (dist <= lgt.Inner)
+    float cosL = dot(lgtDir, L);
+    float cosOuter = cos(lgt.Outer * 0.5);  
+    float num = cosL - cosOuter;
+
+    if (num > 0.0) {
+        float cosInner = cos(lgt.Inner * 0.5);  
+        float denom = cosInner - cosOuter;
+        if (denom <= 0.0) 
+            atten = 1.0;
+        else
+            atten = smoothstep(0.0, 1.0, pow(abs(num/denom), lgt.DropOff));
+    }
+    return atten;
+}
+
+float DistanceDropOff(Light lgt) {
+    float atten = 0.0;
+    float dist = length(lgt.Position.xyz - gl_FragCoord.xyz);
+    if (dist <= lgt.Far) {
+        if (dist <= lgt.Near)
             atten = 1.0;  //  no attenuation
         else {
             // simple quadratic drop off
-            float n = dist - lgt.Inner;
-            float d = lgt.Outer - lgt.Inner;
+            float n = dist - lgt.Near;
+            float d = lgt.Far - lgt.Near;
             atten = smoothstep(0.0, 1.0, 1.0-(n*n)/(d*d)); // blended attenuation
-        }
-        
+        }   
     }
     return atten;
 }
@@ -71,11 +107,17 @@ vec4 DiffuseResult(vec3 N, vec3 L, vec4 textureMapColor) {
 }
 
 vec4 ShadedResult(Light lgt, vec3 N, vec4 textureMapColor) {
-    vec3 L;
-    float atten = LightAttenuation(lgt, L);
+    float aAtten = 1.0, dAtten = 0.0;
+    vec3 lgtDir = -normalize(lgt.Direction.xyz);
+    vec3 L = normalize(lgt.Position.xyz - gl_FragCoord.xyz);
+    if ((lgt.Direction.w == 1.0) && (lgt.DropOff > 0.0)) {
+        // spotlight: do angle dropoff
+        aAtten = AngularDropOff(lgt, lgtDir, L);
+    } 
+    dAtten = DistanceDropOff(lgt);
     vec4  diffuse = DiffuseResult(N, L, textureMapColor);
     vec4  specular = SpecularResult(N, L);
-    vec4 result = atten * lgt.Intensity * lgt.Color * (diffuse + specular);
+    vec4 result = aAtten * dAtten * lgt.Intensity * lgt.Color * (diffuse + specular);
     return result;
 }
 

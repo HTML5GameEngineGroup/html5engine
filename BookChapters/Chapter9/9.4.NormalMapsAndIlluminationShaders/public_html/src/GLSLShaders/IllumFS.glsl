@@ -17,8 +17,8 @@ uniform float uGlobalAmbientIntensity;
 struct Light  {
     vec4 Position;   // in pixel space!
     vec4 Color;
-    float Inner;     // distance in pixel space
-    float Outer;     // distance in pixel space
+    float Near;     // distance in pixel space
+    float Far;     // distance in pixel space
     float Intensity;
     bool  IsOn;
 };
@@ -34,13 +34,13 @@ vec4 LightEffect(Light lgt, vec3 N) {
     float atten = 0.0;
     vec3 L = lgt.Position.xyz - gl_FragCoord.xyz;
     float dist = length(L);
-    if (dist <= lgt.Outer) {
-        if (dist <= lgt.Inner)
+    if (dist <= lgt.Far) {
+        if (dist <= lgt.Near)
             atten = 1.0;  //  no attenuation
         else {
             // simple quadratic drop off
-            float n = dist - lgt.Inner;
-            float d = lgt.Outer - lgt.Inner;
+            float n = dist - lgt.Near;
+            float d = lgt.Far - lgt.Near;
             atten = smoothstep(0.0, 1.0, 1.0-(n*n)/(d*d)); // blended attenuation
         }
         L = L / dist;

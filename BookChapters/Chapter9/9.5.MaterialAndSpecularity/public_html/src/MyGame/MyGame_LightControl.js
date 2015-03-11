@@ -32,16 +32,16 @@ MyGame.prototype._LightControl = function() {
     
     // radius
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.C)) {
-        lgt.SetInner(lgt.GetInner() + delta); 
+        lgt.SetNear(lgt.GetNear() + delta); 
     }
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.V)) {
-        lgt.SetInner(lgt.GetInner() - delta); 
+        lgt.SetNear(lgt.GetNear() - delta); 
     }
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.B)) {
-        lgt.SetOuter(lgt.GetOuter() + delta); 
+        lgt.SetFar(lgt.GetFar() + delta); 
     }
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.N)) {
-        lgt.SetOuter(lgt.GetOuter() - delta); 
+        lgt.SetFar(lgt.GetFar() - delta); 
     }
     
     // Intensity
@@ -58,7 +58,7 @@ MyGame.prototype._LightControl = function() {
     }
     msg = "On(" + lgt.LightIsOn() + ") " +
           this._PrintVec3("P", p) +
-          "R(" + lgt.GetInner().toPrecision(3) + "/" + lgt.GetOuter().toPrecision(3) + ") " + 
+          "R(" + lgt.GetNear().toPrecision(3) + "/" + lgt.GetFar().toPrecision(3) + ") " + 
           "I(" + lgt.GetIntensity().toPrecision(3) + ")";
     
     return msg;

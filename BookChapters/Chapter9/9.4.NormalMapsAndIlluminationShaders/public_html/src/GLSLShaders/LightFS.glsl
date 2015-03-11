@@ -16,13 +16,12 @@ uniform float uGlobalAmbientIntensity;
 struct Light  {
     vec4 Position;   // in pixel space!
     vec4 Color;
-    float Inner;     // distance in pixel space
-    float Outer;     // distance in pixel space
+    float Near;     // distance in pixel space
+    float Far;     // distance in pixel space
     float Intensity;
     bool  IsOn;
 };
 uniform Light uLights[4];  // Maximum array of lights this shader supports
-uniform int uNumLights;     // Number of light is switch on at each rendering
 
 // The "varying" keyword is for signifing that the texture coordinate will be
 // interpolated and thus varies. 
@@ -34,13 +33,13 @@ vec4 LightEffect(Light lgt)
     vec4 result = vec4(0);
     float atten = 0.0;
     float dist = length(lgt.Position.xyz - gl_FragCoord.xyz);
-    if (dist <= lgt.Outer) {
-        if (dist <= lgt.Inner)
+    if (dist <= lgt.Far) {
+        if (dist <= lgt.Near)
             atten = 1.0;  //  no attenuation
         else {
             // simple quadratic drop off
-            float n = dist - lgt.Inner;
-            float d = lgt.Outer - lgt.Inner;
+            float n = dist - lgt.Near;
+            float d = lgt.Far - lgt.Near;
             atten = smoothstep(0.0, 1.0, 1.0-(n*n)/(d*d)); // blended attenuation
         }   
     }

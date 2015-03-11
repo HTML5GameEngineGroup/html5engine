@@ -10,7 +10,6 @@ function MyGame()
     this._kMinionSpriteNormal = "resources/minion_sprite_normal.png";
     this._kBg = "resources/bg.png";
     this._kBgNormal = "resources/bg_normal.png";
-    this._kRingNormal = "resources/ring_normal.png";
     
     // The camera to view the rectangles
     this._mCamera = null;
@@ -20,18 +19,19 @@ function MyGame()
     this._mMatMsg = null;
     
     // the hero and the support objects
-    this._mHero = null;
-    this._mRingHero = null;
-    this._mLMinion = null;
-    this._mRMinion = null;
+    this._mLgtHero = null;
+    this._mIllumHero = null;
+    
+    this._mLgtMinion = null;
+    this._mIllumMinion = null;
     
     this._mGlobalLightSet = null;
 
     this._mBlock1 = null;   // to verify swiitching between shaders is fine
     this._mBlock2 = null;
     
-    this._mLgtIndex = 0;    // the light to move
-    this._mSlectedCh = null; // the selected character
+    this._mLgtIndex = 0;
+    this._mLgtRotateTheta = 0;
 };
 gEngine.Core.InheritPrototype(MyGame, Scene);
 
@@ -40,7 +40,6 @@ MyGame.prototype.LoadScene = function()
    gEngine.Textures.LoadTexture(this._kMinionSprite);
    gEngine.Textures.LoadTexture(this._kBg);
    gEngine.Textures.LoadTexture(this._kBgNormal);
-   gEngine.Textures.LoadTexture(this._kRingNormal);
    gEngine.Textures.LoadTexture(this._kMinionSpriteNormal);
 };
 
@@ -49,7 +48,6 @@ MyGame.prototype.UnloadScene = function()
     gEngine.Textures.UnloadTexture(this._kMinionSprite);
     gEngine.Textures.UnloadTexture(this._kBg);
     gEngine.Textures.UnloadTexture(this._kBgNormal);
-    gEngine.Textures.UnloadTexture(this._kRingNormal);
     gEngine.Textures.UnloadTexture(this._kMinionSpriteNormal);
 };
 
@@ -68,9 +66,10 @@ MyGame.prototype.Initialize = function()
     this._InitializeLights();   // defined in MyGame_Lights.js
     
     // the Background
-    var bgR = new IllumRenderable(this._kBg, this._kBgNormal);
+    // var bgR = new IllumRenderable(this._kBg, this._kBgNormal);
+    var bgR = new LightRenderable(this._kBg, this._kBgNormal);
     bgR.SetTexPixelPositions(0, 1900, 0, 1000);
-    bgR.SetNormalMapPixelPositions(0, 1900, 0, 1000);
+    // bgR.SetNormalMapPixelPositions(0, 1900, 0, 1000);
     bgR.GetXform().SetSize(380, 200);
     bgR.GetXform().SetPosition(50, 35);
     for (var i =0; i<4; i++)
@@ -79,28 +78,10 @@ MyGame.prototype.Initialize = function()
      
     // 
     // the objects
-    this._mHero = new Hero(this._kMinionSprite, this._kMinionSpriteNormal);
-    this._mHero.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(0));   // hero light
-    this._mHero.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(3));   // center light
-    // Uncomment the following to see how light affects Dye
-    //      this._mHero.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(1)); 
-    //      this._mHero.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(2)); 
-    
-    // this creates the strang looking Dye with concentric rings, 
-    // to show normalMap texture coordinate does not need to match the color texture
-    this._mRingHero = new Hero(this._kMinionSprite, this._kRingNormal);
-    this._mRingHero.GetXform().SetPosition(50, 35);  // center
-    this._mRingHero.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(3));
-    this._mRingHero.GetRenderable().SetNormalMapTexCoordinate(0, 1, 0, 1);
-        
-    this._mLMinion = new Minion(this._kMinionSprite, this._kMinionSpriteNormal,17, 15);
-    this._mLMinion.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(1));   // LMinion light
-    this._mLMinion.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(3));   // center light
-        
-    
-    this._mRMinion = new Minion(this._kMinionSprite, null, 87, 15);
-    this._mRMinion.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(2));   // RMinion light
-    this._mRMinion.GetRenderable().AddLight(this._mGlobalLightSet.GetLightAt(3));   // center light
+    this._mIllumHero = new Hero(this._kMinionSprite, this._kMinionSpriteNormal, 15, 50, this._mGlobalLightSet);    
+    this._mLgtHero = new Hero(this._kMinionSprite, null, 80 , 50, this._mGlobalLightSet);        
+    this._mIllumMinion = new Minion(this._kMinionSprite, this._kMinionSpriteNormal,17, 15, this._mGlobalLightSet);    
+    this._mLgtMinion = new Minion(this._kMinionSprite, null, 87, 15, this._mGlobalLightSet);
             
     this._mMsg = new FontRenderable("Status Message");
     this._mMsg.SetColor([1, 1, 1, 1]);
@@ -121,10 +102,6 @@ MyGame.prototype.Initialize = function()
     this._mBlock2.SetColor([0, 1, 0, 1]);
     this._mBlock2.GetXform().SetSize(5, 5);
     this._mBlock2.GetXform().SetPosition(70, 50);
-    
-    this._mSlectedCh = this._mRingHero;
-    this._mSelectedChMsg = "R:";
-    this._mMaterialCh = this._mSlectedCh.GetRenderable().GetMaterial().GetDiffuse();  // to support interactive changing
 };
 
 
@@ -135,11 +112,11 @@ MyGame.prototype.DrawCamera = function(camera) {
         // Step C: Now draws each primitive
         this._mBg.Draw(camera);
         this._mBlock1.Draw(camera);
-        this._mLMinion.Draw(camera);    
+        this._mLgtMinion.Draw(camera);
+        this._mIllumHero.Draw(camera);
         this._mBlock2.Draw(camera);        
-        this._mHero.Draw(camera);
-        this._mRMinion.Draw(camera);
-        this._mRingHero.Draw(camera);
+        this._mLgtHero.Draw(camera);
+        this._mIllumMinion.Draw(camera);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -161,19 +138,21 @@ MyGame.prototype.Update = function()
 {    
     this._mCamera.Update();  // to ensure proper interploated movement effects
     
-    this._mLMinion.Update(); // ensure sprite animation
-    this._mRMinion.Update();
+    this._mIllumMinion.Update(); // ensure sprite animation
+    this._mLgtMinion.Update();
     
-    this._mHero.Update();  // allow keyboard control to move
+    this._mIllumHero.Update();  // allow keyboard control to move
            
     // control the selected light
     var msg = "L=" + this._mLgtIndex + " ";
     msg += this._LightControl();
     this._mMsg.SetText(msg);
     
+    /*
     msg = this._SelectCharacter();
     msg += this._MaterialControl();
     this._mMatMsg.SetText(msg);
+    */
 };
 
 MyGame.prototype._SelectCharacter = function() {

@@ -1,7 +1,6 @@
-/* 
- *
+/*
  */
-function Minion(spriteTexture, normalMap, atX, atY) {
+function Minion(spriteTexture, normalMap, atX, atY, lgtSet) {
     this._kDelta = 0.2;
     if (normalMap === null)
         this._mMinion= new LightRenderable(spriteTexture, normalMap);
@@ -20,6 +19,9 @@ function Minion(spriteTexture, normalMap, atX, atY) {
                                 // show each element for _mAnimSpeed updates
                                 
     GameObject.call(this, this._mMinion);
+    
+    for (var i = 0; i<4; i++)
+        this._mMinion.AddLight(lgtSet.GetLightAt(i));
 };
 gEngine.Core.InheritPrototype(Minion, GameObject);
 

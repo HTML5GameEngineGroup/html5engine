@@ -7,8 +7,8 @@
 function Light() { 
     this._mColor = vec4.fromValues(1, 1, 1, 1);  // light color
     this._mPosition = vec4.fromValues(0, 0, 5, 1); // light position in WC
-    this._mInnerCone = 5;  // effective radius in WC
-    this._mOuterCone = 10;
+    this._mInner = 5;  // effective radius in WC
+    this._mOuter = 10;
     this._mIntensity = 1;
     this._mIsOn = true;
 };
@@ -24,11 +24,11 @@ Light.prototype.SetYPos = function(y) { this._mPosition[1] = y; };
 Light.prototype.SetZPos = function(z) { this._mPosition[2] = z; };
 Light.prototype.GetPosition = function() { return this._mPosition; };
 
-Light.prototype.SetInnerCone = function(r) { this._mInnerCone = r; };
-Light.prototype.GetInnerCone = function() { return this._mInnerCone; };
+Light.prototype.SetInner = function(r) { this._mInner = r; };
+Light.prototype.GetInner = function() { return this._mInner; };
 
-Light.prototype.SetOuterCone = function(r) { this._mOuterCone = r; };
-Light.prototype.GetOuterCone = function() { return this._mOuterCone; };
+Light.prototype.SetOuter = function(r) { this._mOuter = r; };
+Light.prototype.GetOuter = function() { return this._mOuter; };
 
 Light.prototype.SetIntensity = function(i) { this._mIntensity = i; };
 Light.prototype.GetIntensity = function() { return this._mIntensity; };

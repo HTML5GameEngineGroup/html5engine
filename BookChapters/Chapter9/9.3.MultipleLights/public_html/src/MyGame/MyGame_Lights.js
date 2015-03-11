@@ -9,8 +9,8 @@ MyGame.prototype._CreateALight = function(index, pos, color, inner, outer, inten
     light.SetXPos(pos[0]);
     light.SetYPos(pos[1]);
     light.SetZPos(pos[2]);
-    light.SetInnerCone(inner);
-    light.SetOuterCone(outer);
+    light.SetInner(inner);
+    light.SetOuter(outer);
     light.SetIntensity(intensity);
     
     return light;

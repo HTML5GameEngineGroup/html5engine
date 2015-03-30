@@ -7,7 +7,7 @@ precision mediump float;
 // Must be set outside the shader.
 uniform sampler2D uSampler;
 
-// to transform the vertex position
+// Color of the object
 uniform vec4 uPixelColor;  
 
 // The "varying" keyword is for signifing that the texture coordinate will be
@@ -15,7 +15,7 @@ uniform vec4 uPixelColor;
 varying vec2 vTexCoord;
 
 void main(void)  {
-    // simple tint based on uPixelColor setting
+    // texel color look up based on interpolated UV value in vTexCoord
     vec4 c = texture2D(uSampler, vec2(vTexCoord.s, vTexCoord.t));
     // 
     

@@ -97,7 +97,7 @@ MyGame.prototype.Initialize = function()
     this._mMinion.SetAnimationSpeed(15);
                                 // show each element for _mAnimSpeed updates
     
-    // Setp D: Create the hero object with texture from lower-left corner of 
+    // Step D: Create the hero object with texture from lower-left corner of 
     this._mHero = new SpriteRenderable(this._kMinionSprite);
     this._mHero.SetColor([1, 1, 1, 0]);
     this._mHero.GetXform().SetPosition(35, 50);
@@ -106,7 +106,6 @@ MyGame.prototype.Initialize = function()
 
     
     //<editor-fold desc="Create the fonts!">
-    // this._mText = new FontRenderable("This is green text");
     this._mTextSysFont = new FontRenderable("System Font: in Red");
     this._InitText(this._mTextSysFont, 50, 60, [1, 0, 0, 1], 3);
     

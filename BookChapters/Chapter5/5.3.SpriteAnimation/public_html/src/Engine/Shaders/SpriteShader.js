@@ -11,7 +11,7 @@
 // constructor 
 function SpriteShader(vertexShaderPath, fragmentShaderPath)
 {
-    // Call sper class constructor
+    // Call super class constructor
     TextureShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
     
     this._mTexCoordBuffer = null; // this is the reference to gl buffer that contains the actual texture coordinate
@@ -54,8 +54,7 @@ SpriteShader.prototype.ActivateShader = function(pixelColor, vpMatrix) {
     gl.enableVertexAttribArray(this._mShaderTextureCoordAttribute);
 };
 
-SpriteShader.prototype.SetTextureCoordinate = function(texCoord)
-{
+SpriteShader.prototype.SetTextureCoordinate = function(texCoord) {
     var gl = gEngine.Core.GetGL();
     gl.bindBuffer(gl.ARRAY_BUFFER, this._mTexCoordBuffer);
     gl.bufferSubData(gl.ARRAY_BUFFER, 0, new Float32Array(texCoord));

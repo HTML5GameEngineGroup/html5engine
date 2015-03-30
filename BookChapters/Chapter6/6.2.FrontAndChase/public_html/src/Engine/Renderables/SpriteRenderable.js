@@ -21,7 +21,7 @@ gEngine.Core.InheritPrototype(SpriteRenderable, TextureRenderable);
 //<editor-fold desc="Public Methods">
 //
 //// the expected texture cooridnate array is an array of 8 floats where elements:
-    //  [0] [1]: is x/y cooridnate of Top-Right 
+    //  [0] [1]: is x/y coordinate of Top-Right 
     //  [2] [3]: is x/y coordinate of Top-Left
     //  [4] [5]: is x/y coordinate of Bottom-Right
     //  [6] [7]: is x/y coordinate of Bottom-Left
@@ -36,13 +36,6 @@ SpriteRenderable.eTexCoordArray = Object.freeze({
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
-SpriteRenderable.prototype.Draw = function(pixelColor, aCamera) {
-    // set the current texture coordinate
-    // 
-    // activate the texture
-    this._mShader.SetTextureCoordinate(this.GetTexCoordinateArray());
-    TextureRenderable.prototype.Draw.call(this, pixelColor, aCamera);
-};
 
 // specify subtexture region by texture coordinate (between 0 to 1)
 SpriteRenderable.prototype.SetTexCoordinate = function(left, right, bottom, top)
@@ -74,6 +67,14 @@ SpriteRenderable.prototype.GetTexCoordinateArray = function() {
       this._mTexRight,  this._mTexBottom,
       this._mTexLeft,   this._mTexBottom
     ];
+};
+
+SpriteRenderable.prototype.Draw = function(pixelColor, aCamera) {
+    // set the current texture coordinate
+    // 
+    // activate the texture
+    this._mShader.SetTextureCoordinate(this.GetTexCoordinateArray());
+    TextureRenderable.prototype.Draw.call(this, pixelColor, aCamera);
 };
 //--- end of Public Methods
 //

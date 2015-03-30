@@ -10,15 +10,15 @@
 // constructor
 function TextureShader(vertexShaderPath, fragmentShaderPath)
 {
-    // Call sper class constructor
+    // Call super class constructor
     SimpleShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
     
-    // our own instance variable
-    this._mShaderTextureCoordAttribute = null;   // reference to aTextureCoordinate within the shader 
+    // reference to aTextureCoordinate within the shader
+    this._mShaderTextureCoordAttribute = null; 
     this._mSamplerRef = null; // reference to the uSampler, when using only texture, 
                               // this is not necessary, with NormalMap, we must do this.
                               
-    // initialization of our own 
+    // get the reference of uSampler and aTextureCoordinate within the shader
     var gl = gEngine.Core.GetGL();
     this._mSamplerRef = gl.getUniformLocation(this._mCompiledShader, "uSampler");
     this._mShaderTextureCoordAttribute = gl.getAttribLocation(this._mCompiledShader, "aTextureCoordinate");
@@ -35,7 +35,7 @@ gEngine.Core.InheritPrototype(TextureShader, SimpleShader);
 
 // Overriding the Activation of the shader for rendering
 TextureShader.prototype.ActivateShader = function(pixelColor, aCamera) {
-    // fist call the super class's activate
+    // first call the super class's activate
     SimpleShader.prototype.ActivateShader.call(this, pixelColor, aCamera);
     
     // now our own functionality: enable texture coordinate array

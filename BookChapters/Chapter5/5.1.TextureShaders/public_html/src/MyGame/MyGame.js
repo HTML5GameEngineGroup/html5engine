@@ -62,7 +62,7 @@ MyGame.prototype.Initialize = function()
     this._mCollector.GetXform().SetPosition(15, 60);
     this._mCollector.GetXform().SetSize(3, 3);
     
-    // Setp C: Create the hero object in blue
+    // Step C: Create the hero object in blue
     this._mHero = new Renderable();
     this._mHero.SetColor([0, 0, 1, 1]);
     this._mHero.GetXform().SetPosition(20, 60);

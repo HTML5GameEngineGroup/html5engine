@@ -67,7 +67,7 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath)
 
 
 // Access to the compiled shader
-SimpleShader.prototype.GetShader = function() { return _mCompiledShader; };
+SimpleShader.prototype.GetShader = function() { return this._mCompiledShader; };
 
 // Activate the shader for rendering
 SimpleShader.prototype.ActivateShader = function(pixelColor, vpMatrix) {

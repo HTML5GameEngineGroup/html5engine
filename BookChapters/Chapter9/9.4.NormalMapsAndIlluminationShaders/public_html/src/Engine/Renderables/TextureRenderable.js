@@ -13,7 +13,7 @@ function TextureRenderable(myTexture)
     Renderable.prototype.SetColor.call(this, [1, 1, 1, 0]);  
     Renderable.prototype._SetShader.call(this, gEngine.DefaultResources.GetTextureShader());
             // Alpha of 0: switch of tinting of texture
-    this._mTexture = myTexture;          // texture for this object, null is not defined.
+    this._mTexture = myTexture;          // texture for this object, cannot be a "null"
     
     // these two instance variables are to cache texture informaiton
     // for supporting per-pixel accurate collision

@@ -13,7 +13,7 @@
               />
               
  
-<!-- The blue rectangle --> 
+<!-- The red rectangle --> 
  <Square PosX="20" PosY="60" Width="2" Height="3" Rotation="0"  Color="1 0 0 1" />
  
  <!-- Textures Square -->

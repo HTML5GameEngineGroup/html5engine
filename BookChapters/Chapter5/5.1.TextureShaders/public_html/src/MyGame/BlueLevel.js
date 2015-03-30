@@ -9,8 +9,8 @@ function BlueLevel()
     // scene file name
     this._kSceneFile = "resources/BlueLevel.xml";
     
-     // textures: 
-    this._kPortal = "resources/minion_portal.jpg";      // jpg does not support transparency
+     // textures: (Note: jpg does not support transparency)
+    this._kPortal = "resources/minion_portal.jpg";      
     this._kCollector = "resources/minion_collector.jpg";      
     
     // all square
@@ -78,7 +78,7 @@ BlueLevel.prototype.Update = function()
     var xform = this._mSqSet[0].GetXform();
     var deltaX = 0.05;
     
-    /// Move right and swap ovre
+    /// Move right and swap over
     if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
         xform.IncXPosBy(deltaX);
         if (xform.GetXPos() > 30)  // this is the right-bound of the window

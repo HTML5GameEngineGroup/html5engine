@@ -45,7 +45,7 @@ gEngine.Core = function()
             _mGL.blendFunc(_mGL.SRC_ALPHA, _mGL.ONE_MINUS_SRC_ALPHA);
             _mGL.enable ( _mGL.BLEND ) ;
         
-            // Set images to have a fliped y axis to match the texture coordinate space.
+            // Set images to flip y axis to match the texture coordinate space.
             _mGL.pixelStorei(_mGL.UNPACK_FLIP_Y_WEBGL, true);
 
             if (_mGL === null) {

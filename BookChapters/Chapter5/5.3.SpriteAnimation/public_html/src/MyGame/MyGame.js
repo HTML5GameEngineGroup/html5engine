@@ -8,7 +8,7 @@ function MyGame()
 {               
     // textures: 
     this._kFontImage = "resources/Consolas-72.png";
-    this._kMinionSprite = "resources/minion_sprite.png";  // Portal and Collector are embbeded here
+    this._kMinionSprite = "resources/minion_sprite.png";  // Portal and Collector are embedded here
     
     // The camera to view the rectangles
     this._mCamera = null;
@@ -94,16 +94,12 @@ MyGame.prototype.Initialize = function()
                                 // show each element for _mAnimSpeed updates
 
     
-    // Setp D: Create the hero object with texture from lower-left corner of 
+    // Step D: Create the hero object with texture from lower-left corner of 
     this._mHero = new SpriteRenderable(this._kMinionSprite);
     this._mHero.SetColor([1, 1, 1, 0]);
     this._mHero.GetXform().SetPosition(20, 60);
     this._mHero.GetXform().SetSize(2, 3);
     this._mHero.SetTexPixelPositions(0, 120, 0, 180);
-    
-    // now start the bg music ...
-    gEngine.AudioClips.PlayBackgroundAudio(this._kBgClip);
-    
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -208,7 +204,7 @@ MyGame.prototype.Update = function()
         this._mLeftMinion.IncAnimationSpeed(-2);
     }
     
-    // increase the duration of showing each sprite element, thereby slowing downthe animation
+    // increase the duration of showing each sprite element, thereby slowing  the animation
     if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Five)) {
         this._mRightMinion.IncAnimationSpeed(2);
         this._mLeftMinion.IncAnimationSpeed(2);

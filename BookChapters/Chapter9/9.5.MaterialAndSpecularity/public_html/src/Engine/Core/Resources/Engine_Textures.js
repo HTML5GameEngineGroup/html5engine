@@ -19,8 +19,8 @@ function TextureInfo(name, w, h, id)
 gEngine.Textures = function()
 {        
     /*
-     * This converts an image in the mTextureMap from the HTML/Javascript format to the
-     * webmGL texture format. This should only be called once the texture is loaded.
+     * This converts an image to the webGL texture format. 
+     * This should only be called once the texture is loaded.
      */
     var _ProcessLoadedImage = function(textureName, image)
     {
@@ -36,13 +36,13 @@ gEngine.Textures = function()
         // Parameters:
         //  1: Which "binding point" or target the texture is being loaded to.
         //  2: Level of detail. Used for mipmapping. 0 is base texture level.
-        //  3: Internal format. The composition of each element. Pixels in this case.
+        //  3: Internal format. The composition of each element. i.e. pixels.
         //  4: Format of texel data. Must match internal format.
         //  5: The data type of the texel data.
         //  6: Texture Data.
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
 
-        // Creates a mipmap of the data at the mGL.TEXTURE_2D target / binding point.
+        // Creates a mipmap for this texture.
         gl.generateMipmap(gl.TEXTURE_2D);
         
         // Tells WebGL that we are done manipulating data at the mGL.TEXTURE_2D target.

@@ -15,7 +15,7 @@ uniform vec4 uPixelColor;
 varying vec2 vTexCoord;
 
 void main(void)  {
-    // simple tint based on uPixelColor setting
+    // texel color look up based on interpolated UV value in vTexCoord
     vec4 c = texture2D(uSampler, vec2(vTexCoord.s, vTexCoord.t));
     // 
     

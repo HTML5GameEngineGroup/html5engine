@@ -10,13 +10,13 @@
 // constructor
 function TextureShader(vertexShaderPath, fragmentShaderPath)
 {
-    // Call sper class constructor
+    // Call super class constructor
     SimpleShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
     
-    // our own instance variable
-    this._mShaderTextureCoordAttribute = null;   // reference to aTextureCoordinate within the shader 
+    // reference to aTextureCoordinate within the shader
+    this._mShaderTextureCoordAttribute = null;    
     
-    // initialization of our own 
+    // get the reference of aTextureCoordinate within the shader
     var gl = gEngine.Core.GetGL();
     this._mShaderTextureCoordAttribute = gl.getAttribLocation(this._mCompiledShader, "aTextureCoordinate");
 };
@@ -31,7 +31,7 @@ gEngine.Core.InheritPrototype(TextureShader, SimpleShader);
 
 // Overriding the Activation of the shader for rendering
 TextureShader.prototype.ActivateShader = function(pixelColor, vpMatrix) {
-    // fist call the super class's activate
+    // first call the super class's activate
     SimpleShader.prototype.ActivateShader.call(this, pixelColor, vpMatrix);
     
     // now our own functionality: enable texture coordinate array

@@ -4,7 +4,7 @@
 </head>
 <!--Use embedded shader code for now, in order to remove async loading complexity.-->
 
-<body onload="DoGLDraw()">
+<body onload="doGLDraw()">
     
     <!-- everything in-between the <script> tag is javascript -->
     <script type="x-shader/x-vertex" id="VertexShader">
@@ -12,8 +12,7 @@
         attribute vec3 aSquareVertexPosition;  // Vertex shader expects one vertex position
                         // naming convention, attributes always begin with "a"
                         
-        void main(void)
-        {
+        void main(void) {
             // Convert the vec3 into vec4 for scan conversion and
             // assign to gl_Position to pass the vertex to the fragment shader
             gl_Position = vec4(aSquareVertexPosition, 1.0); 
@@ -23,8 +22,7 @@
     
     <script type="x-shader/x-fragment" id="FragmentShader">
         // this is the fragment (or pixel) shader
-        void main(void)
-        {
+        void main(void) {
             // for every pixel called (within the square) sets
             // constant color white with alpha-channel value of 1.0
             gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);

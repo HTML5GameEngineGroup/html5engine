@@ -7,7 +7,7 @@ precision mediump float;
 // to transform the vertex position
 uniform vec4 uPixelColor;  
 
-void main(void)  {
+void main(void) {
     // for every pixel called (within the square) sets
     // constant color red with alpha-channel value of 1.0
     gl_FragColor = uPixelColor;

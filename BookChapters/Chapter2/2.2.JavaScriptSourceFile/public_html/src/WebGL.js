@@ -3,23 +3,31 @@
  * Javascript source code for our project.
  */
 
+/* The following two lines of comment are directions for jsLint 
+ *      jslint: defines jsLint checking options, 
+ *              e.g., "node: true" says "use strict" will be applied to the entire file.
+ *      global: tells jsLint which are the defined global variables
+ *              e.g., "document: false" says "document" is a defined global variable
+ */
+/*jslint node: true, evil: true */
+/*global document: false */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 var gGL = null;
-    // The GL context upon which we will access web-GL functioanlity
+    // The GL context upon which we will access web-GL functionality
     // Convention: global variable names: gName
 
-// Initlaize the webGL by binding the functionality to the gGL variable
-function InitializeGL()
-{
+// Initialize the webGL by binding the functionality to the gGL variable
+function initializeGL() {
     // the "GLCanvas" defined in the index.html file
     var canvas = document.getElementById("GLCanvas");
-        
+
     // Get standard webgl, or experimental
     // binds webgl the the Canvas area on the web-page to the global variable "gGL"
     gGL = canvas.getContext("webgl") ||
         canvas.getContext("experimental-webgl");
-    
+
     if (gGL !== null) {
         gGL.clearColor(0.9, 0.9, 0.9, 1.0);  // set the color to be cleared    
     } else {
@@ -28,14 +36,12 @@ function InitializeGL()
 }
 
 // Clears the gGL area to the defined color
-function ClearCanvas()
-{
+function clearCanvas() {
     gGL.clear(gGL.COLOR_BUFFER_BIT);      // clear to the color previously set
 }
 
 // this is the function that will cause the WebGL drawing
-function DoGLDraw()
-{
-    InitializeGL();     // Binds gGL context to WebGL functionality
-    ClearCanvas();    // Clears the GL area
+function doGLDraw() {
+    initializeGL();   // Binds gGL context to WebGL functionality
+    clearCanvas();    // Clears the GL area
 }

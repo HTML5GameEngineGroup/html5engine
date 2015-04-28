@@ -1,5 +1,5 @@
 /* 
- * File: ShadderSupport.js
+ * File: ShaderSupport.js
  * Support the loading, compiling, and linking of shader code
  * 
  * Notice:  although in a different file, we have access to 
@@ -7,23 +7,27 @@
  *          
  *          In the same way, the global variable gSimpleShader defined in this
  *          file will be accessible to any other javascript source code in 
- *          our projetc.
+ *          our project.
  * 
  */
+/*jslint node: true, evil: true */
+/*global gGL: false, alert: false, loadAndCompileShader: false,
+    gSquareVertexBuffer: false, document: false
+  */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 var gSimpleShader = null;
     // Reference to the shader program stored in gGL context.
-    
+
 var gShaderVertexPositionAttribute = null;
     // gGL reference to the attribute to be used by the VertexShader
 
 // Loads/compiles/links shader programs to gGL context
-function InitSimpleShader(vertexShaderID, fragmentShaderID)
-{
+function initSimpleShader(vertexShaderID, fragmentShaderID) {
     // Step A: load and compile vertex and fragment shaders
-    var vertexShader = LoadAndCompileShader(vertexShaderID, gGL.VERTEX_SHADER);
-    var fragmentShader = LoadAndCompileShader(fragmentShaderID, gGL.FRAGMENT_SHADER);
+    var vertexShader = loadAndCompileShader(vertexShaderID, gGL.VERTEX_SHADER);
+    var fragmentShader = loadAndCompileShader(fragmentShaderID, gGL.FRAGMENT_SHADER);
 
     // Step B: Create and link the shaders into a program.
     gSimpleShader = gGL.createProgram();
@@ -32,19 +36,19 @@ function InitSimpleShader(vertexShaderID, fragmentShaderID)
     gGL.linkProgram(gSimpleShader);
 
     // Step C: check for error
-    if (!gGL.getProgramParameter(gSimpleShader, gGL.LINK_STATUS))  {
+    if (!gGL.getProgramParameter(gSimpleShader, gGL.LINK_STATUS)) {
         alert("Error linking shader");
     }
-    
+
     // Step D: Gets a reference to the SquareVertexPosition variable within the shaders.
     gShaderVertexPositionAttribute = gGL.getAttribLocation(gSimpleShader, "aSquareVertexPosition");
         // SquareVertexPosition: is defined in the VertexShader (in the index.html file)
-   
+
     // Step E: Activates the vertex buffer loaded in VertexBuffer.js
     gGL.bindBuffer(gGL.ARRAY_BUFFER, gSquareVertexBuffer);
         // gSquareVertexBuffer: is defined in VertexBuffer.js and 
         //      initialized by the InitSquareBuffer() function.
-        
+
     // Step F: Describe the characteristic of the vertex position attribute
     gGL.vertexAttribPointer(gShaderVertexPositionAttribute, // variable initialized above
         3,          // each vertex element is a 3-float (x,y,z)
@@ -56,8 +60,7 @@ function InitSimpleShader(vertexShaderID, fragmentShaderID)
 
 // Returns a complied shader from a shader in the dom.
 // The id is the id of the script in the html tag.
-function LoadAndCompileShader(id, shaderType)
-{
+function loadAndCompileShader(id, shaderType) {
     var shaderText, shaderSource, compiledShader;
 
     // Step A: Get the shader source from index.html
@@ -73,7 +76,7 @@ function LoadAndCompileShader(id, shaderType)
 
     // Step D: check for errors and return results (null if error)
     if (!gGL.getShaderParameter(compiledShader, gGL.COMPILE_STATUS)) {
-        alert("A shader compliling error occurred: " + gGL.getShaderInfoLog(compiledShader));
+        alert("A shader compiling error occurred: " + gGL.getShaderInfoLog(compiledShader));
     }
 
     return compiledShader;

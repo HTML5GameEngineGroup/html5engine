@@ -1,4 +1,4 @@
-// For NetBeans Syntax Higlight: http://plugins.netbeans.org/plugin/46515/glsl-syntax-highlighter 
+// For NetBeans Syntax Highlight: http://plugins.netbeans.org/plugin/46515/glsl-syntax-highlighter 
 //
 // This is the vertex shader 
 attribute vec3 aSquareVertexPosition;  // Vertex shader expects one vertex position

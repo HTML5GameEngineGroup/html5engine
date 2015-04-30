@@ -9,8 +9,9 @@
  *      global: tells jsLint which are the defined global variables
  *              e.g., "document: false" says "document" is a defined global variable
  */
-/*jslint node: true, evil: true */
+/*jslint node: true, vars: true, evil: true */
 /*global document: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 

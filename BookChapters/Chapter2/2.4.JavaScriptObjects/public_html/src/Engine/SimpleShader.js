@@ -4,8 +4,9 @@
  * Implements a SimpleShader object.
  * 
  */
-/*jslint node: true */
+/*jslint node: true, vars: true */
 /*global gEngine: false, document: false, alert: false */
+ /* find out more about jslint: http://www.jslint.com/lint.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
@@ -77,7 +78,7 @@ SimpleShader.prototype.activateShader = function () {
 // 
 // Returns a compiled shader from a shader in the dom.
 // The id is the id of the script in the html tag.
-SimpleShader.prototype._loadAndCompileShader = function(id, shaderType) {
+SimpleShader.prototype._loadAndCompileShader = function (id, shaderType) {
     var shaderText, shaderSource, compiledShader;
     var gl = gEngine.Core.getGL();
 

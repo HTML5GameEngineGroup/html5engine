@@ -2,104 +2,103 @@
  * File: MyGame.js 
  * This is the the logic of our game. 
  */
+/*jslint node: true, vars: true */
+/*global gEngine: false, SimpleShader: false, Renderable: false, Camera: false, mat4: false, vec3: false, vec2: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function MyGame(htmlCanvasID)
-{
+function MyGame(htmlCanvasID) {
     // variables of the constant color shader
-    this._mConstColorShader = null;
-        
-    // variables for the squares
-    this._mWhiteSq = null;        // these are the renderable objects
-    this._mRedSq = null;    
-    
-    // The camera to view the rectangles
-    this._mCamera = null;
-    
-    // Initialize the webGL Context
-    gEngine.Core.InitializeEngineCore(htmlCanvasID);
-    
-    // Initialize the game
-    this.Initialize();
-};
+    this.mConstColorShader = null;
 
-MyGame.prototype.Initialize = function() 
-{
+    // variables for the squares
+    this.mWhiteSq = null;        // these are the renderable objects
+    this.mRedSq = null;
+
+    // The camera to view the rectangles
+    this.mCamera = null;
+
+    // Initialize the webGL Context
+    gEngine.Core.initializeEngineCore(htmlCanvasID);
+
+    // Initialize the game
+    this.initialize();
+}
+
+MyGame.prototype.initialize = function () {
     // Step A: set up the cameras
-    this._mCamera = new Camera(
-            vec2.fromValues(20, 60),   // position of the camera
-            20,                        // width of camera
-            [20, 40, 600, 300]         // viewport (orgX, orgY, width, height)
-            );
-    this._mCamera.SetBackgroundColor([0.8, 0.8, 0.8, 1]);
-            // sets the background to gray
-    
+    this.mCamera = new Camera(
+        vec2.fromValues(20, 60),   // position of the camera
+        20,                        // width of camera
+        [20, 40, 600, 300]         // viewport (orgX, orgY, width, height)
+        );
+    this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
+        // sets the background to gray
+
     // Step  B: create the shader
-    this._mConstColorShader = new SimpleShader( 
-            "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
-            "src/GLSLShaders/SimpleFS.glsl");    // Path to the Simple FragmentShader    
-    
+    this.mConstColorShader = new SimpleShader(
+        "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
+        "src/GLSLShaders/SimpleFS.glsl");    // Path to the Simple FragmentShader    
+
     // Step  C: Create the renderable objects:
-    this._mWhiteSq = new Renderable(this._mConstColorShader);
-    this._mWhiteSq.SetColor([1, 1, 1, 1]);
-    this._mRedSq = new Renderable(this._mConstColorShader);
-    this._mRedSq.SetColor([1, 0, 0, 1]);
-    
+    this.mWhiteSq = new Renderable(this.mConstColorShader);
+    this.mWhiteSq.setColor([1, 1, 1, 1]);
+    this.mRedSq = new Renderable(this.mConstColorShader);
+    this.mRedSq.setColor([1, 0, 0, 1]);
+
     // Step  D: Initialize the white renderable object: centred, 5x5, rotated
-    this._mWhiteSq.GetXform().SetPosition(20, 60);
-    this._mWhiteSq.GetXform().SetRotationInRad(0.2); // In Degree
-    this._mWhiteSq.GetXform().SetSize(5, 5);
-    
+    this.mWhiteSq.getXform().setPosition(20, 60);
+    this.mWhiteSq.getXform().setRotationInRad(0.2); // In Degree
+    this.mWhiteSq.getXform().setSize(5, 5);
+
     // Step  E: Initialize the red renderable object: centered 2x2
-    this._mRedSq.GetXform().SetPosition(20, 60);
-    this._mRedSq.GetXform().SetSize(2, 2);
-    
+    this.mRedSq.getXform().setPosition(20, 60);
+    this.mRedSq.getXform().setSize(2, 2);
+
     // Step F: Start the game loop running
-    gEngine.GameLoop.Start(this);
+    gEngine.GameLoop.start(this);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
 // importantly, make sure to _NOT_ change any state.
-MyGame.prototype.Draw = function() 
-{   
+MyGame.prototype.draw = function () {
     // Step A: clear the canvas
-    gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
-    
+    gEngine.Core.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
+
     // Step  B: Activate the drawing Camera
-    this._mCamera.SetupViewProjection();
-    
-        // Step  C: Activate the white shader to draw
-        this._mWhiteSq.Draw(this._mCamera.GetVPMatrix());
-        
-        // Step  D: Activate the red shader to draw
-        this._mRedSq.Draw(this._mCamera.GetVPMatrix());
+    this.mCamera.setupViewProjection();
+
+    // Step  C: Activate the white shader to draw
+    this.mWhiteSq.draw(this.mCamera.getVPMatrix());
+
+    // Step  D: Activate the red shader to draw
+    this.mRedSq.draw(this.mCamera.getVPMatrix());
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
-MyGame.prototype.Update = function()
-{
+MyGame.prototype.update = function () {
     // For this very simple game, let's move the white square and pulse the red
-    
-    var whiteXform = this._mWhiteSq.GetXform();
+    var whiteXform = this.mWhiteSq.getXform();
     var deltaX = 0.05;
-    
+
     // Step A: test for white square movement
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
-        if (whiteXform.GetXPos() > 30)  // this is the right-bound of the window
-            whiteXform.SetPosition(10, 60);
-        whiteXform.IncXPosBy(deltaX);
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Right)) {
+        if (whiteXform.getXPos() > 30) // this is the right-bound of the window
+            whiteXform.setPosition(10, 60);
+        whiteXform.incXPosBy(deltaX);
     }
-    
+
     // Step  B: test for white square rotation
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Up))
-        whiteXform.IncRotationByDegree(1);
-    
-    var redXform = this._mRedSq.GetXform();
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Up))
+        whiteXform.incRotationByDegree(1);
+
+    var redXform = this.mRedSq.getXform();
     // Step  C: test for pulsing the red square
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Down)) {
-        if (redXform.GetWidth() > 5)
-            redXform.SetSize(2, 2);
-        redXform.IncSizeBy(0.05);
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Down)) {
+        if (redXform.getWidth() > 5)
+            redXform.setSize(2, 2);
+        redXform.incSizeBy(0.05);
     }
 };

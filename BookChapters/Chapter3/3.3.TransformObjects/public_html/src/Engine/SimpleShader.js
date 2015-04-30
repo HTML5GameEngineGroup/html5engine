@@ -5,8 +5,9 @@
  * 
  */
 
-/*jslint node: true */
+/*jslint node: true, vars: true */
 /*global gEngine: false, alert: false, XMLHttpRequest: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 

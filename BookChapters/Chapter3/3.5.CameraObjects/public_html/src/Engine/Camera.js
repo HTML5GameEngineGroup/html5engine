@@ -3,8 +3,10 @@
  * Encapsulates the user define WC and Viewport functionality
  */
 
-/*jslint node: true */
+/*jslint node: true, vars: true */
 /*global gEngine: false, SimpleShader: false, Renderable: false, mat4: false, vec3: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";
 
 // wcCenter: is a vec2

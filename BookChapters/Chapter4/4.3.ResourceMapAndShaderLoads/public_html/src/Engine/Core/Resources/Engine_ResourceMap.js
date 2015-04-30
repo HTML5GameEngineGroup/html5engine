@@ -1,98 +1,95 @@
 /*
  * File: Engine_ResourceMap.js 
  */
+/*jslint node: true, vars: true, evil: true */
+/*global gEngine: false, alert: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 var gEngine = gEngine || { };
 
-gEngine.ResourceMap = function()
-{   
-    var _MapEntry = function(rName) {
+gEngine.ResourceMap = (function () {
+    var MapEntry = function (rName) {
         this.mAsset = rName;
     };
-    
-    //<editor-fold desc="Asynchronous resource loading support">
+
     // Number of outstanding load operations
-    var _mNumOutstandingLoads = 0;
-    
+    var mNumOutstandingLoads = 0;
+
     // Callback function when all textures are loaded
-    var _mLoadCompleteCallback = null;
-    
+    var mLoadCompleteCallback = null;
+
     // Resource storage and reference count
-    var _mResourceMap = {};
-    
-    /*
-     * Register one more resource to load
-     */
-    var AsyncLoadRequested = function(rName)
-    {
-        _mResourceMap[rName] = new _MapEntry(rName); // place holder
-        ++_mNumOutstandingLoads;
+    var mResourceMap = {};
+
+   /*
+    * Register one more resource to load
+    */
+    var asyncLoadRequested = function (rName) {
+        mResourceMap[rName] = new MapEntry(rName); // place holder
+        ++mNumOutstandingLoads;
         return true;
     };
-    
-    var AsyncLoadCompleted = function(rName, loadedAsset)
-    {
-        if (!IsAssetLoaded(rName))
-            alert("gEngine.AsyncLoadCompleted: [" + rName + "not in map!");
-        
-        _mResourceMap[rName].mAsset = loadedAsset;
-        --_mNumOutstandingLoads;
-        _CheckForAllLoadCompleted();
+
+    var asyncLoadCompleted = function (rName, loadedAsset) {
+        if (!isAssetLoaded(rName)) {
+            alert("gEngine.asyncLoadCompleted: [" + rName + "not in map!");
+        }
+        mResourceMap[rName].mAsset = loadedAsset;
+        --mNumOutstandingLoads;
+        _checkForAllLoadCompleted();
     };
-    
-    var _CheckForAllLoadCompleted = function() {
-        if ((_mNumOutstandingLoads === 0) && (_mLoadCompleteCallback !== null) ) {
+
+    var _checkForAllLoadCompleted = function () {
+        if ((mNumOutstandingLoads === 0) && (mLoadCompleteCallback !== null)) {
             // ensures the load complete call back will only be called once!
-            var funToCall = _mLoadCompleteCallback;
-            _mLoadCompleteCallback = null;
+            var funToCall = mLoadCompleteCallback;
+            mLoadCompleteCallback = null;
             funToCall();
         }
     };
-    
+
     // Make sure to set the callback _AFTER_ all load commands are issued
-    var SetLoadCompleteCallback = function (funct)
-    {
-        _mLoadCompleteCallback = funct;
+    var setLoadCompleteCallback = function (funct) {
+        mLoadCompleteCallback = funct;
         // in case all loading are done
-        _CheckForAllLoadCompleted();
+        _checkForAllLoadCompleted();
     };
-    //</editor-fold>
-    
-    var RetrieveAsset = function(rName) {
+
+    //<editor-fold desc="Asset checking functions">
+    var retrieveAsset = function (rName) {
         var r = null;
-        if (rName in _mResourceMap)
-            r = _mResourceMap[rName].mAsset;
+        if (rName in mResourceMap) {
+            r = mResourceMap[rName].mAsset;
+        }
         return r;
     };
-    
-    var IsAssetLoaded = function(rName) {
-        return (RetrieveAsset(rName) !== null);
+
+    var isAssetLoaded = function (rName) {
+        return (retrieveAsset(rName) !== null);
     };
-        
-    var UnloadAsset = function(rName) {
-        if (rName in _mResourceMap) {
-            delete _mResourceMap[rName];
+
+    var unloadAsset = function (rName) {
+        if (rName in mResourceMap) {
+            delete mResourceMap[rName];
         }
     };
     //</editor-fold>
-    
-    
+
     // Public interface for this object. Anything not in here will
     // not be accessable.
-    var oPublic =
-    {
+    var mPublic = {
         //<editor-fold desc="asynchronous resource loading support">
-        AsyncLoadRequested: AsyncLoadRequested,
-        AsyncLoadCompleted: AsyncLoadCompleted,
-        SetLoadCompleteCallback: SetLoadCompleteCallback,
+        asyncLoadRequested: asyncLoadRequested,
+        asyncLoadCompleted: asyncLoadCompleted,
+        setLoadCompleteCallback: setLoadCompleteCallback,
         //</editor-fold>
         //<editor-fold desc="resource storage and reference count support">
-        RetrieveAsset: RetrieveAsset,
-        UnloadAsset: UnloadAsset,
-        IsAssetLoaded: IsAssetLoaded
+        retrieveAsset: retrieveAsset,
+        unloadAsset: unloadAsset,
+        isAssetLoaded: isAssetLoaded
         //</editor-fold>
     };
-    return oPublic;
-}();
+    return mPublic;
+}());

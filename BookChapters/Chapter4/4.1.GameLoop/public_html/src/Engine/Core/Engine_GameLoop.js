@@ -2,77 +2,76 @@
  * File: EngineCore_Loop.js 
  * Implements the game loop functionality of gEngine
  */
+/*jslint node: true, vars: true */
+/*global gEngine: false, requestAnimationFrame: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 var gEngine = gEngine || { };
 
-gEngine.GameLoop = function()
-{
+gEngine.GameLoop = (function () {
     var kFPS = 60;          // Frames per second
     var kMPF = 1000 / kFPS; // Milleseconds per frame.
-            
+
     // Variables for timing gameloop.
-    var _mPreviousTime;
-    var _mLagTime;
-    var _mCurrentTime;
-    var _mElapsedTime;
-    
+    var mPreviousTime;
+    var mLagTime;
+    var mCurrentTime;
+    var mElapsedTime;
+
     // The current loop state (running or should stop)
-    var _mIsLoopRunning = false;
-    
-    var _mMyGame = null;
+    var mIsLoopRunning = false;
+
+    var mMyGame = null;
 
     // This function assumes it is sub-classed from MyGame
-    var _RunLoop = function () {
-        if(_mIsLoopRunning) {
-            // Step A: set up for next call to _RunLoop and update input!
-            requestAnimationFrame( function(){_RunLoop.call(_mMyGame);});
-            
+    var _runLoop = function () {
+        if (mIsLoopRunning) {
+            // Step A: set up for next call to _runLoop and update input!
+            requestAnimationFrame(function () { _runLoop.call(mMyGame); });
+
             // Step B: compute how much time has elapsed since we last RunLoop was execuated
-            _mCurrentTime = Date.now();
-            _mElapsedTime = _mCurrentTime - _mPreviousTime;
-            _mPreviousTime = _mCurrentTime;
-            _mLagTime += _mElapsedTime;
+            mCurrentTime = Date.now();
+            mElapsedTime = mCurrentTime - mPreviousTime;
+            mPreviousTime = mCurrentTime;
+            mLagTime += mElapsedTime;
 
             // Step C: Make sure we update the game the appropriate number of times.
             //      Update only every Milleseconds per frame.
             //      If lag larger then update freames, update until catchup.
-            while ((_mLagTime >= kMPF) && (_mIsLoopRunning))
-            {
-                this.Update();      // call Scene.Update()
-                _mLagTime -= kMPF;
+            while ((mLagTime >= kMPF) && mIsLoopRunning) {
+                this.update();      // call Scene.update()
+                mLagTime -= kMPF;
             }
-            
+
             // Step D: now let's draw
-            this.Draw();    // Call Scene.Draw()
+            this.draw();    // Call Scene.draw()
         }
     };
 
     // update and draw functions must be set before this.
-    var Start = function(myGame)
-    {
-        _mMyGame = myGame;
-        
+    var start = function (myGame) {
+        mMyGame = myGame;
+
         // Step A: reset frame time 
-        _mPreviousTime = Date.now();
-        _mLagTime = 0.0;
-        
+        mPreviousTime = Date.now();
+        mLagTime = 0.0;
+
         // Step B: remember that loop is now running
-        _mIsLoopRunning = true;
-            
-        // Step C: request _RunLoop to start when loading is done
-        requestAnimationFrame(function(){_RunLoop.call(_mMyGame);});
+        mIsLoopRunning = true;
+
+        // Step C: request _runLoop to start when loading is done
+        requestAnimationFrame(function () { _runLoop.call(mMyGame); });
     };
-    
+
     // No Stop or Pause function, as all input are pull during the loop
     // once stopped, tricky to start the loop
     // You should implement pausing of game in game update.
-    
-    var oPublic =
-    {
-        Start: Start
+
+    var mPublic = {
+        start: start
     };
-    return oPublic;
-   
-}();
+    return mPublic;
+
+}());

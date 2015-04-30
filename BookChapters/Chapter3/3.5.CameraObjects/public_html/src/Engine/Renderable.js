@@ -4,8 +4,9 @@
  * Encapsulate the Shader and VertexBuffer into the same object (and will include
  * other attributes later) to represent a renderable object on the game screen.
  */
-/*jslint node: true */
+/*jslint node: true, vars: true */
 /*global gEngine: false, Transform: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
 
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!

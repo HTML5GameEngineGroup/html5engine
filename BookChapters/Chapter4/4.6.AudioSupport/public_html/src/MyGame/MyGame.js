@@ -2,115 +2,112 @@
  * File: MyGame.js 
  * This is the the logic of our game. 
  */
+/*jslint node: true, vars: true */
+/*global gEngine: false, Scene: false, BlueLevel: false, Camera: false, Renderable: false, vec2: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function MyGame()
-{           
+function MyGame() {
      // audio clips: supports both mp3 and wav formats
-    this._kBgClip = "resources/sounds/BGClip.mp3";
-    this._kCue = "resources/sounds/MyGame_cue.wav";
-    
+    this.kBgClip = "resources/sounds/BGClip.mp3";
+    this.kCue = "resources/sounds/MyGame_cue.wav";
+
     // The camera to view the rectangles
-    this._mCamera = null;
-    
+    this.mCamera = null;
+
     // the hero and the support objects
-    this._mHero = null;
-    this._mSupport = null;
-};
-gEngine.Core.InheritPrototype(MyGame, Scene);
+    this.mHero = null;
+    this.mSupport = null;
+}
+gEngine.Core.inheritPrototype(MyGame, Scene);
 
-MyGame.prototype.LoadScene = function() 
-{
+MyGame.prototype.loadScene = function () {
    // loads the audios
-    gEngine.AudioClips.LoadAudio(this._kBgClip);
-    gEngine.AudioClips.LoadAudio(this._kCue);
+    gEngine.AudioClips.loadAudio(this.kBgClip);
+    gEngine.AudioClips.loadAudio(this.kCue);
 };
 
-MyGame.prototype.UnloadScene = function() 
-{
+MyGame.prototype.unloadScene = function () {
     // Step A: Game loop not running, unload all assets
     // stop the background audio
-    gEngine.AudioClips.StopBackgroundAudio();
-    
+    gEngine.AudioClips.stopBackgroundAudio();
+
     // unload the scene resources
-    // gEngine.AudioClips.UnloadAudio(this._kBgClip);
+    // gEngine.AudioClips.unloadAudio(this.kBgClip);
     //      You know this clip will be used else where in the game
     //      So you decide to not unload this clip!!
-    gEngine.AudioClips.UnloadAudio(this._kCue);
-    
+    gEngine.AudioClips.unloadAudio(this.kCue);
+
     // Step B: starts the next level
     // starts the next level
     var nextLevel = new BlueLevel();  // next level to be loaded
-    gEngine.Core.StartScene(nextLevel);
+    gEngine.Core.startScene(nextLevel);
 };
 
-MyGame.prototype.Initialize = function() 
-{
+MyGame.prototype.initialize = function () {
     // Step A: set up the cameras
-    this._mCamera = new Camera(
-            vec2.fromValues(20, 60),   // position of the camera
-            20,                        // width of camera
-            [20, 40, 600, 300]         // viewport (orgX, orgY, width, height)
-            );
-    this._mCamera.SetBackgroundColor([0.8, 0.8, 0.8, 1]);
+    this.mCamera = new Camera(
+        vec2.fromValues(20, 60),   // position of the camera
+        20,                        // width of camera
+        [20, 40, 600, 300]         // viewport (orgX, orgY, width, height)
+        );
+    this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
-    
+
     // Step B: Create the support object in red
-    this._mSupport = new Renderable(gEngine.DefaultResources.GetConstColorShader());
-    this._mSupport.SetColor([1, 0, 0, 1]);
-    this._mSupport.GetXform().SetPosition(20, 60);
-    this._mSupport.GetXform().SetSize(5, 5);
-    
+    this.mSupport = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    this.mSupport.setColor([1, 0, 0, 1]);
+    this.mSupport.getXform().setPosition(20, 60);
+    this.mSupport.getXform().setSize(5, 5);
+
     // Setp C: Create the hero object in blue
-    this._mHero = new Renderable(gEngine.DefaultResources.GetConstColorShader());
-    this._mHero.SetColor([0, 0, 1, 1]);
-    this._mHero.GetXform().SetPosition(20, 60);
-    this._mHero.GetXform().SetSize(2, 3);
-    
+    this.mHero = new Renderable(gEngine.DefaultResources.getConstColorShader());
+    this.mHero.setColor([0, 0, 1, 1]);
+    this.mHero.getXform().setPosition(20, 60);
+    this.mHero.getXform().setSize(2, 3);
+
     // now start the bg music ...
-    gEngine.AudioClips.PlayBackgroundAudio(this._kBgClip);
-    
+    gEngine.AudioClips.playBackgroundAudio(this.kBgClip);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
 // importantly, make sure to _NOT_ change any state.
-MyGame.prototype.Draw = function() 
-{   
+MyGame.prototype.draw = function () {
     // Step A: clear the canvas
-    gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
-    
+    gEngine.Core.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
+
     // Step  B: Activate the drawing Camera
-    this._mCamera.SetupViewProjection();
-    
-        // Step  C: Draw everything
-        this._mSupport.Draw(this._mCamera.GetVPMatrix());
-        this._mHero.Draw(this._mCamera.GetVPMatrix());
+    this.mCamera.setupViewProjection();
+
+    // Step  C: draw everything
+    this.mSupport.draw(this.mCamera.getVPMatrix());
+    this.mHero.draw(this.mCamera.getVPMatrix());
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
-MyGame.prototype.Update = function()
-{
+MyGame.prototype.update = function () {
     // For this very simple, let's only allow the movement of hero, 
     // and if hero moves too far off, this level ends, we will
     // load the next level
     var deltaX = 0.05;
-    var xform = this._mHero.GetXform();
-    
+    var xform = this.mHero.getXform();
+
     // Support hero movements
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
-        gEngine.AudioClips.PlayACue(this._kCue);
-        xform.IncXPosBy(deltaX);
-        if (xform.GetXPos() > 30)  // this is the right-bound of the window
-            xform.SetPosition(12, 60);
-    }
-    
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
-        gEngine.AudioClips.PlayACue(this._kCue);
-        xform.IncXPosBy(-deltaX);
-        if (xform.GetXPos() < 11) {  // this is the left-bound of the window
-            gEngine.GameLoop.Stop();
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Right)) {
+        gEngine.AudioClips.playACue(this.kCue);
+        xform.incXPosBy(deltaX);
+        if (xform.getXPos() > 30) { // this is the right-bound of the window
+            xform.setPosition(12, 60);
         }
     }
-    
+
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Left)) {
+        gEngine.AudioClips.playACue(this.kCue);
+        xform.incXPosBy(-deltaX);
+        if (xform.getXPos() < 11) {  // this is the left-bound of the window
+            gEngine.GameLoop.stop();
+        }
+    }
 };

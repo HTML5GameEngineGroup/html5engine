@@ -2,6 +2,9 @@
  * File: EngineCore_TextFileLoader.js 
  * loads an text file into ResoruceMap, either as simple text or as XML
  */
+/*jslint node: true, vars: true, evil: true */
+/*global gEngine: false, XMLHttpRequest: false, DOMParser: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
@@ -10,27 +13,24 @@ var gEngine = gEngine || { };
 // Note: loads the a textfile and when done calls the callbackFunction()
 //     fileName is treated as resource map key, file content is stored as asset
 //
-gEngine.TextFileLoader = function()
-{   
+gEngine.TextFileLoader = (function () {
     var eTextFileType = Object.freeze({
         eXMLFile: 0,
         eTextFile: 1
     });
-    
+
     // if fileType is a eTextFileType
-    var LoadTextFile= function(fileName, fileType, callbackFunction) {
-        if (!(gEngine.ResourceMap.IsAssetLoaded(fileName)))
-        {
+    var loadTextFile = function (fileName, fileType, callbackFunction) {
+        if (!(gEngine.ResourceMap.isAssetLoaded(fileName))) {
             // Update resources in load counter.
-            gEngine.ResourceMap.AsyncLoadRequested(fileName);
-                        
+            gEngine.ResourceMap.asyncLoadRequested(fileName);
+
             // Asyncrounsly request the data from server.
             var req = new XMLHttpRequest();
             req.open('GET', fileName, true);
             req.setRequestHeader('Content-Type', 'text/xml');
-            
-            req.onload = function () 
-            {
+
+            req.onload = function () {
                 var fileContent = null;
                 if (fileType === eTextFileType.eXMLFile) {
                     var parser = new DOMParser();
@@ -38,29 +38,29 @@ gEngine.TextFileLoader = function()
                 } else {
                     fileContent = req.responseText;
                 }
-                gEngine.ResourceMap.AsyncLoadCompleted(fileName, fileContent);
-                if ((callbackFunction !== null) && (callbackFunction !== undefined))
+                gEngine.ResourceMap.asyncLoadCompleted(fileName, fileContent);
+                if ((callbackFunction !== null) && (callbackFunction !== undefined)) {
                     callbackFunction(fileName);
+                }
             };
             req.send();
-            
         } else {
-            if ((callbackFunction !== null) && (callbackFunction !== undefined))
+            if ((callbackFunction !== null) && (callbackFunction !== undefined)) {
                 callbackFunction(fileName);
+            }
         }
     };
-    
-    var UnloadTextFile= function(fileName) {
-        gEngine.ResourceMap.UnloadAsset(fileName);
+
+    var unloadTextFile = function (fileName) {
+        gEngine.ResourceMap.unloadAsset(fileName);
     };
-    
+
     // Public interface for this object. Anything not in here will
     // not be accessable.
-    var oPublic =
-    {
-        LoadTextFile: LoadTextFile,
-        UnloadTextFile: UnloadTextFile,
-        eTextFileType: eTextFileType 
+    var mPublic = {
+        loadTextFile: loadTextFile,
+        unloadTextFile: unloadTextFile,
+        eTextFileType: eTextFileType
     };
-    return oPublic;
-}();
+    return mPublic;
+}());

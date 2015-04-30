@@ -7,8 +7,9 @@
  * Notice, this is a singleton object.
  */
 
-/*jslint node: true */
+/*jslint node: true, vars: true */
 /*global gEngine: false, Float32Array: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 

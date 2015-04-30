@@ -2,8 +2,9 @@
  * File: MyGame.js 
  * This is the the logic of our game. For now, this is very simple.
  */
-/*jslint node: true */
+/*jslint node: true, vars: true */
 /*global gEngine: false, SimpleShader: false, Renderable: false, Camera: false, mat4: false, vec3: false, vec2: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 

@@ -2,8 +2,9 @@
  * File: EngineCore.js 
  * The first iteration of what the core of our game engine would look like.
  */
-/*jslint node: true, evil: true */
+/*jslint node: true, vars: true, evil: true */
 /*global gEngine: false, document: false */
+ /* find out more about jslint: http://www.jslint.com/lint.html */
 
 
 //  Global variable EngineCore

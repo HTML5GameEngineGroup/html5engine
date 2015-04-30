@@ -10,10 +10,10 @@
  *          our project.
  * 
  */
-/*jslint node: true, evil: true */
+/*jslint node: true, vars: true, evil: true */
 /*global gGL: false, alert: false, loadAndCompileShader: false,
-    gSquareVertexBuffer: false, document: false
-  */
+    gSquareVertexBuffer: false, document: false */
+ /* find out more about jslint: http://www.jslint.com/lint.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 

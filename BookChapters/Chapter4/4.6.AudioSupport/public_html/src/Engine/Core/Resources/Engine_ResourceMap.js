@@ -30,7 +30,6 @@ gEngine.ResourceMap = (function () {
     var asyncLoadRequested = function (rName) {
         mResourceMap[rName] = new MapEntry(rName); // place holder
         ++mNumOutstandingLoads;
-        return true;
     };
 
     var asyncLoadCompleted = function (rName, loadedAsset) {

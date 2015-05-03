@@ -12,7 +12,7 @@
 var gEngine = gEngine || { };
 
 gEngine.Input = (function () {
-    // Scancode constants
+    // Key code constants
     var kKeys = {
         // arrows
         Left: 37,

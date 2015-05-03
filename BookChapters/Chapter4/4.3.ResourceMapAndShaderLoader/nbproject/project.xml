@@ -3,7 +3,7 @@
     <type>org.netbeans.modules.web.clientproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/clientside-project/1">
-            <name>4.3.ResourceMapAndShaderLoads</name>
+            <name>4.3.ResourceMapAndShaderLoader</name>
         </data>
     </configuration>
 </project>

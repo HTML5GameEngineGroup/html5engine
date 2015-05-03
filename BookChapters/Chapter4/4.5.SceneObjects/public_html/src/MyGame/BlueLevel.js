@@ -10,7 +10,7 @@
 
 function BlueLevel() {
     // scene file name
-    this.kSceneFile = "resources/BlueLevel.xml";
+    this.kSceneFile = "assets/BlueLevel.xml";
     // all square
     this.mSqSet = [];        // these are the renderable objects
 

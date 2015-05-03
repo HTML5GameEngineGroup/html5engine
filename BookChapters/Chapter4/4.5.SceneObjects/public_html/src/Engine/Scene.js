@@ -38,6 +38,6 @@ Scene.prototype.draw = function () {};
 
 // Must unload all resources
 Scene.prototype.unloadScene = function () {
-    // .. unload all resoruces
+    // .. unload all resources
 };
 //</editor-fold>

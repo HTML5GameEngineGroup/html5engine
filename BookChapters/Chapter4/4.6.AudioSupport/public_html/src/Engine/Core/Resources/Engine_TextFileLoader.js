@@ -1,9 +1,9 @@
 /*
  * File: EngineCore_TextFileLoader.js 
- * loads an text file into ResoruceMap, either as simple text or as XML
+ * loads an text file into resourceMap, either as simple text or as XML
  */
 /*jslint node: true, vars: true, evil: true */
-/*global gEngine: false, XMLHttpRequest: false, DOMParser: false */
+/*global gEngine: false, XMLHttpRequest: false, DOMParser: false, alert: false */
 /* find out more about jslint: http://www.jslint.com/lint.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -27,6 +27,12 @@ gEngine.TextFileLoader = (function () {
 
             // Asyncrounsly request the data from server.
             var req = new XMLHttpRequest();
+            req.onreadystatechange = function () {
+                if ((req.readyState === 4) && (req.status !== 200)) {
+                    alert(fileName + ": loading failed! [Hint: you cannot double click index.html to run this project. " +
+                        "The index.html file must be loaded by a web-server.]");
+                }
+            };
             req.open('GET', fileName, true);
             req.setRequestHeader('Content-Type', 'text/xml');
 

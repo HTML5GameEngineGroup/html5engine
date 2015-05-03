@@ -29,12 +29,11 @@ gEngine.ResourceMap = (function () {
     var asyncLoadRequested = function (rName) {
         mResourceMap[rName] = new MapEntry(rName); // place holder
         ++mNumOutstandingLoads;
-        return true;
     };
 
     var asyncLoadCompleted = function (rName, loadedAsset) {
         if (!isAssetLoaded(rName)) {
-            alert("gEngine.asyncLoadCompleted: [" + rName + "not in map!");
+            alert("gEngine.asyncLoadCompleted: [" + rName + "] not in map!");
         }
         mResourceMap[rName].mAsset = loadedAsset;
         --mNumOutstandingLoads;

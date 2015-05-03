@@ -10,11 +10,11 @@
 
 function BlueLevel() {
     // audio clips: supports both mp3 and wav formats
-    this.kBgClip = "resources/sounds/BGClip.mp3";
-    this.kCue = "resources/sounds/BlueLevel_cue.wav";
+    this.kBgClip = "assets/sounds/BGClip.mp3";
+    this.kCue = "assets/sounds/BlueLevel_cue.wav";
 
     // scene file name
-    this.kSceneFile = "resources/BlueLevel.xml";
+    this.kSceneFile = "assets/BlueLevel.xml";
     // all square
     this.mSqSet = [];        // these are the renderable objects
 
@@ -36,7 +36,7 @@ BlueLevel.prototype.unloadScene = function () {
     // stop the background audio
     gEngine.AudioClips.stopBackgroundAudio();
 
-    // unload the scene flie and loaded resoruces
+    // unload the scene flie and loaded resources
     gEngine.TextFileLoader.unloadTextFile(this.kSceneFile);
     gEngine.AudioClips.unloadAudio(this.kBgClip);
     gEngine.AudioClips.unloadAudio(this.kCue);

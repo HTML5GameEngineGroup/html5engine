@@ -51,7 +51,7 @@ gEngine.Core = (function () {
         gEngine.Input.initialize();
         gEngine.AudioClips.initAudioContext();
 
-        // Function to be called within an anomynous function to not call immediatly.
+        // Function to be called within an anonymous function to not call immediately.
         gEngine.DefaultResources.initialize(function () { startScene(myGame); });
     };
 

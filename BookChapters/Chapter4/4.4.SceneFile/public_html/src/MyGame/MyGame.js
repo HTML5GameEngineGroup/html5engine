@@ -10,7 +10,7 @@
 
 function MyGame() {
     // scene file name
-    this.kSceneFile = "resources/scene.xml";
+    this.kSceneFile = "assets/scene.xml";
     // all square
     this.mSqSet = [];        // these are the renderable objects
 

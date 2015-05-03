@@ -10,8 +10,8 @@
 
 function MyGame() {
      // audio clips: supports both mp3 and wav formats
-    this.kBgClip = "resources/sounds/BGClip.mp3";
-    this.kCue = "resources/sounds/MyGame_cue.wav";
+    this.kBgClip = "assets/sounds/BGClip.mp3";
+    this.kCue = "assets/sounds/MyGame_cue.wav";
 
     // The camera to view the rectangles
     this.mCamera = null;
@@ -35,7 +35,8 @@ MyGame.prototype.unloadScene = function () {
 
     // unload the scene resources
     // gEngine.AudioClips.unloadAudio(this.kBgClip);
-    //      You know this clip will be used else where in the game
+    //      The above line is commented out on purpose because
+    //      you know this clip will be used else where in the game
     //      So you decide to not unload this clip!!
     gEngine.AudioClips.unloadAudio(this.kCue);
 

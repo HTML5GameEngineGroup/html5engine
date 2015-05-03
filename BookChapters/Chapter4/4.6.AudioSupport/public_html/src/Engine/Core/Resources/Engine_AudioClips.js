@@ -32,6 +32,12 @@ gEngine.AudioClips = (function () {
 
             // Asyncrounsly request the data from server.
             var req = new XMLHttpRequest();
+            req.onreadystatechange = function () {
+                if ((req.readyState === 4) && (req.status !== 200)) {
+                    alert(clipName + ": loading failed! [Hint: you cannot double click index.html to run this project. " +
+                        "The index.html file must be loaded by a web-server.]");
+                }
+            };
             req.open('GET', clipName, true);
             // Specify that the request retrieves binary data.
             req.responseType = 'arraybuffer';

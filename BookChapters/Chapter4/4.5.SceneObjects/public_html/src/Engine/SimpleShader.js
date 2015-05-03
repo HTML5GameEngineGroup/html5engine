@@ -18,9 +18,10 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath) {
     // Convention: all instance variables: mVariables
     this.mCompiledShader = null;  // reference to the compiled shader in webgl context  
     this.mShaderVertexPositionAttribute = null; // reference to SquareVertexPosition within the shader
+    this.mPixelColor = null;                    // reference to the pixelColor uniform in the fragment shader
     this.mModelTransform = null;                // reference to model transform matrix in vertex shader
     this.mViewProjTransform = null;             // reference to the View/Projection matrix in the vertex shader
-    this.mPixelColor = null;                    // reference to the pixelColor uniform in the fragment shader
+
     var gl = gEngine.Core.getGL();
 
     // start of constructor code
@@ -56,9 +57,9 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath) {
         0,              // number of bytes to skip in between elements
         0);             // offsets to the first element
 
-    // Step G: references: uniforms: uModelTransform, uPixelColor, and uViewProjTransform
-    this.mModelTransform = gl.getUniformLocation(this.mCompiledShader, "uModelTransform");
+    // Step G: Gets references to the uniform variables: uPixelColor, uModelTransform, and uViewProjTransform
     this.mPixelColor = gl.getUniformLocation(this.mCompiledShader, "uPixelColor");
+    this.mModelTransform = gl.getUniformLocation(this.mCompiledShader, "uModelTransform");
     this.mViewProjTransform = gl.getUniformLocation(this.mCompiledShader, "uViewProjTransform");
 }
 //</editor-fold>

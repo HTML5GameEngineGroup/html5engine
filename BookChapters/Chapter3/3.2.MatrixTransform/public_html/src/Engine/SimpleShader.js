@@ -6,7 +6,7 @@
  */
 
 /*jslint node: true, vars: true */
-/*global gEngine: false, alert: false, XMLHttpRequest: false */
+/*global gEngine: false, alert: false, XMLHttpRequest: false, alert: false */
 /* find out more about jslint: http://www.jslint.com/lint.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -56,7 +56,7 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath) {
         0,              // number of bytes to skip in between elements
         0);             // offsets to the first element
 
-    // Step G: Gets a reference to the uniform variables: uPixelColor and uModelTransform
+    // Step G: Gets references to the uniform variables: uPixelColor and uModelTransform
     this.mPixelColor = gl.getUniformLocation(this.mCompiledShader, "uPixelColor");
     this.mModelTransform = gl.getUniformLocation(this.mCompiledShader, "uModelTransform");
 }
@@ -103,7 +103,8 @@ SimpleShader.prototype._loadAndCompileShader = function (filePath, shaderType) {
     try {
         xmlReq.send();
     } catch (error) {
-        alert("Failed to load shader: " + filePath);
+        alert("Failed to load shader: " + filePath + " [Hint: you cannot double click index.html to run this project. " +
+                "The index.html file must be loaded by a web-server.]");
         return null;
     }
     shaderSource = xmlReq.responseText;

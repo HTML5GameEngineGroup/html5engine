@@ -1,52 +1,53 @@
 /*
  * File: Engine_DefaultResources.js 
  */
+/*jslint node: true, vars: true, evil: true */
+/*global gEngine: false, SimpleShader: false, TextureShader: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 var gEngine = gEngine || { };
 
-gEngine.DefaultResources = function()
-{   
+gEngine.DefaultResources = (function () {
     // Simple Shader
-    var _kSimpleVS = "src/GLSLShaders/SimpleVS.glsl";  // Path to the VertexShader 
-    var _kSimpleFS = "src/GLSLShaders/SimpleFS.glsl";  // Path to the simple FragmentShader
-    var _mConstColorShader = null;
-    
+    var kSimpleVS = "src/GLSLShaders/SimpleVS.glsl";  // Path to the VertexShader 
+    var kSimpleFS = "src/GLSLShaders/SimpleFS.glsl";  // Path to the simple FragmentShader
+    var mConstColorShader = null;
+
     // Texture Shader
-    var _kTextureVS = "src/GLSLShaders/TextureVS.glsl";  // Path to the VertexShader 
-    var _kTextureFS = "src/GLSLShaders/TextureFS.glsl";  // Path to the texture FragmentShader
-    var _mTextureShader = null;
-    
-    
-    var _CreateShaders = function(callBackFunction) {
-        _mConstColorShader = new SimpleShader(_kSimpleVS, _kSimpleFS);
-        _mTextureShader = new TextureShader(_kTextureVS, _kTextureFS);
+    var kTextureVS = "src/GLSLShaders/TextureVS.glsl";  // Path to the VertexShader 
+    var kTextureFS = "src/GLSLShaders/TextureFS.glsl";  // Path to the texture FragmentShader
+    var mTextureShader = null;
+
+    var _createShaders = function (callBackFunction) {
+        mConstColorShader = new SimpleShader(kSimpleVS, kSimpleFS);
+        mTextureShader = new TextureShader(kTextureVS, kTextureFS);
         callBackFunction();
     };
-    
-    var _GetConstColorShader = function() { return _mConstColorShader; };
-    var _GetTextureShader = function() { return _mTextureShader; };
-    
-    var _Initialize = function(callBackFunction) {
+
+    var getConstColorShader = function () { return mConstColorShader; };
+    var getTextureShader = function () { return mTextureShader; };
+
+    var initialize = function (callBackFunction) {
         // constant color shader: SimpleVS, and SimpleFS
-        gEngine.TextFileLoader.LoadTextFile(_kSimpleVS, gEngine.TextFileLoader.eTextFileType.eTextFile);
-        gEngine.TextFileLoader.LoadTextFile(_kSimpleFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
-        
+        gEngine.TextFileLoader.loadTextFile(kSimpleVS, gEngine.TextFileLoader.eTextFileType.eTextFile);
+        gEngine.TextFileLoader.loadTextFile(kSimpleFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
+
         // texture shader: 
-        gEngine.TextFileLoader.LoadTextFile(_kTextureVS, gEngine.TextFileLoader.eTextFileType.eTextFile);
-        gEngine.TextFileLoader.LoadTextFile(_kTextureFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
-        
-        gEngine.ResourceMap.SetLoadCompleteCallback(function() {_CreateShaders(callBackFunction);});
+        gEngine.TextFileLoader.loadTextFile(kTextureVS, gEngine.TextFileLoader.eTextFileType.eTextFile);
+        gEngine.TextFileLoader.loadTextFile(kTextureFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
+
+        gEngine.ResourceMap.setLoadCompleteCallback(function () {_createShaders(callBackFunction); });
     };
-    
+
     // Public interface for this object. Anything not in here will
     // not be accessable.
-    var oPublic =
-    {
-        Initialize: _Initialize,
-        GetConstColorShader: _GetConstColorShader,
-        GetTextureShader: _GetTextureShader
+    var mPublic = {
+        initialize: initialize,
+        getConstColorShader: getConstColorShader,
+        getTextureShader: getTextureShader
     };
-    return oPublic;
-}();
+    return mPublic;
+}());

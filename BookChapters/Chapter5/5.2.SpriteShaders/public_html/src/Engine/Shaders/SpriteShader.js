@@ -3,61 +3,63 @@
  * Subclass from TextureShader
  * Implements a Textured ShaderProgram object where texture coordinate can be changed
  * at run time.
- * 
  */
+
+/*jslint node: true, vars: true */
+/*global gEngine: false, SimpleShader: false, TextureShader: false, Float32Array: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 //<editor-fold desc="constructor">
 // constructor 
-function SpriteShader(vertexShaderPath, fragmentShaderPath)
-{
+function SpriteShader(vertexShaderPath, fragmentShaderPath) {
     // Call super class constructor
     TextureShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
-    
-    this._mTexCoordBuffer = null; // this is the reference to gl buffer that contains the actual texture coordinate
+
+    this.mTexCoordBuffer = null; // this is the reference to gl buffer that contains the actual texture coordinate
 
     var initTexCoord = [
-      1.0, 1.0,
-      0.0, 1.0,
-      1.0, 0.0,
-      0,0, 0.0  
+        1.0, 1.0,
+        0.0, 1.0,
+        1.0, 0.0,
+        0.0, 0.0
     ];
-    
-    var gl = gEngine.Core.GetGL();
-    this._mTexCoordBuffer = gl.createBuffer();
 
-    gl.bindBuffer(gl.ARRAY_BUFFER, this._mTexCoordBuffer);
+    var gl = gEngine.Core.getGL();
+    this.mTexCoordBuffer = gl.createBuffer();
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.mTexCoordBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(initTexCoord), gl.DYNAMIC_DRAW);
             // DYNAMIC_DRAW: says buffer content may change!
-};
-
+}
 // get all the prototype functions from SimpleShader
-gEngine.Core.InheritPrototype(SpriteShader, TextureShader);
+gEngine.Core.inheritPrototype(SpriteShader, TextureShader);
 
 //</editor-fold>
 
 // <editor-fold desc="Public Methods">
 
 // Overriding the Activation of the shader for rendering
-SpriteShader.prototype.ActivateShader = function(pixelColor, vpMatrix) {
+SpriteShader.prototype.activateShader = function (pixelColor, vpMatrix) {
     // fist call the super class's activate
-    SimpleShader.prototype.ActivateShader.call(this, pixelColor, vpMatrix);
-    
+    SimpleShader.prototype.activateShader.call(this, pixelColor, vpMatrix);
+
     // now binds the proper texture coordinate buffer
-    var gl = gEngine.Core.GetGL();
-    gl.bindBuffer(gl.ARRAY_BUFFER, this._mTexCoordBuffer);
-    gl.vertexAttribPointer(this._mShaderTextureCoordAttribute, 
+    var gl = gEngine.Core.getGL();
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.mTexCoordBuffer);
+    gl.vertexAttribPointer(this.mShaderTextureCoordAttribute,
             2,
-            gl.FLOAT, 
-            false,    
-            0,        
+            gl.FLOAT,
+            false,
+            0,
             0);
-    gl.enableVertexAttribArray(this._mShaderTextureCoordAttribute);
+    gl.enableVertexAttribArray(this.mShaderTextureCoordAttribute);
 };
 
-SpriteShader.prototype.SetTextureCoordinate = function(texCoord) {
-    var gl = gEngine.Core.GetGL();
-    gl.bindBuffer(gl.ARRAY_BUFFER, this._mTexCoordBuffer);
+SpriteShader.prototype.setTextureCoordinate = function (texCoord) {
+    var gl = gEngine.Core.getGL();
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.mTexCoordBuffer);
     gl.bufferSubData(gl.ARRAY_BUFFER, 0, new Float32Array(texCoord));
 };
 //</editor-fold>

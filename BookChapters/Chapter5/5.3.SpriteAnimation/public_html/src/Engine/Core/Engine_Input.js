@@ -2,24 +2,27 @@
  * File: EngineCore_Input.js 
  * Provides input support
  */
+/*jslint node: true, vars: true */
+/*global gEngine: false, window: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 var gEngine = gEngine || { };
 
-gEngine.Input = function()
-{
-    // Scancode constants
-    var _kKeys = { 
+gEngine.Input = (function () {
+    // Key code constants
+    var kKeys = {
         // arrows
         Left: 37,
         Up: 38,
         Right: 39,
         Down: 40,
-        
+
         // space bar
         Space: 32,
-        
+
         // numbers 
         Zero: 48,
         One: 49,
@@ -31,9 +34,9 @@ gEngine.Input = function()
         Seven : 55,
         Eight : 56,
         Nine : 57,
-    
+
         // Alphabets
-        A : 65,  
+        A : 65,
         D : 68,
         E : 69,
         F : 70,
@@ -45,61 +48,62 @@ gEngine.Input = function()
         R : 82,
         S : 83,
         W : 87,
-        
+
         LastKeyCode: 222
-        };
-    
-    
+    };
 
     // Previous key state
-    var _mKeyPreviousState = Array();
+    var mKeyPreviousState = [];     // a new array
     // The pressed keys.
-    var _mIsKeyPressed = Array();
+    var mIsKeyPressed = [];
     // Click events: once an event is set, it will remain there until polled
-    var _mIsKeyClicked = Array();
+    var mIsKeyClicked = [];
 
 
     // Event service functions
-    var _OnKeyDown = function (event) {
-        _mIsKeyPressed[event.keyCode] = true;  };
-    var _OnKeyUp = function (event)  {
-        _mIsKeyPressed[event.keyCode] = false; };
-    
-    var Initialize = function ()
-    {
-        for (var i = 0; i<_kKeys.LastKeyCode; i++) {
-            _mIsKeyPressed[i] = false;
-            _mKeyPreviousState[i] = false;
-            _mIsKeyClicked[i] = false;
-        }
-        
-        // register services 
-        window.addEventListener('keyup', _OnKeyUp);
-        window.addEventListener('keydown', _OnKeyDown);
+    var _onKeyDown = function (event) {
+        mIsKeyPressed[event.keyCode] = true;
     };
-    
-    var Update = function() {
-        for (var i = 0; i<_kKeys.LastKeyCode; i++) {
-             _mIsKeyClicked[i] = (!_mKeyPreviousState[i]) && _mIsKeyPressed[i];
-            _mKeyPreviousState[i] = _mIsKeyPressed[i];
-        }
+    var _onKeyUp = function (event) {
+        mIsKeyPressed[event.keyCode] = false;
     };
-    
-    // Function for GameEngine Prorammer to test if a key is pressed down
-    var IsKeyPressed = function (keyCode) {
-        return _mIsKeyPressed[keyCode]; };
 
-    var IsKeyClicked = function(keyCode) {
-        return (_mIsKeyClicked[keyCode]); 
+    var initialize = function () {
+        var i;
+        for (i = 0; i < kKeys.LastKeyCode; i++) {
+            mIsKeyPressed[i] = false;
+            mKeyPreviousState[i] = false;
+            mIsKeyClicked[i] = false;
+        }
+
+        // register services 
+        window.addEventListener('keyup', _onKeyUp);
+        window.addEventListener('keydown', _onKeyDown);
     };
-    
-    var oPublic =
-    {
-        Initialize: Initialize,
-        Update: Update,
-        IsKeyPressed: IsKeyPressed,
-        IsKeyClicked: IsKeyClicked,
-        Keys: _kKeys
+
+    var update = function () {
+        var i;
+        for (i = 0; i < kKeys.LastKeyCode; i++) {
+            mIsKeyClicked[i] = (!mKeyPreviousState[i]) && mIsKeyPressed[i];
+            mKeyPreviousState[i] = mIsKeyPressed[i];
+        }
     };
-    return oPublic;
-}();
+
+    // Function for GameEngine Prorammer to test if a key is pressed down
+    var isKeyPressed = function (keyCode) {
+        return mIsKeyPressed[keyCode];
+    };
+
+    var isKeyClicked = function (keyCode) {
+        return (mIsKeyClicked[keyCode]);
+    };
+
+    var mPublic = {
+        initialize: initialize,
+        update: update,
+        isKeyPressed: isKeyPressed,
+        isKeyClicked: isKeyClicked,
+        keys: kKeys
+    };
+    return mPublic;
+}());

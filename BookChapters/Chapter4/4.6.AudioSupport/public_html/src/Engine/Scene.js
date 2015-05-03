@@ -16,7 +16,7 @@ function Scene() {}
 // Begin Scene: must load all the scene contents
 // when done 
 //  => start the GameLoop
-// The game loop will call initialize and then Update/draw
+// The game loop will call initialize and then update/draw
 Scene.prototype.loadScene = function () {
     // override to load scene specific contents
 };
@@ -27,7 +27,7 @@ Scene.prototype.initialize = function () {
     // initialize the level (called from GameLoop)
 };
 
-// Update function to be called form EngineCore.GameLoop
+// update function to be called form EngineCore.GameLoop
 Scene.prototype.update = function () {
     // when done with this level should call:
     // GameLoop.stop() ==> which will call this.unloadScene();

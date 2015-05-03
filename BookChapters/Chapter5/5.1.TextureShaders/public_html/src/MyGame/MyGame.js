@@ -2,117 +2,118 @@
  * File: MyGame.js 
  * This is the the logic of our game. 
  */
+
+/*jslint node: true, vars: true */
+/*global gEngine: false, Scene: false, BlueLevel:false, Camera: false, vec2: false,
+  TextureRenderable: false, Renderable: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function MyGame()
-{           
+function MyGame() {
     // textures: 
-    this._kPortal = "resources/minion_portal.png";      // supports png with transparency
-    this._kCollector = "resources/minion_collector.png";      
-    
+    this.kPortal = "assets/minion_portal.png";      // supports png with transparency
+    this.kCollector = "assets/minion_collector.png";
+
     // The camera to view the rectangles
-    this._mCamera = null;
-    
+    this.mCamera = null;
+
     // the hero and the support objects
-    this._mHero = null;
-    this._mPortal = null;
-    this._mCollector = null;
-};
-gEngine.Core.InheritPrototype(MyGame, Scene);
+    this.mHero = null;
+    this.mPortal = null;
+    this.mCollector = null;
+}
+gEngine.Core.inheritPrototype(MyGame, Scene);
 
-MyGame.prototype.LoadScene = function() 
-{    
-   // loads the textures
-   gEngine.Textures.LoadTexture(this._kPortal);
-   gEngine.Textures.LoadTexture(this._kCollector);
-    
+MyGame.prototype.loadScene = function () {
+    // loads the textures
+    gEngine.Textures.loadTexture(this.kPortal);
+    gEngine.Textures.loadTexture(this.kCollector);
 };
 
-MyGame.prototype.UnloadScene = function() 
-{
+MyGame.prototype.unloadScene = function () {
     // Game loop not running, unload all assets
-       
-    gEngine.Textures.UnloadTexture(this._kPortal);
-    gEngine.Textures.UnloadTexture(this._kCollector);
+
+    gEngine.Textures.unloadTexture(this.kPortal);
+    gEngine.Textures.unloadTexture(this.kCollector);
 
     // starts the next level
     var nextLevel = new BlueLevel();  // next level to be loaded
-    gEngine.Core.StartScene(nextLevel);
+    gEngine.Core.startScene(nextLevel);
 };
 
-MyGame.prototype.Initialize = function() 
-{
+MyGame.prototype.initialize = function () {
     // Step A: set up the cameras
-    this._mCamera = new Camera(
-            vec2.fromValues(20, 60),   // position of the camera
-            20,                        // width of camera
-            [20, 40, 600, 300]         // viewport (orgX, orgY, width, height)
-            );
-    this._mCamera.SetBackgroundColor([0.8, 0.8, 0.8, 1]);
+    this.mCamera = new Camera(
+        vec2.fromValues(20, 60),   // position of the camera
+        20,                        // width of camera
+        [20, 40, 600, 300]         // viewport (orgX, orgY, width, height)
+        );
+    this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
-    
+
     // Step B: Create the game objects
-    this._mPortal = new TextureRenderable(this._kPortal);
-    this._mPortal.SetColor([1, 0, 0, 0.2]);  // tints red
-    this._mPortal.GetXform().SetPosition(25, 60);
-    this._mPortal.GetXform().SetSize(3, 3);
-    
-    this._mCollector = new TextureRenderable(this._kCollector);
-    this._mCollector.SetColor([0, 0, 0, 0]);  // No tinting
-    this._mCollector.GetXform().SetPosition(15, 60);
-    this._mCollector.GetXform().SetSize(3, 3);
-    
+    this.mPortal = new TextureRenderable(this.kPortal);
+    this.mPortal.setColor([1, 0, 0, 0.2]);  // tints red
+    this.mPortal.getXform().setPosition(25, 60);
+    this.mPortal.getXform().setSize(3, 3);
+
+    this.mCollector = new TextureRenderable(this.kCollector);
+    this.mCollector.setColor([0, 0, 0, 0]);  // No tinting
+    this.mCollector.getXform().setPosition(15, 60);
+    this.mCollector.getXform().setSize(3, 3);
+
     // Step C: Create the hero object in blue
-    this._mHero = new Renderable();
-    this._mHero.SetColor([0, 0, 1, 1]);
-    this._mHero.GetXform().SetPosition(20, 60);
-    this._mHero.GetXform().SetSize(2, 3);
+    this.mHero = new Renderable();
+    this.mHero.setColor([0, 0, 1, 1]);
+    this.mHero.getXform().setPosition(20, 60);
+    this.mHero.getXform().setSize(2, 3);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
 // importantly, make sure to _NOT_ change any state.
-MyGame.prototype.Draw = function() 
-{   
+MyGame.prototype.draw = function () {
     // Step A: clear the canvas
-    gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
-    
+    gEngine.Core.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
+
     // Step  B: Activate the drawing Camera
-    this._mCamera.SetupViewProjection();
-    
-        // Step  C: Draw everything
-        this._mPortal.Draw(this._mCamera.GetVPMatrix());
-        this._mHero.Draw(this._mCamera.GetVPMatrix());
-        this._mCollector.Draw(this._mCamera.GetVPMatrix());
-        
+    this.mCamera.setupViewProjection();
+
+    // Step  C: Draw everything
+    this.mPortal.draw(this.mCamera.getVPMatrix());
+    this.mHero.draw(this.mCamera.getVPMatrix());
+    this.mCollector.draw(this.mCamera.getVPMatrix());
 };
 
-// The Update function, updates the application state. Make sure to _NOT_ draw
+// The update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
-MyGame.prototype.Update = function()
-{
+MyGame.prototype.update = function () {
     // For this very simple, let's only allow the movement of hero, 
     // and if hero moves too far off, this level ends, we will
     // load the next level
     var deltaX = 0.05;
-    var xform = this._mHero.GetXform();
-    
+    var xform = this.mHero.getXform();
+
     // Support hero movements
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
-        xform.IncXPosBy(deltaX);
-        if (xform.GetXPos() > 30)  // this is the right-bound of the window
-            xform.SetPosition(12, 60);
-    }
-    
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
-        xform.IncXPosBy(-deltaX);
-        if (xform.GetXPos() < 11) {  // this is the left-bound of the window
-            gEngine.GameLoop.Stop();
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Right)) {
+        xform.incXPosBy(deltaX);
+        if (xform.getXPos() > 30) { // this is the right-bound of the window
+            xform.setPosition(12, 60);
         }
     }
-    
+
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Left)) {
+        xform.incXPosBy(-deltaX);
+        if (xform.getXPos() < 11) {  // this is the left-bound of the window
+            gEngine.GameLoop.stop();
+        }
+    }
+
     // continously change texture tinting
-    var c = this._mPortal.GetColor();
+    var c = this.mPortal.getColor();
     var ca = c[3] + deltaX;
-    if (ca > 1) ca = 0;
+    if (ca > 1) {
+        ca = 0;
+    }
     c[3] = ca;
 };

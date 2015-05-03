@@ -28,7 +28,7 @@ MyGame.prototype.loadScene = function () {
     gEngine.AudioClips.loadAudio(this.kCue);
 };
 
-MyGame.prototype.unloadScene = function () {
+MyGame.prototype.draw = function () {
     // Step A: Game loop not running, unload all assets
     // stop the background audio
     gEngine.AudioClips.stopBackgroundAudio();
@@ -86,7 +86,7 @@ MyGame.prototype.draw = function () {
     this.mHero.draw(this.mCamera.getVPMatrix());
 };
 
-// The Update function, updates the application state. Make sure to _NOT_ draw
+// The update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGame.prototype.update = function () {
     // For this very simple, let's only allow the movement of hero, 

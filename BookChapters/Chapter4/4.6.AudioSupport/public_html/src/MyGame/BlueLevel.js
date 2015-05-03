@@ -74,7 +74,7 @@ BlueLevel.prototype.draw = function () {
     }
 };
 
-// The Update function, updates the application state. Make sure to _NOT_ draw
+// The update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 BlueLevel.prototype.update = function () {
     // For this very simple game, let's move the first square

@@ -1,16 +1,24 @@
-/* 
+/* File: GameObject.js 
  *
+ * Abstracts a game object's behavior and apparance
  */
+
+/*jslint node: true, vars: true */
+/*global  */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
+"use strict";  // Operate in Strict mode such that variables must be declared before used!
+
 function GameObject(renderableObj) {
-    this._mRenderComponent = renderableObj;
-};
+    this.mRenderComponent = renderableObj;
+}
 
-GameObject.prototype.GetXform = function(){return this._mRenderComponent.GetXform();};
+GameObject.prototype.getXform = function () { return this.mRenderComponent.getXform(); };
 
-GameObject.prototype.update = function(){};
+GameObject.prototype.update = function () {};
 
-GameObject.prototype.GetRenderable = function() { return this._mRenderComponent; }
+GameObject.prototype.getRenderable = function () { return this.mRenderComponent; };
 
-GameObject.prototype.Draw = function(aCamera){
-    this._mRenderComponent.Draw(aCamera);
+GameObject.prototype.draw = function (aCamera) {
+    this.mRenderComponent.draw(aCamera);
 };

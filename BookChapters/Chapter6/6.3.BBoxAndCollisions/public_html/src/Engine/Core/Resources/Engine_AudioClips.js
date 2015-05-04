@@ -3,118 +3,110 @@
  * Provides support for loading and unloading of Audio clips
  */
 
+/*jslint node: true, vars: true, evil: true */
+/*global gEngine: false, SimpleShader: false, window: false, alert: false, XMLHttpRequest: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 var gEngine = gEngine || { };
 
-gEngine.AudioClips = function()
-{    
-    var _mAudioContext = null;
-    var _mBgAudioNode = null;
-    
+gEngine.AudioClips = (function () {
+    var mAudioContext = null;
+    var mBgAudioNode = null;
+
     /*
      * Initializes the audio context to play sounds.
      */
-    var InitAudioContext = function()
-    {
-        try
-        {
+    var initAudioContext = function () {
+        try {
             var AudioContext = window.AudioContext || window.webkitAudioContext;
-            _mAudioContext = new AudioContext();
-        }
-        catch(e) {alert("Web Audio Is not supported.");};
+            mAudioContext = new AudioContext();
+        } catch (e) {alert("Web Audio Is not supported."); }
     };
-    
-    
-    var LoadAudio = function (clipName)
-    {
-        if (!(gEngine.ResourceMap.IsAssetLoaded(clipName)))
-        {   
+
+    var loadAudio = function (clipName) {
+        if (!(gEngine.ResourceMap.isAssetLoaded(clipName))) {
             // Update resources in load counter.
-            gEngine.ResourceMap.AsyncLoadRequested(clipName);
-            
+            gEngine.ResourceMap.asyncLoadRequested(clipName);
+
             // Asyncrounsly request the data from server.
             var req = new XMLHttpRequest();
+            req.onreadystatechange = function () {
+                if ((req.readyState === 4) && (req.status !== 200)) {
+                    alert(clipName + ": loading failed! [Hint: you cannot double click index.html to run this project. " +
+                        "The index.html file must be loaded by a web-server.]");
+                }
+            };
             req.open('GET', clipName, true);
             // Specify that the request retrieves binary data.
             req.responseType = 'arraybuffer';
-            
-            req.onload = function () 
-            {
+
+            req.onload = function () {
                 // Asyncronously decode, then call the function in parameter.
-                _mAudioContext.decodeAudioData(req.response,
-                    function(buffer)
-                    {
-                        gEngine.ResourceMap.AsyncLoadCompleted(clipName, buffer);
+                mAudioContext.decodeAudioData(req.response,
+                    function (buffer) {
+                        gEngine.ResourceMap.asyncLoadCompleted(clipName, buffer);
                     }
-                );
+                    );
             };
-            
             req.send();
         } else {
-            gEngine.ResourceMap.IncAssetRefCount(clipName);
+            gEngine.ResourceMap.incAssetRefCount(clipName);
         }
     };
-    
-    var UnloadAudio = function(clipName) {
-        gEngine.ResourceMap.UnloadAsset(clipName);
+
+    var unloadAudio = function (clipName) {
+        gEngine.ResourceMap.unloadAsset(clipName);
     };
-    
-    var PlayACue = function(clipName)
-    {
-        var clipInfo = gEngine.ResourceMap.RetrieveAsset(clipName);
-        if (clipInfo !== null)
-        {
+
+    var playACue = function (clipName) {
+        var clipInfo = gEngine.ResourceMap.retrieveAsset(clipName);
+        if (clipInfo !== null) {
             // SourceNodes are one use only.
-            var sourceNode = _mAudioContext.createBufferSource();
+            var sourceNode = mAudioContext.createBufferSource();
             sourceNode.buffer = clipInfo;
-            sourceNode.connect(_mAudioContext.destination);
+            sourceNode.connect(mAudioContext.destination);
             sourceNode.start(0);
         }
     };
-    
-    var PlayBackgroundAudio = function(clipName)
-    {
-        var clipInfo = gEngine.ResourceMap.RetrieveAsset(clipName);
-        if (clipInfo !== null)
-        {
+
+    var playBackgroundAudio = function (clipName) {
+        var clipInfo = gEngine.ResourceMap.retrieveAsset(clipName);
+        if (clipInfo !== null) {
             // Stop audio if playing.
-            StopBackgroundAudio();
-            
-            _mBgAudioNode = _mAudioContext.createBufferSource();
-            _mBgAudioNode.buffer = clipInfo;
-            _mBgAudioNode.connect(_mAudioContext.destination);
-            _mBgAudioNode.loop = true;
-            _mBgAudioNode.start(0);
+            stopBackgroundAudio();
+
+            mBgAudioNode = mAudioContext.createBufferSource();
+            mBgAudioNode.buffer = clipInfo;
+            mBgAudioNode.connect(mAudioContext.destination);
+            mBgAudioNode.loop = true;
+            mBgAudioNode.start(0);
         }
     };
-    
-    var StopBackgroundAudio = function()
-    {
+
+    var stopBackgroundAudio = function () {
         // Check if the audio is  playing.
-        if(_mBgAudioNode !== null)
-        {
-            _mBgAudioNode.stop(0);
-            _mBgAudioNode = null;
+        if (mBgAudioNode !== null) {
+            mBgAudioNode.stop(0);
+            mBgAudioNode = null;
         }
     };
-    
-    var IsBackgroundAudioPlaying = function()
-    {
-        return (_mBgAudioNode !== null);
+
+    var isBackgroundAudioPlaying = function () {
+        return (mBgAudioNode !== null);
     };
-    
+
     // Public interface for this object. Anything not in here will
     // not be accessable.
-    var oPublic =
-    {
-        InitAudioContext: InitAudioContext,
-        LoadAudio: LoadAudio,
-        UnloadAudio: UnloadAudio,
-        PlayACue: PlayACue,
-        PlayBackgroundAudio: PlayBackgroundAudio,
-        StopBackgroundAudio: StopBackgroundAudio,
-        IsBackgroundAudioPlaying: IsBackgroundAudioPlaying
+    var mPublic = {
+        initAudioContext: initAudioContext,
+        loadAudio: loadAudio,
+        unloadAudio: unloadAudio,
+        playACue: playACue,
+        playBackgroundAudio: playBackgroundAudio,
+        stopBackgroundAudio: stopBackgroundAudio,
+        isBackgroundAudioPlaying: isBackgroundAudioPlaying
     };
-    return oPublic;
-}();
+    return mPublic;
+}());

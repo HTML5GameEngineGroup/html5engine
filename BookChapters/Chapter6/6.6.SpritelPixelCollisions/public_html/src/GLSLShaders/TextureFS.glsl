@@ -7,7 +7,7 @@ precision mediump float;
 // Must be set outside the shader.
 uniform sampler2D uSampler;
 
-// Color of the object
+// Color of pixel
 uniform vec4 uPixelColor;  
 
 // The "varying" keyword is for signifing that the texture coordinate will be
@@ -23,13 +23,15 @@ void main(void)  {
     // e.g.  tint the transparent area also
     // vec4 result = c * (1.0-uPixelColor.a) + uPixelColor * uPixelColor.a;
     
-    // tint the textured area, and leave transparent area as defined by the texture
+    // or: tint the textured area, and leave transparent area as defined by the texture
     vec3 r = vec3(c) * (1.0-uPixelColor.a) + vec3(uPixelColor) * uPixelColor.a;
     vec4 result = vec4(r, c.a);
     
-    // ignore pixel tinting ...
+    // or: ignore pixel tinting ...
     // vec4 result = c;
+
+    // or: simply multiply pixel color with texture color
+    // vec4 result = c * uPixelColor;
 
     gl_FragColor = result;
 }
-        

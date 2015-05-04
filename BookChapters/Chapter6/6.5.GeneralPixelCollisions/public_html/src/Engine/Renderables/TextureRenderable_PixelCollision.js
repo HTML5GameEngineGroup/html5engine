@@ -1,26 +1,37 @@
-TextureRenderable.prototype.PixelTouches = function(other, wcTouchPos) {
+/* File: TextureRenderable_PixelCollision.js 
+ *
+ * Implements the pixelTouches() and related supporting funcitons of TextureRenderable
+ */
+
+/*jslint node: true, vars: true */
+/*global gEngine, TextureRenderable, vec2 */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
+"use strict";  // Operate in Strict mode such that variables must be declared before used!
+
+TextureRenderable.prototype.pixelTouches = function(other, wcTouchPos) {
     var pixelTouch = false;
-    var xIndex = 0;
+    var xIndex = 0, yIndex;
     var otherIndex = [0, 0];
-    
+
     var xDir = [1, 0];
     var yDir = [0, 1];
     var otherXDir = [1, 0];
     var otherYDir = [0, 1];
-    vec2.rotate(xDir, xDir, this._mXform.GetRotationInRad());
-    vec2.rotate(yDir, yDir, this._mXform.GetRotationInRad());
-    vec2.rotate(otherXDir, otherXDir, other._mXform.GetRotationInRad());
-    vec2.rotate(otherYDir, otherYDir, other._mXform.GetRotationInRad());
-        
-    while ((!pixelTouch) && (xIndex<this._mTexWidth)) {
-        var yIndex = 0;
-        while ((!pixelTouch) && (yIndex<this._mTexHeight)) {
-            if (this.GetTexelAlpha(xIndex, yIndex) > 0) {
-                this.IndexToWCPosition(wcTouchPos, xIndex, yIndex, xDir, yDir);
-                other.WCPositionToIndex(otherIndex, wcTouchPos, otherXDir, otherYDir);
-                if ((otherIndex[0] > 0) && (otherIndex[0] < other._mTexWidth) &&
-                    (otherIndex[1] > 0) && (otherIndex[1] < other._mTexHeight)) {
-                    pixelTouch = other.GetTexelAlpha(otherIndex[0], otherIndex[1]) > 0;
+    vec2.rotate(xDir, xDir, this.mXform.getRotationInRad());
+    vec2.rotate(yDir, yDir, this.mXform.getRotationInRad());
+    vec2.rotate(otherXDir, otherXDir, other.mXform.getRotationInRad());
+    vec2.rotate(otherYDir, otherYDir, other.mXform.getRotationInRad());
+
+    while ((!pixelTouch) && (xIndex < this.mTexWidth)) {
+        yIndex = 0;
+        while ((!pixelTouch) && (yIndex < this.mTexHeight)) {
+            if (this.pixelTouch(xIndex, yIndex) > 0) {
+                this.indexToWCPosition(wcTouchPos, xIndex, yIndex, xDir, yDir);
+                other.wcPositionToIndex(otherIndex, wcTouchPos, otherXDir, otherYDir);
+                if ((otherIndex[0] > 0) && (otherIndex[0] < other.mTexWidth) &&
+                    (otherIndex[1] > 0) && (otherIndex[1] < other.mTexHeight)) {
+                    pixelTouch = other.pixelTouch(otherIndex[0], otherIndex[1]) > 0;
                 }
             }
             yIndex++;
@@ -30,46 +41,47 @@ TextureRenderable.prototype.PixelTouches = function(other, wcTouchPos) {
     return pixelTouch;
 };
 
-TextureRenderable.prototype.SetColorArray = function () {
-    if (this._mColorArray === null)
-        this._mColorArray = gEngine.Textures.GetColorArray(this._mTexture);
+TextureRenderable.prototype.setColorArray = function () {
+    if (this.mColorArray === null) {
+        this.mColorArray = gEngine.Textures.getColorArray(this.mTexture);
+    }
 };
 
-TextureRenderable.prototype.GetTexelAlpha = function (x, y) {
+TextureRenderable.prototype.pixelTouch = function (x, y) {
     x = x * 4;
     y = y * 4;
-    return this._mColorArray[(y*this._mTextureInfo.mWidth) + x  + 3];
+    return this.mColorArray[(y * this.mTextureInfo.mWidth) + x  + 3];
 };
 
-TextureRenderable.prototype.WCPositionToIndex = function(returnIndex, wcPos, xDir, yDir) {
+TextureRenderable.prototype.wcPositionToIndex = function (returnIndex, wcPos, xDir, yDir) {
     // use wcPos to compute the corresponding returnIndex[0 and 1]
     var delta = [];
-    vec2.sub(delta, wcPos, this._mXform.GetPosition());
+    vec2.sub(delta, wcPos, this.mXform.getPosition());
     var xDisp = vec2.dot(delta, xDir);
     var yDisp = vec2.dot(delta, yDir);
-    returnIndex[0] = this._mTexWidth  * (xDisp / this._mXform.GetWidth());
-    returnIndex[1] = this._mTexHeight * (yDisp / this._mXform.GetHeight());
-    
-    // recall that xForm.GetPosition() returns lower-left corner, yet
+    returnIndex[0] = this.mTexWidth  * (xDisp / this.mXform.getWidth());
+    returnIndex[1] = this.mTexHeight * (yDisp / this.mXform.getHeight());
+
+    // recall that xForm.getPosition() returns lower-left corner, yet
     // Texture origin is at lower-left corner!
-    returnIndex[0] += this._mTexWidth / 2;
-    returnIndex[1] += this._mTexHeight / 2;
-    
+    returnIndex[0] += this.mTexWidth / 2;
+    returnIndex[1] += this.mTexHeight / 2;
+
     returnIndex[0] = Math.floor(returnIndex[0]);
     returnIndex[1] = Math.floor(returnIndex[1]);
 };
 
-TextureRenderable.prototype.IndexToWCPosition = function(returnWCPos, i, j, xDir, yDir) {
-    var x = i * this._mXform.GetWidth() / (this._mTexWidth - 1);
-    var y = j * this._mXform.GetHeight() / (this._mTexHeight -1);
-    var xDisp = x - (this._mXform.GetWidth() * 0.5);
-    var yDisp = y - (this._mXform.GetHeight() * 0.5);
+TextureRenderable.prototype.indexToWCPosition = function (returnWCPos, i, j, xDir, yDir) {
+    var x = i * this.mXform.getWidth() / (this.mTexWidth - 1);
+    var y = j * this.mXform.getHeight() / (this.mTexHeight - 1);
+    var xDisp = x - (this.mXform.getWidth() * 0.5);
+    var yDisp = y - (this.mXform.getHeight() * 0.5);
     var xDirDisp = [];
     var yDirDisp = [];
-    
+
     vec2.scale(xDirDisp, xDir, xDisp);
     vec2.scale(yDirDisp, yDir, yDisp);
-    vec2.add(returnWCPos, this._mXform.GetPosition(), xDirDisp);
+    vec2.add(returnWCPos, this.mXform.getPosition(), xDirDisp);
     vec2.add(returnWCPos, returnWCPos, yDirDisp);
 };
 

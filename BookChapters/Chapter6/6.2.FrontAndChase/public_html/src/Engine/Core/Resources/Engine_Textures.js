@@ -3,35 +3,35 @@
  * Provides support for loading and unloading of textures (images)
  */
 
+/*jslint node: true, vars: true */
+/*global gEngine: false, Image: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 var gEngine = gEngine || { };
 
-function TextureInfo(name, w, h, id)
-{
+function TextureInfo(name, w, h, id) {
     this.mName = name;
     this.mWidth = w;
     this.mHeight = h;
     this.mGLTexID = id;
-};
+}
 
-
-gEngine.Textures = function()
-{        
+gEngine.Textures = (function () {
     /*
      * This converts an image to the webGL texture format. 
      * This should only be called once the texture is loaded.
      */
-    var _ProcessLoadedImage = function(textureName, image)
-    {
-        var gl = gEngine.Core.GetGL();
-        
+    var _processLoadedImage = function (textureName, image) {
+        var gl = gEngine.Core.getGL();
+
         // Generate a texture reference to the webGL context
         var textureID = gl.createTexture();
-        
+
         // bind the texture reference with the current texture functionality in the webGL
         gl.bindTexture(gl.TEXTURE_2D, textureID);
-        
+
         // Load the texture into the texture data structure with descriptive info.
         // Parameters:
         //  1: Which "binding point" or target the texture is being loaded to.
@@ -44,85 +44,80 @@ gEngine.Textures = function()
 
         // Creates a mipmap for this texture.
         gl.generateMipmap(gl.TEXTURE_2D);
-        
+
         // Tells WebGL that we are done manipulating data at the mGL.TEXTURE_2D target.
         gl.bindTexture(gl.TEXTURE_2D, null);
-        
+
         var texInfo = new TextureInfo(textureName, image.naturalWidth, image.naturalHeight, textureID);
-        gEngine.ResourceMap.AsyncLoadCompleted(textureName, texInfo);
+        gEngine.ResourceMap.asyncLoadCompleted(textureName, texInfo);
     };
 
     // Loads an texture so that it can be drawn.
     // If already in the map, will do nothing.
-    var LoadTexture = function(textureName)
-    {
-        if (!(gEngine.ResourceMap.IsAssetLoaded(textureName)))
-        {
+    var loadTexture = function (textureName) {
+        if (!(gEngine.ResourceMap.isAssetLoaded(textureName))) {
             // Create new Texture object.
             var img = new Image();
-            
+
             // Update resources in loading counter.
-            gEngine.ResourceMap.AsyncLoadRequested(textureName);
-            
+            gEngine.ResourceMap.asyncLoadRequested(textureName);
+
             // When the texture loads, convert it to the openmGL format then put
             // it back into the mTextureMap.
             img.onload = function () {
-                _ProcessLoadedImage(textureName, img);
+                _processLoadedImage(textureName, img);
             };
             img.src = textureName;
         } else {
-            gEngine.ResourceMap.IncAssetRefCount(textureName);
+            gEngine.ResourceMap.incAssetRefCount(textureName);
         }
     };
-    
+
     // Remove the reference to allow associated memory 
     // be available for subsequent garbage collection
-    var UnloadTexture = function(textureName)
-    {
-        var gl = gEngine.Core.GetGL();
-        var texInfo = gEngine.ResourceMap.RetrieveAsset(textureName);
+    var unloadTexture = function (textureName) {
+        var gl = gEngine.Core.getGL();
+        var texInfo = gEngine.ResourceMap.retrieveAsset(textureName);
         gl.deleteTexture(texInfo.mGLTexID);
-        gEngine.ResourceMap.UnloadAsset(textureName);
+        gEngine.ResourceMap.unloadAsset(textureName);
     };
-    
-    var ActivateTexture = function(textureName) {
-        var gl = gEngine.Core.GetGL();
-        var texInfo = gEngine.ResourceMap.RetrieveAsset(textureName);
-        
+
+    var activateTexture = function (textureName) {
+        var gl = gEngine.Core.getGL();
+        var texInfo = gEngine.ResourceMap.retrieveAsset(textureName);
+
         // Binds our texture reference to the current webGL texture functionality
         gl.bindTexture(gl.TEXTURE_2D, texInfo.mGLTexID);
 
         // Handles how magnification filters will work.
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_NEAREST);
-        
+
         // For pixel-graphics where you want the texture to look "sharp" do the following:
         // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
         // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-        
+
         // Prevent texture wrapping.
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); 
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     };
-    
-    var DeActivateTexture = function() {
-       var gl = gEngine.Core.GetGL();
-       gl.bindTexture(gl.TEXTURE_2D, null);
+
+    var deactivateTexture = function () {
+        var gl = gEngine.Core.getGL();
+        gl.bindTexture(gl.TEXTURE_2D, null);
     };
-    
-    var GetTextureInfo = function(textureName)
-    {
-        return gEngine.ResourceMap.RetrieveAsset(textureName);
+
+    var getTextureInfo = function (textureName) {
+        return gEngine.ResourceMap.retrieveAsset(textureName);
     };
     // Public interface for this object. Anything not in here will
     // not be accessable.
-    var oPublic =
-    {
-        LoadTexture: LoadTexture,
-        UnloadTexture: UnloadTexture,
-        ActivateTexture: ActivateTexture,
-        DeActivateTexture: DeActivateTexture,
-        GetTextureInfo: GetTextureInfo
+    var mPublic = {
+        loadTexture: loadTexture,
+        unloadTexture: unloadTexture,
+        activateTexture: activateTexture,
+        deactivateTexture: deactivateTexture,
+        getTextureInfo: getTextureInfo
     };
-    return oPublic;
-}();
+    return mPublic;
+}());

@@ -2,100 +2,100 @@
  * File: MyGame.js 
  * This is the the logic of our game. 
  */
+
+/*jslint node: true, vars: true */
+/*global gEngine, Scene, GameObjectSet, TextureObject, Camera, vec2,
+  FontRenderable, DyePack, Hero, Minion, Brain,
+  GameObject */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function MyGame()
-{   
-    this._kMinionSprite = "resources/minion_sprite.png";
-    this._kMinionCollector = "resources/minion_collector.png";
-    this._kMinionPortal = "resources/minion_portal.png";
+function MyGame() {
+    this.kMinionSprite = "assets/minion_sprite.png";
+    this.kMinionCollector = "assets/minion_collector.png";
+    this.kMinionPortal = "assets/minion_portal.png";
     // The camera to view the rectangles
-    this._mCamera = null;
-    
-    this._mMsg = null;
-    
-    this._mCollector = null;
-    this._mPortal = null;
-};
-gEngine.Core.InheritPrototype(MyGame, Scene);
+    this.mCamera = null;
 
-MyGame.prototype.LoadScene = function() 
-{
-   gEngine.Textures.LoadTexture(this._kMinionSprite);
-   gEngine.Textures.LoadTexture(this._kMinionCollector);
-   gEngine.Textures.LoadTexture(this._kMinionPortal);
-};
+    this.mMsg = null;
 
-MyGame.prototype.UnloadScene = function() 
-{  
-    gEngine.Textures.UnloadTexture(this._kMinionSprite);
-    gEngine.Textures.UnloadTexture(this._kMinionCollector);
-    gEngine.Textures.UnloadTexture(this._kMinionPortal);
+    this.mCollector = null;
+    this.mPortal = null;
+}
+gEngine.Core.inheritPrototype(MyGame, Scene);
+
+MyGame.prototype.loadScene = function () {
+    gEngine.Textures.loadTexture(this.kMinionSprite);
+    gEngine.Textures.loadTexture(this.kMinionCollector);
+    gEngine.Textures.loadTexture(this.kMinionPortal);
 };
 
-MyGame.prototype.Initialize = function() 
-{
+MyGame.prototype.unloadScene = function () {
+    gEngine.Textures.unloadTexture(this.kMinionSprite);
+    gEngine.Textures.unloadTexture(this.kMinionCollector);
+    gEngine.Textures.unloadTexture(this.kMinionPortal);
+};
+
+MyGame.prototype.initialize = function () {
     // Step A: set up the cameras
-    this._mCamera = new Camera(
-            vec2.fromValues(50, 37.5), // position of the camera
-            100,                       // width of camera
-            [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
-            );
-    this._mCamera.SetBackgroundColor([0.8, 0.8, 0.8, 1]);
+    this.mCamera = new Camera(
+        vec2.fromValues(50, 37.5), // position of the camera
+        100,                       // width of camera
+        [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
+    );
+    this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
-            
-    this._mDyePack = new DyePack(this._kMinionSprite);
-    this._mDyePack.SetVisibility(false);
-    
-    this._mCollector = new TextureObject(this._kMinionCollector, 70, 30, 30, 30);
-    this._mPortal = new TextureObject(this._kMinionPortal, 50, 30, 10, 10);
-        
-    this._mMsg = new FontRenderable("Status Message");
-    this._mMsg.SetColor([0, 0, 0, 1]);
-    this._mMsg.GetXform().SetPosition(1, 2);
-    this._mMsg.SetTextHeight(3);
+
+    this.mDyePack = new DyePack(this.kMinionSprite);
+    this.mDyePack.setVisibility(false);
+
+    this.mCollector = new TextureObject(this.kMinionCollector, 70, 30, 30, 30);
+    this.mPortal = new TextureObject(this.kMinionPortal, 50, 30, 10, 10);
+
+    this.mMsg = new FontRenderable("Status Message");
+    this.mMsg.setColor([0, 0, 0, 1]);
+    this.mMsg.getXform().setPosition(1, 2);
+    this.mMsg.setTextHeight(3);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
 // importantly, make sure to _NOT_ change any state.
-MyGame.prototype.Draw = function() 
-{   
+MyGame.prototype.draw = function () {
     // Step A: clear the canvas
-    gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
-    
+    gEngine.Core.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
+
     // Step  B: Activate the drawing Camera
-    this._mCamera.SetupViewProjection();
-    
-        // Step  C: Draw everything
-        this._mPortal.Draw(this._mCamera);
-        this._mCollector.Draw(this._mCamera);
-        this._mDyePack.Draw(this._mCamera);
-        this._mMsg.Draw(this._mCamera);
+    this.mCamera.setupViewProjection();
+
+    // Step  C: Draw everything
+    this.mPortal.draw(this.mCamera);
+    this.mCollector.draw(this.mCamera);
+    this.mDyePack.draw(this.mCamera);
+    this.mMsg.draw(this.mCamera);
 };
 
-// The Update function, updates the application state. Make sure to _NOT_ draw
+// The update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
-MyGame.prototype.Update = function()
-{
+MyGame.prototype.update = function () {
     var msg = "No Collision";
-    
-    this._mPortal.Update(
-            gEngine.Input.Keys.W, gEngine.Input.Keys.S,
-            gEngine.Input.Keys.A, gEngine.Input.Keys.D);
-    this._mCollector.Update(
-            gEngine.Input.Keys.Up, gEngine.Input.Keys.Down,
-            gEngine.Input.Keys.Left, gEngine.Input.Keys.Right);
+
+    this.mPortal.update(gEngine.Input.keys.W, gEngine.Input.keys.S,
+        gEngine.Input.keys.A, gEngine.Input.keys.D);
+    this.mCollector.update(gEngine.Input.keys.Up, gEngine.Input.keys.Down,
+        gEngine.Input.keys.Left, gEngine.Input.keys.Right);
 
     var h = [];
-    
+
     // Portal's resultion is 1/16 that of Collector!
-    // if (this._mCollector.PixelTouches(this._mPortal, h)) {  // <-- VERY EXPENSIVE!!
-    if (this._mPortal.PixelTouches(this._mCollector, h)) {
+    // if (this.mCollector.pixelTouches(this.mPortal, h)) {  // <-- VERY EXPENSIVE!!
+    if (this.mPortal.pixelTouches(this.mCollector, h)) {
         msg = "Collided!: (" + h[0].toPrecision(4) + " " + h[1].toPrecision(4) + ")";
-        this._mDyePack.SetVisibility(true);
-        this._mDyePack.GetXform().SetXPos(h[0]);
-        this._mDyePack.GetXform().SetYPos(h[1]);
-    } else 
-        this._mDyePack.SetVisibility(false);
-    this._mMsg.SetText(msg);
+        this.mDyePack.setVisibility(true);
+        this.mDyePack.getXform().setXPos(h[0]);
+        this.mDyePack.getXform().setYPos(h[1]);
+    } else {
+        this.mDyePack.setVisibility(false);
+    }
+    this.mMsg.setText(msg);
 };

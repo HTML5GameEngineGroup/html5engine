@@ -4,32 +4,34 @@
  * Encapsulate the Shader and VertexBuffer into the same object (and will include
  * other attributes later) to represent a renderable object on the game screen.
  */
+/*jslint node: true, vars: true */
+/*global gEngine: false, Transform: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
 
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function Renderable()
-{
-    this._mShader = gEngine.DefaultResources.GetConstColorShader();  // this is the default
-    this._mXform = new Transform(); // transform that moves this object around
-    this._mColor = [1, 1, 1, 1];
-};
+function Renderable() {
+    this.mShader = gEngine.DefaultResources.getConstColorShader();  // this is the default
+    this.mXform = new Transform(); // transform that moves this object around
+    this.mColor = [1, 1, 1, 1];    // color of pixel
+}
 
 //<editor-fold desc="Public Methods">
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
-Renderable.prototype.Draw = function(aCamera) {
-    var gl = gEngine.Core.GetGL();    
-    this._mShader.ActivateShader(this._mColor, aCamera);  // always activate the shader first!
-    this._mShader.LoadObjectTransform(this._mXform.GetXform());
+Renderable.prototype.draw = function (aCamera) {
+    var gl = gEngine.Core.getGL();
+    this.mShader.activateShader(this.mColor, aCamera);  // always activate the shader first!
+    this.mShader.loadObjectTransform(this.mXform.getXform());
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 };
 
-Renderable.prototype.GetXform = function() { return this._mXform; };
-Renderable.prototype.SetColor = function(color) { this._mColor = color; };
-Renderable.prototype.GetColor = function() { return this._mColor; };
+Renderable.prototype.getXform = function () { return this.mXform; };
+Renderable.prototype.setColor = function (color) { this.mColor = color; };
+Renderable.prototype.getColor = function () { return this.mColor; };
 //--- end of Public Methods
 //</editor-fold>
 
-Renderable.prototype._SetShader = function(s) { this._mShader = s; };
+Renderable.prototype._setShader = function (s) { this.mShader = s; };

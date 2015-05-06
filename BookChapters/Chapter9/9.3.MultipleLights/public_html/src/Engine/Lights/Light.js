@@ -1,41 +1,42 @@
 /* 
- * Simple light source
- *      Assumes LightShader has an array of Light, the name of the array is assum to be "uLights[]"
+ * File: Light.js
+ * Defines a simple light source
  */
 
+/*jslint node: true, vars: true, bitwise: true */
+/*global vec3, vec4 */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+"use strict";
+
 // Constructor
-function Light() { 
-    this._mColor = vec4.fromValues(1, 1, 1, 1);  // light color
-    this._mPosition = vec4.fromValues(0, 0, 5, 1); // light position in WC
-    this._mNear = 5;  // within Near is fully lighted
-    this._mFar = 10;  // farther than Far is not lighted
-    this._mIntensity = 1;
-    this._mIsOn = true;
-};
+function Light() {
+    this.mColor = vec4.fromValues(0.1, 0.1, 0.1, 1);  // light color
+    this.mPosition = vec3.fromValues(0, 0, 5); // light position in WC
+    this.mRadius = 10;  // effective radius in WC
+    this.mIsOn = true;
+}
 
 //<editor-fold desc="public functions">
 // simple setters and getters
-Light.prototype.SetColor = function(c) { this._mColor = vec4.clone(c); };
-Light.prototype.GetColor = function() { return this._mColor; };
+Light.prototype.setColor = function (c) { this.mColor = vec4.clone(c); };
+Light.prototype.getColor = function () { return this.mColor; };
 
-Light.prototype.Set2DPosition = function(p) { this._mPosition = vec3.fromValues(p[0], p[1], this._mPosition[2]); };
-Light.prototype.SetXPos = function(x) { this._mPosition[0] = x; };
-Light.prototype.SetYPos = function(y) { this._mPosition[1] = y; };
-Light.prototype.SetZPos = function(z) { this._mPosition[2] = z; };
-Light.prototype.GetPosition = function() { return this._mPosition; };
+Light.prototype.set2DPosition = function (p) { this.mPosition = vec3.fromValues(p[0], p[1], this.mPosition[2]); };
+Light.prototype.setXPos = function (x) { this.mPosition[0] = x; };
+Light.prototype.setYPos = function (y) { this.mPosition[1] = y; };
+Light.prototype.setZPos = function (z) { this.mPosition[2] = z; };
+Light.prototype.getPosition = function () { return this.mPosition; };
 
-Light.prototype.SetNear = function(r) { this._mNear = r; };
-Light.prototype.GetNear = function() { return this._mNear; };
+Light.prototype.setNear = function (r) { this.mNear = r; };
+Light.prototype.getNear = function () { return this.mNear; };
 
-Light.prototype.SetFar = function(r) { this._mFar = r; };
-Light.prototype.GetFar = function() { return this._mFar; };
+Light.prototype.setFar = function (r) { this.mFar = r; };
+Light.prototype.getFar = function () { return this.mFar; };
 
-Light.prototype.SetIntensity = function(i) { this._mIntensity = i; };
-Light.prototype.GetIntensity = function() { return this._mIntensity; };
+Light.prototype.setIntensity = function (i) { this.mIntensity = i; };
+Light.prototype.getIntensity = function () { return this.mIntensity; };
 
-
-Light.prototype.LightIsOn = function() { return this._mIsOn;};
-Light.prototype.SetLightTo = function(on) { this._mIsOn = on; };
-
+Light.prototype.setLightTo = function (on) { this.mIsOn = on; };
+Light.prototype.isLightOn = function () { return this.mIsOn; };
 
 //</editor-fold>

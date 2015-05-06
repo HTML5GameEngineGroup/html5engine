@@ -1,35 +1,49 @@
-/* 
+/* File: Hero.js 
+ *
+ * Creates and initializes the Hero (Dye)
+ * overrides the update funciton of GameObject to define
+ * simple Dye behavior
  */
-function Hero(spriteTexture, normalMap, atX, atY, lgtSet) {
-    this._kDelta = 0.3;
-   
-    if (normalMap !== null) {
-        this._mDye = new IllumRenderable(spriteTexture, normalMap);
-        this._mDye.SetNormalMapPixelPositions(0, 120, 0, 180);  // left, right, bot, top
-    } else {
-        this._mDye = new LightRenderable(spriteTexture);
-    }
-    this._mDye.SetColor([1, 1, 1, 0]);
-    this._mDye.GetXform().SetPosition(atX, atY);
-    this._mDye.GetXform().SetSize(18, 24);
-    this._mDye.SetTexPixelPositions(0, 120, 0, 180);
-        
-    GameObject.call(this, this._mDye);
-    
-    for (var i = 0; i<4; i++)
-        this._mDye.AddLight(lgtSet.GetLightAt(i));
-};
-gEngine.Core.InheritPrototype(Hero, GameObject);
 
-Hero.prototype.Update = function() {
+/*jslint node: true, vars: true */
+/*global gEngine, GameObject, LightRenderable, IllumRenderable */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
+"use strict";  // Operate in Strict mode such that variables must be declared before used!
+
+function Hero(spriteTexture, normalMap, atX, atY, lgtSet) {
+    this.kDelta = 0.3;
+    if (normalMap !== null) {
+        this.mDye = new IllumRenderable(spriteTexture, normalMap);
+    } else {
+        this.mDye = new LightRenderable(spriteTexture);
+    }
+    this.mDye.setColor([1, 1, 1, 0]);
+    this.mDye.getXform().setPosition(atX, atY);
+    this.mDye.getXform().setSize(18, 24);
+    this.mDye.setTexPixelPositions(0, 120, 0, 180);
+
+    GameObject.call(this, this.mDye);
+    var i;
+    for (i = 0; i < 4; i++) {
+        this.mDye.addLight(lgtSet.getLightAt(i));
+    }
+}
+gEngine.Core.inheritPrototype(Hero, GameObject);
+
+Hero.prototype.update = function () {
     // control by WSAD
-    var xform = this.GetXform();
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.W))
-        xform.IncYPosBy(this._kDelta);
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.S))
-        xform.IncYPosBy(-this._kDelta);
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.A)) 
-        xform.IncXPosBy(-this._kDelta);
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.D)) 
-        xform.IncXPosBy(this._kDelta);
+    var xform = this.getXform();
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.W)) {
+        xform.incYPosBy(this.kDelta);
+    }
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.S)) {
+        xform.incYPosBy(-this.kDelta);
+    }
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.A)) {
+        xform.incXPosBy(-this.kDelta);
+    }
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.D)) {
+        xform.incXPosBy(this.kDelta);
+    }
 };

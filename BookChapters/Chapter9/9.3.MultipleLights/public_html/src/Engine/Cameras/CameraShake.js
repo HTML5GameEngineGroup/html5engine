@@ -1,24 +1,35 @@
+/* 
+ * File: CameraShake.js
+ * Defines a dampped simple harmonic motion to simulate camera shakie
+ */
+
+/*jslint node: true, vars: true, bitwise: true */
+/*global gEngine, vec2, ShakePosition */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+"use strict";
+
 //
+////
 // dampped simple harmonic shake motion
 //
 // state is the CameraState to be shaked.
-function CameraShake(state, xDelta, yDelta, shakeFrequency, shakeDuration) {    
-    this._mOrgCenter = vec2.clone(state.GetCenter());
-    this._mShakeCenter = vec2.clone(this._mOrgCenter);
-    this._mShake = new ShakePosition(xDelta, yDelta, shakeFrequency, shakeDuration);
+function CameraShake(state, xDelta, yDelta, shakeFrequency, shakeDuration) {
+    this.mOrgCenter = vec2.clone(state.getCenter());
+    this.mShakeCenter = vec2.clone(this.mOrgCenter);
+    this.mShake = new ShakePosition(xDelta, yDelta, shakeFrequency, shakeDuration);
+}
+
+CameraShake.prototype.updateShakeState = function () {
+    var s = this.mShake.getShakeResults();
+    vec2.add(this.mShakeCenter, this.mOrgCenter, s);
 };
 
-CameraShake.prototype.UpdateShakeState = function() {
-    var s = this._mShake.GetShakeResults();
-    vec2.add(this._mShakeCenter, this._mOrgCenter, s);
+CameraShake.prototype.shakeDone = function () {
+    return this.mShake.shakeDone();
 };
 
-CameraShake.prototype.ShakeDone = function() { 
-    return this._mShake.ShakeDone();
-};
-
-CameraShake.prototype.GetCenter = function() { return this._mShakeCenter; };
-CameraShake.prototype.SetRefCenter = function(c) { 
-    this._mOrgCenter[0] = c[0];
-    this._mOrgCenter[1] = c[1];
+CameraShake.prototype.getCenter = function () { return this.mShakeCenter; };
+CameraShake.prototype.setRefCenter = function (c) {
+    this.mOrgCenter[0] = c[0];
+    this.mOrgCenter[1] = c[1];
 };

@@ -7,7 +7,7 @@ precision mediump float;
 // Must be set outside the shader.
 uniform sampler2D uSampler;
 
-// Color of the object
+// Color of pixel
 uniform vec4 uPixelColor;  
 uniform vec4 uGlobalAmbientColor; // this is shared globally
 uniform float uGlobalAmbientIntensity;

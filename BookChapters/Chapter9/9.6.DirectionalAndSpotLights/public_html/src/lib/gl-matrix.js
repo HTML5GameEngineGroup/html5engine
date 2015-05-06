@@ -1293,7 +1293,7 @@ vec3.forEach = (function() {
  * @returns {String} string representation of the vector
  */
 vec3.str = function (a) {
-    return 'vec3(' + a[0].toPrecision(3) + ', ' + a[1].toPrecision(3) + ', ' + a[2].toPrecision(3) + ')';
+    return 'vec3(' + a[0] + ', ' + a[1] + ', ' + a[2] + ')';
 };
 
 if(typeof(exports) !== 'undefined') {

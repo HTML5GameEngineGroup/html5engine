@@ -2,31 +2,33 @@
  * File: TextureShader.js
  * Subclass from SimpleShader
  * Implements a Textured ShaderProgram object.
- * 
  */
+
+/*jslint node: true, vars: true */
+/*global gEngine: false, SimpleShader: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 //<editor-fold desc="constructor">
 // constructor
-function TextureShader(vertexShaderPath, fragmentShaderPath)
-{
+function TextureShader(vertexShaderPath, fragmentShaderPath) {
     // Call super class constructor
     SimpleShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
-    
+
     // reference to aTextureCoordinate within the shader
-    this._mShaderTextureCoordAttribute = null; 
-    this._mSamplerRef = null; // reference to the uSampler, when using only texture, 
-                              // this is not necessary, with NormalMap, we must do this.
-                              
+    this.mShaderTextureCoordAttribute = null;
+    this.mSamplerRef = null; // reference to the uSampler, when using only texture, 
+                             // this is not necessary, with NormalMap, we must do this.
+
     // get the reference of uSampler and aTextureCoordinate within the shader
-    var gl = gEngine.Core.GetGL();
-    this._mSamplerRef = gl.getUniformLocation(this._mCompiledShader, "uSampler");
-    this._mShaderTextureCoordAttribute = gl.getAttribLocation(this._mCompiledShader, "aTextureCoordinate");
-    
-};
+    var gl = gEngine.Core.getGL();
+    this.mSamplerRef = gl.getUniformLocation(this.mCompiledShader, "uSampler");
+    this.mShaderTextureCoordAttribute = gl.getAttribLocation(this.mCompiledShader, "aTextureCoordinate");
+}
 
 // get all the prototype functions from SimpleShader
-gEngine.Core.InheritPrototype(TextureShader, SimpleShader);
+gEngine.Core.inheritPrototype(TextureShader, SimpleShader);
 
 
 //</editor-fold>
@@ -34,16 +36,15 @@ gEngine.Core.InheritPrototype(TextureShader, SimpleShader);
 // <editor-fold desc="Public Methods">
 
 // Overriding the Activation of the shader for rendering
-TextureShader.prototype.ActivateShader = function(pixelColor, aCamera) {
+TextureShader.prototype.activateShader = function (pixelColor, aCamera) {
     // first call the super class's activate
-    SimpleShader.prototype.ActivateShader.call(this, pixelColor, aCamera);
-    
+    SimpleShader.prototype.activateShader.call(this, pixelColor, aCamera);
+
     // now our own functionality: enable texture coordinate array
-    var gl = gEngine.Core.GetGL();
-    gl.bindBuffer(gl.ARRAY_BUFFER, gEngine.VertexBuffer.GetGLTexCoordRef());
-    gl.enableVertexAttribArray(this._mShaderTextureCoordAttribute);
-    gl.vertexAttribPointer(this._mShaderTextureCoordAttribute, 2, gl.FLOAT, false, 0,0);
-    gl.uniform1i(this._mSamplerRef, 0); // <-- binds to texture unit 0
+    var gl = gEngine.Core.getGL();
+    gl.bindBuffer(gl.ARRAY_BUFFER, gEngine.VertexBuffer.getGLTexCoordRef());
+    gl.enableVertexAttribArray(this.mShaderTextureCoordAttribute);
+    gl.vertexAttribPointer(this.mShaderTextureCoordAttribute, 2, gl.FLOAT, false, 0, 0);
+    gl.uniform1i(this.mSamplerRef, 0); // <-- binds to texture unit 0
 };
-    
 //</editor-fold>

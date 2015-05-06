@@ -3,23 +3,25 @@
  *  
  * Texture objects where texture cooridnate can change
  */
+/*jslint node: true, vars: true */
+/*global gEngine: false, Renderable: false, TextureRenderable: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
 
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function SpriteRenderable(myTexture)
-{
+function SpriteRenderable(myTexture) {
     TextureRenderable.call(this, myTexture);
-    Renderable.prototype._SetShader.call(this, gEngine.DefaultResources.GetSpriteShader());
-    this._mTexLeft = 0.0;   // bounds of texture coordinate (0 is left, 1 is right)
-    this._mTexRight = 1.0;  // 
-    this._mTexTop = 1.0;    //   1 is top and 0 is bottom of image
-    this._mTexBottom = 0.0; // 
-    
-    // override superclass!!
-    this._SetTexInfo();
-};
-gEngine.Core.InheritPrototype(SpriteRenderable, TextureRenderable);
+    Renderable.prototype._setShader.call(this, gEngine.DefaultResources.getSpriteShader());
+    this.mTexLeft = 0.0;   // bounds of texture coordinate (0 is left, 1 is right)
+    this.mTexRight = 1.0;  // 
+    this.mTexTop = 1.0;    //   1 is top and 0 is bottom of image
+    this.mTexBottom = 0.0; // 
+
+    // 
+    this._setTexInfo();
+}
+gEngine.Core.inheritPrototype(SpriteRenderable, TextureRenderable);
 
 //<editor-fold desc="Public Methods">
 //
@@ -30,54 +32,52 @@ gEngine.Core.InheritPrototype(SpriteRenderable, TextureRenderable);
     //  [6] [7]: is x/y coordinate of Bottom-Left
     // Convention: eName is an enumerated data type
 SpriteRenderable.eTexCoordArray = Object.freeze({
-            eLeft: 2,
-            eRight: 0,
-            eTop: 1,
-            eBottom: 5
+    eLeft: 2,
+    eRight: 0,
+    eTop: 1,
+    eBottom: 5
 });
-    
+
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
 
 // specify subtexture region by texture coordinate (between 0 to 1)
-SpriteRenderable.prototype.SetTexCoordinate = function(left, right, bottom, top)
-{
-    this._mTexLeft = left;
-    this._mTexRight = right;
-    this._mTexBottom = bottom;
-    this._mTexTop = top;
-    this._SetTexInfo();
+SpriteRenderable.prototype.setTexCoordinate = function (left, right, bottom, top) {
+    this.mTexLeft = left;
+    this.mTexRight = right;
+    this.mTexBottom = bottom;
+    this.mTexTop = top;
+    this._setTexInfo();
 };
 
 // specify subtexture region by pixel positions (between 0 to image resolutions)
-SpriteRenderable.prototype.SetTexPixelPositions = function(left, right, bottom, top)
-{
-    var imageW = this._mTextureInfo.mWidth;
-    var imageH = this._mTextureInfo.mHeight;
-    
-    this._mTexLeft = left / imageW;
-    this._mTexRight = right / imageW;
-    this._mTexBottom = bottom / imageH;
-    this._mTexTop = top / imageH;
-    this._SetTexInfo();
+SpriteRenderable.prototype.setTexPixelPositions = function (left, right, bottom, top) {
+    var imageW = this.mTextureInfo.mWidth;
+    var imageH = this.mTextureInfo.mHeight;
+
+    this.mTexLeft = left / imageW;
+    this.mTexRight = right / imageW;
+    this.mTexBottom = bottom / imageH;
+    this.mTexTop = top / imageH;
+    this._setTexInfo();
 };
 
-SpriteRenderable.prototype.GetTexCoordinateArray = function() {
+SpriteRenderable.prototype.getTexCoordinateArray = function () {
     return [
-      this._mTexRight,  this._mTexTop,          // x,y of top-right
-      this._mTexLeft,   this._mTexTop,
-      this._mTexRight,  this._mTexBottom,
-      this._mTexLeft,   this._mTexBottom
+        this.mTexRight,  this.mTexTop,          // x,y of top-right
+        this.mTexLeft,   this.mTexTop,
+        this.mTexRight,  this.mTexBottom,
+        this.mTexLeft,   this.mTexBottom
     ];
 };
 
-SpriteRenderable.prototype.Draw = function(pixelColor, aCamera) {
+SpriteRenderable.prototype.draw = function (pixelColor, aCamera) {
     // set the current texture coordinate
     // 
     // activate the texture
-    this._mShader.SetTextureCoordinate(this.GetTexCoordinateArray());
-    TextureRenderable.prototype.Draw.call(this, pixelColor, aCamera);
+    this.mShader.setTextureCoordinate(this.getTexCoordinateArray());
+    TextureRenderable.prototype.draw.call(this, pixelColor, aCamera);
 };
 //--- end of Public Methods
 //

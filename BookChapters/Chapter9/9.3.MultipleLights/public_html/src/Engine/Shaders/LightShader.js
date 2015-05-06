@@ -3,49 +3,57 @@
  * Subclass from SpriteShader
  *          Supports light illumination
  */
+/*jslint node: true, vars: true */
+/*global gEngine, SpriteShader, ShaderLightAtIndex, vec4 */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 //<editor-fold desc="constructor">
 // constructor 
-function LightShader(vertexShaderPath, fragmentShaderPath)
-{
+function LightShader(vertexShaderPath, fragmentShaderPath) {
     // Call sper class constructor
     SpriteShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
-    
-    this._mLights = null;  // lights from the renderable
-    
+
+    this.mLights = null;  // lights from the renderable
+
     //*****************************
     // this number MUST correspond to the GLSL uLight[] array size (for LightFS.glsl)
     //**********************************
-    this._kGLSLuLightArraySize = 4;  // <-- make sure this is the same as LightFS.glsl
-    this._mShaderLights = [];
-    for (var i = 0; i<this._kGLSLuLightArraySize; i++) {
-        var ls = new ShaderLightAtIndex(this._mCompiledShader, i);
-        this._mShaderLights.push(ls);
+    this.kGLSLuLightArraySize = 4;  // <-- make sure this is the same as LightFS.glsl
+    this.mShaderLights = [];
+    var i, ls;
+    for (i = 0; i < this.kGLSLuLightArraySize; i++) {
+        ls = new ShaderLightAtIndex(this.mCompiledShader, i);
+        this.mShaderLights.push(ls);
     }
-    
-};
-gEngine.Core.InheritPrototype(LightShader, SpriteShader);
+}
+gEngine.Core.inheritPrototype(LightShader, SpriteShader);
 //</editor-fold>
 
 // <editor-fold desc="Public Methods">
 
 // Overriding the Activation of the shader for rendering
-LightShader.prototype.ActivateShader = function(pixelColor, aCamera) {
+LightShader.prototype.activateShader = function (pixelColor, aCamera) {
     // fist call the super class's activate
-    SpriteShader.prototype.ActivateShader.call(this, pixelColor, aCamera);
-    
+    SpriteShader.prototype.activateShader.call(this, pixelColor, aCamera);
+
     // now push the light information to the shader
     var numLight = 0;
-    if (this._mLights !== null) {
-        for (; numLight<this._mLights.length; numLight++)
-            this._mShaderLights[numLight].LoadToShader(aCamera, this._mLights[numLight]);
+    if (this.mLights !== null) {
+        while (numLight < this.mLights.length) {
+            this.mShaderLights[numLight].loadToShader(aCamera, this.mLights[numLight]);
+            numLight++;
+        }
     }
-    for (; numLight < 4; numLight++)
-        this._mShaderLights[numLight].SwitchOffLight(); // switch off unused lights
+    // switch off the left over ones.
+    while (numLight < this.kGLSLuLightArraySize) {
+        this.mShaderLights[numLight].switchOffLight(); // switch off unused lights
+        numLight++;
+    }
 };
 
-LightShader.prototype.SetLights = function(l) {
-    this._mLights = l;
+LightShader.prototype.setLights = function (l) {
+    this.mLights = l;
 };
 //</editor-fold>

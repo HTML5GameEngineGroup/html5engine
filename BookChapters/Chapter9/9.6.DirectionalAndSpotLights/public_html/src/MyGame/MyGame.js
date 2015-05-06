@@ -2,175 +2,176 @@
  * File: MyGame.js 
  * This is the the logic of our game. 
  */
+
+/*jslint node: true, vars: true */
+/*global gEngine, Scene, GameObjectset, TextureObject, Camera, vec2,
+  Renderable, FontRenderable, SpriteRenderable, LightRenderable, IllumRenderable,
+  GameObject, Hero, Minion, Dye, Light */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function MyGame()
-{   
-    this._kMinionSprite = "resources/minion_sprite.png";
-    this._kMinionSpriteNormal = "resources/minion_sprite_normal.png";
-    this._kBg = "resources/bg.png";
-    this._kBgNormal = "resources/bg_normal.png";
-    
+function MyGame() {
+    this.kMinionSprite = "assets/minion_sprite.png";
+    this.kMinionSpriteNormal = "assets/minion_sprite_normal.png";
+    this.kBg = "assets/bg.png";
+    this.kBgNormal = "assets/bg_normal.png";
+
     // The camera to view the rectangles
-    this._mCamera = null;
-    this._mBg = null;
-    
-    this._mMsg = null;
-    this._mMatMsg = null;
-    
+    this.mCamera = null;
+    this.mBg = null;
+
+    this.mMsg = null;
+    this.mMatMsg = null;
+
     // the hero and the support objects
-    this._mLgtHero = null;
-    this._mIllumHero = null;
-    
-    this._mLgtMinion = null;
-    this._mIllumMinion = null;
-    
-    this._mGlobalLightSet = null;
+    this.mLgtHero = null;
+    this.mIllumHero = null;
 
-    this._mBlock1 = null;   // to verify swiitching between shaders is fine
-    this._mBlock2 = null;
-    
-    this._mLgtIndex = 0;
-    this._mLgtRotateTheta = 0;
-};
-gEngine.Core.InheritPrototype(MyGame, Scene);
+    this.mLgtMinion = null;
+    this.mIllumMinion = null;
 
-MyGame.prototype.LoadScene = function() 
-{
-   gEngine.Textures.LoadTexture(this._kMinionSprite);
-   gEngine.Textures.LoadTexture(this._kBg);
-   gEngine.Textures.LoadTexture(this._kBgNormal);
-   gEngine.Textures.LoadTexture(this._kMinionSpriteNormal);
-};
+    this.mGlobalLightSet = null;
 
-MyGame.prototype.UnloadScene = function() 
-{  
-    gEngine.Textures.UnloadTexture(this._kMinionSprite);
-    gEngine.Textures.UnloadTexture(this._kBg);
-    gEngine.Textures.UnloadTexture(this._kBgNormal);
-    gEngine.Textures.UnloadTexture(this._kMinionSpriteNormal);
+    this.mBlock1 = null;   // to verify swiitching between shaders is fine
+    this.mBlock2 = null;
+
+    this.mLgtIndex = 0;
+    this.mLgtRotateTheta = 0;
+}
+gEngine.Core.inheritPrototype(MyGame, Scene);
+
+MyGame.prototype.loadScene = function () {
+    gEngine.Textures.loadTexture(this.kMinionSprite);
+    gEngine.Textures.loadTexture(this.kBg);
+    gEngine.Textures.loadTexture(this.kBgNormal);
+    gEngine.Textures.loadTexture(this.kMinionSpriteNormal);
 };
 
-MyGame.prototype.Initialize = function() 
-{
+MyGame.prototype.unloadScene = function () {
+    gEngine.Textures.unloadTexture(this.kMinionSprite);
+    gEngine.Textures.unloadTexture(this.kBg);
+    gEngine.Textures.unloadTexture(this.kBgNormal);
+    gEngine.Textures.unloadTexture(this.kMinionSpriteNormal);
+};
+
+MyGame.prototype.initialize = function () {
     // Step A: set up the cameras
-    this._mCamera = new Camera(
-            vec2.fromValues(50, 37.5), // position of the camera
-            100,                       // width of camera
-            [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
-            );
-    this._mCamera.SetBackgroundColor([0.8, 0.8, 0.8, 1]);
+    this.mCamera = new Camera(
+        vec2.fromValues(50, 37.5), // position of the camera
+        100,                       // width of camera
+        [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
+    );
+    this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
-        
+
     // the light
-    this._InitializeLights();   // defined in MyGame_Lights.js
-    
+    this._initializeLights();   // defined in MyGame_Lights.js
+
     // the Background
-    // var bgR = new IllumRenderable(this._kBg, this._kBgNormal);
-    var bgR = new LightRenderable(this._kBg, this._kBgNormal);
-    bgR.SetTexPixelPositions(0, 1900, 0, 1000);
-    // bgR.SetNormalMapPixelPositions(0, 1900, 0, 1000);
-    bgR.GetXform().SetSize(380, 200);
-    bgR.GetXform().SetPosition(50, 35);
-    for (var i =0; i<4; i++)
-        bgR.AddLight(this._mGlobalLightSet.GetLightAt(i));   // all the lights
-    this._mBg = new GameObject(bgR);
-     
+    // var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
+    var bgR = new LightRenderable(this.kBg, this.kBgNormal);
+    bgR.setTexPixelPositions(0, 1900, 0, 1000);
+    // bgR.setNormalMapPixelPositions(0, 1900, 0, 1000);
+    bgR.getXform().setSize(380, 200);
+    bgR.getXform().setPosition(50, 35);
+    var i;
+    for (i = 0; i < 4; i++) {
+        bgR.addLight(this.mGlobalLightSet.getLightAt(i));   // all the lights
+    }
+    this.mBg = new GameObject(bgR);
+
     // 
     // the objects
-    this._mIllumHero = new Hero(this._kMinionSprite, this._kMinionSpriteNormal, 15, 50, this._mGlobalLightSet);    
-    this._mLgtHero = new Hero(this._kMinionSprite, null, 80 , 50, this._mGlobalLightSet);        
-    this._mIllumMinion = new Minion(this._kMinionSprite, this._kMinionSpriteNormal,17, 15, this._mGlobalLightSet);    
-    this._mLgtMinion = new Minion(this._kMinionSprite, null, 87, 15, this._mGlobalLightSet);
-            
-    this._mMsg = new FontRenderable("Status Message");
-    this._mMsg.SetColor([1, 1, 1, 1]);
-    this._mMsg.GetXform().SetPosition(1, 2);
-    this._mMsg.SetTextHeight(3);
-    
-    this._mMatMsg = new FontRenderable("Status Message");
-    this._mMatMsg.SetColor([1, 1, 1, 1]);
-    this._mMatMsg.GetXform().SetPosition(1, 73);
-    this._mMatMsg.SetTextHeight(3);
-    
-    this._mBlock1 = new Renderable();
-    this._mBlock1.SetColor([1, 0, 0, 1]);
-    this._mBlock1.GetXform().SetSize(5, 5);
-    this._mBlock1.GetXform().SetPosition(30, 50);
-    
-    this._mBlock2 = new Renderable();
-    this._mBlock2.SetColor([0, 1, 0, 1]);
-    this._mBlock2.GetXform().SetSize(5, 5);
-    this._mBlock2.GetXform().SetPosition(70, 50);
+    this.mIllumHero = new Hero(this.kMinionSprite, this.kMinionSpriteNormal, 15, 50, this.mGlobalLightSet);
+    this.mLgtHero = new Hero(this.kMinionSprite, null, 80, 50, this.mGlobalLightSet);
+    this.mIllumMinion = new Minion(this.kMinionSprite, this.kMinionSpriteNormal, 17, 15, this.mGlobalLightSet);
+    this.mLgtMinion = new Minion(this.kMinionSprite, null, 87, 15, this.mGlobalLightSet);
+
+    this.mMsg = new FontRenderable("Status Message");
+    this.mMsg.setColor([1, 1, 1, 1]);
+    this.mMsg.getXform().setPosition(1, 2);
+    this.mMsg.setTextHeight(3);
+
+    this.mMatMsg = new FontRenderable("Status Message");
+    this.mMatMsg.setColor([1, 1, 1, 1]);
+    this.mMatMsg.getXform().setPosition(1, 73);
+    this.mMatMsg.setTextHeight(3);
+
+    this.mBlock1 = new Renderable();
+    this.mBlock1.setColor([1, 0, 0, 1]);
+    this.mBlock1.getXform().setSize(5, 5);
+    this.mBlock1.getXform().setPosition(30, 50);
+
+    this.mBlock2 = new Renderable();
+    this.mBlock2.setColor([0, 1, 0, 1]);
+    this.mBlock2.getXform().setSize(5, 5);
+    this.mBlock2.getXform().setPosition(70, 50);
 };
 
 
-MyGame.prototype.DrawCamera = function(camera) {
-    
+MyGame.prototype.drawCamera = function (camera) {
     // Step A: set up the View Projection matrix
-    camera.SetupViewProjection();
-        // Step C: Now draws each primitive
-        this._mBg.Draw(camera);
-        this._mBlock1.Draw(camera);
-        this._mLgtMinion.Draw(camera);
-        this._mIllumHero.Draw(camera);
-        this._mBlock2.Draw(camera);        
-        this._mLgtHero.Draw(camera);
-        this._mIllumMinion.Draw(camera);
+    camera.setupViewProjection();
+    // Step B: Now draws each primitive
+    this.mBg.draw(camera);
+    this.mBlock1.draw(camera);
+    this.mLgtMinion.draw(camera);
+    this.mIllumHero.draw(camera);
+    this.mBlock2.draw(camera);
+    this.mLgtHero.draw(camera);
+    this.mIllumMinion.draw(camera);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
 // importantly, make sure to _NOT_ change any state.
-MyGame.prototype.Draw = function() 
-{   
+MyGame.prototype.draw = function () {
     // Step A: clear the canvas
-    gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
-    
+    gEngine.Core.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
+
     // Step  B: Draw with all three cameras
-    this.DrawCamera(this._mCamera);
-        this._mMsg.Draw(this._mCamera);   // only draw status in the main camera
-        this._mMatMsg.Draw(this._mCamera);
+    this.drawCamera(this.mCamera);
+    this.mMsg.draw(this.mCamera);   // only draw status in the main camera
+    this.mMatMsg.draw(this.mCamera);
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
-MyGame.prototype.Update = function()
-{    
-    this._mCamera.Update();  // to ensure proper interploated movement effects
-    
-    this._mIllumMinion.Update(); // ensure sprite animation
-    this._mLgtMinion.Update();
-    
-    this._mIllumHero.Update();  // allow keyboard control to move
-           
+MyGame.prototype.update = function () {
+    this.mCamera.update();  // to ensure proper interploated movement effects
+
+    this.mIllumMinion.update(); // ensure sprite animation
+    this.mLgtMinion.update();
+
+    this.mIllumHero.update();  // allow keyboard control to move
+
     // control the selected light
-    var msg = "L=" + this._mLgtIndex + " ";
-    msg += this._LightControl();
-    this._mMsg.SetText(msg);
-    
+    var msg = "L=" + this.mLgtIndex + " ";
+    msg += this._lightControl();
+    this.mMsg.setText(msg);
     /*
     msg = this._SelectCharacter();
-    msg += this._MaterialControl();
-    this._mMatMsg.SetText(msg);
+    msg += this.materialControl();
+    this.mMatMsg.setText(msg);
     */
 };
 
-MyGame.prototype._SelectCharacter = function() {
+MyGame.prototype._selectCharacter = function () {
     // select which character to work with
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Four)) {
-        this._mSlectedCh = this._mRingHero;
-        this._mMaterialCh = this._mSlectedCh.GetRenderable().GetMaterial().GetDiffuse();
-        this._mSelectedChMsg = "R:";
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Four)) {
+        this.mSlectedCh = this.mRingHero;
+        this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();
+        this.mSelectedChMsg = "R:";
     }
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Five)) {
-        this._mSlectedCh = this._mLMinion;
-        this._mMaterialCh = this._mSlectedCh.GetRenderable().GetMaterial().GetDiffuse();
-        this._mSelectedChMsg = "L:";
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Five)) {
+        this.mSlectedCh = this.mLMinion;
+        this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();
+        this.mSelectedChMsg = "L:";
     }
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Six)) {
-        this._mSlectedCh = this._mHero;
-        this._mMaterialCh = this._mSlectedCh.GetRenderable().GetMaterial().GetDiffuse();
-        this._mSelectedChMsg = "H:";
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Six)) {
+        this.mSlectedCh = this.mHero;
+        this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();
+        this.mSelectedChMsg = "H:";
     }
-    return this._mSelectedChMsg;
+    return this.mSelectedChMsg;
 };

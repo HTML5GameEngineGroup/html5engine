@@ -1,14 +1,25 @@
-Camera.prototype.FakeZInPixelSpace = function(z) {
-    return z * this._mRenderCache.mWCToPixelRatio;
+/* 
+ * File: Camera_Xform.js
+ * Defines the functions that supports camera to pixel space transforms (mainly for illumination support)
+ */
+
+/*jslint node: true, vars: true, bitwise: true */
+/*global Camera, vec3*/
+/* find out more about jslint: http://www.jslint.com/lint.html */
+"use strict";
+
+Camera.prototype.fakeZInPixelSpace = function (z) {
+    return z * this.mRenderCache.mWCToPixelRatio;
 };
-Camera.prototype.WCPosToPixel = function(p) {  // p is a vec3, fake Z
+
+Camera.prototype.wcPosToPixel = function (p) {  // p is a vec3, fake Z
     // Convert the position to pixel space
-    var x = ((p[0] - this._mRenderCache.mCameraOrgX) * this._mRenderCache.mWCToPixelRatio) + 0.5;
-    var y = ((p[1] - this._mRenderCache.mCameraOrgY) * this._mRenderCache.mWCToPixelRatio) + 0.5;
-    var z = this.FakeZInPixelSpace(p[2]);
+    var x = ((p[0] - this.mRenderCache.mCameraOrgX) * this.mRenderCache.mWCToPixelRatio) + 0.5;
+    var y = ((p[1] - this.mRenderCache.mCameraOrgY) * this.mRenderCache.mWCToPixelRatio) + 0.5;
+    var z = this.fakeZInPixelSpace(p[2]);
     return vec3.fromValues(x, y, z);
 };
 
-Camera.prototype.WCSizeToPixel = function(s) {  // 
-    return (s * this._mRenderCache.mWCToPixelRatio) + 0.5;
+Camera.prototype.wcSizeToPixel = function (s) {  // 
+    return (s * this.mRenderCache.mWCToPixelRatio) + 0.5;
 };

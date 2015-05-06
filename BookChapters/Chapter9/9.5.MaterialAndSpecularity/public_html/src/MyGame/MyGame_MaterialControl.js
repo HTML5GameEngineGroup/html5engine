@@ -1,62 +1,65 @@
 /*
  * File: MyGame_MaterialControl: support UI manipulation of material parameters
  */
+/*jslint node: true, vars: true */
+/*global gEngine, MyGame, Material */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-MyGame.prototype._MaterialControl = function() {
+MyGame.prototype.materialControl = function () {
     var delta = 0.01;
     var msg = "";
-    
+
     // player select which object and material channgel to work 
-    this._SelectMaterialChannel();
-    
+    this._selectMaterialChannel();
+
     // manipulate the selected component Ambient, Diffuse, Specular
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.E)) {
-        this._mMaterialCh[0] += delta; 
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.E)) {
+        this.mMaterialCh[0] += delta;
     }
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.R)) {
-        this._mMaterialCh[0] -= delta; 
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.R)) {
+        this.mMaterialCh[0] -= delta;
     }
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.T)) {
-        this._mMaterialCh[1] += delta; 
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.T)) {
+        this.mMaterialCh[1] += delta;
     }
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Y)) {
-        this._mMaterialCh[1] -= delta; 
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Y)) {
+        this.mMaterialCh[1] -= delta;
     }
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.U)) {
-        this._mMaterialCh[2] += delta; 
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.U)) {
+        this.mMaterialCh[2] += delta;
     }
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.I)) {
-        this._mMaterialCh[2] -= delta; 
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.I)) {
+        this.mMaterialCh[2] -= delta;
     }
-    
+
     // shinningess
-    var mat = this._mSlectedCh.GetRenderable().GetMaterial();
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.O)) {
-        mat.SetShinningness(mat.GetShinningness() + delta); 
+    var mat = this.mSlectedCh.getRenderable().getMaterial();
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.O)) {
+        mat.setShinningness(mat.getShinningness() + delta);
     }
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.P)) {
-        mat.SetShinningness(mat.GetShinningness() - delta); 
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.P)) {
+        mat.setShinningness(mat.getShinningness() - delta);
     }
-    
-    msg += "n(" + mat.GetShinningness().toPrecision(2) + ")" +
-           this._PrintVec3("D", mat.GetDiffuse()) +
-           this._PrintVec3("S", mat.GetSpecular()) +
-           this._PrintVec3("A", mat.GetAmbient());
-    
+
+    msg += "n(" + mat.getShinningness().toPrecision(2) + ")" +
+           this._printVec3("D", mat.getDiffuse()) +
+           this._printVec3("S", mat.getSpecular()) +
+           this._printVec3("A", mat.getAmbient());
+
     return msg;
 };
 
-MyGame.prototype._SelectMaterialChannel = function()
-{
+MyGame.prototype._selectMaterialChannel = function () {
     // select which character to work with
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Seven)) {
-        this._mMaterialCh = this._mSlectedCh.GetRenderable().GetMaterial().GetAmbient();
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Seven)) {
+        this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getAmbient();
     }
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Eight)) {
-        this._mMaterialCh = this._mSlectedCh.GetRenderable().GetMaterial().GetDiffuse();
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Eight)) {
+        this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();
     }
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Nine)) {
-        this._mMaterialCh = this._mSlectedCh.GetRenderable().GetMaterial().GetSpecular();
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Nine)) {
+        this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getSpecular();
     }
 };

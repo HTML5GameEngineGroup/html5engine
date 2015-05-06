@@ -8,7 +8,7 @@ precision mediump float;
 uniform sampler2D uSampler;
 uniform sampler2D uNormalSampler;
 
-// Color of the object
+// Color of pixel
 uniform vec4 uPixelColor;  
 uniform vec4 uGlobalAmbientColor; // this is shared globally
 uniform float uGlobalAmbientIntensity; 
@@ -27,7 +27,6 @@ uniform Light uLights[4];  // Maximum array of lights this shader supports
 // The "varying" keyword is for signifing that the texture coordinate will be
 // interpolated and thus varies. 
 varying vec2 vTexCoord;
-varying vec2 vNormalMapCoord;
 
 vec4 LightEffect(Light lgt, vec3 N) {
     vec4 result = vec4(0);
@@ -54,7 +53,7 @@ vec4 LightEffect(Light lgt, vec3 N) {
 void main(void)  {
     // simple tint based on uPixelColor setting
     vec4 textureMapColor = texture2D(uSampler, vTexCoord);
-    vec4 normal = texture2D(uNormalSampler, vNormalMapCoord);
+    vec4 normal = texture2D(uNormalSampler, vTexCoord);  // using the same coordinate as the sprite texture!
     vec4 normalMap = (2.0 * normal) - 1.0;
     
     normalMap.y = -normalMap.y;  // flip Y

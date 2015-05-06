@@ -7,7 +7,7 @@ precision mediump float;
 // Must be set outside the shader.
 uniform sampler2D uSampler;
 
-// Color of the object
+// Color of pixel
 uniform vec4 uPixelColor;  
 uniform vec4 uGlobalAmbientColor; // this is shared globally
 uniform float uGlobalAmbientIntensity;
@@ -96,6 +96,8 @@ vec4 LightEffect(Light lgt) {
     return dAtten * aAtten * lgt.Intensity * lgt.Color;
 }
 
+#define NUM_SYS_LIGHTS 4
+
 void main(void)  {
     // simple tint based on uPixelColor setting
     vec4 textureMapColor = texture2D(uSampler, vec2(vTexCoord.s, vTexCoord.t));
@@ -103,7 +105,7 @@ void main(void)  {
 
     // now decide if we should illuminate by the light
     if (textureMapColor.a > 0.0) {
-        for (int i=0; i<4; i++) { 
+        for (int i=0; i<NUM_SYS_LIGHTS; i++) { 
             if (uLights[i].IsOn) { 
                 lgtResults +=  LightEffect(uLights[i]) * textureMapColor;
             }

@@ -6,7 +6,7 @@
 
 <body onload="
         var myGame = new MyGame();
-        gEngine.Core.InitializeEngineCore('GLCanvas', myGame);
+        gEngine.Core.initializeEngineCore('GLCanvas', myGame);
             ">
     
     <!-- the following says there are javascript source code contained in 
@@ -60,9 +60,9 @@
             <script type="text/javascript" src="src/Engine/Shaders/SpriteShader.js"></script>
             <script type="text/javascript" src="src/Engine/Shaders/LineShader.js"></script>
             <script type="text/javascript" src="src/Engine/Shaders/LightShader.js"></script>
-            <script type="text/javascript" src="src/Engine/Shaders/LightShader_LightLoader.js"></script>
+            <script type="text/javascript" src="src/Engine/Shaders/ShaderLightAtIndex.js"></script>
             <script type="text/javascript" src="src/Engine/Shaders/IllumShader.js"></script>
-            <script type="text/javascript" src="src/Engine/Shaders/IllumShader_MaterialLoader.js"></script>
+            <script type="text/javascript" src="src/Engine/Shaders/ShaderMaterial.js"></script>
         <!-- Camera -->
             <script type="text/javascript" src="src/Engine/Cameras/Camera.js"></script>
             <script type="text/javascript" src="src/Engine/Cameras/Camera_Manipulation.js"></script>

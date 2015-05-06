@@ -1,36 +1,40 @@
 /*
  * File: LightRenderable.js
  *  
- * SpriteRenderable with light illumination
+ * SpriteAnimatedRenderable with light illumination
  */
+
+/*jslint node: true, vars: true */
+/*global gEngine, Renderable, SpriteAnimateRenderable*/
+/* find out more about jslint: http://www.jslint.com/lint.html */
 
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function LightRenderable(myTexture)
-{
+
+function LightRenderable(myTexture) {
     SpriteAnimateRenderable.call(this, myTexture);
-    Renderable.prototype._SetShader.call(this, gEngine.DefaultResources.GetLightShader());
-    
+    Renderable.prototype._setShader.call(this, gEngine.DefaultResources.getLightShader());
+
     // here is the light source
-    this._mLights = new Array();
-};
-gEngine.Core.InheritPrototype(LightRenderable, SpriteAnimateRenderable);
+    this.mLights = [];
+}
+gEngine.Core.inheritPrototype(LightRenderable, SpriteAnimateRenderable);
 
 //<editor-fold desc="Public Methods">
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
-LightRenderable.prototype.Draw = function(aCamera) {
-    this._mShader.SetLights(this._mLights);
-    SpriteAnimateRenderable.prototype.Draw.call(this, aCamera);
+LightRenderable.prototype.draw = function (aCamera) {
+    this.mShader.setLights(this.mLights);
+    SpriteAnimateRenderable.prototype.draw.call(this, aCamera);
 };
 
-LightRenderable.prototype.GetLightAt = function(index) {
-    return this._mLights[index];
+LightRenderable.prototype.getLightAt = function (index) {
+    return this.mLights[index];
 };
-LightRenderable.prototype.AddLight = function(l) {
-    this._mLights.push(l);
+LightRenderable.prototype.addLight = function (l) {
+    this.mLights.push(l);
 };
 //--- end of Public Methods
 

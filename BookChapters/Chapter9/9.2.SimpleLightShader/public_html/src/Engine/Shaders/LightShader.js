@@ -3,63 +3,67 @@
  * Subclass from SpriteShader
  *          Supports light illumination
  */
+/*jslint node: true, vars: true */
+/*global gEngine, SpriteShader, vec4 */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 //<editor-fold desc="constructor">
 // constructor 
-function LightShader(vertexShaderPath, fragmentShaderPath)
-{
+function LightShader(vertexShaderPath, fragmentShaderPath) {
     // Call sper class constructor
     SpriteShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
-    
+
     // glsl uniform position references
-    this._mColorRef = null;
-    this._mPosRef = null;
-    this._mRadiusRef = null;
-    this._mIsOnRef = null;
-    
-    this._mLight = null; // <-- this is the light soruce in the Game Engine
+    this.mColorRef = null;
+    this.mPosRef = null;
+    this.mRadiusRef = null;
+    this.mIsOnRef = null;
+
+    this.mLight = null; // <-- this is the light soruce in the Game Engine
     //
     // create the references to these uniforms in the LightShader
-    var shader = this._mCompiledShader;
-    var gl = gEngine.Core.GetGL();
-    this._mColorRef = gl.getUniformLocation(shader, "uLightColor");
-    this._mPosRef = gl.getUniformLocation(shader, "uLightPosition");
-    this._mRadiusRef = gl.getUniformLocation(shader, "uLightRadius");
-    this._mIsOnRef = gl.getUniformLocation(shader, "uLightOn");
-};
-gEngine.Core.InheritPrototype(LightShader, SpriteShader);
+    var shader = this.mCompiledShader;
+    var gl = gEngine.Core.getGL();
+    this.mColorRef = gl.getUniformLocation(shader, "uLightColor");
+    this.mPosRef = gl.getUniformLocation(shader, "uLightPosition");
+    this.mRadiusRef = gl.getUniformLocation(shader, "uLightRadius");
+    this.mIsOnRef = gl.getUniformLocation(shader, "uLightOn");
+}
+gEngine.Core.inheritPrototype(LightShader, SpriteShader);
 //</editor-fold>
 
 // <editor-fold desc="Public Methods">
 
 // Overriding the Activation of the shader for rendering
-LightShader.prototype.ActivateShader = function(pixelColor, aCamera) {
+LightShader.prototype.activateShader = function (pixelColor, aCamera) {
     // fist call the super class's activate
-    SpriteShader.prototype.ActivateShader.call(this, pixelColor, aCamera);
-    
+    SpriteShader.prototype.activateShader.call(this, pixelColor, aCamera);
+
     // now push the light information to the shader
-    if (this._mLight !== null)
-        this._LoadToShader(aCamera);
-    else
-        gEngine.Core.GetGL().uniform1i(this._mIsOnRef, false); // <-- switch off the light!
+    if (this.mLight !== null) {
+        this._loadToShader(aCamera);
+    } else {
+        gEngine.Core.getGL().uniform1i(this.mIsOnRef, false); // <-- switch off the light!
+    }
 };
 
-LightShader.prototype.SetLight = function(l) {
-    this._mLight = l;
+LightShader.prototype.setLight = function (l) {
+    this.mLight = l;
 };
 
-LightShader.prototype._LoadToShader = function(aCamera) {
-    var gl = gEngine.Core.GetGL();
-    gl.uniform1i(this._mIsOnRef, this._mLight.IsLightOn());
-    if (this._mLight.IsLightOn()) {
-        var p = aCamera.WCPosToPixel(this._mLight.GetPosition());
-        var r = aCamera.WCSizeToPixel(this._mLight.GetRadius());
-        var c = this._mLight.GetColor();
+LightShader.prototype._loadToShader = function (aCamera) {
+    var gl = gEngine.Core.getGL();
+    gl.uniform1i(this.mIsOnRef, this.mLight.isLightOn());
+    if (this.mLight.isLightOn()) {
+        var p = aCamera.wcPosToPixel(this.mLight.getPosition());
+        var r = aCamera.wcSizeToPixel(this.mLight.getRadius());
+        var c = this.mLight.getColor();
 
-        gl.uniform4fv(this._mColorRef, c);
-        gl.uniform4fv(this._mPosRef, vec4.fromValues(p[0], p[1], p[2], 1));
-        gl.uniform1f(this._mRadiusRef, r);
+        gl.uniform4fv(this.mColorRef, c);
+        gl.uniform4fv(this.mPosRef, vec4.fromValues(p[0], p[1], p[2], 1));
+        gl.uniform1f(this.mRadiusRef, r);
     }
 };
 //</editor-fold>

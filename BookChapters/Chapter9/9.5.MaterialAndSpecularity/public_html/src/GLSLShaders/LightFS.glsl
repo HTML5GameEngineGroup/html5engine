@@ -7,7 +7,7 @@ precision mediump float;
 // Must be set outside the shader.
 uniform sampler2D uSampler;
 
-// Color of the object
+// Color of pixel
 uniform vec4 uPixelColor;  
 uniform vec4 uGlobalAmbientColor; // this is shared globally
 uniform float uGlobalAmbientIntensity;
@@ -65,6 +65,6 @@ void main(void)  {
     vec3 r = vec3(lgtResults) * (1.0-uPixelColor.a) + vec3(uPixelColor) * uPixelColor.a;
     vec4 result = vec4(r, lgtResults.a);
 
-     gl_FragColor = result;
+    gl_FragColor = result;
 }
         

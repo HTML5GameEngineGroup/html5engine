@@ -3,41 +3,43 @@
  *  
  * Renderable objects with textures
  */
+/*jslint node: true, vars: true */
+/*global gEngine: false, Renderable: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
 
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function TextureRenderable(myTexture)
-{
+function TextureRenderable(myTexture) {
     Renderable.call(this);
-    Renderable.prototype.SetColor.call(this, [1, 1, 1, 0]);  
-    Renderable.prototype._SetShader.call(this, gEngine.DefaultResources.GetTextureShader());
+    Renderable.prototype.setColor.call(this, [1, 1, 1, 0]);
+    Renderable.prototype._setShader.call(this, gEngine.DefaultResources.getTextureShader());
             // Alpha of 0: switch of tinting of texture
-    this._mTexture = myTexture;          // texture for this object, cannot be a "null"
-    
+    this.mTexture = myTexture;          // texture for this object, cannot be a "null"
+
     // these two instance variables are to cache texture informaiton
     // for supporting per-pixel accurate collision
-    this._mTextureInfo = gEngine.Textures.GetTextureInfo(myTexture);
-    this._mColorArray = null;
+    this.mTextureInfo = gEngine.Textures.getTextureInfo(myTexture);
+    this.mColorArray = null;
     // defined for subclass to override
-    this._mTexWidth = this._mTextureInfo.mWidth; 
-    this._mTexHeight = this._mTextureInfo.mHeight;
-    this._mTexLeftIndex = 0;
-    this._mTexBottomIndex = 0;
-};
-gEngine.Core.InheritPrototype(TextureRenderable, Renderable);
+    this.mTexWidth = this.mTextureInfo.mWidth;
+    this.mTexHeight = this.mTextureInfo.mHeight;
+    this.mTexLeftIndex = 0;
+    this.mTexBottomIndex = 0;
+}
+gEngine.Core.inheritPrototype(TextureRenderable, Renderable);
 
 //<editor-fold desc="Public Methods">
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
-TextureRenderable.prototype.Draw = function(aCamera) {
+TextureRenderable.prototype.draw = function (aCamera) {
     // activate the texture
-    gEngine.Textures.ActivateTexture(this._mTexture);
-    Renderable.prototype.Draw.call(this, aCamera);
+    gEngine.Textures.activateTexture(this.mTexture);
+    Renderable.prototype.draw.call(this, aCamera);
 };
 
-TextureRenderable.prototype.GetTexture = function() { return this._mTexture; };
-TextureRenderable.prototype.SetTexture = function(t) { this._mTexture = t; };
+TextureRenderable.prototype.getTexture = function () { return this.mTexture; };
+TextureRenderable.prototype.setTexture = function (t) { this.mTexture = t; };
 //--- end of Public Methods
 //</editor-fold>

@@ -6,101 +6,101 @@
  * 
  * Notice, this is a singleton object.
  */
+
+/*jslint node: true, vars: true */
+/*global Float32Array */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 var gEngine = gEngine || { };
 
 // The VertexBuffer object
-gEngine.VertexBuffer = function()
-{    
+gEngine.VertexBuffer = (function () {
     // reference to the vertex positions for the square in the gl context
-    var _mSquareVertexBuffer = null;
+    var mSquareVertexBuffer = null;
 
     // reference to the texture positions for the square vertices in the gl context
-    var _mTextureCoordBuffer = null;
-    
+    var mTextureCoordBuffer = null;
+
     // First: define the vertices for a square
-    var verticesOfSquare =
-    [
+    var verticesOfSquare = [
         0.5, 0.5, 0.0,
         -0.5, 0.5, 0.0,
         0.5, -0.5, 0.0,
         -0.5, -0.5, 0.0
     ];
-    
+
     // Second: define the corresponding texture cooridnates
-    var textureCoordinates = 
-    [
+    var textureCoordinates = [
         1.0, 1.0,
         0.0, 1.0,
         1.0, 0.0,
-        0,0, 0.0
+        0.0, 0.0
     ];
-    
     // this is to support the debugging of physics engine
-    var verticesOfLine =
-    [
+    var verticesOfLine = [
         0.5, 0.5, 0.0,
         -0.5, -0.5, 0.0
     ];
     // reference to the texture positions for the square vertices in the gl context
-    var _mLineVertexBuffer = null;
-    
-    var Initialize = function() {
-        var gl = gEngine.Core.GetGL();
+    var mLineVertexBuffer = null;
+
+    var initialize = function () {
+        var gl = gEngine.Core.getGL();
 
         // <editor-fold desc="Step A: Allocate and store vertex positions into the webGL context">
-            // Create a buffer on the gGL context for our vertex positions
-            _mSquareVertexBuffer = gl.createBuffer();
+        // Create a buffer on the gGL context for our vertex positions
+        mSquareVertexBuffer = gl.createBuffer();
 
-            // Connect the vertexBuffer to the ARRAY_BUFFER global gl binding point.
-            gl.bindBuffer(gl.ARRAY_BUFFER, _mSquareVertexBuffer);    
+        // Activate vertexBuffer
+        gl.bindBuffer(gl.ARRAY_BUFFER, mSquareVertexBuffer);
 
-            // Put the verticesOfSquare into the vertexBuffer, as non-changing drawing data (STATIC_DRAW)
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verticesOfSquare), gl.STATIC_DRAW);
+        // Loads verticesOfSquare into the vertexBuffer
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verticesOfSquare), gl.STATIC_DRAW);
         //<editor-fold>
-    
+
         // <editor-fold desc="Step  B: Allocate and store texture coordinates">
-            // Create a buffer on the gGL context for our vertex positions
-            _mTextureCoordBuffer = gl.createBuffer();
+        // Create a buffer on the gGL context for our vertex positions
+        mTextureCoordBuffer = gl.createBuffer();
 
-            // Connect the textureCoorBuffer to the ARRAY_BUFFER global gl binding point.
-            gl.bindBuffer(gl.ARRAY_BUFFER, _mTextureCoordBuffer);    
+        // Activate vertexBuffer
+        gl.bindBuffer(gl.ARRAY_BUFFER, mTextureCoordBuffer);
 
-            // load the textureCoordinates into the vertexBuffer, as non-changing drawing data (STATIC_DRAW)!
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoordinates), gl.STATIC_DRAW);
+        // Loads verticesOfSquare into the vertexBuffer
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoordinates), gl.STATIC_DRAW);
         // </editor-fold>
-        
+
         // <editor-fold desc="Step A: Allocate and store vertex positions into the webGL context">
-            // Create a buffer on the gGL context for our vertex positions
-            _mLineVertexBuffer = gl.createBuffer();
+        // Create a buffer on the gGL context for our vertex positions
+        mLineVertexBuffer = gl.createBuffer();
 
-            // Connect the vertexBuffer to the ARRAY_BUFFER global gl binding point.
-            gl.bindBuffer(gl.ARRAY_BUFFER, _mLineVertexBuffer);    
+        // Connect the vertexBuffer to the ARRAY_BUFFER global gl binding point.
+        gl.bindBuffer(gl.ARRAY_BUFFER, mLineVertexBuffer);
 
-            // Put the verticesOfSquare into the vertexBuffer, as non-changing drawing data (STATIC_DRAW)
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verticesOfLine), gl.STATIC_DRAW);
+        // Put the verticesOfSquare into the vertexBuffer, as non-changing drawing data (STATIC_DRAW)
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verticesOfLine), gl.STATIC_DRAW);
         //<editor-fold>
     };
-    
-    var GetGLVertexRef = function() { return _mSquareVertexBuffer; };
-    var GetGLTexCoordRef = function() { return _mTextureCoordBuffer; };
-    var GetGLLineVertexRef = function() { return _mLineVertexBuffer; };
-    
-    var CleanUp = function() {
-        var gl = gEngine.Core.GetGL();
-        gl.deleteBuffer(_mSquareVertexBuffer);
-        gl.deleteBuffer(_mTextureCoordBuffer);
-        gl.deleteBuffer(_mLineVertexBuffer);
+
+    var getGLVertexRef = function () { return mSquareVertexBuffer; };
+    var getGLTexCoordRef = function () { return mTextureCoordBuffer; };
+    var getGLLineVertexRef = function () { return mLineVertexBuffer; };
+
+    var cleanUp = function () {
+        var gl = gEngine.Core.getGL();
+        gl.deleteBuffer(mSquareVertexBuffer);
+        gl.deleteBuffer(mTextureCoordBuffer);
+        gl.deleteBuffer(mLineVertexBuffer);
     };
-    
-    var oPublic = {
-        Initialize: Initialize,
-        GetGLVertexRef: GetGLVertexRef,
-        GetGLTexCoordRef: GetGLTexCoordRef,
-        GetGLLineVertexRef: GetGLLineVertexRef,
-        CleanUp: CleanUp
+
+    var mPublic = {
+        initialize: initialize,
+        getGLVertexRef: getGLVertexRef,
+        getGLTexCoordRef: getGLTexCoordRef,
+        getGLLineVertexRef: getGLLineVertexRef,
+        cleanUp: cleanUp
     };
-    
-    return oPublic;
-}();
+
+    return mPublic;
+}());

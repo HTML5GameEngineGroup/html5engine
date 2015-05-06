@@ -53,7 +53,7 @@ MyGame.prototype.initialize = function() {
     bgR.getXform().setPosition(50, 35);
     this.mBg = new GameObject(bgR);
 
-    // Step D: Create the hero object with texture from lower-left corner of 
+    // Step B: Create the hero object with texture from lower-left corner of 
     this.mHero = new Hero(this.kMinionSprite);
 
     this.mLMinion = new Minion(this.kMinionSprite, 30, 30);

@@ -14,6 +14,19 @@ uniform vec4 uGlobalAmbientColor; // this is shared globally
 uniform float uGlobalAmbientIntensity; 
 
 // Light information
+#define kGLSLuLightArraySize 4
+    // GLSL Fragment shader does requires loop control 
+    // varialbe to be a constant number. This number 4
+    // says, this fragment shader will _ALWAYS_ process
+    // all 4 light sources. 
+    // ***********WARNING***********************
+    // This number must correspond to the constant with
+    // the same name defined in LightShader.js file.
+    // ***********WARNING**************************
+    // To change this number MAKE SURE: to update the 
+    //     kGLSLuLightArraySize
+    // defined in LightShader.js file.
+
 struct Light  {
     vec4 Position;   // in pixel space!
     vec4 Color;
@@ -22,7 +35,7 @@ struct Light  {
     float Intensity;
     bool  IsOn;
 };
-uniform Light uLights[4];  // Maximum array of lights this shader supports
+uniform Light uLights[kGLSLuLightArraySize];  // Maximum array of lights this shader supports
 
 // The "varying" keyword is for signifing that the texture coordinate will be
 // interpolated and thus varies. 
@@ -42,7 +55,9 @@ vec4 LightEffect(Light lgt, vec3 N) {
             float d = lgt.Far - lgt.Near;
             atten = smoothstep(0.0, 1.0, 1.0-(n*n)/(d*d)); // blended attenuation
         }
-        L = L / dist;
+        L = L / dist; // To normalize L
+              // Not calling the normalize() function to avoid re-computing
+              // the "dist". This is computationally more efficient.
         float NdotL = max(0.0, dot(N, L));   
         atten = atten *= NdotL;
     }
@@ -63,7 +78,7 @@ void main(void)  {
 
     // now decide if we should illuminate by the light
     if (textureMapColor.a > 0.0) {
-        for (int i=0; i<4; i++) { 
+        for (int i=0; i<kGLSLuLightArraySize; i++) { 
             if (uLights[i].IsOn) { 
                 lgtResult += LightEffect(uLights[i], N) * textureMapColor;
             }

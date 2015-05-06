@@ -104,7 +104,7 @@ gEngine.Textures = (function () {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     };
 
-    // texture1 is always normal map for this game engine
+    // texture 1 is always normal map for this game engine
     var activateNormalMap = function (textureName) {
         var gl = gEngine.Core.getGL();
         var texInfo = gEngine.ResourceMap.retrieveAsset(textureName);

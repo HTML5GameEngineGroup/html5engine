@@ -19,15 +19,31 @@ uniform float uGlobalAmbientIntensity;
 //  PointLight:
 //     Direction.w == 0
 //     DropOff < 0
+//     Inner/Outer: are distance in pixel space to the Position
 //
 //  Directoinal Light
 //     Directoin.w == 1
 //     DropOff < 0
+//     Inner/Outer: are distance in pixel space to the Position
 //
 //  SpotLight
 //     Direction.W == 1
 //     DropOff >= 0
-//
+//     Inner/Outer: are angles measured from the Direction
+//     No distance attenuation
+#define kGLSLuLightArraySize 4
+    // GLSL Fragment shader does requires loop control 
+    // varialbe to be a constant number. This number 4
+    // says, this fragment shader will _ALWAYS_ process
+    // all 4 light sources. 
+    // ***********WARNING***********************
+    // This number must correspond to the constant with
+    // the same name defined in LightShader.js file.
+    // ***********WARNING**************************
+    // To change this number MAKE SURE: to update the 
+    //     kGLSLuLightArraySize
+    // defined in LightShader.js file.
+
 struct Light  {
     vec4 Position;   // in pixel space!
     vec4 Direction;  // Light direction
@@ -40,15 +56,14 @@ struct Light  {
     float DropOff;   // for spotlight
     bool  IsOn;
 };
-uniform Light uLights[4];  // Maximum array of lights this shader supports
+uniform Light uLights[kGLSLuLightArraySize];  // Maximum array of lights this shader supports
 
 // The "varying" keyword is for signifing that the texture coordinate will be
 // interpolated and thus varies. 
 varying vec2 vTexCoord;
 
-float AngularDropOff(Light lgt, vec3 lgtDir) {
+float AngularDropOff(Light lgt, vec3 lgtDir, vec3 L) {
     float atten = 0.0;
-    vec3 L = normalize(lgt.Position.xyz - gl_FragCoord.xyz);
     float cosL = dot(lgtDir, L);
     float cosOuter = cos(lgt.Outer * 0.5);  
     float num = cosL - cosOuter;
@@ -64,9 +79,8 @@ float AngularDropOff(Light lgt, vec3 lgtDir) {
     return atten;
 }
 
-float DistanceDropOff(Light lgt) {
+float DistanceDropOff(Light lgt, float dist) {
     float atten = 0.0;
-    float dist = length(lgt.Position.xyz - gl_FragCoord.xyz);
     if (dist <= lgt.Far) {
         if (dist <= lgt.Near)
             atten = 1.0;  //  no attenuation
@@ -83,20 +97,21 @@ float DistanceDropOff(Light lgt) {
 vec4 LightEffect(Light lgt) {
     float aAtten = 1.0, dAtten = 0.0;
     vec3 lgtDir = -normalize(lgt.Direction.xyz);
+    vec3 L = lgt.Position.xyz - gl_FragCoord.xyz;
+    float dist = length(L);
+    L = L / dist;
     // find out what kind of light ...
     if ((lgt.Direction.w == 1.0) && (lgt.DropOff > 0.0)) {
         // spotlight: do angle dropoff
-        aAtten = AngularDropOff(lgt, lgtDir);
+        aAtten = AngularDropOff(lgt, lgtDir, L);
     } 
-    dAtten = DistanceDropOff(lgt);
+    dAtten = DistanceDropOff(lgt, dist);
     if ((lgt.Direction.w == 1.0) && (lgt.DropOff < 0.0)) { // direcitonal light
         // Let's use the z-component as normal
         dAtten *= lgtDir.z;
     }
     return dAtten * aAtten * lgt.Intensity * lgt.Color;
 }
-
-#define NUM_SYS_LIGHTS 4
 
 void main(void)  {
     // simple tint based on uPixelColor setting
@@ -105,7 +120,7 @@ void main(void)  {
 
     // now decide if we should illuminate by the light
     if (textureMapColor.a > 0.0) {
-        for (int i=0; i<NUM_SYS_LIGHTS; i++) { 
+        for (int i=0; i<kGLSLuLightArraySize; i++) { 
             if (uLights[i].IsOn) { 
                 lgtResults +=  LightEffect(uLights[i]) * textureMapColor;
             }

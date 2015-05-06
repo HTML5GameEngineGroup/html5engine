@@ -11,7 +11,7 @@
 //<editor-fold desc="constructor">
 // constructor 
 function IllumShader(vertexShaderPath, fragmentShaderPath) {
-    // Call sper class constructor
+    // Callsuper class constructor
     LightShader.call(this, vertexShaderPath, fragmentShaderPath);  // call super class constructor
 
     // this is the material property of the renderable
@@ -24,7 +24,7 @@ function IllumShader(vertexShaderPath, fragmentShaderPath) {
     this.mCameraPosRef = gl.getUniformLocation(this.mCompiledShader, "uCameraPosition");
 
     // reference to the normal map sampler
-    this.mNormalSamlerRef = gl.getUniformLocation(this.mCompiledShader, "uNormalSampler");
+    this.mNormalSamplerRef = gl.getUniformLocation(this.mCompiledShader, "uNormalSampler");
 }
 gEngine.Core.inheritPrototype(IllumShader, LightShader);
 //</editor-fold>
@@ -33,10 +33,10 @@ gEngine.Core.inheritPrototype(IllumShader, LightShader);
 
 // Overriding the Activation of the shader for rendering
 IllumShader.prototype.activateShader = function(pixelColor, aCamera) {
-    // fist call the super class's activate
+    // first call the super class's activate
     LightShader.prototype.activateShader.call(this, pixelColor, aCamera);
     var gl = gEngine.Core.getGL();
-    gl.uniform1i(this.mNormalSamlerRef, 1); // binds to texture unit 1
+    gl.uniform1i(this.mNormalSamplerRef, 1); // binds to texture unit 1
     // do not need to set up texture coordinate buffer
     // as we are going to use the ones from the sprite texture 
     // in the fragment shader

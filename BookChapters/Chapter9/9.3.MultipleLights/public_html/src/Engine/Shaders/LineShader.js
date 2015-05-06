@@ -11,7 +11,7 @@
 //<editor-fold desc="constructor">
 // constructor of LineShader object
 function LineShader(vertexShaderPath, fragmentShaderPath) {
-    // Call sper class constructor
+    // Callsuper class constructor
     SimpleShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
 
     this.mPointSizeRef = null;            // reference to the PointSize uniform
@@ -29,7 +29,7 @@ gEngine.Core.inheritPrototype(LineShader, SimpleShader);
 
 // Activate the shader for rendering
 LineShader.prototype.activateShader = function (pixelColor, aCamera) {
-    // fist call the super class's activate
+    // first call the super class's activate
     SimpleShader.prototype.activateShader.call(this, pixelColor, aCamera);
 
     // now our own functionality: enable texture coordinate array

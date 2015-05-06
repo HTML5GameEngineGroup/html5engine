@@ -16,7 +16,7 @@ function IllumRenderable(myTexture, myNormalMap) {
     LightRenderable.call(this, myTexture);
     Renderable.prototype._setShader.call(this, gEngine.DefaultResources.getIllumShader());
 
-    // here is the normal map resoruce id
+    // here is the normal map resource id
     this.mNormalMap = myNormalMap;
 
     // Normal map texture coordinate will reproduce the corresponding sprite sheet

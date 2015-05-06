@@ -12,7 +12,7 @@
 //<editor-fold desc="constructor">
 // constructor 
 function LightShader(vertexShaderPath, fragmentShaderPath) {
-    // Call sper class constructor
+    // Callsuper class constructor
     SpriteShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
 
     // glsl uniform position references
@@ -38,7 +38,7 @@ gEngine.Core.inheritPrototype(LightShader, SpriteShader);
 
 // Overriding the Activation of the shader for rendering
 LightShader.prototype.activateShader = function (pixelColor, aCamera) {
-    // fist call the super class's activate
+    // first call the super class's activate
     SpriteShader.prototype.activateShader.call(this, pixelColor, aCamera);
 
     // now push the light information to the shader

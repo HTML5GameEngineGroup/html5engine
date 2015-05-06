@@ -4,12 +4,10 @@
 precision mediump float; 
     // sets the precision for floating point computation
 
-// Color of the object
+// Color of pixel
 uniform vec4 uPixelColor;  
 
-void main(void)  {
-    // for every pixel called (within the square) sets
-    // constant color red with alpha-channel value of 1.0
+void main(void) {
+    // for every pixel called sets to the user specified color
     gl_FragColor = uPixelColor;
 }
-        

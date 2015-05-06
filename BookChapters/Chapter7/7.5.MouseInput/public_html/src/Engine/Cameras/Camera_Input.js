@@ -1,24 +1,34 @@
-Camera.prototype._MouseDCX = function() {
-    return gEngine.Input.MousePosX() - this._mViewport[Camera.eViewport.eOrgX];
+/* 
+ * File: Camera_Input.js
+ * Defines the functions that supports mouse input coordinate transforms
+ */
+
+/*jslint node: true, vars: true, bitwise: true */
+/*global gEngine, Camera, BoundingBox, vec2, CameraShake */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+"use strict";
+
+
+Camera.prototype._mouseDCX = function () {
+    return gEngine.Input.mousePosX() - this.mViewport[Camera.eViewport.eOrgX];
 };
-Camera.prototype._MouseDCY = function() {
-    return gEngine.Input.MousePosY() - this._mViewport[Camera.eViewport.eOrgY];
+Camera.prototype._mouseDCY = function () {
+    return gEngine.Input.mousePosY() - this.mViewport[Camera.eViewport.eOrgY];
 };
 
-Camera.prototype.IsMouseInViewport = function() {
-    var dcX = this._MouseDCX();
-    var dcY = this._MouseDCY();
-    return ((dcX >= 0) && (dcX < this._mViewport[Camera.eViewport.eWidth]) &&  
-            (dcY >=0) && (dcY < this._mViewport[Camera.eViewport.eHeight]));
+Camera.prototype.isMouseInViewport = function () {
+    var dcX = this._mouseDCX();
+    var dcY = this._mouseDCY();
+    return ((dcX >= 0) && (dcX < this.mViewport[Camera.eViewport.eWidth]) &&
+            (dcY >= 0) && (dcY < this.mViewport[Camera.eViewport.eHeight]));
 };
 
-Camera.prototype.MouseWCX = function() {
-    var minWCX = this.GetWCCenter()[0] - this.GetWCWidth()/2;
-    return minWCX + (this._MouseDCX() * (this.GetWCWidth()/this._mViewport[Camera.eViewport.eWidth]));
+Camera.prototype.mouseWCX = function () {
+    var minWCX = this.getWCCenter()[0] - this.getWCWidth() / 2;
+    return minWCX + (this._mouseDCX() * (this.getWCWidth() / this.mViewport[Camera.eViewport.eWidth]));
 };
 
-Camera.prototype.MouseWCY = function() {
-    var minWCY = this.GetWCCenter()[1] - this.GetWCHeight()/2;
-    return minWCY + (this._MouseDCY() * (this.GetWCHeight()/this._mViewport[Camera.eViewport.eHeight]));
+Camera.prototype.mouseWCY = function () {
+    var minWCY = this.getWCCenter()[1] - this.getWCHeight() / 2;
+    return minWCY + (this._mouseDCY() * (this.getWCHeight() / this.mViewport[Camera.eViewport.eHeight]));
 };
-

@@ -63,7 +63,7 @@ gEngine.DefaultResources = (function () {
         gEngine.TextFileLoader.unloadTextFile(kSimpleVS);
         gEngine.TextFileLoader.unloadTextFile(kSimpleFS);
 
-        // textuire shader: 
+        // texture shader: 
         gEngine.TextFileLoader.unloadTextFile(kTextureVS);
         gEngine.TextFileLoader.unloadTextFile(kTextureFS);
 

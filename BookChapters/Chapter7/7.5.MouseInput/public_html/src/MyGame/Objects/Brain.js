@@ -1,39 +1,47 @@
-/* 
+/* File: Brain.js 
  *
+ * Creates and initializes a simple Brain object
  */
-function Brain(spriteTexture) {
-    this._kDeltaDegree = 1;
-    this._kDeltaRad = Math.PI * this._kDeltaDegree/180;
-    this._kDeltaSpeed = 0.01;
-    this._mBrain= new SpriteRenderable(spriteTexture);
-    this._mBrain.SetColor([1, 1, 1, 0]);
-    this._mBrain.GetXform().SetPosition(50, 10);
-    this._mBrain.GetXform().SetSize(3, 5.4);
-    this._mBrain.SetTexPixelPositions(600, 700, 0, 180);
-                                
-    GameObject.call(this, this._mBrain);
-    
-    this.SetSpeed(0.3);
-};
-gEngine.Core.InheritPrototype(Brain, GameObject);
 
-Brain.prototype.Update = function(){
-    GameObject.prototype.Update.call(this);  // default moving forward
-    
-    var xf = this.GetXform();
-    var fdir = this.GetCurrentFrontDir();
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Left)) {
-        xf.IncRotationByDegree(this._kDeltaDegree);
-        vec2.rotate(fdir, fdir, this._kDeltaRad);
+/*jslint node: true, vars: true */
+/*global gEngine: false, GameObject: false, SpriteRenderable: false, vec2: false */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
+"use strict";  // Operate in Strict mode such that variables must be declared before used!
+
+function Brain(spriteTexture) {
+    this.kDeltaDegree = 1;
+    this.kDeltaRad = Math.PI * this.kDeltaDegree / 180;
+    this.kDeltaSpeed = 0.01;
+    this.mBrain = new SpriteRenderable(spriteTexture);
+    this.mBrain.setColor([1, 1, 1, 0]);
+    this.mBrain.getXform().setPosition(50, 10);
+    this.mBrain.getXform().setSize(3, 5.4);
+    this.mBrain.setTexPixelPositions(600, 700, 0, 180);
+
+    GameObject.call(this, this.mBrain);
+
+    this.setSpeed(0.3);
+}
+gEngine.Core.inheritPrototype(Brain, GameObject);
+
+Brain.prototype.update = function () {
+    GameObject.prototype.update.call(this);  // default moving forward
+
+    var xf = this.getXform();
+    var fdir = this.getCurrentFrontDir();
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Left)) {
+        xf.incRotationByDegree(this.kDeltaDegree);
+        vec2.rotate(fdir, fdir, this.kDeltaRad);
     }
-    if (gEngine.Input.IsKeyPressed(gEngine.Input.Keys.Right)) {
-        xf.IncRotationByRad(-this._kDeltaRad);
-        vec2.rotate(fdir, fdir, -this._kDeltaRad);
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Right)) {
+        xf.incRotationByRad(-this.kDeltaRad);
+        vec2.rotate(fdir, fdir, -this.kDeltaRad);
     }
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Up)) {
-        this.IncSpeedBy(this._kDeltaSpeed);
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Up)) {
+        this.incSpeedBy(this.kDeltaSpeed);
     }
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Down)) {
-        this.IncSpeedBy(-this._kDeltaSpeed);
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Down)) {
+        this.incSpeedBy(-this.kDeltaSpeed);
     }
 };

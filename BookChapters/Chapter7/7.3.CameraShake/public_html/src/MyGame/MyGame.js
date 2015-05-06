@@ -2,160 +2,169 @@
  * File: MyGame.js 
  * This is the the logic of our game. 
  */
+
+/*jslint node: true, vars: true */
+/*global gEngine, Scene, GameObjectset, TextureObject, Camera, vec2,
+  FontRenderable, SpriteRenderable, DyePack, Hero, Minion, Brain,
+  GameObject */
+/* find out more about jslint: http://www.jslint.com/lint.html */
+
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function MyGame()
-{   
-    this._kMinionSprite = "resources/minion_sprite.png";
-    this._kMinionPortal = "resources/minion_portal.png";
-    this._kBg = "resources/bg.png";
-    
+function MyGame() {
+    this.kMinionSprite = "assets/minion_sprite.png";
+    this.kMinionPortal = "assets/minion_portal.png";
+    this.kBg = "assets/bg.png";
+
     // The camera to view the rectangles
-    this._mCamera = null;
-    this._mBg = null;
-    
-    this._mMsg = null;
-    
+    this.mCamera = null;
+    this.mBg = null;
+
+    this.mMsg = null;
+
     // the hero and the support objects
-    this._mHero = null;
-    this._mBrain = null;
-    this._mPortal = null;
-    this._mLMinion = null;
-    this._mRMinion = null;
-    this._mFocusObj = null;
-    
-    this._mChoice = 'D';
-};
-gEngine.Core.InheritPrototype(MyGame, Scene);
+    this.mHero = null;
+    this.mBrain = null;
+    this.mPortal = null;
+    this.mLMinion = null;
+    this.mRMinion = null;
+    this.mFocusObj = null;
 
-MyGame.prototype.LoadScene = function() 
-{
-   gEngine.Textures.LoadTexture(this._kMinionSprite);
-   gEngine.Textures.LoadTexture(this._kMinionPortal);
-   gEngine.Textures.LoadTexture(this._kBg);
-};
+    this.mChoice = 'D';
+}
+gEngine.Core.inheritPrototype(MyGame, Scene);
 
-MyGame.prototype.UnloadScene = function() 
-{  
-    gEngine.Textures.UnloadTexture(this._kMinionSprite);
-    gEngine.Textures.UnloadTexture(this._kMinionPortal);
-    gEngine.Textures.UnloadTexture(this._kBg);
+MyGame.prototype.loadScene = function () {
+    gEngine.Textures.loadTexture(this.kMinionSprite);
+    gEngine.Textures.loadTexture(this.kMinionPortal);
+    gEngine.Textures.loadTexture(this.kBg);
 };
 
-MyGame.prototype.Initialize = function() 
-{
+MyGame.prototype.unloadScene = function () {
+    gEngine.Textures.unloadTexture(this.kMinionSprite);
+    gEngine.Textures.unloadTexture(this.kMinionPortal);
+    gEngine.Textures.unloadTexture(this.kBg);
+};
+
+MyGame.prototype.initialize = function () {
     // Step A: set up the cameras
-    this._mCamera = new Camera(
-            vec2.fromValues(50, 37.5),   // position of the camera
-            100,                       // width of camera
-            [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
-            );
-    this._mCamera.SetBackgroundColor([0.8, 0.8, 0.8, 1]);
+    this.mCamera = new Camera(
+        vec2.fromValues(50, 37.5),   // position of the camera
+        100,                       // width of camera
+        [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
+    );
+    this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
-            
+
     // Large background image
-    var bgR = new SpriteRenderable(this._kBg);
-    bgR.SetTexPixelPositions(0, 1900, 0, 1000);
-    bgR.GetXform().SetSize(380, 200);
-    bgR.GetXform().SetPosition(50, 35);
-    this._mBg = new GameObject(bgR);
-      
+    var bgR = new SpriteRenderable(this.kBg);
+    bgR.setTexPixelPositions(0, 1900, 0, 1000);
+    bgR.getXform().setSize(380, 200);
+    bgR.getXform().setPosition(50, 35);
+    this.mBg = new GameObject(bgR);
+
     // Objects in the scene
-    this._mBrain = new Brain(this._kMinionSprite);        
-    this._mHero = new Hero(this._kMinionSprite);
-    this._mPortal = new TextureObject(this._kMinionPortal, 50, 30, 10, 10);
-    this._mLMinion = new Minion(this._kMinionSprite, 30, 30);
-    this._mRMinion = new Minion(this._kMinionSprite, 70, 30);
-    this._mFocusObj = this._mHero;
-        
-    this._mMsg = new FontRenderable("Status Message");
-    this._mMsg.SetColor([1, 1, 1, 1]);
-    this._mMsg.GetXform().SetPosition(1, 2);
-    this._mMsg.SetTextHeight(3);
+    this.mBrain = new Brain(this.kMinionSprite);
+    this.mHero = new Hero(this.kMinionSprite);
+    this.mPortal = new TextureObject(this.kMinionPortal, 50, 30, 10, 10);
+    this.mLMinion = new Minion(this.kMinionSprite, 30, 30);
+    this.mRMinion = new Minion(this.kMinionSprite, 70, 30);
+    this.mFocusObj = this.mHero;
+
+    this.mMsg = new FontRenderable("Status Message");
+    this.mMsg.setColor([1, 1, 1, 1]);
+    this.mMsg.getXform().setPosition(1, 2);
+    this.mMsg.setTextHeight(3);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
 // importantly, make sure to _NOT_ change any state.
-MyGame.prototype.Draw = function() 
-{   
+MyGame.prototype.draw = function () {
     // Step A: clear the canvas
-    gEngine.Core.ClearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
-    
+    gEngine.Core.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
+
     // Step  B: Activate the drawing Camera
-    this._mCamera.SetupViewProjection();
-    
-        // Step  C: Draw everything
-        this._mBg.Draw(this._mCamera);
-        this._mHero.Draw(this._mCamera);
-        this._mBrain.Draw(this._mCamera);
-        this._mPortal.Draw(this._mCamera);
-        this._mLMinion.Draw(this._mCamera);
-        this._mRMinion.Draw(this._mCamera);
-        this._mMsg.Draw(this._mCamera);
+    this.mCamera.setupViewProjection();
+
+    // Step  C: Draw everything
+    this.mBg.draw(this.mCamera);
+    this.mHero.draw(this.mCamera);
+    this.mBrain.draw(this.mCamera);
+    this.mPortal.draw(this.mCamera);
+    this.mLMinion.draw(this.mCamera);
+    this.mRMinion.draw(this.mCamera);
+    this.mMsg.draw(this.mCamera);
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
-MyGame.prototype.Update = function()
-{
+MyGame.prototype.update = function () {
     var zoomDelta = 0.05;
     var msg = "L/R: Left or Right Minion; H: Dye; P: Portal]: ";
-    
-    this._mCamera.Update();  // for delay camera movements
-    
-    this._mLMinion.Update();  // for sprite animation
-    this._mRMinion.Update();
-    
-    this._mHero.Update();     // for WASD movement
-    this._mPortal.Update(     // for arrow movement
-            gEngine.Input.Keys.Up, gEngine.Input.Keys.Down,
-            gEngine.Input.Keys.Left, gEngine.Input.Keys.Right, gEngine.Input.Keys.P);  
-            
+
+    this.mCamera.update();  // for delay camera movements
+
+    this.mLMinion.update();  // for sprite animation
+    this.mRMinion.update();
+
+    this.mHero.update();     // for WASD movement
+    this.mPortal.update(     // for arrow movement
+        gEngine.Input.keys.Up,
+        gEngine.Input.keys.Down,
+        gEngine.Input.keys.Left,
+        gEngine.Input.keys.Right,
+        gEngine.Input.keys.P
+    );
+
     // Brain chasing the hero
     var h = [];
-    if (!this._mHero.PixelTouches(this._mBrain, h)) {
-        this._mBrain.RotateObjPointTo(this._mHero.GetXform().GetPosition(), 0.01);
-        GameObject.prototype.Update.call(this._mBrain);
-    } 
-    
+    if (!this.mHero.pixelTouches(this.mBrain, h)) {
+        this.mBrain.rotateObjPointTo(this.mHero.getXform().getPosition(), 0.01);
+        GameObject.prototype.update.call(this.mBrain);
+    }
+
     // Pan camera to object
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.L)) {
-        this._mFocusObj = this._mLMinion;
-        this._mChoice = 'L';
-        this._mCamera.PanTo(this._mLMinion.GetXform().GetXPos(), this._mLMinion.GetXform().GetYPos());
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.L)) {
+        this.mFocusObj = this.mLMinion;
+        this.mChoice = 'L';
+        this.mCamera.panTo(this.mLMinion.getXform().getXPos(), this.mLMinion.getXform().getYPos());
     }
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.R)) {
-        this._mFocusObj = this._mRMinion;
-        this._mChoice = 'R';
-        this._mCamera.PanTo(this._mRMinion.GetXform().GetXPos(), this._mRMinion.GetXform().GetYPos());
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.R)) {
+        this.mFocusObj = this.mRMinion;
+        this.mChoice = 'R';
+        this.mCamera.panTo(this.mRMinion.getXform().getXPos(), this.mRMinion.getXform().getYPos());
     }
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.P)) {
-        this._mFocusObj = this._mPortal;
-        this._mChoice = 'P';
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.P)) {
+        this.mFocusObj = this.mPortal;
+        this.mChoice = 'P';
     }
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.H)) {
-        this._mFocusObj = this._mHero;
-        this._mChoice = 'H';
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.H)) {
+        this.mFocusObj = this.mHero;
+        this.mChoice = 'H';
     }
-    
+
     // zoom
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.N))
-        this._mCamera.ZoomBy(1-zoomDelta);
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.M))
-        this._mCamera.ZoomBy(1+zoomDelta);
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.J))
-        this._mCamera.ZoomTowards(this._mFocusObj.GetXform().GetPosition(), 1-zoomDelta);
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.K))
-        this._mCamera.ZoomTowards(this._mFocusObj.GetXform().GetPosition(), 1+zoomDelta);
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.N)) {
+        this.mCamera.zoomBy(1 - zoomDelta);
+    }
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.M)) {
+        this.mCamera.zoomBy(1 + zoomDelta);
+    }
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.J)) {
+        this.mCamera.zoomTowards(this.mFocusObj.getXform().getPosition(), 1 - zoomDelta);
+    }
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.K)) {
+        this.mCamera.zoomTowards(this.mFocusObj.getXform().getPosition(), 1 + zoomDelta);
+    }
 
     // interaction with the WC bound
-    this._mCamera.ClampAtBoundary(this._mBrain.GetXform(), 0.9);
-    this._mCamera.ClampAtBoundary(this._mPortal.GetXform(), 0.8);
-    this._mCamera.PanWith(this._mHero.GetXform(), 0.9);
+    this.mCamera.clampAtBoundary(this.mBrain.getXform(), 0.9);
+    this.mCamera.clampAtBoundary(this.mPortal.getXform(), 0.8);
+    this.mCamera.panWith(this.mHero.getXform(), 0.9);
 
-    if (gEngine.Input.IsKeyClicked(gEngine.Input.Keys.Q))
-        this._mCamera.Shake(-2, -2, 20, 30);
+    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Q)) {
+        this.mCamera.Shake(-2, -2, 20, 30);
+    }
 
-    
-    this._mMsg.SetText(msg + this._mChoice);
+    this.mMsg.setText(msg + this.mChoice);
 };

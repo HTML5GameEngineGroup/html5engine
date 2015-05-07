@@ -163,7 +163,7 @@ MyGame.prototype.update = function () {
 MyGame.prototype._selectCharacter = function () {
     // select which character to work with
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Five)) {
-        this.mSlectedCh = this.mLMinion;
+        this.mSlectedCh = this.mIllumMinion;
         this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();
         this.mSelectedChMsg = "L:";
     }

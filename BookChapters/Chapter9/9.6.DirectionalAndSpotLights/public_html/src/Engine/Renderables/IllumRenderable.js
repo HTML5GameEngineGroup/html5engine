@@ -39,7 +39,7 @@ IllumRenderable.prototype.draw = function (aCamera) {
     LightRenderable.prototype.draw.call(this, aCamera);
 };
 
-IllumRenderable.prototype.getMaterial = function() { return this.mMaterial; };
+IllumRenderable.prototype.getMaterial = function () { return this.mMaterial; };
 //--- end of Public Methods
 
 //</editor-fold>

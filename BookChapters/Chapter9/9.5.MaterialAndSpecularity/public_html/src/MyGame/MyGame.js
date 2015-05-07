@@ -166,11 +166,7 @@ MyGame.prototype.update = function () {
 
 MyGame.prototype._selectCharacter = function () {
     // select which character to work with
-    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Four)) {
-        this.mSlectedCh = this.mRingHero;
-        this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();
-        this.mSelectedChMsg = "R:";
-    }
+
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Five)) {
         this.mSlectedCh = this.mLMinion;
         this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();

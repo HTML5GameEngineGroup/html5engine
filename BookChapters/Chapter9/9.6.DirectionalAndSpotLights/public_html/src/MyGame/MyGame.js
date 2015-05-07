@@ -107,6 +107,10 @@ MyGame.prototype.initialize = function () {
     this.mBlock2.setColor([0, 1, 0, 1]);
     this.mBlock2.getXform().setSize(5, 5);
     this.mBlock2.getXform().setPosition(70, 50);
+
+    this.mSlectedCh = this.mIllumHero;
+    this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();
+    this.mSelectedChMsg = "H:";
 };
 
 
@@ -149,27 +153,22 @@ MyGame.prototype.update = function () {
     var msg = "L=" + this.mLgtIndex + " ";
     msg += this._lightControl();
     this.mMsg.setText(msg);
-    /*
-    msg = this._SelectCharacter();
+
+    msg = this._selectCharacter();
     msg += this.materialControl();
     this.mMatMsg.setText(msg);
-    */
+
 };
 
 MyGame.prototype._selectCharacter = function () {
     // select which character to work with
-    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Four)) {
-        this.mSlectedCh = this.mRingHero;
-        this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();
-        this.mSelectedChMsg = "R:";
-    }
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Five)) {
         this.mSlectedCh = this.mLMinion;
         this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();
         this.mSelectedChMsg = "L:";
     }
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Six)) {
-        this.mSlectedCh = this.mHero;
+        this.mSlectedCh = this.mIllumHero;
         this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();
         this.mSelectedChMsg = "H:";
     }

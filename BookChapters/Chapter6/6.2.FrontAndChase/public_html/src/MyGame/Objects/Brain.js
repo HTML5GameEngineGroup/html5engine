@@ -17,7 +17,7 @@ function Brain(spriteTexture) {
     this.mBrain.setColor([1, 1, 1, 0]);
     this.mBrain.getXform().setPosition(50, 10);
     this.mBrain.getXform().setSize(3, 5.4);
-    this.mBrain.setTexPixelPositions(600, 700, 0, 180);
+    this.mBrain.setElementPixelPositions(600, 700, 0, 180);
 
     GameObject.call(this, this.mBrain);
 

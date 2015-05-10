@@ -105,7 +105,7 @@ MyGame.prototype.initialize = function () {
     this.mHero.setColor([1, 1, 1, 0]);
     this.mHero.getXform().setPosition(35, 50);
     this.mHero.getXform().setSize(12, 18);
-    this.mHero.setTexPixelPositions(0, 120, 0, 180);
+    this.mHero.setElementPixelPositions(0, 120, 0, 180);
 
     //<editor-fold desc="Create the fonts!">
     this.mTextSysFont = new FontRenderable("System Font: in Red");
@@ -195,7 +195,7 @@ MyGame.prototype.update = function () {
     // <editor-fold desc="The font image:">
     // zoom into the texture by updating texture coordinate
     // For font: zoom to the upper left corner by changing bottom right
-    var texCoord = this.mFontImage.getTexCoordinateArray();
+    var texCoord = this.mFontImage.getElementUVCoordinateArray();
             // The 8 elements:
             //      mTexRight,  mTexTop,          // x,y of top-right
             //      mTexLeft,   mTexTop,
@@ -209,7 +209,7 @@ MyGame.prototype.update = function () {
     if (r < 0) {
         r = 1.0;
     }
-    this.mFontImage.setTexCoordinate(
+    this.mFontImage.setElementUVCoordinate(
         texCoord[SpriteRenderable.eTexCoordArray.eLeft],
         r,
         b,

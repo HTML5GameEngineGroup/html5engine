@@ -40,7 +40,7 @@ SpriteRenderable.eTexCoordArray = Object.freeze({
 //**-----------------------------------------
 
 // specify subtexture region by texture coordinate (between 0 to 1)
-SpriteRenderable.prototype.setTexCoordinate = function (left, right, bottom, top) {
+SpriteRenderable.prototype.setElementUVCoordinate = function (left, right, bottom, top) {
     this.mTexLeft = left;
     this.mTexRight = right;
     this.mTexBottom = bottom;
@@ -48,7 +48,7 @@ SpriteRenderable.prototype.setTexCoordinate = function (left, right, bottom, top
 };
 
 // specify subtexture region by pixel positions (between 0 to image resolutions)
-SpriteRenderable.prototype.setTexPixelPositions = function (left, right, bottom, top) {
+SpriteRenderable.prototype.setElementPixelPositions = function (left, right, bottom, top) {
     var texInfo = gEngine.ResourceMap.retrieveAsset(this.mTexture);
     // entire image width, height
     var imageW = texInfo.mWidth;
@@ -60,7 +60,7 @@ SpriteRenderable.prototype.setTexPixelPositions = function (left, right, bottom,
     this.mTexTop = top / imageH;
 };
 
-SpriteRenderable.prototype.getTexCoordinateArray = function () {
+SpriteRenderable.prototype.getElementUVCoordinateArray = function () {
     return [
         this.mTexRight,  this.mTexTop,          // x,y of top-right
         this.mTexLeft,   this.mTexTop,
@@ -73,7 +73,7 @@ SpriteRenderable.prototype.draw = function (pixelColor, vpMatrix) {
     // set the current texture coordinate
     // 
     // activate the texture
-    this.mShader.setTextureCoordinate(this.getTexCoordinateArray());
+    this.mShader.setTextureCoordinate(this.getElementUVCoordinateArray());
     TextureRenderable.prototype.draw.call(this, pixelColor, vpMatrix);
 };
 //--- end of Public Methods

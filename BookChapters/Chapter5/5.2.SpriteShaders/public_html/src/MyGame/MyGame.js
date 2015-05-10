@@ -54,13 +54,13 @@ MyGame.prototype.initialize = function () {
     this.mPortal.setColor([1, 0, 0, 0.2]);  // tints red
     this.mPortal.getXform().setPosition(25, 60);
     this.mPortal.getXform().setSize(3, 3);
-    this.mPortal.setTexPixelPositions(130, 310, 0, 180);
+    this.mPortal.setElementPixelPositions(130, 310, 0, 180);
 
     this.mCollector = new SpriteRenderable(this.kMinionSprite);
     this.mCollector.setColor([0, 0, 0, 0]);  // No tinting
     this.mCollector.getXform().setPosition(15, 60);
     this.mCollector.getXform().setSize(3, 3);
-    this.mCollector.setTexPixelPositions(315, 495, 0, 180);
+    this.mCollector.setElementPixelPositions(315, 495, 0, 180);
 
     // Step C: Create the font and minion images using sprite
     this.mFontImage = new SpriteRenderable(this.kFontImage);
@@ -78,7 +78,7 @@ MyGame.prototype.initialize = function () {
     this.mHero.setColor([1, 1, 1, 0]);
     this.mHero.getXform().setPosition(20, 60);
     this.mHero.getXform().setSize(2, 3);
-    this.mHero.setTexPixelPositions(0, 120, 0, 180);
+    this.mHero.setElementPixelPositions(0, 120, 0, 180);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -136,7 +136,7 @@ MyGame.prototype.update = function () {
     // <editor-fold desc="The font image:">
     // zoom into the texture by updating texture coordinate
     // For font: zoom to the upper left corner by changing bottom right
-    var texCoord = this.mFontImage.getTexCoordinateArray();
+    var texCoord = this.mFontImage.getElementUVCoordinateArray();
             // The 8 elements:
             //      mTexRight,  mTexTop,          // x,y of top-right
             //      mTexLeft,   mTexTop,
@@ -150,7 +150,7 @@ MyGame.prototype.update = function () {
     if (r < 0) {
         r = 1.0;
     }
-    this.mFontImage.setTexCoordinate(
+    this.mFontImage.setElementUVCoordinate(
         texCoord[SpriteRenderable.eTexCoordArray.eLeft],
         r,
         b,
@@ -160,7 +160,7 @@ MyGame.prototype.update = function () {
 
     // <editor-fold desc="The minion image:">
     // For minion: zoom to the bottom right corner by changing top left
-    texCoord = this.mMinion.getTexCoordinateArray();
+    texCoord = this.mMinion.getElementUVCoordinateArray();
             // The 8 elements:
             //      mTexRight,  mTexTop,          // x,y of top-right
             //      mTexLeft,   mTexTop,
@@ -176,7 +176,7 @@ MyGame.prototype.update = function () {
         t = 1.0;
     }
 
-    this.mMinion.setTexCoordinate(
+    this.mMinion.setElementUVCoordinate(
         l,
         texCoord[SpriteRenderable.eTexCoordArray.eRight],
         texCoord[SpriteRenderable.eTexCoordArray.eBottom],

@@ -18,7 +18,7 @@ function DyePack(spriteTexture) {
     this.mDyePack.setColor([1, 1, 1, 0.1]);
     this.mDyePack.getXform().setPosition(50, 33);
     this.mDyePack.getXform().setSize(this.kRefWidth / 50, this.kRefHeight / 50);
-    this.mDyePack.setTexPixelPositions(510, 595, 23, 153);
+    this.mDyePack.setElementPixelPositions(510, 595, 23, 153);
     GameObject.call(this, this.mDyePack);
 }
 gEngine.Core.inheritPrototype(DyePack, GameObject);

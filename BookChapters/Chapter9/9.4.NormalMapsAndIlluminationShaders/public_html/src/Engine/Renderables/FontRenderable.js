@@ -36,7 +36,7 @@ FontRenderable.prototype.draw = function (aCamera) {
         charInfo = gEngine.Fonts.getCharInfo(this.mFont, aChar);
 
         // set the texture coordinate
-        this.mOneChar.setTexCoordinate(charInfo.mTexCoordLeft, charInfo.mTexCoordRight,
+        this.mOneChar.setElementUVCoordinate(charInfo.mTexCoordLeft, charInfo.mTexCoordRight,
             charInfo.mTexCoordBottom, charInfo.mTexCoordTop);
 
         // now the size of the char

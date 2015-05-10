@@ -60,7 +60,7 @@ MyGame.prototype.initialize = function () {
 
     // the Background
     var bgR = new LightRenderable(this.kBg);
-    bgR.setTexPixelPositions(0, 1900, 0, 1000);
+    bgR.setElementPixelPositions(0, 1900, 0, 1000);
     bgR.getXform().setSize(380, 200);
     bgR.getXform().setPosition(50, 35);
     var i;

@@ -56,7 +56,7 @@ SpriteAnimateRenderable.prototype._initAnimation = function () {
 
 SpriteAnimateRenderable.prototype._setSpriteElement = function () {
     var left = this.mFirstElmLeft + (this.mCurrentElm * (this.mElmWidth + this.mWidthPadding));
-    SpriteRenderable.prototype.setTexCoordinate.call(this, left, left + this.mElmWidth,
+    SpriteRenderable.prototype.setElementUVCoordinate.call(this, left, left + this.mElmWidth,
                                         this.mElmTop - this.mElmHeight, this.mElmTop);
 };
 

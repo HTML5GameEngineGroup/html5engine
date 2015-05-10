@@ -48,7 +48,7 @@ MyGame.prototype.initialize = function() {
             // sets the background to gray
 
     var bgR = new SpriteRenderable(this.kBg);
-    bgR.setTexPixelPositions(0, 1900, 0, 1000);
+    bgR.setElementPixelPositions(0, 1900, 0, 1000);
     bgR.getXform().setSize(190, 100);
     bgR.getXform().setPosition(50, 35);
     this.mBg = new GameObject(bgR);

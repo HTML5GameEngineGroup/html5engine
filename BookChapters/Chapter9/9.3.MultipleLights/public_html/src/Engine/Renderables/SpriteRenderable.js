@@ -42,7 +42,7 @@ SpriteRenderable.eTexCoordArray = Object.freeze({
 // Public methods
 //**-----------------------------------------
 
-// specify subtexture region by texture coordinate (between 0 to 1)
+// specify element region by texture coordinate (between 0 to 1)
 SpriteRenderable.prototype.setElementUVCoordinate = function (left, right, bottom, top) {
     this.mTexLeft = left;
     this.mTexRight = right;
@@ -51,7 +51,7 @@ SpriteRenderable.prototype.setElementUVCoordinate = function (left, right, botto
     this._setTexInfo();
 };
 
-// specify subtexture region by pixel positions (between 0 to image resolutions)
+// specify element region by pixel positions (between 0 to image resolutions)
 SpriteRenderable.prototype.setElementPixelPositions = function (left, right, bottom, top) {
     var imageW = this.mTextureInfo.mWidth;
     var imageH = this.mTextureInfo.mHeight;

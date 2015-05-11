@@ -11,7 +11,7 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function Minion(spriteTexture, normalMap, atX, atY, lgtset) {
+function Minion(spriteTexture, normalMap, atX, atY) {
     this.kDelta = 0.2;
 
     if (normalMap === null) {
@@ -30,12 +30,7 @@ function Minion(spriteTexture, normalMap, atX, atY, lgtset) {
     this.mMinion.setAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateSwing);
     this.mMinion.setAnimationSpeed(30);
                                 // show each element for mAnimSpeed updates
-
     GameObject.call(this, this.mMinion);
-    var i;
-    for (i = 0; i < 4; i++) {
-        this.mMinion.addLight(lgtset.getLightAt(i));
-    }
 }
 gEngine.Core.inheritPrototype(Minion, GameObject);
 

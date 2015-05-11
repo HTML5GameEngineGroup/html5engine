@@ -26,49 +26,49 @@ MyGame.prototype._createALight = function (type, pos, dir, color, n, f, inner, o
 };
 
 MyGame.prototype._initializeLights = function () {
-    this.mGlobalLightSet = new LightSet(gEngine.DefaultResources.getLightShader().getShader());
+    this.mGlobalLightSet = new LightSet();
 
-    var l = this._createALight(Light.eLightType.ePoint,
+    var l = this._createALight(Light.eLightType.ePointLight,
             [15, 50, 5],         // position
             [0, 0, -1],          // Direction 
-            [0.6, 0.6, 0.6, 1],  // some color
+            [0.6, 1.0, 0.0, 1],  // some color
             8, 20,               // near and far distances
             0.1, 0.2,            // inner and outer cones
-            2.5,                 // intensity
+            5,                   // intensity
             1.0                  // drop off
             );
     this.mGlobalLightSet.addToSet(l);
 
-    l = this._createALight(Light.eLightType.eDirectional,
-            [17, 15, 4],           // position
-            [0, 0, -1],            // Pointing direction upwards
-            [0.7, 0.7, 0.7, 1],    // color
+    l = this._createALight(Light.eLightType.eDirectionalLight,
+            [15, 50, 4],           // position (not used by directional)
+            [-0.2, -0.2, -1],      // Pointing direction upwards
+            [0.7, 0.7, 0.0, 1],    // color
             500, 500,              // near anf far distances: essentially switch this off
             0.1, 0.2,              // inner and outer cones
-            1.0,                   // intensity
+            2,                     // intensity
             1.0                    // drop off
             );
     this.mGlobalLightSet.addToSet(l);
 
     l = this._createALight(Light.eLightType.eSpotLight,
-            [87, 15, 3],            // Right minion position
-            [0, 0, -1],              // direction
-            [0.7, 0.7, 0.7, 1],     // color
-            5, 8,                   // near and far distances
-            0.3, 0.7,               // 0.3 is around 18-degrees, 0.7 is around 60
-            1,                      // intensity
-            10                     // drop off
+            [87, 15, 10],            // Right minion position
+            [-0.02,  0.02, -1],     // direction
+            [0.5, 0.5, 0.5, 1],     // color
+            5, 40,                  // near and far distances
+            1.2, 2.2,               // inner outter angles (in radius)
+             5,                     // intensity
+            1.2                     // drop off
             );
     this.mGlobalLightSet.addToSet(l);
 
     l = this._createALight(Light.eLightType.eSpotLight,
-            [50, 33, 2],            // Center of camera 
-            [0, 0, -1],
-            [0.4, 0.4, 0.4, 1],     //  color
-            3, 20,                   // near and far distances
-            0.6, 0.8,                // inner and outer cones
-            4,                       // intensity
-            20                        // drop off
+            [50, 33, 10],            // Center of camera 
+            [0.02, -0.02, -1],
+            [0.8, 0.8, 0.2, 1],      //  color
+            3, 40,                   // near and far distances
+            1.6, 2.5,                // inner and outer cones
+            2,                       // intensity
+            1.5                      // drop off
             );
     this.mGlobalLightSet.addToSet(l);
 };

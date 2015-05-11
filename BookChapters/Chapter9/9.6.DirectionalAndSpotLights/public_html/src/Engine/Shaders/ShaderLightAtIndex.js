@@ -26,21 +26,19 @@ ShaderLightAtIndex.prototype.loadToShader = function (aCamera, aLight) {
         gl.uniform4fv(this.mPosRef, vec4.fromValues(p[0], p[1], p[2], 1));
         gl.uniform1f(this.mNearRef, n);
         gl.uniform1f(this.mFarRef, f);
+        gl.uniform1f(this.mInnerRef, 0.0);
+        gl.uniform1f(this.mOuterRef, 0.0);
         gl.uniform1f(this.mIntensityRef, aLight.getIntensity());
+        gl.uniform1f(this.mDropOffRef, 0);
+        gl.uniform1i(this.mLightTypeRef, aLight.getLightType());
 
-        if (aLight.getLightType() === Light.eLightType.ePoint) {
-            gl.uniform4fv(this.mDirRef, vec4.fromValues(0, 0, 0, 0));
-            gl.uniform1f(this.mDropOffRef, -1);
+        if (aLight.getLightType() === Light.eLightType.ePointLight) {
+            gl.uniform4fv(this.mDirRef, vec4.fromValues(0, 0, 0, 1));
         } else {
-            // must compute direction
-            var d = [];
-            vec4.add(d, aLight.getPosition(), aLight.getDirection());
-            var ptPixel = aCamera.wcPosToPixel(d);
-            vec4.sub(d, ptPixel, p);
+            // either spot or directional lights: must compute direction
+            var d = aCamera.wcDirToPixel(aLight.getDirection());
             gl.uniform4fv(this.mDirRef, vec4.fromValues(d[0], d[1], d[2], 1));
-            if (aLight.getLightType() === Light.eLightType.eDirectional) {
-                gl.uniform1f(this.mDropOffRef, -1);
-            } else {
+            if (aLight.getLightType() === Light.eLightType.eSpotLight) {
                 gl.uniform1f(this.mInnerRef, aLight.getInner());
                 gl.uniform1f(this.mOuterRef, aLight.getOuter());
                 gl.uniform1f(this.mDropOffRef, aLight.getDropOff());
@@ -68,5 +66,6 @@ ShaderLightAtIndex.prototype._setShaderReferences = function (aLightShader, inde
     this.mIntensityRef = gl.getUniformLocation(aLightShader, "uLights[" + index + "].Intensity");
     this.mDropOffRef = gl.getUniformLocation(aLightShader,   "uLights[" + index + "].DropOff");
     this.mIsOnRef = gl.getUniformLocation(aLightShader,      "uLights[" + index + "].IsOn");
+    this.mLightTypeRef = gl.getUniformLocation(aLightShader, "uLights[" + index + "].LightType");
 };
 //</editor-fold>

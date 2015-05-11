@@ -69,10 +69,8 @@ MyGame.prototype.initialize = function () {
     this._initializeLights();   // defined in MyGame_Lights.js
 
     // the Background
-    // var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
-    var bgR = new LightRenderable(this.kBg, this.kBgNormal);
+    var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
     bgR.setElementPixelPositions(0, 1900, 0, 1000);
-    // bgR.setNormalMapPixelPositions(0, 1900, 0, 1000);
     bgR.getXform().setSize(380, 200);
     bgR.getXform().setPosition(50, 35);
     var i;
@@ -83,10 +81,16 @@ MyGame.prototype.initialize = function () {
 
     // 
     // the objects
-    this.mIllumHero = new Hero(this.kMinionSprite, this.kMinionSpriteNormal, 15, 50, this.mGlobalLightSet);
-    this.mLgtHero = new Hero(this.kMinionSprite, null, 80, 50, this.mGlobalLightSet);
-    this.mIllumMinion = new Minion(this.kMinionSprite, this.kMinionSpriteNormal, 17, 15, this.mGlobalLightSet);
-    this.mLgtMinion = new Minion(this.kMinionSprite, null, 87, 15, this.mGlobalLightSet);
+    this.mIllumHero = new Hero(this.kMinionSprite, this.kMinionSpriteNormal, 15, 50);
+    this.mLgtHero = new Hero(this.kMinionSprite, null, 80, 50);
+    this.mIllumMinion = new Minion(this.kMinionSprite, this.kMinionSpriteNormal, 17, 15);
+    this.mLgtMinion = new Minion(this.kMinionSprite, null, 87, 15);
+    for (i = 0; i < 4; i++) {
+        this.mIllumHero.getRenderable().addLight(this.mGlobalLightSet.getLightAt(i));
+        this.mLgtHero.getRenderable().addLight(this.mGlobalLightSet.getLightAt(i));
+        this.mIllumMinion.getRenderable().addLight(this.mGlobalLightSet.getLightAt(i));
+        this.mLgtMinion.getRenderable().addLight(this.mGlobalLightSet.getLightAt(i));
+    }
 
     this.mMsg = new FontRenderable("Status Message");
     this.mMsg.setColor([1, 1, 1, 1]);

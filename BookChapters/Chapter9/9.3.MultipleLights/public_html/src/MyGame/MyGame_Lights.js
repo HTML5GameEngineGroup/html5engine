@@ -21,7 +21,7 @@ MyGame.prototype._createALight = function (pos, color, n, f, intensity) {
 };
 
 MyGame.prototype._initializeLights = function () {
-    this.mGlobalLightSet = new LightSet(gEngine.DefaultResources.getLightShader().getShader());
+    this.mGlobalLightSet = new LightSet();
 
     var l = this._createALight(
         [35, 50, 2],        // Left minion position

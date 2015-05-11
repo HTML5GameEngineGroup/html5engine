@@ -9,9 +9,15 @@
 /* find out more about jslint: http://www.jslint.com/lint.html */
 "use strict";
 
+// **** WARNING: The following enumerate values must be identical to 
+// the values of
+// 
+//   ePointLight, eDirectionalLight, eSpotLight
+//   
+// defined in LightFS.glsl and IllumFS.glsl
 Light.eLightType = Object.freeze({
     ePoint: 0,
-    eDirectional: 1,
+    eDirectionalLight: 1,
     eSpotLight: 2
 });
 
@@ -26,7 +32,7 @@ function Light() {
     this.mOuter = 0.3;
     this.mIntensity = 1;
     this.mDropOff = 1;  // 
-    this.mLightType = Light.eLightType.ePoint;
+    this.mLightType = Light.eLightType.ePointLight;
     this.mIsOn = true;
 }
 

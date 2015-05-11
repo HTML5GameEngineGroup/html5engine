@@ -21,7 +21,7 @@ MyGame.prototype._createALight = function (pos, color, n, f, intensity) {
 };
 
 MyGame.prototype._initializeLights = function () {
-    this.mGlobalLightSet = new LightSet(gEngine.DefaultResources.getLightShader().getShader());
+    this.mGlobalLightSet = new LightSet();
 
     var l = this._createALight(
         [15, 50, 5],       // Hero

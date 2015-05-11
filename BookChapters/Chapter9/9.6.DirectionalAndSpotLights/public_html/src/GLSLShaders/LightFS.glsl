@@ -44,17 +44,26 @@ uniform float uGlobalAmbientIntensity;
     //     kGLSLuLightArraySize
     // defined in LightShader.js file.
 
+#define ePointLight       0
+#define eDirectionalLight 1
+#define eSpotLight        2
+    // ******** WARNING ******
+    // The above enumerated values must be identical to 
+    // Light.eLightType values defined in Light.js
+    // ******** WARNING ******
+
 struct Light  {
-    vec4 Position;   // in pixel space!
-    vec4 Direction;  // Light direction
+    vec4 Position;      // in pixel space!
+    vec4 Direction;     // Light direction
     vec4 Color;
-    float Near;      // distance in pixel space
+    float Near;         // distance in pixel space
     float Far;
-    float Inner;     // cone angle in radian for spotlight
-    float Outer;     // cone angle in radian for spotlight
+    float Inner;        // cone angle in radian for spotlight
+    float Outer;        // cone angle in radian for spotlight
     float Intensity;
-    float DropOff;   // for spotlight
+    float DropOff;      // for spotlight only
     bool  IsOn;
+    int   LightType;    // one of ePointLight, eDirectionalLight, eSpotLight
 };
 uniform Light uLights[kGLSLuLightArraySize];  // Maximum array of lights this shader supports
 
@@ -94,21 +103,23 @@ float DistanceDropOff(Light lgt, float dist) {
     return atten;
 }
 
-vec4 LightEffect(Light lgt) {
-    float aAtten = 1.0, dAtten = 0.0;
-    vec3 lgtDir = -normalize(lgt.Direction.xyz);
-    vec3 L = lgt.Position.xyz - gl_FragCoord.xyz;
-    float dist = length(L);
-    L = L / dist;
-    // find out what kind of light ...
-    if ((lgt.Direction.w == 1.0) && (lgt.DropOff > 0.0)) {
-        // spotlight: do angle dropoff
-        aAtten = AngularDropOff(lgt, lgtDir, L);
-    } 
-    dAtten = DistanceDropOff(lgt, dist);
-    if ((lgt.Direction.w == 1.0) && (lgt.DropOff < 0.0)) { // direcitonal light
-        // Let's use the z-component as normal
-        dAtten *= lgtDir.z;
+// Directional lights: without normal information
+//    directional light is the same as an ambient light!
+vec4 LightEffect(Light lgt) {    
+    float aAtten = 1.0, dAtten = 1.0;
+
+    if (lgt.LightType != eDirectionalLight) {
+        vec3 lgtDir = -normalize(lgt.Direction.xyz);
+        vec3 L = lgt.Position.xyz - gl_FragCoord.xyz;
+        float dist = length(L); // distant to light
+        L = L / dist;  // same as calling normalize(), only faster
+    
+        // find out what kind of light ...
+        if (lgt.LightType == eSpotLight) {
+            // spotlight: do angle dropoff
+            aAtten = AngularDropOff(lgt, lgtDir, L);
+        } 
+        dAtten = DistanceDropOff(lgt, dist);
     }
     return dAtten * aAtten * lgt.Intensity * lgt.Color;
 }

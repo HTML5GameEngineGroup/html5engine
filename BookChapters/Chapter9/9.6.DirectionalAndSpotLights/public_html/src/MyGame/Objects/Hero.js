@@ -11,7 +11,7 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function Hero(spriteTexture, normalMap, atX, atY, lgtSet) {
+function Hero(spriteTexture, normalMap, atX, atY) {
     this.kDelta = 0.3;
     if (normalMap !== null) {
         this.mDye = new IllumRenderable(spriteTexture, normalMap);
@@ -22,12 +22,7 @@ function Hero(spriteTexture, normalMap, atX, atY, lgtSet) {
     this.mDye.getXform().setPosition(atX, atY);
     this.mDye.getXform().setSize(18, 24);
     this.mDye.setElementPixelPositions(0, 120, 0, 180);
-
     GameObject.call(this, this.mDye);
-    var i;
-    for (i = 0; i < 4; i++) {
-        this.mDye.addLight(lgtSet.getLightAt(i));
-    }
 }
 gEngine.Core.inheritPrototype(Hero, GameObject);
 

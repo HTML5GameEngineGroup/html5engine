@@ -101,7 +101,7 @@ MyGame.prototype.drawCamera = function (camera) {
     // Step A: set up the View Projection matrix
     camera.setupViewProjection();
 
-    // Step B: Now draws each renderable
+    // Step B: Now draws each Renderable
     this.mBg.draw(camera);
     this.mBlock1.draw(camera);
     this.mLMinion.draw(camera);

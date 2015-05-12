@@ -13,7 +13,7 @@ function MyGame(htmlCanvasID) {
     this.mConstColorShader = null;
 
     // variables for the squares
-    this.mWhiteSq = null;        // these are the renderable objects
+    this.mWhiteSq = null;        // these are the Renderable objects
     this.mRedSq = null;
 
     // Step A: Initialize the webGL Context
@@ -24,7 +24,7 @@ function MyGame(htmlCanvasID) {
         "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
         "src/GLSLShaders/SimpleFS.glsl");     // Path to the Simple FragmentShader
 
-    // Step C: Create the renderable objects:
+    // Step C: Create the Renderable objects:
     this.mWhiteSq = new Renderable(this.mConstColorShader);
     this.mWhiteSq.setColor([1, 1, 1, 1]);
     this.mRedSq = new Renderable(this.mConstColorShader);
@@ -34,9 +34,9 @@ function MyGame(htmlCanvasID) {
     gEngine.Core.clearCanvas([0, 0.8, 0, 1]);   // 1. Clear the canvas
 
     // instead of simply drawing the squares, let's apply simple transforms
-    // Step E: sets the blue renderable object's transform
+    // Step E: sets the blue Renderable object's transform
     this.mWhiteSq.getXform().setPosition(-0.25, 0.25);
-    this.mWhiteSq.getXform().setRotationInRad(0.2); // In Degree
+    this.mWhiteSq.getXform().setRotationInRad(0.2); // In Radians
     this.mWhiteSq.getXform().setSize(1.2, 1.2);
     // Step F: draws the blue square (transform behavior in the object)
     this.mWhiteSq.draw();

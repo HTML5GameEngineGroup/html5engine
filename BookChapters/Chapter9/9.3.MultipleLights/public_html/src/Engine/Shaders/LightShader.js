@@ -15,7 +15,7 @@ function LightShader(vertexShaderPath, fragmentShaderPath) {
     // Callsuper class constructor
     SpriteShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
 
-    this.mLights = null;  // lights from the renderable
+    this.mLights = null;  // lights from the Renderable
 
     //*******WARNING***************
     // this number MUST correspond to the GLSL uLight[] array size (for LightFS.glsl)

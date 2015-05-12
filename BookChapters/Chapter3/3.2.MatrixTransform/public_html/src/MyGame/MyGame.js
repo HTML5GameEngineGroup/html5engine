@@ -17,7 +17,7 @@ function MyGame(htmlCanvasID) {
         "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
         "src/GLSLShaders/SimpleFS.glsl");     // Path to the Simple FragmentShader
 
-    // Step C: Create the renderable objects:
+    // Step C: Create the Renderable objects:
     this.mWhiteSq = new Renderable(this.mConstColorShader);
     this.mWhiteSq.setColor([1, 1, 1, 1]);
     this.mRedSq = new Renderable(this.mConstColorShader);

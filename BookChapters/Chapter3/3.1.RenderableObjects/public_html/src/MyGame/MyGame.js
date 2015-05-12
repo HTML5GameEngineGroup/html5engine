@@ -17,7 +17,7 @@ function MyGame(htmlCanvasID) {
         "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
         "src/GLSLShaders/SimpleFS.glsl");     // Path to the Simple FragmentShader
 
-    // Step C: Create the renderable objects:
+    // Step C: Create the Renderable objects:
     this.mWhiteSq = new Renderable(this.mConstColorShader);
     this.mWhiteSq.setColor([1, 1, 1, 1]);
     this.mRedSq = new Renderable(this.mConstColorShader);
@@ -26,10 +26,10 @@ function MyGame(htmlCanvasID) {
     // Step D: Draw!
     gEngine.Core.clearCanvas([0, 0.8, 0, 1]);  // Clear the canvas
 
-    // Step D1: Draw renderable objects with the white shader
+    // Step D1: Draw Renderable objects with the white shader
     this.mWhiteSq.draw();
 
-    // Step D2: Draw renderable objects with the red shader
+    // Step D2: Draw Renderable objects with the red shader
     this.mRedSq.draw();
 
 }

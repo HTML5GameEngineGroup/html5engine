@@ -12,7 +12,7 @@ function MyGame() {
     // scene file name
     this.kSceneFile = "assets/scene.xml";
     // all square
-    this.mSqSet = [];        // these are the renderable objects
+    this.mSqSet = [];        // these are the Renderable objects
 
     // The camera to view the rectangles
     this.mCamera = null;

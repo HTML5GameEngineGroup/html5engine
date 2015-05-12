@@ -14,7 +14,7 @@ function IllumShader(vertexShaderPath, fragmentShaderPath) {
     // Callsuper class constructor
     LightShader.call(this, vertexShaderPath, fragmentShaderPath);  // call super class constructor
 
-    // this is the material property of the renderable
+    // this is the material property of the Renderable
     this.mMaterial = null;
     this.mMaterialLoader = new ShaderMaterial(this.mCompiledShader);
 

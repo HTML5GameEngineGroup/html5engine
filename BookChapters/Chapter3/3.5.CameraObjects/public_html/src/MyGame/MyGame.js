@@ -13,7 +13,7 @@ function MyGame(htmlCanvasID) {
     this.mConstColorShader = null;
 
     // variables for the squares
-    this.mBlueSq = null;        // these are the renderable objects
+    this.mBlueSq = null;        // these are the Renderable objects
     this.mRedSq = null;
 
     // Step A: Initialize the webGL Context
@@ -31,7 +31,7 @@ function MyGame(htmlCanvasID) {
         "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
         "src/GLSLShaders/SimpleFS.glsl");    // Path to the simple FragmentShader
 
-    // Step D: Create the renderable objects:
+    // Step D: Create the Renderable objects:
     this.mBlueSq = new Renderable(this.mConstColorShader);
     this.mBlueSq.setColor([0.25, 0.25, 0.95, 1]);
     this.mRedSq = new Renderable(this.mConstColorShader);

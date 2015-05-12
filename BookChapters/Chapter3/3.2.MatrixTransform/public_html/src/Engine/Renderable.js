@@ -2,7 +2,7 @@
  * File: Renderable.js
  *  
  * Encapsulate the Shader and VertexBuffer into the same object (and will include
- * other attributes later) to represent a renderable object on the game screen.
+ * other attributes later) to represent a Renderable object on the game screen.
  */
 /*jslint node: true, vars: true */
 /*global gEngine: false */

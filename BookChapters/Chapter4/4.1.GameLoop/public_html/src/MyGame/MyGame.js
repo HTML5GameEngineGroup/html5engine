@@ -13,7 +13,7 @@ function MyGame(htmlCanvasID) {
     this.mConstColorShader = null;
 
     // variables for the squares
-    this.mWhiteSq = null;        // these are the renderable objects
+    this.mWhiteSq = null;        // these are the Renderable objects
     this.mRedSq = null;
 
     // The camera to view the rectangles
@@ -41,18 +41,18 @@ MyGame.prototype.initialize = function () {
         "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
         "src/GLSLShaders/SimpleFS.glsl");    // Path to the Simple FragmentShader    
 
-    // Step  C: Create the renderable objects:
+    // Step  C: Create the Renderable objects:
     this.mWhiteSq = new Renderable(this.mConstColorShader);
     this.mWhiteSq.setColor([1, 1, 1, 1]);
     this.mRedSq = new Renderable(this.mConstColorShader);
     this.mRedSq.setColor([1, 0, 0, 1]);
 
-    // Step  D: Initialize the white renderable object: centred, 5x5, rotated
+    // Step  D: Initialize the white Renderable object: centred, 5x5, rotated
     this.mWhiteSq.getXform().setPosition(20, 60);
-    this.mWhiteSq.getXform().setRotationInRad(0.2); // In Degree
+    this.mWhiteSq.getXform().setRotationInRad(0.2); // In Radians
     this.mWhiteSq.getXform().setSize(5, 5);
 
-    // Step  E: Initialize the red renderable object: centered 2x2
+    // Step  E: Initialize the red Renderable object: centered 2x2
     this.mRedSq.getXform().setPosition(20, 60);
     this.mRedSq.getXform().setSize(2, 2);
 

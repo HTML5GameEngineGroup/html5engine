@@ -22,7 +22,7 @@ function IllumRenderable(myTexture, myNormalMap) {
     // Normal map texture coordinate will reproduce the corresponding sprite sheet
     // This means, the normal map MUST be based on the sprite sheet
 
-    // Material for this renderable
+    // Material for this Renderable
     this.mMaterial = new Material();
 }
 gEngine.Core.inheritPrototype(IllumRenderable, LightRenderable);

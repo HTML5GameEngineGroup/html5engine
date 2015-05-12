@@ -18,7 +18,7 @@ function BlueLevel() {
     this.kCollector = "assets/minion_collector.jpg";
 
     // all square
-    this.mSqset = [];        // these are the renderable objects
+    this.mSqset = [];        // these are the Renderable objects
 
     // The camera to view the rectangles
     this.mCamera = null;

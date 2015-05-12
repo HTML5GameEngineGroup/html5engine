@@ -13,7 +13,7 @@ function MyGame(htmlCanvasID) {
     this.mConstColorShader = null;
 
     // variables for the squares
-    this.mBlueSq = null;        // these are the renderable objects
+    this.mBlueSq = null;        // these are the Renderable objects
     this.mRedSq = null;
 
     // Step A: Initialize the webGL Context
@@ -25,7 +25,7 @@ function MyGame(htmlCanvasID) {
         "src/GLSLShaders/SimpleVS.glsl",      // Path to the VertexShader 
         "src/GLSLShaders/SimpleFS.glsl");    // Path to the simple FragmentShader
 
-    // Step C: Create the renderable objects:
+    // Step C: Create the Renderable objects:
     this.mBlueSq = new Renderable(this.mConstColorShader);
     this.mBlueSq.setColor([0.25, 0.25, 0.95, 1]);
     this.mRedSq = new Renderable(this.mConstColorShader);
@@ -71,7 +71,7 @@ function MyGame(htmlCanvasID) {
         [20, 60, 10],   // camera position
         [20, 60, 0],    // look at position
         [0, 1, 0]);     // orientation 
-    // Step F2: define the view volume
+    // Step F2: define the projection matrix
     mat4.ortho(projMatrix,
         -10,     // distant to left of WC
          10,     // distant to right of WC

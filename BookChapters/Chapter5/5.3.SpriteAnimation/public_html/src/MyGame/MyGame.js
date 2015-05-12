@@ -183,7 +183,7 @@ MyGame.prototype.update = function () {
 
     // New code for controlling the sprite animation
     // <editor-fold desc="controlling the sprite animation:">
-    // remember to update this.mRightMinion's animation
+    // remember to update the minion's animation
     this.mRightMinion.updateAnimation();
     this.mLeftMinion.updateAnimation();
 

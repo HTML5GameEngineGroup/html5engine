@@ -78,6 +78,8 @@ gEngine.DefaultResources = (function () {
         mConstColorShader.cleanUp();
         mTextureShader.cleanUp();
         mSpriteShader.cleanUp();
+        mLineShader.cleanUp();
+        mLightShader.cleanUp();
 
         gEngine.TextFileLoader.unloadTextFile(kSimpleVS);
         gEngine.TextFileLoader.unloadTextFile(kSimpleFS);

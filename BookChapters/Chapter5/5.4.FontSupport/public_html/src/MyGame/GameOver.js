@@ -15,8 +15,6 @@ function GameOver() {
 }
 gEngine.Core.inheritPrototype(GameOver, Scene);
 
-GameOver.prototype.loadScene = function () {};
-
 GameOver.prototype.unloadScene = function () {
     // will be called from GameLoop.stop
     gEngine.Core.cleanUp(); // release gl resources

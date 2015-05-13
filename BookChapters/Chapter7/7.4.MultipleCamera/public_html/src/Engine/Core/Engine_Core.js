@@ -75,6 +75,7 @@ gEngine.Core = (function () {
 
     var cleanUp = function () {
         gEngine.DefaultResources.cleanUp();
+        gEngine.VertexBuffer.cleanUp();
     };
     // -- end of public methods
 

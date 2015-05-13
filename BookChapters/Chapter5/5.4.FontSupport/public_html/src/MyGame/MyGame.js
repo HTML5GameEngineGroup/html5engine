@@ -81,7 +81,7 @@ MyGame.prototype.initialize = function () {
     this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
 
-    // Step C: Create the font and minion images using sprite
+    // Step B: Create the font and minion images using sprite
     this.mFontImage = new SpriteRenderable(this.kFontImage);
     this.mFontImage.setColor([1, 1, 1, 0]);
     this.mFontImage.getXform().setPosition(15, 50);

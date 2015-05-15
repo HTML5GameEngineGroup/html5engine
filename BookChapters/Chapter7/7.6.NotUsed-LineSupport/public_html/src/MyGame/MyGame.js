@@ -12,7 +12,7 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function MyGame() {
-    // The camera to view the rectangles
+    // The camera to view the scene
     this.mCamera = null;
 
     this.mMsg = null;

@@ -11,10 +11,10 @@
 function BlueLevel() {
     // scene file name
     this.kSceneFile = "assets/BlueLevel.xml";
-    // all square
+    // all squares
     this.mSqSet = [];        // these are the Renderable objects
 
-    // The camera to view the rectangles
+    // The camera to view the scene
     this.mCamera = null;
 }
 gEngine.Core.inheritPrototype(BlueLevel, Scene);

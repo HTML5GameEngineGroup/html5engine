@@ -15,7 +15,7 @@ function MyGame() {
     this.kPortal = "assets/minion_portal.png";      // supports png with transparency
     this.kCollector = "assets/minion_collector.png";
 
-    // The camera to view the rectangles
+    // The camera to view the scene
     this.mCamera = null;
 
     // the hero and the support objects

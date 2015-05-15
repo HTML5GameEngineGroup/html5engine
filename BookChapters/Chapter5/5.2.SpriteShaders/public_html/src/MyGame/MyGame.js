@@ -16,7 +16,7 @@ function MyGame() {
     this.kFontImage = "assets/Consolas-72.png";
     this.kMinionSprite = "assets/minion_sprite.png";  // Portal and Collector are embedded here
 
-    // The camera to view the rectangles
+    // The camera to view the scene
     this.mCamera = null;
 
     // the hero and the support objects

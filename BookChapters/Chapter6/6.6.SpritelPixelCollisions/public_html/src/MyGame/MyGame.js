@@ -15,7 +15,7 @@ function MyGame() {
     this.kMinionSprite = "assets/minion_sprite.png";
     this.kMinionPortal = "assets/minion_portal.png";
 
-    // The camera to view the rectangles
+    // The camera to view the scene
     this.mCamera = null;
 
     this.mMsg = null;

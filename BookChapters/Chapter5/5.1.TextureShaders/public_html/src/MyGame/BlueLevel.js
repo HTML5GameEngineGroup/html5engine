@@ -17,10 +17,10 @@ function BlueLevel() {
     this.kPortal = "assets/minion_portal.jpg";
     this.kCollector = "assets/minion_collector.jpg";
 
-    // all square
+    // all squares
     this.mSqset = [];        // these are the Renderable objects
 
-    // The camera to view the rectangles
+    // The camera to view the scene
     this.mCamera = null;
 }
 gEngine.Core.inheritPrototype(BlueLevel, Scene);

@@ -13,7 +13,7 @@ function MyGame() {
     this.kBgClip = "assets/sounds/BGClip.mp3";
     this.kCue = "assets/sounds/MyGame_cue.wav";
 
-    // The camera to view the rectangles
+    // The camera to view the scene
     this.mCamera = null;
 
     // the hero and the support objects

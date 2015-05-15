@@ -18,7 +18,7 @@ function MyGame() {
     this.kBgNormal = "assets/bg_normal.png";
     this.kRingNormal = "assets/ring_normal.png";
 
-    // The camera to view the rectangles
+    // The camera to view the scene
     this.mCamera = null;
     this.mBg = null;
 

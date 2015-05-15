@@ -23,7 +23,7 @@ function MyGame() {
     this.kFontCon72 = "assets/fonts/Consolas-72";
     this.kFontSeg96 = "assets/fonts/Segment7-96";
 
-    // The camera to view the rectangles
+    // The camera to view the scene
     this.mCamera = null;
 
     // the hero and the support objects

@@ -26,7 +26,7 @@ SceneFileParser.prototype.parseCamera = function () {
     var w = Number(camElm[0].getAttribute("Width"));
     var viewport = camElm[0].getAttribute("Viewport").split(" ");
     var bgColor = camElm[0].getAttribute("BgColor").split(" ");
-    // make sure viewprot and color are number
+    // make sure viewport and color are number
     var j;
     for (j = 0; j < 4; j++) {
         bgColor[j] = Number(bgColor[j]);
@@ -53,7 +53,7 @@ SceneFileParser.prototype.parseSquares = function (sqSet) {
         r = Number(elm.item(i).attributes.getNamedItem("Rotation").value);
         c = elm.item(i).attributes.getNamedItem("Color").value.split(" ");
         sq = new Renderable();
-        // make sure color is number
+        // make sure color array contains numbers
         for (j = 0; j < 3; j++) {
             c[j] = Number(c[j]);
         }
@@ -77,7 +77,7 @@ SceneFileParser.prototype.parseTextureSquares = function (sqSet) {
         c = elm.item(i).attributes.getNamedItem("Color").value.split(" ");
         t = elm.item(i).attributes.getNamedItem("Texture").value;
         sq = new TextureRenderable(t);
-        // make sure color is number
+        // make sure color array contains numbers
         for (j = 0; j < 4; j++)
             c[j] = Number(c[j]);
         sq.setColor(c);

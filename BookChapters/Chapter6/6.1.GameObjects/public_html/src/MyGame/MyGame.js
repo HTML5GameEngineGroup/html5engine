@@ -12,7 +12,7 @@
 
 function MyGame() {
     this.kMinionSprite = "assets/minion_sprite.png";
-    // The camera to view the rectangles
+    // The camera to view the scene
     this.mCamera = null;
 
     // For echo message

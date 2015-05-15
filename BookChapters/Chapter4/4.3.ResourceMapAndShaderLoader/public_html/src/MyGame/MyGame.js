@@ -13,7 +13,7 @@ function MyGame() {
     this.mWhiteSq = null;        // these are the Renderable objects
     this.mRedSq = null;
 
-    // The camera to view the rectangles
+    // The camera to view the scene
     this.mCamera = null;
 }
 

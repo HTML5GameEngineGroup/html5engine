@@ -4,7 +4,7 @@
  */
 /*jslint node: true, vars: true, evil: true */
 /*global gEngine: false, XMLHttpRequest: false, DOMParser: false, alert: false */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 

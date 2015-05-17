@@ -4,7 +4,7 @@
 
 /*jslint node: true, vars: true */
 /*global gEngine: false, Renderable: false, TextureRenderable: false, SpriteRenderable: false */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -60,7 +60,6 @@ SpriteAnimateRenderable.prototype._setSpriteElement = function () {
                                         this.mElmTop - this.mElmHeight, this.mElmTop);
 };
 
-
 //<editor-fold desc="Public Methods">
 //**-----------------------------------------
 // Public methods
@@ -94,6 +93,7 @@ SpriteAnimateRenderable.prototype.setSpriteSequence = function (
     this.mElmWidth = elmWidthInPixel / imageW;
     this.mElmHeight = elmHeightInPixel / imageH;
     this.mWidthPadding = wPaddingInPixel / imageW;
+    this._initAnimation();
 };
 
 SpriteAnimateRenderable.prototype.setAnimationSpeed = function (

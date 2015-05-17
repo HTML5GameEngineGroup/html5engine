@@ -7,7 +7,7 @@
 /*global gEngine: false, Scene: false, SpriteRenderable: false, Camera: false, vec2: false,
   TextureRenderable: false, Renderable: false, SpriteAnimateRenderable: false, GameOver: false,
   FontRenderable: false */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 

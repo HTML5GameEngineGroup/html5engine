@@ -2,9 +2,9 @@
  * File: EngineCore.js 
  * The first iteration of what the core of our game engine would look like.
  */
-/*jslint node: true, vars: true, evil: true */
+/*jslint node: true, vars: true, evil: true, bitwise: true */
 /*global document */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 
 //  Global variable EngineCore
 //  the following syntax enforces there can only be one instance of EngineCore object
@@ -23,7 +23,8 @@ gEngine.Core = (function () {
 
         // Get the standard or experimental webgl and binds to the Canvas area
         // store the results to the instance variable mGL
-        mGL = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+        mGL = canvas.getContext("webgl", {depth: true, stencil: true}) ||
+              canvas.getContext("experimental-webgl", {depth: true, stencil: true});
 
         // Allows transperency with textures.
         mGL.blendFunc(mGL.SRC_ALPHA, mGL.ONE_MINUS_SRC_ALPHA);
@@ -31,6 +32,9 @@ gEngine.Core = (function () {
 
         // Set images to flip y axis to match the texture coordinate space.
         mGL.pixelStorei(mGL.UNPACK_FLIP_Y_WEBGL, true);
+
+        // make sure depth buffer is not activated, front/back ordering is handled by the game engine
+        mGL.depthMask(false);
 
         if (mGL === null) {
             document.write("<br><b>WebGL is not supported!</b>");
@@ -63,8 +67,8 @@ gEngine.Core = (function () {
 
     // Clears the draw area and draws one square
     var clearCanvas = function (color) {
-        mGL.clearColor(color[0], color[1], color[2], color[3]);  // set the color to be cleared
-        mGL.clear(mGL.COLOR_BUFFER_BIT);      // clear to the color previously set
+        mGL.clearColor(color[0], color[1], color[2], color[3]);     // set the color to be cleared
+        mGL.clear(mGL.COLOR_BUFFER_BIT | mGL.STENCIL_BUFFER_BIT);   // clear to the color previously set
     };
 
     var inheritPrototype = function (subClass, superClass) {

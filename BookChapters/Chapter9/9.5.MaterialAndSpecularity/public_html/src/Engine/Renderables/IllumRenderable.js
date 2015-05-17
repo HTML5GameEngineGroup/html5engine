@@ -6,7 +6,7 @@
 
 /*jslint node: true, vars: true */
 /*global gEngine, Renderable, LightRenderable, Material */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -39,7 +39,7 @@ IllumRenderable.prototype.draw = function (aCamera) {
     LightRenderable.prototype.draw.call(this, aCamera);
 };
 
-IllumRenderable.prototype.getMaterial = function() { return this.mMaterial; };
+IllumRenderable.prototype.getMaterial = function () { return this.mMaterial; };
 //--- end of Public Methods
 
 //</editor-fold>

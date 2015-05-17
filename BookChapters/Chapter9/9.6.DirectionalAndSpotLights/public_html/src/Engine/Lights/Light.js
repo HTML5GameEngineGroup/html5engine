@@ -6,7 +6,7 @@
 
 /*jslint node: true, vars: true, bitwise: true */
 /*global vec3, vec4 */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
 // **** WARNING: The following enumerate values must be identical to 

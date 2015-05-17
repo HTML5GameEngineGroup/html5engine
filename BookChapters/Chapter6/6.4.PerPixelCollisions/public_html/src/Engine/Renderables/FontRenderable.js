@@ -4,7 +4,7 @@
 
 /*jslint node: true, vars: true */
 /*global gEngine: false, Transform: false, SpriteRenderable: false */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 
 
 // Constructor and object definition
@@ -26,7 +26,7 @@ FontRenderable.prototype.draw = function (aCamera) {
     // chars in the mText string.
     var widthOfOneChar = this.mXform.getWidth() / this.mText.length;
     var heightOfOneChar = this.mXform.getHeight();
-    // this.mOneChar.getXform().SetRotationInRad(this.mXform.getRotationInRad());
+    // this.mOneChar.getXform().setRotationInRad(this.mXform.getRotationInRad());
     var yPos = this.mXform.getYPos();
 
     // center position of the first char

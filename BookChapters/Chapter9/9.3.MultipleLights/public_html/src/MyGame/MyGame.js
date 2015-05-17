@@ -7,7 +7,7 @@
 /*global gEngine, Scene, GameObjectset, TextureObject, Camera, vec2,
   Renderable, FontRenderable, SpriteRenderable, LightRenderable,
   GameObject, Hero, Minion, Dye, Light */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 

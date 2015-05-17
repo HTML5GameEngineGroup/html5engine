@@ -5,7 +5,7 @@
 
 /*jslint node: true, vars: true, bitwise: true */
 /*global gEngine, SimpleShader, Renderable, mat4, vec2, vec3, BoundingBox, CameraState */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
 
@@ -36,7 +36,7 @@ function Camera(wcCenter, wcWidth, viewportArray) {
 
     this.mViewport = viewportArray;  // [x, y, width, height]
     this.mNearPlane = 0;
-    this.mFarPlane = 1000;
+    this.mFarPlane = 1001;
     
     this.kCameraZ = 10;  // This is for illumination computation
     
@@ -124,7 +124,7 @@ Camera.prototype.setupViewProjection = function () {
     }
 
     mat4.lookAt(this.mViewMatrix,
-        [center[0], center[1], 10],   // WC center
+        [center[0], center[1], 1000],   // WC center
         [center[0], center[1], 0],    // 
         [0, 1, 0]);     // orientation
 

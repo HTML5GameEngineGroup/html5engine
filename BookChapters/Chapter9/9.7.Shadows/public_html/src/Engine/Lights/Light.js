@@ -6,7 +6,7 @@
 
 /*jslint node: true, vars: true, bitwise: true */
 /*global vec3, vec4 */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
 // **** WARNING: The following enumerate values must be identical to 
@@ -34,6 +34,7 @@ function Light() {
     this.mDropOff = 1;  // 
     this.mLightType = Light.eLightType.ePointLight;
     this.mIsOn = true;
+    this.mCastShadow = false;
 }
 
 //<editor-fold desc="public functions">
@@ -73,5 +74,8 @@ Light.prototype.getLightType = function () { return this.mLightType; };
 
 Light.prototype.isLightOn = function () { return this.mIsOn; };
 Light.prototype.setLightTo = function (on) { this.mIsOn = on; };
+
+Light.prototype.isLightCastShadow = function () { return this.mCastShadow; };
+Light.prototype.setLightCastShadowTo = function (on) { this.mCastShadow = on; };
 
 //</editor-fold>

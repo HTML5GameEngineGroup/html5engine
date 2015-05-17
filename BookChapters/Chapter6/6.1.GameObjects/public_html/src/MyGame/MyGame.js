@@ -6,7 +6,7 @@
 /*jslint node: true, vars: true */
 /*global gEngine: false, Scene: false, GameObjectSet: false, Camera: false, vec2: false,
   FontRenderable: false, DyePack: false, Hero: false, Minion: false */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 

@@ -5,7 +5,7 @@
  */
 /*jslint node: true, vars: true */
 /*global gEngine: false, Renderable: false, TextureRenderable: false */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -17,7 +17,6 @@ function SpriteRenderable(myTexture) {
     this.mTexRight = 1.0;  // 
     this.mTexTop = 1.0;    //   1 is top and 0 is bottom of image
     this.mTexBottom = 0.0; // 
-
     // 
     this._setTexInfo();
 }
@@ -79,6 +78,7 @@ SpriteRenderable.prototype.draw = function (pixelColor, aCamera) {
     this.mShader.setTextureCoordinate(this.getElementUVCoordinateArray());
     TextureRenderable.prototype.draw.call(this, pixelColor, aCamera);
 };
+
 //--- end of Public Methods
 //
 //</editor-fold>

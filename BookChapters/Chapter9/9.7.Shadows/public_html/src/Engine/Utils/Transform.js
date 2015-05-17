@@ -6,13 +6,14 @@
 
 /*jslint node: true, vars: true */
 /*global gEngine: false, vec2: false, Math: false, mat4: false, vec3: false */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
 function Transform() {
-    this.mPosition = vec2.fromValues(0, 0);  // this is the translation
-    this.mScale = vec2.fromValues(1, 1);     // this is the width (x) and height (y)
-    this.mRotationInRad = 0.0;               // in radians!
+    this.mPosition = vec2.fromValues(0, 0); // this is the translation
+    this.mScale = vec2.fromValues(1, 1);    // this is the width (x) and height (y)
+    this.mDepth = 0.0;                      // positive number, larger is cloer to eye
+    this.mRotationInRad = 0.0;              // in radians!
 }
 
 // <editor-fold desc="Public Methods">
@@ -27,6 +28,9 @@ Transform.prototype.incXPosBy = function (delta) { this.mPosition[0] += delta; }
 Transform.prototype.getYPos = function () { return this.mPosition[1]; };
 Transform.prototype.setYPos = function (yPos) { this.mPosition[1] = yPos; };
 Transform.prototype.incYPosBy = function (delta) { this.mPosition[1] += delta; };
+Transform.prototype.setDepth = function (d) { this.mDepth = d; };
+Transform.prototype.getDepth = function () { return this.mDepth; };
+Transform.prototype.incDepthBy = function (delta) { this.mDepth += delta; };
 //</editor-fold>
 
 // <editor-fold desc="size setters and getters">
@@ -76,8 +80,8 @@ Transform.prototype.getXform = function () {
     // The matricies that opengl uses are transposed, thus the typical matrix
     // operations must be in reverse.
 
-    // Step A: compute translation, for now z is always at 0.0
-    mat4.translate(matrix, matrix, vec3.fromValues(this.getXPos(), this.getYPos(), 0.0));
+    // Step A: compute translation, for now z is the mDepth
+    mat4.translate(matrix, matrix, vec3.fromValues(this.getXPos(), this.getYPos(), this.getDepth()));
     // Step B: concatenate with rotation.
     mat4.rotateZ(matrix, matrix, this.getRotationInRad());
     // Step C: concatenate with scaling

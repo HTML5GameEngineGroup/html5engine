@@ -3,7 +3,7 @@
  */
 /*jslint node: true, vars: true, evil: true */
 /*global SimpleShader, TextureShader, SpriteShader, LineShader, LightShader, IllumShader, vec4 */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -38,6 +38,12 @@ gEngine.DefaultResources = (function () {
     // Illumination Shader
     var kIllumFS = "src/GLSLShaders/IllumFS.glsl";  // Path to the Illumination FragmentShader
     var mIllumShader = null;
+    
+    // Shadow shaders
+    var kShadowReceiverFS = "src/GLSLShaders/ShadowReceiverFS.glsl";  // Path to the FragmentShader
+    var mShadowReceiverShader = null;
+    var kShadowCasterFS = "src/GLSLShaders/ShadowCasterFS.glsl";  // Path to the FragmentShader
+    var mShadowCasterShader = null;
 
     // Default font
     var kDefaultFont = "assets/fonts/system-default-font";
@@ -51,6 +57,8 @@ gEngine.DefaultResources = (function () {
         mLineShader =  new LineShader(kSimpleVS, kSimpleFS);
         mLightShader = new LightShader(kTextureVS, kLightFS);
         mIllumShader = new IllumShader(kTextureVS, kIllumFS);
+        mShadowReceiverShader = new SpriteShader(kTextureVS, kShadowReceiverFS);
+        mShadowCasterShader = new SpriteShader(kTextureVS, kShadowCasterFS);
         callBackFunction();
     };
 
@@ -60,6 +68,8 @@ gEngine.DefaultResources = (function () {
     var getLineShader = function () { return mLineShader; };
     var getLightShader = function () { return mLightShader; };
     var getIllumShader = function () { return mIllumShader; };
+    var getShadowReceiverShader = function () { return mShadowReceiverShader; };
+    var getShadowCasterShader = function () { return mShadowCasterShader; };
 
     var initialize = function (callBackFunction) {
         // constant color shader: SimpleVS, and SimpleFS
@@ -90,6 +100,8 @@ gEngine.DefaultResources = (function () {
         mLineShader.cleanUp();
         mLightShader.cleanUp();
         mIllumShader.cleanUp();
+        mShadowReceiverShader.cleanUp();
+        mShadowCasterShader.cleanUp();
 
         gEngine.TextFileLoader.unloadTextFile(kSimpleVS);
         gEngine.TextFileLoader.unloadTextFile(kSimpleFS);
@@ -118,6 +130,8 @@ gEngine.DefaultResources = (function () {
         getLineShader: getLineShader,
         getLightShader: getLightShader,
         getIllumShader: getIllumShader,
+        getShadowReceiverShader: getShadowReceiverShader,
+        getShadowCasterShader: getShadowCasterShader,
         getDefaultFont: getDefaultFont,
         getGlobalAmbientColor: getGlobalAmbientColor,
         setGlobalAmbientColor: setGlobalAmbientColor,

@@ -5,7 +5,7 @@
 
 /*jslint node: true, vars: true, bitwise: true */
 /*global gEngine, vec2 */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
 //

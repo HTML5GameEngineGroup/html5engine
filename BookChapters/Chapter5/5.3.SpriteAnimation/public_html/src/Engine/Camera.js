@@ -5,7 +5,7 @@
 
 /*jslint node: true, vars: true */
 /*global gEngine: false, SimpleShader: false, Renderable: false, mat4: false, vec3: false */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
 // wcCenter: is a vec2

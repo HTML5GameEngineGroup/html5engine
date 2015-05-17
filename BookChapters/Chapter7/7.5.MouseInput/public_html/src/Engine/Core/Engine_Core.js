@@ -4,7 +4,7 @@
  */
 /*jslint node: true, vars: true, evil: true */
 /*global document */
-/* find out more about jslint: http://www.jslint.com/lint.html */
+/* find out more about jslint: http://www.jslint.com/help.html */
 
 //  Global variable EngineCore
 //  the following syntax enforces there can only be one instance of EngineCore object

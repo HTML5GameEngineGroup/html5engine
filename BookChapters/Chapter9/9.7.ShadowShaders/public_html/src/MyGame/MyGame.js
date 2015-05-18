@@ -73,11 +73,18 @@ MyGame.prototype.initialize = function () {
     bgR.setElementPixelPositions(0, 1900, 0, 1000);
     bgR.getXform().setSize(380, 200);
     bgR.getXform().setPosition(50, 35);
-    var i;
+    var i; 
     for (i = 0; i < 4; i++) {
         bgR.addLight(this.mGlobalLightSet.getLightAt(i));   // all the lights
     }
     this.mBg = new GameObject(bgR);
+
+this.mT = new IllumRenderable(this.kBg, this.kBgNormal);
+this.mT.setElementPixelPositions(0, 1900, 0, 1000);
+this.mT.setColor([0, 0, 0, 0]);
+this.mT.getXform().setSize(380, 10);
+this.mT.getXform().setPosition(50, 35);
+this.mT.addLight(this.mGlobalLightSet.getLightAt(1));
 
     // 
     // the objects
@@ -129,6 +136,8 @@ MyGame.prototype.drawCamera = function (camera) {
     this.mBlock2.draw(camera);
     this.mLgtHero.draw(camera);
     this.mIllumMinion.draw(camera);
+
+    this.mT.draw(camera);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more

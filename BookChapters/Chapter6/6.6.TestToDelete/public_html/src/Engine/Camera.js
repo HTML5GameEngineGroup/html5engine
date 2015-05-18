@@ -25,7 +25,7 @@ function Camera(wcCenter, wcWidth, viewportArray) {
     this.mWCWidth = wcWidth;
     this.mViewport = viewportArray;  // [x, y, width, height]
     this.mNearPlane = 0;
-    this.mFarPlane = 1000;
+    this.mFarPlane = 1001;
 
     // transformation matrices
     this.mViewMatrix = mat4.create();
@@ -89,7 +89,7 @@ Camera.prototype.setupViewProjection = function () {
     //<editor-fold desc="Step  B: Set up the View-Projection transform operator"> 
     // Step B1: define the view matrix
     mat4.lookAt(this.mViewMatrix,
-        [this.mWCCenter[0], this.mWCCenter[1], 10],   // WC center
+        [this.mWCCenter[0], this.mWCCenter[1], 1000],   // WC center
         [this.mWCCenter[0], this.mWCCenter[1], 0],    // 
         [0, 1, 0]);     // orientation
 

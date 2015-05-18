@@ -33,8 +33,8 @@ gEngine.Core = (function () {
         // Set images to flip y axis to match the texture coordinate space.
         mGL.pixelStorei(mGL.UNPACK_FLIP_Y_WEBGL, true);
 
-        // make sure depth buffer is not activated, front/back ordering is handled by the game engine
-        mGL.depthMask(false);
+        // make sure depth testing is enabled
+        mGL.enable(mGL.DEPTH_TEST);
 
         if (mGL === null) {
             document.write("<br><b>WebGL is not supported!</b>");
@@ -68,7 +68,8 @@ gEngine.Core = (function () {
     // Clears the draw area and draws one square
     var clearCanvas = function (color) {
         mGL.clearColor(color[0], color[1], color[2], color[3]);     // set the color to be cleared
-        mGL.clear(mGL.COLOR_BUFFER_BIT | mGL.STENCIL_BUFFER_BIT);   // clear to the color previously set
+        mGL.clear(mGL.COLOR_BUFFER_BIT | mGL.STENCIL_BUFFER_BIT | mGL.DEPTH_BUFFER_BIT);
+                    // clear to the color, stencil bit, and depth buffer bits
     };
 
     var inheritPrototype = function (subClass, superClass) {

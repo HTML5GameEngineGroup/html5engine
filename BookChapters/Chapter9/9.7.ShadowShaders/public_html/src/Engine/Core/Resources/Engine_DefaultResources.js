@@ -38,7 +38,7 @@ gEngine.DefaultResources = (function () {
     // Illumination Shader
     var kIllumFS = "src/GLSLShaders/IllumFS.glsl";  // Path to the Illumination FragmentShader
     var mIllumShader = null;
-    
+
     // Shadow shaders
     var kShadowReceiverFS = "src/GLSLShaders/ShadowReceiverFS.glsl";  // Path to the FragmentShader
     var mShadowReceiverShader = null;
@@ -85,6 +85,10 @@ gEngine.DefaultResources = (function () {
 
         // Illumination Shader
         gEngine.TextFileLoader.loadTextFile(kIllumFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
+
+        // Shadow caster and receiver shaders
+        gEngine.TextFileLoader.loadTextFile(kShadowReceiverFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
+        gEngine.TextFileLoader.loadTextFile(kShadowCasterFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
 
         // load default font
         gEngine.Fonts.loadFont(kDefaultFont);

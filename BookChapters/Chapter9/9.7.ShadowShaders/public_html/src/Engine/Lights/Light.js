@@ -16,7 +16,7 @@
 //   
 // defined in LightFS.glsl and IllumFS.glsl
 Light.eLightType = Object.freeze({
-    ePoint: 0,
+    ePointLight: 0,
     eDirectionalLight: 1,
     eSpotLight: 2
 });
@@ -26,7 +26,7 @@ function Light() {
     this.mColor = vec4.fromValues(1, 1, 1, 1);  // light color
     this.mPosition = vec4.fromValues(0, 0, 5, 1); // light position in WC
     this.mDirection = vec4.fromValues(0, 0, -1, 1); // in WC
-    this.mNear = 5;  // effective radius in WC
+    this.mNear = 5;  // effective radius in WCw
     this.mFar = 10;
     this.mInner = 0.1;  // in radian
     this.mOuter = 0.3;

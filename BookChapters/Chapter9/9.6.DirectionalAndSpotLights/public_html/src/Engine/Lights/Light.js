@@ -16,7 +16,7 @@
 //   
 // defined in LightFS.glsl and IllumFS.glsl
 Light.eLightType = Object.freeze({
-    ePoint: 0,
+    ePointLight: 0,
     eDirectionalLight: 1,
     eSpotLight: 2
 });

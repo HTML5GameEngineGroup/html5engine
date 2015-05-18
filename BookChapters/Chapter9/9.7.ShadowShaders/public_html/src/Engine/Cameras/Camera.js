@@ -36,10 +36,10 @@ function Camera(wcCenter, wcWidth, viewportArray) {
 
     this.mViewport = viewportArray;  // [x, y, width, height]
     this.mNearPlane = 0;
-    this.mFarPlane = 1001;
-    
+    this.mFarPlane = 1000;
+
     this.kCameraZ = 10;  // This is for illumination computation
-    
+
     // transformation matrices
     this.mViewMatrix = mat4.create();
     this.mProjMatrix = mat4.create();
@@ -124,7 +124,7 @@ Camera.prototype.setupViewProjection = function () {
     }
 
     mat4.lookAt(this.mViewMatrix,
-        [center[0], center[1], 1000],   // WC center
+        [center[0], center[1], this.kCameraZ],   // WC center
         [center[0], center[1], 0],    // 
         [0, 1, 0]);     // orientation
 

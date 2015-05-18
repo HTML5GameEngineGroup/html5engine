@@ -35,6 +35,7 @@ gEngine.Core = (function () {
 
         // make sure depth testing is enabled
         mGL.enable(mGL.DEPTH_TEST);
+        mGL.depthFunc(mGL.LEQUAL);
 
         if (mGL === null) {
             document.write("<br><b>WebGL is not supported!</b>");

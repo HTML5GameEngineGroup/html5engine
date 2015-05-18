@@ -21,6 +21,7 @@ MyGame.prototype._createALight = function (type, pos, dir, color, n, f, inner, o
     light.setOuter(outer);
     light.setIntensity(intensity);
     light.setDropOff(dropOff);
+    light.setLightCastShadowTo(true);
 
     return light;
 };

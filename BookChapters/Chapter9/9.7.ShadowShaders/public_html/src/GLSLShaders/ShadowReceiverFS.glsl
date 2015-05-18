@@ -5,7 +5,7 @@ precision mediump float;
 // The object that fetches data from texture.
 // Must be set outside the shader.
 uniform sampler2D uSampler;
-uniform vec4 uColor;
+uniform vec4 uPixelColor;
 
 // The "varying" keyword is for signifing that the texture coordinate will be
 // interpolated and thus varies. 
@@ -17,6 +17,6 @@ void main(void)
     if(texFragColor.a < 1.0)
         discard;
     else
-        gl_FragColor = uColor;
+        gl_FragColor = uPixelColor;
     
 }

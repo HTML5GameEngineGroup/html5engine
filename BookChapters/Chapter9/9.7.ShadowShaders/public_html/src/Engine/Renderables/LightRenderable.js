@@ -17,8 +17,6 @@ function LightRenderable(myTexture) {
 
     // here is the light source
     this.mLights = [];
-
-    this.mShadowColor = [0.2, 0.2, 0.2, 1];
 }
 gEngine.Core.inheritPrototype(LightRenderable, SpriteAnimateRenderable);
 
@@ -41,19 +39,6 @@ LightRenderable.prototype.getLightAt = function (index) {
 LightRenderable.prototype.addLight = function (l) {
     this.mLights.push(l);
 };
-
-
-//<editor-fold desc="support for shadow operations">
-LightRenderable.prototype.setShadowColor = function (c) {
-    this.mShadowColor = c;
-};
-
-LightRenderable.prototype.drawAsShadowCaster = function (aCamera) {
-    this._setShader(gEngine.DefaultResources.getShadowCasterShader());
-    this.draw(this.mShadowColor, aCamera);
-    this._setShader(gEngine.DefaultResources.getLightShader());
-};
-//</editor-fold>
 //--- end of Public Methods
 
 //</editor-fold>

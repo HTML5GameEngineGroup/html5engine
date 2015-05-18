@@ -3,10 +3,10 @@
  * This is the the logic of our game. 
  */
 
-/*jslint node: true, vars: true */
+/*jslint node: true, vars: true, white: true */
 /*global gEngine, Scene, GameObjectset, TextureObject, Camera, vec2,
   Renderable, FontRenderable, SpriteRenderable, LightRenderable, IllumRenderable,
-  GameObject, Hero, Minion, Dye, Light */
+  ShadowCasterRenderable, ShadowReceiverRenderable, GameObject, Hero, Minion, Dye, Light */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -20,6 +20,7 @@ function MyGame() {
     // The camera to view the scene
     this.mCamera = null;
     this.mBg = null;
+    this.mBgShadow = null;
 
     this.mMsg = null;
     this.mMatMsg = null;
@@ -71,20 +72,14 @@ MyGame.prototype.initialize = function () {
     // the Background
     var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
     bgR.setElementPixelPositions(0, 1900, 0, 1000);
-    bgR.getXform().setSize(380, 200);
+    // bgR.getXform().setSize(380, 200);
+    bgR.getXform().setSize(60, 70);
     bgR.getXform().setPosition(50, 35);
     var i; 
     for (i = 0; i < 4; i++) {
         bgR.addLight(this.mGlobalLightSet.getLightAt(i));   // all the lights
     }
     this.mBg = new GameObject(bgR);
-
-this.mT = new IllumRenderable(this.kBg, this.kBgNormal);
-this.mT.setElementPixelPositions(0, 1900, 0, 1000);
-this.mT.setColor([0, 0, 0, 0]);
-this.mT.getXform().setSize(380, 10);
-this.mT.getXform().setPosition(50, 35);
-this.mT.addLight(this.mGlobalLightSet.getLightAt(1));
 
     // 
     // the objects
@@ -122,6 +117,8 @@ this.mT.addLight(this.mGlobalLightSet.getLightAt(1));
     this.mSlectedCh = this.mIllumHero;
     this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();
     this.mSelectedChMsg = "H:";
+    
+    this._setupShadow(bgR);  // defined in MyGame_Shadow.js
 };
 
 
@@ -129,15 +126,17 @@ MyGame.prototype.drawCamera = function (camera) {
     // Step A: set up the View Projection matrix
     camera.setupViewProjection();
     // Step B: Now draws each primitive
-    this.mBg.draw(camera);
+    // this.mBg.draw(camera);
+        // this is drawn the mBgShadow!!
+    // always draw shadow first!
+    this.mBgShadow.draw(camera);
+
     this.mBlock1.draw(camera);
     this.mLgtMinion.draw(camera);
-    this.mIllumHero.draw(camera);
+    // this.mIllumHero.draw(camera);
     this.mBlock2.draw(camera);
-    this.mLgtHero.draw(camera);
+    // this.mLgtHero.draw(camera);
     this.mIllumMinion.draw(camera);
-
-    this.mT.draw(camera);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more

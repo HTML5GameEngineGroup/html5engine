@@ -12,7 +12,7 @@
 function Transform() {
     this.mPosition = vec2.fromValues(0, 0); // this is the translation
     this.mScale = vec2.fromValues(1, 1);    // this is the width (x) and height (y)
-    this.mFront = 0.0;                      // must be a positive number, larger is cloer to eye
+    this.mZ = 0.0;                          // must be a positive number, larger is cloer to eye
     this.mRotationInRad = 0.0;              // in radians!
 }
 
@@ -23,7 +23,7 @@ function Transform() {
 Transform.prototype.setPosition = function (xPos, yPos) { this.setXPos(xPos); this.setYPos(yPos); };
 Transform.prototype.getPosition = function () { return this.mPosition; };
 Transform.prototype.get3DPosition = function () {
-    return vec3.fromValues(this.getXPos(), this.getYPos(), this.getHeight());
+    return vec3.fromValues(this.getXPos(), this.getYPos(), this.getZPos());
 };
 Transform.prototype.getXPos = function () { return this.mPosition[0]; };
 Transform.prototype.setXPos = function (xPos) { this.mPosition[0] = xPos; };
@@ -31,9 +31,9 @@ Transform.prototype.incXPosBy = function (delta) { this.mPosition[0] += delta; }
 Transform.prototype.getYPos = function () { return this.mPosition[1]; };
 Transform.prototype.setYPos = function (yPos) { this.mPosition[1] = yPos; };
 Transform.prototype.incYPosBy = function (delta) { this.mPosition[1] += delta; };
-Transform.prototype.setFront = function (d) { this.mFront = d; };
-Transform.prototype.getFront = function () { return this.mFront; };
-Transform.prototype.incFrontBy = function (delta) { this.mFront += delta; };
+Transform.prototype.setZPos = function (d) { this.mZ = d; };
+Transform.prototype.getZPos = function () { return this.mZ; };
+Transform.prototype.incZPosBy = function (delta) { this.mZ += delta; };
 //</editor-fold>
 
 // <editor-fold desc="size setters and getters">

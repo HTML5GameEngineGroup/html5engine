@@ -28,7 +28,6 @@ function ShadowReceiverRenderable (theReceiverRenderable) {
     this.mReceiver = theReceiverRenderable;     // Shadow receiver is a copy of mReceiver
     this.mXform = this.mReceiver.getXform();    // accomplished by copying the Xform and texture
 }
-
 gEngine.Core.inheritPrototype(ShadowReceiverRenderable, SpriteRenderable);
     
 // <editor-fold desc="support for setting and removing casters ">
@@ -36,12 +35,7 @@ ShadowReceiverRenderable.prototype.addShadowCaster = function (lgtRenderable) {
     var c = new ShadowCasterRenderable(lgtRenderable, this.mReceiver);
     this.mShadowCaster.push(c);
 };
-ShadowReceiverRenderable.prototype.removeShadowCaster = function (lgtRenderable) {
-    var index = this.mShadowCaster.indexOf(lgtRenderable);
-    if (index > -1) {
-        this.mShadowCaster.splice(index, 1);  // remove one element
-    }
-};
+// for now, cannot remove shadow casters
 // </editor-fold>
 
 // <editor-fold  desc="shadow drawing support">
@@ -54,7 +48,7 @@ ShadowReceiverRenderable.prototype.draw = function (aCamera) {
     // now switch on stencil and swich on the pixels that corresponds
     // to the mReceiver
     this._shadowRecieverStencilOn();
-    SpriteRenderable.prototype.draw(this, aCamera);
+    SpriteRenderable.prototype.draw.call(this, aCamera);
     this._shadowRecieverStencilOff();
     
     // now draw shadow color to the pixels in the stencil that are switched on

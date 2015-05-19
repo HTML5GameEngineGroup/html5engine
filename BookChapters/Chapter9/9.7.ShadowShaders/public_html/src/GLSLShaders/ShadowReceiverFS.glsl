@@ -14,9 +14,9 @@ varying vec2 vTexCoord;
 void main(void)
 {
     vec4 texFragColor = texture2D(uSampler, vTexCoord);
-    if(texFragColor.a < 1.0)
+    if(texFragColor.a < 0.9)
         discard;
     else
-        gl_FragColor = uPixelColor;
+        gl_FragColor = vec4(1, 1, 1, 1);
     
 }

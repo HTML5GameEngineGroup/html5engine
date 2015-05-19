@@ -15,7 +15,7 @@
 */
 ShadowReceiverRenderable.prototype._shadowRecieverStencilOn = function () {
         var gl = gEngine.Core.getGL();
-        // gl.clear(gl.STENCIL_BUFFER_BIT);
+        gl.clear(gl.STENCIL_BUFFER_BIT);
         gl.enable(gl.STENCIL_TEST);
         gl.colorMask(false, false, false, false);
         gl.depthMask(false);
@@ -28,8 +28,6 @@ ShadowReceiverRenderable.prototype._shadowRecieverStencilOff = function () {
     var gl = gEngine.Core.getGL();
     gl.depthMask(gl.TRUE);
     gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
-//        gl.colorMask( gl.FALSE, gl.FALSE, gl.FALSE, gl.FALSE);
-        // gl.stencilMask(0x00);
     gl.stencilFunc(gl.EQUAL, this.kShadowStencilBit, this.kShadowStencilMask);
     gl.colorMask( true, true, true, true );
 };

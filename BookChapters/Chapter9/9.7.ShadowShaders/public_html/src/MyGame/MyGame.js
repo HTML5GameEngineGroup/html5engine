@@ -20,7 +20,6 @@ function MyGame() {
     // The camera to view the scene
     this.mCamera = null;
     this.mBg = null;
-    this.mBgShadow = null;
 
     this.mMsg = null;
     this.mMatMsg = null;
@@ -39,6 +38,10 @@ function MyGame() {
 
     this.mLgtIndex = 0;
     this.mLgtRotateTheta = 0;
+    
+    // shadow support
+    this.mBgShadow = null;
+    this.mMinionShadow = null;
 }
 gEngine.Core.inheritPrototype(MyGame, Scene);
 
@@ -72,8 +75,7 @@ MyGame.prototype.initialize = function () {
     // the Background
     var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
     bgR.setElementPixelPositions(0, 1900, 0, 1000);
-    // bgR.getXform().setSize(380, 200);
-    bgR.getXform().setSize(60, 70);
+    bgR.getXform().setSize(380, 200);
     bgR.getXform().setPosition(50, 35);
     var i; 
     for (i = 0; i < 4; i++) {
@@ -83,10 +85,11 @@ MyGame.prototype.initialize = function () {
 
     // 
     // the objects
-    this.mIllumHero = new Hero(this.kMinionSprite, this.kMinionSpriteNormal, 15, 50);
-    this.mLgtHero = new Hero(this.kMinionSprite, null, 80, 50);
-    this.mIllumMinion = new Minion(this.kMinionSprite, this.kMinionSpriteNormal, 17, 15);
-    this.mLgtMinion = new Minion(this.kMinionSprite, null, 87, 15);
+    this.mIllumHero = new Hero(this.kMinionSprite, this.kMinionSpriteNormal, 20, 30);
+    this.mLgtHero = new Hero(this.kMinionSprite, null, 60, 50);
+    this.mIllumMinion = new Minion(this.kMinionSprite, this.kMinionSpriteNormal, 25, 30);
+    this.mIllumMinion.getXform().incSizeBy(20);
+    this.mLgtMinion = new Minion(this.kMinionSprite, null, 65, 25);
     for (i = 0; i < 4; i++) {
         this.mIllumHero.getRenderable().addLight(this.mGlobalLightSet.getLightAt(i));
         this.mLgtHero.getRenderable().addLight(this.mGlobalLightSet.getLightAt(i));
@@ -126,17 +129,17 @@ MyGame.prototype.drawCamera = function (camera) {
     // Step A: set up the View Projection matrix
     camera.setupViewProjection();
     // Step B: Now draws each primitive
-    // this.mBg.draw(camera);
-        // this is drawn the mBgShadow!!
+    
     // always draw shadow first!
-    this.mBgShadow.draw(camera);
+    this.mBgShadow.draw(camera);        // also draws the object
+    this.mMinionShadow.draw(camera);
 
     this.mBlock1.draw(camera);
     this.mLgtMinion.draw(camera);
-    // this.mIllumHero.draw(camera);
-    this.mBlock2.draw(camera);
-    // this.mLgtHero.draw(camera);
-    this.mIllumMinion.draw(camera);
+    this.mIllumHero.draw(camera);
+    this.mBlock2.draw(camera);  
+    this.mLgtHero.draw(camera);
+    
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more

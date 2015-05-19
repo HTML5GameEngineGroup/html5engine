@@ -12,7 +12,6 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 
-
 function LightRenderable(myTexture) {
     SpriteAnimateRenderable.call(this, myTexture);
     Renderable.prototype._setShader.call(this, gEngine.DefaultResources.getLightShader());

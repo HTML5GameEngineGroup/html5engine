@@ -28,7 +28,7 @@ uniform float uGlobalAmbientIntensity;
     // defined in LightShader.js file.
 
 struct Light  {
-    vec4 Position;   // in pixel space!
+    vec3 Position;   // in pixel space!
     vec4 Color;
     float Near;     // distance in pixel space
     float Far;     // distance in pixel space

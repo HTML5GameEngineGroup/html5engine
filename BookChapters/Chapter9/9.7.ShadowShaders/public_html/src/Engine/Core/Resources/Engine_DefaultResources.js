@@ -2,7 +2,8 @@
  * File: Engine_DefaultResources.js 
  */
 /*jslint node: true, vars: true, evil: true */
-/*global SimpleShader, TextureShader, SpriteShader, LineShader, LightShader, IllumShader, vec4 */
+/*global SimpleShader, TextureShader, SpriteShader,
+  LineShader, LightShader, IllumShader, ShadowCasterShader, vec4 */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 
@@ -58,7 +59,7 @@ gEngine.DefaultResources = (function () {
         mLightShader = new LightShader(kTextureVS, kLightFS);
         mIllumShader = new IllumShader(kTextureVS, kIllumFS);
         mShadowReceiverShader = new SpriteShader(kTextureVS, kShadowReceiverFS);
-        mShadowCasterShader = new SpriteShader(kTextureVS, kShadowCasterFS);
+        mShadowCasterShader = new ShadowCasterShader(kTextureVS, kShadowCasterFS);
         callBackFunction();
     };
 

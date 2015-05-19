@@ -4,7 +4,7 @@
  *          Supports light illumination
  */
 /*jslint node: true, vars: true */
-/*global gEngine, SpriteShader, vec4 */
+/*global gEngine, SpriteShader, vec3 */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -62,7 +62,7 @@ LightShader.prototype._loadToShader = function (aCamera) {
         var c = this.mLight.getColor();
 
         gl.uniform4fv(this.mColorRef, c);
-        gl.uniform4fv(this.mPosRef, vec4.fromValues(p[0], p[1], p[2], 1));
+        gl.uniform3fv(this.mPosRef, vec3.fromValues(p[0], p[1], p[2]));
         gl.uniform1f(this.mRadiusRef, r);
     }
 };

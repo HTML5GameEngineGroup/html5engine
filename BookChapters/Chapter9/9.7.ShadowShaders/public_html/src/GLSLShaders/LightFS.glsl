@@ -53,8 +53,8 @@ uniform float uGlobalAmbientIntensity;
     // ******** WARNING ******
 
 struct Light  {
-    vec4 Position;      // in pixel space!
-    vec4 Direction;     // Light direction
+    vec3 Position;      // in pixel space!
+    vec3 Direction;     // Light direction
     vec4 Color;
     float Near;         // distance in pixel space
     float Far;

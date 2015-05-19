@@ -20,7 +20,7 @@ function Hero(spriteTexture, normalMap, atX, atY) {
     }
     this.mDye.setColor([1, 1, 1, 0]);
     this.mDye.getXform().setPosition(atX, atY);
-    this.mDye.getXform().setZPos(2);
+    this.mDye.getXform().setZPos(5);
     this.mDye.getXform().setSize(18, 24);
     this.mDye.setElementPixelPositions(0, 120, 0, 180);
     GameObject.call(this, this.mDye);

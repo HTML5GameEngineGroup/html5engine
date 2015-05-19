@@ -4,7 +4,7 @@
  *      references are pointing to uLight[index]
  */
 /*jslint node: true, vars: true */
-/*global gEngine, vec4 */
+/*global gEngine, vec3 */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -22,7 +22,7 @@ ShaderLightAtIndex.prototype.loadToShader = function (aCamera, aLight) {
         var oc = aCamera.wcSizeToPixel(aLight.getFar());
         var c = aLight.getColor();
         gl.uniform4fv(this.mColorRef, c);
-        gl.uniform4fv(this.mPosRef, vec4.fromValues(p[0], p[1], p[2], 1));
+        gl.uniform3fv(this.mPosRef, vec3.fromValues(p[0], p[1], p[2]));
         gl.uniform1f(this.mNearRef, ic);
         gl.uniform1f(this.mFarRef, oc);
         gl.uniform1f(this.mIntensityRef, aLight.getIntensity());

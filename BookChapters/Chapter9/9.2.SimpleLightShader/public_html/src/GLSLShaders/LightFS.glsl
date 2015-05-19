@@ -15,7 +15,7 @@ uniform float uGlobalAmbientIntensity;
 // Light information
 uniform bool uLightOn;
 uniform vec4 uLightColor;
-uniform vec4 uLightPosition;   // in pixel space!
+uniform vec3 uLightPosition;   // in pixel space!
 uniform float uLightRadius;    // in pixel space!
 
 // The "varying" keyword is for signifing that the texture coordinate will be

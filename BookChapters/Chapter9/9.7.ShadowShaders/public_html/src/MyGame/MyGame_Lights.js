@@ -30,7 +30,7 @@ MyGame.prototype._initializeLights = function () {
     this.mGlobalLightSet = new LightSet();
 
     var l = this._createALight(Light.eLightType.ePointLight,
-            [15, 50, 5],         // position
+            [20, 25, 10],         // position
             [0, 0, -1],          // Direction 
             [0.6, 1.0, 0.0, 1],  // some color
             8, 20,               // near and far distances
@@ -41,7 +41,7 @@ MyGame.prototype._initializeLights = function () {
     this.mGlobalLightSet.addToSet(l);
 
     l = this._createALight(Light.eLightType.eDirectionalLight,
-            [15, 50, 4],           // position (not used by directional)
+            [15, 50, 10],           // position (not used by directional)
             [-0.2, -0.2, -1],      // Pointing direction upwards
             [0.7, 0.7, 0.0, 1],    // color
             500, 500,              // near anf far distances: essentially switch this off
@@ -52,22 +52,22 @@ MyGame.prototype._initializeLights = function () {
     this.mGlobalLightSet.addToSet(l);
 
     l = this._createALight(Light.eLightType.eSpotLight,
-            [87, 15, 10],            // Right minion position
+            [65, 25, 12],            // Right minion position
             [-0.02,  0.02, -1],     // direction
             [0.5, 0.5, 0.5, 1],     // color
-            5, 40,                  // near and far distances
-            1.2, 2.2,               // inner outter angles (in radius)
+            20, 40,                  // near and far distances
+            1.9, 2.0,               // inner outter angles (in radius)
              5,                     // intensity
             1.2                     // drop off
             );
     this.mGlobalLightSet.addToSet(l);
 
     l = this._createALight(Light.eLightType.eSpotLight,
-            [50, 33, 10],            // Center of camera 
+            [60, 50, 12],            // Center of camera 
             [0.02, -0.02, -1],
             [0.8, 0.8, 0.2, 1],      //  color
-            3, 40,                   // near and far distances
-            1.6, 2.5,                // inner and outer cones
+            20, 40,                   // near and far distances
+            1.2, 1.3,                // inner and outer cones
             2,                       // intensity
             1.5                      // drop off
             );

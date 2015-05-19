@@ -12,7 +12,9 @@
 function Light() {
     this.mColor = vec4.fromValues(0.1, 0.1, 0.1, 1);  // light color
     this.mPosition = vec3.fromValues(0, 0, 5); // light position in WC
-    this.mRadius = 10;  // effective radius in WC
+    this.mNear = 5;  // effective distance in WC
+    this.mFar = 10;  // within near is full on, outside far is off
+    this.mIntensity = 1;
     this.mIsOn = true;
 }
 

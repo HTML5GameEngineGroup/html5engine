@@ -26,7 +26,6 @@ function ShadowReceiverRenderable (theReceiverRenderable) {
     // To support shadow drawing
     this.mShadowCaster = [];                    // array of ShadowCasterRenderables
     this.mReceiver = theReceiverRenderable;     // Shadow receiver is a copy of mReceiver
-    this.mXform = this.mReceiver.getXform();    // accomplished by copying the Xform and texture
 }
 gEngine.Core.inheritPrototype(ShadowReceiverRenderable, SpriteRenderable);
     
@@ -47,7 +46,17 @@ ShadowReceiverRenderable.prototype.draw = function (aCamera) {
     
     // now switch on stencil and swich on the pixels that corresponds
     // to the mReceiver
+    var texCoord;
+    if (this.mReceiver.getElementUVCoordinateArray !== undefined) {
+        texCoord = this.mReceiver.getElementUVCoordinateArray();
+        this.setElementUVCoordinate(
+            texCoord[SpriteRenderable.eTexCoordArray.eLeft],
+            texCoord[SpriteRenderable.eTexCoordArray.eRight],
+            texCoord[SpriteRenderable.eTexCoordArray.eBottom],
+            texCoord[SpriteRenderable.eTexCoordArray.eTop]);
+    }
     this._shadowRecieverStencilOn();
+    this.mXform = this.mReceiver.getXform();    // refer to receiver's xform
     SpriteRenderable.prototype.draw.call(this, aCamera);
     this._shadowRecieverStencilOff();
     

@@ -18,10 +18,12 @@ function ShadowCasterRenderable (shadowCaster, shadowReceiver) {
     this.mShadowCaster = shadowCaster;      // must be at least a LightRenderable
     this.mShadowReceiver = shadowReceiver;   // must be at least a SpriteRenderable
     
-    this.kCasterMaxScale = 3;  // maximum size a caster will be scaled
-    this.kVerySmall = 0.001;  // 
+    this.kCasterMaxScale = 3;   // maximum size a caster will be scaled
+    this.kVerySmall = 0.001;    // 
+    this.kDistanceFudge = 0.01; // Ensure that the shadow caster geometry will not be on the exact same depth as the receiver
+    this.kReceiverDistanceFudge = 0.6; // De-Emphasize the distance between Caster and Receiver, this slows down the size increase of the caster geometry
     
-    this.setShadowColor([0, 0, 0, 1.0]);
+    this.setShadowColor([0, 0, 0, 0.2]);
 }
 gEngine.Core.inheritPrototype(ShadowCasterRenderable, SpriteRenderable);
 
@@ -31,7 +33,7 @@ ShadowCasterRenderable.prototype.setShadowColor = function (c) {
     this.setColor(c);
 };
 
-ShadowCasterRenderable.prototype._setShadowOffset = function(aLight) {
+ShadowCasterRenderable.prototype._computeShadowGeometry = function(aLight) {
     // Remember that z-value determines front/back
     //      The camera is located a z=some value, looking towards z=0
     //      The larger the z-value (larger height value) the closer to the camera
@@ -80,11 +82,10 @@ ShadowCasterRenderable.prototype._setShadowOffset = function(aLight) {
         vec3.scale(lgtToCaster, lgtToCaster, 1/distToCaster);  // normalize lgtToCaster
         
         distToReceiver = Math.abs(receiverToCasterZ / lgtToCaster[2]);  // distant measured along lgtToCaster
-        scale = (distToCaster + distToReceiver) / distToCaster;
+        scale = (distToCaster + (distToReceiver * this.kReceiverDistanceFudge)) / distToCaster;
     }
-    vec3.scaleAndAdd(offset, this.mShadowCaster.getXform().get3DPosition(), lgtToCaster, distToReceiver);
+    vec3.scaleAndAdd(offset, this.mShadowCaster.getXform().get3DPosition(), lgtToCaster, distToReceiver + this.kDistanceFudge);
         
-  // vec3.add(offset, offset, this.mShadowCaster.getXform().get3DPosition());
     this.getXform().setRotationInRad( this.mShadowCaster.getXform().getRotationInRad());
     this.getXform().setPosition(offset[0], offset[1]);
     this.getXform().setZPos(offset[2]);
@@ -110,8 +111,9 @@ ShadowCasterRenderable.prototype.draw = function(aCamera) {
     var l, lgt;
     for (l = 0; l < this.mShadowCaster.numLights(); l++) {
         lgt = this.mShadowCaster.getLightAt(l);
-        if (lgt.isLightCastShadow()) {
-            if (this._setShadowOffset(lgt)) {
+        if (lgt.isLightOn() && lgt.isLightCastShadow()) {
+            if (this._computeShadowGeometry(lgt)) {
+                this.mShader.setLight(lgt);
                 SpriteRenderable.prototype.draw.call(this, aCamera);
             }
         }

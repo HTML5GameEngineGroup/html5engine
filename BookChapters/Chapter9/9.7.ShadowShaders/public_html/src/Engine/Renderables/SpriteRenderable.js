@@ -17,6 +17,7 @@ function SpriteRenderable(myTexture) {
     this.mTexRight = 1.0;  // 
     this.mTexTop = 1.0;    //   1 is top and 0 is bottom of image
     this.mTexBottom = 0.0; // 
+
     // 
     this._setTexInfo();
 }

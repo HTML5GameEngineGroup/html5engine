@@ -45,8 +45,8 @@ IllumShader.prototype.activateShader = function(pixelColor, aCamera) {
 };
 
 
-IllumShader.prototype.setMaterialAndCameraPos = function(m, p) { 
-    this.mMaterial = m; 
+IllumShader.prototype.setMaterialAndCameraPos = function(m, p) {
+    this.mMaterial = m;
     this.mCameraPos = p;
 };
 //</editor-fold>

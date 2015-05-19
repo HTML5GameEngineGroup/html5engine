@@ -24,9 +24,9 @@ Light.eLightType = Object.freeze({
 // Constructor
 function Light() {
     this.mColor = vec4.fromValues(1, 1, 1, 1);  // light color
-    this.mPosition = vec4.fromValues(0, 0, 5, 1); // light position in WC
-    this.mDirection = vec4.fromValues(0, 0, -1, 1); // in WC
-    this.mNear = 5;  // effective radius in WCw
+    this.mPosition = vec3.fromValues(0, 0, 5); // light position in WC
+    this.mDirection = vec3.fromValues(0, 0, -1); // in WC
+    this.mNear = 5;  // effective radius in WC
     this.mFar = 10;
     this.mInner = 0.1;  // in radian
     this.mOuter = 0.3;
@@ -48,7 +48,7 @@ Light.prototype.setYPos = function (y) { this.mPosition[1] = y; };
 Light.prototype.setZPos = function (z) { this.mPosition[2] = z; };
 Light.prototype.getPosition = function () { return this.mPosition; };
 
-Light.prototype.setDirection = function (d) { this.mDirection = vec4.clone(d); };
+Light.prototype.setDirection = function (d) { this.mDirection = vec3.clone(d); };
 Light.prototype.getDirection = function () { return this.mDirection; };
 
 Light.prototype.setNear = function (n) { this.mNear = n; };

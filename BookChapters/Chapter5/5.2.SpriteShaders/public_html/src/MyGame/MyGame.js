@@ -1,6 +1,6 @@
 /*
  * File: MyGame.js 
- * This is the the logic of our game. 
+ * This is the logic of our game. 
  */
 
 
@@ -73,7 +73,7 @@ MyGame.prototype.initialize = function () {
     this.mMinion.getXform().setPosition(26, 56);
     this.mMinion.getXform().setSize(5, 2.5);
 
-    // Step D: Create the hero object with texture from lower-left corner of 
+    // Step D: Create the hero object with texture from the lower-left corner 
     this.mHero = new SpriteRenderable(this.kMinionSprite);
     this.mHero.setColor([1, 1, 1, 0]);
     this.mHero.getXform().setPosition(20, 60);
@@ -101,7 +101,7 @@ MyGame.prototype.draw = function () {
 // The update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGame.prototype.update = function () {
-    // For this very simple, let's only allow the movement of hero, 
+    // let's only allow the movement of hero, 
     // and if hero moves too far off, this level ends, we will
     // load the next level
     var deltaX = 0.05;

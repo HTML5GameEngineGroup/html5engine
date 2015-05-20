@@ -1,6 +1,6 @@
 /*
  * File: MyGame.js 
- * This is the the logic of our game. 
+ * This is the logic of our game. 
  */
 
 /*jslint node: true, vars: true */
@@ -53,7 +53,7 @@ MyGame.prototype.initialize = function() {
     bgR.getXform().setPosition(50, 35);
     this.mBg = new GameObject(bgR);
 
-    // Step B: Create the hero object with texture from lower-left corner of 
+    // Step B: Create the hero object with texture from the lower-left corner 
     this.mHero = new Hero(this.kMinionSprite);
 
     this.mLMinion = new Minion(this.kMinionSprite, 30, 30);

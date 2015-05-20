@@ -1,6 +1,6 @@
 /*
  * File: BlueLevel.js 
- * This is the the logic of our game. 
+ * This is the logic of our game. 
  */
 
 /*jslint node: true, vars: true */

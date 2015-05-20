@@ -43,7 +43,7 @@ gEngine.Core.inheritPrototype(SpriteShader, TextureShader);
 
 // Overriding the Activation of the shader for rendering
 SpriteShader.prototype.activateShader = function (pixelColor, aCamera) {
-    // fist call the super class's activate
+    // first call the super class's activate
     SimpleShader.prototype.activateShader.call(this, pixelColor, aCamera);
 
     // now binds the proper texture coordinate buffer

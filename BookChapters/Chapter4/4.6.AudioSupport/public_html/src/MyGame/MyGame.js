@@ -1,6 +1,6 @@
 /*
  * File: MyGame.js 
- * This is the the logic of our game. 
+ * This is the logic of our game. 
  */
 /*jslint node: true, vars: true */
 /*global gEngine: false, Scene: false, BlueLevel: false, Camera: false, Renderable: false, vec2: false */
@@ -107,7 +107,7 @@ MyGame.prototype.draw = function () {
 // The update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGame.prototype.update = function () {
-    // For this very simple, let's only allow the movement of hero, 
+    // let's only allow the movement of hero, 
     // and if hero moves too far off, this level ends, we will
     // load the next level
     var deltaX = 0.05;

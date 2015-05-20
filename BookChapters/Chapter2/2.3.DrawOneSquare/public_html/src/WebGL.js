@@ -27,7 +27,7 @@ function initializeGL() {
     var canvas = document.getElementById("GLCanvas");
 
     // Get standard webgl, or experimental
-    // binds webgl the the Canvas area on the web-page to the global variable "gGL"
+    // binds webgl to the Canvas area on the web-page to the global variable "gGL"
     gGL = canvas.getContext("webgl") ||
         canvas.getContext("experimental-webgl");
 

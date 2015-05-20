@@ -1,6 +1,6 @@
 /*
  * File: MyGame.js 
- * This is the the logic of our game. For now, this is very simple.
+ * This is the logic of our game. For now, this is very simple.
  */
 /*jslint node: true, vars: true */
 /*global gEngine: false, SimpleShader: false, Renderable: false, mat4: false, vec3: false */

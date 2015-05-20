@@ -29,7 +29,7 @@ gEngine.Core.inheritPrototype(LineShader, SimpleShader);
 
 // Activate the shader for rendering
 LineShader.prototype.activateShader = function (pixelColor, aCamera) {
-    // fist call the super class's activate
+    // first call the super class's activate
     SimpleShader.prototype.activateShader.call(this, pixelColor, aCamera);
 
     // now our own functionality: enable texture coordinate array

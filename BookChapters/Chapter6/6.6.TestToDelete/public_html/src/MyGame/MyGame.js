@@ -1,6 +1,6 @@
 /*
  * File: MyGame.js 
- * This is the the logic of our game. 
+ * This is the logic of our game. 
  */
 
 /*jslint node: true, vars: true */
@@ -60,7 +60,7 @@ MyGame.prototype.initialize = function () {
 
     this.mBrain = new Brain(this.kMinionSprite);
 
-    // Step D: Create the hero object with texture from lower-left corner of 
+    // Step D: Create the hero object with texture from the lower-left corner 
     this.mHero = new Hero(this.kMinionSprite);
 
     this.mPortalHit = new DyePack(this.kMinionSprite);

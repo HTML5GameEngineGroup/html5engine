@@ -27,7 +27,7 @@ function Hero(spriteTexture, normalMap, atX, atY) {
 gEngine.Core.inheritPrototype(Hero, GameObject);
 
 Hero.prototype.update = function () {
-    // control by WSAD
+    // control by WASD
     var xform = this.getXform();
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.W)) {
         xform.incYPosBy(this.kDelta);

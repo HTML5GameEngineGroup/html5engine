@@ -60,7 +60,7 @@ BoundingBox.prototype.boundCollideStatus = function (otherBound) {
             status |= BoundingBox.eboundCollideStatus.eCollideTop;
         }
 
-        // if the bounds intersects and yet onoe of the sides overlaps
+        // if the bounds intersects and yet none of the sides overlaps
         // otherBound is completely inside thisBound
         if (status === BoundingBox.eboundCollideStatus.eOutside) {
             status = BoundingBox.eboundCollideStatus.eInside;

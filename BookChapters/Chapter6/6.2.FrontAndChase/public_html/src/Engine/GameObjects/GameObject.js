@@ -12,7 +12,6 @@
 function GameObject(renderableObj) {
     this.mRenderComponent = renderableObj;
     this.mVisible = true;
-    this.mObjFrontDir = vec2.fromValues(0, 1);   // this is the default front direction of the object
     this.mCurrentFrontDir = vec2.fromValues(0, 1);  // this is the current front direction of the object
     this.mSpeed = 0;
 }
@@ -23,9 +22,6 @@ GameObject.prototype.isVisible = function () { return this.mVisible; };
 GameObject.prototype.setSpeed = function (s) { this.mSpeed = s; };
 GameObject.prototype.getSpeed = function () { return this.mSpeed; };
 GameObject.prototype.incSpeedBy = function (delta) { this.mSpeed += delta; };
-
-GameObject.prototype.setObjFrontDir = function (f) { vec2.normalize(this.mObjFrontDir, f); };
-GameObject.prototype.getObjFrontDir = function () { return this.mObjFrontDir; };
 
 GameObject.prototype.setCurrentFrontDir = function (f) { vec2.normalize(this.mCurrentFrontDir, f); };
 GameObject.prototype.getCurrentFrontDir = function () { return this.mCurrentFrontDir; };

@@ -16,7 +16,6 @@ function MyGame() {
     this.kMinionSpriteNormal = "assets/minion_sprite_normal.png";
     this.kBg = "assets/bg.png";
     this.kBgNormal = "assets/bg_normal.png";
-    this.kRingNormal = "assets/ring_normal.png";
 
     // The camera to view the scene
     this.mCamera = null;
@@ -42,7 +41,6 @@ MyGame.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kMinionSprite);
     gEngine.Textures.loadTexture(this.kBg);
     gEngine.Textures.loadTexture(this.kBgNormal);
-    gEngine.Textures.loadTexture(this.kRingNormal);
     gEngine.Textures.loadTexture(this.kMinionSpriteNormal);
 };
 
@@ -50,7 +48,6 @@ MyGame.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kMinionSprite);
     gEngine.Textures.unloadTexture(this.kBg);
     gEngine.Textures.unloadTexture(this.kBgNormal);
-    gEngine.Textures.unloadTexture(this.kRingNormal);
     gEngine.Textures.unloadTexture(this.kMinionSpriteNormal);
 };
 

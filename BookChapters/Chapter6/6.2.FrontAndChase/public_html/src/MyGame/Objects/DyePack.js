@@ -21,5 +21,3 @@ function DyePack(spriteTexture) {
     GameObject.call(this, this.mDyePack);
 }
 gEngine.Core.inheritPrototype(DyePack, GameObject);
-
-DyePack.prototype.update = function () {};

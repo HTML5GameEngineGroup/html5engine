@@ -16,11 +16,11 @@ function Minion(spriteTexture, atX, atY) {
     this.mMinion = new LightRenderable(spriteTexture);
     this.mMinion.setColor([1, 1, 1, 0]);
     this.mMinion.getXform().setPosition(atX, atY);
-    this.mMinion.getXform().setSize(12, 9.6);
+    this.mMinion.getXform().setSize(18, 14.4);
     this.mMinion.setSpriteSequence(512, 0,      // first element pixel position: top-right 512 is top of image, 0 is right of image
-                                    204, 164,   // widthxheight in pixels
-                                    5,          // number of elements in this sequence
-                                    0);         // horizontal padding in between
+                                   204, 164,    // widthxheight in pixels
+                                   5,           // number of elements in this sequence
+                                   0);          // horizontal padding in between
     this.mMinion.setAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateSwing);
     this.mMinion.setAnimationSpeed(30);
                                 // show each element for mAnimSpeed updates

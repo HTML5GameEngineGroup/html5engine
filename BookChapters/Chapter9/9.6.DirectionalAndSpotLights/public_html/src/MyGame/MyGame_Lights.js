@@ -12,7 +12,7 @@ MyGame.prototype._createALight = function (type, pos, dir, color, n, f, inner, o
     light.setLightType(type);
     light.setColor(color);
     light.setXPos(pos[0]);
-    light.setYPos(pos[1]);
+    light.setYPos(pos[1]);      
     light.setZPos(pos[2]);
     light.setDirection(dir);
     light.setNear(n);
@@ -51,24 +51,24 @@ MyGame.prototype._initializeLights = function () {
     this.mGlobalLightSet.addToSet(l);
 
     l = this._createALight(Light.eLightType.eSpotLight,
-            [87, 15, 10],            // Right minion position
-            [-0.02,  0.02, -1],     // direction
+            [80, 18, 10],            // Right minion position
+            [-0.07,  0, -1],     // direction
             [0.5, 0.5, 0.5, 1],     // color
-            5, 40,                  // near and far distances
-            1.2, 2.2,               // inner outter angles (in radius)
-             5,                     // intensity
+            100, 100,                  // near and far distances
+            1.65, 1.7,               // inner outter angles (in radius)
+            5,                     // intensity
             1.2                     // drop off
             );
     this.mGlobalLightSet.addToSet(l);
 
     l = this._createALight(Light.eLightType.eSpotLight,
-            [50, 33, 10],            // Center of camera 
-            [0.02, -0.02, -1],
+            [64, 43, 10],            // Center of camera 
+            [0.0, 0.03, -1],
             [0.8, 0.8, 0.2, 1],      //  color
-            3, 40,                   // near and far distances
-            1.6, 2.5,                // inner and outer cones
+            100, 100,                   // near and far distances
+            1.9, 2.0,                // inner and outer cones
             2,                       // intensity
-            1.5                      // drop off
+            1                      // drop off
             );
     this.mGlobalLightSet.addToSet(l);
 };

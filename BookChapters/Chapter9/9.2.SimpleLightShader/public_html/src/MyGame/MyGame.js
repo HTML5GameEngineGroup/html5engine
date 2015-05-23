@@ -63,8 +63,8 @@ MyGame.prototype.initialize = function () {
 
     // the Background
     var bgR = new LightRenderable(this.kBg);
-    bgR.setElementPixelPositions(0, 1900, 0, 1000);
-    bgR.getXform().setSize(380, 200);
+    bgR.setElementPixelPositions(0, 1024, 0, 1024);
+    bgR.getXform().setSize(100, 100);
     bgR.getXform().setPosition(50, 35);
     bgR.addLight(this.mTheLight);
     this.mBg = new GameObject(bgR);

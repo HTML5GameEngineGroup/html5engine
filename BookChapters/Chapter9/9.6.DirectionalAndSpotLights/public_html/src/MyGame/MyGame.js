@@ -70,8 +70,8 @@ MyGame.prototype.initialize = function () {
 
     // the Background
     var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
-    bgR.setElementPixelPositions(0, 1900, 0, 1000);
-    bgR.getXform().setSize(380, 200);
+    bgR.setElementPixelPositions(0, 1024, 0, 1024);
+    bgR.getXform().setSize(100, 100);
     bgR.getXform().setPosition(50, 35);
     var i;
     for (i = 0; i < 4; i++) {

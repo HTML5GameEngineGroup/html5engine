@@ -60,8 +60,8 @@ MyGame.prototype.initialize = function () {
 
     // the Background
     var bgR = new LightRenderable(this.kBg);
-    bgR.setElementPixelPositions(0, 1900, 0, 1000);
-    bgR.getXform().setSize(380, 200);
+    bgR.setElementPixelPositions(0, 1024, 0, 1024);
+    bgR.getXform().setSize(100, 100);
     bgR.getXform().setPosition(50, 35);
     var i;
     for (i = 0; i < 4; i++) {
@@ -78,11 +78,11 @@ MyGame.prototype.initialize = function () {
     //      this.mHero.getRenderable().addLight(this.mGlobalLightSet.getLightAt(1)); 
     //      this.mHero.getRenderable().addLight(this.mGlobalLightSet.getLightAt(2)); 
 
-    this.mLMinion = new Minion(this.kMinionSprite, 30, 30);
+    this.mLMinion = new Minion(this.kMinionSprite, 17, 15);
     this.mLMinion.getRenderable().addLight(this.mGlobalLightSet.getLightAt(1));   // LMinion light
     this.mLMinion.getRenderable().addLight(this.mGlobalLightSet.getLightAt(3));   // center light
 
-    this.mRMinion = new Minion(this.kMinionSprite, 70, 30);
+    this.mRMinion = new Minion(this.kMinionSprite, 87, 15);
     this.mRMinion.getRenderable().addLight(this.mGlobalLightSet.getLightAt(2));   // RMinion light
     this.mRMinion.getRenderable().addLight(this.mGlobalLightSet.getLightAt(3));   // center light
 

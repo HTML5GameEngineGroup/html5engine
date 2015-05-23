@@ -49,7 +49,7 @@ MyGame.prototype.unloadScene = function () {
 MyGame.prototype.initialize = function () {
     // Step A: set up the cameras
     this.mCamera = new Camera(
-        vec2.fromValues(50, 37.5), // position of the camera
+        vec2.fromValues(50, 37.5),   // position of the camera
         100,                       // width of camera
         [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
     );
@@ -58,8 +58,8 @@ MyGame.prototype.initialize = function () {
 
     // Large background image
     var bgR = new SpriteRenderable(this.kBg);
-    bgR.setElementPixelPositions(0, 1900, 0, 1000);
-    bgR.getXform().setSize(380, 200);
+    bgR.setElementPixelPositions(0, 1024, 0, 1024);
+    bgR.getXform().setSize(150, 150);
     bgR.getXform().setPosition(50, 35);
     this.mBg = new GameObject(bgR);
 

@@ -58,8 +58,8 @@ MyGame.prototype.initialize = function () {
 
     // Large background image
     var bgR = new SpriteRenderable(this.kBg);
-    bgR.setElementPixelPositions(0, 1900, 0, 1000);
-    bgR.getXform().setSize(380, 200);
+    bgR.setElementPixelPositions(0, 1024, 0, 1024);
+    bgR.getXform().setSize(150, 150);
     bgR.getXform().setPosition(50, 35);
     this.mBg = new GameObject(bgR);
 

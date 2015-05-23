@@ -17,7 +17,6 @@ function Hero(spriteTexture, normalMap) {
     this.mDye = new IllumRenderable(spriteTexture, normalMap);
     this.mDye.setColor([1, 1, 1, 0]);
     this.mDye.getXform().setPosition(15, 50);
-    //this.mDye.getXform().setSize(9, 12);
     this.mDye.getXform().setSize(18, 24);
     this.mDye.setElementPixelPositions(0, 120, 0, 180);
     GameObject.call(this, this.mDye);

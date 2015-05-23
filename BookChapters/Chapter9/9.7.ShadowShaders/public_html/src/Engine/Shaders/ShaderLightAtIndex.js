@@ -39,8 +39,8 @@ ShaderLightAtIndex.prototype.loadToShader = function (aCamera, aLight) {
             var d = aCamera.wcDirToPixel(aLight.getDirection());
             gl.uniform3fv(this.mDirRef, vec3.fromValues(d[0], d[1], d[2]));
             if (aLight.getLightType() === Light.eLightType.eSpotLight) {
-                gl.uniform1f(this.mInnerRef, aLight.getInner());
-                gl.uniform1f(this.mOuterRef, aLight.getOuter());
+                gl.uniform1f(this.mInnerRef, Math.cos(0.5 * aLight.getInner())); // stores the cosine of half of inner cone angle
+                gl.uniform1f(this.mOuterRef, Math.cos(0.5 * aLight.getOuter())); // stores the cosine of half of outer cone angle
                 gl.uniform1f(this.mDropOffRef, aLight.getDropOff());
             }
         }
@@ -61,8 +61,8 @@ ShaderLightAtIndex.prototype._setShaderReferences = function (aLightShader, inde
     this.mDirRef = gl.getUniformLocation(aLightShader,       "uLights[" + index + "].Direction");
     this.mNearRef = gl.getUniformLocation(aLightShader,      "uLights[" + index + "].Near");
     this.mFarRef = gl.getUniformLocation(aLightShader,       "uLights[" + index + "].Far");
-    this.mInnerRef = gl.getUniformLocation(aLightShader,     "uLights[" + index + "].Inner");
-    this.mOuterRef = gl.getUniformLocation(aLightShader,     "uLights[" + index + "].Outer");
+    this.mInnerRef = gl.getUniformLocation(aLightShader,     "uLights[" + index + "].CosInner");
+    this.mOuterRef = gl.getUniformLocation(aLightShader,     "uLights[" + index + "].CosOuter");
     this.mIntensityRef = gl.getUniformLocation(aLightShader, "uLights[" + index + "].Intensity");
     this.mDropOffRef = gl.getUniformLocation(aLightShader,   "uLights[" + index + "].DropOff");
     this.mIsOnRef = gl.getUniformLocation(aLightShader,      "uLights[" + index + "].IsOn");

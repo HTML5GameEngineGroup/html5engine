@@ -58,8 +58,8 @@ struct Light  {
     vec4 Color;
     float Near;         // distance in pixel space
     float Far;
-    float Inner;        // cone angle in radian for spotlight
-    float Outer;        // cone angle in radian for spotlight
+    float CosInner;     // cosine of inner cone angle for spotlight
+    float CosOuter;     // cosine of outer cone angle for spotlight
     float Intensity;
     float DropOff;      // for spotlight only
     bool  IsOn;
@@ -74,16 +74,14 @@ varying vec2 vTexCoord;
 float AngularDropOff(Light lgt, vec3 lgtDir, vec3 L) {
     float atten = 0.0;
     float cosL = dot(lgtDir, L);
-    float cosOuter = cos(lgt.Outer * 0.5);  
-    float num = cosL - cosOuter;
-
+    float num = cosL - lgt.CosOuter;
     if (num > 0.0) {
-        float cosInner = cos(lgt.Inner * 0.5);  
-        float denom = cosInner - cosOuter;
-        if (denom <= 0.0) 
+        if (cosL > lgt.CosInner) 
             atten = 1.0;
-        else
-            atten = smoothstep(0.0, 1.0, pow(abs(num/denom), lgt.DropOff));
+        else {
+            float denom = lgt.CosInner - lgt.CosOuter;
+            atten = smoothstep(0.0, 1.0, pow(num/denom, lgt.DropOff));
+        }
     }
     return atten;
 }

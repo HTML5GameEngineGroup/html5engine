@@ -6,7 +6,7 @@
 /*jslint node: true, vars: true, white: true */
 /*global gEngine, Scene, GameObjectset, TextureObject, Camera, vec2,
   Renderable, FontRenderable, SpriteRenderable, LightRenderable, IllumRenderable,
-  ShadowCasterRenderable, ShadowReceiverRenderable, GameObject, Hero, Minion, Dye, Light */
+  ShadowCasterRenderable, ShadowReceiverRenderable, GameObject, TiledGameObject, Hero, Minion, Dye, Light */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -75,20 +75,19 @@ MyGame.prototype.initialize = function () {
     // the Background
     var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
     bgR.setElementPixelPositions(0, 1024, 0, 1024);
-    bgR.getXform().setSize(100, 100);
-    bgR.getXform().setPosition(50, 35);
+    bgR.getXform().setSize(30, 40);
+    bgR.getXform().setPosition(60, 70);
     var i; 
     for (i = 0; i < 4; i++) {
         bgR.addLight(this.mGlobalLightSet.getLightAt(i));   // all the lights
     }
-    this.mBg = new GameObject(bgR);
+    this.mBg = new TiledGameObject(bgR, this.mCamera);
 
     // 
     // the objects
     this.mIllumHero = new Hero(this.kMinionSprite, this.kMinionSpriteNormal, 20, 30);
     this.mLgtHero = new Hero(this.kMinionSprite, null, 60, 50);
     this.mIllumMinion = new Minion(this.kMinionSprite, this.kMinionSpriteNormal, 25, 30);
-    this.mIllumMinion.getXform().incSizeBy(20);
     this.mLgtMinion = new Minion(this.kMinionSprite, null, 65, 25);
     for (i = 0; i < 4; i++) {
         this.mIllumHero.getRenderable().addLight(this.mGlobalLightSet.getLightAt(i));
@@ -121,7 +120,7 @@ MyGame.prototype.initialize = function () {
     this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();
     this.mSelectedChMsg = "H:";
     
-    this._setupShadow();  // defined in MyGame_Shadow.js
+    this._setupShadow(bgR);  // defined in MyGame_Shadow.js
 };
 
 
@@ -132,9 +131,7 @@ MyGame.prototype.drawCamera = function (camera) {
     
     // always draw shadow first!
     this.mBgShadow.draw(camera);        // also draws the object
-    
     this.mMinionShadow.draw(camera);
-    
 
     this.mBlock1.draw(camera);
     this.mLgtMinion.draw(camera);

@@ -131,8 +131,10 @@ MyGame.prototype.drawCamera = function (camera) {
     // Step B: Now draws each primitive
     
     // always draw shadow first!
+    //this.mBg.draw(camera);
     this.mBgShadow.draw(camera);        // also draws the object
     
+    //this.mIllumMinion.draw(camera);
     this.mMinionShadow.draw(camera);
     
 

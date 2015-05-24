@@ -16,6 +16,12 @@ function Transform() {
     this.mRotationInRad = 0.0;              // in radians!
 }
 
+Transform.prototype.cloneTo = function (aXform) {
+    aXform.mPosition = vec2.clone(this.mPosition);
+    aXform.mScale = vec2.clone(this.mScale);
+    aXform.mZ = this.mZ;
+    aXform.mRotationInRad = this.mRotationInRad;
+};
 // <editor-fold desc="Public Methods">
 
 //<editor-fold desc="Setter/getter methods">

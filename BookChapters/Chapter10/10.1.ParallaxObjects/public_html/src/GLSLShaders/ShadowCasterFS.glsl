@@ -25,8 +25,8 @@ struct Light  {
     vec4 Color;
     float Near;
     float Far;
-    float Inner;    // cone angle for spotlight in radian
-    float Outer;    // cone angle for spotlight
+    float CosInner;    // Cosine of inner cone angle for spotlight
+    float CosOuter;    // Cosine of outer cone angle for spotlight
     float Intensity;
     float DropOff;  // for spotlight
     bool  IsOn;
@@ -38,20 +38,17 @@ uniform Light uLights[1];  // Exactly one light source, the one that is casting 
 // interpolated and thus varies. 
 varying vec2 vTexCoord;
 
-
 float AngularDropOff(vec3 lgtDir, vec3 L) {
     float atten = 0.0;
     float cosL = dot(lgtDir, L);
-    float cosOuter = cos(uLights[0].Outer * 0.5);  
-    float num = cosL - cosOuter;
-
+    float num = cosL - uLights[0].CosOuter;
     if (num > 0.0) {
-        float cosInner = cos(uLights[0].Inner * 0.5);  
-        float denom = cosInner - cosOuter;
-        if (denom <= 0.0) 
+        if (cosL > uLights[0].CosInner) 
             atten = 1.0;
-        else
+        else {
+            float denom = uLights[0].CosInner - uLights[0].CosOuter;
             atten = smoothstep(0.0, 1.0, pow(num/denom, uLights[0].DropOff));
+        }
     }
     return atten;
 }

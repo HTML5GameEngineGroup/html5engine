@@ -1,10 +1,10 @@
 /*
- * File: ShadowReceiverRenderable.js
- * ShadowReceiverRenderable support's stencil settings
+ * File: ShadowReceiver.js
+ * ShadowReceiver support's stencil settings
  */
 
 /*jslint node: true, vars: true, white: true */
-/*global ShadowReceiverRenderable, gEngine */
+/*global ShadowReceiver, gEngine */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -13,7 +13,7 @@
 * GL Stencil settings to support rendering to and checking of 
 * the stencil buffer
 */
-ShadowReceiverRenderable.prototype._shadowRecieverStencilOn = function () {
+ShadowReceiver.prototype._shadowRecieverStencilOn = function () {
         var gl = gEngine.Core.getGL();
         gl.clear(gl.STENCIL_BUFFER_BIT);
         gl.enable(gl.STENCIL_TEST);
@@ -24,7 +24,7 @@ ShadowReceiverRenderable.prototype._shadowRecieverStencilOn = function () {
         gl.stencilMask(this.kShadowStencilMask);
     };
     
-ShadowReceiverRenderable.prototype._shadowRecieverStencilOff = function () {
+ShadowReceiver.prototype._shadowRecieverStencilOff = function () {
     var gl = gEngine.Core.getGL();
     gl.depthMask(gl.TRUE);
     gl.stencilOp(gl.KEEP, gl.KEEP, gl.KEEP);
@@ -32,7 +32,7 @@ ShadowReceiverRenderable.prototype._shadowRecieverStencilOff = function () {
     gl.colorMask( true, true, true, true );
 };
     
-ShadowReceiverRenderable.prototype._shadowRecieverStencilDisable = function () {
+ShadowReceiver.prototype._shadowRecieverStencilDisable = function () {
     var gl = gEngine.Core.getGL();
     gl.disable(gl.STENCIL_TEST); 
 };

@@ -5,8 +5,8 @@
 
 /*jslint node: true, vars: true, white: true */
 /*global gEngine, Scene, GameObjectset, TextureObject, Camera, vec2,
-  Renderable, FontRenderable, SpriteRenderable, LightRenderable, IllumRenderable,
-  ShadowCasterRenderable, ShadowReceiverRenderable, GameObject, TiledGameObject, Hero, Minion, Dye, Light */
+  Renderable, TextureRenderable, FontRenderable, SpriteRenderable, LightRenderable, IllumRenderable,
+  GameObject, TiledGameObject, Hero, Minion, Dye, Light */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -16,10 +16,12 @@ function MyGame() {
     this.kMinionSpriteNormal = "assets/minion_sprite_normal.png";
     this.kBg = "assets/bg.png";
     this.kBgNormal = "assets/bg_normal.png";
+    this.kBgLayer1 = "assets/bg_layer1.png";
 
     // The camera to view the scene
     this.mCamera = null;
     this.mBg = null;
+    this.mBgL1 = null;
 
     this.mMsg = null;
     this.mMatMsg = null;
@@ -41,6 +43,7 @@ function MyGame() {
     
     // shadow support
     this.mBgShadow = null;
+    this.mBgShadow1 = null;
     this.mMinionShadow = null;
 }
 gEngine.Core.inheritPrototype(MyGame, Scene);
@@ -49,6 +52,7 @@ MyGame.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kMinionSprite);
     gEngine.Textures.loadTexture(this.kBg);
     gEngine.Textures.loadTexture(this.kBgNormal);
+    gEngine.Textures.loadTexture(this.kBgLayer1);
     gEngine.Textures.loadTexture(this.kMinionSpriteNormal);
 };
 
@@ -56,6 +60,7 @@ MyGame.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kMinionSprite);
     gEngine.Textures.unloadTexture(this.kBg);
     gEngine.Textures.unloadTexture(this.kBgNormal);
+    gEngine.Textures.unloadTexture(this.kBgLayer1);
     gEngine.Textures.unloadTexture(this.kMinionSpriteNormal);
 };
 
@@ -75,14 +80,25 @@ MyGame.prototype.initialize = function () {
     // the Background
     var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
     bgR.setElementPixelPositions(0, 1024, 0, 1024);
-    bgR.getXform().setSize(30, 40);
-    bgR.getXform().setPosition(60, 70);
+    bgR.getXform().setSize(150, 150);
+    bgR.getXform().setPosition(0, 0);
+    bgR.getXform().setZPos(-20);
     var i; 
     for (i = 0; i < 4; i++) {
         bgR.addLight(this.mGlobalLightSet.getLightAt(i));   // all the lights
     }
     this.mBg = new TiledGameObject(bgR, this.mCamera);
 
+    var bgR1 = new LightRenderable(this.kBgLayer1);
+    bgR1.getXform().setSize(90, 90);
+    bgR.getXform().setPosition(0, 0);
+    bgR.getXform().setZPos(-10);
+    for (i = 0; i < 4; i++) {
+        bgR1.addLight(this.mGlobalLightSet.getLightAt(i));   // all the lights
+    }
+    this.mBgL1 = new TiledGameObject(bgR1, this.mCamera);
+    this.mBgL1.setSpeed(0.1);
+    this.mBgL1.setCurrentFrontDir([-1, 0]);
     // 
     // the objects
     this.mIllumHero = new Hero(this.kMinionSprite, this.kMinionSpriteNormal, 20, 30);
@@ -120,7 +136,7 @@ MyGame.prototype.initialize = function () {
     this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();
     this.mSelectedChMsg = "H:";
     
-    this._setupShadow(bgR);  // defined in MyGame_Shadow.js
+    this._setupShadow();  // defined in MyGame_Shadow.js
 };
 
 
@@ -130,7 +146,9 @@ MyGame.prototype.drawCamera = function (camera) {
     // Step B: Now draws each primitive
     
     // always draw shadow first!
-    this.mBgShadow.draw(camera);        // also draws the object
+   //  this.mBgShadow.draw(camera);        // also draws the object
+   this.mBg.draw(camera);
+    this.mBgShadow1.draw(camera);
     this.mMinionShadow.draw(camera);
 
     this.mBlock1.draw(camera);
@@ -157,12 +175,16 @@ MyGame.prototype.draw = function () {
 // anything from this function!
 MyGame.prototype.update = function () {
     this.mCamera.update();  // to ensure proper interploated movement effects
+    
+    this.mBgL1.update();
 
     this.mIllumMinion.update(); // ensure sprite animation
     this.mLgtMinion.update();
 
     this.mIllumHero.update();  // allow keyboard control to move
 
+    this.mCamera.panWith(this.mIllumHero.getXform(), 0.9);
+    
     // control the selected light
     var msg = "L=" + this.mLgtIndex + " ";
     msg += this._lightControl();

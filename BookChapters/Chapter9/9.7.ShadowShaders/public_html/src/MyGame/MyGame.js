@@ -6,7 +6,7 @@
 /*jslint node: true, vars: true, white: true */
 /*global gEngine, Scene, GameObjectset, TextureObject, Camera, vec2,
   Renderable, FontRenderable, SpriteRenderable, LightRenderable, IllumRenderable,
-  ShadowCasterRenderable, ShadowReceiverRenderable, GameObject, Hero, Minion, Dye, Light */
+  GameObject, Hero, Minion, Dye, Light */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -132,7 +132,6 @@ MyGame.prototype.drawCamera = function (camera) {
     
     // always draw shadow first!
     this.mBgShadow.draw(camera);        // also draws the object
-    
     this.mMinionShadow.draw(camera);
     
 

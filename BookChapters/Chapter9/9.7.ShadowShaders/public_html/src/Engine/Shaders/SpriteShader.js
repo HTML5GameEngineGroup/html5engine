@@ -70,4 +70,14 @@ SpriteShader.prototype.cleanUp = function () {
     // now call super class's clean up ...
     SimpleShader.prototype.cleanUp.call(this);
 };
+
+// make sure these functions are defined, such that
+// this shader can support LightRenderable and IllumRenderable
+
+// will be override by LightShader
+SpriteShader.prototype.setLights = function (l) { };
+
+// will be override by IllumShader
+SpriteShader.prototype.setMaterialAndCameraPos = function(m, p) { };
+
 //</editor-fold>

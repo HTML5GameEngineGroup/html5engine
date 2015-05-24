@@ -50,12 +50,14 @@ TiledGameObject.prototype._drawTile = function(aCamera) {
     
     // top/bottom boundary
     if (top < wcBottom) {
-        dy = Math.ceil((wcBottom - top)/w) * w;
+        dy = Math.ceil((wcBottom - top)/h) * h;
     } else {
         if (bottom > wcBottom) {  // not touching the bottom
-            dy = -Math.ceil((bottom - wcBottom)/w) * w;
+            dy = -Math.ceil((bottom - wcBottom)/h) * h;
         }
     }
+    var sX = pos[0];
+    var sY = pos[1];
     xf.incXPosBy(dx);
     xf.incYPosBy(dy);
     right = pos[0] + (w/2);
@@ -76,6 +78,8 @@ TiledGameObject.prototype._drawTile = function(aCamera) {
         xf.incYPosBy(h);
         --ny;
     }
+    pos[0] = sX;
+    pos[1] = sY;
 };
 
 TiledGameObject.prototype.draw = function (aCamera) {

@@ -29,17 +29,23 @@ function PerRenderCache() {
 //      
 //  wcHeight = wcWidth * viewport[3]/viewport[2]
 //
-function Camera(wcCenter, wcWidth, viewportArray) {
+function Camera(wcCenter, wcWidth, viewportArray, bound) {
     // WC and viewport position and size
     this.mCameraState = new CameraState(wcCenter, wcWidth);
     this.mCameraShake = null;
 
-    this.mViewport = viewportArray;  // [x, y, width, height]
+    this.mViewport = [];  // [x, y, width, height]
+    this.mViewportBound = 0;
+    if (bound !== undefined) {
+        this.mViewportBound = bound;
+    }
+    this.mScissorBound = [];  // use for bounds
+    this.setViewport(viewportArray, this.mViewportBound);
     this.mNearPlane = 0;
     this.mFarPlane = 1000;
-
+    
     this.kCameraZ = 10;  // This is for illumination computation
-
+    
     // transformation matrices
     this.mViewMatrix = mat4.create();
     this.mProjMatrix = mat4.create();
@@ -77,8 +83,30 @@ Camera.prototype.setWCWidth = function (width) { this.mCameraState.setWidth(widt
 Camera.prototype.getWCWidth = function () { return this.mCameraState.getWidth(); };
 Camera.prototype.getWCHeight = function () { return this.mCameraState.getWidth() * this.mViewport[Camera.eViewport.eHeight] / this.mViewport[Camera.eViewport.eWidth]; };
                                                                                                         // viewportH/viewportW
-Camera.prototype.setViewport = function (viewportArray) { this.mViewport = viewportArray; };
-Camera.prototype.getViewport = function () { return this.mViewport; };
+
+Camera.prototype.setViewport = function (viewportArray, bound) {
+    if (bound === undefined) {
+        bound = this.mViewportBound;
+    }
+    // [x, y, width, height]
+    this.mViewport[0] = viewportArray[0] + bound;
+    this.mViewport[1] = viewportArray[1] + bound;
+    this.mViewport[2] = viewportArray[2] - (2 * bound);
+    this.mViewport[3] = viewportArray[3] - (2 * bound);
+    this.mScissorBound[0] = viewportArray[0];
+    this.mScissorBound[1] = viewportArray[1];
+    this.mScissorBound[2] = viewportArray[2];
+    this.mScissorBound[3] = viewportArray[3];
+};
+
+Camera.prototype.getViewport = function () {
+    var out = [];
+    out[0] = this.mScissorBound[0];
+    out[1] = this.mScissorBound[1];
+    out[2] = this.mScissorBound[2];
+    out[3] = this.mScissorBound[3];
+    return out; 
+};
 //</editor-fold>
 
 //<editor-fold desc="setter/getter of wc background color">
@@ -102,10 +130,10 @@ Camera.prototype.setupViewProjection = function () {
                 this.mViewport[2],  // width of the area to be drawn
                 this.mViewport[3]); // height of the area to be drawn
     // Step A2: set up the corresponding scissor area to limite clear area
-    gl.scissor(this.mViewport[0], // x position of bottom-left corner of the area to be drawn
-               this.mViewport[1], // y position of bottom-left corner of the area to be drawn
-               this.mViewport[2], // width of the area to be drawn
-               this.mViewport[3]);// height of the area to be drawn
+    gl.scissor(this.mScissorBound[0], // x position of bottom-left corner of the area to be drawn
+               this.mScissorBound[1], // y position of bottom-left corner of the area to be drawn
+               this.mScissorBound[2], // width of the area to be drawn
+               this.mScissorBound[3]);// height of the area to be drawn
     // Step A3: set the color to be clear to black
     gl.clearColor(this.mBgColor[0], this.mBgColor[1], this.mBgColor[2], this.mBgColor[3]);  // set the color to be cleared
     // Step A4: enable the scissor area, clear, and then disable the scissor area

@@ -51,9 +51,9 @@ MyGame.prototype.unloadScene = function () {
 MyGame.prototype.initialize = function () {
     // Step A: set up the cameras
     this.mCamera = new Camera(
-        vec2.fromValues(50, 26.6), // position of the camera
+        vec2.fromValues(50, 36), // position of the camera
         100,                       // width of camera
-        [0, 0, 640, 340]           // viewport (orgX, orgY, width, height)
+        [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
     );
     this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
@@ -61,13 +61,17 @@ MyGame.prototype.initialize = function () {
     this.mHeroCam = new Camera(
         vec2.fromValues(50, 30),    // will be updated at each cycle to point to hero
         20,
-        [0, 350, 150, 150]
+        [0, 330, 150, 150],
+        2                           // viewport bounds
     );
+    this.mHeroCam.setBackgroundColor([0.85, 0.8, 0.8, 1]);
     this.mBrainCam = new Camera(
         vec2.fromValues(50, 30),    // will be updated at each cycle to point to the brain
         10,
-        [500, 350, 150, 150]
+        [490, 330, 150, 150],
+        2                           // viewport bounds
     );
+    this.mBrainCam.setBackgroundColor([0.8, 0.8, 0.85, 1]);
     this.mBrainCam.configInterpolation(0.7, 10);
     // Large background image
     var bgR = new SpriteRenderable(this.kBg);
@@ -196,6 +200,7 @@ MyGame.prototype.update = function () {
     if (v[0] > 500) {
         v[0] = 0;
     }
+    this.mHeroCam.setViewport(v);
 
     this.mMsg.setText(msg + this.mChoice);
 };

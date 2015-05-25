@@ -20,6 +20,8 @@ function MyGame() {
 
     // The camera to view the scene
     this.mCamera = null;
+    this.mHeroCam = null;
+    
     this.mBg = null;
     this.mBgL1 = null;
 
@@ -42,9 +44,7 @@ function MyGame() {
     this.mLgtRotateTheta = 0;
     
     // shadow support
-    this.mBgShadow = null;
     this.mBgShadow1 = null;
-    this.mMinionShadow = null;
 }
 gEngine.Core.inheritPrototype(MyGame, Scene);
 
@@ -66,6 +66,13 @@ MyGame.prototype.unloadScene = function () {
 
 MyGame.prototype.initialize = function () {
     // Step A: set up the cameras
+    this.mHeroCam = new Camera(
+        vec2.fromValues(20, 30.5), // position of the camera
+        14,                       // width of camera
+        [0, 330, 150, 150]           // viewport (orgX, orgY, width, height)
+    );
+    this.mHeroCam.setBackgroundColor([0.2, 0.8, 0.2, 1]);
+    
     this.mCamera = new Camera(
         vec2.fromValues(50, 37.5), // position of the camera
         100,                       // width of camera
@@ -73,7 +80,7 @@ MyGame.prototype.initialize = function () {
     );
     this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
-
+    
     // the light
     this._initializeLights();   // defined in MyGame_Lights.js
 
@@ -81,22 +88,22 @@ MyGame.prototype.initialize = function () {
     var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
     bgR.setElementPixelPositions(0, 1024, 0, 1024);
     bgR.getXform().setSize(150, 150);
-    bgR.getXform().setPosition(0, 0);
+    bgR.getXform().setPosition(50, 35);
+    bgR.getMaterial().setSpecular([0.2, 0.1, 0.1, 1]);
+    bgR.getMaterial().setShinningness(50);
     bgR.getXform().setZPos(-20);
+    bgR.addLight(this.mGlobalLightSet.getLightAt(1));   // all the lights
+    this.mBg = new TiledGameObject(bgR);
+    
     var i; 
-    for (i = 0; i < 4; i++) {
-        bgR.addLight(this.mGlobalLightSet.getLightAt(i));   // all the lights
-    }
-    this.mBg = new TiledGameObject(bgR, this.mCamera);
-
     var bgR1 = new LightRenderable(this.kBgLayer1);
     bgR1.getXform().setSize(70, 70);
-    bgR.getXform().setPosition(0, 0);
-    bgR.getXform().setZPos(-10);
+    bgR1.getXform().setPosition(0, 0);
+    bgR1.getXform().setZPos(-10);
     for (i = 0; i < 4; i++) {
         bgR1.addLight(this.mGlobalLightSet.getLightAt(i));   // all the lights
     }
-    this.mBgL1 = new TiledGameObject(bgR1, this.mCamera);
+    this.mBgL1 = new TiledGameObject(bgR1);
     this.mBgL1.setSpeed(0.1);
     this.mBgL1.setCurrentFrontDir([-1, 0]);
     // 
@@ -146,13 +153,13 @@ MyGame.prototype.drawCamera = function (camera) {
     // Step B: Now draws each primitive
     
     // always draw shadow first!
-   //  this.mBgShadow.draw(camera);        // also draws the object
-   this.mBg.draw(camera);
+    //  this.mBgShadow.draw(camera);        // also draws the object
+    this.mBg.draw(camera);
     this.mBgShadow1.draw(camera);
-    this.mMinionShadow.draw(camera);
 
     this.mBlock1.draw(camera);
     this.mLgtMinion.draw(camera);
+    this.mIllumMinion.draw(camera);
     this.mIllumHero.draw(camera);
     this.mBlock2.draw(camera);  
     this.mLgtHero.draw(camera);
@@ -165,16 +172,19 @@ MyGame.prototype.draw = function () {
     // Step A: clear the canvas
     gEngine.Core.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
 
-    // Step  B: Draw with all three cameras
+    // Step  B: Draw with all cameras
     this.drawCamera(this.mCamera);
     this.mMsg.draw(this.mCamera);   // only draw status in the main camera
     this.mMatMsg.draw(this.mCamera);
+    
+    this.drawCamera(this.mHeroCam);
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGame.prototype.update = function () {
     this.mCamera.update();  // to ensure proper interploated movement effects
+    this.mHeroCam.update();
     
     this.mBgL1.update();
 
@@ -182,8 +192,15 @@ MyGame.prototype.update = function () {
     this.mLgtMinion.update();
 
     this.mIllumHero.update();  // allow keyboard control to move
+    this.mLgtHero.update();
 
-    this.mCamera.panWith(this.mIllumHero.getXform(), 0.7);
+    var xf = this.mIllumHero.getXform();
+    this.mCamera.panWith(xf, 0.7);
+    this.mGlobalLightSet.getLightAt(2).set2DPosition(xf.getPosition());
+    this.mHeroCam.setWCCenter(xf.getXPos(), xf.getYPos());
+        
+    this.mCamera.panWith(this.mLgtHero.getXform(), 0.7);
+    this.mGlobalLightSet.getLightAt(3).set2DPosition(this.mLgtHero.getXform().getPosition());
     
     // control the selected light
     var msg = "L=" + this.mLgtIndex + " ";

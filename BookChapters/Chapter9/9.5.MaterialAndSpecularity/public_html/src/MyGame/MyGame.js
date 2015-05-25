@@ -72,7 +72,7 @@ MyGame.prototype.initialize = function () {
     bgR.getXform().setSize(100, 100);
     bgR.getXform().setPosition(50, 35);
     // set background materal properties
-    bgR.getMaterial().setShinningness(10);
+    bgR.getMaterial().setShinningness(100);
     bgR.getMaterial().setSpecular([1, 0, 0, 1]);
     
     var i;

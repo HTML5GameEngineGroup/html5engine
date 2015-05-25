@@ -77,6 +77,7 @@ MyGame.prototype.initialize = function () {
     bgR.setElementPixelPositions(0, 1024, 0, 1024);
     bgR.getXform().setSize(100, 100);
     bgR.getXform().setPosition(50, 35);
+    bgR.getMaterial().setSpecular([1, 0, 0, 1]);
     var i; 
     for (i = 0; i < 4; i++) {
         bgR.addLight(this.mGlobalLightSet.getLightAt(i));   // all the lights

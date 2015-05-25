@@ -38,7 +38,7 @@ function Camera(wcCenter, wcWidth, viewportArray) {
     this.mNearPlane = 0;
     this.mFarPlane = 1000;
 
-    this.kCameraZ = 200;  // This is for illumination computation
+    this.kCameraZ = 10;  // This is for illumination computation
 
     // transformation matrices
     this.mViewMatrix = mat4.create();

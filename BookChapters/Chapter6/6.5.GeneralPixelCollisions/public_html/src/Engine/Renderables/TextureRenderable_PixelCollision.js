@@ -26,12 +26,12 @@ TextureRenderable.prototype.pixelTouches = function(other, wcTouchPos) {
     while ((!pixelTouch) && (xIndex < this.mTexWidth)) {
         yIndex = 0;
         while ((!pixelTouch) && (yIndex < this.mTexHeight)) {
-            if (this.pixelTouch(xIndex, yIndex) > 0) {
-                this.indexToWCPosition(wcTouchPos, xIndex, yIndex, xDir, yDir);
-                other.wcPositionToIndex(otherIndex, wcTouchPos, otherXDir, otherYDir);
+            if (this._pixelAlphaValue(xIndex, yIndex) > 0) {
+                this._indexToWCPosition(wcTouchPos, xIndex, yIndex, xDir, yDir);
+                other._wcPositionToIndex(otherIndex, wcTouchPos, otherXDir, otherYDir);
                 if ((otherIndex[0] > 0) && (otherIndex[0] < other.mTexWidth) &&
                     (otherIndex[1] > 0) && (otherIndex[1] < other.mTexHeight)) {
-                    pixelTouch = other.pixelTouch(otherIndex[0], otherIndex[1]) > 0;
+                    pixelTouch = other._pixelAlphaValue(otherIndex[0], otherIndex[1]) > 0;
                 }
             }
             yIndex++;
@@ -47,13 +47,13 @@ TextureRenderable.prototype.setColorArray = function () {
     }
 };
 
-TextureRenderable.prototype.pixelTouch = function (x, y) {
+TextureRenderable.prototype._pixelAlphaValue = function (x, y) {
     x = x * 4;
     y = y * 4;
     return this.mColorArray[(y * this.mTextureInfo.mWidth) + x  + 3];
 };
 
-TextureRenderable.prototype.wcPositionToIndex = function (returnIndex, wcPos, xDir, yDir) {
+TextureRenderable.prototype._wcPositionToIndex = function (returnIndex, wcPos, xDir, yDir) {
     // use wcPos to compute the corresponding returnIndex[0 and 1]
     var delta = [];
     vec2.sub(delta, wcPos, this.mXform.getPosition());
@@ -62,7 +62,7 @@ TextureRenderable.prototype.wcPositionToIndex = function (returnIndex, wcPos, xD
     returnIndex[0] = this.mTexWidth  * (xDisp / this.mXform.getWidth());
     returnIndex[1] = this.mTexHeight * (yDisp / this.mXform.getHeight());
 
-    // recall that xForm.getPosition() returns lower-left corner, yet
+    // recall that xForm.getPosition() returns center, yet
     // Texture origin is at lower-left corner!
     returnIndex[0] += this.mTexWidth / 2;
     returnIndex[1] += this.mTexHeight / 2;
@@ -71,7 +71,7 @@ TextureRenderable.prototype.wcPositionToIndex = function (returnIndex, wcPos, xD
     returnIndex[1] = Math.floor(returnIndex[1]);
 };
 
-TextureRenderable.prototype.indexToWCPosition = function (returnWCPos, i, j, xDir, yDir) {
+TextureRenderable.prototype._indexToWCPosition = function (returnWCPos, i, j, xDir, yDir) {
     var x = i * this.mXform.getWidth() / (this.mTexWidth - 1);
     var y = j * this.mXform.getHeight() / (this.mTexHeight - 1);
     var xDisp = x - (this.mXform.getWidth() * 0.5);

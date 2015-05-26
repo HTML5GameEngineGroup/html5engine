@@ -14,6 +14,18 @@ function TextureRenderable(myTexture) {
     Renderable.call(this);
     Renderable.prototype.setColor.call(this, [1, 1, 1, 0]); // Alpha of 0: switch off tinting of texture
     Renderable.prototype._setShader.call(this, gEngine.DefaultResources.getTextureShader());
+
+    this.mTexture = null;
+    // these two instance variables are to cache texture information
+    // for supporting per-pixel accurate collision
+    this.mTextureInfo = null;
+    this.mColorArray = null;
+    // defined for subclass to override
+    this.mTexWidth = 0;
+    this.mTexHeight = 0;
+    this.mTexLeftIndex = 0;
+    this.mTexBottomIndex = 0;
+
     this.setTexture(myTexture);     // texture for this object, cannot be a "null"
 }
 gEngine.Core.inheritPrototype(TextureRenderable, Renderable);

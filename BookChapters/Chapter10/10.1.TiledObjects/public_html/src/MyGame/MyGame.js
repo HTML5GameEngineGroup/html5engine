@@ -16,7 +16,8 @@ function MyGame() {
     this.kMinionSpriteNormal = "assets/minion_sprite_normal.png";
     this.kBg = "assets/bg.png";
     this.kBgNormal = "assets/bg_normal.png";
-    this.kBgLayer1 = "assets/bg_layer1.png";
+    this.kBgLayer = "assets/bgLayer.png";
+    this.kBgLayerNormal = "assets/bgLayer_normal.png";
 
     // The camera to view the scene
     this.mCamera = null;
@@ -52,7 +53,8 @@ MyGame.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kMinionSprite);
     gEngine.Textures.loadTexture(this.kBg);
     gEngine.Textures.loadTexture(this.kBgNormal);
-    gEngine.Textures.loadTexture(this.kBgLayer1);
+    gEngine.Textures.loadTexture(this.kBgLayer);
+    gEngine.Textures.loadTexture(this.kBgLayerNormal);
     gEngine.Textures.loadTexture(this.kMinionSpriteNormal);
 };
 
@@ -60,7 +62,8 @@ MyGame.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kMinionSprite);
     gEngine.Textures.unloadTexture(this.kBg);
     gEngine.Textures.unloadTexture(this.kBgNormal);
-    gEngine.Textures.unloadTexture(this.kBgLayer1);
+    gEngine.Textures.unloadTexture(this.kBgLayer);
+    gEngine.Textures.unloadTexture(this.kBgLayerNormal);
     gEngine.Textures.unloadTexture(this.kMinionSpriteNormal);
 };
 
@@ -88,24 +91,26 @@ MyGame.prototype.initialize = function () {
     // the Background
     var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
     bgR.setElementPixelPositions(0, 1024, 0, 1024);
-    bgR.getXform().setSize(150, 150);
-    bgR.getXform().setPosition(50, 35);
+    bgR.getXform().setSize(50, 50);
+    bgR.getXform().setPosition(0, 0);
     bgR.getMaterial().setSpecular([0.2, 0.1, 0.1, 1]);
     bgR.getMaterial().setShinningness(50);
     bgR.getXform().setZPos(-20);
-    bgR.addLight(this.mGlobalLightSet.getLightAt(1));   // all the lights
+    bgR.addLight(this.mGlobalLightSet.getLightAt(1));   // only the directional light
     this.mBg = new TiledGameObject(bgR);
     
     var i; 
-    var bgR1 = new LightRenderable(this.kBgLayer1);
-    bgR1.getXform().setSize(70, 70);
+    var bgR1 = new IllumRenderable(this.kBgLayer, this.kBgLayerNormal);
+    bgR1.getXform().setSize(50, 50);
     bgR1.getXform().setPosition(0, 0);
     bgR1.getXform().setZPos(-10);
     for (i = 0; i < 4; i++) {
         bgR1.addLight(this.mGlobalLightSet.getLightAt(i));   // all the lights
     }
+    bgR1.getMaterial().setSpecular([0.2, 0.2, 0.5, 1]);
+    bgR1.getMaterial().setShinningness(10);
     this.mBgL1 = new TiledGameObject(bgR1);
-    this.mBgL1.setSpeed(0.1);
+    //this.mBgL1.setSpeed(0.1);
     this.mBgL1.setCurrentFrontDir([-1, 0]);
     // 
     // the objects

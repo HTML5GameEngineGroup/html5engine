@@ -27,15 +27,12 @@ GameObject.prototype.pixelTouches = function (otherObj, wcTouchPos) {
                 pixelTouch = myRen.pixelTouches(otherRen, wcTouchPos);
             }
         } else {
-            // One of both are rotated ... use radius ... be conservative
-            // Use the larger of the Width/Height and approx radius
-            //   Sqrt(1/2)*x Approx = 0.71f * x;
+            // One of both are rotated, compute an encompassing circle
+            // by using the hypotenuse as radius
             var mySize = myRen.getXform().getSize();
             var otherSize = otherRen.getXform().getSize();
-            // otherwise, use simple distance
-            // Sqrt(0.5) approx = 0.71
-            var myR = 0.71 * Math.max(mySize[0], mySize[1]);
-            var otherR = 0.71 * Math.max(otherSize[0], otherSize[1]);
+            var myR = Math.sqrt(0.5*mySize[0]*0.5*mySize[0] + 0.5*mySize[1]*0.5*mySize[1]);
+            var otherR = Math.sqrt(0.5*otherSize[0]*0.5*otherSize[0] + 0.5*otherSize[1]*0.5*otherSize[1]);
             var d = [];
             vec2.sub(d, myRen.getXform().getPosition(), otherRen.getXform().getPosition());
             if (vec2.length(d) < (myR + otherR)) {

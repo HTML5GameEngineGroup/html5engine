@@ -60,6 +60,7 @@ SpriteAnimateRenderable.prototype._setSpriteElement = function () {
                                         this.mElmTop - this.mElmHeight, this.mElmTop);
 };
 
+
 //<editor-fold desc="Public Methods">
 //**-----------------------------------------
 // Public methods

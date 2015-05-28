@@ -50,8 +50,8 @@ MyGame.prototype.initialize = function () {
     this.mDyePack = new DyePack(this.kMinionSprite);
     this.mDyePack.setVisibility(false);
 
-    this.mCollector = new TextureObject(this.kMinionCollector, 70, 30, 30, 30);
-    this.mPortal = new TextureObject(this.kMinionPortal, 50, 30, 10, 10);
+    this.mCollector = new TextureObject(this.kMinionCollector, 50, 30, 30, 30);
+    this.mPortal = new TextureObject(this.kMinionPortal, 70, 30, 10, 10);
 
     this.mMsg = new FontRenderable("Status Message");
     this.mMsg.setColor([0, 0, 0, 1]);
@@ -69,8 +69,8 @@ MyGame.prototype.draw = function () {
     this.mCamera.setupViewProjection();
 
     // Step  C: Draw everything
-    this.mPortal.draw(this.mCamera);
     this.mCollector.draw(this.mCamera);
+    this.mPortal.draw(this.mCamera);
     this.mDyePack.draw(this.mCamera);
     this.mMsg.draw(this.mCamera);
 };
@@ -80,14 +80,14 @@ MyGame.prototype.draw = function () {
 MyGame.prototype.update = function () {
     var msg = "No Collision";
 
-    this.mPortal.update(gEngine.Input.keys.W, gEngine.Input.keys.S,
+    this.mCollector.update(gEngine.Input.keys.W, gEngine.Input.keys.S,
         gEngine.Input.keys.A, gEngine.Input.keys.D);
-    this.mCollector.update(gEngine.Input.keys.Up, gEngine.Input.keys.Down,
+    this.mPortal.update(gEngine.Input.keys.Up, gEngine.Input.keys.Down,
         gEngine.Input.keys.Left, gEngine.Input.keys.Right);
 
     var h = [];
 
-    // Portal's resultion is 1/16 that of Collector!
+    // Portal's resolution is 1/16 x 1/16 that of Collector!
     // if (this.mCollector.pixelTouches(this.mPortal, h)) {  // <-- VERY EXPENSIVE!!
     if (this.mPortal.pixelTouches(this.mCollector, h)) {
         msg = "Collided!: (" + h[0].toPrecision(4) + " " + h[1].toPrecision(4) + ")";

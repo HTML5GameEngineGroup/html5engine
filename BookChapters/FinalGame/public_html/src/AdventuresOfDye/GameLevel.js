@@ -13,6 +13,8 @@ function GameLevel(level) {
     this.kMinionSprite = "assets/minion_sprite.png";
     this.kPlatform = "assets/platform.png";
     this.kPlatformNormal = "assets/platform_normal.png";
+    this.kWall = "assets/wall.png";
+    this.kWallNormal = "assets/wall_normal.png";
     
     // specifics to the level
     this.kLevelFile = "assets/" + level + "/" + level + ".xml";  // e.g., assets/Level1/Level1.xml
@@ -20,8 +22,6 @@ function GameLevel(level) {
     this.kBgNormal = "assets/" + level + "/bg_normal.png";
     this.kBgLayer = "assets/" + level + "/bgLayer.png";
     this.kBgLayerNormal = "assets/" + level + "/bgLayer_normal.png";
-    this.kWall = "assets/" + level + "/wall.png";
-    this.kWallNormal = "assets/" + level + "/wall_normal.png";
 
     // The camera to view the scene
     this.mCamera = null;

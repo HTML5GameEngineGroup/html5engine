@@ -10,10 +10,10 @@
 
 
 Camera.prototype._mouseDCX = function () {
-    return gEngine.Input.mousePosX() - this.mViewport[Camera.eViewport.eOrgX];
+    return gEngine.Input.getMousePosX() - this.mViewport[Camera.eViewport.eOrgX];
 };
 Camera.prototype._mouseDCY = function () {
-    return gEngine.Input.mousePosY() - this.mViewport[Camera.eViewport.eOrgY];
+    return gEngine.Input.getMousePosY() - this.mViewport[Camera.eViewport.eOrgY];
 };
 
 Camera.prototype.isMouseInViewport = function () {

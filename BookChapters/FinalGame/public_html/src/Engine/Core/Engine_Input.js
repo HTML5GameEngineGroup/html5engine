@@ -182,8 +182,8 @@ gEngine.Input = (function () {
     var isButtonClicked = function (button) {
         return mIsButtonClicked[button];
     };
-    var mousePosX = function () { return mMousePosX; };
-    var mousePosY = function () { return mMousePosY; };
+    var getMousePosX = function () { return mMousePosX; };
+    var getMousePosY = function () { return mMousePosY; };
 
     var mPublic = {
         initialize: initialize,
@@ -197,8 +197,8 @@ gEngine.Input = (function () {
         // Mouse support
         isButtonPressed: isButtonPressed,
         isButtonClicked: isButtonClicked,
-        mousePosX: mousePosX,       // invalid if no corresponding buttonPressed or buttonClicked
-        mousePosY: mousePosY,
+        getMousePosX: getMousePosX,       // invalid if no corresponding buttonPressed or buttonClicked
+        getMousePosY: getMousePosY,
         mouseButton: kMouseButton
     };
     return mPublic;

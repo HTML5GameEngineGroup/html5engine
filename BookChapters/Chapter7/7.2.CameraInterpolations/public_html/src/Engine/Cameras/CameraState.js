@@ -11,7 +11,7 @@
 //
 function CameraState(center, width) {
     this.kCycles = 300;  // number of cycles to complete the transition
-    this.kRate = 0.1;  // rate of change for each cycle
+    this.kRate = 0.1;    // rate of change for each cycle
     this.mCenter = new InterpolateVec2(center, this.kCycles, this.kRate);
     this.mWidth = new Interpolate(width, this.kCycles, this.kRate);
 }

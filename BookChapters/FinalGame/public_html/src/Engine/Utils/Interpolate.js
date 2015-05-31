@@ -13,29 +13,29 @@
 // cycles: integer, how many cycle it should take for a value to change to final
 // rate: the rate at which the value should change at each cycle
 function Interpolate(value, cycles, rate) {
-    this.mCurrentValue = value;    // begine value of interpolation
+    this.mCurrentValue = value;    // begin value of interpolation
     this.mFinalValue = value;      // final value of interpolation
     this.mCycles = cycles;
     this.mRate = rate;
 
-    // if there is a new value to interpolate to, these are the currnet state
-    this.mCurrentCycle = 0;
+    // if there is a new value to interpolate to, number of cycles left for interpolation
+    this.mCyclesLeft = 0;
 }
 
 // <editor-fold desc="Public Methods">
 Interpolate.prototype.getValue = function () { return this.mCurrentValue; };
 Interpolate.prototype.setFinalValue = function (v) {
     this.mFinalValue = v;
-    this.mCurrentCycle = this.mCycles;     // will trigger interpolation
+    this.mCyclesLeft = this.mCycles;     // will trigger interpolation
 };
 
 Interpolate.prototype.updateInterpolation = function () {
-    if (this.mCurrentCycle <= 0) {
+    if (this.mCyclesLeft <= 0) {
         return;
     }
 
-    this.mCurrentCycle--;
-    if (this.mCurrentCycle === 0) {
+    this.mCyclesLeft--;
+    if (this.mCyclesLeft === 0) {
         this.mCurrentValue = this.mFinalValue;
     } else {
         this._interpolateValue();

@@ -187,14 +187,14 @@ MyGame.prototype.update = function () {
     this.mCamera.panWith(this.mHero.getXform(), 0.9);
 
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Q)) {
-        this.mCamera.Shake(-2, -2, 20, 30);
+        this.mCamera.shake(-2, -2, 20, 30);
     }
 
     // set the hero and brain cams    
     this.mHeroCam.panTo(this.mHero.getXform().getXPos(), this.mHero.getXform().getYPos());
     this.mBrainCam.panTo(this.mBrain.getXform().getXPos(), this.mBrain.getXform().getYPos());
 
-    // Move the hero cam viewport just to show we can
+    // Move the hero cam viewport just to show it is possible
     var v = this.mHeroCam.getViewport();
     v[0] += 1;
     if (v[0] > 500) {

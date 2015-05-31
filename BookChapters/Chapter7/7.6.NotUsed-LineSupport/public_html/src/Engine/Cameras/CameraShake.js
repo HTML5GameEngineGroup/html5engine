@@ -1,6 +1,6 @@
 /* 
  * File: CameraShake.js
- * Defines a dampped simple harmonic motion to simulate camera shakie
+ * Defines a damped simple harmonic motion to simulate camera shakie
  */
 
 /*jslint node: true, vars: true, bitwise: true */
@@ -10,7 +10,7 @@
 
 //
 ////
-// dampped simple harmonic shake motion
+// damped simple harmonic shake motion
 //
 // state is the CameraState to be shaked.
 function CameraShake(state, xDelta, yDelta, shakeFrequency, shakeDuration) {

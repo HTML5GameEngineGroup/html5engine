@@ -183,7 +183,7 @@ MyGame.prototype.update = function () {
     this.mCamera.panWith(this.mHero.getXform(), 0.9);
 
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Q)) {
-        this.mCamera.Shake(-2, -2, 20, 30);
+        this.mCamera.shake(-2, -2, 20, 30);
     }
 
     // set the hero and brain cams    
@@ -214,6 +214,6 @@ MyGame.prototype.update = function () {
         this.mPortal.setVisibility(true);
     }
 
-    msg += " X=" + gEngine.Input.mousePosX() + " Y=" + gEngine.Input.mousePosY();
+    msg += " X=" + gEngine.Input.getMousePosX() + " Y=" + gEngine.Input.getMousePosY();
     this.mMsg.setText(msg);
 };

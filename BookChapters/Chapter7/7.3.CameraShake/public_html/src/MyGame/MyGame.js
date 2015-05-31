@@ -163,7 +163,7 @@ MyGame.prototype.update = function () {
     this.mCamera.panWith(this.mHero.getXform(), 0.9);
 
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Q)) {
-        this.mCamera.Shake(-2, -2, 20, 30);
+        this.mCamera.shake(-2, -2, 20, 30);
     }
 
     this.mMsg.setText(msg + this.mChoice);

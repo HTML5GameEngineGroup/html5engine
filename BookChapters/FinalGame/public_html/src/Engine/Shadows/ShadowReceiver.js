@@ -57,6 +57,8 @@ ShadowReceiver.prototype.draw = function (aCamera) {
     this._shadowRecieverStencilDisable();
 };
 
-// to support LayerManager's updateLayer call
-ShadowReceiver.prototype.update = function () {};
+// 
+ShadowReceiver.prototype.update = function () {
+    this.mReceiver.update();
+};
 // </editor-fold>

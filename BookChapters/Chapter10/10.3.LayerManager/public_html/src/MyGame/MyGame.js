@@ -59,6 +59,8 @@ MyGame.prototype.loadScene = function () {
 };
 
 MyGame.prototype.unloadScene = function () {
+    gEngine.LayerManager.cleanUp();
+    
     gEngine.Textures.unloadTexture(this.kMinionSprite);
     gEngine.Textures.unloadTexture(this.kBg);
     gEngine.Textures.unloadTexture(this.kBgNormal);
@@ -186,7 +188,6 @@ MyGame.prototype.update = function () {
     this.mCamera.update();  // to ensure proper interploated movement effects
     this.mHeroCam.update();
 
-    this.mBgL1.update();  // not in the layer manager directly!
     gEngine.LayerManager.updateAllLayers();
     
     var xf = this.mIllumHero.getXform();

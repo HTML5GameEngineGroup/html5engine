@@ -35,6 +35,10 @@ gEngine.LayerManager = (function () {
         mAllLayers[gEngine.eLayer.eHUD] = new GameObjectSet();
     };
     
+    var cleanUp = function() {
+        initialize();
+    };
+    
     var drawAllLayers = function(aCamera) {
         var i;
         for (i=0; i<kNumLayers; i++) {
@@ -57,9 +61,14 @@ gEngine.LayerManager = (function () {
     var updateLayer = function(layerEnum) {
         mAllLayers[layerEnum].update();
     };
-    
     var addToLayer = function(layerEnum, obj) {
         mAllLayers[layerEnum].addToSet(obj);
+    };
+    var addAsShadowCaster = function(obj) {
+        var i;
+        for (i = 0; i<mAllLayers[gEngine.eLayer.eShadowReceiver].size(); i++) {
+            mAllLayers[gEngine.eLayer.eShadowReceiver].getObjectAt(i).addShadowCaster(obj);
+        }
     };
     var removeFromLayer = function(layerEnum, obj) {
         mAllLayers[layerEnum].removeFromSet(obj);
@@ -75,10 +84,12 @@ gEngine.LayerManager = (function () {
       initialize: initialize,
       drawAllLayers: drawAllLayers,
       updateAllLayers: updateAllLayers,
+      cleanUp: cleanUp,
       
       drawLayer: drawLayer,
       updateLayer: updateLayer,
       addToLayer: addToLayer,
+      addAsShadowCaster: addAsShadowCaster,
       removeFromLayer: removeFromLayer,
       drawLastInLayer: drawLastInLayer,
       layerSize: layerSize

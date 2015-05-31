@@ -174,6 +174,6 @@ void main(void)  {
     vec3 tintResult = vec3(shadedResult) * (1.0-uPixelColor.a) + vec3(uPixelColor) * uPixelColor.a;
     vec4 result = vec4(tintResult, shadedResult.a);
 
-     gl_FragColor = result; 
+    gl_FragColor = result;
 }
         

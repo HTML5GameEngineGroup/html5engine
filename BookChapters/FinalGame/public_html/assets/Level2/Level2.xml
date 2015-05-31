@@ -1,5 +1,5 @@
 <MyGameLevel>
-<!-- Level 1 scene file -->
+<!-- Level 2 scene file -->
 
 <!--  *** be careful!! comma (,) is not a supported syntax!!  -->
 <!--  make sure there are no comma in between attributes -->
@@ -7,7 +7,7 @@
 <!--  notice the "comma" between PosX and PosY: Syntax error! -->
   
     <!-- cameras -->
-	<!-- WC for level 1 is:  -->
+	<!-- WC for level 2 is -->
                 <!-- Viewport: x, y, w, h -->
     <Camera CenterX="6" CenterY="12" Width="32" 
           Viewport="0 0 1280 720"   
@@ -28,8 +28,6 @@
     <!-- Platforms -->
     <Platform PosX="10" PosY="10" Velocity="0 0 0" MovementRange="0" />
     <Platform PosX="10" PosY="5" Velocity="0 0 0" MovementRange="0" />
-    <Platform PosX="25" PosY="7.5" Velocity="1 0 0" MovementRange="5" />
-    <Platform PosX="25" PosY="12.5" Velocity="-1 1 0" MovementRange="6" />
     
     <!-- Walls -->
     <Wall PosX="15" PosY="2.5" />
@@ -39,9 +37,9 @@
     <Wall PosX="15" PosY="22.5" />
        
    <!-- next level -->
-   <NextLevel Next="Level2">
-        <!-- a fold assets/Level2 must exist
-             a file assets/Level2/Level2.xml must exist!
+   <NextLevel Next="Level1">
+        <!-- a fold assets/Level1 must exist
+             a file assets/Level1/Level1.xml must exist!
              -> GameLevel.js: initialize() makes these assumptions
         -->
    

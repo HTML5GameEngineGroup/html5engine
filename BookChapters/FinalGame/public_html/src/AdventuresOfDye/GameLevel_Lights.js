@@ -1,13 +1,13 @@
 /*
- * File: MyGame_Lights: support the creation of light for MyGame
+ * File: GameLevel_Lights: support the creation of light for GameLevel
  */
 /*jslint node: true, vars: true */
-/*global gEngine, MyGame, Light, LightSet */
+/*global gEngine, GameLevel, Light, LightSet */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-MyGame.prototype._createALight = function (type, pos, dir, color, n, f, inner, outer, intensity, dropOff) {
+GameLevel.prototype._createALight = function (type, pos, dir, color, n, f, inner, outer, intensity, dropOff) {
     var light = new Light();
     light.setLightType(type);
     light.setColor(color);
@@ -26,7 +26,7 @@ MyGame.prototype._createALight = function (type, pos, dir, color, n, f, inner, o
     return light;
 };
 
-MyGame.prototype._initializeLights = function () {
+GameLevel.prototype._initializeLights = function () {
     this.mGlobalLightSet = new LightSet();
 
     var l = this._createALight(Light.eLightType.ePointLight,

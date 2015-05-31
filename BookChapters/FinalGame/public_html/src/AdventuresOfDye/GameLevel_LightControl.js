@@ -1,14 +1,14 @@
 /*
- * File: MyGame_lightControl: support UI manipulation of light parameters
+ * File: GameLevel_lightControl: support UI manipulation of light parameters
  */
 
 /*jslint node: true, vars: true */
-/*global gEngine, MyGame, vec3, Light */
+/*global gEngine, GameLevel, vec3, Light */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-MyGame.prototype._lightControl = function () {
+GameLevel.prototype._lightControl = function () {
     var dirDelta = 0.005;
     var delta = 0.2;
     var msg = "";
@@ -108,7 +108,7 @@ MyGame.prototype._lightControl = function () {
     return msg;
 };
 
-MyGame.prototype._selectLight = function () {
+GameLevel.prototype._selectLight = function () {
     // select which light to work with
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Zero)) {
         this.mLgtIndex = 0;
@@ -124,6 +124,6 @@ MyGame.prototype._selectLight = function () {
     }
 };
 
-MyGame.prototype._printVec3 = function (msg, p) {
+GameLevel.prototype._printVec3 = function (msg, p) {
     return msg + "(" + p[0].toPrecision(2) + " " + p[1].toPrecision(2) + " " + p[2].toPrecision(2) + ") ";
 };

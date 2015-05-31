@@ -1,13 +1,13 @@
 /*
- * File: MyGame_MaterialControl: support UI manipulation of material parameters
+ * File: GameLevel_MaterialControl: support UI manipulation of material parameters
  */
 /*jslint node: true, vars: true */
-/*global gEngine, MyGame, Material */
+/*global gEngine, GameLevel, Material */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-MyGame.prototype.materialControl = function () {
+GameLevel.prototype.materialControl = function () {
     var delta = 0.01;
     var msg = "";
 
@@ -51,7 +51,7 @@ MyGame.prototype.materialControl = function () {
     return msg;
 };
 
-MyGame.prototype._selectMaterialChannel = function () {
+GameLevel.prototype._selectMaterialChannel = function () {
     // select which character to work with
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Seven)) {
         this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getAmbient();

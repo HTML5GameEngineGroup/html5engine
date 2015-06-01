@@ -43,7 +43,7 @@ MyGame.prototype.initialize = function () {
     this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
             // 
-    // Step B: The dye pack: simple another GameObject
+    // Step B: The dye pack: simply another GameObject
     this.mDyePack = new DyePack(this.kMinionSprite);
 
     // Step C: A set of Minions

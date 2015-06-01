@@ -87,7 +87,7 @@ MyGame.prototype.update = function () {
 
     switch (this.mMode) {
     case 'H':
-        this.mBrain.update();  // player drive with arrow keys
+        this.mBrain.update();  // player steers with arrow keys
         break;
     case 'K':
         rate = 0.02;    // graduate rate

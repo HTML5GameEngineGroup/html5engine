@@ -27,7 +27,7 @@ GameObject.prototype.pixelTouches = function (otherObj, wcTouchPos) {
                 pixelTouch = myRen.pixelTouches(otherRen, wcTouchPos);
             }
         } else {
-            // One of both are rotated, compute an encompassing circle
+            // One or both are rotated, compute an encompassing circle
             // by using the hypotenuse as radius
             var mySize = myRen.getXform().getSize();
             var otherSize = otherRen.getXform().getSize();

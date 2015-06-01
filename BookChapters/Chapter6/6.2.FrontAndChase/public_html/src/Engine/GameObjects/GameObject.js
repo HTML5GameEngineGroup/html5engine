@@ -43,7 +43,7 @@ GameObject.prototype.rotateObjPointTo = function (p, rate) {
     var fdir = this.getCurrentFrontDir();
     var cosTheta = vec2.dot(dir, fdir);
 
-    if (cosTheta > 0.999999) { // pointing very close to exactly 
+    if (cosTheta > 0.999999) { // almost exactly the same direction
         return;
     }
 
@@ -56,7 +56,7 @@ GameObject.prototype.rotateObjPointTo = function (p, rate) {
         }
     }
 
-    // now compute if rotate towards the left, or right
+    // now compute if rotate clockwise, or counterclockwise
     var dir3d = vec3.fromValues(dir[0], dir[1], 0);
     var f3d = vec3.fromValues(fdir[0], fdir[1], 0);
     var r3d = [];

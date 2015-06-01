@@ -13,8 +13,8 @@
           Viewport="0 0 1280 720"   
           BgColor="0 0 1 1.0"
           />    
-	
-	<Background PosX="0" PosY="0" Width="10" Height="10" ZPos="-20" ParallaxDepth="100" 
+
+    <Background PosX="0" PosY="0" Width="10" Height="10" ZPos="-20" ParallaxDepth="100" 
         LightIndices="0"
         ReceiveShadow="false"
 		Texture="bg.png" NormalMap="bg_normal.png" />
@@ -29,7 +29,7 @@
     <Platform PosX="10" PosY="10" Velocity="0 0 0" MovementRange="0" />
     <Platform PosX="10" PosY="5" Velocity="0 0 0" MovementRange="0" />
     <Platform PosX="25" PosY="7.5" Velocity="1 0 0" MovementRange="5" />
-    <Platform PosX="25" PosY="12.5" Velocity="-1 1 0" MovementRange="6" />
+    <Platform PosX="25" PosY="12.5" Velocity="-1 1 0" MovementRange="2" />
     
     <!-- Walls -->
     <Wall PosX="15" PosY="2.5" />

@@ -111,7 +111,7 @@ gEngine.Textures = (function () {
     var getColorArray = function (textureName) {
         var texInfo = getTextureInfo(textureName);
         if (texInfo.mColorArray === null) {
-            // create a framebuffer binds it to the texture, and reads the color content
+            // create a framebuffer bind it to the texture, and read the color content
             // Hint from: http://stackoverflow.com/questions/13626606/read-pixels-from-a-webgl-texture 
             var gl = gEngine.Core.getGL();
             var fb = gl.createFramebuffer();

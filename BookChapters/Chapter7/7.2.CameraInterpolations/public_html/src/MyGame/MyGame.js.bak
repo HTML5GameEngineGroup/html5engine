@@ -102,6 +102,8 @@ MyGame.prototype.update = function () {
     var zoomDelta = 0.05;
     var msg = "L/R: Left or Right Minion; H: Dye; P: Portal]: ";
 
+    this.mCamera.update();  // for delay camera movements
+
     this.mLMinion.update();  // for sprite animation
     this.mRMinion.update();
 
@@ -110,7 +112,8 @@ MyGame.prototype.update = function () {
         gEngine.Input.keys.Up,
         gEngine.Input.keys.Down,
         gEngine.Input.keys.Left,
-        gEngine.Input.keys.Right
+        gEngine.Input.keys.Right,
+        gEngine.Input.keys.P
     );
 
     // Brain chasing the hero

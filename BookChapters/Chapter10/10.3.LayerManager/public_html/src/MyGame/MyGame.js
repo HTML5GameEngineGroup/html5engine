@@ -74,7 +74,7 @@ MyGame.prototype.initialize = function () {
     this.mHeroCam = new Camera(
         vec2.fromValues(20, 30.5), // position of the camera
         15,                        // width of camera
-        [0, 330, 150, 150],         // viewport (orgX, orgY, width, height)
+        [0, 420, 300, 300],         // viewport (orgX, orgY, width, height)
         2
     );
     this.mHeroCam.setBackgroundColor([0.5, 0.5, 0.9, 1]);
@@ -82,7 +82,7 @@ MyGame.prototype.initialize = function () {
     this.mCamera = new Camera(
         vec2.fromValues(50, 37.5), // position of the camera
         100,                       // width of camera
-        [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
+        [0, 0, 1280, 720]           // viewport (orgX, orgY, width, height)
     );
     this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
@@ -90,20 +90,22 @@ MyGame.prototype.initialize = function () {
     // the light
     this._initializeLights();   // defined in MyGame_Lights.js
 
+    this.mIllumHero = new Hero(this.kMinionSprite, this.kMinionSpriteNormal, 20, 30);
+    
     // the Background
     var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
     bgR.setElementPixelPositions(0, 1024, 0, 1024);
-    bgR.getXform().setSize(50, 50);
+    bgR.getXform().setSize(30, 30);
     bgR.getXform().setPosition(0, 0);
     bgR.getMaterial().setSpecular([0.2, 0.1, 0.1, 1]);
     bgR.getMaterial().setShinningness(50);
     bgR.getXform().setZPos(-20);
     bgR.addLight(this.mGlobalLightSet.getLightAt(1));   // only the directional light
-    this.mBg = new ParallaxGameObject(bgR, 100, this.mCamera);
+    this.mBg = new ParallaxGameObject(bgR, 100, this.mIllumHero.getXform());
     
     var i; 
     var bgR1 = new IllumRenderable(this.kBgLayer, this.kBgLayerNormal);
-    bgR1.getXform().setSize(50, 50);
+    bgR1.getXform().setSize(30, 30);
     bgR1.getXform().setPosition(0, 0);
     bgR1.getXform().setZPos(-10);
     bgR1.addLight(this.mGlobalLightSet.getLightAt(1));   // the directional light
@@ -111,12 +113,11 @@ MyGame.prototype.initialize = function () {
     bgR1.addLight(this.mGlobalLightSet.getLightAt(3));   // the hero spotlight light
     bgR1.getMaterial().setSpecular([0.2, 0.2, 0.5, 1]);
     bgR1.getMaterial().setShinningness(10);    
-    this.mBgL1 = new ParallaxGameObject(bgR1, 5, this.mCamera);
+    this.mBgL1 = new ParallaxGameObject(bgR1, 5, this.mIllumHero.getXform());
     this.mBgL1.setCurrentFrontDir([-1, 0]);
     
     // 
     // the objects
-    this.mIllumHero = new Hero(this.kMinionSprite, this.kMinionSpriteNormal, 20, 30);
     this.mLgtHero = new Hero(this.kMinionSprite, null, 60, 50);
     this.mIllumMinion = new Minion(this.kMinionSprite, this.kMinionSpriteNormal, 25, 30);
     this.mLgtMinion = new Minion(this.kMinionSprite, null, 65, 25);

@@ -59,6 +59,8 @@ MyGame.prototype.loadScene = function () {
 };
 
 MyGame.prototype.unloadScene = function () {
+    gEngine.LayerManager.cleanUp();
+    
     gEngine.Textures.unloadTexture(this.kMinionSprite);
     gEngine.Textures.unloadTexture(this.kBg);
     gEngine.Textures.unloadTexture(this.kBgNormal);
@@ -71,8 +73,8 @@ MyGame.prototype.initialize = function () {
     // Step A: set up the cameras
     this.mHeroCam = new Camera(
         vec2.fromValues(20, 30.5), // position of the camera
-        30,                       // width of camera
-        [0, 420, 700, 300],           // viewport (orgX, orgY, width, height)
+        15,                        // width of camera
+        [0, 660, 300, 300],         // viewport (orgX, orgY, width, height)
         2
     );
     this.mHeroCam.setBackgroundColor([0.5, 0.5, 0.9, 1]);
@@ -88,8 +90,6 @@ MyGame.prototype.initialize = function () {
     // the light
     this._initializeLights();   // defined in MyGame_Lights.js
 
-    this.mIllumHero = new Hero(this.kMinionSprite, this.kMinionSpriteNormal, 20, 30);
-    
     // the Background
     var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
     bgR.setElementPixelPositions(0, 1024, 0, 1024);
@@ -99,7 +99,7 @@ MyGame.prototype.initialize = function () {
     bgR.getMaterial().setShinningness(50);
     bgR.getXform().setZPos(-20);
     bgR.addLight(this.mGlobalLightSet.getLightAt(1));   // only the directional light
-    this.mBg = new ParallaxGameObject(bgR, 100, this.mIllumHero.getXform());
+    this.mBg = new ParallaxGameObject(bgR, 100, this.mCamera);
     
     var i; 
     var bgR1 = new IllumRenderable(this.kBgLayer, this.kBgLayerNormal);
@@ -111,11 +111,12 @@ MyGame.prototype.initialize = function () {
     bgR1.addLight(this.mGlobalLightSet.getLightAt(3));   // the hero spotlight light
     bgR1.getMaterial().setSpecular([0.2, 0.2, 0.5, 1]);
     bgR1.getMaterial().setShinningness(10);    
-    this.mBgL1 = new ParallaxGameObject(bgR1, 5, this.mIllumHero.getXform());
+    this.mBgL1 = new ParallaxGameObject(bgR1, 5, this.mCamera);
     this.mBgL1.setCurrentFrontDir([-1, 0]);
     
     // 
     // the objects
+    this.mIllumHero = new Hero(this.kMinionSprite, this.kMinionSpriteNormal, 20, 30);
     this.mLgtHero = new Hero(this.kMinionSprite, null, 60, 50);
     this.mIllumMinion = new Minion(this.kMinionSprite, this.kMinionSpriteNormal, 25, 30);
     this.mLgtMinion = new Minion(this.kMinionSprite, null, 65, 25);
@@ -151,26 +152,21 @@ MyGame.prototype.initialize = function () {
     this.mSelectedChMsg = "H:";
     
     this._setupShadow();  // defined in MyGame_Shadow.js
-};
-
-
-MyGame.prototype.drawCamera = function (camera) {
-    // Step A: set up the View Projection matrix
-    camera.setupViewProjection();
-    // Step B: Now draws each primitive
     
-    // always draw shadow first!
-    //  this.mBgShadow.draw(camera);        // also draws the object
-    this.mBg.draw(camera);
-    this.mBgShadow1.draw(camera);
-
-    this.mBlock1.draw(camera);
-    this.mLgtMinion.draw(camera);
-    this.mIllumMinion.draw(camera);
-    this.mIllumHero.draw(camera);
-    this.mBlock2.draw(camera);  
-    this.mLgtHero.draw(camera);
+    // add to layer managers ...
+    gEngine.LayerManager.addToLayer(gEngine.eLayer.eBackground, this.mBg);
+    gEngine.LayerManager.addToLayer(gEngine.eLayer.eShadowReceiver, this.mBgShadow1);
     
+    gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, this.mIllumMinion);
+    gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, this.mLgtMinion);
+    gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, this.mIllumHero);
+    gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, this.mLgtHero);
+    
+    gEngine.LayerManager.addToLayer(gEngine.eLayer.eFront, this.mBlock1);
+    gEngine.LayerManager.addToLayer(gEngine.eLayer.eFront, this.mBlock2);
+    
+    gEngine.LayerManager.addToLayer(gEngine.eLayer.eHUD, this.mMsg);
+    gEngine.LayerManager.addToLayer(gEngine.eLayer.eHUD, this.mMatMsg);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -178,13 +174,12 @@ MyGame.prototype.drawCamera = function (camera) {
 MyGame.prototype.draw = function () {
     // Step A: clear the canvas
     gEngine.Core.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
-
-    // Step  B: Draw with all cameras
-    this.drawCamera(this.mCamera);
-    this.mMsg.draw(this.mCamera);   // only draw status in the main camera
-    this.mMatMsg.draw(this.mCamera);
     
-    this.drawCamera(this.mHeroCam);
+    this.mCamera.setupViewProjection();
+    gEngine.LayerManager.drawAllLayers(this.mCamera);
+
+    this.mHeroCam.setupViewProjection();
+    gEngine.LayerManager.drawAllLayers(this.mHeroCam);
 };
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
@@ -192,16 +187,9 @@ MyGame.prototype.draw = function () {
 MyGame.prototype.update = function () {
     this.mCamera.update();  // to ensure proper interploated movement effects
     this.mHeroCam.update();
+
+    gEngine.LayerManager.updateAllLayers();
     
-    this.mBgL1.update();
-    this.mBg.update();
-
-    this.mIllumMinion.update(); // ensure sprite animation
-    this.mLgtMinion.update();
-
-    this.mIllumHero.update();  // allow keyboard control to move
-    this.mLgtHero.update();
-
     var xf = this.mIllumHero.getXform();
     this.mCamera.panWith(xf, 0.7);
     this.mGlobalLightSet.getLightAt(2).set2DPosition(xf.getPosition());

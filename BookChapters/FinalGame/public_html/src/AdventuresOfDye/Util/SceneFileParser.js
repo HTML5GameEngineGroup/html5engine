@@ -123,7 +123,7 @@ SceneFileParser.prototype.parseWall = function (texture, normal, lightSet) {
     }
 };
 
-SceneFileParser.prototype.parseBackground = function (level, camera, lightSet) {
+SceneFileParser.prototype.parseBackground = function (level, refObj, lightSet) {
     var elm = this._getElm("Background");
     var dir = "assets/" + level + "/";
     var i, j, x, y, z, w, h, p, t, n, bg, bgR, l, s;
@@ -148,7 +148,7 @@ SceneFileParser.prototype.parseBackground = function (level, camera, lightSet) {
         for (j=0; j<l.length; j++) {
             bgR.addLight(lightSet.getLightAt(l[j]));
         }
-        bg = new ParallaxGameObject(bgR, p, camera);
+        bg = new ParallaxGameObject(bgR, p, refObj.getXform());
         
         var sr;
         if (s === "true") {

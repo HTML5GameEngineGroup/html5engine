@@ -72,7 +72,7 @@ MyGame.prototype.initialize = function () {
     this.mHeroCam = new Camera(
         vec2.fromValues(20, 30.5), // position of the camera
         14,                        // width of camera
-        [0, 330, 150, 150],        // viewport (orgX, orgY, width, height)
+        [0, 420, 300, 300],        // viewport (orgX, orgY, width, height)
         2
     );
     this.mHeroCam.setBackgroundColor([0.5, 0.5, 0.9, 1]);
@@ -80,7 +80,7 @@ MyGame.prototype.initialize = function () {
     this.mCamera = new Camera(
         vec2.fromValues(50, 37.5), // position of the camera
         100,                       // width of camera
-        [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
+        [0, 0, 1280, 720]           // viewport (orgX, orgY, width, height)
     );
     this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
@@ -91,7 +91,7 @@ MyGame.prototype.initialize = function () {
     // the Background
     var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
     bgR.setElementPixelPositions(0, 1024, 0, 1024);
-    bgR.getXform().setSize(50, 50);
+    bgR.getXform().setSize(30, 30);
     bgR.getXform().setPosition(0, 0);
     bgR.getMaterial().setSpecular([0.2, 0.1, 0.1, 1]);
     bgR.getMaterial().setShinningness(50);
@@ -101,7 +101,7 @@ MyGame.prototype.initialize = function () {
     
     var i; 
     var bgR1 = new IllumRenderable(this.kBgLayer, this.kBgLayerNormal);
-    bgR1.getXform().setSize(50, 50);
+    bgR1.getXform().setSize(30, 30);
     bgR1.getXform().setPosition(0, 0);
     bgR1.getXform().setZPos(-10);
     for (i = 0; i < 4; i++) {

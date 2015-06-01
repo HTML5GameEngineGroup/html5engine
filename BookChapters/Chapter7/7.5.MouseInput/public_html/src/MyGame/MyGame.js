@@ -132,8 +132,7 @@ MyGame.prototype.update = function () {
         gEngine.Input.keys.Up,
         gEngine.Input.keys.Down,
         gEngine.Input.keys.Left,
-        gEngine.Input.keys.Right,
-        gEngine.Input.keys.P
+        gEngine.Input.keys.Right
     );
 
     // Brain chasing the hero

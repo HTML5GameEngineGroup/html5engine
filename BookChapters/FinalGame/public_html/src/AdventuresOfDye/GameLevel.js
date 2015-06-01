@@ -79,12 +79,17 @@ GameLevel.prototype.unloadScene = function () {
     gEngine.Core.startScene(nextLevel);
 };
 
-GameLevel.prototype.initialize = function () {
+GameLevel.prototype.initialize = function () {    
     var parser = new SceneFileParser(this.kLevelFile);
     
     this.mCamera = parser.parseCamera();
     this.mGlobalLightSet = parser.parseLights();
-    parser.parseBackground(this.mThisLevel, this.mCamera, this.mGlobalLightSet);
+    
+    // for now here is the hero
+    this.mIllumHero = new Hero(this.kMinionSprite, null, 6, 12, this.mGlobalLightSet);
+        
+    // needs the hero as a reference for parallax
+    parser.parseBackground(this.mThisLevel, this.mIllumHero, this.mGlobalLightSet);
     
     // parsing of actors can only begin after background has been parsed
     // to ensure proper support shadow
@@ -92,11 +97,6 @@ GameLevel.prototype.initialize = function () {
     parser.parseWall(this.kWall, this.kWallNormal, this.mGlobalLightSet);
     
     this.mNextLevel = parser.parseNextLevel();
-    
-    // for now
-    this.mIllumHero = new Hero(this.kMinionSprite, null, 6, 12, this.mGlobalLightSet);
-    gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, this.mIllumHero);
-    gEngine.LayerManager.addAsShadowCaster(this.mIllumHero);
 
     this.mMsg = new FontRenderable("Status Message");
     this.mMsg.setColor([1, 1, 1, 1]);
@@ -109,6 +109,13 @@ GameLevel.prototype.initialize = function () {
     this.mMatMsg.setTextHeight(0.7);
     gEngine.LayerManager.addToLayer(gEngine.eLayer.eFront, this.mMsg);
     gEngine.LayerManager.addToLayer(gEngine.eLayer.eFront, this.mMatMsg);
+
+    // Add hero into the layer manager and as shadow caster
+    // Hero should be added into Actor layer last
+    // Hero can only be added as shadow caster after background is created
+    gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, this.mIllumHero);
+    gEngine.LayerManager.addAsShadowCaster(this.mIllumHero);
+
 
     this.mSlectedCh = this.mIllumHero;
     // this.mMaterialCh = this.mSlectedCh.getRenderable().getMaterial().getDiffuse();

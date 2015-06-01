@@ -15,10 +15,9 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function ParallaxGameObject(renderableObj, distant, theCamera) {
-    this.mTheCamera = theCamera;
-    this.mCameraCenter = vec2.clone(theCamera.getWCCenter());
-    this.mCameraWCWidth = theCamera.getWCWidth();
+function ParallaxGameObject(renderableObj, distant, aXform) {
+    this.mRefXform = aXform;
+    this.mCurrentPosition = vec2.clone(this.mRefXform.getPosition());
     this.mDistant = distant;
     this.mParallaxScale = 1;
     this._distantCheck();
@@ -34,29 +33,17 @@ gEngine.Core.inheritPrototype(ParallaxGameObject, TiledGameObject);
 
 ParallaxGameObject.prototype.update = function () {
     // simple default behavior
-    this._cameraUpdate(); // check to see if the camera has moved
+    this._refPosUpdate(); // check to see if the camera has moved
     var pos = this.getXform().getPosition();
     vec2.scaleAndAdd(pos, pos, this.getCurrentFrontDir(), this.getSpeed() * this.parallaxScale);  // this is movement in Parallax space
 };
 
-ParallaxGameObject.prototype._cameraUpdate = function () {
-    /* not doing this for now
-    // check for width change
-    var ratio;
-    var deltaW = this.mTheCamera.getWCWidth() - this.mCameraWCWidth;
-    if (Math.abs(deltaW) > Number.MIN_VALUE) {
-        ratio = this.mTheCamera.getWCWidth() / this.mCameraWCWidth;
-        this.mDistant *= ratio;
-        if (this.mDistant <= 1) {
-            this.mDistant = 1;
-        }
-    }
-    */
-    // now check for caerma movement
+ParallaxGameObject.prototype._refPosUpdate= function () {
+    // now check for reference movement
     var deltaT = vec2.fromValues(0, 0);
-    vec2.sub(deltaT, this.mCameraCenter, this.mTheCamera.getWCCenter());
+    vec2.sub(deltaT, this.mCurrentPosition, this.mRefXform.getPosition());
     this.setWCTranslationBy(deltaT);
-    vec2.sub(this.mCameraCenter, this.mCameraCenter, deltaT); // update camera position
+    vec2.sub(this.mCurrentPosition, this.mCurrentPosition, deltaT); // update current position
 };
 
 ParallaxGameObject.prototype.setWCTranslationBy = function (delta) {

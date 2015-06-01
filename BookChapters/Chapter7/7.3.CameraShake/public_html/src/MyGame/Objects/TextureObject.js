@@ -21,7 +21,7 @@ function TextureObject(texture, x, y, w, h) {
 }
 gEngine.Core.inheritPrototype(TextureObject, GameObject);
 
-TextureObject.prototype.update = function (up, down, left, right, rot) {
+TextureObject.prototype.update = function (up, down, left, right) {
     var xform = this.getXform();
     if (gEngine.Input.isKeyPressed(up)) {
         xform.incYPosBy(this.kDelta);
@@ -34,8 +34,5 @@ TextureObject.prototype.update = function (up, down, left, right, rot) {
     }
     if (gEngine.Input.isKeyPressed(right)) {
         xform.incXPosBy(this.kDelta);
-    }
-    if (gEngine.Input.isKeyPressed(rot)) {
-        xform.incRotationByRad(this.kRDelta);
     }
 };

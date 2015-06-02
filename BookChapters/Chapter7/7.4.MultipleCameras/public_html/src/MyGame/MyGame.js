@@ -61,17 +61,17 @@ MyGame.prototype.initialize = function () {
     this.mHeroCam = new Camera(
         vec2.fromValues(50, 30),    // will be updated at each cycle to point to hero
         20,
-        [0, 330, 150, 150],
-        2                           // viewport bounds
-    );
-    this.mHeroCam.setBackgroundColor([0.85, 0.8, 0.8, 1]);
-    this.mBrainCam = new Camera(
-        vec2.fromValues(50, 30),    // will be updated at each cycle to point to the brain
-        10,
         [490, 330, 150, 150],
         2                           // viewport bounds
     );
-    this.mBrainCam.setBackgroundColor([0.8, 0.8, 0.85, 1]);
+    this.mHeroCam.setBackgroundColor([0.5, 0.5, 0.5, 1]);
+    this.mBrainCam = new Camera(
+        vec2.fromValues(50, 30),    // will be updated at each cycle to point to the brain
+        10,
+        [0, 330, 150, 150],
+        2                           // viewport bounds
+    );
+    this.mBrainCam.setBackgroundColor([1, 1, 1, 1]);
     this.mBrainCam.configInterpolation(0.7, 10);
     // Large background image
     var bgR = new SpriteRenderable(this.kBg);

@@ -35,8 +35,9 @@ ShakePosition.prototype.getShakeResults = function () {
     var fx = 0;
     var fy = 0;
     if (!this.shakeDone()) {
-        fx = this._nextDampedHarmonic();
-        fy = this._nextDampedHarmonic();
+        var v = this._nextDampedHarmonic();
+        fx = (Math.random() > 0.5) ? -v : v;
+        fy = (Math.random() > 0.5) ? -v : v;
     }
     c[0] = this.mXMag * fx;
     c[1] = this.mYMag * fy;
@@ -46,9 +47,5 @@ ShakePosition.prototype.getShakeResults = function () {
 ShakePosition.prototype._nextDampedHarmonic = function () {
     // computes (Cycles) * cos(  Omega * t )
     var frac = this.mNumCyclesLeft / this.mCycles;
-    var sign = -1;
-    if (Math.random() > 0.5) {
-        sign = 1;
-    }
-    return sign * frac * frac * Math.cos((1 - frac) * this.mOmega);
+    return frac * frac * Math.cos((1 - frac) * this.mOmega);
 };

@@ -101,7 +101,7 @@ MyGame.prototype.initialize = function () {
     bgR.getMaterial().setShinningness(50);
     bgR.getXform().setZPos(-20);
     bgR.addLight(this.mGlobalLightSet.getLightAt(1));   // only the directional light
-    this.mBg = new ParallaxGameObject(bgR, 100, this.mIllumHero.getXform());
+    this.mBg = new ParallaxGameObject(bgR, 100, this.mCamera);
     
     var i; 
     var bgR1 = new IllumRenderable(this.kBgLayer, this.kBgLayerNormal);
@@ -113,7 +113,7 @@ MyGame.prototype.initialize = function () {
     bgR1.addLight(this.mGlobalLightSet.getLightAt(3));   // the hero spotlight light
     bgR1.getMaterial().setSpecular([0.2, 0.2, 0.5, 1]);
     bgR1.getMaterial().setShinningness(10);    
-    this.mBgL1 = new ParallaxGameObject(bgR1, 5, this.mIllumHero.getXform());
+    this.mBgL1 = new ParallaxGameObject(bgR1, 5, this.mCamera);
     this.mBgL1.setCurrentFrontDir([-1, 0]);
     
     // 

@@ -53,7 +53,7 @@ MyGame.prototype.initialize = function () {
     this.mCamera = new Camera(
         vec2.fromValues(50, 36), // position of the camera
         100,                       // width of camera
-        [0, 0, 640, 480]           // viewport (orgX, orgY, width, height)
+        [0, 0, 640, 330]           // viewport (orgX, orgY, width, height)
     );
     this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
@@ -90,7 +90,7 @@ MyGame.prototype.initialize = function () {
 
     this.mMsg = new FontRenderable("Status Message");
     this.mMsg.setColor([1, 1, 1, 1]);
-    this.mMsg.getXform().setPosition(1, 2);
+    this.mMsg.getXform().setPosition(1, 14);
     this.mMsg.setTextHeight(3);
 };
 

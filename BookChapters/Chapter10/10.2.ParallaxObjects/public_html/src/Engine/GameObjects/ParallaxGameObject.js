@@ -15,13 +15,12 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function ParallaxGameObject(renderableObj, distant, aXform) {
-    this.mRefXform = aXform;
-    this.mCurrentPosition = vec2.clone(this.mRefXform.getPosition());
+function ParallaxGameObject(renderableObj, distant, aCamera) {
+    this.mRefCamera = aCamera;
+    this.mCurrentPosition = vec2.clone(this.mRefCamera.getWCCenter());
     this.mDistant = distant;
     this.mParallaxScale = 1;
     this._distantCheck();
-    
     TiledGameObject.call(this, renderableObj);
 }
 gEngine.Core.inheritPrototype(ParallaxGameObject, TiledGameObject);
@@ -34,14 +33,14 @@ gEngine.Core.inheritPrototype(ParallaxGameObject, TiledGameObject);
 ParallaxGameObject.prototype.update = function () {
     // simple default behavior
     this._refPosUpdate(); // check to see if the camera has moved
-    var pos = this.getXform().getPosition();
+    var pos = this.getXform().getPosition();  // our own xform
     vec2.scaleAndAdd(pos, pos, this.getCurrentFrontDir(), this.getSpeed() * this.parallaxScale);  // this is movement in Parallax space
 };
 
 ParallaxGameObject.prototype._refPosUpdate= function () {
     // now check for reference movement
     var deltaT = vec2.fromValues(0, 0);
-    vec2.sub(deltaT, this.mCurrentPosition, this.mRefXform.getPosition());
+    vec2.sub(deltaT, this.mCurrentPosition, this.mRefCamera.getWCCenter());
     this.setWCTranslationBy(deltaT);
     vec2.sub(this.mCurrentPosition, this.mCurrentPosition, deltaT); // update current position
 };

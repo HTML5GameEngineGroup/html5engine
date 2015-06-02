@@ -88,8 +88,8 @@ GameLevel.prototype.initialize = function () {
     // for now here is the hero
     this.mIllumHero = new Hero(this.kMinionSprite, null, 6, 12, this.mGlobalLightSet);
         
-    // needs the hero as a reference for parallax
-    parser.parseBackground(this.mThisLevel, this.mIllumHero, this.mGlobalLightSet);
+    // needs the camera as a reference for parallax
+    parser.parseBackground(this.mThisLevel, this.mCamera, this.mGlobalLightSet);
     
     // parsing of actors can only begin after background has been parsed
     // to ensure proper support shadow

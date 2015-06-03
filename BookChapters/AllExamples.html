@@ -1,48 +1,39 @@
+<html>
+<head>
+
+<!-- Copied from: http://www.w3schools.com/jquerymobile/tryit.asp?filename=tryjqmob_lists_collapsible -->
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+ <body>
+
 <h1>Sample Game Engine</h1>
-<ul>
-    <li>What we have so far: <a href="../HTML5-Engine/public_html/index.html">the game engine</a></li>
-</ul>
 
-<p />
+<hr/>
 
-<h1>Sample Platformer</h1>
-<ul>
-    <li>What we have so far: <a href="../SamplePlatformer/public_html/index.html">the game shell</a><ul>
-        <li>WSAD: to move</li>
-        <li>Space to fly</li>
-        <li>7/8: gravity on/off</li>
-        <li>1: to toggle mini map<ul>
-            <li>2/3: to zoom in minimap</li>
-            </ul>
-        </li>
-        <li>DO NOT type 9! :-)</li>
-        </ul>
-    </li>
-</ul>
-<p />    
-    -------------------</p>
-
-<ur />
-
-<h1>Chapter 1: Getting Started with HTML5</h1>
+<div data-role="collapsible">
+<h2>Chapter 1: Getting Started with HTML5</h2>
 <ul>
     <li>1.1. <a href="Chapter1/1.1.HTML5Application/public_html/index.html">HTML5 Application</a>
-
 </li>
 </ul>
+</div>
 
-<h1>Chapter 2: Working with HTML5 and WebGL</h1>
-<ul>
-    <li>2.1. <a href="Chapter2/2.1.HTML5Canvas/public_html/index.html">HTML5 Canvas</a></li>
-    <li>2.2. <a href="Chapter2/2.2.JavaScriptSourceFile/public_html/index.html">JavaScript Source Files</a></li>
-    <li>2.3. <a href="Chapter2/2.3.DrawOneSquare/public_html/index.html">Draw One Square (with WebGL)</a></li>
-    <li>2.4. <a href="Chapter2/2.4.JavaScriptObjects/public_html/index.html">JavaScript Objects</a></li>
-    <li>2.5. <a href="Chapter2/2.5.ShaderSourceFiles/public_html/index.html">Shader Source Files</a></li>
-    <li>2.6. <a href="Chapter2/2.6.ParameterizedFragmentShader/public_html/index.html">Parameterized Fragment Shader</a></li>
-</ul>
+<div data-role="collapsible">
+<h2>Chapter 2: Working with HTML5 and WebGL</h2>
+    <ul>
+        <li>2.1. <a href="Chapter2/2.1.HTML5Canvas/public_html/index.html">HTML5 Canvas</a></li>
+        <li>2.2. <a href="Chapter2/2.2.JavaScriptSourceFile/public_html/index.html">JavaScript Source Files</a></li>
+        <li>2.3. <a href="Chapter2/2.3.DrawOneSquare/public_html/index.html">Draw One Square (with WebGL)</a></li>
+        <li>2.4. <a href="Chapter2/2.4.JavaScriptObjects/public_html/index.html">JavaScript Objects</a></li>
+        <li>2.5. <a href="Chapter2/2.5.ShaderSourceFiles/public_html/index.html">Shader Source Files</a></li>
+        <li>2.6. <a href="Chapter2/2.6.ParameterizedFragmentShader/public_html/index.html">Parameterized Fragment Shader</a></li>
+    </ul>
+</div>
 
-<h1>Chapter 3: Drawing objects in the World</h1>
-
+<div data-role="collapsible">
+<h2>Chapter 3: Drawing objects in the World</h2>
 <ul>
     <li>3.1.<a href="Chapter3/3.1.RenderableObjects/public_html/index.html">Renderable Objects</a></li>
     <li>3.2. <a href="Chapter3/3.2.MatrixTransform/public_html/index.html">Matrix Transform</a></li>
@@ -51,10 +42,10 @@
     <li>3.5. <a href="Chapter3/3.5.CameraObjects/public_html/index.html">Camera Objects</a></li>
 </li>
 </ul>
+</div>
 
-
-<h1>Chapter 4: Supporting Core Game Engine Functionality</h1>
-
+<div data-role="collapsible">
+<h2>Chapter 4: Implementing Common Components of Video Games</h2>
 <ul>
     <li>4.1. <a href="Chapter4/4.1.GameLoop/public_html/index.html">Game Loop</a></li>
     <li>4.2. <a href="Chapter4/4.2.KeyboardSupport/public_html/index.html">Keyboard Support</a>
@@ -69,9 +60,10 @@
     <li>4.6 <a href="Chapter4/4.6.AudioSupport/public_html/index.html">Audio Support</a>`<ul>
         <li>Left/Right: to move the center rectangle<li>Move left out of bound to change level</ul>
 </ul>
+</div>
 
-
-<h1>Chapter 5: Working with Textures and Sprites</h1>
+<div data-role="collapsible">
+<h2>Chapter 5: Working with Textures, Sprites, and Fonts</h2>
 <ul>
     <li>5.1. <a href="Chapter5/5.1.TextureShaders/public_html/index.html">Texture Shaders</a><ul>
         <li>Left and Right: arrows to move the center rectangle</li>
@@ -94,10 +86,10 @@
 		<li>Up/Down with X/Y: to increase/decrease the selected font size</li>
 	</ul>
 </ul>
+</div>
 
-
-<h1>Chapter 6: Creating Basic Behaviors for Game Objects</h1>
-
+<div data-role="collapsible">
+<h2>Chapter 6: Defining Behaviors and Detecting Collisions</h2>
 <ul>
     <li>6.1. <a href="Chapter6/6.1.GameObjects/public_html/index.html">Game Object Abstraction</a><ul>
 		<li>WASD: to move Dye. Yeah, boring.</li>
@@ -147,26 +139,23 @@
 	</ul>
 	</li>
 </ul>
+</div>
 
 
-<h1>Chapter 7: Revisiting the Camera</h1>
-
+<div data-role="collapsible">
+<h2>Chapter 7: Manipulating and Receiving Mouse Input from the Camera</h2>
 <ul>
     <li>7.1. <a href="Chapter7/7.1.CameraManipulations/public_html/index.html">
-	Simple Camera Manipulations</a><ul>
-		<li>WASD: move hero to push window (at 90% of the bound region)</li>
-		<li>Portal and Brain: are always kept within the window bound
-</li>
-		<li>L/R: pan the center of the camera to center on the corresponding objects
-</li>
-		<li>N/M: zoom with respect to the center of the window
-</li>
-		<li>J/K: zoom with respect to either Hero (H) or Portal (P)
+		Simple Camera Manipulations</a>
 		<ul>
-			<li>Put your finger on the screen over the Hero, select H, and then J/K to see hero’s relative position does not change as the window zooms
-			</li>
+			<li>WASD: move hero to push window (at 90% of the bound region)</li>
+			<li>Portal and Brain: are always kept within the window bound</li>
+			<li>L/R: pan the center of the camera to center on the corresponding objects</li>
+			<li>N/M: zoom with respect to the center of the window</li>
+			<li>J/K: zoom with respect to either Hero (H) or Portal (P)		<ul>
+			<li>Put your finger on the screen over the Hero, select H, and then J/K to see hero’s relative position does not change as the window zooms			</li>
 		</ul>
-</li>
+	</li>
 	</ul>
 	</li>
     <li>7.2. <a href="Chapter7/7.2.CameraInterpolations/public_html/index.html">
@@ -174,8 +163,7 @@
 		<li>Exactly the same as above, camera interpolates and does not jump</li>
 	</ul>
 	</li>
-    <li>7.3. <a href="Chapter7/7.3.CameraShake/public_html/index.html">Camera 
-	Shake</a><ul>
+    <li>7.3. <a href="Chapter7/7.3.CameraShake/public_html/index.html">Camera Shake</a><ul>
 		<li>Same as above</li>
 		<li>Q: to shake the camera</li>
 	</ul>
@@ -188,48 +176,33 @@
 	</li>
 	<li>7.5. <a href="Chapter7/7.5.MouseInput/public_html/index.html">Mouse 
 	Input</a><ul>
-		<li>LMB Press in main: drag Portal
-</li>
-		<li>&nbsp;MMB Press in HeroCam: drag hero
-</li>
-		<li>RMB Click in main: Portal disappear
-</li>
-		<li>MMB Click in main: Portal reappear
-</li>
+		<li>LMB Press in main: drag Portal</li>
+		<li>&nbsp;MMB Press in HeroCam: drag hero</li>
+		<li>RMB Click in main: Portal disappear</li>
+		<li>MMB Click in main: Portal reappear</li>
 	</ul>
 	</li>
 </ul>
+</div>
 
-
-<h1>Chapter 8: Creating Physics for Game Objects</h1>
-
+<div data-role="collapsible">
+<h2>Chapter 8: Creating Graphical and Illumination Effects for Game Objects</h2>
 <ul>
-    <li>To come ...</li>
-</ul>
-
-
-<h1>Chapter 9: Creating Graphical and Illumination Effects for Game Objects</h1>
-
-<ul>
-    <li>9.1. <a href="Chapter9/9.1.GlobalAmbient/public_html/index.html">Simple 
+    <li>8.1. <a href="Chapter8/8.1.GlobalAmbient/public_html/index.html">Simple 
 	Global Ambient</a><ul>
 		<li>LMB/MMB: to increase/decrease global red ambient</li>
 	</ul>
 	</li>
-    <li>9.2. <a href="Chapter9/9.2.SimpleLightShader/public_html/index.html">Simple 
+    <li>8.2. <a href="Chapter8/8.2.SimpleLightShader/public_html/index.html">Simple 
 	Light Shader: One Light Source</a><ul>
-		<li>WASD: moves Dye
-</li>
-		<li>LMB + WASD:  moves Dye with the light source
-</li>
-		<li>Left/Right arrow: increase/decrease the light intensity
-</li>
-		<li>Notice: negative light can be interesting (since we are only adding)
-		</li>
+		<li>WASD: moves Dye</li>
+		<li>LMB + WASD:  moves Dye with the light source</li>
+		<li>Left/Right arrow: increase/decrease the light intensity</li>
+		<li>Notice: negative light can be interesting (since we are only adding)</li>
 		<li>Notice: Right-Minion is not illumindated</li>
 	</ul>
 	</li>
-    <li>9.3. <a href="Chapter9/9.3.MultipleLights/public_html/index.html">Diffuse Shader with Multiple Light Sources</a><ul>
+    <li>8.3. <a href="Chapter8/8.3.MultipleLights/public_html/index.html">Diffuse Shader with Multiple Light Sources</a><ul>
 		<li>Lights:<ul>
 			<li>0: Dye&nbsp; + Background only</li>
 			<li>1: Left Minion + Background</li>
@@ -237,8 +210,7 @@
 			<li>3: Dye + Background</li>
 		</ul>
 		</li>
-		<li>WASD: moves Dye
-</li>
+		<li>WASD: moves Dye</li>
 		<li>0, 1, 2, 3: select light</li>
 		<li>Arrow: move XY of selected light position<ul>
 			<li>Z/X: inc/dec z of the selected light</li>
@@ -250,15 +222,15 @@
 		</li>
 	</ul>
 	</li>
-    <li>9.4. 
-	<a href="Chapter9/9.4.NormalMapsAndIlluminationShaders/public_html/index.html">Illumi/nation Shader: Multiple Lights with Normal Map</a><ul>
+    <li>8.4. 
+	<a href="Chapter8/8.4.NormalMapsAndIlluminationShaders/public_html/index.html">Illumi/nation Shader: Multiple Lights with Normal Map</a><ul>
 		<li>Command same as above. </li>
 	</ul>
 	</li>
-	<li>9.5.
-	<a href="Chapter9/9.5.MaterialAndSpecularity/public_html/index.html">
+	<li>8.5.
+	<a href="Chapter8/8.5.MaterialAndSpecularity/public_html/index.html">
 	Materials: Diffuse and Specularity</a><ul>
-		<li>Same commands as 9.3 with additional</li>
+		<li>Same commands as 8.3 with additional</li>
 		<li>5: Selects the Left Minion</li>
 		<li>6: Selects Dye</li>
 		<li>7, 8, 9: Selects the Ambient, Diffuse, or Specular component of the 
@@ -268,30 +240,38 @@
 		<li>O/P: increase/decrease the shinngingness</li>
 	</ul>
 	</li>
-	<li>9.6:
-	<a href="Chapter9/9.6.DirectionalAndSpotLights/public_html/index.html">
+	<li>8.6:
+	<a href="Chapter8/8.6.DirectionalAndSpotLights/public_html/index.html">
 	Different Light Types</a><ul>
-		<li>Control as the combined of 9.3 and 9.5</li>
+		<li>Control as the combined of 8.3 and 8.5</li>
 		<li>Space+Arrow: to move the X/Y of light direction</li>
 	</ul>
 	</li>
-	<li>9.7: <a href="Chapter9/9.7.ShadowShaders/public_html/index.html">Shadow 
+	<li>8.7: <a href="Chapter8/8.7.ShadowShaders/public_html/index.html">Shadow 
 	Shaders</a><ul>
 		<li>Background and Large Space craft (on lower right) are shadow 
 		receivers</li>
 		<li>Large space craft casts shadow on background</li>
 		<li>Left-Illuminated hero does NOT cast shadow on background</li>
-		<li>Command same as 9.6</li>
+		<li>Command same as 8.6</li>
 	</ul>
 	</li>
 </ul>
+</div>
 
+<div data-role="collapsible">
+<h2>Chapter 9: Creating Physics for Game Objects</h2>
+<ul>
+    <li>To come ...</li>
+</ul>
+</div>
 
-<h1>Chapter 10: Working with Background and General Support</h1>
+<div data-role="collapsible">
+<h2>Chapter 10: Working with Background and General Support</h2>
 <ul>
     <li>10.1: <a href="Chapter10/10.1.TiledObjects/public_html/index.html">Tiled 
 	Objects</a><ul>
-		<li>Controls the same as 9.7</li>
+		<li>Controls the same as 8.7</li>
 		<li>Move illuminated hero to see the never ending world.</li>
 	</ul>
 	</li>
@@ -318,10 +298,11 @@
 	</ul>
 	</li>
 </ul>
+</div>
 
 
-<h1>Chapter 11: Building a Simple Game: From Design to Complete</h1>
-
+<div data-role="collapsible">
+<h2>Chapter 11: Building a Simple Game: From Design to Complete</h2>
 <ul>
     <li>Here is <a href="FinalGame/public_html/index.html">the game for now</a><ul>
 		<li>P: to peek the entire level</li>
@@ -335,6 +316,6 @@
     <li>Agile development process</li>
     <li>Source code analysis</li>
 </ul>
-
-
-
+</div>
+</body>
+</html>

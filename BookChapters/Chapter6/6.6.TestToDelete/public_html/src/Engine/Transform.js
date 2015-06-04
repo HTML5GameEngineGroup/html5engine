@@ -75,7 +75,7 @@ Transform.prototype.getXform = function () {
     // Creates a blank identity matrix
     var matrix = mat4.create();
 
-    // The matricies that opengl uses are transposed, thus the typical matrix
+    // The matricies that WebGL uses are transposed, thus the typical matrix
     // operations must be in reverse.
 
     // Step A: compute translation, for now z is always at 0.0

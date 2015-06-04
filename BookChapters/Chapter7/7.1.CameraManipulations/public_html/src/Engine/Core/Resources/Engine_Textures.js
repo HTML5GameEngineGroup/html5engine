@@ -63,7 +63,7 @@ gEngine.Textures = (function () {
             // Update resources in loading counter.
             gEngine.ResourceMap.asyncLoadRequested(textureName);
 
-            // When the texture loads, convert it to the openmGL format then put
+            // When the texture loads, convert it to the WebGL format then put
             // it back into the mTextureMap.
             img.onload = function () {
                 _processLoadedImage(textureName, img);

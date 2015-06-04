@@ -74,16 +74,17 @@ void main(void)  {
     normalMap.y = -normalMap.y;  // flip Y
     vec3 N = normalize(normalMap.xyz);
    
-    vec4 lgtResult = textureMapColor * uGlobalAmbientColor * uGlobalAmbientIntensity;
+    vec4 lgtResult = uGlobalAmbientColor * uGlobalAmbientIntensity;
 
     // now decide if we should illuminate by the light
     if (textureMapColor.a > 0.0) {
         for (int i=0; i<kGLSLuLightArraySize; i++) { 
             if (uLights[i].IsOn) { 
-                lgtResult += LightEffect(uLights[i], N) * textureMapColor;
+                lgtResult += LightEffect(uLights[i], N);
             }
         }
     }
+    lgtResult *= textureMapColor;
 
     // tint the textured area, and leave transparent area as defined by the texture
     vec3 r = vec3(lgtResult) * (1.0-uPixelColor.a) + vec3(uPixelColor) * uPixelColor.a;

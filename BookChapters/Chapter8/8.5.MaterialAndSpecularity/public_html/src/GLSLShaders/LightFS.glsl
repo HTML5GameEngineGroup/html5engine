@@ -63,16 +63,17 @@ vec4 LightEffect(Light lgt)
 void main(void)  {
     // simple tint based on uPixelColor setting
     vec4 textureMapColor = texture2D(uSampler, vec2(vTexCoord.s, vTexCoord.t));
-    vec4 lgtResults = textureMapColor * uGlobalAmbientIntensity * uGlobalAmbientColor;
+    vec4 lgtResults = uGlobalAmbientIntensity * uGlobalAmbientColor;
 
     // now decide if we should illuminate by the light
     if (textureMapColor.a > 0.0) {
         for (int i=0; i<kGLSLuLightArraySize; i++) { 
             if (uLights[i].IsOn) { 
-                lgtResults +=  LightEffect(uLights[i]) * textureMapColor;
+                lgtResults +=  LightEffect(uLights[i]);
             }
         }
     }
+    lgtResults *= textureMapColor;
 
     // tint the textured area, and leave transparent area as defined by the texture
     vec3 r = vec3(lgtResults) * (1.0-uPixelColor.a) + vec3(uPixelColor) * uPixelColor.a;

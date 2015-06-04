@@ -104,5 +104,6 @@ void main(void)
         discard;
     vec3 shadowColor = lgtStrength * uPixelColor.rgb;
     shadowColor *= uPixelColor.a * texFragColor.a;
+    // gl_FragColor = vec4(shadowColor,  lgtStrength * lgtStrength * texFragColor.a);
     gl_FragColor = vec4(shadowColor,  texFragColor.a);
 }

@@ -3,7 +3,7 @@
  * The first iteration of what the core of our game engine would look like.
  */
 /*jslint node: true, vars: true, evil: true */
-/*global gEngine: false, document: false */
+/*global document */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 //  Global variable EngineCore
@@ -23,7 +23,7 @@ gEngine.Core = (function () {
 
         // Get the standard or experimental webgl and binds to the Canvas area
         // store the results to the instance variable mGL
-        mGL = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+        mGL = canvas.getContext("webgl", {alpha: false}) || canvas.getContext("experimental-webgl", {alpha: false});
 
         // Allows transperency with textures.
         mGL.blendFunc(mGL.SRC_ALPHA, mGL.ONE_MINUS_SRC_ALPHA);
@@ -37,7 +37,7 @@ gEngine.Core = (function () {
             return;
         }
     };
-    
+
     //**----------------------------
     // Public methods:
     //**-----------------------------

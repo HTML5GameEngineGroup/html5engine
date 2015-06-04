@@ -24,25 +24,6 @@ struct Material {
 };
 uniform Material uMaterial;
 
-// Light information
-//   Three light types are encoded:
-//     Direction.w == 1: says direction should be used
-//     DropOff > 0 says SpotLight
-//  PointLight:
-//     Direction.w == 0
-//     DropOff < 0
-//     Inner/Outer: are distance in pixel space to the Position
-//
-//  Directoinal Light
-//     Directoin.w == 1
-//     DropOff < 0
-//     Inner/Outer: are distance in pixel space to the Position
-//
-//  SpotLight
-//     Direction.W == 1
-//     DropOff >= 0
-//     Inner/Outer: are angles measured from the Direction
-//     No distance attenuation
 #define kGLSLuLightArraySize 4
     // GLSL Fragment shader does requires loop control 
     // varialbe to be a constant number. This number 4

@@ -12,25 +12,6 @@ uniform vec4 uPixelColor;
 uniform vec4 uGlobalAmbientColor; // this is shared globally
 uniform float uGlobalAmbientIntensity;
 
-// Light information
-//   Three light types are encoded:
-//     Direction.w == 1: says direction should be used
-//     DropOff > 0 says SpotLight
-//  PointLight:
-//     Direction.w == 0
-//     DropOff < 0
-//     Inner/Outer: are distance in pixel space to the Position
-//
-//  Directoinal Light
-//     Directoin.w == 1
-//     DropOff < 0
-//     Inner/Outer: are distance in pixel space to the Position
-//
-//  SpotLight
-//     Direction.W == 1
-//     DropOff >= 0
-//     Inner/Outer: are angles measured from the Direction
-//     No distance attenuation
 #define kGLSLuLightArraySize 4
     // GLSL Fragment shader does requires loop control 
     // varialbe to be a constant number. This number 4
@@ -125,20 +106,21 @@ vec4 LightEffect(Light lgt) {
 void main(void)  {
     // simple tint based on uPixelColor setting
     vec4 textureMapColor = texture2D(uSampler, vec2(vTexCoord.s, vTexCoord.t));
-    vec4 lgtResults = textureMapColor * uGlobalAmbientIntensity * uGlobalAmbientColor;
+    vec4 lgtResults = uGlobalAmbientIntensity * uGlobalAmbientColor;
 
     // now decide if we should illuminate by the light
     if (textureMapColor.a > 0.0) {
         for (int i=0; i<kGLSLuLightArraySize; i++) { 
             if (uLights[i].IsOn) { 
-                lgtResults +=  LightEffect(uLights[i]) * textureMapColor;
+                lgtResults +=  LightEffect(uLights[i]);
             }
         }
     }
+    lgtResults *= textureMapColor;
 
     // tint the textured area, and leave transparent area as defined by the texture
     vec3 r = vec3(lgtResults) * (1.0-uPixelColor.a) + vec3(uPixelColor) * uPixelColor.a;
     vec4 result = vec4(r, lgtResults.a);
 
-     gl_FragColor = result;
-}       
+    gl_FragColor = result;
+}

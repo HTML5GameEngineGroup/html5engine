@@ -39,7 +39,7 @@ MyGame.prototype.initialize = function () {
 
     // Step B: Create the support object in red
     this.mSupport = new Renderable(gEngine.DefaultResources.getConstColorShader());
-    this.mSupport.setColor([1, 0, 0, 1]);
+    this.mSupport.setColor([0.8, 0.2, 0.2, 1]);
     this.mSupport.getXform().setPosition(20, 60);
     this.mSupport.getXform().setSize(5, 5);
 

@@ -28,7 +28,7 @@ gEngine.ResourceMap = (function () {
     * Register one more resource to load
     */
     var asyncLoadRequested = function (rName) {
-        mResourceMap[rName] = new MapEntry(rName); // place holder
+        mResourceMap[rName] = new MapEntry(rName); // place holder for the resource to be loaded
         ++mNumOutstandingLoads;
     };
 

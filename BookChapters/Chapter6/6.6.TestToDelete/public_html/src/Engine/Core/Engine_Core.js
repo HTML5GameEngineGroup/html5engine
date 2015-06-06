@@ -58,7 +58,7 @@ gEngine.Core = (function () {
         gEngine.Input.initialize();
         gEngine.AudioClips.initAudioContext();
 
-        // Inits DefaultResoruces, when done,  invoke the anonymous function to call startScene(myGame).
+        // Inits DefaultResoruces, when done, invoke the anonymous function to call startScene(myGame).
         gEngine.DefaultResources.initialize(function () { startScene(myGame); });
     };
 

@@ -124,7 +124,7 @@ MyGame.prototype.update = function () {
     var zoomDelta = 0.05;
     var msg = "L/R: Left or Right Minion; H: Dye; P: Portal]: ";
 
-    this.mCamera.update();  // for delay camera movements
+    this.mCamera.update();  // for smoother camera movements
     this.mHeroCam.update();
     this.mBrainCam.update();
 

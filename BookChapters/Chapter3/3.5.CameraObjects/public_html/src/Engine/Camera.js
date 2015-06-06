@@ -71,7 +71,7 @@ Camera.prototype.setupViewProjection = function () {
                 this.mViewport[1],  // y position of bottom-left corner of the area to be drawn
                 this.mViewport[2],  // width of the area to be drawn
                 this.mViewport[3]); // height of the area to be drawn
-    // Step A2: set up the corresponding scissor area to limite clear area
+    // Step A2: set up the corresponding scissor area to limit the clear area
     gl.scissor(this.mViewport[0], // x position of bottom-left corner of the area to be drawn
                this.mViewport[1], // y position of bottom-left corner of the area to be drawn
                this.mViewport[2], // width of the area to be drawn

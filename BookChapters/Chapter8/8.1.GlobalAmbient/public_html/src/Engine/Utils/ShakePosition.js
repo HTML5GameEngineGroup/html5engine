@@ -13,7 +13,7 @@
 // damped simple harmonic shake motion
 // xDelta, yDelta: how large a shake
 // shakeFrequency: how much movement
-// shakeDuration: for how long
+// shakeDuration: for how long in number of cycles
 //
 function ShakePosition(xDelta, yDelta, shakeFrequency, shakeDuration) {
     this.mXMag = xDelta;

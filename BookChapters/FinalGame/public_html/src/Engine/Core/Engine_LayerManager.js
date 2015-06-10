@@ -73,8 +73,8 @@ gEngine.LayerManager = (function () {
     var removeFromLayer = function(layerEnum, obj) {
         mAllLayers[layerEnum].removeFromSet(obj);
     };
-    var drawLastInLayer = function(layerEnum, obj) {
-        mAllLayers[layerEnum].drawLast(obj);
+    var moveToLayerFront = function(layerEnum, obj) {
+        mAllLayers[layerEnum].moveToLast(obj);
     };
     var layerSize = function(layerEnum) {
         return mAllLayers[layerEnum].size();
@@ -91,7 +91,7 @@ gEngine.LayerManager = (function () {
       addToLayer: addToLayer,
       addAsShadowCaster: addAsShadowCaster,
       removeFromLayer: removeFromLayer,
-      drawLastInLayer: drawLastInLayer,
+      moveToLayerFront: moveToLayerFront,
       layerSize: layerSize
     };
 

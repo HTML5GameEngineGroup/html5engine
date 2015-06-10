@@ -3,10 +3,10 @@
  * Represent an GameObject located at some distance D away, thus 
  * resulting in slower movements
  * 
- * D: is set for the camera Window Size if the camera window size should change
- *    D will vary linearly
- *    
- * Introduces the Parallax space: displacemet is simply t/D where t is WC displacement
+ * Passed in scale: 
+ *     ==1: means same as actors
+ *     > 1: farther away, slows down inversely (scale==2 slows down twice)
+ *     < 1: closer, speeds up inversely (scale==0.5 speeds up twice)
  */
 
 /*jslint node: true, vars: true, white: true */
@@ -15,12 +15,11 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-function ParallaxGameObject(renderableObj, distant, aCamera) {
+function ParallaxGameObject(renderableObj, scale, aCamera) {
     this.mRefCamera = aCamera;
-    this.mCurrentPosition = vec2.clone(this.mRefCamera.getWCCenter());
-    this.mDistant = distant;
+    this.mCameraWCCenterRef = vec2.clone(this.mRefCamera.getWCCenter());
     this.mParallaxScale = 1;
-    this._distantCheck();
+    this.setParallaxScale(scale);
     TiledGameObject.call(this, renderableObj);
 }
 gEngine.Core.inheritPrototype(ParallaxGameObject, TiledGameObject);
@@ -34,37 +33,31 @@ ParallaxGameObject.prototype.update = function () {
     // simple default behavior
     this._refPosUpdate(); // check to see if the camera has moved
     var pos = this.getXform().getPosition();  // our own xform
-    vec2.scaleAndAdd(pos, pos, this.getCurrentFrontDir(), this.getSpeed() * this.parallaxScale);  // this is movement in Parallax space
+    vec2.scaleAndAdd(pos, pos, this.getCurrentFrontDir(), this.getSpeed() * this.mParallaxScale);
 };
 
 ParallaxGameObject.prototype._refPosUpdate= function () {
     // now check for reference movement
     var deltaT = vec2.fromValues(0, 0);
-    vec2.sub(deltaT, this.mCurrentPosition, this.mRefCamera.getWCCenter());
+    vec2.sub(deltaT, this.mCameraWCCenterRef, this.mRefCamera.getWCCenter());
     this.setWCTranslationBy(deltaT);
-    vec2.sub(this.mCurrentPosition, this.mCurrentPosition, deltaT); // update current position
+    vec2.sub(this.mCameraWCCenterRef, this.mCameraWCCenterRef, deltaT); // update current position
 };
 
 ParallaxGameObject.prototype.setWCTranslationBy = function (delta) {
-    this.getXform().incXPosBy(delta[0] * this.parallaxScale);
-    this.getXform().incYPosBy(delta[1] * this.parallaxScale);
+    var f = (1-this.mParallaxScale);
+    this.getXform().incXPosBy(-delta[0] * f);
+    this.getXform().incYPosBy(-delta[1] * f);
 };
 
-ParallaxGameObject.prototype.getDistance = function () {
-    return this.mDistant;
-};
-ParallaxGameObject.prototype.setDistance = function (d) {
-    this.mDistant = d;
-    this._distantCheck();
-};
-ParallaxGameObject.prototype.incDistance = function (delta) {
-    this.mDistant += delta;
-    this._distantCheck();
+ParallaxGameObject.prototype.getParallaxScale = function () {
+    return this.mParallaxScale;
 };
 
-ParallaxGameObject.prototype._distantCheck = function() {
-    if (this.mDistant <= 1) {
-        this.mDistant = 1;
+ParallaxGameObject.prototype.setParallaxScale = function(s) {
+    if (s <= 0) {
+        this.mParallaxScale = 1;
+    } else {
+        this.mParallaxScale = 1/s;
     }
-    this.parallaxScale = 1/this.mDistant;
 };

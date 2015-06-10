@@ -85,10 +85,10 @@ MyGame.prototype.initialize = function () {
     this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
     
-    // the light
+    // Step B: the lights
     this._initializeLights();   // defined in MyGame_Lights.js
 
-    // the Background
+    // Step C: the far Background
     var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
     bgR.setElementPixelPositions(0, 1024, 0, 1024);
     bgR.getXform().setSize(30, 30);
@@ -99,6 +99,7 @@ MyGame.prototype.initialize = function () {
     bgR.addLight(this.mGlobalLightSet.getLightAt(1));   // only the directional light
     this.mBg = new TiledGameObject(bgR);
     
+    // Step D: the closer Background
     var i; 
     var bgR1 = new IllumRenderable(this.kBgLayer, this.kBgLayerNormal);
     bgR1.getXform().setSize(30, 30);
@@ -110,8 +111,9 @@ MyGame.prototype.initialize = function () {
     bgR1.getMaterial().setSpecular([0.2, 0.2, 0.5, 1]);
     bgR1.getMaterial().setShinningness(10);
     this.mBgL1 = new TiledGameObject(bgR1);
-    //this.mBgL1.setSpeed(0.1);
+    this.mBgL1.setSpeed(0.1);
     this.mBgL1.setCurrentFrontDir([-1, 0]);
+    
     // 
     // the objects
     this.mIllumHero = new Hero(this.kMinionSprite, this.kMinionSpriteNormal, 20, 30);
@@ -127,12 +129,12 @@ MyGame.prototype.initialize = function () {
 
     this.mMsg = new FontRenderable("Status Message");
     this.mMsg.setColor([1, 1, 1, 1]);
-    this.mMsg.getXform().setPosition(1, 2);
+    this.mMsg.getXform().setPosition(4, 12);
     this.mMsg.setTextHeight(3);
 
     this.mMatMsg = new FontRenderable("Status Message");
     this.mMatMsg.setColor([1, 1, 1, 1]);
-    this.mMatMsg.getXform().setPosition(1, 73);
+    this.mMatMsg.getXform().setPosition(4, 64);
     this.mMatMsg.setTextHeight(3);
 
     this.mBlock1 = new Renderable();
@@ -159,7 +161,6 @@ MyGame.prototype.drawCamera = function (camera) {
     // Step B: Now draws each primitive
     
     // always draw shadow first!
-    //  this.mBgShadow.draw(camera);        // also draws the object
     this.mBg.draw(camera);
     this.mBgShadow1.draw(camera);
 

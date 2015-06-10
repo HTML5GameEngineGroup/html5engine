@@ -50,7 +50,7 @@ gEngine.Core = (function () {
         gEngine.VertexBuffer.initialize();
         gEngine.Input.initialize();
 
-        // Inits DefaultResoruces, when done, invoke the anonymous function to call startScene(myGame).
+        // Inits DefaultResources, when done, invoke the anonymous function to call startScene(myGame).
         gEngine.DefaultResources.initialize(function () { startScene(myGame); });
     };
 

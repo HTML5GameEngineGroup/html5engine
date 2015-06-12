@@ -32,3 +32,14 @@ Camera.prototype.mouseWCY = function () {
     var minWCY = this.getWCCenter()[1] - this.getWCHeight() / 2;
     return minWCY + (this.mouseDCY() * (this.getWCHeight() / this.mViewport[Camera.eViewport.eHeight]));
 };
+
+
+Camera.prototype.dcXToWC = function (x) {
+    var minWCX = this.getWCCenter()[0] - this.getWCWidth() / 2;
+    return minWCX + (x * (this.getWCWidth() / this.mViewport[Camera.eViewport.eWidth]));
+};
+
+Camera.prototype.dcYToWC = function (y) {
+    var minWCY = this.getWCCenter()[1] - this.getWCHeight() / 2;
+    return minWCY + (y * (this.getWCHeight() / this.mViewport[Camera.eViewport.eHeight]));
+};

@@ -74,6 +74,7 @@ MyGame.prototype.initialize = function () {
     bgR.getXform().setSize(100, 100);
     bgR.getXform().setPosition(50, 35);
     bgR.getMaterial().setSpecular([2, 0, 0, 1]);
+    bgR.getMaterial().setShinningness(250);
     var i;
     for (i = 0; i < 4; i++) {
         bgR.addLight(this.mGlobalLightSet.getLightAt(i));   // all the lights
@@ -172,4 +173,8 @@ MyGame.prototype.update = function () {
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.D))
         wc[0] += delta;
 
+    var p = this.mCamera.getPosInPixelSpace();
+    var wcX = this.mCamera.dcXToWC(p[0]);
+    var wcY = this.mCamera.dcYToWC(p[1]);
+    this.mBlock1.getXform().setPosition(wcX, wcY);
 };

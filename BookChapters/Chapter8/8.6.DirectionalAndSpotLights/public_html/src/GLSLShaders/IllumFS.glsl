@@ -137,7 +137,10 @@ void main(void)  {
     vec4 normal = texture2D(uNormalSampler, vTexCoord);
     vec4 normalMap = (2.0 * normal) - 1.0;
     
-    normalMap.y = -normalMap.y;  // flip Y
+    //
+    // normalMap.y = -normalMap.y;  // flip Y
+    //    depending on the normal map you work with, this may or may not be flipped
+    // 
     vec3 N = normalize(normalMap.xyz);
    
     vec4 shadedResult = uMaterial.Ka + (textureMapColor  * uGlobalAmbientColor * uGlobalAmbientIntensity);

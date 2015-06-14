@@ -30,7 +30,7 @@ GameObjectSet.prototype.removeFromSet = function (obj) {
         this.mSet.splice(index, 1);
 };
 
-// Ensures the given obj is the last element (when draw, appears on top)
+// Ensures the given obj is the last element (when drawn, appears on top)
 GameObjectSet.prototype.moveToLast = function (obj) {
     this.removeFromSet(obj);
     this.addToSet(obj);

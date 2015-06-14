@@ -3,7 +3,7 @@
  * Support for working with a set of GameObjects
  */
 
-/*jslint node: true, vars: true, white: true */
+/*jslint node: true, vars: true */
 /*global  */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
@@ -22,18 +22,6 @@ GameObjectSet.prototype.getObjectAt = function (index) {
 
 GameObjectSet.prototype.addToSet = function (obj) {
     this.mSet.push(obj);
-};
-
-GameObjectSet.prototype.removeFromSet = function (obj) {
-    var index = this.mSet.indexOf(obj);
-    if (index > -1)
-        this.mSet.splice(index, 1);
-};
-
-// Ensures the given obj is the last element (when drawn, appears on top)
-GameObjectSet.prototype.moveToLast = function (obj) {
-    this.removeFromSet(obj);
-    this.addToSet(obj);
 };
 
 GameObjectSet.prototype.update = function () {

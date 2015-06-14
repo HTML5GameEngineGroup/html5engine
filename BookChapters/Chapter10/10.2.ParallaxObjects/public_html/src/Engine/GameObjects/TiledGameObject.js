@@ -51,7 +51,7 @@ TiledGameObject.prototype._drawTile = function(aCamera) {
         }
     }
     // top/bottom boundary
-    if (top < wcBottom) {
+    if (top < wcBottom) { // Lower than the WC bottom
         dy = Math.ceil((wcBottom - top)/h) * h;
     } else {
         if (bottom > wcBottom) {  // not touching the bottom
@@ -70,11 +70,11 @@ TiledGameObject.prototype._drawTile = function(aCamera) {
     top = pos[1] + (h/2);
     
     // Step F: Determine the number of times to tile in the x and y directions.
-    var nx = 1, ny = 1; // number to draw in the x and y directions
+    var nx = 1, ny = 1; // number of times to draw in the x and y directions
     nx = Math.ceil((wcRight - right) / w);
     ny = Math.ceil((wcTop - top) / h);
     
-    // Step G: Loop through each location to draw a tile, and draw the tile.
+    // Step G: Loop through each location to draw a tile
     var cx = nx;
     var xPos = pos[0];
     while (ny >= 0) {

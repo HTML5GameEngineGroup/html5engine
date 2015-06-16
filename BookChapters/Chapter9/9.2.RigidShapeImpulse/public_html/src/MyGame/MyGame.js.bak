@@ -77,7 +77,6 @@ MyGame.prototype.initialize = function () {
         
         ry = ry + 20 + Math.random() * 10;
     }
-    
     // 
     // the important objects
     this.mHero = new Hero(this.kMinionSprite, 20, 30);

@@ -58,6 +58,13 @@
             <script type="text/javascript" src="src/Engine/GameObjects/GameObject.js"></script>
             <script type="text/javascript" src="src/Engine/GameObjects/GameObject_PixelCollision.js"></script>
             <script type="text/javascript" src="src/Engine/GameObjects/GameObjectSet.js"></script>
+        <!-- Physics -->
+            <script type="text/javascript" src="src/Engine/Physics/RigidShape.js"></script>
+            <script type="text/javascript" src="src/Engine/Physics/RigidShape_Collision.js"></script>
+            <script type="text/javascript" src="src/Engine/Physics/RigidCircle.js"></script>
+            <script type="text/javascript" src="src/Engine/Physics/RigidCircle_Collision.js"></script>
+            <script type="text/javascript" src="src/Engine/Physics/RigidRectangle.js"></script>
+            <script type="text/javascript" src="src/Engine/Physics/RigidRectangle_Collision.js"></script>
         <!-- Shaders -->
             <script type="text/javascript" src="src/Engine/Shaders/SimpleShader.js"></script>
             <script type="text/javascript" src="src/Engine/Shaders/TextureShader.js"></script>
@@ -79,16 +86,12 @@
    
     <!-- Client game code -->
         <script type="text/javascript" src="src/MyGame/MyGame.js"></script>
-        <script type="text/javascript" src="src/MyGame/MyGame_Lights.js"></script>
-        <script type="text/javascript" src="src/MyGame/MyGame_LightControl.js"></script>
-        <script type="text/javascript" src="src/MyGame/MyGame_MaterialControl.js"></script>
-        <script type="text/javascript" src="src/MyGame/MyGame_Shadow.js"></script>
-        
         <!-- Objects -->
             <script type="text/javascript" src="src/MyGame/Objects/Hero.js"></script>
             <script type="text/javascript" src="src/MyGame/Objects/Minion.js"></script>
+            <script type="text/javascript" src="src/MyGame/Objects/Platform.js"></script>
     
-    <canvas id="GLCanvas" width="640" height="480">
+    <canvas id="GLCanvas" width="1280" height="720">
         <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
         Your browser does not support the HTML5 canvas.
         <!-- this message will show only if WebGL clearing failed -->

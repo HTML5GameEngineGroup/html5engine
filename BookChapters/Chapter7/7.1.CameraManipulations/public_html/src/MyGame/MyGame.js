@@ -51,7 +51,7 @@ MyGame.prototype.initialize = function () {
     this.mCamera = new Camera(
         vec2.fromValues(50, 37.5),   // position of the camera
         100,                       // width of camera
-        [10, 10, 620, 460]           // viewport (orgX, orgY, width, height)
+        [30, 30, 580, 420]           // viewport (orgX, orgY, width, height)
     );
     this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
             // sets the background to gray
@@ -73,7 +73,7 @@ MyGame.prototype.initialize = function () {
 
     this.mMsg = new FontRenderable("Status Message");
     this.mMsg.setColor([1, 1, 1, 1]);
-    this.mMsg.getXform().setPosition(1, 2);
+    this.mMsg.getXform().setPosition(2, 4);
     this.mMsg.setTextHeight(3);
 };
 
@@ -81,7 +81,7 @@ MyGame.prototype.initialize = function () {
 // importantly, make sure to _NOT_ change any state.
 MyGame.prototype.draw = function () {
     // Step A: clear the canvas
-    gEngine.Core.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
+    gEngine.Core.clearCanvas([0, 1, 0, 1.0]); // clear to bright green
 
     // Step  B: Activate the drawing Camera
     this.mCamera.setupViewProjection();

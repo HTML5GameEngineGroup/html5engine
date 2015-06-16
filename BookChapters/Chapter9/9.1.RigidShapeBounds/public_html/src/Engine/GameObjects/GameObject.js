@@ -14,6 +14,7 @@ function GameObject(renderableObj) {
     this.mVisible = true;
     this.mCurrentFrontDir = vec2.fromValues(0, 1);  // this is the current front direction of the object
     this.mSpeed = 0;
+    this.mRigidShape = null;
 }
 GameObject.prototype.getXform = function () { return this.mRenderComponent.getXform(); };
 GameObject.prototype.getBBox = function () {
@@ -32,6 +33,9 @@ GameObject.prototype.setCurrentFrontDir = function (f) { vec2.normalize(this.mCu
 GameObject.prototype.getCurrentFrontDir = function () { return this.mCurrentFrontDir; };
 
 GameObject.prototype.getRenderable = function () { return this.mRenderComponent; };
+
+GameObject.prototype.setRigidShape = function (r) { return this.mRigidShape = r; };
+GameObject.prototype.getRigidShape = function () { return this.mRigidShape; };
 
 // Orientate the entire object to point towards point p
 // will rotate Xform() accordingly
@@ -81,10 +85,17 @@ GameObject.prototype.update = function () {
     // simple default behavior
     var pos = this.getXform().getPosition();
     vec2.scaleAndAdd(pos, pos, this.getCurrentFrontDir(), this.getSpeed());
+
+    if (this.mRigidShape !== null) {
+        this.mRigidShape.update();
+    }
 };
 
 GameObject.prototype.draw = function (aCamera) {
     if (this.isVisible()) {
         this.mRenderComponent.draw(aCamera);
+    }
+    if (this.mRigidShape !== null) {
+            this.mRigidShape.draw(aCamera);
     }
 };

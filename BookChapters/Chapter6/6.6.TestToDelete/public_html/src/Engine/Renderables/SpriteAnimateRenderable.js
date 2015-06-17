@@ -74,10 +74,10 @@ SpriteAnimateRenderable.eAnimationType = Object.freeze({
 });
 
 
-// Always set the right-most element to be the first
+// Always set the left-most element to be the first
 SpriteAnimateRenderable.prototype.setSpriteSequence = function (
     topPixel,   // offset from top-left
-    rightPixel, // offset from top-left
+    leftPixel, // offset from top-left
     elmWidthInPixel,
     elmHeightInPixel,
     numElements,      // number of elements in sequence
@@ -89,7 +89,7 @@ SpriteAnimateRenderable.prototype.setSpriteSequence = function (
     var imageH = texInfo.mHeight;
 
     this.mNumElems = numElements;   // number of elements in animation
-    this.mFirstElmLeft = rightPixel / imageW;
+    this.mFirstElmLeft = leftPixel / imageW;
     this.mElmTop = topPixel / imageH;
     this.mElmWidth = elmWidthInPixel / imageW;
     this.mElmHeight = elmHeightInPixel / imageH;

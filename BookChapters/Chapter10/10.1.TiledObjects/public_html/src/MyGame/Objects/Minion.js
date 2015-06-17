@@ -24,7 +24,7 @@ function Minion(spriteTexture, normalMap, atX, atY) {
     this.mMinion.getXform().setPosition(atX, atY);
     this.mMinion.getXform().setSize(9, 7.2);
     this.mMinion.getXform().setZPos(2);
-    this.mMinion.setSpriteSequence(512, 0,      // first element pixel position: top-right 512 is top of image, 0 is right of image
+    this.mMinion.setSpriteSequence(512, 0,      // first element pixel position: top-left 512 is top of image, 0 is left of image
                                    204, 164,    // widthxheight in pixels
                                    5,           // number of elements in this sequence
                                    0);          // horizontal padding in between

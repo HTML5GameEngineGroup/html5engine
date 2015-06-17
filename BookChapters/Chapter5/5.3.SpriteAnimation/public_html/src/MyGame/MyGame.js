@@ -74,7 +74,7 @@ MyGame.prototype.initialize = function () {
     this.mRightMinion.setColor([1, 1, 1, 0]);
     this.mRightMinion.getXform().setPosition(26, 56.5);
     this.mRightMinion.getXform().setSize(4, 3.2);
-    this.mRightMinion.setSpriteSequence(512, 0,     // first element pixel position: top-right 512 is top of image, 0 is right of image
+    this.mRightMinion.setSpriteSequence(512, 0,     // first element pixel position: top-left 512 is top of image, 0 is left of image
                                     204, 164,       // widthxheight in pixels
                                     5,              // number of elements in this sequence
                                     0);             // horizontal padding in between

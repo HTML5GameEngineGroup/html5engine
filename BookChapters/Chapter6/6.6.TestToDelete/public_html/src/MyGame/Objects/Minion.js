@@ -17,7 +17,7 @@ function Minion(spriteTexture, atX, atY) {
     this.mMinion.setColor([1, 1, 1, 0]);
     this.mMinion.getXform().setPosition(atX, atY);
     this.mMinion.getXform().setSize(24, 19.2);
-    this.mMinion.setSpriteSequence(64, 0,      // first element pixel position: top-right 512 is top of image, 0 is right of image
+    this.mMinion.setSpriteSequence(64, 0,      // first element pixel position: top-left 512 is top of image, 0 is left of image
                                     64, 64,   // widthxheight in pixels
                                     4,          // number of elements in this sequence
                                     0);         // horizontal padding in between
@@ -37,7 +37,7 @@ Minion.prototype.update = function () {
 
 Minion.prototype.change1 = function () {
     this.mMinion.setTexture("assets/minion_sprite.png");
-    this.mMinion.setSpriteSequence(512, 0,      // first element pixel position: top-right 512 is top of image, 0 is right of image
+    this.mMinion.setSpriteSequence(512, 0,      // first element pixel position: top-left 512 is top of image, 0 is left of image
                                     204, 164,   // widthxheight in pixels
                                     5,          // number of elements in this sequence
                                     0);         // horizontal padding in between
@@ -46,7 +46,7 @@ Minion.prototype.change1 = function () {
 Minion.prototype.change2 = function () {
     this.mMinion.setTexture("assets/s2.png");
     
-    this.mMinion.setSpriteSequence(64, 0,      // first element pixel position: top-right 64 is top of image, 0 is right of image
+    this.mMinion.setSpriteSequence(64, 0,      // first element pixel position: top-left 64 is top of image, 0 is left of image
                                    64, 64,   // widthxheight in pixels
                                    4,          // number of elements in this sequence
                                    0);         // horizontal padding in between

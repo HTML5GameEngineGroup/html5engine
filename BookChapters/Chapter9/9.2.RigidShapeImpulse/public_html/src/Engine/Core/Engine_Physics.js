@@ -13,6 +13,7 @@ var gEngine = gEngine || { };
 
 gEngine.Physics = (function () {
     var mRelaxationCount = 15;
+    var mRelaxationOffset = 1/mRelaxationCount;
     var mPosCorrectionRate = 0.8;
     var mSystemGravity = -100;
     
@@ -48,8 +49,12 @@ gEngine.Physics = (function () {
     // m is the invMass
     var _applyFriction = function(n, v, f, m) {
         var tangent = vec2.fromValues(n[1], -n[0]);  // perpendicular to n
-        f *= m;
-        if (vec2.dot(v, tangent) < 0) {
+        var tComponent = vec2.dot(v, tangent);
+        if (Math.abs(tComponent) < 0.01)
+            return;
+        
+        f *= m * mRelaxationOffset;
+        if (tComponent < 0) {
             vec2.scale(tangent, tangent, -f);
         } else {
             vec2.scale(tangent, tangent, f);
@@ -68,10 +73,6 @@ gEngine.Physics = (function () {
         var n = collisionInfo.getNormal();
         _applyFriction(n, s1V, s1.getFriction(), s1.getInvMass());
         _applyFriction(n, s2V, -s2.getFriction(), s2.getInvMass());
-        
-        
-        s1V[0] *= (1-s1.getFriction());
-        s2V[0] *= (1-s2.getFriction());
         
         vec2.sub(relativeVelocity, s2V, s1V);
 
@@ -158,7 +159,12 @@ gEngine.Physics = (function () {
         mPosCorrectionRate = r;
     };
     var getRelaxationLoopCount = function() { return mRelaxationCount; };
-    var setRelaxationLoopCount = function(c) { mRelaxationCount = c; };
+    var setRelaxationLoopCount = function(c) { 
+        if (c <= 0)
+            c = 1;
+        mRelaxationCount = c; 
+        mRelaxationOffset = 1/mRelaxationCount;
+    };
     
     var mPublic = {
         initialize: initialize,

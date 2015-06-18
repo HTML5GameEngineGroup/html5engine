@@ -20,9 +20,6 @@ RigidCircle.prototype.collidedCircCirc = function(c1, c2) {
 RigidCircle.prototype.collided = function(otherShape) { 
     var status = false;
     switch (otherShape.rigidType()) {
-        case RigidShape.eRigidType.eRigidPoint:
-            status = this.circContainsPos(this, otherShape.getPosition());
-            break;
         case RigidShape.eRigidType.eRigidCircle:
             status = this.collidedCircCirc(this, otherShape);
             break;

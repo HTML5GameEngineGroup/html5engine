@@ -6,7 +6,7 @@
  */
 
 /*jslint node: true, vars: true */
-/*global gEngine, GameObject, SpriteAnimateRenderable, RigidShape */
+/*global gEngine, GameObject, SpriteAnimateRenderable, RigidCircle, RigidRectangle */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -27,7 +27,12 @@ function Minion(spriteTexture, atX, atY) {
                                 // show each element for mAnimSpeed updates
     GameObject.call(this, this.mMinion);
 
-    var r = new RigidShape(this.getXform());
+    var r;
+    if (Math.random() > 0.5) {
+        r = new RigidCircle(this.getXform(), 7);
+    } else {
+        r = new RigidRectangle(this.getXform(), 17, 14);
+    }
     r.setColor([0, 1, 0, 1]);
     r.setDrawBounds(true);
     this.setRigidShape(r);

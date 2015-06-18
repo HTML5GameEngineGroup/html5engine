@@ -20,6 +20,8 @@ function Hero(spriteTexture, atX, atY) {
     this.mDye.setElementPixelPositions(0, 120, 0, 180);
     GameObject.call(this, this.mDye);
     var r = new RigidCircle(this.getXform(), 9);
+    r.setMass(0.7);  // less dense than Minions
+    r.setVelocity([0, -1]);
     r.setColor([0, 1, 0, 1]);
     r.setDrawBounds(true);
     this.setRigidShape(r);
@@ -27,6 +29,9 @@ function Hero(spriteTexture, atX, atY) {
 gEngine.Core.inheritPrototype(Hero, GameObject);
 
 Hero.prototype.update = function () {
+    // must call super class update
+    GameObject.prototype.update.call(this);
+   
     // control by WASD
     var xform = this.getXform();
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.W)) {

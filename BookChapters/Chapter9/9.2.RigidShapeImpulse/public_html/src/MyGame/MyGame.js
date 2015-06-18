@@ -14,6 +14,7 @@
 function MyGame() {
     this.kMinionSprite = "assets/minion_sprite.png";
     this.kPlatformTexture = "assets/platform.png";
+    this.kPrompt = "RigidBody Physics!";
     
     this.kCollideColor = [1, 0, 0, 1];
     this.kNormalColor = [0, 1, 0, 1];
@@ -25,14 +26,11 @@ function MyGame() {
 
     // the hero and the support objects
     this.mHero = null;
-    this.mMinion = null;
-    this.mPlatform = null;
     
-    this.mSelectedObj = null;
     this.mCollidedObj = null;
-    this.mAllObjects = new GameObjectSet();
+    this.mAllPlatforms = new GameObjectSet();
+    this.mAllMinions = new GameObjectSet();
     
-    this.kPrompt = "[H:hero M:minion P:platform]: ";
     this.mEcho = "Hero";
 }
 gEngine.Core.inheritPrototype(MyGame, Scene);
@@ -60,38 +58,35 @@ MyGame.prototype.initialize = function () {
     gEngine.DefaultResources.setGlobalAmbientIntensity(3);
     
     // create a few objects ...
-    var i, rx, ry, obj; 
+    var i, j, rx, ry, obj, dy, dx;
+    dx = 80;
     ry = Math.random() * 5 + 20;
     for (i = 0; i<4; i++) {
-        rx = 20 + Math.random() * 80;
-        obj = new Hero(this.kMinionSprite, rx, ry);
-        this.mAllObjects.addToSet(obj);
-        
-        rx = rx + 20 + Math.random() * 80;
-        obj = new Minion(this.kMinionSprite, rx, ry);
-        this.mAllObjects.addToSet(obj);
-        
         rx = 20 + Math.random() * 160;
-        obj = new Platform(this.kPlatformTexture, rx, ry);
-        this.mAllObjects.addToSet(obj);
+        obj = new Minion(this.kMinionSprite, rx, ry);
+        this.mAllMinions.addToSet(obj);
+        
+        for (j=0; j<2; j++) {
+            rx = 20 + (j*dx) + Math.random() * dx;
+            dy = 10 * Math.random() - 5;
+            obj = new Platform(this.kPlatformTexture, rx, ry+dy);
+            this.mAllPlatforms.addToSet(obj);
+        }
         
         ry = ry + 20 + Math.random() * 10;
     }
     
+    rx = 15;
+    ry = 2;
+    for (i = 0; i<7; i++) {
+        obj = new Platform(this.kPlatformTexture, rx, ry);
+        this.mAllPlatforms.addToSet(obj);
+        rx += 30;
+    }
+    
     // 
     // the important objects
-    this.mHero = new Hero(this.kMinionSprite, 20, 30);
-    this.mAllObjects.addToSet(this.mHero);
-    
-    this.mMinion = new Minion(this.kMinionSprite, 50, 50);
-    this.mAllObjects.addToSet(this.mMinion);
-    
-    this.mPlatform = new Platform(this.kPlatformTexture, 20, 30);
-    this.mAllObjects.addToSet(this.mPlatform);
-    
-    
-    this.mSelectedObj = this.mHero;
-    this.mSelectedObj.setVisibility(false);
+    this.mHero = new Hero(this.kMinionSprite, 20, 30);   
     
     this.mMsg = new FontRenderable(this.kPrompt);
     this.mMsg.setColor([0, 0, 0, 1]);
@@ -106,7 +101,9 @@ MyGame.prototype.draw = function () {
 
     this.mCamera.setupViewProjection();
     
-    this.mAllObjects.draw(this.mCamera);
+    this.mAllPlatforms.draw(this.mCamera);
+    this.mAllMinions.draw(this.mCamera);
+    this.mHero.draw(this.mCamera);
     this.mMsg.draw(this.mCamera);
 };
 
@@ -115,54 +112,12 @@ MyGame.prototype.draw = function () {
 MyGame.prototype.update = function () {
     
     this.mCamera.update();  // to ensure proper interploated movement effects
-    this.mAllObjects.update();  // updates everything
- 
-    if (this.mCamera.isMouseInViewport()) {
-        if (gEngine.Input.isButtonPressed(gEngine.Input.mouseButton.Left)) {
-            var x = this.mCamera.mouseWCX();
-            var y = this.mCamera.mouseWCY();
-            this.mSelectedObj.getXform().setPosition(x, y);
-        }
-    }
     
-    this._selectCharacter();
-    this._detectCollision();
+   this.mAllPlatforms.update();
+   this.mAllMinions.update();
+   this.mHero.update();
+ 
+    this._physicsSimulation();
     
     this.mMsg.setText(this.kPrompt + this.mEcho);
-};
-
-MyGame.prototype._selectCharacter = function () {
-    // select which character to work with
-    this.mSelectedObj.setVisibility(true);
-    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.H)) {
-        this.mSelectedObj = this.mHero;
-        this.mEcho = "Hero";
-    }
-    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.M)) {
-        this.mSelectedObj = this.mMinion;
-        this.mEcho = "Minion";
-    }
-    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.P)) {
-        this.mSelectedObj = this.mPlatform;
-        this.mEcho = "Platform";
-    }
-    this.mSelectedObj.setVisibility(false);
-};
-
-MyGame.prototype._detectCollision = function () {
-    
-    var i, obj;
-    this.mCollidedObj = null;
-    var selectedRigidShape = this.mSelectedObj.getRigidShape();
-    for (i = 0; i<this.mAllObjects.size(); i++) {
-        obj = this.mAllObjects.getObjectAt(i);
-        if (obj !== this.mSelectedObj) {
-            if (selectedRigidShape.collided(obj.getRigidShape())) {
-                this.mCollidedObj = obj;
-                this.mCollidedObj.getRigidShape().setColor(this.kCollideColor);
-            } else {
-                obj.getRigidShape().setColor(this.kNormalColor);
-            }
-        }
-    }
 };

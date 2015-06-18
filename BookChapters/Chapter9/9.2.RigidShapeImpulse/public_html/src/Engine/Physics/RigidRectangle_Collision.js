@@ -42,9 +42,6 @@ RigidRectangle.prototype.collided = function(otherShape, collisionInfo) {
     var status = false;
     collisionInfo.setDepth(0);
     switch (otherShape.rigidType()) {
-        case RigidShape.eRigidType.eRigidPoint:
-            status = this.rectContainsPos(this, otherShape.getPosition());
-            break;
         case RigidShape.eRigidType.eRigidCircle:
             status = this.collidedRectCirc(this, otherShape, collisionInfo);
             break;

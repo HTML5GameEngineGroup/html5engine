@@ -44,7 +44,7 @@ RigidShape.prototype.collidedRectCirc = function(rect1Shape, circ2Shape, collisi
 
     var isInside = false;
 
-    if (this.RectContainsPoint(rect1Shape, circ2Pos))  {
+    if (this.rectContainsPos(rect1Shape, circ2Pos))  {
         isInside = true;
         // Find closest axis
         if (Math.abs(vFrom1to2[0] - alongX) < Math.abs(vFrom1to2[1] - alongY)) {
@@ -75,13 +75,14 @@ RigidShape.prototype.collidedRectCirc = function(rect1Shape, circ2Shape, collisi
     }
 
     var len = vec2.length(normal);
-    var depth = circ2Shape.getRadius() - len;
-    
+    var depth;        
+        
     vec2.scale(normal, normal, 1/len); // normalize normal
     if (isInside) { //flip normal if inside the rect
         vec2.scale(normal, normal, -1);
+        depth = circ2Shape.getRadius() + len;
     } else {
-        collisionInfo.setNormal(normal);
+        depth = circ2Shape.getRadius() - len;
     }
     
     collisionInfo.setNormal(normal);
@@ -90,18 +91,5 @@ RigidShape.prototype.collidedRectCirc = function(rect1Shape, circ2Shape, collisi
 };
 
 RigidShape.prototype.collided = function(otherShape, collisionInfo) { 
-    var status = false;
-    collisionInfo.setDepth(0);
-    switch (otherShape.rigidType()) {
-        // case RigidShape.eRigidType.eRigidPoint:
-        //    point-point collision is always false;
-        
-        case RigidShape.eRigidType.eRigidCircle:
-            status = this.circContainsPos(otherShape, this.getPosition());
-            break;
-        case RigidShape.eRigidType.eRigidRectangle:
-            status = this.rectContainsPos(otherShape, this.getPosition());
-            break;
-    }
-    return status;
+    return false;
 };

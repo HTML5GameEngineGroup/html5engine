@@ -19,6 +19,7 @@ function Platform(texture, atX, atY) {
     GameObject.call(this, this.mPlatform);
 
     var rigidShape = new RigidRectangle(this.getXform(), 25, 5);
+    rigidShape.setMass(0);  // ensures no movements!
     rigidShape.setDrawBounds(true);
     this.setRigidShape(rigidShape);
 }

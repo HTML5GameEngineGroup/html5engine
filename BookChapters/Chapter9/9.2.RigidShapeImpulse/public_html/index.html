@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>Example 8.7: Shadow Shaders </title>
+    <title>Example 9.2: Rigid Shape Impulse</title>
 </head>
 <!--Use embedded shader code for now, in order to remove async loading complexity.-->
 
@@ -21,6 +21,7 @@
             <script type="text/javascript" src="src/Engine/Core/Engine_VertexBuffer.js"></script>
             <script type="text/javascript" src="src/Engine/Core/Engine_GameLoop.js"></script>
             <script type="text/javascript" src="src/Engine/Core/Engine_Input.js"></script>
+            <script type="text/javascript" src="src/Engine/Core/Engine_Physics.js"></script>
             <!-- Resource support -->
                 <script type="text/javascript" src="src/Engine/Core/Resources/Engine_ResourceMap.js"></script>
                 <script type="text/javascript" src="src/Engine/Core/Resources/Engine_TextFileLoader.js"></script>
@@ -39,6 +40,7 @@
             <script type="text/javascript" src="src/Engine/Utils/Interpolate.js"></script>
             <script type="text/javascript" src="src/Engine/Utils/InterpolateVec2.js"></script>
             <script type="text/javascript" src="src/Engine/Utils/ShakePosition.js"></script>
+            <script type="text/javascript" src="src/Engine/Utils/CollisionInfo.js"></script>
         <!-- Renderables -->
             <script type="text/javascript" src="src/Engine/Renderables/Renderable.js"></script>
             <script type="text/javascript" src="src/Engine/Renderables/TextureRenderable.js"></script>
@@ -61,9 +63,12 @@
         <!-- Physics -->
             <script type="text/javascript" src="src/Engine/Physics/RigidShape.js"></script>
             <script type="text/javascript" src="src/Engine/Physics/RigidShape_Collision.js"></script>
+            <script type="text/javascript" src="src/Engine/Physics/RigidShape_CollisionResolution.js"></script>
+            <script type="text/javascript" src="src/Engine/Physics/RigidShape_Physics.js"></script>
             <script type="text/javascript" src="src/Engine/Physics/RigidCircle.js"></script>
             <script type="text/javascript" src="src/Engine/Physics/RigidCircle_Collision.js"></script>
             <script type="text/javascript" src="src/Engine/Physics/RigidRectangle.js"></script>
+            <script type="text/javascript" src="src/Engine/Physics/RigidRectangle_Collision.js"></script>
             <script type="text/javascript" src="src/Engine/Physics/RigidRectangle_Collision.js"></script>
         <!-- Shaders -->
             <script type="text/javascript" src="src/Engine/Shaders/SimpleShader.js"></script>
@@ -86,6 +91,7 @@
    
     <!-- Client game code -->
         <script type="text/javascript" src="src/MyGame/MyGame.js"></script>
+        <script type="text/javascript" src="src/MyGame/MyGame_Physics.js"></script>
         <!-- Objects -->
             <script type="text/javascript" src="src/MyGame/Objects/Hero.js"></script>
             <script type="text/javascript" src="src/MyGame/Objects/Minion.js"></script>

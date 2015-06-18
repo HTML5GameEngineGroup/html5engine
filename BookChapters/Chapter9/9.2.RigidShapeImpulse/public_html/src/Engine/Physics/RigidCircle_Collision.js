@@ -38,9 +38,6 @@ RigidCircle.prototype.collided = function(otherShape, collisionInfo) {
     var status = false;
     collisionInfo.setDepth(0);
     switch (otherShape.rigidType()) {
-        case RigidShape.eRigidType.eRigidPoint:
-            status = this.circContainsPos(this, otherShape.getPosition());
-            break;
         case RigidShape.eRigidType.eRigidCircle:
             status = this.collidedCircCirc(this, otherShape, collisionInfo);
             break;

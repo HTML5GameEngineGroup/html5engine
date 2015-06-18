@@ -96,6 +96,6 @@ GameObject.prototype.draw = function (aCamera) {
         this.mRenderComponent.draw(aCamera);
     }
     if (this.mRigidShape !== null) {
-            this.mRigidShape.draw(aCamera);
+        this.mRigidShape.draw(aCamera);
     }
 };

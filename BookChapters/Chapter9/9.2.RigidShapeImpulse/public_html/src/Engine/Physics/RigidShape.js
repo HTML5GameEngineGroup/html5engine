@@ -9,7 +9,7 @@
 "use strict";
 
 RigidShape.eRigidType = Object.freeze({
-    eRigidPoint: 0,
+    eRigidAbstract: 0,
     eRigidCircle: 1,
     eRigidRectangle: 2
 });
@@ -23,10 +23,17 @@ function RigidShape(xform) {
     this.mPositionMark2 = new LineRenderable();
     
     this.mDrawBounds = false;
+    
+    // physical properties
+    this.mInvMass = 1;
+    this.mRestitution = 0.8;
+    this.mVelocity = vec2.fromValues(0, 0);
+    this.mFriction = 0.25;
+    this.mGravity = vec2.fromValues(0, gEngine.Physics.getSystemGravity());
 }
 
 RigidShape.prototype.rigidType = function () {
-    return RigidShape.eRigidType.eRigidPoint;
+    return RigidShape.eRigidType.eRigidAbstract;
 };
 
 RigidShape.prototype.draw = function (aCamera) {
@@ -47,9 +54,6 @@ RigidShape.prototype.draw = function (aCamera) {
     this.mPositionMark2.draw(aCamera);
     
 };
-
-RigidShape.prototype.update = function () {};
-
 
 RigidShape.prototype.getPosition = function() { 
     return this.mXform.getPosition(); 

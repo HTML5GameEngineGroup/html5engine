@@ -40,7 +40,6 @@ RigidShape.prototype.collidedRectCirc = function(rect1Shape, circ2Shape) {
     vec2.subtract(vFrom1to2, circ2Pos, rect1Pos);
     var vec = vec2.clone(vFrom1to2);
 
-
     var alongX = rect1Shape.getWidth() / 2;
     var alongY = rect1Shape.getHeight() / 2;
 
@@ -57,17 +56,5 @@ RigidShape.prototype.collidedRectCirc = function(rect1Shape, circ2Shape) {
 };
 
 RigidShape.prototype.collided = function(otherShape) { 
-    var status = false;
-    switch (otherShape.rigidType()) {
-        // case RigidShape.eRigidType.eRigidPoint:
-        //    point-point collision is always false;
-        
-        case RigidShape.eRigidType.eRigidCircle:
-            status = this.circContainsPos(otherShape, this.getPosition());
-            break;
-        case RigidShape.eRigidType.eRigidRectangle:
-            status = this.rectContainsPos(otherShape, this.getPosition());
-            break;
-    }
-    return status;
+    return false;
 };

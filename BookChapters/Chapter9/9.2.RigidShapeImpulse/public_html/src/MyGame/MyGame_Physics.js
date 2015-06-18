@@ -10,18 +10,22 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 MyGame.prototype._physicsSimulation = function() {
-    gEngine.Physics.beginRelaxation();
-    var collisionInfo = new CollisionInfo();
-    var i, obj, rShape;
-    var heroRigid = this.mHero.getRigidShape();
-    do {
-        // Hero collide with platforms
-        for (i = 0; i<this.mAllPlatforms.size(); i++) {
-            obj = this.mAllPlatforms.getObjectAt(i);
-            rShape = obj.getRigidShape();
-            if (heroRigid.collided(rShape, collisionInfo)) {
-                gEngine.Physics.resolveCollision(heroRigid, rShape, collisionInfo);
-            }
-        }
-    } while (!gEngine.Physics.doneRelaxation());
+    
+    // Hero platform
+    gEngine.Physics.processObjSet(this.mHero, this.mAllPlatforms);
+    
+    // Hero Minion
+    gEngine.Physics.processObjSet(this.mHero, this.mAllMinions);
+    
+    // Minion platform
+    gEngine.Physics.processSetSet(this.mAllMinions, this.mAllPlatforms);
+    
+    // DyePack platform
+    gEngine.Physics.processSetSet(this.mAllDyePacks, this.mAllPlatforms);
+    
+    // DyePack Minions
+    gEngine.Physics.processSetSet(this.mAllDyePacks, this.mAllMinions);
+    
+    // Hero DyePack
+    gEngine.Physics.processObjSet(this.mHero, this.mAllDyePacks);
 };

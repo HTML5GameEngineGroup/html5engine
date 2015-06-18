@@ -5,14 +5,14 @@
  * simple sprite animation behavior behavior
  */
 
-/*jslint node: true, vars: true */
-/*global gEngine, GameObject, SpriteAnimateRenderable, RigidCircle */
+/*jslint node: true, vars: true, white: true */
+/*global gEngine, GameObject, SpriteAnimateRenderable, RigidCircle, vec2 */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 function Minion(spriteTexture, atX, atY) {
-    this.kDelta = 0.2;
+    this.kSpeed = 5;
     this.mMinion = new SpriteAnimateRenderable(spriteTexture);
 
     this.mMinion.setColor([1, 1, 1, 0]);
@@ -29,13 +29,37 @@ function Minion(spriteTexture, atX, atY) {
 
     var r = new RigidCircle(this.getXform(), 6.5);
     r.setMass(2);
+    r.setGravity([0, 0]);
+    r.setFriction(0);
     r.setColor([0, 1, 0, 1]);
     r.setDrawBounds(true);
+    if (Math.random() > 0.5) {
+        r.setVelocity([this.kSpeed, 0]);
+    } else {
+        r.setVelocity([-this.kSpeed, 0]);
+    }
     this.setRigidShape(r);
+
+    this.mHasCollision = false;
 }
 gEngine.Core.inheritPrototype(Minion, GameObject);
 
 Minion.prototype.update = function () {
+    GameObject.prototype.update.call(this);
     // remember to update this.mMinion's animation
     this.mMinion.updateAnimation();
+    
+    if (this.mHasCollision) {
+        this.flipVelocity();
+        this.mHasCollision = false;
+    }
+};
+
+Minion.prototype.flipVelocity = function () {
+    var v = this.getRigidShape().getVelocity();
+    vec2.scale(v, v, -1);
+};
+
+Minion.prototype.hasCollision = function () {
+    this.mHasCollision = true;
 };

@@ -11,7 +11,7 @@
 
 RigidCircle.prototype.collidedCircCirc = function(c1, c2, collisionInfo) {
     var vFrom1to2 = [0, 0];
-    vec2.sub(vFrom1to2, c1.getPosition(), c2.getPosition());
+    vec2.sub(vFrom1to2, c2.getPosition(), c1.getPosition());
     var rSum = c1.getRadius() + c2.getRadius();
     var sqLen = vec2.squaredLength(vFrom1to2);
     if (sqLen > (rSum * rSum)) {
@@ -36,6 +36,7 @@ RigidCircle.prototype.collidedCircCirc = function(c1, c2, collisionInfo) {
 
 RigidCircle.prototype.collided = function(otherShape, collisionInfo) { 
     var status = false;
+    var n;
     collisionInfo.setDepth(0);
     switch (otherShape.rigidType()) {
         case RigidShape.eRigidType.eRigidCircle:
@@ -43,6 +44,9 @@ RigidCircle.prototype.collided = function(otherShape, collisionInfo) {
             break;
         case RigidShape.eRigidType.eRigidRectangle:
             status = this.collidedRectCirc(otherShape, this, collisionInfo);
+            n = collisionInfo.getNormal();
+            n[0] = -n[0];
+            n[1] = -n[1];
             break;
     }
     return status;

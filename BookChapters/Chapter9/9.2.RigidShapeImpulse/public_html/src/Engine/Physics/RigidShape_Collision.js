@@ -43,7 +43,6 @@ RigidShape.prototype.collidedRectCirc = function(rect1Shape, circ2Shape, collisi
     vec[1] = this.clamp(vec[1], -alongY, alongY);
 
     var isInside = false;
-
     if (this.rectContainsPos(rect1Shape, circ2Pos))  {
         isInside = true;
         // Find closest axis
@@ -74,7 +73,7 @@ RigidShape.prototype.collidedRectCirc = function(rect1Shape, circ2Shape, collisi
         return false; //no collision exit before costly square root
     }
 
-    var len = vec2.length(normal);
+    var len = Math.sqrt(distSqr);
     var depth;        
         
     vec2.scale(normal, normal, 1/len); // normalize normal

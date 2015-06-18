@@ -6,7 +6,7 @@
 /*jslint node: true, vars: true, white: true */
 /*global gEngine, Scene, GameObjectSet, TextureObject, Camera, vec2,
   FontRenderable,
-  GameObject, Hero, Minion, Dye, Platform, */
+  GameObject, Hero, Minion, Dye, Platform, Wall, DyePack */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -14,10 +14,9 @@
 function MyGame() {
     this.kMinionSprite = "assets/minion_sprite.png";
     this.kPlatformTexture = "assets/platform.png";
+    this.kWallTexture = "assets/wall.png";
+    this.kDyePackTexture = "assets/dye_pack.png";
     this.kPrompt = "RigidBody Physics!";
-    
-    this.kCollideColor = [1, 0, 0, 1];
-    this.kNormalColor = [0, 1, 0, 1];
 
     // The camera to view the scene
     this.mCamera = null;
@@ -30,19 +29,22 @@ function MyGame() {
     this.mCollidedObj = null;
     this.mAllPlatforms = new GameObjectSet();
     this.mAllMinions = new GameObjectSet();
-    
-    this.mEcho = "Hero";
+    this.mAllDyePacks = new GameObjectSet();
 }
 gEngine.Core.inheritPrototype(MyGame, Scene);
 
 MyGame.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kMinionSprite);
     gEngine.Textures.loadTexture(this.kPlatformTexture);
+    gEngine.Textures.loadTexture(this.kWallTexture);
+    gEngine.Textures.loadTexture(this.kDyePackTexture);
 };
 
 MyGame.prototype.unloadScene = function () {    
     gEngine.Textures.unloadTexture(this.kMinionSprite);
     gEngine.Textures.unloadTexture(this.kPlatformTexture);
+    gEngine.Textures.unloadTexture(this.kWallTexture);
+    gEngine.Textures.unloadTexture(this.kDyePackTexture);
 };
 
 MyGame.prototype.initialize = function () {
@@ -76,12 +78,24 @@ MyGame.prototype.initialize = function () {
         ry = ry + 20 + Math.random() * 10;
     }
     
-    rx = 15;
+    // the floor 
+    rx = -15;
     ry = 2;
-    for (i = 0; i<7; i++) {
+    for (i = 0; i<9; i++) {
         obj = new Platform(this.kPlatformTexture, rx, ry);
         this.mAllPlatforms.addToSet(obj);
         rx += 30;
+    }
+    
+    // the left and right walls
+    ry = 12;
+    for (i = 0; i<8; i++) {
+        obj = new Wall(this.kWallTexture, 5, ry);
+        this.mAllPlatforms.addToSet(obj);
+        
+        obj = new Wall(this.kWallTexture, 195, ry);
+        this.mAllPlatforms.addToSet(obj);
+        ry += 16;
     }
     
     // 
@@ -90,7 +104,7 @@ MyGame.prototype.initialize = function () {
     
     this.mMsg = new FontRenderable(this.kPrompt);
     this.mMsg.setColor([0, 0, 0, 1]);
-    this.mMsg.getXform().setPosition(1, 2);
+    this.mMsg.getXform().setPosition(10, 110);
     this.mMsg.setTextHeight(3);
 };
 
@@ -103,6 +117,7 @@ MyGame.prototype.draw = function () {
     
     this.mAllPlatforms.draw(this.mCamera);
     this.mAllMinions.draw(this.mCamera);
+    this.mAllDyePacks.draw(this.mCamera);
     this.mHero.draw(this.mCamera);
     this.mMsg.draw(this.mCamera);
 };
@@ -113,11 +128,27 @@ MyGame.prototype.update = function () {
     
     this.mCamera.update();  // to ensure proper interploated movement effects
     
-   this.mAllPlatforms.update();
-   this.mAllMinions.update();
-   this.mHero.update();
+    this.mAllPlatforms.update();
+    this.mAllMinions.update();
+    this.mHero.update();
+    this.mAllDyePacks.update();
+    
+    // create dye pack and remove the expired ones ...
+    if (gEngine.Input.isButtonClicked(gEngine.Input.mouseButton.Left)) {
+        if (this.mCamera.isMouseInViewport()) {
+            var d = new DyePack(this.kDyePackTexture, this.mCamera.mouseWCX(), this.mCamera.mouseWCY());
+            this.mAllDyePacks.addToSet(d);
+        }
+    }
+    var i, obj;
+    for (i=0; i<this.mAllDyePacks.size(); i++) {
+        obj = this.mAllDyePacks.getObjectAt(i);
+        if (obj.hasExpired()) {
+            this.mAllDyePacks.removeFromSet(obj);
+        }
+    }
  
     this._physicsSimulation();
     
-    this.mMsg.setText(this.kPrompt + this.mEcho);
+    this.mMsg.setText(this.kPrompt + ": DyePack=" + this.mAllDyePacks.size());
 };

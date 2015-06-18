@@ -46,7 +46,7 @@ RigidRectangle.prototype.collided = function(otherShape, collisionInfo) {
             status = this.collidedRectCirc(this, otherShape, collisionInfo);
             break;
         case RigidShape.eRigidType.eRigidRectangle:
-            status = this.collidedRectRect(otherShape, this, collisionInfo);
+            status = this.collidedRectRect(this, otherShape, collisionInfo);
             break;
     }
     return status;

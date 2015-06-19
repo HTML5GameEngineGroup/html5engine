@@ -24,7 +24,7 @@ function DyePack(texture, atX, atY) {
     var rigidShape = new RigidCircle(this.getXform(), 1.5);
     rigidShape.setMass(0.1);  // ensures no movements!
     rigidShape.setDrawBounds(true);
-    this.setRigidShape(rigidShape);
+    this.setPhysicsComponent(rigidShape);
 }
 gEngine.Core.inheritPrototype(DyePack, GameObject);
 

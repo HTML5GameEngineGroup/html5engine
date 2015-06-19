@@ -35,7 +35,7 @@ function Minion(spriteTexture, atX, atY) {
     }
     r.setColor([0, 1, 0, 1]);
     r.setDrawBounds(true);
-    this.setRigidShape(r);
+    this.setPhysicsComponent(r);
 }
 gEngine.Core.inheritPrototype(Minion, GameObject);
 

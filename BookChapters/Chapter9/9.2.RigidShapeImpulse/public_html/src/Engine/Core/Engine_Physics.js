@@ -110,8 +110,8 @@ gEngine.Physics = (function () {
         return ((mRelaxationLoopCount > 0) && oneCollision); 
     };
     var processObjObj = function(obj1, obj2) {
-        var s1 = obj1.getRigidShape();
-        var s2 = obj2.getRigidShape();
+        var s1 = obj1.getPhysicsComponent();
+        var s2 = obj2.getPhysicsComponent();
         if (s1 === s2)
             return;
         beginRelaxation();
@@ -122,12 +122,12 @@ gEngine.Physics = (function () {
         }
     };
     var processObjSet = function(obj, set) {
-        var s1 = obj.getRigidShape();
+        var s1 = obj.getPhysicsComponent();
         var i, s2;
         beginRelaxation();
         while (continueRelaxation()) {
             for (i=0; i<set.size(); i++) {
-                s2 = set.getObjectAt(i).getRigidShape();
+                s2 = set.getObjectAt(i).getPhysicsComponent();
                 if ((s1 !== s2) && (s1.collided(s2, mCollisionInfo))) {
                     resolveCollision(s1, s2, mCollisionInfo);
                 }
@@ -139,9 +139,9 @@ gEngine.Physics = (function () {
         beginRelaxation();
         while (continueRelaxation()) {
             for (i=0; i<set1.size(); i++) {
-                s1 = set1.getObjectAt(i).getRigidShape();
+                s1 = set1.getObjectAt(i).getPhysicsComponent();
                 for (j=0; j<set2.size(); j++) {
-                    s2 = set2.getObjectAt(j).getRigidShape();
+                    s2 = set2.getObjectAt(j).getPhysicsComponent();
                     if ((s1 !== s2) && (s1.collided(s2, mCollisionInfo))) {
                         resolveCollision(s1, s2, mCollisionInfo);
                     }

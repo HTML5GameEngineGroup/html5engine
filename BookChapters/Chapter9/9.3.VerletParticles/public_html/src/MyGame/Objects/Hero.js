@@ -25,16 +25,16 @@ function Hero(spriteTexture, atX, atY) {
     r.setRestitution(0.3);
     r.setColor([0, 1, 0, 1]);
     r.setDrawBounds(true);
-    this.setRigidShape(r);
+    this.setPhysicsComponent(r);
 }
 gEngine.Core.inheritPrototype(Hero, GameObject);
 
 Hero.prototype.update = function () {
     // must call super class update
     GameObject.prototype.update.call(this);
-   
+
     // control by WASD
-    var v = this.getRigidShape().getVelocity();
+    var v = this.getPhysicsComponent().getVelocity();
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.W)) {
         v[1] += this.kYDelta;
     }

@@ -20,6 +20,6 @@ function Platform(texture, atX, atY) {
 
     var rigidShape = new RigidRectangle(this.getXform(), 25, 5);
     rigidShape.setDrawBounds(true);
-    this.setRigidShape(rigidShape);
+    this.setPhysicsComponent(rigidShape);
 }
 gEngine.Core.inheritPrototype(Platform, GameObject);

@@ -153,15 +153,15 @@ MyGame.prototype._detectCollision = function () {
     
     var i, obj;
     this.mCollidedObj = null;
-    var selectedRigidShape = this.mSelectedObj.getRigidShape();
+    var selectedRigidShape = this.mSelectedObj.getPhysicsComponent();
     for (i = 0; i<this.mAllObjects.size(); i++) {
         obj = this.mAllObjects.getObjectAt(i);
         if (obj !== this.mSelectedObj) {
-            if (selectedRigidShape.collided(obj.getRigidShape())) {
+            if (selectedRigidShape.collided(obj.getPhysicsComponent())) {
                 this.mCollidedObj = obj;
-                this.mCollidedObj.getRigidShape().setColor(this.kCollideColor);
+                this.mCollidedObj.getPhysicsComponent().setColor(this.kCollideColor);
             } else {
-                obj.getRigidShape().setColor(this.kNormalColor);
+                obj.getPhysicsComponent().setColor(this.kNormalColor);
             }
         }
     }

@@ -13,14 +13,14 @@ function VerletParticle(pos) {
     this.kPadding = 0.5;
     
     this.mPosition = pos;
-    this.mPrevPosition = this.mPosition;
+    this.mPrevPosition = vec2.clone(this.mPosition);
     this.mForce = vec2.fromValues(0, 0);
     this.mGravity = gEngine.Physics.getSystemGravity();
-    this.mPositionMark = new LineRenderable();
+    this.mDrag = 0.99; 
     
+    this.mPositionMark = new LineRenderable();
     this.mDrawBounds = false;
 }
-
 
 VerletParticle.prototype.draw = function (aCamera) {
     if (!this.mDrawBounds) {
@@ -42,26 +42,26 @@ VerletParticle.prototype.draw = function (aCamera) {
 
 VerletParticle.prototype.update = function () {
     this.accumulateForces();
-
     var dt = gEngine.GameLoop.getUpdateIntervalInSeconds();
-    var drag = 0.99;
-    var oldPos = this.mPosition;
+    
+    var p = this.getPosition();
+    var preP = this.mPrevPosition();
     
     // newpos += (pos - prevpos) + (force * dt^2)
     var posDrag = [0, 0];
     var prevPosDrag = [0, 0];
-    vec2.scale(posDrag, this.mPosition, drag);
-    vec2.scale(prevPosDrag, this.mPrevPosition, drag);
+    vec2.scale(posDrag, p, this.mDrag);
+    vec2.scale(prevPosDrag, preP, this.mDrag);
+    //
+    preP[0] = p[0];  // setting this.mPrevPosition!!
+    preP[1] = p[1];
+
     var posDiff = [0, 0];
     vec2.subtract(posDiff ,posDrag, prevPosDrag);
-    var forceOverTime = [0, 0];
-    vec2.scale(forceOverTime, this.mForce, dt*dt);
-    var posAndForce = [0, 0];
-    vec2.add(posAndForce, posDiff, forceOverTime);
-    var newPos = [0, 0];
-    vec2.add(newPos, this.mPosition, posAndForce);
-    this.mPosition = newPos;
-    this.mPrevPosition = oldPos;
+    var overTime = [0, 0];
+    vec2.scale(overTime, this.mForce, dt*dt);
+    vec2.add(overTime, posDiff, overTime);
+    vec2.add(p, p, overTime);
 };
 
 VerletParticle.prototype.accumulateForces = function () {
@@ -69,7 +69,6 @@ VerletParticle.prototype.accumulateForces = function () {
 };
 
 VerletParticle.prototype.setColor = function (color) {
-    this.mColor = color;
     this.mPositionMark.setColor(color);
 };
 
@@ -83,3 +82,9 @@ VerletParticle.prototype.getPsuedoVelocity = function () {
     var vel = [0,0];
     vec2.subtract(vel, this.mPrevPosition, this.mPosition);
     return vel; };
+VerletParticle.prototype.setForce = function (f) { this.mForce = f; };
+VerletParticle.prototype.getForce = function () { return this.mForce; };
+VerletParticle.prototype.setGravity = function (g) { this.mGravity = g; };
+VerletParticle.prototype.getGravity = function () { return this.mGravity; };
+VerletParticle.prototype.setDrag = function (d) { this.mDrag = d; };
+VerletParticle.prototype.getDrag = function () { return this.mDrag; };

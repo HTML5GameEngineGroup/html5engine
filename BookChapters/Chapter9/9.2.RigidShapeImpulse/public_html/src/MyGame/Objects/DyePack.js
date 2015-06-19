@@ -26,7 +26,7 @@ function DyePack(texture, atX, atY) {
     rigidShape.setMass(0.1);
     rigidShape.setGravity([0, 0]);
     rigidShape.setDrawBounds(true);
-    this.setRigidShape(rigidShape);
+    this.setPhysicsComponent(rigidShape);
 }
 gEngine.Core.inheritPrototype(DyePack, GameObject);
 

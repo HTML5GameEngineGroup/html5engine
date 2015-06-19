@@ -38,7 +38,7 @@ function Minion(spriteTexture, atX, atY) {
     } else {
         r.setVelocity([-this.kSpeed, 0]);
     }
-    this.setRigidShape(r);
+    this.setPhysicsComponent(r);
 
     this.mHasCollision = false;
 }
@@ -56,7 +56,7 @@ Minion.prototype.update = function () {
 };
 
 Minion.prototype.flipVelocity = function () {
-    var v = this.getRigidShape().getVelocity();
+    var v = this.getPhysicsComponent().getVelocity();
     vec2.scale(v, v, -1);
 };
 

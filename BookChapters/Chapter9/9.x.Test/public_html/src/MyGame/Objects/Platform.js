@@ -21,6 +21,6 @@ function Platform(texture, atX, atY) {
     var rigidShape = new RigidRectangle(this.getXform(), 30, 3);
     rigidShape.setMass(0);  // ensures no movements!
     rigidShape.setDrawBounds(true);
-    this.setRigidShape(rigidShape);
+    this.setPhysicsComponent(rigidShape);
 }
 gEngine.Core.inheritPrototype(Platform, GameObject);

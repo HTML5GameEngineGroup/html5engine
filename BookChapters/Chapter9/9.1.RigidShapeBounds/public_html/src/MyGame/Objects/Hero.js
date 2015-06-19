@@ -22,7 +22,7 @@ function Hero(spriteTexture, atX, atY) {
     var r = new RigidCircle(this.getXform(), 9);
     r.setColor([0, 1, 0, 1]);
     r.setDrawBounds(true);
-    this.setRigidShape(r);
+    this.setPhysicsComponent(r);
 }
 gEngine.Core.inheritPrototype(Hero, GameObject);
 

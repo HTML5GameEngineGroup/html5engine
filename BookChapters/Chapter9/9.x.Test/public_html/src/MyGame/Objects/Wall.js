@@ -21,6 +21,6 @@ function Wall(texture, atX, atY) {
     var rigidShape = new RigidRectangle(this.getXform(), 2, 16);
     rigidShape.setMass(0);  // ensures no movements!
     rigidShape.setDrawBounds(true);
-    this.setRigidShape(rigidShape);
+    this.setPhysicsComponent(rigidShape);
 }
 gEngine.Core.inheritPrototype(Wall, GameObject);

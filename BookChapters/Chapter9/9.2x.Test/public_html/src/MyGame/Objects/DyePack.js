@@ -19,12 +19,10 @@ function DyePack(texture, atX, atY) {
     this.mDyePack.getXform().setSize(4, 3);
                                 // show each element for mAnimSpeed updates
     GameObject.call(this, this.mDyePack);
-    this.setSpeed(0.5);
-    this.setCurrentFrontDir([1, 0]);
+    this.setSpeed(1);
 
     var rigidShape = new RigidCircle(this.getXform(), 1.5);
-    rigidShape.setMass(0.1);
-    rigidShape.setGravity([0, 0]);
+    rigidShape.setMass(0.1);  // ensures no movements!
     rigidShape.setDrawBounds(true);
     this.setRigidShape(rigidShape);
 }

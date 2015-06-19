@@ -15,7 +15,7 @@ gEngine.Physics = (function () {
     var mRelaxationCount = 15;
     var mRelaxationOffset = 1/mRelaxationCount;
     var mPosCorrectionRate = 0.8;
-    var mSystemGravity = -50;
+    var mSystemGravity = -25;
     
     var mRelaxationLoopCount = 0;
     var mHasOneCollision = false;

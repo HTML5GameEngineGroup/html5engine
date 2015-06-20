@@ -192,8 +192,8 @@ MyGame.prototype.draw = function () {
     gEngine.LayerManager.drawAllLayers(this.mCamera);
 
     if (this.mShowHeroCam) {
-        this.mHeroCam.setupViewProjection();
-        gEngine.LayerManager.drawAllLayers(this.mHeroCam);
+        this.mParallaxCam.setupViewProjection();
+        gEngine.LayerManager.drawAllLayers(this.mParallaxCam);
     }
 };
 

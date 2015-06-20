@@ -120,6 +120,10 @@ gEngine.DefaultResources = (function () {
 
          // Illumination Shader
         gEngine.TextFileLoader.unloadTextFile(kIllumFS);
+        
+        // Shadow shaders
+        gEngine.TextFileLoader.unloadTextFile(kShadowReceiverFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
+        gEngine.TextFileLoader.unloadTextFile(kShadowCasterFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
 
         // default font
         gEngine.Fonts.unloadFont(kDefaultFont);

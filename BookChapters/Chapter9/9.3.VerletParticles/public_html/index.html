@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>Example 9.2: Rigid Shape Impulse</title>
+    <title>Example 9.3: Verlet Particles</title>
 </head>
 <!--Use embedded shader code for now, in order to remove async loading complexity.-->
 
@@ -22,6 +22,7 @@
             <script type="text/javascript" src="src/Engine/Core/Engine_GameLoop.js"></script>
             <script type="text/javascript" src="src/Engine/Core/Engine_Input.js"></script>
             <script type="text/javascript" src="src/Engine/Core/Engine_Physics.js"></script>
+            <script type="text/javascript" src="src/Engine/Core/Engine_ParticleSystem.js"></script>
             <!-- Resource support -->
                 <script type="text/javascript" src="src/Engine/Core/Resources/Engine_ResourceMap.js"></script>
                 <script type="text/javascript" src="src/Engine/Core/Resources/Engine_TextFileLoader.js"></script>
@@ -52,6 +53,7 @@
             <script type="text/javascript" src="src/Engine/Renderables/LineRenderable.js"></script>
             <script type="text/javascript" src="src/Engine/Renderables/LightRenderable.js"></script>
             <script type="text/javascript" src="src/Engine/Renderables/IllumRenderable.js"></script>
+            <script type="text/javascript" src="src/Engine/Renderables/ParticleRenderable.js"></script>
         <!-- Shadows -->
             <script type="text/javascript" src="src/Engine/Shadows/ShadowCaster.js"></script>
             <script type="text/javascript" src="src/Engine/Shadows/ShadowReceiver.js"></script>
@@ -60,6 +62,10 @@
             <script type="text/javascript" src="src/Engine/GameObjects/GameObject.js"></script>
             <script type="text/javascript" src="src/Engine/GameObjects/GameObject_PixelCollision.js"></script>
             <script type="text/javascript" src="src/Engine/GameObjects/GameObjectSet.js"></script>
+        <!-- Particles -->
+            <script type="text/javascript" src="src/Engine/Particles/VerletParticle.js"></script>
+            <script type="text/javascript" src="src/Engine/Particles/ParticleGameObject.js"></script>
+            <script type="text/javascript" src="src/Engine/Particles/ParticleGameObjectSet.js"></script>
         <!-- Physics -->
             <script type="text/javascript" src="src/Engine/Physics/RigidShape.js"></script>
             <script type="text/javascript" src="src/Engine/Physics/RigidShape_Collision.js"></script>
@@ -96,6 +102,7 @@
             <script type="text/javascript" src="src/MyGame/Objects/Platform.js"></script>
             <script type="text/javascript" src="src/MyGame/Objects/Wall.js"></script>
             <script type="text/javascript" src="src/MyGame/Objects/DyePack.js"></script>
+            <script type="text/javascript" src="src/MyGame/Objects/Particle.js"></script>
     
     <canvas id="GLCanvas" width="1280" height="720">
         <!-- GLCanvas is the area we will draw in: a 640x480 area. -->

@@ -29,7 +29,7 @@ function Hero(spriteTexture, atX, atY) {
 }
 gEngine.Core.inheritPrototype(Hero, GameObject);
 
-Hero.prototype.update = function () {
+Hero.prototype.update = function (dyePacks) {
     // must call super class update
     GameObject.prototype.update.call(this);
 
@@ -46,5 +46,18 @@ Hero.prototype.update = function () {
     }
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.D)) {
         v[0] += this.kXDelta;
+    }
+    
+    // now interact with the dyePack ...
+    var i, obj;
+    var heroBounds = this.getBBox();
+    var p = this.getXform().getPosition();
+    for (i=0; i<dyePacks.size(); i++) {
+        obj = dyePacks.getObjectAt(i);
+        // chase after hero
+        obj.rotateObjPointTo(p, 0.8);
+        if (obj.getBBox().intersectsBound(heroBounds)) {
+            dyePacks.removeFromSet(obj);
+        }
     }
 };

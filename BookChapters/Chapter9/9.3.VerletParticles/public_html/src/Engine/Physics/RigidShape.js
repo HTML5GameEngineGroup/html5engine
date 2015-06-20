@@ -28,7 +28,7 @@ function RigidShape(xform) {
     this.mRestitution = 0.8;
     this.mVelocity = vec2.fromValues(0, 0);
     this.mFriction = 0.3;
-    this.mGravity = vec2.fromValues(0, gEngine.Physics.getSystemGravity());
+    this.mGravity = gEngine.Physics.getSystemGravity();
 }
 
 RigidShape.prototype.rigidType = function () {

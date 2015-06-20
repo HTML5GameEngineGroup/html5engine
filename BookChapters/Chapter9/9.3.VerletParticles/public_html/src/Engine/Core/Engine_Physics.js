@@ -15,7 +15,7 @@ gEngine.Physics = (function () {
     var mRelaxationCount = 15;
     var mRelaxationOffset = 1/mRelaxationCount;
     var mPosCorrectionRate = 0.8;
-    var mSystemGravity = -50;
+    var mSystemGravity = [0, -50];
     
     var mRelaxationLoopCount = 0;
     var mHasOneCollision = false;
@@ -109,6 +109,8 @@ gEngine.Physics = (function () {
         mRelaxationLoopCount = mRelaxationLoopCount - 1;
         return ((mRelaxationLoopCount > 0) && oneCollision); 
     };
+    
+    // Rigid Shape interactions: two game objects
     var processObjObj = function(obj1, obj2) {
         var s1 = obj1.getPhysicsComponent();
         var s2 = obj2.getPhysicsComponent();
@@ -121,6 +123,8 @@ gEngine.Physics = (function () {
             }
         }
     };
+    
+    // Rigid Shape interactions: a game object and a game object set
     var processObjSet = function(obj, set) {
         var s1 = obj.getPhysicsComponent();
         var i, s2;
@@ -134,6 +138,8 @@ gEngine.Physics = (function () {
             }
         }
     };
+    
+    // Rigid Shape interactions: two game object sets
     var processSetSet = function(set1, set2) {
         var i, j, s1, s2;
         beginRelaxation();

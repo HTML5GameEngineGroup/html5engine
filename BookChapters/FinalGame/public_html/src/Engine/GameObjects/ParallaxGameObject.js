@@ -41,7 +41,7 @@ ParallaxGameObject.prototype._refPosUpdate= function () {
     var deltaT = vec2.fromValues(0, 0);
     vec2.sub(deltaT, this.mCameraWCCenterRef, this.mRefCamera.getWCCenter());
     this.setWCTranslationBy(deltaT);
-    vec2.sub(this.mCameraWCCenterRef, this.mCameraWCCenterRef, deltaT); // update current position
+    vec2.sub(this.mCameraWCCenterRef, this.mCameraWCCenterRef, deltaT); // update WC center ref position
 };
 
 ParallaxGameObject.prototype.setWCTranslationBy = function (delta) {

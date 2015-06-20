@@ -5,8 +5,8 @@
 
 /*jslint node: true, vars: true, white: true */
 /*global gEngine, Scene, GameObjectSet, TextureObject, Camera, vec2,
-  FontRenderable,
-  GameObject, Hero, Minion, Dye, Platform, Wall, DyePack */
+  FontRenderable, ParticleGameObjectSet,
+  GameObject, Hero, Minion, Dye, Platform, Wall, DyePack, Particle */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -16,6 +16,7 @@ function MyGame() {
     this.kPlatformTexture = "assets/platform.png";
     this.kWallTexture = "assets/wall.png";
     this.kDyePackTexture = "assets/dye_pack.png";
+    this.kParticleTexture = "assets/particle.png";
     this.kPrompt = "RigidBody Physics!";
 
     // The camera to view the scene
@@ -30,6 +31,7 @@ function MyGame() {
     this.mAllPlatforms = new GameObjectSet();
     this.mAllMinions = new GameObjectSet();
     this.mAllDyePacks = new GameObjectSet();
+    this.mAllParticles = new ParticleGameObjectSet();
 }
 gEngine.Core.inheritPrototype(MyGame, Scene);
 
@@ -38,6 +40,7 @@ MyGame.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kPlatformTexture);
     gEngine.Textures.loadTexture(this.kWallTexture);
     gEngine.Textures.loadTexture(this.kDyePackTexture);
+    gEngine.Textures.loadTexture(this.kParticleTexture);
 };
 
 MyGame.prototype.unloadScene = function () {    
@@ -45,6 +48,7 @@ MyGame.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kPlatformTexture);
     gEngine.Textures.unloadTexture(this.kWallTexture);
     gEngine.Textures.unloadTexture(this.kDyePackTexture);
+    gEngine.Textures.unloadTexture(this.kParticleTexture);
 };
 
 MyGame.prototype.initialize = function () {
@@ -54,7 +58,7 @@ MyGame.prototype.initialize = function () {
         200,                         // width of camera
         [0, 0, 1280, 720]            // viewport (orgX, orgY, width, height)
     );
-    this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
+    this.mCamera.setBackgroundColor([0.7, 0.7, 0.7, 1]);
             // sets the background to gray
     
     gEngine.DefaultResources.setGlobalAmbientIntensity(3);
@@ -121,6 +125,7 @@ MyGame.prototype.draw = function () {
     this.mAllMinions.draw(this.mCamera);
     this.mAllDyePacks.draw(this.mCamera);
     this.mHero.draw(this.mCamera);
+    this.mAllParticles.draw(this.mCamera);
     this.mMsg.draw(this.mCamera);
 };
 
@@ -132,8 +137,9 @@ MyGame.prototype.update = function () {
     
     this.mAllPlatforms.update();
     this.mAllMinions.update();
-    this.mHero.update();
+    this.mHero.update(this.mAllDyePacks);
     this.mAllDyePacks.update();
+    this.mAllParticles.update();
     
     // create dye pack and remove the expired ones ...
     if (gEngine.Input.isButtonClicked(gEngine.Input.mouseButton.Left)) {
@@ -142,22 +148,27 @@ MyGame.prototype.update = function () {
             this.mAllDyePacks.addToSet(d);
         }
     }
+    
+    // create particles
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Z)) {
+        if (this.mCamera.isMouseInViewport()) {
+            var p = new Particle(this.kParticleTexture, this.mCamera.mouseWCX(), this.mCamera.mouseWCY());
+            this.mAllParticles.addToSet(p);
+        }
+    }
+    
+    // Cleanup DyePacks
     var i, obj;
-    var heroBounds = this.mHero.getBBox();
     for (i=0; i<this.mAllDyePacks.size(); i++) {
         obj = this.mAllDyePacks.getObjectAt(i);
         if (obj.hasExpired()) {
             this.mAllDyePacks.removeFromSet(obj);
-        } else {
-            // chase after hero
-            obj.rotateObjPointTo(this.mHero.getXform().getPosition(), 0.8);
-            if (obj.getBBox().intersectsBound(heroBounds)) {
-                this.mAllDyePacks.removeFromSet(obj);
-            }
         }
     }
- 
+    
+    // physics simulation
     this._physicsSimulation();
     
-    this.mMsg.setText(this.kPrompt + ": DyePack=" + this.mAllDyePacks.size());
+    this.mMsg.setText(this.kPrompt + ": DyePack=" + this.mAllDyePacks.size() +
+            " Particles=" + this.mAllParticles.size());
 };

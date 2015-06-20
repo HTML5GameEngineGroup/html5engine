@@ -28,4 +28,9 @@ MyGame.prototype._physicsSimulation = function() {
     
     // Hero DyePack
     gEngine.Physics.processObjSet(this.mHero, this.mAllDyePacks);
+    
+    // Particle system collisions
+    gEngine.ParticleSystem.processObjSet(this.mHero, this.mAllParticles);
+    gEngine.ParticleSystem.processSetSet(this.mAllMinions, this.mAllParticles);
+    gEngine.ParticleSystem.processSetSet(this.mAllPlatforms, this.mAllParticles);
 };

@@ -132,7 +132,7 @@ MyGame.prototype.update = function () {
     
     this.mAllPlatforms.update();
     this.mAllMinions.update();
-    this.mHero.update();
+    this.mHero.update(this.mAllDyePacks);
     this.mAllDyePacks.update();
     
     // create dye pack and remove the expired ones ...
@@ -142,21 +142,17 @@ MyGame.prototype.update = function () {
             this.mAllDyePacks.addToSet(d);
         }
     }
+    
+    // Cleanup DyePacks
     var i, obj;
-    var heroBounds = this.mHero.getBBox();
     for (i=0; i<this.mAllDyePacks.size(); i++) {
         obj = this.mAllDyePacks.getObjectAt(i);
         if (obj.hasExpired()) {
             this.mAllDyePacks.removeFromSet(obj);
-        } else {
-            // chase after hero
-            obj.rotateObjPointTo(this.mHero.getXform().getPosition(), 0.8);
-            if (obj.getBBox().intersectsBound(heroBounds)) {
-                this.mAllDyePacks.removeFromSet(obj);
-            }
         }
     }
- 
+    
+    // physics simulation
     this._physicsSimulation();
     
     this.mMsg.setText(this.kPrompt + ": DyePack=" + this.mAllDyePacks.size());

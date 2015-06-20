@@ -45,6 +45,9 @@ gEngine.DefaultResources = (function () {
     var mShadowReceiverShader = null;
     var kShadowCasterFS = "src/GLSLShaders/ShadowCasterFS.glsl";  // Path to the FragmentShader
     var mShadowCasterShader = null;
+    
+    var kParticleFS = "src/GLSLShaders/ParticleFS.glsl";
+    var mParticleShader = null;
 
     // Default font
     var kDefaultFont = "assets/fonts/system-default-font";
@@ -60,6 +63,7 @@ gEngine.DefaultResources = (function () {
         mIllumShader = new IllumShader(kTextureVS, kIllumFS);
         mShadowReceiverShader = new SpriteShader(kTextureVS, kShadowReceiverFS);
         mShadowCasterShader = new ShadowCasterShader(kTextureVS, kShadowCasterFS);
+        mParticleShader = new TextureShader(kTextureVS, kParticleFS);
         callBackFunction();
     };
 
@@ -71,6 +75,7 @@ gEngine.DefaultResources = (function () {
     var getIllumShader = function () { return mIllumShader; };
     var getShadowReceiverShader = function () { return mShadowReceiverShader; };
     var getShadowCasterShader = function () { return mShadowCasterShader; };
+    var getParticleShader = function () { return mParticleShader };
 
     var initialize = function (callBackFunction) {
         // constant color shader: SimpleVS, and SimpleFS
@@ -91,6 +96,9 @@ gEngine.DefaultResources = (function () {
         gEngine.TextFileLoader.loadTextFile(kShadowReceiverFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
         gEngine.TextFileLoader.loadTextFile(kShadowCasterFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
 
+        // particle shader
+        gEngine.TextFileLoader.loadTextFile(kParticleFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
+        
         // load default font
         gEngine.Fonts.loadFont(kDefaultFont);
 
@@ -107,6 +115,7 @@ gEngine.DefaultResources = (function () {
         mIllumShader.cleanUp();
         mShadowReceiverShader.cleanUp();
         mShadowCasterShader.cleanUp();
+        mParticleShader.cleanUp();
 
         gEngine.TextFileLoader.unloadTextFile(kSimpleVS);
         gEngine.TextFileLoader.unloadTextFile(kSimpleFS);
@@ -120,6 +129,13 @@ gEngine.DefaultResources = (function () {
 
          // Illumination Shader
         gEngine.TextFileLoader.unloadTextFile(kIllumFS);
+        
+        // Shadow shaders
+        gEngine.TextFileLoader.unloadTextFile(kShadowReceiverFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
+        gEngine.TextFileLoader.unloadTextFile(kShadowCasterFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
+
+        // particle shader
+        gEngine.TextFileLoader.unloadTextFile(kParticleFS);
 
         // default font
         gEngine.Fonts.unloadFont(kDefaultFont);
@@ -137,6 +153,7 @@ gEngine.DefaultResources = (function () {
         getIllumShader: getIllumShader,
         getShadowReceiverShader: getShadowReceiverShader,
         getShadowCasterShader: getShadowCasterShader,
+        getParticleShader: getParticleShader,
         getDefaultFont: getDefaultFont,
         getGlobalAmbientColor: getGlobalAmbientColor,
         setGlobalAmbientColor: setGlobalAmbientColor,

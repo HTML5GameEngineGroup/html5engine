@@ -7,7 +7,7 @@ precision mediump float;
 uniform sampler2D uSampler;
 uniform vec4 uPixelColor;
 
-#define kIntensityFudge 0.05  // reduce the effect of intensity of shadow
+#define kMaxShadowOpacity 0.7  // max of shadow opacity
 #define kLightStrengthCutOff 0.05 // any less will not cause chadow
 
 // the types of light that can cast shadow
@@ -89,10 +89,6 @@ float LightStrength() {
         dAtten = DistanceDropOff(dist);
     }
     float result = aAtten * dAtten;
-    if (uLights[0].Intensity  > 1.0)
-        result *= (1.0 + uLights[0].Intensity * kIntensityFudge);
-    else
-        result *= uLights[0].Intensity;
     return result;
 }
 
@@ -104,6 +100,5 @@ void main(void)
         discard;
     vec3 shadowColor = lgtStrength * uPixelColor.rgb;
     shadowColor *= uPixelColor.a * texFragColor.a;
-    // gl_FragColor = vec4(shadowColor,  lgtStrength * lgtStrength * texFragColor.a);
-    gl_FragColor = vec4(shadowColor,  texFragColor.a);
+    gl_FragColor = vec4(shadowColor,  kMaxShadowOpacity * lgtStrength * texFragColor.a);
 }

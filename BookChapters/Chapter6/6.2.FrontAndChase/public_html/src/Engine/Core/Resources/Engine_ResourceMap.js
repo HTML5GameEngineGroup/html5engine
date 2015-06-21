@@ -34,7 +34,7 @@ gEngine.ResourceMap = (function () {
 
     var asyncLoadCompleted = function (rName, loadedAsset) {
         if (!isAssetLoaded(rName)) {
-            alert("gEngine.asyncLoadCompleted: [" + rName + "not in map!");
+            alert("gEngine.asyncLoadCompleted: [" + rName + "] not in map!");
         }
         mResourceMap[rName].mAsset = loadedAsset;
         --mNumOutstandingLoads;
@@ -62,12 +62,14 @@ gEngine.ResourceMap = (function () {
         var r = null;
         if (rName in mResourceMap) {
             r = mResourceMap[rName].mAsset;
+        } else {
+            alert("gEngine.retrieveAsset: [" + rName + "] not in map!");
         }
         return r;
     };
 
     var isAssetLoaded = function (rName) {
-        return (retrieveAsset(rName) !== null);
+        return (rName in mResourceMap);
     };
 
     var incAssetRefCount = function (rName) {

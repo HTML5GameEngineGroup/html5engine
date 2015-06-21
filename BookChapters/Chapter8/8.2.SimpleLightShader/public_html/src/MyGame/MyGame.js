@@ -126,12 +126,11 @@ MyGame.prototype.draw = function () {
 MyGame.prototype.update = function () {
     var msg, i, c;
     var deltaC = 0.01;
+    var deltaZ = 0.05;
 
     this.mCamera.update();  // to ensure proper interploated movement effects
-
     this.mLMinion.update(); // ensure sprite animation
     this.mRMinion.update();
-
     this.mHero.update();  // allow keyboard control to move
 
     if (gEngine.Input.isButtonPressed(gEngine.Input.mouseButton.Left)) {
@@ -151,8 +150,29 @@ MyGame.prototype.update = function () {
             c[i] -= deltaC;
         }
     }
+    
+    var p = this.mTheLight.getPosition(), r;
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Z)) {
+        p[2] += deltaZ;
+    }
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.X)) {
+        p[2] -= deltaZ;
+    }
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.C)) {
+        r = this.mTheLight.getRadius();
+        r += deltaC;
+        this.mTheLight.setRadius(r);
+    }
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.V)) {
+        r = this.mTheLight.getRadius();
+        r -= deltaC;
+        this.mTheLight.setRadius(r);
+    }
+    
     c = this.mTheLight.getColor();
     msg = "LightColor:" + c[0].toPrecision(4) + " " + c[1].toPrecision(4) +
-                    " " + c[2].toPrecision(4) + " " + c[3].toPrecision(4);
+                    " " + c[2].toPrecision(4) + " " + c[3].toPrecision(4) +
+          " Z=" + p[2].toPrecision(3) +
+          " r=" + this.mTheLight.getRadius().toPrecision(3);
     this.mMsg.setText(msg);
 };

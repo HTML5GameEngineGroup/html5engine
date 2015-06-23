@@ -1,6 +1,6 @@
 /* File: TextureRenderable_PixelCollision.js 
  *
- * Implements the pixelTouches() and related supporting funcitons of TextureRenderable
+ * Implements the pixelTouches() and related supporting functions of TextureRenderable
  */
 
 /*jslint node: true, vars: true */

@@ -1,7 +1,7 @@
 /* File: Minion.js 
  *
  * Creates and initializes a Minion object
- * overrides the update funciton of GameObject to define
+ * overrides the update function of GameObject to define
  * simple sprite animation behavior behavior
  */
 

@@ -58,7 +58,7 @@ function initSimpleShader(vertexShaderID, fragmentShaderID) {
         0);         // offsets to the first element
 }
 
-// Returns a complied shader from a shader in the dom.
+// Returns a compiled shader from a shader in the dom.
 // The id is the id of the script in the html tag.
 function loadAndCompileShader(id, shaderType) {
     var shaderText, shaderSource, compiledShader;

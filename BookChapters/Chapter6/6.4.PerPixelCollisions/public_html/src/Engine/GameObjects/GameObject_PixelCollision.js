@@ -1,6 +1,6 @@
 /* File: GameObject_PixelCollision.js 
  *
- * Implements the pixelTouch() funciton of GameObject
+ * Implements the pixelTouch() function of GameObject
  */
 
 /*jslint node: true, vars: true */

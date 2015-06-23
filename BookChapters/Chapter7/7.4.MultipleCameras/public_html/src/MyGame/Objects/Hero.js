@@ -1,7 +1,7 @@
 /* File: Hero.js 
  *
  * Creates and initializes the Hero (Dye)
- * overrides the update funciton of GameObject to define
+ * overrides the update function of GameObject to define
  * simple Dye behavior
  */
 

@@ -40,7 +40,7 @@ function initializeGL() {
         // 2. now load and compile the vertex and fragment shaders
         initSimpleShader("VertexShader", "FragmentShader");
                 // the two shaders are defined in the index.html file
-                // InitSimpleShader() funciton is defined in ShaderSupport.js file
+                // InitSimpleShader() function is defined in ShaderSupport.js file
 
     } else {
         document.write("<br><b>WebGL is not supported!</b>");

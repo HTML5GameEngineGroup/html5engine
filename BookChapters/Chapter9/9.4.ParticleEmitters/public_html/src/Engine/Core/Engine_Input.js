@@ -88,8 +88,8 @@ gEngine.Input = (function () {
     var mMousePosX = -1;
     var mMousePosY = -1;
 
-    // <editor-fold desc="Event service functions">
-    //<editor-fold desc="Keyboard services">
+    // <editor-fold desc="Event handler functions">
+    //<editor-fold desc="Keyboard handlers">
     var _onKeyDown = function (event) {
         mIsKeyPressed[event.keyCode] = true;
     };
@@ -98,7 +98,7 @@ gEngine.Input = (function () {
     };
     //</editor-fold>
 
-    //<editor-fold desc="Mouse services">
+    //<editor-fold desc="Mouse handlers">
     var _onMouseMove = function (event) {
         var inside = false;
         var bBox = mCanvas.getBoundingClientRect();
@@ -136,7 +136,7 @@ gEngine.Input = (function () {
             mKeyPreviousState[i] = false;
             mIsKeyClicked[i] = false;
         }
-        // register services 
+        // register handlers 
         window.addEventListener('keyup', _onKeyUp);
         window.addEventListener('keydown', _onKeyDown);
         //</editor-fold>
@@ -166,7 +166,7 @@ gEngine.Input = (function () {
         }
     };
 
-    // Function for GameEngine Prorammer to test if a key is pressed down
+    // Function for GameEngine programmer to test if a key is pressed down
     var isKeyPressed = function (keyCode) {
         return mIsKeyPressed[keyCode];
     };

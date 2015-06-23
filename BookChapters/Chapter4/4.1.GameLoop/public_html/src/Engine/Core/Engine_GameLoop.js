@@ -41,12 +41,12 @@ gEngine.GameLoop = (function () {
             //      Update only every Milliseconds per frame.
             //      If lag larger then update frames, update until caught up.
             while ((mLagTime >= kMPF) && mIsLoopRunning) {
-                this.update();      // call Scene.update()
+                this.update();      // call MyGame.update()
                 mLagTime -= kMPF;
             }
 
             // Step D: now let's draw
-            this.draw();    // Call Scene.draw()
+            this.draw();    // Call MyGame.draw()
         }
     };
 

@@ -36,7 +36,7 @@ MyGame.prototype.unloadScene = function() {
 
     // unload the scene resources
     // gEngine.AudioClips.unloadAudio(this.kBgClip);
-    //      You know this clip will be used else where in the game
+    //      You know this clip will be used elsewhere in the game
     //      So you decide to not unload this clip!!
     gEngine.AudioClips.unloadAudio(this.kCue);
 
@@ -54,7 +54,7 @@ MyGame.prototype.draw = function () {
     // unload the scene resources
     // gEngine.AudioClips.unloadAudio(this.kBgClip);
     //      The above line is commented out on purpose because
-    //      you know this clip will be used else where in the game
+    //      you know this clip will be used elsewhere in the game
     //      So you decide to not unload this clip!!
     gEngine.AudioClips.unloadAudio(this.kCue);
 

@@ -60,7 +60,7 @@ gEngine.Input = (function () {
     var mIsKeyClicked = [];
 
 
-    // Event service functions
+    // Event handler functions
     var _onKeyDown = function (event) {
         mIsKeyPressed[event.keyCode] = true;
     };
@@ -76,7 +76,7 @@ gEngine.Input = (function () {
             mIsKeyClicked[i] = false;
         }
 
-        // register services 
+        // register handlers 
         window.addEventListener('keyup', _onKeyUp);
         window.addEventListener('keydown', _onKeyDown);
     };
@@ -89,7 +89,7 @@ gEngine.Input = (function () {
         }
     };
 
-    // Function for GameEngine Prorammer to test if a key is pressed down
+    // Function for GameEngine programmer to test if a key is pressed down
     var isKeyPressed = function (keyCode) {
         return mIsKeyPressed[keyCode];
     };

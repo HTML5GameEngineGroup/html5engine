@@ -43,7 +43,7 @@ gEngine.AudioClips = (function () {
             req.responseType = 'arraybuffer';
 
             req.onload = function () {
-                // Asyncronously decode, then call the function in parameter.
+                // Asynchronously decode, then call the function in parameter.
                 mAudioContext.decodeAudioData(req.response,
                     function (buffer) {
                         gEngine.ResourceMap.asyncLoadCompleted(clipName, buffer);

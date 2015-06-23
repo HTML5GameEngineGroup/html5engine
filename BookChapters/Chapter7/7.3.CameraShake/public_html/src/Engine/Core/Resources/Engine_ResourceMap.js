@@ -21,7 +21,7 @@ gEngine.ResourceMap = (function () {
     // Callback function when all textures are loaded
     var mLoadCompleteCallback = null;
 
-    // Resource storage and reference count
+    // Resource storage
     var mResourceMap = {};
 
    /*

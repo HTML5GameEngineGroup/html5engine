@@ -20,7 +20,7 @@ gEngine.ResourceMap = (function () {
     // Callback function when all textures are loaded
     var mLoadCompleteCallback = null;
 
-    // Resource storage and reference count
+    // Resource storage
     var mResourceMap = {};
 
    /*
@@ -86,7 +86,7 @@ gEngine.ResourceMap = (function () {
         asyncLoadCompleted: asyncLoadCompleted,
         setLoadCompleteCallback: setLoadCompleteCallback,
         //</editor-fold>
-        //<editor-fold desc="resource storage and reference count support">
+        //<editor-fold desc="resource storage support">
         retrieveAsset: retrieveAsset,
         unloadAsset: unloadAsset,
         isAssetLoaded: isAssetLoaded

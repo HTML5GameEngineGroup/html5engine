@@ -18,7 +18,7 @@ function BlueLevel() {
     this.kCollector = "assets/minion_collector.jpg";
 
     // all squares
-    this.mSqset = [];        // these are the Renderable objects
+    this.mSqSet = [];        // these are the Renderable objects
 
     // The camera to view the scene
     this.mCamera = null;
@@ -35,7 +35,7 @@ BlueLevel.prototype.loadScene = function () {
 };
 
 BlueLevel.prototype.unloadScene = function () {
-    // unload the scene flie and loaded resoruces
+    // unload the scene flie and loaded resources
     gEngine.TextFileLoader.unloadTextFile(this.kSceneFile);
     gEngine.Textures.unloadTexture(this.kPortal);
     gEngine.Textures.unloadTexture(this.kCollector);
@@ -51,8 +51,8 @@ BlueLevel.prototype.initialize = function () {
     this.mCamera = sceneParser.parseCamera();
 
     // Step B: Read all the squares and textureSquares
-    sceneParser.parseSquares(this.mSqset);
-    sceneParser.parseTextureSquares(this.mSqset);
+    sceneParser.parseSquares(this.mSqSet);
+    sceneParser.parseTextureSquares(this.mSqSet);
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
@@ -66,8 +66,8 @@ BlueLevel.prototype.draw = function () {
 
     // Step  C: Draw all the squares
     var i;
-    for (i = 0; i < this.mSqset.length; i++) {
-        this.mSqset[i].draw(this.mCamera.getVPMatrix());
+    for (i = 0; i < this.mSqSet.length; i++) {
+        this.mSqSet[i].draw(this.mCamera.getVPMatrix());
     }
 };
 
@@ -75,7 +75,7 @@ BlueLevel.prototype.draw = function () {
 // anything from this function!
 BlueLevel.prototype.update = function () {
     // For this very simple game, let's move the first square
-    var xform = this.mSqset[0].getXform();
+    var xform = this.mSqSet[0].getXform();
     var deltaX = 0.05;
 
     /// Move right and swap over
@@ -95,7 +95,7 @@ BlueLevel.prototype.update = function () {
     }
 
     // continously change texture tinting
-    var c = this.mSqset[1].getColor();
+    var c = this.mSqSet[1].getColor();
     var ca = c[3] + deltaX;
     if (ca > 1) {
         ca = 0;

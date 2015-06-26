@@ -33,6 +33,12 @@ function Platform(cx, cy, velocity, movementRange, texture, normal, lightSet) {
         this.setCurrentFrontDir(velocity);
         this.setSpeed(this.kSpeed);
     }
+    
+    var r = new RigidRectangle(this.getXform(), this.kPlatformWidth, this.kPlatformHeight);
+    r.setDrawBounds(true);
+    r.setColor([1, 0, 0, 1]);
+    r.setMass(0);
+    this.setPhysicsComponent(r);
 }
 gEngine.Core.inheritPrototype(Platform, GameObject);
 

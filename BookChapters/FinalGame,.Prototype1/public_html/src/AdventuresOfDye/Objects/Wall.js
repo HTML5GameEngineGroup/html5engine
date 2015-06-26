@@ -23,6 +23,11 @@ function Wall(cx, cy, texture, normal, lightSet) {
     this.getXform().setPosition(cx, cy);
     
     // velocity and movementRange will come later
+    var r = new RigidRectangle(this.getXform(), this.kWallWidth, this.kWallHeight);
+    r.setDrawBounds(true);
+    r.setColor([1, 1, 0, 1]);
+    r.setMass(0);
+    this.setPhysicsComponent(r);
 }
 gEngine.Core.inheritPrototype(Wall, GameObject);
 

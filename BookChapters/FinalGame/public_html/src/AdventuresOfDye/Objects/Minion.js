@@ -17,10 +17,10 @@ Minion.eMinionType = Object.freeze({
     eChaser: 2
 });
 
-function Minion(atX, atY, velocity, movementRange, type, texture, normal, lightSet) {
+function Minion(atX, atY, velocity, movementRange, type, texture, normal, lightSet, w, h) {
     this.kDelta = 0.1;
-    this.kWidth = 2;
-    this.kHeight = 1.6;
+    this.kWidth = w;
+    this.kHeight = h;
     this.kSpeed = 0.03;
     
     this.mProjectiles = new ParticleGameObjectSet();
@@ -104,7 +104,7 @@ Minion.prototype.changeSprite = function (atX, atY) {
             this.mMinion.setAnimationSpeed(1);
             break;
         case Minion.eMinionType.eChaser:
-            this.mMinion.setSpriteSequence(164, 608, 80, 164, 1, 0);
+            this.mMinion.setSpriteSequence(164, 608, 90, 164, 1, 0);
             this.mMinion.setAnimationSpeed(1);
             break;
     }

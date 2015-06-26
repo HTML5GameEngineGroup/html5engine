@@ -2,7 +2,7 @@
 function Button(cx, cy, texture, type, lightSet) {
     this.kWidth = 2.25;
     this.kHeight = 2;
-    this.mIsUnlocked = true;
+    this.mIsUnlocked = false;
     this.mButton = new LightRenderable(texture);
 
     var i;

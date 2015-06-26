@@ -117,7 +117,7 @@ SceneFileParser.prototype.parsePlatform = function (texture, normal, lightSet) {
 
 SceneFileParser.prototype.parseMinions = function (texture, normal, lightSet) {
     var elm = this._getElm("Minion");
-    var i, j, x, y, v, r, t, m;
+    var i, j, x, y, v, r, t, w, h, m;
     var allMinions = [];
     for (i = 0; i < elm.length; i++) {
         x = Number(elm.item(i).attributes.getNamedItem("PosX").value);
@@ -125,18 +125,20 @@ SceneFileParser.prototype.parseMinions = function (texture, normal, lightSet) {
         v = elm.item(i).attributes.getNamedItem("Velocity").value.split(" ");
         r = Number(elm.item(i).attributes.getNamedItem("MovementRange").value);
         t = Number(elm.item(i).attributes.getNamedItem("Type").value);
-
+        w = Number(elm.item(i).attributes.getNamedItem("Width").value);
+        h = Number(elm.item(i).attributes.getNamedItem("Height").value);
+        
         // make sure color array contains numbers
         this._convertToNum(v);
         switch (t) {
             case 0:
-                m = new Minion(x, y, v, r, t, texture, normal, lightSet);
+                m = new Minion(x, y, v, r, t, texture, normal, lightSet, w, h);
                 break;
             case 1:
-                m = new SentryMinion(x, y, v, r, t, texture, normal, lightSet);
+                m = new SentryMinion(x, y, v, r, t, texture, normal, lightSet, w, h);
                 break;
             case 2:
-                m = new ChaserMinion(x, y, v, r, t, texture, normal, lightSet);
+                m = new ChaserMinion(x, y, v, r, t, texture, normal, lightSet, w, h);
                 break;
         }
         gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, m);

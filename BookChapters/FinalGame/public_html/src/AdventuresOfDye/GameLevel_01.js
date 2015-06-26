@@ -155,7 +155,7 @@ GameLevel_01.prototype.initialize = function () {
     // parsing of actors can only begin after background has been parsed
     // to ensure proper support shadow
     // for now here is the hero
-    this.mIllumHero = new Hero(this.kHeroSprite, null, 60, 6, this.mGlobalLightSet);
+    this.mIllumHero = new Hero(this.kHeroSprite, null, 2, 6, this.mGlobalLightSet);
 
     this.mNextLevel = parser.parseNextLevel();
 

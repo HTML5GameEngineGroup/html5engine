@@ -190,7 +190,7 @@ Boss.prototype.draw = function (aCamera) {
 Boss.prototype._spawnChaser = function () {
     var x = this.getXform().getXPos();
     var y = this.getXform().getYPos();
-    var m = new ChaserMinion(x, y, [0, 0], 0, 2, this.kMinionTex, null, this.mLightSet);
+    var m = new ChaserMinion(x, y, [0, 0], 0, 2, this.kMinionTex, null, this.mLightSet, 1, 1.6);
     this.mAllMinions.push(m);
 };
 

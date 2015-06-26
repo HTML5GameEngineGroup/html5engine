@@ -63,10 +63,10 @@
     
      <!-- Minions -->
      <!-- minion type: 0=>shooter, 1->brain, 2=>beetle -->
-    <Minion PosX="30" PosY="14" Velocity="1 0 0" MovementRange="8" Type="0"/>
-    <Minion PosX="18" PosY="10" Velocity="0 1 0" MovementRange="2" Type="1"/>
-    <Minion PosX="55" PosY="10" Velocity="1 0 0" MovementRange="7" Type="0"/>
-    <Minion PosX="50" PosY="5" Velocity="0 1 0" MovementRange="3" Type="0"/>
+    <Minion PosX="30" PosY="14" Width="2" Height="1.6" Velocity="1 0 0" MovementRange="8" Type="0"/>
+    <Minion PosX="18" PosY="10" Width="2" Height="1.6" Velocity="0 1 0" MovementRange="2" Type="1"/>
+    <Minion PosX="55" PosY="10" Width="2" Height="1.6" Velocity="1 0 0" MovementRange="7" Type="0"/>
+    <Minion PosX="50" PosY="5" Width="2" Height="1.6" Velocity="0 1 0" MovementRange="3" Type="0"/>
     
     <!-- next level -->
     <NextLevel Next="Level2">

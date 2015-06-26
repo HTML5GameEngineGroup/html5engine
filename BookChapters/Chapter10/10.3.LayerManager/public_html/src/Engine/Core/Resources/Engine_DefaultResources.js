@@ -1,7 +1,7 @@
 /*
  * File: Engine_DefaultResources.js 
  */
-/*jslint node: true, vars: true, evil: true */
+/*jslint node: true, vars: true, evil: true, white: true */
 /*global SimpleShader, TextureShader, SpriteShader,
   LineShader, LightShader, IllumShader, ShadowCasterShader, vec4 */
 /* find out more about jslint: http://www.jslint.com/help.html */
@@ -30,6 +30,7 @@ gEngine.DefaultResources = (function () {
     var kTextureFS = "src/GLSLShaders/TextureFS.glsl";  // Path to the texture FragmentShader
     var mTextureShader = null;
     var mSpriteShader = null;
+    var kLineFS = "src/GLSLShaders/LineFS.glsl";        // Path to the Line FragmentShader
     var mLineShader = null;
 
     // Light Shader
@@ -58,7 +59,7 @@ gEngine.DefaultResources = (function () {
         mConstColorShader = new SimpleShader(kSimpleVS, kSimpleFS);
         mTextureShader = new TextureShader(kTextureVS, kTextureFS);
         mSpriteShader =  new SpriteShader(kTextureVS, kTextureFS);
-        mLineShader =  new LineShader(kSimpleVS, kSimpleFS);
+        mLineShader =  new LineShader(kSimpleVS, kLineFS);
         mLightShader = new LightShader(kTextureVS, kLightFS);
         mIllumShader = new IllumShader(kTextureVS, kIllumFS);
         mShadowReceiverShader = new SpriteShader(kTextureVS, kShadowReceiverFS);
@@ -85,6 +86,9 @@ gEngine.DefaultResources = (function () {
         // texture shader: 
         gEngine.TextFileLoader.loadTextFile(kTextureVS, gEngine.TextFileLoader.eTextFileType.eTextFile);
         gEngine.TextFileLoader.loadTextFile(kTextureFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
+
+        // Line Shader:
+        gEngine.TextFileLoader.loadTextFile(kLineFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
 
         // Light Shader
         gEngine.TextFileLoader.loadTextFile(kLightFS, gEngine.TextFileLoader.eTextFileType.eTextFile);
@@ -123,6 +127,10 @@ gEngine.DefaultResources = (function () {
         // texture shader: 
         gEngine.TextFileLoader.unloadTextFile(kTextureVS);
         gEngine.TextFileLoader.unloadTextFile(kTextureFS);
+
+        // Line Shader:
+        gEngine.TextFileLoader.unloadTextFile(kLineFS);
+
 
         // Light Shader
         gEngine.TextFileLoader.unloadTextFile(kLightFS);

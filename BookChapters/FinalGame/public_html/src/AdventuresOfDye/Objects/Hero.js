@@ -28,7 +28,7 @@ function Hero(spriteTexture, normalMap, atX, atY, lgtSet) {
     this.mDye.getXform().setSize(this.kWidth, this.kHeight);
 
     this.mHeroState = Hero.eHeroState.eRunRight;
-    this.mPreviousHeroState = this.mHeroState;
+    this.mPreviousHeroState = Hero.eHeroState.eRunLeft;
     this.mIsMoving = false;
     this.mCanJump = false;
 

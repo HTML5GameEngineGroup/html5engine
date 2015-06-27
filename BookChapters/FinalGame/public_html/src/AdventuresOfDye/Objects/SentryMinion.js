@@ -1,13 +1,13 @@
 "use strict";
 
-function SentryMinion(atX, atY, velocity, movementRange, type, texture, normal, lightSet ) {
+function SentryMinion(atX, atY, velocity, movementRange, type, texture, normal, lightSet, w, h ) {
     this.kOffset = 4.7;
     this.kShootTimer = 90;
     
     this.mNumCycles = 0;
     this.mSpotlight = this._createSpotLight(atX, atY, velocity);
     lightSet.addToSet(this.mSpotlight);
-    Minion.call(this, atX, atY, velocity, movementRange, type, texture, normal, lightSet);
+    Minion.call(this, atX, atY, velocity, movementRange, type, texture, normal, lightSet, w, h);
 
 }
 gEngine.Core.inheritPrototype(SentryMinion, Minion);

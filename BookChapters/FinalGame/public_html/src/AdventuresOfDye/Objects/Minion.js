@@ -22,38 +22,38 @@ function Minion(atX, atY, velocity, movementRange, type, texture, normal, lightS
     this.kWidth = w;
     this.kHeight = h;
     this.kSpeed = 0.03;
-    
+
     this.mProjectiles = new ParticleGameObjectSet();
     this.mType = type;
-    
+
     // control of movement
     this.mInitialPosition = vec2.fromValues(atX, atY);
     this.mMovementRange = movementRange;
-    
+
     if (normal === null) {
         this.mMinion = new LightRenderable(texture, normal);
     } else {
         this.mMinion = new IllumRenderable(texture, normal);
     }
-    
+
     this.light = this._createPointLight(atX, atY);
     lightSet.addToSet(this.light);
-    
+
     var i;
-    for (i=2; i<lightSet.numLights(); i++) {
+    for (i = 2; i < lightSet.numLights(); i++) {
         this.mMinion.addLight(lightSet.getLightAt(i));
     }
 
     this.changeSprite(atX, atY);
     GameObject.call(this, this.mMinion);
-    
+
     // velocity and movementRange will come later
     var size = vec2.length(velocity);
     if (size > 0.001) {
         this.setCurrentFrontDir(velocity);
         this.setSpeed(this.kSpeed);
     }
-    
+
     var rigidShape = new RigidRectangle(this.getXform(), this.kWidth, this.kHeight);
     rigidShape.setMass(1);  // ensures no movements!
     rigidShape.setDrawBounds(true);
@@ -68,17 +68,17 @@ Minion.prototype.update = function () {
     this.mMinion.updateAnimation();
     this.mProjectiles.update();
     GameObject.prototype.update.call(this);
-    
-    if(this.mType === Minion.eMinionType.eDefault){
-    var s = vec2.fromValues(0,0);
-    vec2.subtract(s, this.getXform().getPosition(), this.mInitialPosition);
-    var len = vec2.length(s);
-    if (len > this.mMovementRange) {
-        var f = this.getCurrentFrontDir();
-        f[0] = -f[0];
-        f[1] = -f[1];
-    }
-    this.light.set2DPosition(this.getXform().getPosition());
+
+    if (this.mType === Minion.eMinionType.eDefault || this.mType === Minion.eMinionType.eSentry) {
+        var s = vec2.fromValues(0, 0);
+        vec2.subtract(s, this.getXform().getPosition(), this.mInitialPosition);
+        var len = vec2.length(s);
+        if (len > this.mMovementRange) {
+            var f = this.getCurrentFrontDir();
+            f[0] = -f[0];
+            f[1] = -f[1];
+        }
+        this.light.set2DPosition(this.getXform().getPosition());
     }
 };
 
@@ -125,4 +125,6 @@ Minion.prototype._createPointLight = function (atX, atY) {
     return lgt;
 };
 
-Minion.prototype.getProjectiles = function (){return this.mProjectiles};
+Minion.prototype.getProjectiles = function () {
+    return this.mProjectiles
+};

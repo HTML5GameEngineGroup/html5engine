@@ -17,7 +17,7 @@ RigidShape.eRigidType = Object.freeze({
 
 function RigidShape(xform) {
     this.mXform = xform; // this is typically from gameObject
-    this.kPadding = 1; // size of the position mark
+    this.kPadding = 0.25; // size of the position mark
     
     this.mPositionMark = new LineRenderable();
     

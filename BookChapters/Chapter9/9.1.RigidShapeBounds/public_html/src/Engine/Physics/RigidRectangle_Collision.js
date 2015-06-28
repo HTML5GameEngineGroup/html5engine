@@ -8,6 +8,16 @@
 /* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
+RigidRectangle.prototype.containsPos = function (pos) {
+    var rPos = this.getPosition();
+    var rMinX = rPos[0] - this.getWidth() / 2;
+    var rMaxX = rPos[0] + this.getWidth() / 2;
+    var rMinY = rPos[1] - this.getHeight() / 2;
+    var rMaxY = rPos[1] + this.getHeight() / 2;
+
+    return ((rMinX < pos[0]) && (rMaxX > pos[0]) && 
+            (rMinY < pos[1] && rMaxY > pos[1]));
+};
 
 RigidRectangle.prototype.collidedRectRect = function(r1, r2) {
     var r1Pos = r1.getPosition();

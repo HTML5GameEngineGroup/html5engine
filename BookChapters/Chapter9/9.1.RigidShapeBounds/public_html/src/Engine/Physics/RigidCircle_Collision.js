@@ -8,6 +8,10 @@
 /* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
+RigidCircle.prototype.containsPos = function(pos) {
+    var dist = vec2.distance(this.getPosition(), pos);
+    return (dist < this.getRadius());
+};
 
 RigidCircle.prototype.collidedCircCirc = function(c1, c2) {
     var vecToCenter = [0, 0];

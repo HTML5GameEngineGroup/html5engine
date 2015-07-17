@@ -94,7 +94,7 @@ MyGame.prototype.initialize = function () {
     bgR.getXform().setSize(30, 30);
     bgR.getXform().setPosition(0, 0);
     bgR.getMaterial().setSpecular([0.2, 0.1, 0.1, 1]);
-    bgR.getMaterial().setShinningness(50);
+    bgR.getMaterial().setShininess(50);
     bgR.getXform().setZPos(-20);
     bgR.addLight(this.mGlobalLightSet.getLightAt(1));   // only the directional light
     this.mBg = new TiledGameObject(bgR);
@@ -109,7 +109,7 @@ MyGame.prototype.initialize = function () {
         bgR1.addLight(this.mGlobalLightSet.getLightAt(i));   // all the lights
     }
     bgR1.getMaterial().setSpecular([0.2, 0.2, 0.5, 1]);
-    bgR1.getMaterial().setShinningness(10);
+    bgR1.getMaterial().setShininess(10);
     this.mBgL1 = new TiledGameObject(bgR1);
     this.mBgL1.setSpeed(0.1);
     this.mBgL1.setCurrentFrontDir([-1, 0]);

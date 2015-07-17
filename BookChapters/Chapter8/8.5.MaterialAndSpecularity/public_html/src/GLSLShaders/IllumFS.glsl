@@ -20,7 +20,7 @@ struct Material {
     vec4 Ka;    // simple boosting of color
     vec4 Kd;    // Diffuse 
     vec4 Ks;    // Specular
-    float Shinningness; // this is the "n"
+    float Shininess; // this is the "n"
 };
 uniform Material uMaterial;
 
@@ -72,7 +72,7 @@ float LightAttenuation(Light lgt, float dist) {
 vec4 SpecularResult(vec3 N, vec3 L) {
     vec3 V = normalize(uCameraPosition - gl_FragCoord.xyz);
     vec3 H = (L + V) * 0.5;
-    return uMaterial.Ks * pow(max(0.0, dot(N, H)), uMaterial.Shinningness);
+    return uMaterial.Ks * pow(max(0.0, dot(N, H)), uMaterial.Shininess);
 }
 
 vec4 DiffuseResult(vec3 N, vec3 L, vec4 textureMapColor) {

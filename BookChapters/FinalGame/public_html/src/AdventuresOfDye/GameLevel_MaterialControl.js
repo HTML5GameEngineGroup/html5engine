@@ -37,13 +37,13 @@ GameLevel_01.prototype.materialControl = function () {
     // shinningess
     var mat = this.mSlectedCh.getRenderable().getMaterial();
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.O)) {
-        mat.setShinningness(mat.getShinningness() + delta);
+        mat.setShininess(mat.getShininess() + delta);
     }
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.P)) {
-        mat.setShinningness(mat.getShinningness() - delta);
+        mat.setShininess(mat.getShininess() - delta);
     }
 
-    msg += "n(" + mat.getShinningness().toPrecision(2) + ")" +
+    msg += "n(" + mat.getShininess().toPrecision(2) + ")" +
            this._printVec3("D", mat.getDiffuse()) +
            this._printVec3("S", mat.getSpecular()) +
            this._printVec3("A", mat.getAmbient());

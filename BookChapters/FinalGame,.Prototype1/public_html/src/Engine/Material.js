@@ -1,6 +1,6 @@
 /*
  * File: Material.js
- * Simple Phong illumination model material: Ka, Kd, KS, and Shinningness.
+ * Simple Phong illumination model material: Ka, Kd, KS, and Shininess.
  */
 
 /*jslint node: true, vars: true */
@@ -13,7 +13,7 @@ function Material() {
     this.mKa = vec4.fromValues(0.0, 0.0, 0.0, 0);
     this.mKs = vec4.fromValues(0.2, 0.2, 0.2, 1);
     this.mKd = vec4.fromValues(1.0, 1.0, 1.0, 1);
-    this.mShinningness = 20;
+    this.mShininess = 20;
 }
 
 //<editor-fold desc="Public Methods">
@@ -29,8 +29,8 @@ Material.prototype.getDiffuse = function () { return this.mKd; };
 Material.prototype.setSpecular = function (s) { this.mKs = vec4.clone(s); };
 Material.prototype.getSpecular = function () { return this.mKs; };
 
-Material.prototype.setShinningness = function (s) { this.mShinningness = s; };
-Material.prototype.getShinningness = function () { return this.mShinningness; };
+Material.prototype.setShininess = function (s) { this.mShininess = s; };
+Material.prototype.getShininess = function () { return this.mShininess; };
 //--- end of Public Methods
 
 //</editor-fold>

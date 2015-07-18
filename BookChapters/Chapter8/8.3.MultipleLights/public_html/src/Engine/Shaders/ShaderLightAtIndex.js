@@ -40,8 +40,8 @@ ShaderLightAtIndex.prototype._setShaderReferences = function (aLightShader, inde
     var gl = gEngine.Core.getGL();
     this.mColorRef = gl.getUniformLocation(aLightShader,      "uLights[" + index + "].Color");
     this.mPosRef = gl.getUniformLocation(aLightShader,        "uLights[" + index + "].Position");
-    this.mNearRef = gl.getUniformLocation(aLightShader,  "uLights[" + index + "].Near");
-    this.mFarRef = gl.getUniformLocation(aLightShader, "uLights[" + index + "].Far");
+    this.mNearRef = gl.getUniformLocation(aLightShader,       "uLights[" + index + "].Near");
+    this.mFarRef = gl.getUniformLocation(aLightShader,        "uLights[" + index + "].Far");
     this.mIntensityRef = gl.getUniformLocation(aLightShader,  "uLights[" + index + "].Intensity");
     this.mIsOnRef = gl.getUniformLocation(aLightShader,       "uLights[" + index + "].IsOn");
 };

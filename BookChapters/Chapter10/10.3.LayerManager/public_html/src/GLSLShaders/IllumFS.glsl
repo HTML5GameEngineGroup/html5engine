@@ -25,8 +25,8 @@ struct Material {
 uniform Material uMaterial;
 
 #define kGLSLuLightArraySize 4
-    // GLSL Fragment shader does requires loop control 
-    // varialbe to be a constant number. This number 4
+    // GLSL Fragment shader requires loop control
+    // variable to be a constant number. This number 4
     // says, this fragment shader will _ALWAYS_ process
     // all 4 light sources. 
     // ***********WARNING***********************

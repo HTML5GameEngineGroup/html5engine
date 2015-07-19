@@ -20,10 +20,8 @@ function ShadowCaster (shadowCaster, shadowReceiver) {
     
     this.kCasterMaxScale = 3;   // maximum size a caster will be scaled
     this.kVerySmall = 0.001;    // 
-    this.kDistanceFudge = 0.01; // Ensure that the shadow caster geometry will not be on the exact same depth as the receiver
-    this.kReceiverDistanceFudge = 0.6; // De-Emphasize the distance between Caster and Receiver, this slows down the size increase of the caster geometry
-    
-    this.setShadowColor([0, 0, 0, 0.2]);
+    this.kDistanceFudge = 0.01; // Ensure shadow caster geometry is not at the exact same depth as receiver
+    this.kReceiverDistanceFudge = 0.6; // Reduce the projection size increase of the caster geometry
 }
 
 ShadowCaster.prototype.setShadowColor = function (c) {
@@ -100,6 +98,8 @@ ShadowCaster.prototype.draw = function(aCamera) {
     var casterRenderable = this.mShadowCaster.getRenderable();
     this.mShadowCaster.getXform().cloneTo(this.mSaveXform);
     var s = casterRenderable.swapShader(this.mCasterShader);
+    var c = casterRenderable.getColor();
+    casterRenderable.setColor(this.mShadowColor);
     var l, lgt;
     for (l = 0; l < casterRenderable.numLights(); l++) {
         lgt = casterRenderable.getLightAt(l);
@@ -113,4 +113,5 @@ ShadowCaster.prototype.draw = function(aCamera) {
     }
     this.mSaveXform.cloneTo(this.mShadowCaster.getXform());
     casterRenderable.swapShader(s);
+    casterRenderable.setColor(c);
 };

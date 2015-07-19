@@ -136,10 +136,10 @@ MyGame.prototype.drawCamera = function (camera) {
     // always draw shadow first!
     this.mBgShadow.draw(camera);        // also draws the object
     this.mMinionShadow.draw(camera);
+    this.mLgtMinionShaodw.draw(camera);
     
 
     this.mBlock1.draw(camera);
-    this.mLgtMinion.draw(camera);
     this.mIllumHero.draw(camera);
     this.mBlock2.draw(camera);  
     this.mLgtHero.draw(camera);
@@ -167,6 +167,7 @@ MyGame.prototype.update = function () {
     this.mLgtMinion.update();
 
     this.mIllumHero.update();  // allow keyboard control to move
+    this.mLgtHero.update();
 
     // control the selected light
     var msg = "L=" + this.mLgtIndex + " ";

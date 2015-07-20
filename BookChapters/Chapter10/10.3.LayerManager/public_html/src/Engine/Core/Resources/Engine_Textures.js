@@ -145,7 +145,7 @@ gEngine.Textures = (function () {
                 gl.readPixels(0, 0, texInfo.mWidth, texInfo.mHeight, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
                 texInfo.mColorArray = pixels;
             } else {
-                alert("WARNING: Engine.Textures.getColorArray() faliled!");
+                alert("WARNING: Engine.Textures.getColorArray() failed!");
             }
             gl.bindFramebuffer(gl.FRAMEBUFFER, null);
             gl.deleteFramebuffer(fb);

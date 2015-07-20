@@ -31,6 +31,7 @@ GameObject.prototype.getRenderable = function () { return this.mRenderComponent;
 // Orientate the entire object to point towards point p
 // will rotate Xform() accordingly
 GameObject.prototype.rotateObjPointTo = function (p, rate) {
+    // Step A: determine if reach the destination position p
     var dir = [];
     vec2.sub(dir, p, this.getXform().getPosition());
     var len = vec2.length(dir);
@@ -39,7 +40,7 @@ GameObject.prototype.rotateObjPointTo = function (p, rate) {
     }
     vec2.scale(dir, dir, 1 / len);
 
-    // now compute the angle to rotate
+    // Step B: compute the angle to rotate
     var fdir = this.getCurrentFrontDir();
     var cosTheta = vec2.dot(dir, fdir);
 
@@ -47,6 +48,7 @@ GameObject.prototype.rotateObjPointTo = function (p, rate) {
         return;
     }
 
+    // Step C: clamp the cosTheda to -1 to 1 
     // in a perfect world, this would never happen! BUT ...
     if (cosTheta > 1) {
         cosTheta = 1;
@@ -56,7 +58,7 @@ GameObject.prototype.rotateObjPointTo = function (p, rate) {
         }
     }
 
-    // now compute if rotate clockwise, or counterclockwise
+    // Step D: compute whether to rotate clockwise, or counterclockwise
     var dir3d = vec3.fromValues(dir[0], dir[1], 0);
     var f3d = vec3.fromValues(fdir[0], fdir[1], 0);
     var r3d = [];
@@ -67,6 +69,7 @@ GameObject.prototype.rotateObjPointTo = function (p, rate) {
         rad = -rad;
     }
 
+    // Step E: rotate the facing direction with the angle and rate
     rad *= rate;  // actual angle need to rotate from Obj's front
     vec2.rotate(this.getCurrentFrontDir(), this.getCurrentFrontDir(), rad);
     this.getXform().incRotationByRad(rad);

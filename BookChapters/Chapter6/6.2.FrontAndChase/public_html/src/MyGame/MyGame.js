@@ -80,7 +80,7 @@ MyGame.prototype.draw = function () {
 // The update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGame.prototype.update = function () {
-    var msg = "Brain modes [H:keys, J:immidiate, K:gradual]: ";
+    var msg = "Brain modes [H:keys, J:immediate, K:gradual]: ";
     var rate = 1;
 
     this.mHero.update();

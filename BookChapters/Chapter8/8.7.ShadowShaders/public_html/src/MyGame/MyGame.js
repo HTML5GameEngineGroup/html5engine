@@ -129,16 +129,15 @@ MyGame.prototype.initialize = function () {
 
 
 MyGame.prototype.drawCamera = function (camera) {
-    // Step A: set up the View Projection matrix
+    // set up the View Projection matrix
     camera.setupViewProjection();
-    // Step B: Now draws each primitive
     
-    // always draw shadow first!
-    this.mBgShadow.draw(camera);        // also draws the object
+    
+    // always draw shadow receivers first!
+    this.mBgShadow.draw(camera);        // also draws the receiver object
     this.mMinionShadow.draw(camera);
     this.mLgtMinionShaodw.draw(camera);
     
-
     this.mBlock1.draw(camera);
     this.mIllumHero.draw(camera);
     this.mBlock2.draw(camera);  

@@ -155,6 +155,24 @@ gEngine.Physics = (function () {
             }
         }
     };
+    
+    // Rigid Shape interactions: a set against itself
+    var processSelfSet = function(set) {
+        var i, j, s1, s2;
+        beginRelaxation();
+        while (continueRelaxation()) {
+            for (i=0; i<set.size(); i++) {
+                s1 = set.getObjectAt(i).getPhysicsComponent();
+                for (j=i+1; j<set.size(); j++) {
+                    s2 = set.getObjectAt(j).getPhysicsComponent();
+                    if ((s1 !== s2) && (s1.collided(s2, mCollisionInfo))) {
+                        resolveCollision(s1, s2, mCollisionInfo);
+                    }
+                }
+            }
+        }
+    };
+    
     var getSystemGravity = function() { return mSystemGravity; };
     var setSystemGravity = function(g) { mSystemGravity = g; };
     var getRelaxationCorrectionRate = function() { return mPosCorrectionRate; };
@@ -185,7 +203,8 @@ gEngine.Physics = (function () {
         setRelaxationLoopCount: setRelaxationLoopCount,
         processObjObj: processObjObj,
         processObjSet: processObjSet,
-        processSetSet: processSetSet
+        processSetSet: processSetSet,
+        processSelfSet: processSelfSet
     };
 
     return mPublic;

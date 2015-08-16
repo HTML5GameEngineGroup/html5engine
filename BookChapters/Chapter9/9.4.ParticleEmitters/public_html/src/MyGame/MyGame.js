@@ -133,11 +133,13 @@ MyGame.prototype.draw = function () {
 // anything from this function!
 MyGame.prototype.update = function () {
     
+    var func = function(x, y) { this.createParticle.call(this, x, y); };
+    
     this.mCamera.update();  // to ensure proper interploated movement effects
     
     this.mAllPlatforms.update();
     this.mAllMinions.update();
-    this.mHero.update(this.mAllDyePacks, this.mAllParticles);
+    this.mHero.update(this.mAllDyePacks, this.mAllParticles, this.createParticle);
     this.mAllDyePacks.update();
     this.mAllParticles.update();
     
@@ -152,7 +154,7 @@ MyGame.prototype.update = function () {
     // create particles
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Z)) {
         if (this.mCamera.isMouseInViewport()) {
-            var p = new Particle(this.kParticleTexture, this.mCamera.mouseWCX(), this.mCamera.mouseWCY());
+            var p = this.createParticle(this.mCamera.mouseWCX(), this.mCamera.mouseWCY());
             this.mAllParticles.addToSet(p);
         }
     }
@@ -171,4 +173,30 @@ MyGame.prototype.update = function () {
     
     this.mMsg.setText(this.kPrompt + ": DyePack=" + this.mAllDyePacks.size() +
             " Particles=" + this.mAllParticles.size());
+};
+
+MyGame.prototype.createParticle = function(atX, atY) {
+    var life = 30 + Math.random() * 200;
+    var p = new ParticleGameObject("assets/particle.png", atX, atY, life);
+    p.getRenderable().setColor([1, 0, 0, 1]);
+    
+    // size of the particle
+    var r = 3.5 + Math.random() * 2.5;
+    p.getXform().setSize(r, r);
+    
+    // final color
+    var fr = 2.5 + Math.random();
+    var fg = 0.2 + 0.1 * Math.random();
+    var fb = 0.1 + 0.1 * Math.random();
+    p.setFinalColor([fr, fg, fb, 0.6]);
+    
+    // force on the particle
+    var fx = 10 * Math.random() - 20 * Math.random();
+    var fy = 10 * Math.random();
+    p.getPhysicsComponent().setForce([fx, fy]);
+    
+    // size delta
+    p.setSizeDelta(0.98);
+    
+    return p;
 };

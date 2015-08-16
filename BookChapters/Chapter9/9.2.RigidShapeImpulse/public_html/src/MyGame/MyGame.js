@@ -30,6 +30,9 @@ function MyGame() {
     this.mAllPlatforms = new GameObjectSet();
     this.mAllMinions = new GameObjectSet();
     this.mAllDyePacks = new GameObjectSet();
+    
+    // for testing of stability
+    this.mAllRigidShapes = new GameObjectSet();
 }
 gEngine.Core.inheritPrototype(MyGame, Scene);
 
@@ -120,6 +123,7 @@ MyGame.prototype.draw = function () {
     this.mAllPlatforms.draw(this.mCamera);
     this.mAllMinions.draw(this.mCamera);
     this.mAllDyePacks.draw(this.mCamera);
+    this.mAllRigidShapes.draw(this.mCamera);
     this.mHero.draw(this.mCamera);
     this.mMsg.draw(this.mCamera);
 };
@@ -134,6 +138,7 @@ MyGame.prototype.update = function () {
     this.mAllMinions.update();
     this.mHero.update(this.mAllDyePacks);
     this.mAllDyePacks.update();
+    this.mAllRigidShapes.update();
     
     // create dye pack and remove the expired ones ...
     if (gEngine.Input.isButtonClicked(gEngine.Input.mouseButton.Left)) {

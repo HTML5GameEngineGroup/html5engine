@@ -29,7 +29,7 @@ function Hero(spriteTexture, atX, atY) {
 }
 gEngine.Core.inheritPrototype(Hero, GameObject);
 
-Hero.prototype.update = function (dyePacks, allParticles) {
+Hero.prototype.update = function (dyePacks, allParticles, func) {
     // must call super class update
     GameObject.prototype.update.call(this);
 
@@ -50,7 +50,6 @@ Hero.prototype.update = function (dyePacks, allParticles) {
     
     // now interact with the dyePack ...
     var i, obj, collisionPt = [0, 0];
-    var func = function s(x, y) {return new Particle(x, y);};
     
     var p = this.getXform().getPosition();
     for (i=0; i<dyePacks.size(); i++) {

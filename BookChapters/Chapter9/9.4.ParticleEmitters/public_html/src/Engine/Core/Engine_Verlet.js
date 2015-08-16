@@ -1,6 +1,6 @@
 /*
- * File: Engine_ParticleSystem.js 
- * Particle System support
+ * File: Engine_Verlet.js 
+ * Verlet Particle System support
  */
 /*jslint node: true, vars: true, white: true */
 /*global vec2 */
@@ -11,8 +11,8 @@
 var gEngine = gEngine || { };
     // initialize the variable while ensuring it is not redefined
 
-gEngine.ParticleSystem = (function () {
-    var mSystemGravity = [0, -0.1];
+gEngine.Verlet = (function () {
+    var mSystemGravity = [0, -1.1];
     
     // the follows are scratch workspace for vec2
     var mFrom1to2 = [0, 0];  

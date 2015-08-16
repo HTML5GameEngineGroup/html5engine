@@ -6,7 +6,7 @@
 /*jslint node: true, vars: true, white: true */
 /*global gEngine, Scene, GameObjectSet, TextureObject, Camera, vec2,
   FontRenderable, ParticleGameObjectSet,
-  GameObject, Hero, Minion, Dye, Platform, Wall, DyePack, Particle */
+  GameObject, Hero, Minion, Dye, Platform, Wall, DyePack, ParticleGameObject */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -152,7 +152,7 @@ MyGame.prototype.update = function () {
     // create particles
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Z)) {
         if (this.mCamera.isMouseInViewport()) {
-            var p = new Particle(this.kParticleTexture, this.mCamera.mouseWCX(), this.mCamera.mouseWCY());
+            var p = this._createParticle(this.mCamera.mouseWCX(), this.mCamera.mouseWCY());
             this.mAllParticles.addToSet(p);
         }
     }
@@ -171,4 +171,30 @@ MyGame.prototype.update = function () {
     
     this.mMsg.setText(this.kPrompt + ": DyePack=" + this.mAllDyePacks.size() +
             " Particles=" + this.mAllParticles.size());
+};
+
+MyGame.prototype._createParticle = function(atX, atY) {
+    var life = 30 + Math.random() * 200;
+    var p = new ParticleGameObject(this.kParticleTexture, atX, atY, life);
+    p.getRenderable().setColor([1, 0, 0, 1]);
+    
+    // size of the particle
+    var r = 5.5 + Math.random() * 0.5;
+    p.getXform().setSize(r, r);
+    
+    // final color
+    var fr = 2.5 + Math.random();
+    var fg = 0.2 + 0.1 * Math.random();
+    var fb = 0.1 + 0.1 * Math.random();
+    p.setFinalColor([fr, fg, fb, 0.6]);
+    
+    // force on the particle
+    var fx = 10 - 20 * Math.random();
+    var fy = 10 * Math.random();
+    p.getPhysicsComponent().setForce([fx, fy]);
+    
+    // size delta
+    p.setSizeDelta(0.98);
+    
+    return p;
 };

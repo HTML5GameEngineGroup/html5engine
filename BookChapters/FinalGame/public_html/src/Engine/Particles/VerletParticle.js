@@ -15,7 +15,7 @@ function VerletParticle(pos) {
     this.mPosition = pos;  // this is probably a reference to xform.mPosition
     this.mPrevPosition = vec2.clone(this.mPosition);
     this.mForce = vec2.fromValues(0, 0);
-    this.mGravity = gEngine.ParticleSystem.getSystemGravity();
+    this.mGravity = gEngine.Verlet.getSystemGravity();
     this.mDrag = 0.99; 
     
     this.mPositionMark = new LineRenderable();

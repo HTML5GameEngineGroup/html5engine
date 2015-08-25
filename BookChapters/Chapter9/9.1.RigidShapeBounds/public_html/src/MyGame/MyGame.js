@@ -114,7 +114,7 @@ MyGame.prototype.draw = function () {
 // anything from this function!
 MyGame.prototype.update = function () {
     
-    this.mCamera.update();  // to ensure proper interploated movement effects
+    this.mCamera.update();  // to ensure proper interpolated movement effects
     this.mAllObjects.update();  // updates everything
  
     if (this.mCamera.isMouseInViewport()) {

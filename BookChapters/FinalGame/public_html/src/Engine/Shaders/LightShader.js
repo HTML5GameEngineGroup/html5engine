@@ -12,7 +12,7 @@
 //<editor-fold desc="constructor">
 // constructor 
 function LightShader(vertexShaderPath, fragmentShaderPath) {
-    // Callsuper class constructor
+    // Call super class constructor
     SpriteShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
 
     this.mLights = null;  // lights from the Renderable

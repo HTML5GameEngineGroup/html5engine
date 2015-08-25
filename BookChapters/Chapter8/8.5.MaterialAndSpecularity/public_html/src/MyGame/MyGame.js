@@ -150,7 +150,7 @@ MyGame.prototype.draw = function () {
 // The update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGame.prototype.update = function () {
-    this.mCamera.update();  // to ensure proper interploated movement effects
+    this.mCamera.update();  // to ensure proper interpolated movement effects
     this.mLMinion.update(); // ensure sprite animation
     this.mRMinion.update();
     this.mHero.update();  // allow keyboard control to move

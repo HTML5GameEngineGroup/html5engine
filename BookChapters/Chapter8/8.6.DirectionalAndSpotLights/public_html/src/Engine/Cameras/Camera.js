@@ -168,7 +168,7 @@ Camera.prototype.setupViewProjection = function () {
          this.mFarPlane  // z-distant to far plane 
         );
 
-    // Step B3: concatnate view and project matrices
+    // Step B3: concatenate view and project matrices
     mat4.multiply(this.mVPMatrix, this.mProjMatrix, this.mViewMatrix);
     //</editor-fold>
 

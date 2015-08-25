@@ -138,7 +138,7 @@ MyGame.prototype.draw = function () {
 MyGame.prototype.update = function () {
     var msg = "Light=" + this.mLgtIndex + " ";
 
-    this.mCamera.update();  // to ensure proper interploated movement effects
+    this.mCamera.update();  // to ensure proper interpolated movement effects
 
     this.mLMinion.update(); // ensure sprite animation
     this.mRMinion.update();

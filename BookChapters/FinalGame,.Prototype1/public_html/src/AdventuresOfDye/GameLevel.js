@@ -148,7 +148,7 @@ GameLevel.prototype.draw = function () {
 // The Update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 GameLevel.prototype.update = function () {
-    this.mCamera.update();  // to ensure proper interploated movement effects
+    this.mCamera.update();  // to ensure proper interpolated movement effects
 
     gEngine.LayerManager.updateAllLayers();
     

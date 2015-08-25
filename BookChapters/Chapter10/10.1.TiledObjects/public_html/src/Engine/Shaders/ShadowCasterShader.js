@@ -13,7 +13,7 @@
 //<editor-fold desc="constructor">
 // constructor 
 function ShadowCasterShader(vertexShaderPath, fragmentShaderPath) {
-    // Callsuper class constructor
+    // Call super class constructor
     SpriteShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
 
     this.mLight = null;  // The light that casts the shadow

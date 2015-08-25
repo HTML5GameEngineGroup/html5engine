@@ -12,7 +12,7 @@
 //<editor-fold desc="constructor">
 // constructor 
 function LightShader(vertexShaderPath, fragmentShaderPath) {
-    // Callsuper class constructor
+    // Call super class constructor
     SpriteShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
 
     // glsl uniform position references
@@ -21,7 +21,7 @@ function LightShader(vertexShaderPath, fragmentShaderPath) {
     this.mRadiusRef = null;
     this.mIsOnRef = null;
 
-    this.mLight = null; // <-- this is the light soruce in the Game Engine
+    this.mLight = null; // <-- this is the light source in the Game Engine
     //
     // create the references to these uniforms in the LightShader
     var shader = this.mCompiledShader;

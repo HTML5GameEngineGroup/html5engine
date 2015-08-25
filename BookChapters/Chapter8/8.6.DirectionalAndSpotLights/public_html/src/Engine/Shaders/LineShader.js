@@ -11,7 +11,7 @@
 //<editor-fold desc="constructor">
 // constructor of LineShader object
 function LineShader(vertexShaderPath, fragmentShaderPath) {
-    // Callsuper class constructor
+    // Call super class constructor
     SimpleShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
 
     this.mPointSizeRef = null;            // reference to the PointSize uniform

@@ -11,7 +11,7 @@
 //<editor-fold desc="constructor">
 // constructor 
 function IllumShader(vertexShaderPath, fragmentShaderPath) {
-    // Callsuper class constructor
+    // Call super class constructor
     LightShader.call(this, vertexShaderPath, fragmentShaderPath);  // call super class constructor
 
     // reference to the normal map sampler

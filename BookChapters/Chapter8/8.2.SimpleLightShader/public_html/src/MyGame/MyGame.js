@@ -128,7 +128,7 @@ MyGame.prototype.update = function () {
     var deltaC = 0.01;
     var deltaZ = 0.05;
 
-    this.mCamera.update();  // to ensure proper interploated movement effects
+    this.mCamera.update();  // to ensure proper interpolated movement effects
     this.mLMinion.update(); // ensure sprite animation
     this.mRMinion.update();
     this.mHero.update();  // allow keyboard control to move

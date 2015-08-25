@@ -36,7 +36,7 @@ ParallaxGameObject.prototype.update = function () {
     vec2.scaleAndAdd(pos, pos, this.getCurrentFrontDir(), this.getSpeed() * this.mParallaxScale);
 };
 
-ParallaxGameObject.prototype._refPosUpdate= function () {
+ParallaxGameObject.prototype._refPosUpdate = function () {
     // now check for reference movement
     var deltaT = vec2.fromValues(0, 0);
     vec2.sub(deltaT, this.mCameraWCCenterRef, this.mRefCamera.getWCCenter());

@@ -135,7 +135,7 @@ MyGame.prototype.update = function () {
     
     var func = function(x, y) { this.createParticle.call(this, x, y); };
     
-    this.mCamera.update();  // to ensure proper interploated movement effects
+    this.mCamera.update();  // to ensure proper interpolated movement effects
     
     this.mAllPlatforms.update();
     this.mAllMinions.update();

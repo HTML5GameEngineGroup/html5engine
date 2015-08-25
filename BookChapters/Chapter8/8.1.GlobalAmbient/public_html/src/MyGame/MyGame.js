@@ -91,7 +91,7 @@ MyGame.prototype.update = function () {
     var deltaAmbient = 0.01;
     var msg = "Current Ambient]: ";
 
-    this.mCamera.update();  // to ensure proper interploated movement effects
+    this.mCamera.update();  // to ensure proper interpolated movement effects
     this.mLMinion.update(); // ensure sprite animation
     this.mRMinion.update();
     this.mHero.update();  // allow keyboard control to move

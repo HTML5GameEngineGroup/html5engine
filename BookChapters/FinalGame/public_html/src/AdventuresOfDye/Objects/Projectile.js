@@ -3,15 +3,13 @@
 function Projectile(atX, atY, velocity, radius) {
     this.kTexture = "assets/EMPPulse.png";
     this.kSpeed = 0.2;
-    this.mParticle = new ParticleRenderable(this.kTexture);
 
-    this.mParticle.setColor([1, 1, 1, 1]);
-    this.mParticle.getXform().setPosition(atX, atY);
-    this.mParticle.getXform().setSize(radius, radius);
-                                
-    ParticleGameObject.call(this, this.mParticle, 500);
+    ParticleGameObject.call(this, this.kTexture, atX, atY, 500);
     this.setSpeed(this.kSpeed);
     this.setCurrentFrontDir(velocity);
+    var obj = this.getRenderable();
+    obj.setColor([1, 1, 1, 1]);
+    obj.getXform().setSize(radius, radius);
     
     var rigidShape = new RigidCircle(this.getXform(), radius);
     rigidShape.setMass(0.1);

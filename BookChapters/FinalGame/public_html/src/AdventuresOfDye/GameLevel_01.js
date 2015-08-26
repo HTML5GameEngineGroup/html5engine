@@ -21,6 +21,7 @@ function GameLevel_01(level) {
     this.kDoorBot = "assets/DoorInterior_Bottom.png";
     this.kDoorSleeve = "assets/DoorFrame_AnimSheet.png";
     this.kButton = "assets/DoorFrame_Button_180x100.png";
+    this.kProjectileTexture = "assets/EMPPulse.png";
 
     // specifics to the level
     this.kLevelFile = "assets/" + level + "/" + level + ".xml";  // e.g., assets/Level1/Level1.xml
@@ -74,6 +75,7 @@ GameLevel_01.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kDoorBot);
     gEngine.Textures.loadTexture(this.kDoorSleeve);
     gEngine.Textures.loadTexture(this.kButton);
+    gEngine.Textures.loadTexture(this.kProjectileTexture);
 
     gEngine.Textures.loadTexture(this.kBg);
     gEngine.Textures.loadTexture(this.kBgNormal);
@@ -96,6 +98,7 @@ GameLevel_01.prototype.unloadScene = function () {
     gEngine.Textures.unloadTexture(this.kDoorBot);
     gEngine.Textures.unloadTexture(this.kDoorSleeve);
     gEngine.Textures.unloadTexture(this.kButton);
+    gEngine.Textures.unloadTexture(this.kProjectileTexture);
 
     gEngine.Textures.unloadTexture(this.kBg);
     gEngine.Textures.unloadTexture(this.kBgNormal);

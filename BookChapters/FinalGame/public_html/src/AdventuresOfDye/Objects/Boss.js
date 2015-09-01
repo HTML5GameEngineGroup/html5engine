@@ -19,14 +19,14 @@ function Boss(atX, atY, velocity, movementRange, type, texture0, texture1, textu
     this.mMovementRange = movementRange;
 
     if (normal === null) {
-        this.mDyeBoss_Bottom = new LightRenderable(texture0, normal);
-        this.mDyeBoss_Top = new LightRenderable(texture1, normal);
-        this.mDyeBoss_CenterSpawn = new LightRenderable(texture2, normal);
-        this.mDyeBoss_Eyeballs = new LightRenderable(texture3, normal);
-        this.mDyeBoss_Eyeballs02 = new LightRenderable(texture3, normal);
-        this.mDyeBoss_WeakPoint_Blue = new LightRenderable(texture4, normal);
-        this.mDyeBoss_WeakPoint_Green = new LightRenderable(texture5, normal);
-        this.mDyeBoss_WeakPoint_Red = new LightRenderable(texture6, normal);
+        this.mDyeBoss_Bottom = new LightRenderable(texture0);
+        this.mDyeBoss_Top = new LightRenderable(texture1);
+        this.mDyeBoss_CenterSpawn = new LightRenderable(texture2);
+        this.mDyeBoss_Eyeballs = new LightRenderable(texture3);
+        this.mDyeBoss_Eyeballs02 = new LightRenderable(texture3);
+        this.mDyeBoss_WeakPoint_Blue = new LightRenderable(texture4);
+        this.mDyeBoss_WeakPoint_Green = new LightRenderable(texture5);
+        this.mDyeBoss_WeakPoint_Red = new LightRenderable(texture6);
     } else {
         this.mDyeBoss_Bottom = new IllumRenderable(texture0, normal);
         this.mDyeBoss_Top = new IllumRenderable(texture1, normal);

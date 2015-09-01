@@ -31,7 +31,7 @@ function Minion(atX, atY, velocity, movementRange, type, texture, normal, lightS
     this.mMovementRange = movementRange;
 
     if (normal === null) {
-        this.mMinion = new LightRenderable(texture, normal);
+        this.mMinion = new LightRenderable(texture);
     } else {
         this.mMinion = new IllumRenderable(texture, normal);
     }

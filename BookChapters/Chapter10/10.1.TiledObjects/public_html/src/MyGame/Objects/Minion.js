@@ -15,7 +15,7 @@ function Minion(spriteTexture, normalMap, atX, atY) {
     this.kDelta = 0.2;
 
     if (normalMap === null) {
-        this.mMinion = new LightRenderable(spriteTexture, normalMap);
+        this.mMinion = new LightRenderable(spriteTexture);
     } else {
         this.mMinion = new IllumRenderable(spriteTexture, normalMap);
     }

@@ -26,7 +26,7 @@ gEngine.Core.inheritPrototype(ParticleGameObject, GameObject);
 
 ParticleGameObject.prototype.setFinalColor = function(f) {    
     vec4.sub(this.mDeltaColor, f, this.mRenderComponent.getColor());
-    if (this.mCyclesToLieve !== 0) {
+    if (this.mCyclesToLive !== 0) {
         vec4.scale(this.mDeltaColor, this.mDeltaColor, 1/this.mCyclesToLive);
     }
 };

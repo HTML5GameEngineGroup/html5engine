@@ -58,7 +58,7 @@ function Minion(atX, atY, velocity, movementRange, type, texture, normal, lightS
     rigidShape.setMass(1);  // ensures no movements!
     rigidShape.setDrawBounds(true);
     rigidShape.setColor([0, 0, 1, 1]);
-    rigidShape.setGravity([0, 0]);
+    rigidShape.setAcceleration([0, 0]);
     this.setPhysicsComponent(rigidShape);
 }
 gEngine.Core.inheritPrototype(Minion, GameObject);

@@ -37,7 +37,7 @@ MyGame.prototype._physicsSimulation = function() {
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Z)) {
         var c = new Minion(this.kMinionSprite, this.mCamera.mouseWCX(), this.mCamera.mouseWCY());
         var p = c.getPhysicsComponent();
-        p.setGravity(gEngine.Physics.getSystemGravity());
+        p.setAcceleration(gEngine.Physics.getSystemtAcceleration());
         p.setColor([1, 1, 1, 1]);
         this.mAllRigidShapes.addToSet(c);
     }

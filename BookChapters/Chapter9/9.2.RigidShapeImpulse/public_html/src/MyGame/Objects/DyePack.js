@@ -24,7 +24,7 @@ function DyePack(texture, atX, atY) {
 
     var rigidShape = new RigidCircle(this.getXform(), 1.5);
     rigidShape.setMass(0.1);
-    rigidShape.setGravity([0, 0]);
+    rigidShape.setAcceleration([0, 0]);
     rigidShape.setDrawBounds(true);
     this.setPhysicsComponent(rigidShape);
 }

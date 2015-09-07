@@ -67,7 +67,7 @@ function Boss(atX, atY, velocity, movementRange, type, texture0, texture1, textu
     rigidShape.setMass(0);
     rigidShape.setDrawBounds(true);
     rigidShape.setColor([0, 0, 1, 1]);
-    //rigidShape.setGravity([0, 0]);
+    //rigidShape.setAcceleration([0, 0]);
     this.setPhysicsComponent(rigidShape);
 }
 gEngine.Core.inheritPrototype(Boss, GameObject);

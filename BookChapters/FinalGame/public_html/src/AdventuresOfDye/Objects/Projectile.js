@@ -13,7 +13,7 @@ function Projectile(atX, atY, velocity, radius) {
     
     var rigidShape = new RigidCircle(this.getXform(), radius);
     rigidShape.setMass(0.1);
-    rigidShape.setGravity([0, 0]);
+    rigidShape.setAcceleration([0, 0]);
     this.setPhysicsComponent(rigidShape);
     
     this.setSizeDelta(1);

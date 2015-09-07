@@ -15,7 +15,7 @@ gEngine.Physics = (function () {
     var mRelaxationCount = 15;
     var mRelaxationOffset = 1/mRelaxationCount;
     var mPosCorrectionRate = 0.8;
-    var mSystemGravity = [0, -50];
+    var mSystemtAcceleration = [0, -50];
     
     var mRelaxationLoopCount = 0;
     var mHasOneCollision = false;
@@ -155,8 +155,8 @@ gEngine.Physics = (function () {
             }
         }
     };
-    var getSystemGravity = function() { return mSystemGravity; };
-    var setSystemGravity = function(g) { mSystemGravity = g; };
+    var getSystemtAcceleration = function() { return mSystemtAcceleration; };
+    var setSystemtAcceleration = function(g) { mSystemtAcceleration = g; };
     var getRelaxationCorrectionRate = function() { return mPosCorrectionRate; };
     var setRelaxationCorrectionRate = function(r) {
         if ((r <= 0) || (r>=1)) {
@@ -177,8 +177,8 @@ gEngine.Physics = (function () {
         resolveCollision: resolveCollision,
         beginRelaxation: beginRelaxation,
         continueRelaxation: continueRelaxation,
-        getSystemGravity: getSystemGravity,
-        setSystemGravity: setSystemGravity,
+        getSystemtAcceleration: getSystemtAcceleration,
+        setSystemtAcceleration: setSystemtAcceleration,
         getRelaxationCorrectionRate: getRelaxationCorrectionRate,
         setRelaxationCorrectionRate: setRelaxationCorrectionRate,
         getRelaxationLoopCount: getRelaxationLoopCount,

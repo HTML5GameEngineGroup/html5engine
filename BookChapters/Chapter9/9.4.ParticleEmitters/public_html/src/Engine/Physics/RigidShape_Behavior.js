@@ -15,7 +15,7 @@ RigidShape.prototype.update = function () {
     //    v += (1/m * F) * dt
     //    x += v * dt
     var v = this.getVelocity();
-    vec2.scaleAndAdd(v, v, this.mGravity, (this.getInvMass() * dt ));
+    vec2.scaleAndAdd(v, v, this.mAcceleration, (this.getInvMass() * dt ));
     
     var pos = this.getPosition();
     vec2.scaleAndAdd(pos, pos, v, dt);
@@ -34,5 +34,5 @@ RigidShape.prototype.getRestitution = function () { return this.mRestitution; };
 RigidShape.prototype.setRestitution = function (r) { this.mRestitution = r; };
 RigidShape.prototype.getFriction = function () { return this.mFriction; };
 RigidShape.prototype.setFriction = function (f) { this.mFriction = f; };
-RigidShape.prototype.getGravity = function () { return this.mGravity; };
-RigidShape.prototype.setGravity = function (g) { this.mGravity = g; };
+RigidShape.prototype.getAcceleration = function () { return this.mAcceleration; };
+RigidShape.prototype.setAcceleration = function (g) { this.mAcceleration = g; };

@@ -54,7 +54,7 @@ function Hero(spriteTexture, normalMap, atX, atY, lgtSet) {
     r.setRestitution(0);
     r.setColor([0, 1, 0, 1]);
     r.setDrawBounds(true);
-    //r.setGravity(-5);
+    //r.setAcceleration(-5);
     this.setPhysicsComponent(r);
 
 }

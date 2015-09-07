@@ -29,7 +29,7 @@ function Minion(spriteTexture, atX, atY) {
 
     var r = new RigidCircle(this.getXform(), 6.5);
     r.setMass(2);
-    r.setGravity([0, 0]);
+    r.setAcceleration([0, 0]);
     r.setFriction(0);
     r.setColor([0, 1, 0, 1]);
     r.setDrawBounds(true);

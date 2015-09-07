@@ -12,7 +12,7 @@ var gEngine = gEngine || { };
     // initialize the variable while ensuring it is not redefined
 
 gEngine.Verlet = (function () {
-    var mSystemGravity = [0, -0.1];
+    var mSystemtAcceleration = [0, -0.1];
     
     // the follows are scratch workspace for vec2
     var mFrom1to2 = [0, 0];  
@@ -98,12 +98,12 @@ gEngine.Verlet = (function () {
             processObjSet(objSet.getObjectAt(i), pSet);
         }
     };
-    var getSystemGravity = function() { return mSystemGravity; };
-    var setSystemGravity = function(g) { mSystemGravity = g; };
+    var getSystemtAcceleration = function() { return mSystemtAcceleration; };
+    var setSystemtAcceleration = function(g) { mSystemtAcceleration = g; };
     
     var mPublic = {
-        getSystemGravity: getSystemGravity,
-        setSystemGravity: setSystemGravity,
+        getSystemtAcceleration: getSystemtAcceleration,
+        setSystemtAcceleration: setSystemtAcceleration,
         resolveCirclePos: resolveCirclePos,
         resolveRectPos: resolveRectPos,
         processObjSet: processObjSet,

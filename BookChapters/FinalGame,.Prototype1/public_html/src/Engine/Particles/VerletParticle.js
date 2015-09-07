@@ -15,7 +15,7 @@ function VerletParticle(pos) {
     this.mPosition = pos;  // this is probably a reference to xform.mPosition
     this.mPrevPosition = vec2.clone(this.mPosition);
     this.mForce = vec2.fromValues(0, 0);
-    this.mGravity = gEngine.ParticleSystem.getSystemGravity();
+    this.mAcceleration = gEngine.ParticleSystem.getSystemtAcceleration();
     this.mDrag = 0.99; 
     
     this.mPositionMark = new LineRenderable();
@@ -65,7 +65,7 @@ VerletParticle.prototype.update = function () {
 };
 
 VerletParticle.prototype.accumulateForces = function () {
-    vec2.add(this.mForce, this.mForce, this.mGravity);
+    vec2.add(this.mForce, this.mForce, this.mAcceleration);
 };
 
 VerletParticle.prototype.setColor = function (color) {
@@ -83,7 +83,7 @@ VerletParticle.prototype.getYPos = function () { return this.mPosition[1]; };
 VerletParticle.prototype.setYPos = function (yPos) { this.mPosition[1] = yPos; };
 VerletParticle.prototype.setForce = function (f) { this.mForce = f; };
 VerletParticle.prototype.getForce = function () { return this.mForce; };
-VerletParticle.prototype.setGravity = function (g) { this.mGravity = g; };
-VerletParticle.prototype.getGravity = function () { return this.mGravity; };
+VerletParticle.prototype.setAcceleration = function (g) { this.mAcceleration = g; };
+VerletParticle.prototype.getAcceleration = function () { return this.mAcceleration; };
 VerletParticle.prototype.setDrag = function (d) { this.mDrag = d; };
 VerletParticle.prototype.getDrag = function () { return this.mDrag; };

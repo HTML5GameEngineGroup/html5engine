@@ -1,6 +1,6 @@
 /*
- * File: Engine_Verlet.js 
- * Verlet Particle System support
+ * File: Engine_Particle.js 
+ * Particle System support
  */
 /*jslint node: true, vars: true, white: true */
 /*global vec2 */
@@ -11,8 +11,8 @@
 var gEngine = gEngine || { };
     // initialize the variable while ensuring it is not redefined
 
-gEngine.Verlet = (function () {
-    var mSystemtAcceleration = [0, -1.1];
+gEngine.Particle = (function () {
+    var mSystemtAcceleration = [0, -0.1];
     
     // the follows are scratch workspace for vec2
     var mFrom1to2 = [0, 0];  
@@ -86,7 +86,7 @@ gEngine.Verlet = (function () {
         var s1 = obj.getPhysicsComponent();  // a RigidShape
         var i, p;
         for (i=0; i<pSet.size(); i++) {
-            p = pSet.getObjectAt(i).getPhysicsComponent();  // a VerletParticle
+            p = pSet.getObjectAt(i).getPhysicsComponent();  // a Particle
             s1.resolveParticleCollision(p);
         }
     };

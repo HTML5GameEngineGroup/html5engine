@@ -86,7 +86,7 @@ gEngine.ParticleSystem = (function () {
         var s1 = obj.getPhysicsComponent();  // a RigidShape
         var i, p;
         for (i=0; i<pSet.size(); i++) {
-            p = pSet.getObjectAt(i).getPhysicsComponent();  // a VerletParticle
+            p = pSet.getObjectAt(i).getPhysicsComponent();  // a Particle
             s1.resolveParticleCollision(p);
         }
     };

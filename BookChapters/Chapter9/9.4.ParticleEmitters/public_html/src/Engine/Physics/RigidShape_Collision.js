@@ -4,7 +4,7 @@
  */
 
 /*jslint node: true, vars:true , white: true*/
-/*global RigidShape, vec2, LineRenderable, gEngine, gEngine.Verlet */
+/*global RigidShape, vec2, LineRenderable, gEngine, gEngine.Particle */
 /* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
@@ -78,10 +78,10 @@ RigidShape.prototype.resolveParticleCollision = function(aParticle) {
     var status = false;
     switch (this.rigidType()) {
         case RigidShape.eRigidType.eRigidCircle:
-            status = gEngine.Verlet.resolveCirclePos(this, aParticle);
+            status = gEngine.Particle.resolveCirclePos(this, aParticle);
             break;
         case RigidShape.eRigidType.eRigidRectangle:
-            status = gEngine.Verlet.resolveRectPos(this, aParticle);
+            status = gEngine.Particle.resolveRectPos(this, aParticle);
             break;
     }
     return status;

@@ -185,15 +185,15 @@ MyGame.prototype.createParticle = function(atX, atY) {
     p.getXform().setSize(r, r);
     
     // final color
-    var fr = 2.5 + Math.random();
-    var fg = 0.2 + 0.1 * Math.random();
-    var fb = 0.1 + 0.1 * Math.random();
+    var fr = 3.5 + Math.random();
+    var fg = 0.4 + 0.1 * Math.random();
+    var fb = 0.3 + 0.1 * Math.random();
     p.setFinalColor([fr, fg, fb, 0.6]);
     
-    // force on the particle
+    // velocity on the particle
     var fx = 10 * Math.random() - 20 * Math.random();
     var fy = 10 * Math.random();
-    p.getPhysicsComponent().setForce([fx, fy]);
+    p.getPhysicsComponent().setVelocity([fx, fy]);
     
     // size delta
     p.setSizeDelta(0.98);

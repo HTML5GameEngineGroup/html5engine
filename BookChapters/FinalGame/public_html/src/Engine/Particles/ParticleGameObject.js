@@ -4,7 +4,7 @@
  */
 
 /*jslint node: true, vars: true, white: true */
-/*global gEngine, GameObject, ParticleRenderable, VerletParticle, vec4 */
+/*global gEngine, GameObject, ParticleRenderable, Particle, vec4 */
 /* find out more about jslint: http://www.jslint.com/help.html */
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
@@ -15,7 +15,7 @@ function ParticleGameObject(texture, atX, atY, cyclesToLive) {
     xf.setPosition(atX, atY);
     GameObject.call(this, renderableObj);
     
-    var p = new VerletParticle(xf.getPosition());
+    var p = new Particle(xf.getPosition());
     this.setPhysicsComponent(p);
     
     this.mDeltaColor = [0, 0, 0, 0];

@@ -1,6 +1,6 @@
 /*
  * File: EngineCore_Physics.js 
- * Physics engine supporting impulse responses and verlet integration. 
+ * Physics engine supporting projection and impulse collision resolution. 
  */
 /*jslint node: true, vars: true, white: true */
 /*global vec2, CollisionInfo */

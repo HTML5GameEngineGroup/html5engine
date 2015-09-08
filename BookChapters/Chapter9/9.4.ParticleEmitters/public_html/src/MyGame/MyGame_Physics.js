@@ -28,6 +28,6 @@ MyGame.prototype._physicsSimulation = function() {
     
     
     // Particle system collisions
-    gEngine.Verlet.processSetSet(this.mAllMinions, this.mAllParticles);
-    gEngine.Verlet.processSetSet(this.mAllPlatforms, this.mAllParticles);
+    gEngine.Particle.processSetSet(this.mAllMinions, this.mAllParticles);
+    gEngine.Particle.processSetSet(this.mAllPlatforms, this.mAllParticles);
 };

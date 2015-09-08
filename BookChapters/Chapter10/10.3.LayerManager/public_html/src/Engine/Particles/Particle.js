@@ -1,6 +1,6 @@
 /* 
  * File: Particle.js
- * Defines a verlet particle
+ * Defines a particle
  */
 
 /*jslint node: true, vars:true , white: true*/
@@ -10,12 +10,11 @@
 "use strict";
 
 function Particle(pos) {
-    this.kPadding = 0.5;
+    this.kPadding = 0.5;   // for drawing particle bounds
     
-    this.mPosition = pos;  // this is probably a reference to xform.mPosition
-    this.mPrevPosition = vec2.clone(this.mPosition);
-    this.mForce = vec2.fromValues(0, 0);
-    this.mAcceleration = gEngine.ParticleSystem.getSystemtAcceleration();
+    this.mPosition = pos;  // this is likely to be a reference to xform.mPosition
+    this.mVelocity = vec2.fromValues(0, 0);
+    this.mAcceleration = gEngine.Particle.getSystemtAcceleration();
     this.mDrag = 0.99; 
     
     this.mPositionMark = new LineRenderable();
@@ -41,31 +40,16 @@ Particle.prototype.draw = function (aCamera) {
 };
 
 Particle.prototype.update = function () {
-    this.accumulateForces();
     var dt = gEngine.GameLoop.getUpdateIntervalInSeconds();
     
+    // Symplectic Euler
+    //    v += a * dt
+    //    x += v * dt
     var p = this.getPosition();
-    var preP = this.mPrevPosition;
-    
-    // newpos += (pos - prevpos) + (force * dt^2)
-    var posDrag = [0, 0];
-    var prevPosDrag = [0, 0];
-    vec2.scale(posDrag, p, this.mDrag);
-    vec2.scale(prevPosDrag, preP, this.mDrag);
-    //
-    preP[0] = p[0];  // setting this.mPrevPosition!!
-    preP[1] = p[1];
-
-    var posDiff = [0, 0];
-    vec2.subtract(posDiff ,posDrag, prevPosDrag);
-    var overTime = [0, 0];
-    vec2.scale(overTime, this.mForce, dt*dt);
-    vec2.add(overTime, posDiff, overTime);
-    vec2.add(p, p, overTime);
-};
-
-Particle.prototype.accumulateForces = function () {
-    vec2.add(this.mForce, this.mForce, this.mAcceleration);
+    vec2.scaleAndAdd(this.mVelocity, this.mVelocity, this.mAcceleration, dt);
+    var useV = [0, 0];
+    vec2.scale(useV, this.mVelocity, this.mDrag);
+    vec2.scaleAndAdd(p, p, useV, dt);
 };
 
 Particle.prototype.setColor = function (color) {
@@ -81,8 +65,8 @@ Particle.prototype.getXPos = function () { return this.mPosition[0]; };
 Particle.prototype.setXPos = function (xPos) { this.mPosition[0] = xPos; };
 Particle.prototype.getYPos = function () { return this.mPosition[1]; };
 Particle.prototype.setYPos = function (yPos) { this.mPosition[1] = yPos; };
-Particle.prototype.setForce = function (f) { this.mForce = f; };
-Particle.prototype.getForce = function () { return this.mForce; };
+Particle.prototype.setVelocity = function (f) { this.mVelocity = f; };
+Particle.prototype.getVelocity = function () { return this.mVelocity; };
 Particle.prototype.setAcceleration = function (g) { this.mAcceleration = g; };
 Particle.prototype.getAcceleration = function () { return this.mAcceleration; };
 Particle.prototype.setDrag = function (d) { this.mDrag = d; };

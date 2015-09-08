@@ -12,7 +12,7 @@ var gEngine = gEngine || { };
     // initialize the variable while ensuring it is not redefined
 
 gEngine.Particle = (function () {
-    var mSystemtAcceleration = [0, -0.1];
+    var mSystemtAcceleration = [0, -50.0];
     
     // the follows are scratch workspace for vec2
     var mFrom1to2 = [0, 0];  

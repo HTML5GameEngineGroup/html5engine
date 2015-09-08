@@ -12,18 +12,18 @@ var gEngine = gEngine || { };
     // initialize the variable while ensuring it is not redefined
 
 gEngine.Physics = (function () {
-    var mRelaxationCount = 15;
-    var mRelaxationOffset = 1/mRelaxationCount;
-    var mPosCorrectionRate = 0.8;
-    var mSystemtAcceleration = [0, -50];
+    var mRelaxationCount = 15;                  // number of relaxation iteration
+    var mRelaxationOffset = 1/mRelaxationCount; // porportion to apply when scaling friction
+    var mPosCorrectionRate = 0.8;               // percentage of separation to project objects
+    var mSystemtAcceleration = [0, -50];        // system-wide default acceleration
     
-    var mRelaxationLoopCount = 0;
-    var mHasOneCollision = false;
+    var mRelaxationLoopCount = 0;               // the current relaxation count
+    var mHasOneCollision = false;               // detect the first collision
     
-    var mCollisionInfo = null;
+    var mCollisionInfo = null;                  // information of the current collision
     
     var initialize = function() {
-        mCollisionInfo = new CollisionInfo(); // to avoid allocating this all the time
+        mCollisionInfo = new CollisionInfo(); // to avoid allocating this constantly
     } 
     
     var _positionalCorrection = function (s1, s2, collisionInfo) {
@@ -62,27 +62,33 @@ gEngine.Physics = (function () {
         vec2.sub(v, v, tangent);
     };
     var resolveCollision = function (s1, s2, collisionInfo) {
+        // Step A: one collision has been found
         mHasOneCollision = true;
+        
+        // Step B: correct positions
         _positionalCorrection(s1, s2, collisionInfo);
 
-        var relativeVelocity = [0, 0];
+        // collision normal direction is _against_ s2
+        // Step C: apply friction
         var s1V = s1.getVelocity();
         var s2V = s2.getVelocity();
-        
-        // collision normal direction is _against_ s2
         var n = collisionInfo.getNormal();
         _applyFriction(n, s1V, s1.getFriction(), s1.getInvMass());
         _applyFriction(n, s2V, -s2.getFriction(), s2.getInvMass());
-        
+
+        // Step D: compute relatively velocity of the colliding objects
+        var relativeVelocity = [0, 0];
         vec2.sub(relativeVelocity, s2V, s1V);
 
+        // Step E: examine the component in the normal direction
         // Relative velocity in normal direction
         var rVelocityInNormal = vec2.dot(relativeVelocity, n);
         //if objects moving apart ignore
         if (rVelocityInNormal > 0) {
             return;
         }
-
+        
+        // Step F: compute and apply response impulses for each object
         var newRestituion = Math.min(s1.getRestitution(), s2.getRestitution());
         // Calc impulse scalar
         var j = -(1 + newRestituion) * rVelocityInNormal;

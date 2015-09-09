@@ -10,8 +10,6 @@ uniform sampler2D uSampler;
 
 // Color of pixel
 uniform vec4 uPixelColor;  
-uniform vec4 uGlobalAmbientColor; // this is shared globally
-uniform float uGlobalAmbientIntensity;
 
 // The "varying" keyword is for signifing that the texture coordinate will be
 // interpolated and thus varies. 

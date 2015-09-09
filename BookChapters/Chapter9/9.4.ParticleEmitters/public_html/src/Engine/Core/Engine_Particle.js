@@ -76,7 +76,7 @@ gEngine.Particle = (function () {
             }
 
             vec2.subtract(mVec, mVec, mFrom1to2);
-            vec2.add(pos, pos, mVec);  // remember pt is ptShape.Position!!
+            vec2.add(pos, pos, mVec);  // remember pos is particle position
         }
         return collided;
     };

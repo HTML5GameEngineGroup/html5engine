@@ -15,7 +15,7 @@ function Particle(pos) {
     this.mPosition = pos;  // this is likely to be a reference to xform.mPosition
     this.mVelocity = vec2.fromValues(0, 0);
     this.mAcceleration = gEngine.Particle.getSystemtAcceleration();
-    this.mDrag = 0.99; 
+    this.mDrag = 0.95; 
     
     this.mPositionMark = new LineRenderable();
     this.mDrawBounds = false;
@@ -47,9 +47,8 @@ Particle.prototype.update = function () {
     //    x += v * dt
     var p = this.getPosition();
     vec2.scaleAndAdd(this.mVelocity, this.mVelocity, this.mAcceleration, dt);
-    var useV = [0, 0];
-    vec2.scale(useV, this.mVelocity, this.mDrag);
-    vec2.scaleAndAdd(p, p, useV, dt);
+    vec2.scale(this.mVelocity, this.mVelocity, this.mDrag);
+    vec2.scaleAndAdd(p, p, this.mVelocity, dt);
 };
 
 Particle.prototype.setColor = function (color) {

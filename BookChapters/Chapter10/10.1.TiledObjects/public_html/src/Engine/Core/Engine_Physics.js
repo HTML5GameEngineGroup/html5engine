@@ -24,7 +24,7 @@ gEngine.Physics = (function () {
     
     var initialize = function() {
         mCollisionInfo = new CollisionInfo(); // to avoid allocating this constantly
-    } 
+    };
     
     var _positionalCorrection = function (s1, s2, collisionInfo) {
         var s1InvMass = s1.getInvMass();

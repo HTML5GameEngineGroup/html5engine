@@ -71,7 +71,7 @@ Particle.prototype.accumulateForces = function () {
 Particle.prototype.setColor = function (color) {
     this.mPositionMark.setColor(color);
 };
-Particle.prototype.getColor = function () { return this.mPositionMark1.getColor(); };
+Particle.prototype.getColor = function () { return this.mPositionMark.getColor(); };
 Particle.prototype.setDrawBounds = function(d) { this.mDrawBounds = d; };
 Particle.prototype.getDrawBounds = function() { return this.mDrawBounds; };
 

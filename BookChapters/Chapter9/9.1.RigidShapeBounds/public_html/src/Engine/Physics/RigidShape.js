@@ -61,6 +61,6 @@ RigidShape.prototype.setXform = function (xform) { this.mXform = xform; };
 RigidShape.prototype.setColor = function (color) {
     this.mPositionMark.setColor(color);
 };
-RigidShape.prototype.getColor = function () { return this.mPositionMark1.getColor(); };
+RigidShape.prototype.getColor = function () { return this.mPositionMark.getColor(); };
 RigidShape.prototype.setDrawBounds = function(d) { this.mDrawBounds = d; };
 RigidShape.prototype.getDrawBounds = function() { return this.mDrawBounds; };

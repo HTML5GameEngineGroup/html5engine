@@ -19,7 +19,7 @@ function ParticleEmitter(pos, num, createrFunc) {
     // Number of particles left to be emitted
     this.mNumRemains = num;
     
-    this.mParticleCreater = createrFunc;
+    this.mParticleCreator = createrFunc;
 }
 ParticleEmitter.prototype.expired = function () { return (this.mNumRemains <= 0); };
 
@@ -36,7 +36,7 @@ ParticleEmitter.prototype.emitParticles = function (pSet) {
     this.mNumRemains -= numToEmit;
     var i, p;
     for (i = 0; i < numToEmit; i++) {
-        p = this.mParticleCreater(this.mEmitPosition[0], this.mEmitPosition[1]);
+        p = this.mParticleCreator(this.mEmitPosition[0], this.mEmitPosition[1]);
         pSet.addToSet(p);
     }
 };

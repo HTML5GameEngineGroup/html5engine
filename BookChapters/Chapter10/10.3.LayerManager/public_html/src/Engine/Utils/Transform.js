@@ -12,7 +12,7 @@
 function Transform() {
     this.mPosition = vec2.fromValues(0, 0); // this is the translation
     this.mScale = vec2.fromValues(1, 1);    // this is the width (x) and height (y)
-    this.mZ = 0.0;                          // must be a positive number, larger is cloer to eye
+    this.mZ = 0.0;                          // must be a positive number, larger is closer to eye
     this.mRotationInRad = 0.0;              // in radians!
 }
 

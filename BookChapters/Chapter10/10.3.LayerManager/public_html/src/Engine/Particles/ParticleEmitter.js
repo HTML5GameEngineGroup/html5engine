@@ -29,7 +29,7 @@ ParticleEmitter.prototype.emitParticles = function (pSet) {
         // If only a few are left, emits all of them
         numToEmit = this.mNumRemains;
     } else  {
-        // Other wise, emits about 20% of what's left
+        // Otherwise, emits about 20% of what's left
         numToEmit = Math.random() * 0.2 * this.mNumRemains;
     }
     // Left for future emitting.                            

@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 
 <head>
 <!-- Copied from: http://www.w3schools.com/jquerymobile/tryit.asp?filename=tryjqmob_lists_collapsible -->
@@ -7,342 +7,417 @@
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 </head>
  <body>
-<h1>Sample Game Engine</h1>
+<h1>Build your own 2D Game Engine</h1>
 
 <hr/>
 
 <div data-role="collapsible">
-<h2>Chapter 1: Getting Started with HTML5</h2>
+<h2>Chapter 1: Introduction</h2>
 <ul>
-    <li>1.1. <a href="Chapter1/1.1.HTML5Application/public_html/index.html " target="_blank">HTML5 Application</a>
-</li>
+    <li>1.1. <a href="Chapter1/1.1.HTML5Application/public_html/index.html " target="_blank">HTML5 Application</a>: 
+		Builds first empty project.</li>
 </ul>
 </div>
 
 <div data-role="collapsible">
 <h2>Chapter 2: Working with HTML5 and WebGL</h2>
     <ul>
-        <li>2.1. <a href="Chapter2/2.1.HTML5Canvas/public_html/index.html" target="_blank">HTML5 Canvas</a></li>
-        <li>2.2. <a href="Chapter2/2.2.JavaScriptSourceFile/public_html/index.html" target="_blank">JavaScript Source Files</a></li>
-        <li>2.3. <a href="Chapter2/2.3.DrawOneSquare/public_html/index.html" target="_blank">Draw One Square (with WebGL)</a></li>
-        <li>2.4. <a href="Chapter2/2.4.JavaScriptObjects/public_html/index.html" target="_blank">JavaScript Objects</a></li>
-        <li>2.5. <a href="Chapter2/2.5.ShaderSourceFiles/public_html/index.html" target="_blank">Shader Source Files</a></li>
-        <li>2.6. <a href="Chapter2/2.6.ParameterizedFragmentShader/public_html/index.html" target="_blank">Parameterized Fragment Shader</a></li>
+        <li>2.1. <a href="Chapter2/2.1.HTML5Canvas/public_html/index.html" target="_blank">HTML5 Canvas</a>: 
+			Draws and clears a HTML5 canvas.</li>
+        <li>2.2. <a href="Chapter2/2.2.JavaScriptSourceFile/public_html/index.html" target="_blank">JavaScript Source Files</a>: 
+			Separates source code into appropriate files.</li>
+        <li>2.3. <a href="Chapter2/2.3.DrawOneSquare/public_html/index.html" target="_blank">Elementary Drawing with WebGL</a>:
+	        Draws one square using WebGL.</li>
+        <li>2.4. <a href="Chapter2/2.4.JavaScriptObjects/public_html/index.html" target="_blank">Abstraction with JavaScript Objects</a>:
+	        Enhances the draw square project with data abstraction.</li>
+        <li>2.5. <a href="Chapter2/2.5.ShaderSourceFiles/public_html/index.html" target="_blank">Shader Source Files</a>:
+	        Separates the GLSL shaders into different files.</li>
+        <li>2.6. <a href="Chapter2/2.6.ParameterizedFragmentShader/public_html/index.html" target="_blank">Parameterized Fragment Shader</a>:
+	        Supports drawing with any color.</li>
     </ul>
 </div>
 
 <div data-role="collapsible">
 <h2>Chapter 3: Drawing objects in the World</h2>
 <ul>
-    <li>3.1.<a href="Chapter3/3.1.RenderableObjects/public_html/index.html" target="_blank">Renderable Objects</a></li>
-    <li>3.2. <a href="Chapter3/3.2.MatrixTransform/public_html/index.html" target="_blank">Matrix Transform</a></li>
-    <li>3.3. <a href="Chapter3/3.3.TransformObjects/public_html/index.html" target="_blank">Transform Objects</a></li>
-    <li>3.4. <a href="Chapter3/3.4.ViewProjectionAndViewport/public_html/index.html" target="_blank">View Projection And Viewport</a></li>
-    <li>3.5. <a href="Chapter3/3.5.CameraObjects/public_html/index.html" target="_blank">Camera Objects</a></li>
-</li>
+    <li>3.1.<a href="Chapter3/3.1.RenderableObjects/public_html/index.html" target="_blank">Renderable Objects</a>:
+    	Encapsulates the drawing operation.</li>
+    <li>3.2. <a href="Chapter3/3.2.MatrixTransform/public_html/index.html" target="_blank">Matrix Transform</a>:
+    	Uses transformation matrices as operators.</li>
+    <li>3.3. <a href="Chapter3/3.3.TransformObjects/public_html/index.html" target="_blank">Transform Objects</a>:
+    	Defines a logical interface for manipulating transformation operators.</li>
+    <li>3.4. <a href="Chapter3/3.4.ViewProjectionAndViewport/public_html/index.html" target="_blank">View Projection And Viewport</a>:
+    	Draws from any coordinate system to any subregion of the canvas.</li>
+    <li>3.5. <a href="Chapter3/3.5.CameraObjects/public_html/index.html" target="_blank">Camera Objects</a>:
+    	Abstracts the view-projection transform and the viewport.</li>
 </ul>
 </div>
 
 <div data-role="collapsible">
 <h2>Chapter 4: Implementing Common Components of Video Games</h2>
 <ul>
-    <li>4.1. <a href="Chapter4/4.1.GameLoop/public_html/index.html " target="_blank">Game Loop</a></li>
-    <li>4.2. <a href="Chapter4/4.2.KeyboardSupport/public_html/index.html " target="_blank">Keyboard Support</a>
+    <li>4.1. <a href="Chapter4/4.1.GameLoop/public_html/index.html " target="_blank">Game Loop</a>:
+	    Incorporates a game loop into your game engine.</li>
+    <li>4.2. <a href="Chapter4/4.2.KeyboardSupport/public_html/index.html " target="_blank">Keyboard Support</a>:
+    	Supports receiving input from the keyboard.
         <ul>
-            <li>Up, Left, and Down: arrows to manipulate</ul>
-    <li>4.3 <a href="Chapter4/4.3.ResourceMapAndShaderLoader/public_html/index.html " target="_blank">ResourceMap and Asyn Shader loading</a><ul>
-        <li>Up, Left, and Down: arrows to manipulate</ul>
-    <li>4.4 <a href="Chapter4/4.4.SceneFile/public_html/index.html " target="_blank">External Scene File</a><ul>
-        <li>Up, Left, and Down: arrows to manipulate</ul>
-    <li>4.5 <a href="Chapter4/4.5.SceneObjects/public_html/index.html " target="_blank">Scene Objects</a><ul>
-        <li>Left/Right: to move the center rectangle<li>Move left out of bound to change level</ul>
-    <li>4.6 <a href="Chapter4/4.6.AudioSupport/public_html/index.html " target="_blank">Audio Support</a><ul>
-        <li>Left/Right: to move the center rectangle<li>Move left out of bound to change level</ul>
+            <li>Right/Up/Down Arrow: to manipulate</li></ul>
+    <li>4.3 <a href="Chapter4/4.3.ResourceMapAndShaderLoader/public_html/index.html " target="_blank">Resource Map and Shader 
+	Load</a>er: Develops infrastructure for resource management, and loads shader files asynchronously.
+		<ul>
+            <li>Right/Up/Down Arrow: to manipulate</li></ul>
+    <li>4.4 
+	<a href="Chapter4/4.4.SceneFile/public_html/index.html " target="_blank">Scene File</a>:
+		Works with external scene files.
+		<ul>
+            <li>Right/Up/Down Arrow: to manipulate</li></ul>
+    <li>4.5 <a href="Chapter4/4.5.SceneObjects/public_html/index.html " target="_blank">Scene Objects</a>:
+    	Interfaces with the Game Engine via the Scene object.
+    	<ul>
+    	    <li>Left/Right Arrow: to move the center rectangle</li>
+    	    <li>Move left out of bound to change level</li>
+    	    </ul>
+    <li>4.6 <a href="Chapter4/4.6.AudioSupport/public_html/index.html " target="_blank">Audio Support</a>:
+    	Supports loading and playing of audio cues and musics.
+    	<ul>
+    	    <li>Left/Right Arrow: to move the center rectangle</li>
+    	    <li>Move left out of bound to change level</li>
+    	    </ul>
 </ul>
 </div>
 
 <div data-role="collapsible">
 <h2>Chapter 5: Working with Textures, Sprites, and Fonts</h2>
 <ul>
-    <li>5.1. <a href="Chapter5/5.1.TextureShaders/public_html/index.html " target="_blank">Texture Shaders</a><ul>
-        <li>Left and Right: arrows to move the center rectangle</li>
-        <li>Crossing the Left boundary causes level change</li>
+    <li>5.1. <a href="Chapter5/5.1.TextureShaders/public_html/index.html " target="_blank">Texture Shaders</a>:
+    	Loads, renders, and unloads textures.
+    	<ul>
+    	    <li>Left/Right Arrows: to move the center rectangle</li>
+    	    <li>Cross the Left boundary to change level</li>
         </ul>
     </li>
-    <li>5.2. <a href="Chapter5/5.2.SpriteShaders/public_html/index.html " target="_blank">Sprite Shaders</a><ul>
-        <li>Left and Right: arrows to move the center rectangle</li>
+    <li>5.2. <a href="Chapter5/5.2.SpriteShaders/public_html/index.html " target="_blank">Sprite Shaders</a>:
+    	Draws sprite elements as objects.
+    	<ul>
+    	    <li>Left/Right Arrows: to move Dye</li>
         </ul>
     </li>
-    <li>5.3. <a href="Chapter5/5.3.SpriteAnimation/public_html/index.html " target="_blank">Sprite Animation</a><ul>
-		<li>Left and Right arrows to move Dye</li>
-		<li>0, 1, 2 (click): animate forward, swing, and backward</li>
-		<li>4: each click speeds up animation</li>
-		<li>5: each click slows down animation</li>
-	</ul>
+    <li>5.3. <a href="Chapter5/5.3.SpriteAnimation/public_html/index.html " target="_blank">Sprite Animation</a>:
+		Creates animation with sprite elements.
+		<ul>
+			<li>Left/Right Arrows: to move Dye</li>
+			<li>1/2/3 Keys click: to animate forward, swing, and backward</li>
+			<li>4 Key clicks: to speed up animation</li>
+			<li>5 Key clicks: to slow down animation</li>
+		</ul>
 	</li>
-	<li>5.4. <a href="Chapter5/5.4.FontSupport/public_html/index.html " target="_blank">Font Support</a><ul>
-		<li>0, 1, 3, 4: to select font size, 16, 24, 32, 72</li>
-		<li>Up/Down with X/Y: to increase/decrease the selected font size</li>
-	</ul>
+	<li>5.4. <a href="Chapter5/5.4.FontSupport/public_html/index.html " target="_blank">Font Support</a>
+		Draws with bitmap fonts.
+		<ul>
+			<li>Left/Right Arrows: to move Dye</li>
+			<li>0/1/2/3 Keys click: to select font size, 16, 24, 32, 72</li>
+			<li>Up/Down Arrows with X/Y Keys: to increase/decrease the selected font width/height size</li>
+		</ul>
 </ul>
 </div>
 
 <div data-role="collapsible">
 <h2>Chapter 6: Defining Behaviors and Detecting Collisions</h2>
 <ul>
-    <li>6.1. <a href="Chapter6/6.1.GameObjects/public_html/index.html " target="_blank">Game Object Abstraction</a><ul>
-		<li>WASD: to move Dye. Yeah, boring.</li>
-	</ul>
+    <li>6.1. <a href="Chapter6/6.1.GameObjects/public_html/index.html " target="_blank">Game Objects</a>:
+    	Abstracts game object behavior.
+    	<ul>
+			<li>WASD Keys: to move Dye. Yeah, boring.</li>
+		</ul>
 	</li>
-    <li>6.2. <a href="Chapter6/6.2.FrontAndChase/public_html/index.html " target="_blank">Vectors: 
-	Front Direction and Chase</a><ul>
-		<li>H: drive the brain with arrows</li>
-		<li>J: WASD move Dye and Brain points to Dye immediately<ul>
-			<li>Oscillates when Brain eventually gets to Dye</li>
+    <li>6.2. 
+	<a href="Chapter6/6.2.FrontAndChase/public_html/index.html " target="_blank">Front and Chase</a>:
+		
+		<ul>
+			<li>H: to select drive mode for the Brain
+				<ul>
+					<li>Arrow Keys: to drive the Brain</li>
+				</ul>
+			</li>
+			<li>J: to select immidiate point mode for the Brain
+				<ul>
+					<li>WASD Keys: to move Dye and observe Brain pointing/moving to Dye</li>
+					<li><strong>Observe</strong>: <em>When Brain eventually reaches Dye, it oscillates</em></li>
+				</ul>
+			</li>
+			<li>K: to select gradual turn mode for the Brain
+				<ul>
+					<li>WASD Keys: to move Dye and observe Brain turning smoothly towards Dye</li>
+					<li><strong>Observe</strong>: <em>When Brain eventually reaches Dye, it orbits around Dye</em></li>
+				</ul>
+			</li>
+			<li><strong>Observe</strong>: <em>Would be nice if we can detect collision and stop</em> </li>
 		</ul>
 
-		</li>
-		<li>K: moves Dye and Brain points to Dye gradually/smoothly<ul>
-			<li>Orbits around a small circle when catches up to Dye</li>
-		</ul>
-		</li>
-		<li>Would be nice if we can detect collision and stop </li>
-	</ul>
-	</li>
     <li>6.3. <a href="Chapter6/6.3.BBoxAndCollisions/public_html/index.html " target="_blank">
-	Bounding Box and Collisions</a><ul>
-		<li>Exactly the same control as above</li>
-		<li>Brain: now stops when it touches Dye&#39;s bound (not touching Dye)</li>
-		<li>Dye touches WC bound is detected (nothing is done yet)</li>
-	</ul>
+	Bounding Box and Collisions</a>:
+		Defines bounding box for game objects and detects collisions.
+		<ul>
+			<li>Exactly the same control as above</li>
+			<li><strong>Observe:</strong>
+				<ul>
+				<li>Brain: now stops when it touches Dye&#39;s bound (not touching Dye)</li>
+				<li>Dye: touching of WC bound is detected (but nothing is done)</li>
+				</ul>
+				</li>
+		</ul>
 	</li>
     <li>6.4. <a href="Chapter6/6.4.PerPixelCollisions/public_html/index.html " target="_blank">
-	Per Pixel Collisions</a><ul>
-		<li>WASD: move one</li>
-		<li>Arrows: move another</li>
-		<li>When pixel touches, shows DyePack at the first intersection found.
+	Per-Pixel Collisions</a>:
+		Implements per-pixel accurate collisions.
+		<ul>
+			<li>WASD Keys: to move the larger object</li>
+			<li>Arrow Keys: to move the smaller object</li>
+			<li><strong>Observe</strong>: <em>When pixel touches, observe DyePack displayed at the first intersection pixel found</em></li>
+		</ul>
+	</li>
+	<li>6.5. <a href="Chapter6/6.5.GeneralPixelCollisions/public_html/index.html " target="_blank">General Pixel Collisions
+	</a>: Supports per-pixel accurate collisions with rotated images.
+		<ul>
+			<li>Exactly the same control as above</li>
+			<li>E/P Keys: to rotate the larger/smaller objects</li>
+		</ul>
 		</li>
-	</ul>
-	</li>
-	<li>6.5.
-	<a href="Chapter6/6.5.GeneralPixelCollisions/public_html/index.html " target="_blank">Per 
-	Pixel Collisions with Rotated Image</a><ul>
-		<li>Same behavior as above</li>
-		<li>E/P: keys rotate the texture, behavior exactly the same</li>
-	</ul>
-	</li>
 	<li>6.6.
 	<a href="Chapter6/6.6.SpritelPixelCollisions/public_html/index.html " target="_blank">Sprite 
-	Per Pixel Collisions</a><ul>
-		<li>Exact the same as above</li>
-	</ul>
+	Pixel Collisions</a>: Supports for per-pixel accurate collision between sprite elements.
+		<ul>
+			<li>Arrows and P Keys: to move and roate Portal minion</li>
+			<li>WASD Keys: to move Dye</li>
+			<li>L/R/H/B Keys: to slect the garge tor colliding with the Portal minion</li>
+		</ul>
 	</li>
 </ul>
 </div>
 
 
 <div data-role="collapsible">
-<h2>Chapter 7: Manipulating and Receiving Mouse Input from the Camera</h2>
+<h2>Chapter 7: Manipulating the Camera</h2>
 <ul>
     <li>7.1. <a href="Chapter7/7.1.CameraManipulations/public_html/index.html " target="_blank">
-		Simple Camera Manipulations</a>
+		Camera Manipulations</a>:
+		Implements intuitive camera manipulation operations.
 		<ul>
-			<li>WASD: move hero to push window (at 90% of the bound region)</li>
-			<li>Portal and Brain: are always kept within the window bound</li>
-			<li>L/R: pan the center of the camera to center on the corresponding objects</li>
-			<li>N/M: zoom with respect to the center of the window</li>
-			<li>J/K: zoom with respect to either Hero (H) or Portal (P)		<ul>
-			<li>Put your finger on the screen over the Hero, select H, and then J/K to see hero’s relative position does not change as the window zooms			</li>
+			<li>WASD Keys: to move hero to push window (at 90% of the bound region)</li>
+			<li>Arrow Keys: to move the Potal object (clamp at 80% of bound)</li>
+			<li>L/R: to pan the center of the camera to left/right minion</li>
+			<li>H/P/L/R: to select the zoom focus</li>
+			<li>N/M: to zoom with respect to the center of the window</li>
+			<li>J/K: to zoom with respect to either Hero (H), Portal (P), or left/right minion (L/R)</li>
+			<li><strong>Observe:</strong>
+				<ul>
+					<li>Portal and Brain: are always kept within the window bound</li>
+					<li>Put your finger on the screen over the Hero, select H, and then J/K to see 
+					hero's relative position does not change as the window zooms			</li>
+				</ul>
+			</li>
 		</ul>
-	</li>
-	</ul>
 	</li>
     <li>7.2. <a href="Chapter7/7.2.CameraInterpolations/public_html/index.html " target="_blank">
-	Delayed Camera Movement: Interpolations</a><ul>
-		<li>Exactly the same as above, camera interpolates and does not jump</li>
-	</ul>
+	Camera Interpolations</a>: Implements smooth camera movements.
+		<ul>
+			<li>Exactly the same control as above</li> 
+			<li><strong>Observe</strong>: camera interpolates and does not jump</li>
+		</ul>
 	</li>
-    <li>7.3. <a href="Chapter7/7.3.CameraShake/public_html/index.html " target="_blank">Camera Shake</a><ul>
-		<li>Same as above</li>
-		<li>Q: to shake the camera</li>
-	</ul>
+    <li>7.3. <a href="Chapter7/7.3.CameraShake/public_html/index.html " target="_blank">Camera Shake</a>: 
+    	Creates the camera shake effect.
+    	<ul>
+			<li>Exactly the same control as above</li> 
+			<li>Q Key: to shake the camera</li>
+		</ul>
 	</li>
 	<li>7.4. <a href="Chapter7/7.4.MultipleCameras/public_html/index.html " target="_blank">
-	Multiple Cameras</a><ul>
-		<li>Move Dye to see BrainCam chase</li>
-		<li>Moveing DyeCam for fun</li>
-	</ul>
+	Multiple Cameras</a>: Supports viewing the game world with multiple cameras.
+		<ul>
+			<li>Exactly the same control as above</li> 
+		</ul>
 	</li>
 	<li>7.5. <a href="Chapter7/7.5.MouseInput/public_html/index.html " target="_blank">Mouse 
-	Input</a><ul>
-		<li>LMB Press in main: drag Portal</li>
-		<li>&nbsp;MMB Press in HeroCam: drag hero</li>
-		<li>RMB Click in main: Portal disappear</li>
-		<li>MMB Click in main: Portal reappear</li>
-	</ul>
+	Input</a>: Supports receiving input from the mouse.
+		<ul>
+			<li>LMB Press in Main Window: to drag the Portal</li>
+			<li>MMB Press in HeroCam Window: to drag the hero</li>
+			<li>RMB Click in Main Window: to hide the Portal</li>
+			<li>MMB Click in Main Window: to reappear the Portal</li>
+		</ul>
 	</li>
 </ul>
 </div>
 
 <div data-role="collapsible">
-<h2>Chapter 8: Creating Graphical and Illumination Effects for Game Objects</h2>
+<h2>Chapter 8: Implementing Illumination and Shadow</h2>
 <ul>
-    <li>8.1. <a href="Chapter8/8.1.GlobalAmbient/public_html/index.html " target="_blank">Simple 
-	Global Ambient</a><ul>
-		<li>LMB/MMB: to increase/decrease global red ambient</li>
-	</ul>
+    <li>8.1. <a href="Chapter8/8.1.GlobalAmbient/public_html/index.html " target="_blank">Global Ambient</a>: Illuminates 
+    the scene with a global ambient light source.
+    	<ul>
+			<li>LMB/MMB: to increase/decrease global red ambient</li>
+			<li>Left/Right Arrow Keys: to increase/decrease global ambient intensity</li>
+			<li><strong>Observe</strong>: it is possible to create negative light!</li>
+		</ul>
 	</li>
     <li>8.2. <a href="Chapter8/8.2.SimpleLightShader/public_html/index.html " target="_blank">Simple 
-	Light Shader: One Light Source</a><ul>
-		<li>WASD: moves Dye</li>
-		<li>LMB + WASD:  moves Dye with the light source</li>
-		<li>Z/X:  Increase/Decrease Z position</li>
-		<li>C/V:  Increase/Decrease light radius</li>
-		<li>Left/Right arrow: increase/decrease the light intensity</li>
-		<li>Notice: negative light can be interesting (since we are only adding)</li>
-		<li>Notice: Right-Minion is not illumindated</li>
-	</ul>
-	</li>
-    <li>8.3. 
-	<a href="Chapter8/8.3.MultipleLights/public_html/index.html " target="_blank">Multiple Light Sources</a><ul>
-		<li>Lights:<ul>
-			<li>0: Dye&nbsp; + Background only</li>
-			<li>1: Left Minion + Background</li>
-			<li>2: Right Minion + Background</li>
-			<li>3: Dye + Background</li>
+	Light Shader</a>: Illuminates with one light source.
+		<ul>
+			<li>WASD Keys: to move Dye</li>
+			<li>WASD Keys + LMB: to move Dye with the light source</li>
+			<li>Left/Right Arrows: to increase/decrease the light intensity</li>
+			<li>Z/X Keys: to increase/decrease light Z position</li>
+			<li>C/V Keys: to increase/decrease light radius</li>
+			<li><strong>Observe</strong>:
+			<ul>
+				<li>Negative light can be interesting (since we are only adding)</li>
+				<li>Right-Minion is not illumindated</li>
+			</ul>
+			</li>
 		</ul>
-		</li>
-		<li>WASD: moves Dye</li>
-		<li>0, 1, 2, 3: select light</li>
-		<li>Arrow: move XY of selected light position<ul>
-			<li>Z/X: inc/dec z of the selected light</li>
-			<li>C/V: inc/dec inner cone </li>
-			<li>B/N: inc/dec outer cone</li>
-			<li>K/L: inc/dec intensity (try negative light!)</li>
-			<li>H: to toggle current selected light on/off</li>
+	</li>
+    <li>8.3. <a href="Chapter8/8.3.MultipleLights/public_html/index.html " target="_blank">Multiple Lights</a>:
+    Illuminates with multiple light sources.
+    	<ul>
+			<li>WASD Keys: to move Dye</li>
+			<li>0/1/2/3 Keys: to select a light</li>
+			<li>Selected light control:
+				<ul>
+					<li>H Key: to toggle current selected light on/off</li>
+					<li>Arrow Keys: to move the light position<ul>
+					<li>Z/X Keys: to inc/dec z of the light</li>
+					<li>C/V Keys: to inc/dec near cut-off</li>
+					<li>B/N Keys: to inc/dec far cut-off</li>
+					<li>K/L Keys: to inc/dec intensity (try negative light!)</li>
+				</ul>
+			</li>
+			<li><strong>Observe</strong>: illumination<ul>
+				<li>Light-0/3: illuminates Dye + background</li>
+				<li>Light-1: illuminates left minion + background</li>
+				<li>Light-2: illuminates right minion + background</li>
+			</ul>
+			</li>
+
 		</ul>
-		</li>
-	</ul>
 	</li>
-    <li>8.4. 
-	<a href="Chapter8/8.4.NormalMapsAndIlluminationShaders/public_html/index.html " target="_blank">Illumination Shader: 
-	Diffuse Shader and Normal Map</a><ul>
-		<li>Command same as above. </li>
-	</ul>
+    <li>8.4. <a href="Chapter8/8.4.NormalMapsAndIlluminationShaders/public_html/index.html " target="_blank">Normal Maps 
+    and Illumination Shader</a>: Supports 3D illumination effects.
+	    <ul>
+			<li>◦Exactly the same control as above.</li>
+		</ul>
 	</li>
-	<li>8.5.
-	<a href="Chapter8/8.5.MaterialAndSpecularity/public_html/index.html " target="_blank">
-	Specularity and
-	Materials</a><ul>
-		<li>Same commands as 8.3 with additional</li>
-		<li>5: Selects the Left Minion</li>
-		<li>6: Selects Dye</li>
-		<li>7, 8, 9: Selects the Ambient, Diffuse, or Specular component of the 
-		selected character</li>
-		<li>E/R, T/Y, U/I: increase/decrease the R, G, or B channel of the 
-		selected component</li>
-		<li>O/P: increase/decrease the shinngingness</li>
-	</ul>
+	<li>8.5. <a href="Chapter8/8.5.MaterialAndSpecularity/public_html/index.html " target="_blank">
+	Materials and Specularity</a>: Implements a simple Phong Illumination model.
+		<ul>
+			<li>Same controls as 8.4 with the following additional controls</li>
+			<li>5/6 Keys: to select the left minion or Dye (for changing material properties)</li>
+			<li>Material control of the selected object (left minion or Dye):
+				<ul>
+					<li>7/8/9 Keys: to select Ka, Kd, or Ks</li>
+					<li>E/R, T/Y, U/I Keys: to increase/decrease the R, G, or B channel of the 
+							selected component</li>
+					<li>O/P Keys: to increase/decrease the shinngingness</li>
+				</ul>
+			</li>
+		</ul>
 	</li>
-	<li>8.6:
-	<a href="Chapter8/8.6.DirectionalAndSpotLights/public_html/index.html " target="_blank">
-	Different Light Types</a><ul>
-		<li>Control as the combined of 8.3 and 8.5</li>
-		<li>Space+Arrow: to move the X/Y of light direction</li>
-	</ul>
+	<li>8.6. <a href="Chapter8/8.6.DirectionalAndSpotLights/public_html/index.html " target="_blank">
+	Directional and Spot Lights</a>: Supports additional light types.
+		<ul>
+			<li>Same controls as 8.5 with the following additional controls</li>
+			<li>Space Key + Arrow Keys: to move light direction</li>
+			<li><strong>Observe</strong>: Light-0 is a point light and direction of the light is not used.</li>
+		</ul>
 	</li>
-	<li>8.7: <a href="Chapter8/8.7.ShadowShaders/public_html/index.html " target="_blank">Shadow 
-	Shaders</a><ul>
-		<li>Background and Large Space craft (on lower right) are shadow 
-		receivers</li>
-		<li>Large space craft casts shadow on background</li>
-		<li>Left-Illuminated hero does NOT cast shadow on background</li>
-		<li>Command same as 8.6</li>
-	</ul>
+	<li>8.7. <a href="Chapter8/8.7.ShadowShaders/public_html/index.html " target="_blank">Shadow 
+	Shaders</a>: Simulates shadows.
+		<ul>
+			<li>Same controls as 8.6</li>
+			<li><strong>Observe</strong>:
+			<ul>
+				<li>Background and Large Space craft (on lower left) are shadow receivers</li>
+				<li>Large space craft casts shadow on background</li>
+				<li>Left-Illuminated hero does NOT cast shadow on background</li>
+			</ul> </li>
+		</ul>
 	</li>
 </ul>
 </div>
 
 <div data-role="collapsible">
-<h2>Chapter 9: Creating Physics for Game Objects</h2>
+<h2>Chapter 9: Integrating Physics and Particles</h2>
 <ul>
-    <li>9.1: <a href="Chapter9/9.1.RigidShapeBounds/public_html/index.html " target="_blank">Rigid shapes and their bounds</a>
-    <ul>
-		<li>H/M/P: Select one of Hero, Minion, or Platform. Selected object will only draw its bounds (for better visual inspection of results)</li>
-		<li>RMB: To move the selected bounds around.</li>
-		<li>Collision turns bounds red.</li>
-	</ul>
+    <li>9.1. <a href="Chapter9/9.1.RigidShapeBounds/public_html/index.html " target="_blank">Rigid Shape Bounds</a>:
+    Implements bounds for rigid shapes for collision detection.
+	    <ul>
+			<li>H/M/P Keys: to select one of Hero, Minion, or Platform</li>
+			<li>RMB: to drag the selected bound</li>
+			<li><strong>Observe</strong>: 
+				<ul>
+					<li>Selected object will only draw its bounds (for better visual inspection of results)</li>
+					<li>Collision turns bounds red</li>
+				</ul></li>
+		</ul>
 	</li>
-    <li>9.2: 
-	<a href="Chapter9/9.2.RigidShapeImpulse/public_html/index.html" target="_blank">Rigid shapes Impulse Response</a>
-    <ul>
-		<li>WASD: flys the hero</li>
-		<li>LMB: Click to drop dye packs</li>
-		<li>Testing of Rigid body stability (creating dumb minions with white bounds). Dumb minions only interact with dumb minions.
-			<ul>
-				<li>Z: Create dumb minions (with white bounds). WARNING: cost is N^2!!</li>
-				<li>X: Select and move the dumb minion under the mouse</li>
-				<li>C: Agitate the dumb minions by injecting random velocity (press and hold to injet large random velocity)</li>
-				<li>V: Clears the dumb minions</li>
-			</ul>
-		</li>
-		<li>Notice, dye pack when traveling fast may shoot right through the floor. The problem with small bounds traveling fast, intersection misses!</li>
-	</ul>
+    <li>9.2. <a href="Chapter9/9.2.RigidShapeImpulse/public_html/index.html" target="_blank">Rigid Shapes Impulse</a>:
+    Implements impulse respose when rigid shapes collided.
+	    <ul>
+			<li>WASD Keys: to fly Dye</li>
+			<li>LMB Click: to send one dye pack chasing Dye</li>
+			<li>Testing of Rigid body stability (creating dumb minions with white bounds). Dumb minions only interact with dumb minions.
+				<ul>
+					<li>Z Key: to create dumb minions (with white bounds). WARNING: cost is N^2!!</li>
+					<li>X Key: to select and move the dumb minion under the mouse</li>
+					<li>C Key: to agitate the dumb minions by injecting random velocity (press and hold to injet large random velocity)</li>
+					<li>V Key: to clear the dumb minions</li>
+				</ul>
+			</li>
+			<li><strong>Observe</strong>: dye pack 
+				when traveling fast may shoot through the floor. 
+				This is a well-known problem with fast traveling objects resulting in missed collisions.</li>
+		</ul>
 	</li>
 
-	<li>9.3: 
-	<a href="Chapter9/9.3.Particles/public_html/index.html" target="_blank">Particles</a>
+	<li>9.3. <a href="Chapter9/9.3.Particles/public_html/index.html" target="_blank">Particles</a>: Creates particles.
     <ul>
-		<li>WASD: flys the hero</li>
-		<li>LMB: Click to drop dye packs</li>
-		<li>Z: to see particles follow your mouse pointer</li>
+		<li>WASD Keys: to fly Dye</li>
+		<li>LMB Click: to send one dye pack chasing Dye</li>
+		<li>Z Key: to generate particles under the mouse pointer</li>
 	</ul>
 	</li>
 	
-	<li>9.4: 
-	<a href="Chapter9/9.4.ParticleEmitters/public_html/index.html" target="_blank">Particle Emitters</a>
+	<li>9.4. <a href="Chapter9/9.4.ParticleEmitters/public_html/index.html" target="_blank">Particle Emitters</a>: Creates particle via defined emitters.
     <ul>
-		<li>WASD: flys the hero</li>
-		<li>LMB: Click to drop dye packs</li>
-		<li>See explosion when dye pack touches Dye</li>
-		<li>Notice, dye pack when traveling fast may shoot right through the floor. The problem with small bounds traveling fast, intersection misses!</li>
+		<li>Same controls as 9.3</li>
+		<li><strong>Observe</strong>: explosions when dye pack touches Dye</li>
 	</ul>
 	</li>
-
-
-
 </ul>
 </div>
 
 <div data-role="collapsible">
-<h2>Chapter 10: Working with Background and General Support</h2>
+<h2>Chapter 10: Supporting Camera Background</h2>
 <ul>
-    <li>10.1: <a href="Chapter10/10.1.TiledObjects/public_html/index.html" target="_blank">Tiled 
-	Objects</a><ul>
-		<li>Controls the same as 8.7</li>
-		<li>Move illuminated hero to see the never ending world.</li>
+    <li>10.1. <a href="Chapter10/10.1.TiledObjects/public_html/index.html" target="_blank">Tiled 
+	Objects</a>: Tiles the background.<ul>
+		<li>WASD Keys: to move the hero and pan the WC window bounds</li>
+		<li><strong>Observe</strong>: can never reach the bounds of the world</li>
 	</ul>
 	</li>
-	<li>10.2: <a href="Chapter10/10.2.ParallaxObjects/public_html/index.html" target="_blank">
-	Parallax Objects</a><ul>
-		<li>Control same as 10.1</li>
-		<li>Move illuminated hero to see layered background movement</li>
-	</ul>
-	</li>
-	<li>10.3: <a href="Chapter10/10.3.LayerManager/public_html/index.html" target="_blank">Layer Manager</a>: Parallex, Shadow Catcher, Actors, Front Layer, HUD<ul>
-		<li>Controls and apparance are the same as 10.2</li>
-		<li>Layeing is supported by the engine.</li>
-	</ul>
-	</li>
-    <li>Depth Manager: 
+	
+	<li>10.2. <a href="Chapter10/10.2.ParallaxObjects/public_html/index.html" target="_blank">
+	Parallax Objects</a>: Supports parallax.
 	<ul>
-		<li>z-component for front to back drawing. Not implemented</li>
+		<li>WASD Keys: to move the hero and pan the WC window bounds</li>
+		<li>P Key: to toggle the drawing of the parallax camera</li>
+		<li><strong>Observe</strong>: observe layered background moves at different speeds</li>
 	</ul>
+	
 	</li>
-    <li>Draw Set Manager:
-	<ul>
-		<li>Per layer, per depth, gathering of shaders and per-shader draw. Not 
-		implemented</li>
+	<li>10.3. <a href="Chapter10/10.3.LayerManager/public_html/index.html" target="_blank">Layer Manager</a>: 
+	Supports HUD, Foreground, Actor, Shadow Receiver, and Background layers.<ul>
+		<li>Same controls as 10.2</li>
 	</ul>
 	</li>
 </ul>
@@ -350,19 +425,16 @@
 
 
 <div data-role="collapsible">
-<h2>Chapter 11: Building a Simple Game: From Design to Complete</h2>
+<h2>Chapter 11: Building a Simple Game: From Design to Completion</h2>
 <ul>
-    <li>Here is <a href="FinalGame/public_html/index.html " target="_blank">the game for now</a><ul>
+    <li>Here is <a href="FinalGame/public_html/index.html " target="_blank">The in-progress game</a><ul>
+		<li>A/D Keys: to move left/right</li>
+		<li>Space Key: to jump</li>
 		<li>P: to peek the entire level</li>
 		<li>L: to switch level</li>
-		<li>Some of the 10.3 light controls still works</li>
+		<li><strong>Observe</strong>: Game not completed (yet).</li>
 	</ul>
 	</li>
-	<li>Steps in designing a complete game</li>
-    <li>Prototyping ideas</li>
-    <li>Refinement of game design</li>
-    <li>Agile development process</li>
-    <li>Source code analysis</li>
 </ul>
 </div>
 </body>

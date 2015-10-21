@@ -12,7 +12,12 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 /**
+ * Default Constructor.
+ * <p>
  * Default Constructor creates an instance of Renderable.
+ * Shader = gEngine.DefaultResources.getConstColorShader();
+ * Xform = new Transform();
+ * Color = [1, 1, 1, 1];
  * 
  * @returns {Renderable} a new instance of Renderable.
  */

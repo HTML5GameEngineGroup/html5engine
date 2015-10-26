@@ -48,7 +48,7 @@ struct Light  {
 };
 uniform Light uLights[kGLSLuLightArraySize];  // Maximum array of lights this shader supports
 
-// The "varying" keyword is for signifing that the texture coordinate will be
+// The "varying" keyword is for signifying that the texture coordinate will be
 // interpolated and thus varies. 
 varying vec2 vTexCoord;
 

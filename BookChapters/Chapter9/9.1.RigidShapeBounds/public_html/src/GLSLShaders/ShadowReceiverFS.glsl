@@ -7,7 +7,7 @@ precision mediump float;
 uniform sampler2D uSampler;
 uniform vec4 uPixelColor;
 
-// The "varying" keyword is for signifing that the texture coordinate will be
+// The "varying" keyword is for signifying that the texture coordinate will be
 // interpolated and thus varies. 
 varying vec2 vTexCoord;
 

@@ -73,12 +73,12 @@ function MyGame(htmlCanvasID) {
         [0, 1, 0]);     // orientation 
     // Step F2: define the projection matrix
     mat4.ortho(projMatrix,
-        -10,     // distant to left of WC
-         10,     // distant to right of WC
-        -5,      // distant to bottom of WC
-         5,      // distant to top of WC
-         0,      // distant to near plane 
-         1000);  // distant to far plane 
+        -10,     // distance to left of WC
+         10,     // distance to right of WC
+        -5,      // distance to bottom of WC
+         5,      // distance to top of WC
+         0,      // distance to near plane 
+         1000);  // distance to far plane 
 
     // Step F3: concatenate to form the View-Projection operator
     var vpMatrix = mat4.create();

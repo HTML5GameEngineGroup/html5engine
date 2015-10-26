@@ -26,7 +26,7 @@ function MyGame(htmlCanvasID) {
     // Step D: Draw!
     gEngine.Core.clearCanvas([0, 0.8, 0, 1]);  // 1. Clear the canvas
 
-    // create a new identify transform operator
+    // create a new identity transform operator
     var xform = mat4.create();
 
     // Step E: compute the white square transform 

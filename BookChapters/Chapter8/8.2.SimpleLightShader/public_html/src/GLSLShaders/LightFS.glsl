@@ -18,7 +18,7 @@ uniform vec4 uLightColor;
 uniform vec3 uLightPosition;   // in pixel space!
 uniform float uLightRadius;    // in pixel space!
 
-// The "varying" keyword is for signifing that the texture coordinate will be
+// The "varying" keyword is for signifying that the texture coordinate will be
 // interpolated and thus varies. 
 varying vec2 vTexCoord;
 

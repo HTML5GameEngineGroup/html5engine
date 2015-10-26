@@ -61,7 +61,7 @@ struct Light  {
 };
 uniform Light uLights[kGLSLuLightArraySize];  // Maximum array of lights this shader supports
 
-// The "varying" keyword is for signifing that the texture coordinate will be
+// The "varying" keyword is for signifying that the texture coordinate will be
 // interpolated and thus varies. 
 varying vec2 vTexCoord;
 
@@ -109,7 +109,7 @@ vec4 ShadedResult(Light lgt, vec3 N, vec4 textureMapColor) {
     float aAtten = 1.0, dAtten = 1.0;
     vec3 lgtDir = -normalize(lgt.Direction.xyz);
     vec3 L; // light vector
-    float dist; // distant to light
+    float dist; // distance to light
     if (lgt.LightType == eDirectionalLight) {
         L = lgtDir;
     } else {
@@ -122,7 +122,7 @@ vec4 ShadedResult(Light lgt, vec3 N, vec4 textureMapColor) {
         aAtten = AngularDropOff(lgt, lgtDir, L);
     }
     if (lgt.LightType != eDirectionalLight) {
-        // both spot and point light has distant dropoff
+        // both spot and point light has distance dropoff
         dAtten = DistanceDropOff(lgt, dist);
     }
     vec4  diffuse = DiffuseResult(N, L, textureMapColor);

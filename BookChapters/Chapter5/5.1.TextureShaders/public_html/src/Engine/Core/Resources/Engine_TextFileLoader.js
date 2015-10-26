@@ -25,7 +25,7 @@ gEngine.TextFileLoader = (function () {
             // Update resources in load counter.
             gEngine.ResourceMap.asyncLoadRequested(fileName);
 
-            // Asyncrounsly request the data from server.
+            // Asynchronously request the data from server.
             var req = new XMLHttpRequest();
             req.onreadystatechange = function () {
                 if ((req.readyState === 4) && (req.status !== 200)) {

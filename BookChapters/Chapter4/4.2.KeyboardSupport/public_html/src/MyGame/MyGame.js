@@ -47,7 +47,7 @@ MyGame.prototype.initialize = function () {
     this.mRedSq = new Renderable(this.mConstColorShader);
     this.mRedSq.setColor([1, 0, 0, 1]);
 
-    // Step  D: Initialize the white Renderable object: centred, 5x5, rotated
+    // Step  D: Initialize the white Renderable object: centered, 5x5, rotated
     this.mWhiteSq.getXform().setPosition(20, 60);
     this.mWhiteSq.getXform().setRotationInRad(0.2); // In Radians
     this.mWhiteSq.getXform().setSize(5, 5);

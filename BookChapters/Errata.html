@@ -10,6 +10,9 @@
         .auto-style2 {
             width: 269px;
         }
+        .auto-style3 {
+            background-color: #CCCCCC;
+        }
     </style>
 </head>
  <body>
@@ -565,7 +568,7 @@
 			</ul><br>
 			</li>
 			
-		<li>Page 17,, item-6, last line of _processLoadedImage() function:
+		<li>Page 17, item-6, last line of _processLoadedImage() function:
 			<ul>
 				<li><em>ayncLoadCompleted(...)</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -579,23 +582,87 @@
 			</li>
 					
 
-		<li>Page 30,, item-3, code comment first and second lines:<ul>
-				<li><em>// ... cooridnate ...</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<li>Page 19, item-9, code very last line:<ul>
+				<li><em>}</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-						should be</li>
-				<li>// ... coor<strong>di</strong>nate
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; should be</li>
+				<li>}<strong>;</strong>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(replace "id" with "di")</li>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(missing the ";")</li>
 			</ul><br>
 			</li>
 			
 			
 			
+		<li>Page 29, comment about the very last line of code:<ul>
+				<li><em>// ... from SimpleShader</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should be</li>
+				<li>// ... from <strong>TextureShader</strong>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(replace SimpleShader with "TextureShader")</li>
+			</ul><br>
+			</li>
 			
+			
+		<li>Page 30, item-3, code comment first and second lines:<ul>
+				<li><em>// ... cooridnate ...</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should be</li>
+				<li>// ... coor<strong>di</strong>nate
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;(replace "id" with "di")</li>
+			</ul><br>
+			</li>
+			
+			
+		<li>Page 46, item-2, code comment:<ul>
+				<li><em>// ... the entier image...</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should be</li>
+				<li>// ... the ent<strong>ire</strong> image
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (replace "ier" with "ire")</li>
+			</ul><br>
+			</li>
+			
+			
+		<li>Page 47, top of page, code comment towards the end:<ul>
+				<li><em>// ... width/height ration</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should be</li>
+				<li>// ... width/height ratio
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (remove the "n" in ration)</li>
+			</ul><br>
+			</li>
+		
+            <li>Page 49, bottom of page, code wrap:<ul>
+				<li>var xPos = ... this.mXform.getXPos() - (widthOfOneChar / 2) +<br />
+                    <span class="auto-style3">(widthOfOneChar * 0.5)</span>;</li>
+				<li>Gray highlighted code is wrap-around from previous line, should be indented.</li>
+			</ul><br>
+			</li>	
+
+
+            <li>Page 50, top of page, code wrap:<ul>
+				<li>this.mOneChar.setElementUVCoordinate(charInfo.mTexCoordLeft,<br />
+                    <span class="auto-style3">charInfo.mTexCoordRight,</span></li>
+				<li>Gray highlighted code is wrap-around from previous line, should be indented.</li>
+			</ul><br>
+			</li>	
+
 		</ul>
 	</div>
 </div>

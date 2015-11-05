@@ -8,6 +8,10 @@
 /* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
+/**
+ * update function to be called from EngineCore.GameLoop.
+ * @returns {void}
+ */
 Camera.prototype.update = function () {
     if (this.mCameraShake !== null) {
         if (this.mCameraShake.shakeDone()) {
@@ -20,6 +24,12 @@ Camera.prototype.update = function () {
     this.mCameraState.updateCameraState();
 };
 
+/**
+ * Pan the Camera by dx and dy
+ * @param {Number} dx X value to pan the camera
+ * @param {Number} dy Y value to pan the camera
+ * @returns {void}
+ */
 Camera.prototype.panBy = function (dx, dy) {
     var newC = vec2.clone(this.getWCCenter());
     this.mWCCenter[0] += dx;
@@ -27,8 +37,13 @@ Camera.prototype.panBy = function (dx, dy) {
     this.mCameraState.setCenter(newC);
 };
 
-// pan the camera to ensure aXform is within camera bounds
-// this is complementary to the ClampAtBound: instead of clamping aXform, now, move the camera
+/**
+ * pan the camera to ensure aXform is within camera bounds
+ * this is complementary to the ClampAtBound: instead of clamping aXform, now, move the camera
+ * @param {Transform} aXform Transform to clamp the Camera to
+ * @param {Number} zone distance from the camera border to collide with
+ * @returns {void}
+ */
 Camera.prototype.panWith = function (aXform, zone) {
     var status = this.collideWCBound(aXform, zone);
     if (status !== BoundingBox.eboundCollideStatus.eInside) {
@@ -50,25 +65,39 @@ Camera.prototype.panWith = function (aXform, zone) {
     }
 };
 
-
+/**
+ * Pan Camera to cx, cy position
+ * @param {Number} cx X position to pan the camera to
+ * @param {Number} cy Y position to pan the camera to
+ * @returns {void}
+ */
 Camera.prototype.panTo = function (cx, cy) {
     this.setWCCenter(cx, cy);
 };
 
-// zoom with respect to the center
-// zoom > 1 ==> zooming out, see more of the world
-// zoom < 1 ==> zooming in, see less of the world, more detailed
-// zoom < 0 is ignored
+/**
+ * zoom with respect to the center
+ * zoom > 1 ==> zooming out, see more of the world
+ * zoom < 1 ==> zooming in, see less of the world, more detailed
+ * zoom < 0 is ignored
+ * @param {Number} zoom to scale the camera width
+ * @returns {void}
+ */
 Camera.prototype.zoomBy = function (zoom) {
     if (zoom > 0) {
         this.setWCWidth(this.getWCWidth() * zoom);
     }
 };
 
-// zoom towards (pX, pY) by zoom: 
-// zoom > 1 ==> zooming out, see more of the world
-// zoom < 1 ==> zooming in, see less of the world, more detailed
-// zoom < 0 is ignored
+/**
+ * zoom towards (pX, pY) by zoom:
+ * zoom > 1 ==> zooming out, see more of the world
+ * zoom < 1 ==> zooming in, see less of the world, more detailed
+ * zoom < 0 is ignored
+ * @param {vec2} pos Point to scale the camera with respect to
+ * @param {Number} zoom to scale the camera width
+ * @returns {void}
+ */
 Camera.prototype.zoomTowards = function (pos, zoom) {
     var delta = [];
     var newC = [];
@@ -79,10 +108,24 @@ Camera.prototype.zoomTowards = function (pos, zoom) {
     this.mCameraState.setCenter(newC);
 };
 
+/**
+ * Confiqure interpolation of camera
+ * @param {Number} stiffness stiffness value of interpolate, stiffness of 1 switches off interpolation
+ * @param {Number} duration duration value of interpolate
+ * @returns {void}
+ */
 Camera.prototype.configInterpolation = function (stiffness, duration) {
     this.mCameraState.configInterpolation(stiffness, duration);
 };
 
+/**
+ * Initiates a camera shake
+ * @param {Number} xDelta how large a shake
+ * @param {Number} yDelta how large a shake
+ * @param {Number} shakeFrequency how much movement
+ * @param {Number} duration for how long in number of cycles
+ * @returns {void}
+ */
 Camera.prototype.shake = function (xDelta, yDelta, shakeFrequency, duration) {
     this.mCameraShake = new CameraShake(this.mCameraState, xDelta, yDelta, shakeFrequency, duration);
 };

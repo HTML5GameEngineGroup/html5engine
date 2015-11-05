@@ -9,6 +9,12 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Implements the pixelTouches() and related supporting functions of TextureRenderable
+ * @param {type} other
+ * @param {type} wcTouchPos
+ * @returns {Boolean}
+ */
 TextureRenderable.prototype.pixelTouches = function(other, wcTouchPos) {
     var pixelTouch = false;
     var xIndex = 0, yIndex;
@@ -41,12 +47,22 @@ TextureRenderable.prototype.pixelTouches = function(other, wcTouchPos) {
     return pixelTouch;
 };
 
+/**
+ * 
+ * @returns {undefined}
+ */
 TextureRenderable.prototype.setColorArray = function () {
     if (this.mColorArray === null) {
         this.mColorArray = gEngine.Textures.getColorArray(this.mTexture);
     }
 };
 
+/**
+ * 
+ * @param {type} x
+ * @param {type} y
+ * @returns {texInfo.mColorArray}
+ */
 TextureRenderable.prototype._pixelAlphaValue = function (x, y) {
     y += this.mTexBottomIndex;
     x += this.mTexLeftIndex;
@@ -55,6 +71,14 @@ TextureRenderable.prototype._pixelAlphaValue = function (x, y) {
     return this.mColorArray[(y * this.mTextureInfo.mWidth) + x  + 3];
 };
 
+/**
+ * 
+ * @param {type} returnIndex
+ * @param {type} wcPos
+ * @param {type} xDir
+ * @param {type} yDir
+ * @returns {undefined}
+ */
 TextureRenderable.prototype._wcPositionToIndex = function (returnIndex, wcPos, xDir, yDir) {
     // use wcPos to compute the corresponding returnIndex[0 and 1]
     var delta = [];
@@ -73,6 +97,15 @@ TextureRenderable.prototype._wcPositionToIndex = function (returnIndex, wcPos, x
     returnIndex[1] = Math.floor(returnIndex[1]);
 };
 
+/**
+ * 
+ * @param {type} returnWCPos
+ * @param {type} i
+ * @param {type} j
+ * @param {type} xDir
+ * @param {type} yDir
+ * @returns {undefined}
+ */
 TextureRenderable.prototype._indexToWCPosition = function (returnWCPos, i, j, xDir, yDir) {
     var x = i * this.mXform.getWidth() / (this.mTexWidth - 1);
     var y = j * this.mXform.getHeight() / (this.mTexHeight - 1);

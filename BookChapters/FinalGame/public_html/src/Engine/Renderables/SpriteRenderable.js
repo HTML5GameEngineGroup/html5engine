@@ -10,6 +10,12 @@
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Constructor of SpriteRenderable object.
+ * 
+ * @param {Texture} myTexture - Texture to be associated by object.
+ * @returns {SpriteRenderable} - Instance of this SpriteRenderable object
+ */
 function SpriteRenderable(myTexture) {
     TextureRenderable.call(this, myTexture);
     Renderable.prototype._setShader.call(this, gEngine.DefaultResources.getSpriteShader());
@@ -24,13 +30,17 @@ function SpriteRenderable(myTexture) {
 gEngine.Core.inheritPrototype(SpriteRenderable, TextureRenderable);
 
 //<editor-fold desc="Public Methods">
-//
-//// the expected texture cooridnate array is an array of 8 floats where elements:
-    //  [0] [1]: is u/v coordinate of Top-Right 
-    //  [2] [3]: is u/v coordinate of Top-Left
-    //  [4] [5]: is u/v coordinate of Bottom-Right
-    //  [6] [7]: is u/v coordinate of Bottom-Left
-    // Convention: eName is an enumerated data type
+
+// Convention: eName is an enumerated data type
+/**
+ * the expected texture cooridnate array is an array of 8 floats where elements:
+ * [0] [1]: is u/v coordinate of Top-Right 
+ * [2] [3]: is u/v coordinate of Top-Left
+ * [4] [5]: is u/v coordinate of Bottom-Right
+ * [6] [7]: is u/v coordinate of Bottom-Left
+ * 
+ * @type {float[]|enum}
+ */
 SpriteRenderable.eTexCoordArray = Object.freeze({
     eLeft: 2,
     eRight: 0,
@@ -42,7 +52,15 @@ SpriteRenderable.eTexCoordArray = Object.freeze({
 // Public methods
 //**-----------------------------------------
 
-// specify element region by texture coordinate (between 0 to 1)
+/**
+ * specify element region by texture coordinate (between 0 to 1)
+ * 
+ * @param {float} left - Sets the Left UV Coordinate.
+ * @param {float} right - Sets the Right UV Coordinate.
+ * @param {float} bottom - Sets the Bottom UV Coordinate.
+ * @param {float} top - Sets the Top UV Coordinate.
+ * @returns {void}
+ */
 SpriteRenderable.prototype.setElementUVCoordinate = function (left, right, bottom, top) {
     this.mTexLeft = left;
     this.mTexRight = right;
@@ -51,7 +69,15 @@ SpriteRenderable.prototype.setElementUVCoordinate = function (left, right, botto
     this._setTexInfo();
 };
 
-// specify element region by pixel positions (between 0 to image resolutions)
+/**
+ * specify element region by pixel positions (between 0 to image resolutions)
+ * 
+ * @param {float} left - Sets the Left pixel position.
+ * @param {float} right - Sets the Right pixel position.
+ * @param {float} bottom - Sets the Bottom pixel position.
+ * @param {float} top - Sets the Top pixel position.
+ * @returns {void}
+ */
 SpriteRenderable.prototype.setElementPixelPositions = function (left, right, bottom, top) {
     var imageW = this.mTextureInfo.mWidth;
     var imageH = this.mTextureInfo.mHeight;
@@ -63,6 +89,11 @@ SpriteRenderable.prototype.setElementPixelPositions = function (left, right, bot
     this._setTexInfo();
 };
 
+/**
+ * Returns a UV Coordinate Array.
+ * 
+ * @returns {float[]} UV Voordinate Array
+ */
 SpriteRenderable.prototype.getElementUVCoordinateArray = function () {
     return [
         this.mTexRight,  this.mTexTop,          // x,y of top-right
@@ -72,6 +103,13 @@ SpriteRenderable.prototype.getElementUVCoordinateArray = function () {
     ];
 };
 
+/**
+ * Draws the SpriteRenderable to the screen in the aCamera viewport.
+ * 
+ * @param {float[]} pixelColor - 4 Float array of pixel color.
+ * @param {Camera} aCamera - drawing Camera of the SpriteRenderable.
+ * @returns {void}
+ */
 SpriteRenderable.prototype.draw = function (pixelColor, aCamera) {
     // set the current texture coordinate
     // 

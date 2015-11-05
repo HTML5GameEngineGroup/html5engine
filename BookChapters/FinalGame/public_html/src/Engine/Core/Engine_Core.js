@@ -10,9 +10,17 @@
 //  the following syntax enforces there can only be one instance of EngineCore object
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Static refrence to gEngine
+ * @type gEngine
+ */
 var gEngine = gEngine || { };
     // initialize the variable while ensuring it is not redefined
 
+/**
+ * Global variable EngineCore
+ * @type gEngine.Core
+ */
 gEngine.Core = (function () {
     // instance variables
     // The graphical context to draw to
@@ -46,16 +54,28 @@ gEngine.Core = (function () {
     //**----------------------------
     // Public methods:
     //**-----------------------------
-    //
-    // Accessor of the webgl context
+    /**
+     * Accessor of the webgl context
+     * @returns {WebGLContext}
+     */
     var getGL = function () { return mGL; };
 
+    /**
+     * Loads the scene and starts the gameloop
+     * @param {type} scene  to load
+     * @returns {void}
+     */
     var startScene = function (scene) {
         scene.loadScene.call(scene); // Called in this way to keep correct context
         gEngine.GameLoop.start(scene); // will wait until async loading is done and call scene.initialize()
     };
 
-    // initialize all of the EngineCore components
+    /**
+     * initialize all of the EngineCore components
+     * @param {type} htmlCanvasID
+     * @param {type} myGame
+     * @returns {void}
+     */
     var initializeEngineCore = function (htmlCanvasID, myGame) {
         _initializeWebGL(htmlCanvasID);
         gEngine.VertexBuffer.initialize();
@@ -68,19 +88,33 @@ gEngine.Core = (function () {
         gEngine.DefaultResources.initialize(function () { startScene(myGame); });
     };
 
-    // Clears the draw area and draws one square
+    /**
+     * Clears the draw area and draws one square
+     * @param {type} color
+     * @returns {void}
+     */
     var clearCanvas = function (color) {
         mGL.clearColor(color[0], color[1], color[2], color[3]);     // set the color to be cleared
         mGL.clear(mGL.COLOR_BUFFER_BIT | mGL.STENCIL_BUFFER_BIT | mGL.DEPTH_BUFFER_BIT);
                     // clear to the color, stencil bit, and depth buffer bits
     };
 
+    /**
+     * Inherits a SuperClass prototype functions into the SubClass
+     * @param {type} subClass class to inherit to
+     * @param {type} superClass class to inherit from
+     * @returns {void}
+     */
     var inheritPrototype = function (subClass, superClass) {
         var prototype = Object.create(superClass.prototype);
         prototype.constructor = subClass;
         subClass.prototype = prototype;
     };
-
+    
+    /**
+     * 
+     * @returns {void}
+     */
     var cleanUp = function () {
         gEngine.DefaultResources.cleanUp();
         gEngine.VertexBuffer.cleanUp();

@@ -22,29 +22,20 @@
 function SimpleShader(vertexShaderPath, fragmentShaderPath) {
     // instance variables
     // Convention: all instance variables: mVariables
-    /**@type{WebGLProgram} mCompiledShader - reference to the compiled shader in webgl context.*/
-    this.mCompiledShader = null;
-    /**@type{Attribute} mShaderVertexPositionAttribute - reference to SquareVertexPosition within the shader.*/
-    this.mShaderVertexPositionAttribute = null;
-    /**@type{float[]} mPixelColor - reference to the pixelColor uniform in the fragment shader.*/
-    this.mPixelColor = null;
-    /**@type{Transform} mModelTransform - reference to model transform matrix in vertex shader.*/
-    this.mModelTransform = null;
-    /**@type{Transform} mViewProjTransform - reference to the View/Projection matrix in the vertex shader.*/
-    this.mViewProjTransform = null;
-    /**@type{float[]} mGlobalAmbientColor - refrence to the globalAmbientColor uniform in the fragment shader.*/
-    this.mGlobalAmbientColor = null;
-    /**@type{Uniform} mGlobalAmbientIntensity - refrence to the globalAmbientIntensity uniform in the fragment shader.*/
-    this.mGlobalAmbientIntensity = null;
+    this.mCompiledShader = null; // reference to the compiled shader in webgl context.
+    this.mShaderVertexPositionAttribute = null; // reference to SquareVertexPosition within the shader.
+    this.mPixelColor = null; // reference to the pixelColor uniform in the fragment shader.
+    this.mModelTransform = null; // reference to model transform matrix in vertex shader.
+    this.mViewProjTransform = null; // reference to the View/Projection matrix in the vertex shader.
+    this.mGlobalAmbientColor = null; // refrence to the globalAmbientColor uniform in the fragment shader.
+    this.mGlobalAmbientIntensity = null; // refrence to the globalAmbientIntensity uniform in the fragment shader.
 
     var gl = gEngine.Core.getGL();
 
     // start of constructor code
     // 
     // Step A: load and compile vertex and fragment shaders
-    /**@type{VertexShader}*/
     this.mVertexShader = this._compileShader(vertexShaderPath, gl.VERTEX_SHADER);
-    /**@type{FragmentShader}*/
     this.mFragmentShader = this._compileShader(fragmentShaderPath, gl.FRAGMENT_SHADER);
 
     // Step B: Create and link the shaders into a program.

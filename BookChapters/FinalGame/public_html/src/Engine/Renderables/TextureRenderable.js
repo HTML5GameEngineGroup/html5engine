@@ -10,6 +10,12 @@
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Constructor of TextureRenderable object.
+ * 
+ * @param {Texture} myTexture - Texture to be associated by object.
+ * @returns {TextureRenderable} - Instance of TextureRenderable object.
+ */
 function TextureRenderable(myTexture) {
     Renderable.call(this);
     Renderable.prototype.setColor.call(this, [1, 1, 1, 0]); // Alpha of 0: switch off tinting of texture
@@ -34,13 +40,31 @@ gEngine.Core.inheritPrototype(TextureRenderable, Renderable);
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
+/**
+ * Draws the TextureRenderable to the screen in the aCamera viewport.
+ * 
+ * @param {Camera} aCamera - drawing Camera of the TextureRenderable.
+ * @returns {void}
+ */
 TextureRenderable.prototype.draw = function (aCamera) {
     // activate the texture
     gEngine.Textures.activateTexture(this.mTexture);
     Renderable.prototype.draw.call(this, aCamera);
 };
 
+/**
+ * Returns a refrence to Texture
+ * 
+ * @returns {Texture} - Refrence to Texture.
+ */
 TextureRenderable.prototype.getTexture = function () { return this.mTexture; };
+
+/**
+ * Set Renderable Texture.
+ * 
+ * @param {Texture} newTexture - Texture to set to TextureRenderable.
+ * @returns {void}
+ */
 TextureRenderable.prototype.setTexture = function (newTexture) {
     this.mTexture = newTexture;
     // these two instance variables are to cache texture information

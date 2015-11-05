@@ -8,8 +8,10 @@
 /* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
-
-// Information to be updated once per render for efficiency concerns
+/**
+ * Information to be updated once per render for efficiency concerns
+ * @returns {PerRenderCache} New instance of PerRenderCache
+ */
 function PerRenderCache() {
     this.mWCToPixelRatio = 1;  // WC to pixel transformation
     this.mCameraOrgX = 1; // Lower-left corner of camera in WC 
@@ -17,18 +19,19 @@ function PerRenderCache() {
     this.mCameraPosInPixelSpace = vec3.fromValues(0, 0, 0); //
 }
 
-
-// wcCenter: is a vec2
-// wcWidth: is the width of the user defined WC
-//      Height of the user defined WC is implicitly defined by the viewport aspect ratio
-//      Please refer to the following
-// viewportRect: an array of 4 elements
-//      [0] [1]: (x,y) position of lower left corner on the canvas (in pixel)
-//      [2]: width of viewport
-//      [3]: height of viewport
-//      
-//  wcHeight = wcWidth * viewport[3]/viewport[2]
-//
+/**
+ * Default Constructor
+ * Height of the user defined WC is implicitly defined by the viewport aspect ratio
+ * viewportRect: an array of 4 elements
+ *      [0] [1]: (x,y) position of lower left corner on the canvas (in pixel)
+ *      [2]: width of viewport
+ *      [3]: height of viewport
+ * @param {vec2} wcCenter Center position of Camera
+ * @param {Number} wcWidth Width of Camera
+ * @param {Float[]} viewportArray position and size of viewport [x, y, width, height]
+ * @param {Number} bound viewport border
+ * @returns {Camera} New instance of Camera
+ */
 function Camera(wcCenter, wcWidth, viewportArray, bound) {
     // WC and viewport position and size
     this.mCameraState = new CameraState(wcCenter, wcWidth);
@@ -63,6 +66,10 @@ function Camera(wcCenter, wcWidth, viewportArray, bound) {
         // Client game should not access this!
 }
 
+/**
+ * Viewport enum
+ * @type {enum|eViewport}
+ */
 Camera.eViewport = Object.freeze({
     eOrgX: 0,
     eOrgY: 1,
@@ -73,17 +80,54 @@ Camera.eViewport = Object.freeze({
 // <editor-fold desc="Public Methods">
 // <editor-fold desc="Getter/Setter">
 // <editor-fold desc="setter/getter of WC and viewport">
+/**
+ * Set the World Coordinate center position
+ * @param {Number} xPos World Coordinate X position
+ * @param {Number} yPos World Coordinate Y position
+ * @returns {void}
+ */
 Camera.prototype.setWCCenter = function (xPos, yPos) {
     var p = vec2.fromValues(xPos, yPos);
     this.mCameraState.setCenter(p);
 };
+
+/**
+ * Return Camera position in pixel space
+ * @returns {vec3} Camera position in pixel space
+ */
 Camera.prototype.getPosInPixelSpace = function () { return this.mRenderCache.mCameraPosInPixelSpace; };
+
+/**
+ * Return the World Coordinate center position
+ * @returns {vec2} World Coordinate center position
+ */
 Camera.prototype.getWCCenter = function () { return this.mCameraState.getCenter(); };
+
+/**
+ * Set the World Coordinate width
+ * @param {Number} width of the World Coordinate
+ * @returns {void}
+ */
 Camera.prototype.setWCWidth = function (width) { this.mCameraState.setWidth(width); };
+
+/**
+ * Return the width of the World Coordinate
+ * @returns {Number} width of the World Coordinate
+ */
 Camera.prototype.getWCWidth = function () { return this.mCameraState.getWidth(); };
+
+/**
+ * Return the height of the World Coordinate
+ * @returns {Number} height of the World Coordinate
+ */
 Camera.prototype.getWCHeight = function () { return this.mCameraState.getWidth() * this.mViewport[Camera.eViewport.eHeight] / this.mViewport[Camera.eViewport.eWidth]; };
                                                                                                         // viewportH/viewportW
-
+/**
+ * Set the Camera viewport
+ * @param {Float[]} viewportArray viewportArray position and size of viewport [x, y, width, height]
+ * @param {Number} bound viewport border
+ * @returns {void}
+ */
 Camera.prototype.setViewport = function (viewportArray, bound) {
     if (bound === undefined) {
         bound = this.mViewportBound;
@@ -99,6 +143,10 @@ Camera.prototype.setViewport = function (viewportArray, bound) {
     this.mScissorBound[3] = viewportArray[3];
 };
 
+/**
+ * Return the Camera viewport
+ * @returns {Array} camera Viewport [x, y, width, height]
+ */
 Camera.prototype.getViewport = function () {
     var out = [];
     out[0] = this.mScissorBound[0];
@@ -110,17 +158,33 @@ Camera.prototype.getViewport = function () {
 //</editor-fold>
 
 //<editor-fold desc="setter/getter of wc background color">
+/**
+ * Set the background color of the Camera
+ * @param {Float[]} newColor new color of the background
+ * @returns {void}
+ */
 Camera.prototype.setBackgroundColor = function (newColor) { this.mBgColor = newColor; };
+
+/**
+ * Return the background color of the Camera
+ * @returns {Float[]}
+ */
 Camera.prototype.getBackgroundColor = function () { return this.mBgColor; };
 
-// Getter for the View-Projection transform operator
+/**
+ * Return the View-Projection transform operator
+ * @returns {mat4} View-Projection transform
+ */
 Camera.prototype.getVPMatrix = function () {
     return this.mVPMatrix;
 };
 // </editor-fold>
 // </editor-fold>
 
-// Initializes the camera to begin drawing
+/**
+ * Initializes the camera to begin drawing
+ * @returns {void}
+ */
 Camera.prototype.setupViewProjection = function () {
     var gl = gEngine.Core.getGL();
     //<editor-fold desc="Step A: Set up and clear the Viewport">
@@ -182,6 +246,12 @@ Camera.prototype.setupViewProjection = function () {
     this.mRenderCache.mCameraPosInPixelSpace[2] = this.fakeZInPixelSpace(this.kCameraZ);
 };
 
+/**
+ * Check if parameter transform collides with the camera border
+ * @param {Transform} aXform to check collision status
+ * @param {Float} zone distance from the camera border to collide with
+ * @returns {eboundCollideStatus} Collision status of the parameter transform and Camera
+ */
 Camera.prototype.collideWCBound = function (aXform, zone) {
     var bbox = new BoundingBox(aXform.getPosition(), aXform.getWidth(), aXform.getHeight());
     var w = zone * this.getWCWidth();
@@ -190,8 +260,13 @@ Camera.prototype.collideWCBound = function (aXform, zone) {
     return cameraBound.boundCollideStatus(bbox);
 };
 
-// prevents the xform from moving outside of the WC boundary.
-// by clamping the aXfrom at the boundary of WC, 
+/**
+ * prevents the xform from moving outside of the WC boundary
+ * by clamping the aXfrom at the boundary of WC
+ * @param {Transform} aXform to check collision status
+ * @param {Float} zone distance from the camera border to collide with
+ * @returns {eboundCollideStatus} Collision status of the parameter transform and Camera
+ */
 Camera.prototype.clampAtBoundary = function (aXform, zone) {
     var status = this.collideWCBound(aXform, zone);
     if (status !== BoundingBox.eboundCollideStatus.eInside) {

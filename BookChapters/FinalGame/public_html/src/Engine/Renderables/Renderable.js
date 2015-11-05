@@ -55,14 +55,14 @@ Renderable.prototype.update = function () {};
 /**
  * Returns the Renderable's Transform.
  * 
- * @returns {Transform} the return of the Renderable.
+ * @returns {Transform} the Transform of the Renderable.
  */
 Renderable.prototype.getXform = function () { return this.mXform; };
 
 /**
  * Sets the Color of the Renderable.
  * 
- * @param {type} color The desired Color of the Renderable.
+ * @param {float[]} color The desired Color of the Renderable.
  * @returns {void}
  */
 Renderable.prototype.setColor = function (color) { this.mColor = color; };
@@ -70,7 +70,7 @@ Renderable.prototype.setColor = function (color) { this.mColor = color; };
 /**
  * Gets the Color of the Renderable.
  * 
- * @returns {Array|float} The color of the Renderable.
+ * @returns {float[]} The color of the Renderable.
  */
 Renderable.prototype.getColor = function () { return this.mColor; };
 //--- end of Public Methods

@@ -8,35 +8,51 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-// Constructor
+/**
+ * Default Constructor
+ * @returns {Scene}
+ */
 function Scene() {}
 
 //<editor-fold desc="functions subclass should override">
-
-// Begin Scene: must load all the scene contents
-// when done 
-//  => start the GameLoop
-// The game loop will call initialize and then update/draw
+/**
+ * Begin Scene: must load all the scene contents when done 
+ *   => start the GameLoop
+ * The game loop will call initialize and then update/draw
+ * @returns {void}
+ */
 Scene.prototype.loadScene = function () {
     // override to load scene specific contents
 };
 
-// Performs all initialization functions
-//   => Should call gEngine.GameLoop.start(this)!
+/**
+ * Performs all initialization functions.
+ *   => Should call gEngine.GameLoop.start(this)!
+ * @returns {void}
+ */
 Scene.prototype.initialize = function () {
     // initialize the level (called from GameLoop)
 };
 
-// update function to be called form EngineCore.GameLoop
+/**
+ * update function to be called from EngineCore.GameLoop.
+ * @returns {void}
+ */
 Scene.prototype.update = function () {
     // when done with this level should call:
     // GameLoop.stop() ==> which will call this.unloadScene();
 };
 
-// draw function to be called from EngineCore.GameLoop
+/**
+ * draw function to be called from EngineCore.GameLoop.
+ * @returns {void}
+ */
 Scene.prototype.draw = function () {};
 
-// Must unload all resources
+/**
+ * Must unload all resources.
+ * @returns {void}
+ */
 Scene.prototype.unloadScene = function () {
     // .. unload all resources
 };

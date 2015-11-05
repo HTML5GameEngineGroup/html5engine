@@ -10,6 +10,10 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * implements the _setTexInfo() function to support per-pixel collision for sprite elements
+ * @returns {void}
+ */
 SpriteRenderable.prototype._setTexInfo = function () {
     var imageW = this.mTextureInfo.mWidth;
     var imageH = this.mTextureInfo.mHeight;

@@ -8,13 +8,23 @@
 /* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
-
-// vec2 interpolation support
+/**
+ * Default Constructor
+ * vec2 interpolation support
+ * @param {type} value target for interpolation
+ * @param {Integer} cycle how many cycle it should take for a value to change to final
+ * @param {Number} rate the rate at which the value should change at each cycle
+ * @returns {InterpolateVec2} New Instance of InterpolateVec2
+ */
 function InterpolateVec2(value, cycle, rate) {
     Interpolate.call(this, value, cycle, rate);
 }
 gEngine.Core.inheritPrototype(InterpolateVec2, Interpolate);
 
+/**
+ * Interpolate values
+ * @returns {void}
+ */
 InterpolateVec2.prototype._interpolateValue = function () {
     vec2.lerp(this.mCurrentValue, this.mCurrentValue, this.mFinalValue, this.mRate);
 };

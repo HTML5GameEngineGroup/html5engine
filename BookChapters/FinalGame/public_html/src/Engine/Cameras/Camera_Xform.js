@@ -8,11 +8,21 @@
 /* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
+/**
+ * 
+ * @param {Number} z
+ * @returns {Number}
+ */
 Camera.prototype.fakeZInPixelSpace = function (z) {
     return z * this.mRenderCache.mWCToPixelRatio;
 };
 
-Camera.prototype.wcPosToPixel = function (p) {  // p is a vec3, fake Z
+/**
+ * 
+ * @param {vec3} p vec3 position, fake Z
+ * @returns {vec3}
+ */
+Camera.prototype.wcPosToPixel = function (p) {
     // Convert the position to pixel space
     var x = this.mViewport[Camera.eViewport.eOrgX] + ((p[0] - this.mRenderCache.mCameraOrgX) * this.mRenderCache.mWCToPixelRatio) + 0.5;
     var y = this.mViewport[Camera.eViewport.eOrgY] + ((p[1] - this.mRenderCache.mCameraOrgY) * this.mRenderCache.mWCToPixelRatio) + 0.5;
@@ -20,7 +30,12 @@ Camera.prototype.wcPosToPixel = function (p) {  // p is a vec3, fake Z
     return vec3.fromValues(x, y, z);
 };
 
-Camera.prototype.wcDirToPixel = function (d) {  // d is a vec3 direction in WC
+/**
+ * 
+ * @param {vec3} d vec3 direction in WC
+ * @returns {vec3}
+ */
+Camera.prototype.wcDirToPixel = function (d) {
     // Convert the position to pixel space
     var x = d[0] * this.mRenderCache.mWCToPixelRatio;
     var y = d[1] * this.mRenderCache.mWCToPixelRatio;
@@ -28,6 +43,11 @@ Camera.prototype.wcDirToPixel = function (d) {  // d is a vec3 direction in WC
     return vec3.fromValues(x, y, z);
 };
 
-Camera.prototype.wcSizeToPixel = function (s) {  // 
+/**
+ * 
+ * @param {Number} s
+ * @returns {Number}
+ */
+Camera.prototype.wcSizeToPixel = function (s) {
     return (s * this.mRenderCache.mWCToPixelRatio) + 0.5;
 };

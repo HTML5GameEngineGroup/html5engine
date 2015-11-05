@@ -10,9 +10,17 @@
 //  the following syntax enforces there can only be one instance of EngineCore object
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Static refrence to gEngine
+ * @type gEngine
+ */
 var gEngine = gEngine || { };
     // initialize the variable while ensuring it is not redefined
 
+/**
+ * Layer enum
+ * @type enum|eLayer
+ */
 gEngine.eLayer = Object.freeze({
     eBackground: 0,
     eShadowReceiver: 1,
@@ -21,12 +29,20 @@ gEngine.eLayer = Object.freeze({
     eHUD: 4
 });
 
+/**
+ * Global variable EngineLayerManager
+ * @type gEngine.LayerManager
+ */
 gEngine.LayerManager = (function () {
     // instance variables
     var kNumLayers = 5;
     
     var mAllLayers = [];
     
+    /**
+     * 
+     * @returns {undefined}
+     */
     var initialize = function() {
         mAllLayers[gEngine.eLayer.eBackground] = new GameObjectSet();
         mAllLayers[gEngine.eLayer.eShadowReceiver] = new GameObjectSet();
@@ -35,10 +51,19 @@ gEngine.LayerManager = (function () {
         mAllLayers[gEngine.eLayer.eHUD] = new GameObjectSet();
     };
     
+    /**
+     * 
+     * @returns {undefined}
+     */
     var cleanUp = function() {
         initialize();
     };
     
+    /**
+     * 
+     * @param {type} aCamera
+     * @returns {undefined}
+     */
     var drawAllLayers = function(aCamera) {
         var i;
         for (i=0; i<kNumLayers; i++) {
@@ -46,6 +71,10 @@ gEngine.LayerManager = (function () {
         }
     };
     
+    /**
+     * 
+     * @returns {undefined}
+     */
     var updateAllLayers = function() {
         var i;
         for (i=0; i<kNumLayers; i++) {
@@ -55,27 +84,72 @@ gEngine.LayerManager = (function () {
     
     
     // operations on the layers
+    /**
+     * 
+     * @param {type} layerEnum
+     * @param {type} aCamera
+     * @returns {undefined}
+     */
     var drawLayer = function(layerEnum, aCamera) {
         mAllLayers[layerEnum].draw(aCamera);
     };
+    
+    /**
+     * 
+     * @param {type} layerEnum
+     * @returns {undefined}
+     */
     var updateLayer = function(layerEnum) {
         mAllLayers[layerEnum].update();
     };
+    
+    /**
+     * 
+     * @param {type} layerEnum
+     * @param {type} obj
+     * @returns {undefined}
+     */
     var addToLayer = function(layerEnum, obj) {
         mAllLayers[layerEnum].addToSet(obj);
     };
+    
+    /**
+     * 
+     * @param {type} obj
+     * @returns {undefined}
+     */
     var addAsShadowCaster = function(obj) {
         var i;
         for (i = 0; i<mAllLayers[gEngine.eLayer.eShadowReceiver].size(); i++) {
             mAllLayers[gEngine.eLayer.eShadowReceiver].getObjectAt(i).addShadowCaster(obj);
         }
     };
+    
+    /**
+     * 
+     * @param {type} layerEnum
+     * @param {type} obj
+     * @returns {undefined}
+     */
     var removeFromLayer = function(layerEnum, obj) {
         mAllLayers[layerEnum].removeFromSet(obj);
     };
+    
+    /**
+     * 
+     * @param {type} layerEnum
+     * @param {type} obj
+     * @returns {undefined}
+     */
     var moveToLayerFront = function(layerEnum, obj) {
         mAllLayers[layerEnum].moveToLast(obj);
     };
+    
+    /**
+     * 
+     * @param {type} layerEnum
+     * @returns {GameObjectSet.mSet.length}
+     */
     var layerSize = function(layerEnum) {
         return mAllLayers[layerEnum].size();
     };

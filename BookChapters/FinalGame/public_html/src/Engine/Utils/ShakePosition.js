@@ -8,13 +8,15 @@
 /* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
-//
-//
-// damped simple harmonic shake motion
-// xDelta, yDelta: how large a shake
-// shakeFrequency: how much movement
-// shakeDuration: for how long in number of cycles
-//
+/**
+ * Default Constructor
+ * damped simple harmonic shake motion
+ * @param {Number} xDelta  how large a shake
+ * @param {Number} yDelta  how large a shake
+ * @param {Number} shakeFrequency how much movement
+ * @param {Number} shakeDuration for how long in number of cycles
+ * @returns {ShakePosition} New instance of ShakePosition
+ */
 function ShakePosition(xDelta, yDelta, shakeFrequency, shakeDuration) {
     this.mXMag = xDelta;
     this.mYMag = yDelta;
@@ -25,10 +27,18 @@ function ShakePosition(xDelta, yDelta, shakeFrequency, shakeDuration) {
     this.mNumCyclesLeft = shakeDuration;
 }
 
+/**
+ * Return the shake status
+ * @returns {Boolean} true if shake is done
+ */
 ShakePosition.prototype.shakeDone = function () {
     return (this.mNumCyclesLeft <= 0);
 };
 
+/**
+ * Return the shake coordinate results
+ * @returns {Array} X and Y value of the shake position
+ */
 ShakePosition.prototype.getShakeResults = function () {
     this.mNumCyclesLeft--;
     var c = [];
@@ -44,6 +54,10 @@ ShakePosition.prototype.getShakeResults = function () {
     return c;
 };
 
+/**
+ * 
+ * @returns {@param;ShakePosition|@param;ShakePosition:shakeDuration|Number}
+ */
 ShakePosition.prototype._nextDampedHarmonic = function () {
     // computes (Cycles) * cos(  Omega * t )
     var frac = this.mNumCyclesLeft / this.mCycles;

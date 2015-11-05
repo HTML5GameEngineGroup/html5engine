@@ -8,10 +8,13 @@
 /* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
-
-// value: target for interpolation
-// cycles: integer, how many cycle it should take for a value to change to final
-// rate: the rate at which the value should change at each cycle
+/**
+ * Default Constructor
+ * @param {Float[]} value target for interpolation
+ * @param {Integer} cycles how many cycle it should take for a value to change to final
+ * @param {Number} rate the rate at which the value should change at each cycle
+ * @returns {Interpolate} New Instance of Interpolate
+ */
 function Interpolate(value, cycles, rate) {
     this.mCurrentValue = value;    // begin value of interpolation
     this.mFinalValue = value;      // final value of interpolation
@@ -23,12 +26,26 @@ function Interpolate(value, cycles, rate) {
 }
 
 // <editor-fold desc="Public Methods">
+/**
+ * Return the current value of the Interpolation
+ * @returns {Float[]} current value
+ */
 Interpolate.prototype.getValue = function () { return this.mCurrentValue; };
+
+/**
+ * Set the final value of the Interpolation
+ * @param {Float[]} v final value
+ * @returns {void}
+ */
 Interpolate.prototype.setFinalValue = function (v) {
     this.mFinalValue = v;
     this.mCyclesLeft = this.mCycles;     // will trigger interpolation
 };
 
+/**
+ * Update the Interpolation
+ * @returns {void}
+ */
 Interpolate.prototype.updateInterpolation = function () {
     if (this.mCyclesLeft <= 0) {
         return;
@@ -42,14 +59,25 @@ Interpolate.prototype.updateInterpolation = function () {
     }
 };
 
-// stiffness of 1 switches off interpolation
+// 
+/**
+ * Set stiffness and duration
+ * @param {Number} stiffness new stiffness value of interpolate, stiffness of 1 switches off interpolation
+ * @param {Number} duration new duration value of interpolate
+ * @returns {void}
+ */
 Interpolate.prototype.configInterpolation = function (stiffness, duration) {
     this.mRate = stiffness;
     this.mCycles = duration;
 };
 // </editor-fold>
 
-// subclass should override this function for non-scalar values
+// 
+/**
+ * Interpolate values
+ * subclass should override this function for non-scalar values
+ * @returns {void}
+ */
 Interpolate.prototype._interpolateValue = function () {
     this.mCurrentValue = this.mCurrentValue + this.mRate * (this.mFinalValue - this.mCurrentValue);
 };

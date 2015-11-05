@@ -9,6 +9,14 @@
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Default Constructor.
+ * <p>
+ * Default Constructor creates an instance of FontRenderable.
+ * 
+ * @param {String} aString - text to display
+ * @returns {FontRenderable} a new instance of FontRenderable.
+ */
 function FontRenderable(aString) {
     this.mFont = gEngine.DefaultResources.getDefaultFont();
     this.mOneChar = new SpriteRenderable(this.mFont + ".png");
@@ -20,6 +28,12 @@ function FontRenderable(aString) {
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
+/**
+ * Draws the FontRenderable to the screen in the aCamera viewport.
+ * 
+ * @param {Camera} aCamera - Camera object to draw to.
+ * @returns {void}
+ */
 FontRenderable.prototype.draw = function (aCamera) {
     // we will draw the text string by calling to mOneChar for each of the
     // chars in the mText string.
@@ -56,28 +70,81 @@ FontRenderable.prototype.draw = function (aCamera) {
     }
 };
 
+/**
+ * Returns the Renderable's Transform.
+ * 
+ * @returns {Transform} the return of the Renderable.
+ */
 FontRenderable.prototype.getXform = function () { return this.mXform; };
+
+/**
+ * Returns the text of the FontRenderable.
+ * 
+ * @returns {String} text of the FontRenderable.
+ */
 FontRenderable.prototype.getText = function () { return this.mText; };
+
+/**
+ * Set the text of the FontRenderable.
+ * 
+ * @param {String} t - text to set to the FontRenderable.
+ * @returns {void}
+ */
 FontRenderable.prototype.setText = function (t) {
     this.mText = t;
     this.setTextHeight(this.getXform().getHeight());
 };
+
+/**
+ * Set the Text Height of the FontRenderable.
+ * 
+ * @param {float} h - height of the Renderable.
+ * @returns {void}
+ */
 FontRenderable.prototype.setTextHeight = function (h) {
     var charInfo = gEngine.Fonts.getCharInfo(this.mFont, "A".charCodeAt(0)); // this is for "A"
     var w = h * charInfo.mCharAspectRatio;
     this.getXform().setSize(w * this.mText.length, h);
 };
 
-
+/**
+ * Returns the FontRenderable's Font
+ * 
+ * @returns {String} the Font of the FontRenderable.
+ */
 FontRenderable.prototype.getFont = function () { return this.mFont; };
+
+/**
+ * Sets the Font of the FontRenderable.
+ * 
+ * @param {Font} f - font of the FontRenderable.
+ * @returns {void}
+ */
 FontRenderable.prototype.setFont = function (f) {
     this.mFont = f;
     this.mOneChar.setTexture(this.mFont + ".png");
 };
 
+/**
+ * Sets the Color of the FontRenderable.
+ * 
+ * @param {float[]} color The desired Color of the FontRenderable.
+ * @returns {void}
+ */
 FontRenderable.prototype.setColor = function (c) { this.mOneChar.setColor(c); };
+
+/**
+ * Gets the Color of the FontRenderable.
+ * 
+ * @returns {float[]} The color of the FontRenderable.
+ */
 FontRenderable.prototype.getColor = function () { return this.mOneChar.getColor(); };
 
+/**
+ * Update function called on Gameloop
+ * 
+ * @returns {void}
+ */
 FontRenderable.prototype.update = function () {};
 
 //--- end of Public Methods

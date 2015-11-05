@@ -8,8 +8,16 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Static refrence to gEngine
+ * @type gEngine
+ */
 var gEngine = gEngine || { };
 
+/**
+ * Global variable EngineGameLoop
+ * @type gEngine.GameLoop
+ */
 gEngine.GameLoop = (function () {
     var kFPS = 60;          // Frames per second
     var kFrameTime = 1 / kFPS;
@@ -67,6 +75,11 @@ gEngine.GameLoop = (function () {
         requestAnimationFrame(function () { _runLoop.call(mMyGame); });
     };
 
+    /**
+     * Start the Gameloop's Loop
+     * @param {Scene} myGame to set as the active scene
+     * @returns {void}
+     */
     var start = function (myGame) {
         mMyGame = myGame;
         gEngine.ResourceMap.setLoadCompleteCallback(
@@ -77,10 +90,18 @@ gEngine.GameLoop = (function () {
         );
     };
 
+    /**
+     * Stop the Gameloop's Loop
+     * @returns {void}
+     */
     var stop = function () {
         mIsLoopRunning = false;
     };
     
+    /**
+     * 
+     * @returns {Number}
+     */
     var getUpdateIntervalInSeconds = function () {
         return kFrameTime;
     };

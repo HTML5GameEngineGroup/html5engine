@@ -9,19 +9,43 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * 
+ * @memberOf TiledGameObject
+ * @param {type} renderableObj
+ * @returns {TiledGameObject}
+ */
 function TiledGameObject(renderableObj) {
     this.mShouldTile = true;  // can switch this off if desired
     GameObject.call(this, renderableObj);
 }
 gEngine.Core.inheritPrototype(TiledGameObject, GameObject);
 
+/**
+ * 
+ * @memberOf TiledGameObject
+ * @param {type} t
+ * @returns {undefined}
+ */
 TiledGameObject.prototype.setIsTiled = function (t) {
     this.mShouldTile = t;
 };
+
+/**
+ * 
+ * @memberOf TiledGameObject
+ * @returns {type|Boolean}
+ */
 TiledGameObject.prototype.shouldTile = function () {
     return this.mShouldTile;
 };
 
+/**
+ * 
+ * @memberOf TiledGameObject
+ * @param {type} aCamera
+ * @returns {undefined}
+ */
 TiledGameObject.prototype._drawTile = function(aCamera) {
     // Step A: Compute the positions and dimensions of tiling object.
     var xf = this.getXform();
@@ -94,6 +118,12 @@ TiledGameObject.prototype._drawTile = function(aCamera) {
     pos[1] = sY;
 };
 
+/**
+ * 
+ * @memberOf TiledGameObject
+ * @param {type} aCamera
+ * @returns {undefined}
+ */
 TiledGameObject.prototype.draw = function (aCamera) {
     if (this.isVisible()) {
         if (this.shouldTile()) {

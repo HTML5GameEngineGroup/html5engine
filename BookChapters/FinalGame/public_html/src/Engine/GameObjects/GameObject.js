@@ -9,6 +9,13 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Default Constructor<p>
+ * Abstracts a game object's behavior and apparance
+ * @memberOf GameObject
+ * @param {type} renderableObj
+ * @returns {GameObject}
+ */
 function GameObject(renderableObj) {
     this.mRenderComponent = renderableObj;
     this.mVisible = true;
@@ -16,29 +23,108 @@ function GameObject(renderableObj) {
     this.mSpeed = 0;
     this.mPhysicsComponent = null;
 }
+
+/**
+ * 
+ * @memberOf GameObject
+ * @returns {GameObject.prototype@pro;mRenderComponent@call;getXform}
+ */
 GameObject.prototype.getXform = function () { return this.mRenderComponent.getXform(); };
+
+/**
+ * 
+ * @memberOf GameObject
+ * @returns {BoundingBox}
+ */
 GameObject.prototype.getBBox = function () {
     var xform = this.getXform();
     var b = new BoundingBox(xform.getPosition(), xform.getWidth(), xform.getHeight());
     return b;
 };
+
+/**
+ * 
+ * @memberOf GameObject
+ * @param {type} f
+ * @returns {undefined}
+ */
 GameObject.prototype.setVisibility = function (f) { this.mVisible = f; };
+
+/**
+ * 
+ * @memberOf GameObject
+ * @returns {type|Boolean}
+ */
 GameObject.prototype.isVisible = function () { return this.mVisible; };
 
+/**
+ * 
+ * @memberOf GameObject
+ * @param {type} s
+ * @returns {undefined}
+ */
 GameObject.prototype.setSpeed = function (s) { this.mSpeed = s; };
+
+/**
+ * 
+ * @memberOf GameObject
+ * @returns {Number|type}
+ */
 GameObject.prototype.getSpeed = function () { return this.mSpeed; };
+
+/**
+ * 
+ * @memberOf GameObject
+ * @param {type} delta
+ * @returns {undefined}
+ */
 GameObject.prototype.incSpeedBy = function (delta) { this.mSpeed += delta; };
 
+/**
+ * 
+ * @memberOf GameObject
+ * @param {type} f
+ * @returns {undefined}
+ */
 GameObject.prototype.setCurrentFrontDir = function (f) { vec2.normalize(this.mCurrentFrontDir, f); };
+
+/**
+ * 
+ * @memberOf GameObject
+ * @returns {unresolved}
+ */
 GameObject.prototype.getCurrentFrontDir = function () { return this.mCurrentFrontDir; };
 
+/**
+ * 
+ * @memberOf GameObject
+ * @returns {type}
+ */
 GameObject.prototype.getRenderable = function () { return this.mRenderComponent; };
 
+/**
+ * 
+ * @memberOf GameObject
+ * @param {type} p
+ * @returns {undefined}
+ */
 GameObject.prototype.setPhysicsComponent = function (p) { this.mPhysicsComponent = p; };
+
+/**
+ * 
+ * @memberOf GameObject
+ * @returns {type}
+ */
 GameObject.prototype.getPhysicsComponent = function () { return this.mPhysicsComponent; };
 
-// Orientate the entire object to point towards point p
-// will rotate Xform() accordingly
+/**
+ * Orientate the entire object to point towards point p<p>
+ * will rotate Xform() accordingly
+ * @memberOf GameObject
+ * @param {type} p
+ * @param {type} rate
+ * @returns {undefined}
+ */
 GameObject.prototype.rotateObjPointTo = function (p, rate) {
     // Step A: determine if reach the destination position p
     var dir = [];
@@ -84,6 +170,11 @@ GameObject.prototype.rotateObjPointTo = function (p, rate) {
     this.getXform().incRotationByRad(rad);
 };
 
+/**
+ * 
+ * @memberOf GameObject
+ * @returns {undefined}
+ */
 GameObject.prototype.update = function () {
     // simple default behavior
     var pos = this.getXform().getPosition();
@@ -94,6 +185,12 @@ GameObject.prototype.update = function () {
     }
 };
 
+/**
+ * 
+ * @memberOf GameObject
+ * @param {type} aCamera
+ * @returns {undefined}
+ */
 GameObject.prototype.draw = function (aCamera) {
     if (this.isVisible()) {
         this.mRenderComponent.draw(aCamera);

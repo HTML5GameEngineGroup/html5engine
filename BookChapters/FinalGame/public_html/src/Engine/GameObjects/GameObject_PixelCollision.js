@@ -9,7 +9,13 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-// 
+/**
+ * Implements the pixelTouch() function of GameObject
+ * @memberOf GameObject
+ * @param {type} otherObj
+ * @param {type} wcTouchPos
+ * @returns {Boolean}
+ */
 GameObject.prototype.pixelTouches = function (otherObj, wcTouchPos) {
     // only continue if both objects have getColorArray defined 
     // if defined, should have other texture intersection support!

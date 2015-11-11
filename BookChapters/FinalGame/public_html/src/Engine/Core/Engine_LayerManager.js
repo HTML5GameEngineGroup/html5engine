@@ -19,6 +19,7 @@ var gEngine = gEngine || { };
 
 /**
  * Layer enum
+ * @memberOf gEngine.eLayer
  * @type enum|eLayer
  */
 gEngine.eLayer = Object.freeze({
@@ -31,6 +32,7 @@ gEngine.eLayer = Object.freeze({
 
 /**
  * Global variable EngineLayerManager
+ * @memberOf gEngine.eLayer
  * @type gEngine.LayerManager
  */
 gEngine.LayerManager = (function () {
@@ -41,6 +43,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
+     * @memberOf gEngine.eLayer
      * @returns {undefined}
      */
     var initialize = function() {
@@ -53,6 +56,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
+     * @memberOf gEngine.eLayer
      * @returns {undefined}
      */
     var cleanUp = function() {
@@ -61,6 +65,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
+     * @memberOf gEngine.eLayer
      * @param {type} aCamera
      * @returns {undefined}
      */
@@ -73,6 +78,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
+     * @memberOf gEngine.eLayer
      * @returns {undefined}
      */
     var updateAllLayers = function() {
@@ -82,10 +88,9 @@ gEngine.LayerManager = (function () {
         }
     };
     
-    
-    // operations on the layers
     /**
-     * 
+     * operations on the layers
+     * @memberOf gEngine.eLayer
      * @param {type} layerEnum
      * @param {type} aCamera
      * @returns {undefined}
@@ -96,6 +101,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
+     * @memberOf gEngine.eLayer
      * @param {type} layerEnum
      * @returns {undefined}
      */
@@ -105,6 +111,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
+     * @memberOf gEngine.eLayer
      * @param {type} layerEnum
      * @param {type} obj
      * @returns {undefined}
@@ -115,6 +122,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
+     * @memberOf gEngine.eLayer
      * @param {type} obj
      * @returns {undefined}
      */
@@ -127,6 +135,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
+     * @memberOf gEngine.eLayer
      * @param {type} layerEnum
      * @param {type} obj
      * @returns {undefined}
@@ -137,6 +146,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
+     * @memberOf gEngine.eLayer
      * @param {type} layerEnum
      * @param {type} obj
      * @returns {undefined}
@@ -147,6 +157,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
+     * @memberOf gEngine.eLayer
      * @param {type} layerEnum
      * @returns {GameObjectSet.mSet.length}
      */

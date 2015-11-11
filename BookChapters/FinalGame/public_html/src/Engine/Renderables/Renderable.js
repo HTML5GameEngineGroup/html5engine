@@ -12,13 +12,12 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 /**
- * Default Constructor.
- * <p>
- * Default Constructor creates an instance of Renderable.
- * Shader = gEngine.DefaultResources.getConstColorShader();
- * Xform = new Transform();
+ * Default Constructor.<p>
+ * Default Constructor creates an instance of Renderable.<p>
+ * Shader = gEngine.DefaultResources.getConstColorShader();<p>
+ * Xform = new Transform();<p>
  * Color = [1, 1, 1, 1];
- * 
+ * @memberOf Renderable
  * @returns {Renderable} a new instance of Renderable.
  */
 function Renderable() {
@@ -34,7 +33,7 @@ function Renderable() {
 
 /**
  * Draws the Renderable to the screen in the aCamera viewport.
- * 
+ * @memberOf Renderable
  * @param {Camera} aCamera Camera object to draw to.
  * @returns {void}
  */
@@ -47,21 +46,21 @@ Renderable.prototype.draw = function (aCamera) {
 
 /**
  * Update function called on Gameloop
- * 
+ * @memberOf Renderable
  * @returns {void}
  */
 Renderable.prototype.update = function () {};
 
 /**
  * Returns the Renderable's Transform.
- * 
+ * @memberOf Renderable
  * @returns {Transform} the Transform of the Renderable.
  */
 Renderable.prototype.getXform = function () { return this.mXform; };
 
 /**
  * Sets the Color of the Renderable.
- * 
+ * @memberOf Renderable
  * @param {float[]} color The desired Color of the Renderable.
  * @returns {void}
  */
@@ -69,7 +68,7 @@ Renderable.prototype.setColor = function (color) { this.mColor = color; };
 
 /**
  * Gets the Color of the Renderable.
- * 
+ * @memberOf Renderable
  * @returns {float[]} The color of the Renderable.
  */
 Renderable.prototype.getColor = function () { return this.mColor; };
@@ -77,10 +76,9 @@ Renderable.prototype.getColor = function () { return this.mColor; };
 //</editor-fold>
 
 /**
- * Swap the Renderable's Shader.
- * <p>
+ * Swap the Renderable's Shader.<p>
  * Sets the Renderable's shader and returns the previous shader.
- * 
+ * @memberOf Renderable
  * @param {Shader} s Shader to set for the Renderable.
  * @returns {SimpleShader} The Renderable's current Shader.
  */
@@ -92,7 +90,7 @@ Renderable.prototype.swapShader = function (s) {
 
 /**
  * Sets the Renderable's Shader
- * 
+ * @memberOf Renderable
  * @param {SimpleShader} s Shader to set for the Renderable
  * @returns {void}
  */

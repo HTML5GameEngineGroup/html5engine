@@ -10,6 +10,7 @@
 
 /**
  * Default Constructor
+ * @memberOf Interpolate
  * @param {Float[]} value target for interpolation
  * @param {Integer} cycles how many cycle it should take for a value to change to final
  * @param {Number} rate the rate at which the value should change at each cycle
@@ -28,12 +29,14 @@ function Interpolate(value, cycles, rate) {
 // <editor-fold desc="Public Methods">
 /**
  * Return the current value of the Interpolation
+ * @memberOf Interpolate
  * @returns {Float[]} current value
  */
 Interpolate.prototype.getValue = function () { return this.mCurrentValue; };
 
 /**
  * Set the final value of the Interpolation
+ * @memberOf Interpolate
  * @param {Float[]} v final value
  * @returns {void}
  */
@@ -44,6 +47,7 @@ Interpolate.prototype.setFinalValue = function (v) {
 
 /**
  * Update the Interpolation
+ * @memberOf Interpolate
  * @returns {void}
  */
 Interpolate.prototype.updateInterpolation = function () {
@@ -62,6 +66,7 @@ Interpolate.prototype.updateInterpolation = function () {
 // 
 /**
  * Set stiffness and duration
+ * @memberOf Interpolate
  * @param {Number} stiffness new stiffness value of interpolate, stiffness of 1 switches off interpolation
  * @param {Number} duration new duration value of interpolate
  * @returns {void}
@@ -76,6 +81,7 @@ Interpolate.prototype.configInterpolation = function (stiffness, duration) {
 /**
  * Interpolate values
  * subclass should override this function for non-scalar values
+ * @memberOf Interpolate
  * @returns {void}
  */
 Interpolate.prototype._interpolateValue = function () {

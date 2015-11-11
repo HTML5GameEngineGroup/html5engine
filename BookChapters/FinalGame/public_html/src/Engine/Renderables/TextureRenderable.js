@@ -12,7 +12,7 @@
 
 /**
  * Constructor of TextureRenderable object.
- * 
+ * @memberOf TextureRenderable
  * @param {Texture} myTexture - Texture to be associated by object.
  * @returns {TextureRenderable} - Instance of TextureRenderable object.
  */
@@ -42,7 +42,7 @@ gEngine.Core.inheritPrototype(TextureRenderable, Renderable);
 //**-----------------------------------------
 /**
  * Draws the TextureRenderable to the screen in the aCamera viewport.
- * 
+ * @memberOf TextureRenderable
  * @param {Camera} aCamera - drawing Camera of the TextureRenderable.
  * @returns {void}
  */
@@ -54,14 +54,14 @@ TextureRenderable.prototype.draw = function (aCamera) {
 
 /**
  * Returns a refrence to Texture
- * 
+ * @memberOf TextureRenderable
  * @returns {Texture} - Refrence to Texture.
  */
 TextureRenderable.prototype.getTexture = function () { return this.mTexture; };
 
 /**
  * Set Renderable Texture.
- * 
+ * @memberOf TextureRenderable
  * @param {Texture} newTexture - Texture to set to TextureRenderable.
  * @returns {void}
  */

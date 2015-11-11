@@ -11,6 +11,7 @@
 /**
  * Default Constructor
  * Encapsulates an axis aligned box
+ * @memberOf BoundingBox
  * @param {vec2} centerPos Center postion of the bounding box
  * @param {Number} w Width of the bounding box
  * @param {Number} h Height of the bounding box
@@ -23,6 +24,7 @@ function BoundingBox(centerPos, w, h) {
 
 /**
  * Collision Status values
+ * @memberOf BoundingBox
  * @type {enum|eboundCollideStatus}
  */
 BoundingBox.eboundCollideStatus = Object.freeze({
@@ -35,6 +37,7 @@ BoundingBox.eboundCollideStatus = Object.freeze({
 });
 /**
  * Set the BoundingBox Location and Size. rotation is ignored.
+ * @memberOf BoundingBox
  * @param {vec2} centerPos Center postion of the bounding box
  * @param {Number} w Width of the bounding box
  * @param {Number} h Height of the bounding box
@@ -49,6 +52,7 @@ BoundingBox.prototype.setBounds = function (centerPos, w, h) {
 
 /**
  * Determines if x,y point is inside BoundingBox
+ * @memberOf BoundingBox
  * @param {type} x X location to check
  * @param {type} y Y location to check
  * @returns {Boolean} true if x,y point is inside this BoundingBox
@@ -60,6 +64,7 @@ BoundingBox.prototype.containsPoint = function (x, y) {
 
 /**
  * Determines if parameter BoundingBox intersects with this BoundingBox
+ * @memberOf BoundingBox
  * @param {BoundingBox} otherBound to check intersect status
  * @returns {Boolean} true if paramater intersects this BoundingBox
  */
@@ -72,6 +77,7 @@ BoundingBox.prototype.intersectsBound = function (otherBound) {
 
 /**
  * Return the collision status of parameter BoundingBox
+ * @memberOf BoundingBox
  * @param {BoundingBox} otherBound to check collision status
  * @returns {eboundCollideStatus} collision status
  */
@@ -104,24 +110,28 @@ BoundingBox.prototype.boundCollideStatus = function (otherBound) {
 
 /**
  * Return the left position of the BoundingBox
+ * @memberOf BoundingBox
  * @returns {Number} left position
  */
 BoundingBox.prototype.minX = function () { return this.mLL[0]; };
 
 /**
  * Return the right position of the BoundingBox
+ * @memberOf BoundingBox
  * @returns {Number} right position
  */
 BoundingBox.prototype.maxX = function () { return this.mLL[0] + this.mWidth; };
 
 /**
  * Return the bottom position of the BoundingBox
+ * @memberOf BoundingBox
  * @returns {Number} bottom position
  */
 BoundingBox.prototype.minY = function () { return this.mLL[1]; };
 
 /**
  * Return the top position of the BoundingBox
+ * @memberOf BoundingBox
  * @returns {Number} top position
  */
 BoundingBox.prototype.maxY = function () { return this.mLL[1] + this.mHeight; };

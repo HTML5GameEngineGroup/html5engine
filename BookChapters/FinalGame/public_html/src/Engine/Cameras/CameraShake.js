@@ -10,6 +10,7 @@
 
 /**
  * damped simple harmonic shake motion
+ * @memberOf CameraShake
  * @param {CameraState} state CameraState to be shaked.
  * @param {Number} xDelta  how large a shake
  * @param {Number} yDelta  how large a shake
@@ -25,6 +26,7 @@ function CameraShake(state, xDelta, yDelta, shakeFrequency, shakeDuration) {
 
 /**
  * 
+ * @memberOf CameraShake
  * @returns {void}
  */
 CameraShake.prototype.updateShakeState = function () {
@@ -34,6 +36,7 @@ CameraShake.prototype.updateShakeState = function () {
 
 /**
  * Return the shake status
+ * @memberOf CameraShake
  * @returns {Boolean} true if shake is done
  */
 CameraShake.prototype.shakeDone = function () {
@@ -42,12 +45,14 @@ CameraShake.prototype.shakeDone = function () {
 
 /**
  * 
+ * @memberOf CameraShake
  * @returns {unresolved}
  */
 CameraShake.prototype.getCenter = function () { return this.mShakeCenter; };
 
 /**
  * Set the CameraShakes center refrence
+ * @memberOf CameraShake
  * @param {Float[]} c (x,y) center position
  * @returns {void}
  */

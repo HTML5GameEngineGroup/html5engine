@@ -10,15 +10,17 @@
 
 /**
  * Default Constructor
+ * @memberOf Scene
  * @returns {Scene}
  */
 function Scene() {}
 
 //<editor-fold desc="functions subclass should override">
 /**
- * Begin Scene: must load all the scene contents when done 
- *   => start the GameLoop
+ * Begin Scene: must load all the scene contents when done <p>
+ *   => start the GameLoop<p>
  * The game loop will call initialize and then update/draw
+ * @memberOf Scene
  * @returns {void}
  */
 Scene.prototype.loadScene = function () {
@@ -26,8 +28,9 @@ Scene.prototype.loadScene = function () {
 };
 
 /**
- * Performs all initialization functions.
+ * Performs all initialization functions.<p>
  *   => Should call gEngine.GameLoop.start(this)!
+ *   @memberOf Scene
  * @returns {void}
  */
 Scene.prototype.initialize = function () {
@@ -36,6 +39,7 @@ Scene.prototype.initialize = function () {
 
 /**
  * update function to be called from EngineCore.GameLoop.
+ * @memberOf Scene
  * @returns {void}
  */
 Scene.prototype.update = function () {
@@ -45,12 +49,14 @@ Scene.prototype.update = function () {
 
 /**
  * draw function to be called from EngineCore.GameLoop.
+ * @memberOf Scene
  * @returns {void}
  */
 Scene.prototype.draw = function () {};
 
 /**
  * Must unload all resources.
+ * @memberOf Scene
  * @returns {void}
  */
 Scene.prototype.unloadScene = function () {

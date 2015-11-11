@@ -9,8 +9,9 @@
 "use strict";
 
 /**
- * Default Constructor
+ * Default Constructor<p>
  * damped simple harmonic shake motion
+ * @memberOf ShakePosition
  * @param {Number} xDelta  how large a shake
  * @param {Number} yDelta  how large a shake
  * @param {Number} shakeFrequency how much movement
@@ -29,6 +30,7 @@ function ShakePosition(xDelta, yDelta, shakeFrequency, shakeDuration) {
 
 /**
  * Return the shake status
+ * @memberOf ShakePosition
  * @returns {Boolean} true if shake is done
  */
 ShakePosition.prototype.shakeDone = function () {
@@ -37,6 +39,7 @@ ShakePosition.prototype.shakeDone = function () {
 
 /**
  * Return the shake coordinate results
+ * @memberOf ShakePosition
  * @returns {Array} X and Y value of the shake position
  */
 ShakePosition.prototype.getShakeResults = function () {
@@ -56,6 +59,7 @@ ShakePosition.prototype.getShakeResults = function () {
 
 /**
  * 
+ * @memberOf ShakePosition
  * @returns {@param;ShakePosition|@param;ShakePosition:shakeDuration|Number}
  */
 ShakePosition.prototype._nextDampedHarmonic = function () {

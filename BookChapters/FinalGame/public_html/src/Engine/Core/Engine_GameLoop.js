@@ -16,6 +16,7 @@ var gEngine = gEngine || { };
 
 /**
  * Global variable EngineGameLoop
+ * @memberOf gEngine.GameLoop
  * @type gEngine.GameLoop
  */
 gEngine.GameLoop = (function () {
@@ -77,6 +78,7 @@ gEngine.GameLoop = (function () {
 
     /**
      * Start the Gameloop's Loop
+     * @memberOf gEngine.GameLoop
      * @param {Scene} myGame to set as the active scene
      * @returns {void}
      */
@@ -92,6 +94,7 @@ gEngine.GameLoop = (function () {
 
     /**
      * Stop the Gameloop's Loop
+     * @memberOf gEngine.GameLoop
      * @returns {void}
      */
     var stop = function () {
@@ -100,6 +103,7 @@ gEngine.GameLoop = (function () {
     
     /**
      * 
+     * @memberOf gEngine.GameLoop
      * @returns {Number}
      */
     var getUpdateIntervalInSeconds = function () {

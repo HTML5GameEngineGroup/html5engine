@@ -11,6 +11,7 @@
 
 /**
  * Default Constructor
+ * @memberOf Material
  * @returns {Material} new instance of Material
  */
 function Material() {
@@ -26,6 +27,7 @@ function Material() {
 //**-----------------------------------------
 /**
  * Set the ambient value of the material.
+ * @memberOf Material
  * @param {vec4} a new abient value of material
  * @returns {void}
  */
@@ -33,12 +35,14 @@ Material.prototype.setAmbient = function (a) { this.mKa = vec4.clone(a); };
 
 /**
  * Return the ambient value of the material
+ * @memberOf Material
  * @returns {vec4} ambient value of the material
  */
 Material.prototype.getAmbient = function () { return this.mKa; };
 
 /**
  * Set the diffuse value of the material
+ * @memberOf Material
  * @param {vec4} d new diffuse value of material
  * @returns {void}
  */
@@ -46,12 +50,14 @@ Material.prototype.setDiffuse = function (d) { this.mKd = vec4.clone(d); };
 
 /**
  * Return the diffuse value of the material
+ * @memberOf Material
  * @returns {vec4} diffuse value of the material
  */
 Material.prototype.getDiffuse = function () { return this.mKd; };
 
 /**
  * Set the specular value of the material
+ * @memberOf Material
  * @param {vec4} s new specular value of material
  * @returns {void}
  */
@@ -59,12 +65,14 @@ Material.prototype.setSpecular = function (s) { this.mKs = vec4.clone(s); };
 
 /**
  * Return the specular value of the material
+ * @memberOf Material
  * @returns {vec4} specular value of material
  */
 Material.prototype.getSpecular = function () { return this.mKs; };
 
 /**
  * Set the shininess value of the material
+ * @memberOf Material
  * @param {Number} s new shininess value of material
  * @returns {Number}
  */
@@ -72,6 +80,7 @@ Material.prototype.setShininess = function (s) { this.mShininess = s; };
 
 /**
  * Return shininess value of the material
+ * @memberOf Material
  * @returns {Number} shininess value of material
  */
 Material.prototype.getShininess = function () { return this.mShininess; };

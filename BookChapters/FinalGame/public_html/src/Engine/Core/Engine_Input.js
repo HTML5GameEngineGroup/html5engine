@@ -17,11 +17,15 @@ var gEngine = gEngine || { };
 
 /**
  * Input Class
+ * @memberOf gEngine.Input
  * @type Engine_Input_L21.mPublic|Function
  */
 gEngine.Input = (function () {
     // Key code constants
-    /**@type{enum} kKeys - Input keyCodes. */
+    /**
+     * @memberOf gEngine.Input
+     * @type{enum} kKeys - Input keyCodes.
+     */
     var kKeys = {
         // arrows
         Left: 37,
@@ -75,7 +79,10 @@ gEngine.Input = (function () {
         LastKeyCode: 222
     };
 
-    /**@type{enum} mouseButton - Mouse button input codes. */
+    /**
+     * @memberOf gEngine.Input
+     * @type{enum} mouseButton - Mouse button input codes.
+     */
     var kMouseButton = {
         Left: 0,
         Middle: 1,
@@ -141,10 +148,9 @@ gEngine.Input = (function () {
     //</editor-fold>
 
     /**
-     * Initialize the input manager.
-     * <p>
+     * Initialize the input manager.<p>
      * Intitalize and intsntiate input listeners.
-     * 
+     * @memberOf gEngine.Input
      * @param {GLCanvas} canvasID - HTML canvas
      * @returns {void}
      */
@@ -176,7 +182,7 @@ gEngine.Input = (function () {
 
     /**
      * Update function called on Gameloop.
-     * 
+     * @memberOf gEngine.Input
      * @returns {void}
      */
     var update = function () {
@@ -191,10 +197,10 @@ gEngine.Input = (function () {
         }
     };
 
-    // Function for GameEngine programmer to test if a key is pressed down
     /**
+     * Function for GameEngine programmer to test if a key is pressed down<p>
      * returns if key is pressed.
-     * 
+     * @memberOf gEngine.Input
      * @param {number|keys} keyCode - key to check for pressed state.
      * @returns {Boolean} true if key is pressed
      */
@@ -204,7 +210,7 @@ gEngine.Input = (function () {
 
     /**
      * returns if key is clicked.
-     * 
+     * @memberOf gEngine.Input
      * @param {number|keys} keyCode - key to check for clicked state.
      * @returns {Boolean} true if key is clicked
      */
@@ -214,7 +220,7 @@ gEngine.Input = (function () {
 
     /**
      * returns if button is pressed.
-     * 
+     * @memberOf gEngine.Input
      * @param {number|mouseButton} button - button to check for pressed state.
      * @returns {Boolean} true if button is pressed.
      */
@@ -224,7 +230,7 @@ gEngine.Input = (function () {
 
     /**
      * returns if button is clicked.
-     * 
+     * @memberOf gEngine.Input
      * @param {number|mouseButton} button - button to check for ckicked state.
      * @returns {Boolean} true if button is clicked.
      */
@@ -234,14 +240,14 @@ gEngine.Input = (function () {
     
     /**
      * Returns mouse X position.
-     * 
+     * @memberOf gEngine.Input
      * @returns {Number} X position of mouse.
      */
     var getMousePosX = function () { return mMousePosX; };
     
     /**
      * Returns mouse Y position.
-     * 
+     * @memberOf gEngine.Input
      * @returns {Number} Y position of mouse.
      */
     var getMousePosY = function () { return mMousePosY; };

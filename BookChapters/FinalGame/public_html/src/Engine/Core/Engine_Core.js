@@ -19,6 +19,7 @@ var gEngine = gEngine || { };
 
 /**
  * Global variable EngineCore
+ * @memberOf gEngine.Core
  * @type gEngine.Core
  */
 gEngine.Core = (function () {
@@ -56,12 +57,14 @@ gEngine.Core = (function () {
     //**-----------------------------
     /**
      * Accessor of the webgl context
+     * @memberOf gEngine.Core
      * @returns {WebGLContext}
      */
     var getGL = function () { return mGL; };
 
     /**
      * Loads the scene and starts the gameloop
+     * @memberOf gEngine.Core
      * @param {type} scene  to load
      * @returns {void}
      */
@@ -72,6 +75,7 @@ gEngine.Core = (function () {
 
     /**
      * initialize all of the EngineCore components
+     * @memberOf gEngine.Core
      * @param {type} htmlCanvasID
      * @param {type} myGame
      * @returns {void}
@@ -90,6 +94,7 @@ gEngine.Core = (function () {
 
     /**
      * Clears the draw area and draws one square
+     * @memberOf gEngine.Core
      * @param {type} color
      * @returns {void}
      */
@@ -101,6 +106,7 @@ gEngine.Core = (function () {
 
     /**
      * Inherits a SuperClass prototype functions into the SubClass
+     * @memberOf gEngine.Core
      * @param {type} subClass class to inherit to
      * @param {type} superClass class to inherit from
      * @returns {void}
@@ -113,6 +119,7 @@ gEngine.Core = (function () {
     
     /**
      * 
+     * @memberOf gEngine.Core
      * @returns {void}
      */
     var cleanUp = function () {

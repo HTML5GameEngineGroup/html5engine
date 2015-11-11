@@ -12,6 +12,7 @@
 
 /**
  * implements the _setTexInfo() function to support per-pixel collision for sprite elements
+ * @memberOf SpriteRenderable
  * @returns {void}
  */
 SpriteRenderable.prototype._setTexInfo = function () {

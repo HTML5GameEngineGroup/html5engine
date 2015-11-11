@@ -14,7 +14,7 @@
 //<editor-fold desc="constructor">
 /**
  * constructor of SimpleShader object.
- * 
+ * @memberOf SimpleShader
  * @param {string} vertexShaderPath filepath of the Vertex Shader.
  * @param {string} fragmentShaderPath filrepath of the Fragment Shader.
  * @returns {SimpleShader} An intsnace of SimpleShader.
@@ -69,14 +69,14 @@ function SimpleShader(vertexShaderPath, fragmentShaderPath) {
 
 /**
  * Access to the compiled shader
- * 
+ * @memberOf SimpleShader
  * @returns {WebGLProgram} A reference to the SimpleShaders Shader Program.
  */
 SimpleShader.prototype.getShader = function () { return this.mCompiledShader; };
 
 /**
  * Activate the shader for rendering.
- * 
+ * @memberOf SimpleShader
  * @param {float[]} pixelColor [R, G, B, A] Sets the shader pixel color.
  * @param {Camera} aCamera 
  * @returns {void}
@@ -100,7 +100,7 @@ SimpleShader.prototype.activateShader = function (pixelColor, aCamera) {
 
 /**
  * Loads per-object model transform to the vertex shader.
- * 
+ * @memberOf SimpleShader
  * @param {float[]} modelTransform An array of float values representing one or more 4x4 matrices.
  * @returns {void}
  */
@@ -112,7 +112,7 @@ SimpleShader.prototype.loadObjectTransform = function (modelTransform) {
 
 /**
  * Detaches and removes the shader from the Shader Program
- * 
+ * @memberOf SimpleShader
  * @returns {void}
  */
 SimpleShader.prototype.cleanUp = function () {
@@ -132,9 +132,9 @@ SimpleShader.prototype.cleanUp = function () {
 // **------------------------------------
 
 /**
- * Returns a compiled shader from a shader in the dom.
- * <br>The id is the id of the script in the html tag.
- * 
+ * Returns a compiled shader from a shader in the dom.<p>
+ * The id is the id of the script in the html tag.
+ * @memberOf SimpleShader
  * @param {string} filePath Filepath of the shader.
  * @param {Number} shaderType Either gl.FRAGMENT_SHADER or gl.VERTEX_SHADER constants.
  * @returns {WebGLShader} Shader object of type fragment or vertex shader.

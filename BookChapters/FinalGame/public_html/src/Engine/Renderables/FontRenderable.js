@@ -10,10 +10,9 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 /**
- * Default Constructor.
- * <p>
+ * Default Constructor.<p>
  * Default Constructor creates an instance of FontRenderable.
- * 
+ * @memberOf FontRenderable
  * @param {String} aString - text to display
  * @returns {FontRenderable} a new instance of FontRenderable.
  */
@@ -30,7 +29,7 @@ function FontRenderable(aString) {
 //**-----------------------------------------
 /**
  * Draws the FontRenderable to the screen in the aCamera viewport.
- * 
+ * @memberOf FontRenderable
  * @param {Camera} aCamera - Camera object to draw to.
  * @returns {void}
  */
@@ -72,21 +71,21 @@ FontRenderable.prototype.draw = function (aCamera) {
 
 /**
  * Returns the Renderable's Transform.
- * 
+ * @memberOf FontRenderable
  * @returns {Transform} the return of the Renderable.
  */
 FontRenderable.prototype.getXform = function () { return this.mXform; };
 
 /**
  * Returns the text of the FontRenderable.
- * 
+ * @memberOf FontRenderable
  * @returns {String} text of the FontRenderable.
  */
 FontRenderable.prototype.getText = function () { return this.mText; };
 
 /**
  * Set the text of the FontRenderable.
- * 
+ * @memberOf FontRenderable
  * @param {String} t - text to set to the FontRenderable.
  * @returns {void}
  */
@@ -97,7 +96,7 @@ FontRenderable.prototype.setText = function (t) {
 
 /**
  * Set the Text Height of the FontRenderable.
- * 
+ * @memberOf FontRenderable
  * @param {float} h - height of the Renderable.
  * @returns {void}
  */
@@ -109,14 +108,14 @@ FontRenderable.prototype.setTextHeight = function (h) {
 
 /**
  * Returns the FontRenderable's Font
- * 
+ * @memberOf FontRenderable
  * @returns {String} the Font of the FontRenderable.
  */
 FontRenderable.prototype.getFont = function () { return this.mFont; };
 
 /**
  * Sets the Font of the FontRenderable.
- * 
+ * @memberOf FontRenderable
  * @param {Font} f - font of the FontRenderable.
  * @returns {void}
  */
@@ -127,7 +126,7 @@ FontRenderable.prototype.setFont = function (f) {
 
 /**
  * Sets the Color of the FontRenderable.
- * 
+ * @memberOf FontRenderable
  * @param {float[]} color The desired Color of the FontRenderable.
  * @returns {void}
  */
@@ -135,14 +134,14 @@ FontRenderable.prototype.setColor = function (c) { this.mOneChar.setColor(c); };
 
 /**
  * Gets the Color of the FontRenderable.
- * 
+ * @memberOf FontRenderable
  * @returns {float[]} The color of the FontRenderable.
  */
 FontRenderable.prototype.getColor = function () { return this.mOneChar.getColor(); };
 
 /**
  * Update function called on Gameloop
- * 
+ * @memberOf FontRenderable
  * @returns {void}
  */
 FontRenderable.prototype.update = function () {};

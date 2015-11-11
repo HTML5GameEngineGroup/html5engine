@@ -10,6 +10,7 @@
 
 /**
  * update function to be called from EngineCore.GameLoop.
+ * @memberOf Camera
  * @returns {void}
  */
 Camera.prototype.update = function () {
@@ -26,6 +27,7 @@ Camera.prototype.update = function () {
 
 /**
  * Pan the Camera by dx and dy
+ * @memberOf Camera
  * @param {Number} dx X value to pan the camera
  * @param {Number} dy Y value to pan the camera
  * @returns {void}
@@ -38,8 +40,9 @@ Camera.prototype.panBy = function (dx, dy) {
 };
 
 /**
- * pan the camera to ensure aXform is within camera bounds
- * this is complementary to the ClampAtBound: instead of clamping aXform, now, move the camera
+ * pan the camera to ensure aXform is within camera bounds<p>
+ * this is complementary to the ClampAtBound: instead of clamping aXform, now, move the camera.
+ * @memberOf Camera
  * @param {Transform} aXform Transform to clamp the Camera to
  * @param {Number} zone distance from the camera border to collide with
  * @returns {void}
@@ -67,6 +70,7 @@ Camera.prototype.panWith = function (aXform, zone) {
 
 /**
  * Pan Camera to cx, cy position
+ * @memberOf Camera
  * @param {Number} cx X position to pan the camera to
  * @param {Number} cy Y position to pan the camera to
  * @returns {void}
@@ -76,10 +80,11 @@ Camera.prototype.panTo = function (cx, cy) {
 };
 
 /**
- * zoom with respect to the center
- * zoom > 1 ==> zooming out, see more of the world
- * zoom < 1 ==> zooming in, see less of the world, more detailed
+ * zoom with respect to the center<p>
+ * zoom > 1 ==> zooming out, see more of the world<p>
+ * zoom < 1 ==> zooming in, see less of the world, more detailed<p>
  * zoom < 0 is ignored
+ * @memberOf Camera
  * @param {Number} zoom to scale the camera width
  * @returns {void}
  */
@@ -90,10 +95,11 @@ Camera.prototype.zoomBy = function (zoom) {
 };
 
 /**
- * zoom towards (pX, pY) by zoom:
- * zoom > 1 ==> zooming out, see more of the world
- * zoom < 1 ==> zooming in, see less of the world, more detailed
+ * zoom towards (pX, pY) by zoom:<p>
+ * zoom > 1 ==> zooming out, see more of the world<p>
+ * zoom < 1 ==> zooming in, see less of the world, more detailed<p>
  * zoom < 0 is ignored
+ * @memberOf Camera
  * @param {vec2} pos Point to scale the camera with respect to
  * @param {Number} zoom to scale the camera width
  * @returns {void}
@@ -110,6 +116,7 @@ Camera.prototype.zoomTowards = function (pos, zoom) {
 
 /**
  * Confiqure interpolation of camera
+ * @memberOf Camera
  * @param {Number} stiffness stiffness value of interpolate, stiffness of 1 switches off interpolation
  * @param {Number} duration duration value of interpolate
  * @returns {void}
@@ -120,6 +127,7 @@ Camera.prototype.configInterpolation = function (stiffness, duration) {
 
 /**
  * Initiates a camera shake
+ * @memberOf Camera
  * @param {Number} xDelta how large a shake
  * @param {Number} yDelta how large a shake
  * @param {Number} shakeFrequency how much movement

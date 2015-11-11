@@ -20,9 +20,14 @@ function TextureInfo(name, w, h, id) {
 }
 
 gEngine.Textures = (function () {
-    /*
-     * This converts an image to the webGL texture format. 
+
+    /**
+     * This converts an image to the webGL texture format. <p>
      * This should only be called once the texture is loaded.
+     * @memberOf gEngine.Textures
+     * @param {type} textureName
+     * @param {type} image
+     * @returns {undefined}
      */
     var _processLoadedImage = function (textureName, image) {
         var gl = gEngine.Core.getGL();

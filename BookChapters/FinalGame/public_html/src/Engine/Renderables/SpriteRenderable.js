@@ -12,7 +12,7 @@
 
 /**
  * Constructor of SpriteRenderable object.
- * 
+ * @memberOf SpriteRenderable
  * @param {Texture} myTexture - Texture to be associated by object.
  * @returns {SpriteRenderable} - Instance of this SpriteRenderable object
  */
@@ -33,12 +33,12 @@ gEngine.Core.inheritPrototype(SpriteRenderable, TextureRenderable);
 
 // Convention: eName is an enumerated data type
 /**
- * the expected texture cooridnate array is an array of 8 floats where elements:
- * [0] [1]: is u/v coordinate of Top-Right 
- * [2] [3]: is u/v coordinate of Top-Left
- * [4] [5]: is u/v coordinate of Bottom-Right
+ * the expected texture cooridnate array is an array of 8 floats where elements:<p>
+ * [0] [1]: is u/v coordinate of Top-Right<p>
+ * [2] [3]: is u/v coordinate of Top-Left<p>
+ * [4] [5]: is u/v coordinate of Bottom-Right<p>
  * [6] [7]: is u/v coordinate of Bottom-Left
- * 
+ * @memberOf SpriteRenderable
  * @type {float[]|enum}
  */
 SpriteRenderable.eTexCoordArray = Object.freeze({
@@ -54,7 +54,7 @@ SpriteRenderable.eTexCoordArray = Object.freeze({
 
 /**
  * specify element region by texture coordinate (between 0 to 1)
- * 
+ * @memberOf SpriteRenderable
  * @param {float} left - Sets the Left UV Coordinate.
  * @param {float} right - Sets the Right UV Coordinate.
  * @param {float} bottom - Sets the Bottom UV Coordinate.
@@ -71,7 +71,7 @@ SpriteRenderable.prototype.setElementUVCoordinate = function (left, right, botto
 
 /**
  * specify element region by pixel positions (between 0 to image resolutions)
- * 
+ * @memberOf SpriteRenderable
  * @param {float} left - Sets the Left pixel position.
  * @param {float} right - Sets the Right pixel position.
  * @param {float} bottom - Sets the Bottom pixel position.
@@ -91,7 +91,7 @@ SpriteRenderable.prototype.setElementPixelPositions = function (left, right, bot
 
 /**
  * Returns a UV Coordinate Array.
- * 
+ * @memberOf SpriteRenderable
  * @returns {float[]} UV Voordinate Array
  */
 SpriteRenderable.prototype.getElementUVCoordinateArray = function () {
@@ -105,7 +105,7 @@ SpriteRenderable.prototype.getElementUVCoordinateArray = function () {
 
 /**
  * Draws the SpriteRenderable to the screen in the aCamera viewport.
- * 
+ * @memberOf SpriteRenderable
  * @param {float[]} pixelColor - 4 Float array of pixel color.
  * @param {Camera} aCamera - drawing Camera of the SpriteRenderable.
  * @returns {void}

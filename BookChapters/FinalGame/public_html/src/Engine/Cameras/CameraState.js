@@ -10,6 +10,7 @@
 
 /**
  * Default Constructor
+ * @memberOf CameraState
  * @param {Float[]} center final value of the center Interpolation
  * @param {Float[]} width final value of the width Interpolation
  * @returns {CameraState} new instance of CameraState
@@ -24,18 +25,21 @@ function CameraState(center, width) {
 // <editor-fold desc="Public Methods">
 /**
  * Return the CameraState center
+ * @memberOf CameraState
  * @returns {Float[]} current value of the center Interpolation
  */
 CameraState.prototype.getCenter = function () { return this.mCenter.getValue(); };
 
 /**
  * Return the CameraState width
+ * @memberOf CameraState
  * @returns {Float[]} current value of the width Interpolation
  */
 CameraState.prototype.getWidth = function () { return this.mWidth.getValue(); };
 
 /**
  * Set the CameraState Center
+ * @memberOf CameraState
  * @param {Float[]} c final value of the center Interpolation
  * @returns {void}
  */
@@ -43,6 +47,7 @@ CameraState.prototype.setCenter = function (c) { this.mCenter.setFinalValue(c); 
 
 /**
  * Set the CameraState Width
+ * @memberOf CameraState
  * @param {Float[]} w final value of the width Interpolation
  * @returns {void}
  */
@@ -50,6 +55,7 @@ CameraState.prototype.setWidth = function (w) { this.mWidth.setFinalValue(w); };
 
 /**
  * Update the CameraState interpolation values
+ * @memberOf CameraState
  * @returns {void}
  */
 CameraState.prototype.updateCameraState = function () {
@@ -60,6 +66,7 @@ CameraState.prototype.updateCameraState = function () {
 /**
  * 
  * Confiqure interpolation of camera
+ * @memberOf CameraState
  * @param {Number} stiffness stiffness value of interpolate, stiffness of 1 switches off interpolation
  * @param {Number} duration duration value of interpolate
  * @returns {void}

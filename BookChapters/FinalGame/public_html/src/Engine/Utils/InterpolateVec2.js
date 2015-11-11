@@ -11,6 +11,7 @@
 /**
  * Default Constructor
  * vec2 interpolation support
+ * @memberOf InterpolateVec2
  * @param {type} value target for interpolation
  * @param {Integer} cycle how many cycle it should take for a value to change to final
  * @param {Number} rate the rate at which the value should change at each cycle
@@ -23,6 +24,7 @@ gEngine.Core.inheritPrototype(InterpolateVec2, Interpolate);
 
 /**
  * Interpolate values
+ * @memberOf InterpolateVec2
  * @returns {void}
  */
 InterpolateVec2.prototype._interpolateValue = function () {

@@ -10,6 +10,7 @@
 
 /**
  * 
+ * @memberOf Camera
  * @param {Number} z
  * @returns {Number}
  */
@@ -19,6 +20,7 @@ Camera.prototype.fakeZInPixelSpace = function (z) {
 
 /**
  * 
+ * @memberOf Camera
  * @param {vec3} p vec3 position, fake Z
  * @returns {vec3}
  */
@@ -32,6 +34,7 @@ Camera.prototype.wcPosToPixel = function (p) {
 
 /**
  * 
+ * @memberOf Camera
  * @param {vec3} d vec3 direction in WC
  * @returns {vec3}
  */
@@ -45,6 +48,7 @@ Camera.prototype.wcDirToPixel = function (d) {
 
 /**
  * 
+ * @memberOf Camera
  * @param {Number} s
  * @returns {Number}
  */

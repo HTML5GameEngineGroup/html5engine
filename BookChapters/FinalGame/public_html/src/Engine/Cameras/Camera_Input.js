@@ -10,6 +10,7 @@
 
 /**
  * Returns mouse X position.
+ * @memberOf Camera
  * @returns {Number}
  */
 Camera.prototype.mouseDCX = function () {
@@ -18,6 +19,7 @@ Camera.prototype.mouseDCX = function () {
 
 /**
  * Returns mouse Y position.
+ * @memberOf Camera
  * @returns {Number}
  */
 Camera.prototype.mouseDCY = function () {
@@ -26,6 +28,7 @@ Camera.prototype.mouseDCY = function () {
 
 /**
  * Checks if the mouse position is inside the Camera viewport
+ * @memberOf Camera
  * @returns {Boolean} true if mouse position is inside viewport
  */
 Camera.prototype.isMouseInViewport = function () {
@@ -36,7 +39,8 @@ Camera.prototype.isMouseInViewport = function () {
 };
 
 /**
- * Returns the mouse X World Coordinate position 
+ * Returns the mouse X World Coordinate position
+ * @memberOf Camera
  * @returns {Number}
  */
 Camera.prototype.mouseWCX = function () {
@@ -46,6 +50,7 @@ Camera.prototype.mouseWCX = function () {
 
 /**
  * Returns the mouse Y World Coordinate position
+ * @memberOf Camera
  * @returns {Number}
  */
 Camera.prototype.mouseWCY = function () {

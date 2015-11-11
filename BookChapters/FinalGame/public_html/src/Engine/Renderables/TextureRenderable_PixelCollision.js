@@ -11,6 +11,7 @@
 
 /**
  * Implements the pixelTouches() and related supporting functions of TextureRenderable
+ * @memberOf TextureRenderable
  * @param {type} other
  * @param {type} wcTouchPos
  * @returns {Boolean}
@@ -49,6 +50,7 @@ TextureRenderable.prototype.pixelTouches = function(other, wcTouchPos) {
 
 /**
  * 
+ * @memberOf TextureRenderable
  * @returns {undefined}
  */
 TextureRenderable.prototype.setColorArray = function () {
@@ -59,6 +61,7 @@ TextureRenderable.prototype.setColorArray = function () {
 
 /**
  * 
+ * @memberOf TextureRenderable
  * @param {type} x
  * @param {type} y
  * @returns {texInfo.mColorArray}
@@ -73,6 +76,7 @@ TextureRenderable.prototype._pixelAlphaValue = function (x, y) {
 
 /**
  * 
+ * @memberOf TextureRenderable
  * @param {type} returnIndex
  * @param {type} wcPos
  * @param {type} xDir
@@ -99,6 +103,7 @@ TextureRenderable.prototype._wcPositionToIndex = function (returnIndex, wcPos, x
 
 /**
  * 
+ * @memberOf TextureRenderable
  * @param {type} returnWCPos
  * @param {type} i
  * @param {type} j

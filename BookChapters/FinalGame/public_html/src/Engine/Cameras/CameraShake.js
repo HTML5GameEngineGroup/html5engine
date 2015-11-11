@@ -25,7 +25,7 @@ function CameraShake(state, xDelta, yDelta, shakeFrequency, shakeDuration) {
 }
 
 /**
- * 
+ * Update the shake state of the camera
  * @memberOf CameraShake
  * @returns {void}
  */
@@ -44,9 +44,9 @@ CameraShake.prototype.shakeDone = function () {
 };
 
 /**
- * 
+ * Return the world coordinate center of the camera
  * @memberOf CameraShake
- * @returns {unresolved}
+ * @returns {vec2} WC center of the camera
  */
 CameraShake.prototype.getCenter = function () { return this.mShakeCenter; };
 

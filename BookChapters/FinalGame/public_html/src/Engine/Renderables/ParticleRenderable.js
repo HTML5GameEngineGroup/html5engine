@@ -10,6 +10,12 @@
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * ParticleRenderable specifically for particles (additive blending)
+ * @param {type} myTexture
+ * @returns {undefined}
+ * @memberOf ParticleRenderable
+ */
 function ParticleRenderable(myTexture) {
     TextureRenderable.call(this, myTexture);
     Renderable.prototype._setShader.call(this, gEngine.DefaultResources.getParticleShader());

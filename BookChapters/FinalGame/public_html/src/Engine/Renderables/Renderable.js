@@ -14,9 +14,8 @@
 /**
  * Default Constructor.<p>
  * Default Constructor creates an instance of Renderable.<p>
- * Shader = gEngine.DefaultResources.getConstColorShader();<p>
- * Xform = new Transform();<p>
- * Color = [1, 1, 1, 1];
+ * Encapsulate the Shader and VertexBuffer into the same object (and will include<p>
+ * other attributes later) to represent a Renderable object on the game screen.<p>
  * @memberOf Renderable
  * @returns {Renderable} a new instance of Renderable.
  */

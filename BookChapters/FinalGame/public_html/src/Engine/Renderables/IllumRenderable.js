@@ -11,7 +11,14 @@
 // Constructor and object definition
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-
+/**
+ * Default Constructor<p>
+ * LightRenderable with light illumination
+ * @param {type} myTexture
+ * @param {type} myNormalMap
+ * @returns {IllumRenderable}
+ * @memberOf IllumRenderable
+ */
 function IllumRenderable(myTexture, myNormalMap) {
     LightRenderable.call(this, myTexture);
     Renderable.prototype._setShader.call(this, gEngine.DefaultResources.getIllumShader());
@@ -31,6 +38,12 @@ gEngine.Core.inheritPrototype(IllumRenderable, LightRenderable);
 //**-----------------------------------------
 // Public methods
 //**-----------------------------------------
+/**
+ * 
+ * @param {type} aCamera
+ * @returns {undefined}
+ * @memberOf IllumRenderable
+ */
 IllumRenderable.prototype.draw = function (aCamera) {
     gEngine.Textures.activateNormalMap(this.mNormalMap);
             // Here thenormal map texture coordinate is copied from those of 
@@ -39,6 +52,11 @@ IllumRenderable.prototype.draw = function (aCamera) {
     LightRenderable.prototype.draw.call(this, aCamera);
 };
 
+/**
+ * 
+ * @returns {Material}
+ * @memberOf IllumRenderable
+ */
 IllumRenderable.prototype.getMaterial = function () { return this.mMaterial; };
 //--- end of Public Methods
 

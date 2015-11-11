@@ -14,7 +14,7 @@ var gEngine = gEngine || { };
 // for convenenit communication of per-character information
 // all size returned are in normalize unit (range between 0 to 1)
 function CharacterInfo() {
-  // in texture coordinate (0 to 1) maps to the entier image
+  // in texture coordinate (0 to 1) maps to the entire image
     this.mTexCoordLeft = 0;
     this.mTexCoordRight = 1;
     this.mTexCoordBottom = 0;
@@ -26,7 +26,7 @@ function CharacterInfo() {
     this.mCharWidthOffset = 0;
     this.mCharHeightOffset = 0;
 
-    // reference of char width/height ration
+    // reference of char width/height ratio
     this.mCharAspectRatio = 1;
 }
 

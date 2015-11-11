@@ -31,7 +31,7 @@ gEngine.VertexBuffer = (function () {
         -0.5, -0.5, 0.0
     ];
 
-    // Second: define the corresponding texture cooridnates
+    // Second: define the corresponding texture coordinates
     var textureCoordinates = [
         1.0, 1.0,
         0.0, 1.0,

@@ -2,7 +2,7 @@
 /*
  * File: SpriteRenderable.js
  *  
- * Texture objects where texture cooridnate can change
+ * Texture objects where texture coordinate can change
  */
 /*jslint node: true, vars: true */
 /*global gEngine: false, Renderable: false, TextureRenderable: false */
@@ -23,7 +23,7 @@ gEngine.Core.inheritPrototype(SpriteRenderable, TextureRenderable);
 
 //<editor-fold desc="Public Methods">
 //
-//// the expected texture cooridnate array is an array of 8 floats where elements:
+//// the expected texture coordinate array is an array of 8 floats where elements:
     //  [0] [1]: is u/v coordinate of Top-Right 
     //  [2] [3]: is u/v coordinate of Top-Left
     //  [4] [5]: is u/v coordinate of Bottom-Right
@@ -70,12 +70,12 @@ SpriteRenderable.prototype.getElementUVCoordinateArray = function () {
     ];
 };
 
-SpriteRenderable.prototype.draw = function (pixelColor, vpMatrix) {
+SpriteRenderable.prototype.draw = function (vpMatrix) {
     // set the current texture coordinate
     // 
     // activate the texture
     this.mShader.setTextureCoordinate(this.getElementUVCoordinateArray());
-    TextureRenderable.prototype.draw.call(this, pixelColor, vpMatrix);
+    TextureRenderable.prototype.draw.call(this, vpMatrix);
 };
 //--- end of Public Methods
 //

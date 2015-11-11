@@ -54,7 +54,7 @@ SceneFileParser.prototype.parseSquares = function (sqSet) {
         c = elm.item(i).attributes.getNamedItem("Color").value.split(" ");
         sq = new Renderable(gEngine.DefaultResources.getConstColorShader());
         // make sure color array contains numbers
-        for (j = 0; j < 3; j++) {
+        for (j = 0; j < 4; j++) {
             c[j] = Number(c[j]);
         }
         sq.setColor(c);

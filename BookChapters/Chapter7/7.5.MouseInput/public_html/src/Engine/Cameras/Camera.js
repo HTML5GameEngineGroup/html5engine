@@ -113,7 +113,7 @@ Camera.prototype.setupViewProjection = function () {
                this.mScissorBound[1], // y position of bottom-left corner of the area to be drawn
                this.mScissorBound[2], // width of the area to be drawn
                this.mScissorBound[3]);// height of the area to be drawn
-    // Step A3: set the color to be clear to black
+    // Step A3: set the color to be clear
     gl.clearColor(this.mBgColor[0], this.mBgColor[1], this.mBgColor[2], this.mBgColor[3]);  // set the color to be cleared
     // Step A4: enable the scissor area, clear, and then disable the scissor area
     gl.enable(gl.SCISSOR_TEST);
@@ -139,12 +139,12 @@ Camera.prototype.setupViewProjection = function () {
     var halfWCWidth = 0.5 * this.getWCWidth();
     var halfWCHeight = 0.5 * this.getWCHeight(); // 
     mat4.ortho(this.mProjMatrix,
-        -halfWCWidth,   // distant to left of WC
-         halfWCWidth,   // distant to right of WC
-        -halfWCHeight,  // distant to bottom of WC
-         halfWCHeight,  // distant to top of WC
-         this.mNearPlane,   // z-distant to near plane 
-         this.mFarPlane  // z-distant to far plane 
+        -halfWCWidth,   // distance to left of WC
+         halfWCWidth,   // distance to right of WC
+        -halfWCHeight,  // distance to bottom of WC
+         halfWCHeight,  // distance to top of WC
+         this.mNearPlane,   // z-distance to near plane 
+         this.mFarPlane  // z-distance to far plane 
         );
 
     // Step B3: concatenate view and project matrices

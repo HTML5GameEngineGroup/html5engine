@@ -34,7 +34,7 @@ struct Light  {
 };
 uniform Light uLights[1];  // Exactly one light source, the one that is casting the shadow
 
-// The "varying" keyword is for signifing that the texture coordinate will be
+// The "varying" keyword is for signifying that the texture coordinate will be
 // interpolated and thus varies. 
 varying vec2 vTexCoord;
 
@@ -72,7 +72,7 @@ float LightStrength() {
     float aAtten = 1.0, dAtten = 1.0;
     vec3 lgtDir = -normalize(uLights[0].Direction.xyz);
     vec3 L; // light vector
-    float dist; // distant to light
+    float dist; // distance to light
     if (uLights[0].LightType == eDirectionalLight) {
         L = lgtDir;
     } else {
@@ -85,7 +85,7 @@ float LightStrength() {
         aAtten = AngularDropOff(lgtDir, L);
     }
     if (uLights[0].LightType != eDirectionalLight) {
-        // both spot and point light has distant dropoff
+        // both spot and point light has distance dropoff
         dAtten = DistanceDropOff(dist);
     }
     float result = aAtten * dAtten;

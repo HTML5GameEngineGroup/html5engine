@@ -1,7 +1,7 @@
 /*
  * File: SpriteRenderable.js
  *  
- * Texture objects where texture cooridnate can change
+ * Texture objects where texture coordinate can change
  */
 /*jslint node: true, vars: true */
 /*global gEngine: false, Renderable: false, TextureRenderable: false */

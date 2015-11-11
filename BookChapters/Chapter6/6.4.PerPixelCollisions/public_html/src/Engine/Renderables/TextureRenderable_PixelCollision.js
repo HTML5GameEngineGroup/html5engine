@@ -61,8 +61,8 @@ TextureRenderable.prototype._wcPositionToIndex = function (returnIndex, wcPos) {
 };
 
 TextureRenderable.prototype._indexToWCPosition = function (returnWCPos, i, j) {
-    var x = i * this.mXform.getWidth() / (this.mTexWidth - 1);
-    var y = j * this.mXform.getHeight() / (this.mTexHeight - 1);
+    var x = i * this.mXform.getWidth() / this.mTexWidth;
+    var y = j * this.mXform.getHeight() / this.mTexHeight;
     returnWCPos[0] = this.mXform.getXPos() + (x - (this.mXform.getWidth() * 0.5));
     returnWCPos[1] = this.mXform.getYPos() + (y - (this.mXform.getHeight() * 0.5));
 };

@@ -60,7 +60,7 @@ ShadowCaster.prototype._computeShadowGeometry = function(aLight) {
         vec3.copy(lgtToCaster, aLight.getDirection());
         vec3.normalize(lgtToCaster, lgtToCaster);
         
-        distToReceiver = Math.abs(receiverToCasterZ / lgtToCaster[2]);  // distant measured along lgtToCaster
+        distToReceiver = Math.abs(receiverToCasterZ / lgtToCaster[2]);  // distance measured along lgtToCaster
         scale = Math.abs(1/lgtToCaster[2]);
     } else {    
         vec3.sub(lgtToCaster, cxf.get3DPosition(), aLight.getPosition());
@@ -78,7 +78,7 @@ ShadowCaster.prototype._computeShadowGeometry = function(aLight) {
         distToCaster = vec3.length(lgtToCaster);
         vec3.scale(lgtToCaster, lgtToCaster, 1/distToCaster);  // normalize lgtToCaster
         
-        distToReceiver = Math.abs(receiverToCasterZ / lgtToCaster[2]);  // distant measured along lgtToCaster
+        distToReceiver = Math.abs(receiverToCasterZ / lgtToCaster[2]);  // distance measured along lgtToCaster
         scale = (distToCaster + (distToReceiver * this.kReceiverDistanceFudge)) / distToCaster;
     }
     vec3.scaleAndAdd(offset, cxf.get3DPosition(), lgtToCaster, distToReceiver + this.kDistanceFudge);

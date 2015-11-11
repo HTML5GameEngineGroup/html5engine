@@ -7,9 +7,25 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Static refrence to gEngine
+ * @type gEngine
+ */
 var gEngine = gEngine || { };
 
+/**
+ * 
+ * @memberOf gEngine.ResourceMap
+ * @type gEngine.ResourceMap
+ */
 gEngine.ResourceMap = (function () {
+    
+    /**
+     * 
+     * @memberOf gEngine.ResourceMap
+     * @param {type} rName
+     * @returns {Engine_ResourceMap_L21.MapEntry}
+     */
     var MapEntry = function (rName) {
         this.mAsset = rName;
         this.mRefCount = 1;
@@ -24,14 +40,24 @@ gEngine.ResourceMap = (function () {
     // Resource storage
     var mResourceMap = {};
 
-   /*
+   /**
     * Register one more resource to load
+    * @memberOf gEngine.ResourceMap
+    * @param {type} rName
+    * @returns {undefined}
     */
     var asyncLoadRequested = function (rName) {
         mResourceMap[rName] = new MapEntry(rName); // place holder for the resource to be loaded
         ++mNumOutstandingLoads;
     };
 
+    /**
+     * 
+     * @memberOf gEngine.ResourceMap
+     * @param {type} rName
+     * @param {type} loadedAsset
+     * @returns {undefined}
+     */
     var asyncLoadCompleted = function (rName, loadedAsset) {
         if (!isAssetLoaded(rName)) {
             alert("gEngine.asyncLoadCompleted: [" + rName + "] not in map!");
@@ -41,6 +67,11 @@ gEngine.ResourceMap = (function () {
         _checkForAllLoadCompleted();
     };
 
+    /**
+     * 
+     * @memberOf gEngine.ResourceMap
+     * @returns {undefined}
+     */
     var _checkForAllLoadCompleted = function () {
         if ((mNumOutstandingLoads === 0) && (mLoadCompleteCallback !== null)) {
             // ensures the load complete call back will only be called once!
@@ -50,7 +81,12 @@ gEngine.ResourceMap = (function () {
         }
     };
 
-    // Make sure to set the callback _AFTER_ all load commands are issued
+    /**
+     * Make sure to set the callback _AFTER_ all load commands are issued
+     * @memberOf gEngine.ResourceMap
+     * @param {type} funct
+     * @returns {undefined}
+     */
     var setLoadCompleteCallback = function (funct) {
         mLoadCompleteCallback = funct;
         // in case all loading are done
@@ -58,6 +94,12 @@ gEngine.ResourceMap = (function () {
     };
 
     //<editor-fold desc="Asset checking functions">
+    /**
+     * 
+     * @memberOf gEngine.ResourceMap
+     * @param {type} rName
+     * @returns {unresolved}
+     */
     var retrieveAsset = function (rName) {
         var r = null;
         if (rName in mResourceMap) {
@@ -68,14 +110,32 @@ gEngine.ResourceMap = (function () {
         return r;
     };
 
+    /**
+     * 
+     * @memberOf gEngine.ResourceMap
+     * @param {type} rName
+     * @returns {Engine_ResourceMap_L21.MapEntry}
+     */
     var isAssetLoaded = function (rName) {
         return (rName in mResourceMap);
     };
 
+    /**
+     * 
+     * @memberOf gEngine.ResourceMap
+     * @param {type} rName
+     * @returns {undefined}
+     */
     var incAssetRefCount = function (rName) {
         mResourceMap[rName].mRefCount += 1;
     };
 
+    /**
+     * 
+     * @memberOf gEngine.ResourceMap
+     * @param {type} rName
+     * @returns {Number}
+     */
     var unloadAsset = function (rName) {
         var c = 0;
         if (rName in mResourceMap) {

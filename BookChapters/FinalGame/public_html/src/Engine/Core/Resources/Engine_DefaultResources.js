@@ -9,15 +9,50 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Static refrence to gEngine
+ * @type gEngine
+ */
 var gEngine = gEngine || { };
 
+/**
+ * 
+ * @memberOf gEngine.DefaultResources
+ * @type Function|Engine_DefaultResources_L21.mPublic
+ */
 gEngine.DefaultResources = (function () {
     // Global Ambient color
     var mGlobalAmbientColor = [0.3, 0.3, 0.3, 1];
     var mGlobalAmbientIntensity = 1;
+    
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @returns {Number|v}
+     */
     var getGlobalAmbientIntensity = function () { return mGlobalAmbientIntensity; };
+    
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @param {type} v
+     * @returns {undefined}
+     */
     var setGlobalAmbientIntensity = function (v) { mGlobalAmbientIntensity = v; };
+    
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @returns {Array}
+     */
     var getGlobalAmbientColor = function () { return mGlobalAmbientColor; };
+    
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @param {type} v
+     * @returns {undefined}
+     */
     var setGlobalAmbientColor = function (v) { mGlobalAmbientColor = vec4.fromValues(v[0], v[1], v[2], v[3]); };
 
     // Simple Shader
@@ -52,6 +87,12 @@ gEngine.DefaultResources = (function () {
 
     // Default font
     var kDefaultFont = "assets/fonts/system-default-font";
+    
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @returns {String}
+     */
     var getDefaultFont = function () { return kDefaultFont; };
 
     var _createShaders = function (callBackFunction) {
@@ -68,16 +109,75 @@ gEngine.DefaultResources = (function () {
         callBackFunction();
     };
 
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @returns {SimpleShader}
+     */
     var getConstColorShader = function () { return mConstColorShader; };
+    
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @returns {TextureShader}
+     */
     var getTextureShader = function () { return mTextureShader; };
+    
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @returns {SpriteShader}
+     */
     var getSpriteShader = function () { return mSpriteShader; };
+    
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @returns {LineShader}
+     */
     var getLineShader = function () { return mLineShader; };
+    
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @returns {LightShader}
+     */
     var getLightShader = function () { return mLightShader; };
+    
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @returns {IllumShader}
+     */
     var getIllumShader = function () { return mIllumShader; };
+    
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @returns {SpriteShader}
+     */
     var getShadowReceiverShader = function () { return mShadowReceiverShader; };
+    
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @returns {ShadowCasterShader}
+     */
     var getShadowCasterShader = function () { return mShadowCasterShader; };
+    
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @returns {TextureShader}
+     */
     var getParticleShader = function () { return mParticleShader };
 
+    /**
+     * 
+     * @memberOf gEngine.DefaultResources
+     * @param {type} callBackFunction
+     * @returns {undefined}
+     */
     var initialize = function (callBackFunction) {
         // constant color shader: SimpleVS, and SimpleFS
         gEngine.TextFileLoader.loadTextFile(kSimpleVS, gEngine.TextFileLoader.eTextFileType.eTextFile);
@@ -109,7 +209,11 @@ gEngine.DefaultResources = (function () {
         gEngine.ResourceMap.setLoadCompleteCallback(function s() {_createShaders(callBackFunction); });
     };
 
-    // unload all resources
+    /**
+     * unload all resources
+     * @memberOf gEngine.DefaultResources
+     * @returns {undefined}
+     */
     var cleanUp = function () {
         mConstColorShader.cleanUp();
         mTextureShader.cleanUp();

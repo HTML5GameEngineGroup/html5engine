@@ -9,14 +9,24 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Static refrence to gEngine
+ * @type gEngine
+ */
 var gEngine = gEngine || { };
 
+/**
+ * 
+ * @type gEngine.AudioClips
+ */
 gEngine.AudioClips = (function () {
     var mAudioContext = null;
     var mBgAudioNode = null;
 
-    /*
+    /**
      * Initializes the audio context to play sounds.
+     * @memberOf gEngine.AudioClips
+     * @returns {undefined}
      */
     var initAudioContext = function () {
         try {
@@ -25,6 +35,12 @@ gEngine.AudioClips = (function () {
         } catch (e) {alert("Web Audio Is not supported."); }
     };
 
+    /**
+     * 
+     * @memberOf gEngine.AudioClips
+     * @param {type} clipName
+     * @returns {undefined}
+     */
     var loadAudio = function (clipName) {
         if (!(gEngine.ResourceMap.isAssetLoaded(clipName))) {
             // Update resources in load counter.
@@ -56,10 +72,22 @@ gEngine.AudioClips = (function () {
         }
     };
 
+    /**
+     * 
+     * @memberOf gEngine.AudioClips
+     * @param {type} clipName
+     * @returns {undefined}
+     */
     var unloadAudio = function (clipName) {
         gEngine.ResourceMap.unloadAsset(clipName);
     };
 
+    /**
+     * 
+     * @memberOf gEngine.AudioClips
+     * @param {type} clipName
+     * @returns {undefined}
+     */
     var playACue = function (clipName) {
         var clipInfo = gEngine.ResourceMap.retrieveAsset(clipName);
         if (clipInfo !== null) {
@@ -71,6 +99,12 @@ gEngine.AudioClips = (function () {
         }
     };
 
+    /**
+     * 
+     * @memberOf gEngine.AudioClips
+     * @param {type} clipName
+     * @returns {undefined}
+     */
     var playBackgroundAudio = function (clipName) {
         var clipInfo = gEngine.ResourceMap.retrieveAsset(clipName);
         if (clipInfo !== null) {
@@ -85,6 +119,11 @@ gEngine.AudioClips = (function () {
         }
     };
 
+    /**
+     * 
+     * @memberOf gEngine.AudioClips
+     * @returns {undefined}
+     */
     var stopBackgroundAudio = function () {
         // Check if the audio is  playing.
         if (mBgAudioNode !== null) {
@@ -93,6 +132,11 @@ gEngine.AudioClips = (function () {
         }
     };
 
+    /**
+     * 
+     * @memberOf gEngine.AudioClips
+     * @returns {Boolean}
+     */
     var isBackgroundAudioPlaying = function () {
         return (mBgAudioNode !== null);
     };

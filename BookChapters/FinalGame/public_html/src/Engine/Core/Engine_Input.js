@@ -10,8 +10,8 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 /**
- * 
- * @type @exp;gEngine
+ * Static refrence to gEngine
+ * @type gEngine
  */
 var gEngine = gEngine || { };
 

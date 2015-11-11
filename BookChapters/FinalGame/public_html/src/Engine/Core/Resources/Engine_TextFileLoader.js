@@ -8,18 +8,34 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Static refrence to gEngine
+ * @type gEngine
+ */
 var gEngine = gEngine || { };
 
-// Note: loads the a textfile and when done calls the callbackFunction()
-//     fileName is treated as resource map key, file content is stored as asset
-//
+/**
+ * Default Constructor<p>
+ * loads an text file into resourceMap, either as simple text or as XML<p>
+ * Note: loads the a textfile and when done calls the callbackFunction()<p>
+ *      fileName is treated as resource map key, file content is stored as asset
+ * @memberOf gEngine.TextFileLoader
+ * @type Engine_TextFileLoader_L23.mPublic|Function
+ */
 gEngine.TextFileLoader = (function () {
     var eTextFileType = Object.freeze({
         eXMLFile: 0,
         eTextFile: 1
     });
 
-    // if fileType is a eTextFileType
+    /**
+     * if fileType is a eTextFileType
+     * @memberOf gEngine.TextFileLoader
+     * @param {type} fileName
+     * @param {type} fileType
+     * @param {type} callbackFunction
+     * @returns {undefined}
+     */
     var loadTextFile = function (fileName, fileType, callbackFunction) {
         if (!(gEngine.ResourceMap.isAssetLoaded(fileName))) {
             // Update resources in load counter.
@@ -58,6 +74,12 @@ gEngine.TextFileLoader = (function () {
         }
     };
 
+    /**
+     * 
+     * @memberOf gEngine.TextFileLoader
+     * @param {type} fileName
+     * @returns {undefined}
+     */
     var unloadTextFile = function (fileName) {
         gEngine.ResourceMap.unloadAsset(fileName);
     };

@@ -16,6 +16,11 @@
 var gEngine = gEngine || { };
 
 // The VertexBuffer object
+/**
+ * 
+ * @memberOf gEngine.VertexBuffer
+ * @type Engine_VertexBuffer_L22.mPublic|Function
+ */
 gEngine.VertexBuffer = (function () {
     // reference to the vertex positions for the square in the gl context
     var mSquareVertexBuffer = null;
@@ -46,6 +51,11 @@ gEngine.VertexBuffer = (function () {
     // reference to the texture positions for the square vertices in the gl context
     var mLineVertexBuffer = null;
 
+    /**
+     * 
+     * @memberOf gEngine.VertexBuffer
+     * @returns {undefined}
+     */
     var initialize = function () {
         var gl = gEngine.Core.getGL();
 
@@ -83,10 +93,32 @@ gEngine.VertexBuffer = (function () {
         //<editor-fold>
     };
 
+    /**
+     * 
+     * @memberOf gEngine.VertexBuffer
+     * @returns {unresolved}
+     */
     var getGLVertexRef = function () { return mSquareVertexBuffer; };
+    
+    /**
+     * 
+     * @memberOf gEngine.VertexBuffer
+     * @returns {unresolved}
+     */
     var getGLTexCoordRef = function () { return mTextureCoordBuffer; };
+    
+    /**
+     * 
+     * @memberOf gEngine.VertexBuffer
+     * @returns {unresolved}
+     */
     var getGLLineVertexRef = function () { return mLineVertexBuffer; };
 
+    /**
+     * 
+     * @memberOf gEngine.VertexBuffer
+     * @returns {undefined}
+     */
     var cleanUp = function () {
         var gl = gEngine.Core.getGL();
         gl.deleteBuffer(mSquareVertexBuffer);

@@ -43,7 +43,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
-     * @memberOf gEngine.eLayer
+     * @memberOf gEngine.LayerManager
      * @returns {undefined}
      */
     var initialize = function() {
@@ -56,7 +56,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
-     * @memberOf gEngine.eLayer
+     * @memberOf gEngine.LayerManager
      * @returns {undefined}
      */
     var cleanUp = function() {
@@ -65,7 +65,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
-     * @memberOf gEngine.eLayer
+     * @memberOf gEngine.LayerManager
      * @param {type} aCamera
      * @returns {undefined}
      */
@@ -78,7 +78,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
-     * @memberOf gEngine.eLayer
+     * @memberOf gEngine.LayerManager
      * @returns {undefined}
      */
     var updateAllLayers = function() {
@@ -101,7 +101,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
-     * @memberOf gEngine.eLayer
+     * @memberOf gEngine.LayerManager
      * @param {type} layerEnum
      * @returns {undefined}
      */
@@ -111,7 +111,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
-     * @memberOf gEngine.eLayer
+     * @memberOf gEngine.LayerManager
      * @param {type} layerEnum
      * @param {type} obj
      * @returns {undefined}
@@ -122,7 +122,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
-     * @memberOf gEngine.eLayer
+     * @memberOf gEngine.LayerManager
      * @param {type} obj
      * @returns {undefined}
      */
@@ -135,7 +135,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
-     * @memberOf gEngine.eLayer
+     * @memberOf gEngine.LayerManager
      * @param {type} layerEnum
      * @param {type} obj
      * @returns {undefined}
@@ -146,7 +146,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
-     * @memberOf gEngine.eLayer
+     * @memberOf gEngine.LayerManager
      * @param {type} layerEnum
      * @param {type} obj
      * @returns {undefined}
@@ -157,7 +157,7 @@ gEngine.LayerManager = (function () {
     
     /**
      * 
-     * @memberOf gEngine.eLayer
+     * @memberOf gEngine.LayerManager
      * @param {type} layerEnum
      * @returns {GameObjectSet.mSet.length}
      */

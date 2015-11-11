@@ -11,6 +11,11 @@
 var gEngine = gEngine || { };
     // initialize the variable while ensuring it is not redefined
 
+/**
+ * 
+ * @memberOf gEngine.ParticleSystem
+ * @type gEngine.ParticleSystem
+ */
 gEngine.ParticleSystem = (function () {
     var mSystemtAcceleration = [0, -1.1];
     
@@ -19,6 +24,13 @@ gEngine.ParticleSystem = (function () {
     var mVec = [0, 0];
     var mNormal = [0, 0];
     
+    /**
+     * 
+     * @memberOf gEngine.ParticleSystem
+     * @param {type} circShape
+     * @param {type} particle
+     * @returns {Boolean}
+     */
     var resolveCirclePos = function (circShape, particle) {
         var collided = false;
         var pos = particle.getPosition();
@@ -33,6 +45,13 @@ gEngine.ParticleSystem = (function () {
         return collided;
     };
 
+    /**
+     * 
+     * @memberOf gEngine.ParticleSystem
+     * @param {type} rectShape
+     * @param {type} particle
+     * @returns {Boolean}
+     */
     var resolveRectPos = function (rectShape, particle) {
         var collided = false;
         var alongX = rectShape.getWidth() / 2;
@@ -82,6 +101,13 @@ gEngine.ParticleSystem = (function () {
     };
     
     // Rigid Shape interactions: a game object and a set of particle game objects
+    /**
+     * 
+     * @memberOf gEngine.ParticleSystem
+     * @param {type} obj
+     * @param {type} pSet
+     * @returns {undefined}
+     */
     var processObjSet = function(obj, pSet) {
         var s1 = obj.getPhysicsComponent();  // a RigidShape
         var i, p;
@@ -92,13 +118,33 @@ gEngine.ParticleSystem = (function () {
     };
     
     // Rigid Shape interactions: game object set and a set of particle game objects
+    /**
+     * 
+     * @memberOf gEngine.ParticleSystem
+     * @param {type} objSet
+     * @param {type} pSet
+     * @returns {undefined}
+     */
     var processSetSet = function(objSet, pSet) {
         var i;
         for (i=0; i<objSet.size(); i++) {
             processObjSet(objSet.getObjectAt(i), pSet);
         }
     };
+    
+    /**
+     * 
+     * @memberOf gEngine.ParticleSystem
+     * @returns {Array|g}
+     */
     var getSystemtAcceleration = function() { return mSystemtAcceleration; };
+    
+    /**
+     * 
+     * @memberOf gEngine.ParticleSystem
+     * @param {type} g
+     * @returns {undefined}
+     */
     var setSystemtAcceleration = function(g) { mSystemtAcceleration = g; };
     
     var mPublic = {

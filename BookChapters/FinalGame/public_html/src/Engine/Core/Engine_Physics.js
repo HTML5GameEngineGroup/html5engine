@@ -11,6 +11,11 @@
 var gEngine = gEngine || { };
     // initialize the variable while ensuring it is not redefined
 
+/**
+ * Physics engine supporting projection and impulse collision resolution. <p>
+ * @memberOf gEngine.Physics
+ * @type gEngine.Physics
+ */
 gEngine.Physics = (function () {
     var mRelaxationCount = 15;                  // number of relaxation iteration
     var mRelaxationOffset = 1/mRelaxationCount; // porportion to apply when scaling friction
@@ -22,6 +27,11 @@ gEngine.Physics = (function () {
     
     var mCollisionInfo = null;                  // information of the current collision
     
+    /**
+     * 
+     * @memberOf gEngine.Physics
+     * @returns {undefined}
+     */
     var initialize = function() {
         mCollisionInfo = new CollisionInfo(); // to avoid allocating this constantly
     };
@@ -61,6 +71,15 @@ gEngine.Physics = (function () {
         }
         vec2.sub(v, v, tangent);
     };
+    
+    /**
+     * 
+     * @memberOf gEngine.Physics
+     * @param {type} s1
+     * @param {type} s2
+     * @param {type} collisionInfo
+     * @returns {undefined}
+     */
     var resolveCollision = function (s1, s2, collisionInfo) {
         // Step A: one collision has been found
         mHasOneCollision = true;
@@ -105,10 +124,21 @@ gEngine.Physics = (function () {
         vec2.add(s2V, s2V, newImpulse);
     };
     
+    /**
+     * 
+     * @memberOf gEngine.Physics
+     * @returns {undefined}
+     */
     var beginRelaxation = function() { 
         mRelaxationLoopCount = mRelaxationCount; 
         mHasOneCollision = true;
     };
+    
+    /**
+     * 
+     * @memberOf gEngine.Physics
+     * @returns {Boolean}
+     */
     var continueRelaxation = function() { 
         var oneCollision = mHasOneCollision;
         mHasOneCollision = false;
@@ -116,7 +146,13 @@ gEngine.Physics = (function () {
         return ((mRelaxationLoopCount > 0) && oneCollision); 
     };
     
-    // Rigid Shape interactions: two game objects
+    /**
+     * Rigid Shape interactions: two game objects
+     * @memberOf gEngine.Physics
+     * @param {type} obj1
+     * @param {type} obj2
+     * @returns {undefined}
+     */
     var processObjObj = function(obj1, obj2) {
         var s1 = obj1.getPhysicsComponent();
         var s2 = obj2.getPhysicsComponent();
@@ -130,7 +166,13 @@ gEngine.Physics = (function () {
         }
     };
     
-    // Rigid Shape interactions: a game object and a game object set
+    /**
+     * Rigid Shape interactions: a game object and a game object set
+     * @memberOf gEngine.Physics
+     * @param {type} obj
+     * @param {type} set
+     * @returns {undefined}
+     */
     var processObjSet = function(obj, set) {
         var s1 = obj.getPhysicsComponent();
         var i, s2;
@@ -145,7 +187,13 @@ gEngine.Physics = (function () {
         }
     };
     
-    // Rigid Shape interactions: two game object sets
+    /**
+     * Rigid Shape interactions: two game object sets
+     * @memberOf gEngine.Physics
+     * @param {type} set1
+     * @param {type} set2
+     * @returns {undefined}
+     */
     var processSetSet = function(set1, set2) {
         var i, j, s1, s2;
         beginRelaxation();
@@ -162,7 +210,12 @@ gEngine.Physics = (function () {
         }
     };
     
-    // Rigid Shape interactions: a set against itself
+    /**
+     * Rigid Shape interactions: a set against itself
+     * @memberOf gEngine.Physics
+     * @param {type} set
+     * @returns {undefined}
+     */
     var processSelfSet = function(set) {
         var i, j, s1, s2;
         beginRelaxation();
@@ -179,16 +232,54 @@ gEngine.Physics = (function () {
         }
     };
     
+    /**
+     * 
+     * @memberOf gEngine.Physics
+     * @returns {Array|g}
+     */
     var getSystemtAcceleration = function() { return mSystemtAcceleration; };
+    
+    /**
+     * 
+     * @memberOf gEngine.Physics
+     * @param {type} g
+     * @returns {undefined}
+     */
     var setSystemtAcceleration = function(g) { mSystemtAcceleration = g; };
+    
+    /**
+     * 
+     * @memberOf gEngine.Physics
+     * @returns {r|Number}
+     */
     var getRelaxationCorrectionRate = function() { return mPosCorrectionRate; };
+    
+    /**
+     * 
+     * @memberOf gEngine.Physics
+     * @param {type} r
+     * @returns {undefined}
+     */
     var setRelaxationCorrectionRate = function(r) {
         if ((r <= 0) || (r>=1)) {
             r = 0.8;
         }
         mPosCorrectionRate = r;
     };
+    
+    /**
+     * 
+     * @memberOf gEngine.Physics
+     * @returns {c|Number}
+     */
     var getRelaxationLoopCount = function() { return mRelaxationCount; };
+    
+    /**
+     * 
+     * @memberOf gEngine.Physics
+     * @param {type} c
+     * @returns {undefined}
+     */
     var setRelaxationLoopCount = function(c) { 
         if (c <= 0)
             c = 1;

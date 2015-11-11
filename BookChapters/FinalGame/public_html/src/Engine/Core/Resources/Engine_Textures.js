@@ -9,8 +9,21 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Static refrence to gEngine
+ * @type gEngine
+ */
 var gEngine = gEngine || { };
 
+/**
+ * 
+ * @memberOf TextureInfo
+ * @param {type} name
+ * @param {type} w
+ * @param {type} h
+ * @param {type} id
+ * @returns {TextureInfo}
+ */
 function TextureInfo(name, w, h, id) {
     this.mName = name;
     this.mWidth = w;
@@ -19,6 +32,11 @@ function TextureInfo(name, w, h, id) {
     this.mColorArray = null;
 }
 
+/**
+ * 
+ * @memberOf gEngine.Textures
+ * @type Function|Engine_Textures_L38.mPublic
+ */
 gEngine.Textures = (function () {
 
     /**
@@ -58,8 +76,13 @@ gEngine.Textures = (function () {
         gEngine.ResourceMap.asyncLoadCompleted(textureName, texInfo);
     };
 
-    // Loads an texture so that it can be drawn.
-    // If already in the map, will do nothing.
+    /**
+     * Loads an texture so that it can be drawn.<p>
+     * If already in the map, will do nothing.
+     * @memberOf gEngine.Textures
+     * @param {type} textureName
+     * @returns {undefined}
+     */
     var loadTexture = function (textureName) {
         if (!(gEngine.ResourceMap.isAssetLoaded(textureName))) {
             // Create new Texture object.
@@ -79,8 +102,13 @@ gEngine.Textures = (function () {
         }
     };
 
-    // Remove the reference to allow associated memory 
-    // be available for subsequent garbage collection
+    /**
+     * Remove the reference to allow associated memory <p>
+     * be available for subsequent garbage collection
+     * @memberOf gEngine.Textures
+     * @param {type} textureName
+     * @returns {undefined}
+     */
     var unloadTexture = function (textureName) {
         var gl = gEngine.Core.getGL();
         var texInfo = gEngine.ResourceMap.retrieveAsset(textureName);
@@ -88,6 +116,12 @@ gEngine.Textures = (function () {
         gEngine.ResourceMap.unloadAsset(textureName);
     };
 
+    /**
+     * 
+     * @memberOf gEngine.Textures
+     * @param {type} textureName
+     * @returns {undefined}
+     */
     var activateTexture = function (textureName) {
         var gl = gEngine.Core.getGL();
         var texInfo = gEngine.ResourceMap.retrieveAsset(textureName);
@@ -109,7 +143,12 @@ gEngine.Textures = (function () {
         // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
     };
 
-    // texture 1 is always normal map for this game engine
+    /**
+     * texture 1 is always normal map for this game engine
+     * @memberOf gEngine.Textures
+     * @param {type} textureName
+     * @returns {undefined}
+     */
     var activateNormalMap = function (textureName) {
         var gl = gEngine.Core.getGL();
         var texInfo = gEngine.ResourceMap.retrieveAsset(textureName);
@@ -127,15 +166,32 @@ gEngine.Textures = (function () {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
     };
 
+    /**
+     * 
+     * @memberOf gEngine.Textures
+     * @returns {undefined}
+     */
     var deactivateTexture = function () {
         var gl = gEngine.Core.getGL();
         gl.bindTexture(gl.TEXTURE_2D, null);
     };
 
+    /**
+     * 
+     * @memberOf gEngine.Textures
+     * @param {type} textureName
+     * @returns {unresolved}
+     */
     var getTextureInfo = function (textureName) {
         return gEngine.ResourceMap.retrieveAsset(textureName);
     };
 
+    /**
+     * 
+     * @memberOf gEngine.Textures
+     * @param {type} textureName
+     * @returns {Float[]}
+     */
     var getColorArray = function (textureName) {
         var texInfo = getTextureInfo(textureName);
         if (texInfo.mColorArray === null) {

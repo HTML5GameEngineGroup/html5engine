@@ -106,16 +106,15 @@ SpriteRenderable.prototype.getElementUVCoordinateArray = function () {
 /**
  * Draws the SpriteRenderable to the screen in the aCamera viewport.
  * @memberOf SpriteRenderable
- * @param {float[]} pixelColor - 4 Float array of pixel color.
  * @param {Camera} aCamera - drawing Camera of the SpriteRenderable.
  * @returns {void}
  */
-SpriteRenderable.prototype.draw = function (pixelColor, aCamera) {
+SpriteRenderable.prototype.draw = function (aCamera) {
     // set the current texture coordinate
     // 
     // activate the texture
     this.mShader.setTextureCoordinate(this.getElementUVCoordinateArray());
-    TextureRenderable.prototype.draw.call(this, pixelColor, aCamera);
+    TextureRenderable.prototype.draw.call(this, aCamera);
 };
 
 //--- end of Public Methods

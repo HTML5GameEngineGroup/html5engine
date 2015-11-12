@@ -14,10 +14,10 @@
  * Default Constructor<p>
  * Subclass from SpriteShader<p>
  *          Supports light illumination
- * @param {type} vertexShaderPath
- * @param {type} fragmentShaderPath
- * @returns {LightShader}
- * @memberOf LightShader
+ * @param {String} vertexShaderPath Vertex Shader file path
+ * @param {String} fragmentShaderPath Fragment shader file path
+ * @returns {LightShader} New instance of LightShader
+ * @class LightShader
  */
 function LightShader(vertexShaderPath, fragmentShaderPath) {
     // Call super class constructor
@@ -43,10 +43,10 @@ gEngine.Core.inheritPrototype(LightShader, SpriteShader);
 
 // Overriding the Activation of the shader for rendering
 /**
- * 
- * @param {type} pixelColor
- * @param {type} aCamera
- * @returns {undefined}
+ * Activate this shader
+ * @param {Float[]} pixelColor
+ * @param {Camera} aCamera
+ * @returns {void}
  * @memberOf LightShader
  */
 LightShader.prototype.activateShader = function (pixelColor, aCamera) {
@@ -70,8 +70,8 @@ LightShader.prototype.activateShader = function (pixelColor, aCamera) {
 
 /**
  * 
- * @param {type} l
- * @returns {undefined}
+ * @param {Light[]} l
+ * @returns {void}
  * @memberOf LightShader
  */
 LightShader.prototype.setLights = function (l) {

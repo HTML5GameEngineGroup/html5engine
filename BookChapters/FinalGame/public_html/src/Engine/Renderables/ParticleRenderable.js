@@ -14,7 +14,7 @@
  * ParticleRenderable specifically for particles (additive blending)
  * @param {type} myTexture
  * @returns {undefined}
- * @memberOf ParticleRenderable
+ * @class ParticleRenderable
  */
 function ParticleRenderable(myTexture) {
     TextureRenderable.call(this, myTexture);

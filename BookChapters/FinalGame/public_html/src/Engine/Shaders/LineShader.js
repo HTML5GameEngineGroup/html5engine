@@ -15,7 +15,7 @@
  * @param {type} vertexShaderPath
  * @param {type} fragmentShaderPath
  * @returns {LineShader}
- * @memberOf LineShader
+ * @class LineShader
  */
 function LineShader(vertexShaderPath, fragmentShaderPath) {
     // Call super class constructor

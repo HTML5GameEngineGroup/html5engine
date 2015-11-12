@@ -13,7 +13,7 @@
  * 
  * @param {type} myTexture
  * @returns {SpriteAnimateRenderable}
- * @memberOf SpriteAnimateRenderable
+ * @class SpriteAnimateRenderable
  */
 function SpriteAnimateRenderable(myTexture) {
     SpriteRenderable.call(this, myTexture);

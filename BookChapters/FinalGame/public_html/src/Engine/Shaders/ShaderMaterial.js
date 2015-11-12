@@ -17,7 +17,7 @@
  * Rederences point to uMaterial.
  * @param {type} aIllumShader
  * @returns {ShaderMaterial}
- * @memberOf ShaderMaterial
+ * @class ShaderMaterial
  */
 function ShaderMaterial(aIllumShader) {
     // reference to the normal map sampler

@@ -12,7 +12,7 @@
 /**
  * Default Constructor.<p>
  * Default Constructor creates an instance of FontRenderable.
- * @memberOf FontRenderable
+ * @class FontRenderable
  * @param {String} aString - text to display
  * @returns {FontRenderable} a new instance of FontRenderable.
  */

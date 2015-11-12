@@ -9,6 +9,7 @@
 "use strict";
 
 /**
+ * Defines a damped simple harmonic motion to simulate camera shake<p>
  * damped simple harmonic shake motion
  * @class CameraShake
  * @param {CameraState} state CameraState to be shaked.

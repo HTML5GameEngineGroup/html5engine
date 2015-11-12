@@ -18,7 +18,7 @@
  * @param {type} vertexShaderPath
  * @param {type} fragmentShaderPath
  * @returns {SpriteShader}
- * @memberOf SpriteShader
+ * @class SpriteShader
  */
 function SpriteShader(vertexShaderPath, fragmentShaderPath) {
     // Call super class constructor

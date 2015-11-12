@@ -14,9 +14,9 @@
 /**
  * Default Contructior<p>
  * SpriteAnimatedRenderable with light illumination
- * @param {type} myTexture
- * @returns {LightRenderable}
- * @memberOf LightRenderable
+ * @param {Texture} myTexture to associate this this Renderable
+ * @returns {LightRenderable} New instance of LightRenderable
+ * @class LightRenderable
  */
 function LightRenderable(myTexture) {
     SpriteAnimateRenderable.call(this, myTexture);
@@ -32,9 +32,9 @@ gEngine.Core.inheritPrototype(LightRenderable, SpriteAnimateRenderable);
 // Public methods
 //**-----------------------------------------
 /**
- * 
- * @param {type} aCamera
- * @returns {undefined}
+ * Draw function called by GameLoop
+ * @param {Camera} aCamera Camera to draw to
+ * @returns {void}
  * @memberOf LightRenderable
  */
 LightRenderable.prototype.draw = function (aCamera) {
@@ -43,8 +43,8 @@ LightRenderable.prototype.draw = function (aCamera) {
 };
 
 /**
- * 
- * @returns {LightRenderable.mLights.length}
+ * Returns the number of Lights on this LightRenderable
+ * @returns {Number} number of lights
  * @memberOf LightRenderable
  */
 LightRenderable.prototype.numLights = function () {
@@ -52,9 +52,9 @@ LightRenderable.prototype.numLights = function () {
 };
 
 /**
- * 
- * @param {type} index
- * @returns {Array}
+ * Return Light at index
+ * @param {type} index of Light to return
+ * @returns {Light} 
  * @memberOf LightRenderable
  */
 LightRenderable.prototype.getLightAt = function (index) {
@@ -62,9 +62,9 @@ LightRenderable.prototype.getLightAt = function (index) {
 };
 
 /**
- * 
- * @param {type} l
- * @returns {undefined}
+ * Add light to LightRenderable
+ * @param {type} l Light to add
+ * @returns {void}
  * @memberOf LightRenderable
  */
 LightRenderable.prototype.addLight = function (l) {

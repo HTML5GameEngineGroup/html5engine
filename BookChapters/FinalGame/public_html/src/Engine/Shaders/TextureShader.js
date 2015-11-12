@@ -17,7 +17,7 @@
  * @param {type} vertexShaderPath
  * @param {type} fragmentShaderPath
  * @returns {TextureShader}
- * @memberOf TextureShader
+ * @class TextureShader
  */
 function TextureShader(vertexShaderPath, fragmentShaderPath) {
     // Call super class constructor

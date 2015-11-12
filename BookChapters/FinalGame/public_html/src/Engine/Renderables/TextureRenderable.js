@@ -12,7 +12,7 @@
 
 /**
  * Constructor of TextureRenderable object.
- * @memberOf TextureRenderable
+ * @class TextureRenderable
  * @param {Texture} myTexture - Texture to be associated by object.
  * @returns {TextureRenderable} - Instance of TextureRenderable object.
  */

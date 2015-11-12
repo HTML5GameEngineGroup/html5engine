@@ -18,7 +18,7 @@ var gEngine = gEngine || { };
 /**
  * Input Class
  * @class gEngine.Input
- * @type Engine_Input_L21.mPublic|Function
+ * @type gEngine.Input
  */
 gEngine.Input = (function () {
     // Key code constants
@@ -201,7 +201,7 @@ gEngine.Input = (function () {
      * Function for GameEngine programmer to test if a key is pressed down<p>
      * returns if key is pressed.
      * @memberOf gEngine.Input
-     * @param {number|keys} keyCode - key to check for pressed state.
+     * @param {Number|keys} keyCode - key to check for pressed state.
      * @returns {Boolean} true if key is pressed
      */
     var isKeyPressed = function (keyCode) {
@@ -211,7 +211,7 @@ gEngine.Input = (function () {
     /**
      * returns if key is clicked.
      * @memberOf gEngine.Input
-     * @param {number|keys} keyCode - key to check for clicked state.
+     * @param {Number|keys} keyCode - key to check for clicked state.
      * @returns {Boolean} true if key is clicked
      */
     var isKeyClicked = function (keyCode) {
@@ -221,7 +221,7 @@ gEngine.Input = (function () {
     /**
      * returns if button is pressed.
      * @memberOf gEngine.Input
-     * @param {number|mouseButton} button - button to check for pressed state.
+     * @param {Number|mouseButton} button - button to check for pressed state.
      * @returns {Boolean} true if button is pressed.
      */
     var isButtonPressed = function (button) {
@@ -231,7 +231,7 @@ gEngine.Input = (function () {
     /**
      * returns if button is clicked.
      * @memberOf gEngine.Input
-     * @param {number|mouseButton} button - button to check for ckicked state.
+     * @param {Number|mouseButton} button - button to check for ckicked state.
      * @returns {Boolean} true if button is clicked.
      */
     var isButtonClicked = function (button) {

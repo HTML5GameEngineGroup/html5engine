@@ -11,10 +11,10 @@
 
 /**
  * Implements the pixelTouches() and related supporting functions of TextureRenderable
- * @memberOf TextureRenderable
- * @param {type} other
- * @param {type} wcTouchPos
- * @returns {Boolean}
+ * @class TextureRenderable
+ * @param {TextureRenderable} other to check for collision with
+ * @param {vec2} wcTouchPos world coordinate position of first collision
+ * @returns {Boolean} true if collision is detected
  */
 TextureRenderable.prototype.pixelTouches = function(other, wcTouchPos) {
     var pixelTouch = false;
@@ -49,9 +49,9 @@ TextureRenderable.prototype.pixelTouches = function(other, wcTouchPos) {
 };
 
 /**
- * 
+ * Get the color array from the GPU and set it to the renderables Color Array
  * @memberOf TextureRenderable
- * @returns {undefined}
+ * @returns {void}
  */
 TextureRenderable.prototype.setColorArray = function () {
     if (this.mColorArray === null) {
@@ -60,11 +60,11 @@ TextureRenderable.prototype.setColorArray = function () {
 };
 
 /**
- * 
+ * Return the pixel alpha value of the index
  * @memberOf TextureRenderable
- * @param {type} x
- * @param {type} y
- * @returns {texInfo.mColorArray}
+ * @param {Number} x X pixel index of image
+ * @param {Number} y Y pixel index of image
+ * @returns {Float[]}
  */
 TextureRenderable.prototype._pixelAlphaValue = function (x, y) {
     y += this.mTexBottomIndex;
@@ -75,13 +75,13 @@ TextureRenderable.prototype._pixelAlphaValue = function (x, y) {
 };
 
 /**
- * 
+ * Calculate the image index position from the world coordinate position
  * @memberOf TextureRenderable
- * @param {type} returnIndex
- * @param {type} wcPos
- * @param {type} xDir
- * @param {type} yDir
- * @returns {undefined}
+ * @param {vec2} returnIndex out var to hold texture index position
+ * @param {vec2} wcPos world coordinate position of the pixel
+ * @param {vec2} xDir
+ * @param {ve2} yDir
+ * @returns {void}
  */
 TextureRenderable.prototype._wcPositionToIndex = function (returnIndex, wcPos, xDir, yDir) {
     // use wcPos to compute the corresponding returnIndex[0 and 1]

@@ -15,7 +15,7 @@
  * @param {type} vertexShaderPath
  * @param {type} fragmentShaderPath
  * @returns {IllumShader}
- * @memberOf IllumShader
+ * @class IllumShader
  */
 function IllumShader(vertexShaderPath, fragmentShaderPath) {
     // Call super class constructor

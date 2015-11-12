@@ -12,7 +12,7 @@
 
 /**
  * Constructor of SpriteRenderable object.
- * @memberOf SpriteRenderable
+ * @class SpriteRenderable
  * @param {Texture} myTexture - Texture to be associated by object.
  * @returns {SpriteRenderable} - Instance of this SpriteRenderable object
  */

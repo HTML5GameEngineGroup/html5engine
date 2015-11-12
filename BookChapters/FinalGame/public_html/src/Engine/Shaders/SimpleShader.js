@@ -14,7 +14,7 @@
 //<editor-fold desc="constructor">
 /**
  * constructor of SimpleShader object.
- * @memberOf SimpleShader
+ * @class SimpleShader
  * @param {string} vertexShaderPath filepath of the Vertex Shader.
  * @param {string} fragmentShaderPath filrepath of the Fragment Shader.
  * @returns {SimpleShader} An intsnace of SimpleShader.

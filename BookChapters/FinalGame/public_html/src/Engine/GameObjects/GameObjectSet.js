@@ -12,7 +12,7 @@
 /**
  * Default Constructor<p>
  * Support for working with a set of GameObjects
- * @returns {GameObjectSet}
+ * @returns {GameObjectSet} New instance of GameObjectSet
  * @class GameObjectSet
  */
 function GameObjectSet() {
@@ -20,16 +20,16 @@ function GameObjectSet() {
 }
 
 /**
- * 
- * @returns {GameObjectSet.mSet.length}
+ * Return the count of GameObjects in set
+ * @returns {Number} count of GameObjects in set
  * @memberOf GameObjectSet
  */
 GameObjectSet.prototype.size = function () { return this.mSet.length; };
 
 /**
- * 
- * @param {type} index
- * @returns {Array}
+ * Return the GameObject at index
+ * @param {Number} index of GameObject to return
+ * @returns {GameObject}
  * @memberOf GameObjectSet
  */
 GameObjectSet.prototype.getObjectAt = function (index) {
@@ -37,9 +37,9 @@ GameObjectSet.prototype.getObjectAt = function (index) {
 };
 
 /**
- * 
- * @param {type} obj
- * @returns {undefined}
+ * Add GameObject to this GameObjectSet
+ * @param {GameObject} obj to add to this GameObjectSet
+ * @returns {void}
  * @memberOf GameObjectSet
  */
 GameObjectSet.prototype.addToSet = function (obj) {
@@ -47,9 +47,9 @@ GameObjectSet.prototype.addToSet = function (obj) {
 };
 
 /**
- * 
- * @param {type} obj
- * @returns {undefined}
+ * Remove GameObject from GameObjectSet
+ * @param {GameObject} obj to remove from GameObjectSet
+ * @returns {void}
  * @memberOf GameObjectSet
  */
 GameObjectSet.prototype.removeFromSet = function (obj) {
@@ -59,9 +59,9 @@ GameObjectSet.prototype.removeFromSet = function (obj) {
 };
 
 /**
- * 
- * @param {type} obj
- * @returns {undefined}
+ * Move GameObject to end of GameObjectSet
+ * @param {GameObjec} obj to move to end of GameObjectSet
+ * @returns {void}
  * @memberOf GameObjectSet
  */
 GameObjectSet.prototype.moveToLast = function (obj) {
@@ -70,8 +70,8 @@ GameObjectSet.prototype.moveToLast = function (obj) {
 };
 
 /**
- * 
- * @returns {undefined}
+ * Update function called by GameLoop calls all GameObject's in GameObjectSet
+ * @returns {void}
  * @memberOf GameObjectSet
  */
 GameObjectSet.prototype.update = function () {
@@ -82,7 +82,7 @@ GameObjectSet.prototype.update = function () {
 };
 
 /**
- * 
+ * Draw function called by GameLoop calls all GameObject's in GameObjectSet
  * @param {type} aCamera
  * @returns {undefined}
  * @memberOf GameObjectSet

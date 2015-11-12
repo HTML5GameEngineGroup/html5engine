@@ -20,7 +20,7 @@
  * @param {type} x2
  * @param {type} y2
  * @returns {LineRenderable}
- * @memberOf LineRenderable
+ * @class LineRenderable
  */
 function LineRenderable(x1, y1, x2, y2) {
     Renderable.call(this);

@@ -20,21 +20,26 @@ var gEngine = gEngine || { };
  * Note: loads the a textfile and when done calls the callbackFunction()<p>
  *      fileName is treated as resource map key, file content is stored as asset
  * @class gEngine.TextFileLoader
- * @type Engine_TextFileLoader_L23.mPublic|Function
+ * @type TextFileLoader
  */
 gEngine.TextFileLoader = (function () {
+    /**
+     * Text file type tokens
+     * @type {enum|eTextFileType}
+     * @memberOf gEngine.TextFileLoader
+     */
     var eTextFileType = Object.freeze({
         eXMLFile: 0,
         eTextFile: 1
     });
 
     /**
-     * if fileType is a eTextFileType
+     * Load text file if fileType is a eTextFileType
      * @memberOf gEngine.TextFileLoader
-     * @param {type} fileName
-     * @param {type} fileType
-     * @param {type} callbackFunction
-     * @returns {undefined}
+     * @param {String} fileName File Path name
+     * @param {enum|eTextFileType} fileType File type token
+     * @param {Function} callbackFunction Callback Function called when file load is complete
+     * @returns {void}
      */
     var loadTextFile = function (fileName, fileType, callbackFunction) {
         if (!(gEngine.ResourceMap.isAssetLoaded(fileName))) {
@@ -75,10 +80,10 @@ gEngine.TextFileLoader = (function () {
     };
 
     /**
-     * 
+     * Unload the TextFile
      * @memberOf gEngine.TextFileLoader
-     * @param {type} fileName
-     * @returns {undefined}
+     * @param {type} fileName file name to unload
+     * @returns {void}
      */
     var unloadTextFile = function (fileName) {
         gEngine.ResourceMap.unloadAsset(fileName);

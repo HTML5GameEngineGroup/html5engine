@@ -16,7 +16,7 @@
  * Default Constructor creates an instance of Renderable.<p>
  * Encapsulate the Shader and VertexBuffer into the same object (and will include<p>
  * other attributes later) to represent a Renderable object on the game screen.<p>
- * @memberOf Renderable
+ * @class Renderable
  * @returns {Renderable} a new instance of Renderable.
  */
 function Renderable() {

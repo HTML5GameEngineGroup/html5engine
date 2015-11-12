@@ -19,7 +19,7 @@
  * @param {type} vertexShaderPath
  * @param {type} fragmentShaderPath
  * @returns {ShadowCasterShader}
- * @memberOf SpriteShader
+ * @class ShadowCasterShader
  */
 function ShadowCasterShader(vertexShaderPath, fragmentShaderPath) {
     // Call super class constructor
@@ -41,7 +41,7 @@ gEngine.Core.inheritPrototype(ShadowCasterShader, SpriteShader);
  * @param {type} pixelColor
  * @param {type} aCamera
  * @returns {undefined}
- * @memberOf SpriteShader
+ * @memberOf ShadowCasterShader
  */
 ShadowCasterShader.prototype.activateShader = function (pixelColor, aCamera) {
     // first call the super class's activate
@@ -53,7 +53,7 @@ ShadowCasterShader.prototype.activateShader = function (pixelColor, aCamera) {
  * 
  * @param {type} l
  * @returns {undefined}
- * @memberOf SpriteShader
+ * @memberOf ShadowCasterShader
  */
 ShadowCasterShader.prototype.setLight = function (l) {
     this.mLight = l;

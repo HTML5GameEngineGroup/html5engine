@@ -16,7 +16,7 @@
  * @param {type} shader
  * @param {type} index
  * @returns {ShaderLightAtIndex}
- * @memberOf ShaderLightAtIndex
+ * @class ShaderLightAtIndex
  */
 function ShaderLightAtIndex(shader, index) {
     this._setShaderReferences(shader, index);

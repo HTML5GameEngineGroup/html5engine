@@ -13,8 +13,8 @@
  * Default Constructor<p>
  * Abstracts a game object's behavior and apparance
  * @class GameObject
- * @param {type} renderableObj
- * @returns {GameObject}
+ * @param {Renderable} renderableObj Renderable to assotiate to GameObject
+ * @returns {GameObject} New instance of GameObject
  */
 function GameObject(renderableObj) {
     this.mRenderComponent = renderableObj;
@@ -25,16 +25,16 @@ function GameObject(renderableObj) {
 }
 
 /**
- * 
+ * Return the GameObject's Transform
  * @memberOf GameObject
  * @returns {Transform}
  */
 GameObject.prototype.getXform = function () { return this.mRenderComponent.getXform(); };
 
 /**
- * 
+ * Return the GameObject's Bounding Box
  * @memberOf GameObject
- * @returns {BoundingBox}
+ * @returns {BoundingBox} of this GameObject
  */
 GameObject.prototype.getBBox = function () {
     var xform = this.getXform();
@@ -43,77 +43,77 @@ GameObject.prototype.getBBox = function () {
 };
 
 /**
- * 
+ * Set the visibility state of the GameObject
  * @memberOf GameObject
- * @param {type} f
- * @returns {undefined}
+ * @param {Boolean} f new state of GameObject
+ * @returns {void}
  */
 GameObject.prototype.setVisibility = function (f) { this.mVisible = f; };
 
 /**
- * 
+ * Returs the visibility state of the GameObject
  * @memberOf GameObject
- * @returns {type|Boolean}
+ * @returns {Boolean} returns true if this GameObject is visible
  */
 GameObject.prototype.isVisible = function () { return this.mVisible; };
 
 /**
- * 
+ * Set the Speed of the GameObject
  * @memberOf GameObject
- * @param {type} s
- * @returns {undefined}
+ * @param {Number} s new speed of GameObject
+ * @returns {void}
  */
 GameObject.prototype.setSpeed = function (s) { this.mSpeed = s; };
 
 /**
- * 
+ * Return the speed og the GameObject
  * @memberOf GameObject
- * @returns {Number|type}
+ * @returns {Number}
  */
 GameObject.prototype.getSpeed = function () { return this.mSpeed; };
 
 /**
- * 
+ * Increment the speed by delta
  * @memberOf GameObject
- * @param {type} delta
- * @returns {undefined}
+ * @param {Number} delta to increment the speed by
+ * @returns {void}
  */
 GameObject.prototype.incSpeedBy = function (delta) { this.mSpeed += delta; };
 
 /**
- * 
+ * Set the front vector of the GameObject
  * @memberOf GameObject
- * @param {type} f
- * @returns {undefined}
+ * @param {vec2} f new front vector
+ * @returns {void}
  */
 GameObject.prototype.setCurrentFrontDir = function (f) { vec2.normalize(this.mCurrentFrontDir, f); };
 
 /**
- * 
+ * Return the front vector of the GameObject
  * @memberOf GameObject
- * @returns {unresolved}
+ * @returns {vec2} GameObject's front vector
  */
 GameObject.prototype.getCurrentFrontDir = function () { return this.mCurrentFrontDir; };
 
 /**
- * 
+ * Return the GameObject Renderable Object
  * @memberOf GameObject
- * @returns {type}
+ * @returns {Renderable} current Renderable of the GameObject
  */
 GameObject.prototype.getRenderable = function () { return this.mRenderComponent; };
 
 /**
- * 
+ * Set the Physics Component for the GameObject
  * @memberOf GameObject
- * @param {type} p
- * @returns {undefined}
+ * @param {type} p new Physics Compenent of the GameObject
+ * @returns {void}
  */
-GameObject.prototype.setPhysicsComponent = function (p) { this.mPhysicsComponent = p; };
+GameObject.prototype.setPhysicsComponent = function (p) { this.mPhysicsComponent = p; console.log(p); };
 
 /**
- * 
+ * Return the Physics Component for the GameObject
  * @memberOf GameObject
- * @returns {type}
+ * @returns {type} Physics Compenent of the GameObject
  */
 GameObject.prototype.getPhysicsComponent = function () { return this.mPhysicsComponent; };
 
@@ -121,9 +121,9 @@ GameObject.prototype.getPhysicsComponent = function () { return this.mPhysicsCom
  * Orientate the entire object to point towards point p<p>
  * will rotate Xform() accordingly
  * @memberOf GameObject
- * @param {type} p
- * @param {type} rate
- * @returns {undefined}
+ * @param {vec2} p position to rotate to
+ * @param {Number} rate rate of turn towards point
+ * @returns {void}
  */
 GameObject.prototype.rotateObjPointTo = function (p, rate) {
     // Step A: determine if reach the destination position p
@@ -171,9 +171,9 @@ GameObject.prototype.rotateObjPointTo = function (p, rate) {
 };
 
 /**
- * 
+ * Update Function called by GameLoop
  * @memberOf GameObject
- * @returns {undefined}
+ * @returns {return}
  */
 GameObject.prototype.update = function () {
     // simple default behavior
@@ -186,10 +186,10 @@ GameObject.prototype.update = function () {
 };
 
 /**
- * 
+ * Draw function called by GameLoop
  * @memberOf GameObject
- * @param {type} aCamera
- * @returns {undefined}
+ * @param {Camera} aCamera Camera to draw too
+ * @returns {void}
  */
 GameObject.prototype.draw = function (aCamera) {
     if (this.isVisible()) {

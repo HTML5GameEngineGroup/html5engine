@@ -31,7 +31,8 @@ gEngine.eLayer = Object.freeze({
 });
 
 /**
- * Global variable EngineLayerManager
+ * Global variable EngineLayerManager<p>
+ * Central storage for all elements that would be drawn 
  * @class gEngine.eLayer
  * @type gEngine.LayerManager
  */
@@ -42,9 +43,9 @@ gEngine.LayerManager = (function () {
     var mAllLayers = [];
     
     /**
-     * 
+     * Initilize the LayerManager
      * @memberOf gEngine.LayerManager
-     * @returns {undefined}
+     * @returns {void}
      */
     var initialize = function() {
         mAllLayers[gEngine.eLayer.eBackground] = new GameObjectSet();
@@ -55,19 +56,19 @@ gEngine.LayerManager = (function () {
     };
     
     /**
-     * 
+     * Initilize the LayerManager
      * @memberOf gEngine.LayerManager
-     * @returns {undefined}
+     * @returns {void}
      */
     var cleanUp = function() {
         initialize();
     };
     
     /**
-     * 
+     * Draw all Layers
      * @memberOf gEngine.LayerManager
-     * @param {type} aCamera
-     * @returns {undefined}
+     * @param {Camera} aCamera to draw Layers too
+     * @returns {void}
      */
     var drawAllLayers = function(aCamera) {
         var i;
@@ -77,9 +78,9 @@ gEngine.LayerManager = (function () {
     };
     
     /**
-     * 
+     * Update all Layers
      * @memberOf gEngine.LayerManager
-     * @returns {undefined}
+     * @returns {void}
      */
     var updateAllLayers = function() {
         var i;
@@ -88,33 +89,35 @@ gEngine.LayerManager = (function () {
         }
     };
     
+    // operations on the layers
+    
     /**
-     * operations on the layers
+     * Draw layer index
      * @memberOf gEngine.eLayer
-     * @param {type} layerEnum
-     * @param {type} aCamera
-     * @returns {undefined}
+     * @param {Number} layerEnum layer index to draw
+     * @param {Camera} aCamera to draw layer to
+     * @returns {void}
      */
     var drawLayer = function(layerEnum, aCamera) {
         mAllLayers[layerEnum].draw(aCamera);
     };
     
     /**
-     * 
+     * Update layer index
      * @memberOf gEngine.LayerManager
-     * @param {type} layerEnum
-     * @returns {undefined}
+     * @param {Number} layerEnum layer index to update
+     * @returns {void}
      */
     var updateLayer = function(layerEnum) {
         mAllLayers[layerEnum].update();
     };
     
     /**
-     * 
+     * Add Renderable to Layer
      * @memberOf gEngine.LayerManager
-     * @param {type} layerEnum
-     * @param {type} obj
-     * @returns {undefined}
+     * @param {Number} layerEnum 
+     * @param {Renderable} obj to add to Layer
+     * @returns {void}
      */
     var addToLayer = function(layerEnum, obj) {
         mAllLayers[layerEnum].addToSet(obj);
@@ -124,7 +127,7 @@ gEngine.LayerManager = (function () {
      * 
      * @memberOf gEngine.LayerManager
      * @param {type} obj
-     * @returns {undefined}
+     * @returns {void}
      */
     var addAsShadowCaster = function(obj) {
         var i;
@@ -134,11 +137,11 @@ gEngine.LayerManager = (function () {
     };
     
     /**
-     * 
+     * Remove object from Layer
      * @memberOf gEngine.LayerManager
-     * @param {type} layerEnum
-     * @param {type} obj
-     * @returns {undefined}
+     * @param {Number} layerEnum layer index to remove from
+     * @param {type} obj to remove from set
+     * @returns {void}
      */
     var removeFromLayer = function(layerEnum, obj) {
         mAllLayers[layerEnum].removeFromSet(obj);
@@ -156,10 +159,10 @@ gEngine.LayerManager = (function () {
     };
     
     /**
-     * 
+     * Return the count of obects within layer
      * @memberOf gEngine.LayerManager
-     * @param {type} layerEnum
-     * @returns {GameObjectSet.mSet.length}
+     * @param {Number} layerEnum Layer index
+     * @returns {Number}
      */
     var layerSize = function(layerEnum) {
         return mAllLayers[layerEnum].size();

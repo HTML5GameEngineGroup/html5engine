@@ -17,7 +17,7 @@
  * @param {type} myTexture
  * @param {type} myNormalMap
  * @returns {IllumRenderable}
- * @memberOf IllumRenderable
+ * @class IllumRenderable
  */
 function IllumRenderable(myTexture, myNormalMap) {
     LightRenderable.call(this, myTexture);

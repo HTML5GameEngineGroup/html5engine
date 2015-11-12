@@ -16,7 +16,7 @@ var gEngine = gEngine || { };
 
 /**
  * Global variable EngineGameLoop
- * @memberOf gEngine.GameLoop
+ * @class gEngine.GameLoop
  * @type gEngine.GameLoop
  */
 gEngine.GameLoop = (function () {

@@ -11,7 +11,7 @@
 
 /**
  * 
- * @memberOf TiledGameObject
+ * @class TiledGameObject
  * @param {type} renderableObj
  * @returns {TiledGameObject}
  */

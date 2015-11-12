@@ -17,6 +17,7 @@ var gEngine = gEngine || { };
 
 /**
  * 
+ * @class gEngine.AudioClips
  * @type gEngine.AudioClips
  */
 gEngine.AudioClips = (function () {

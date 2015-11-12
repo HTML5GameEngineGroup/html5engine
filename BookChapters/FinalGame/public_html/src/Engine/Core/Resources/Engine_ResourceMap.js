@@ -15,7 +15,7 @@ var gEngine = gEngine || { };
 
 /**
  * 
- * @memberOf gEngine.ResourceMap
+ * @class gEngine.ResourceMap
  * @type gEngine.ResourceMap
  */
 gEngine.ResourceMap = (function () {

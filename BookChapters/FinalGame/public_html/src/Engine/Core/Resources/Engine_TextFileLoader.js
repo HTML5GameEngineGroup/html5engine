@@ -19,7 +19,7 @@ var gEngine = gEngine || { };
  * loads an text file into resourceMap, either as simple text or as XML<p>
  * Note: loads the a textfile and when done calls the callbackFunction()<p>
  *      fileName is treated as resource map key, file content is stored as asset
- * @memberOf gEngine.TextFileLoader
+ * @class gEngine.TextFileLoader
  * @type Engine_TextFileLoader_L23.mPublic|Function
  */
 gEngine.TextFileLoader = (function () {

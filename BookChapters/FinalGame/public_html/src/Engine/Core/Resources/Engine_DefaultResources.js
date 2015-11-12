@@ -17,7 +17,7 @@ var gEngine = gEngine || { };
 
 /**
  * 
- * @memberOf gEngine.DefaultResources
+ * @class gEngine.DefaultResources
  * @type Function|Engine_DefaultResources_L21.mPublic
  */
 gEngine.DefaultResources = (function () {

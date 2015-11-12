@@ -17,7 +17,7 @@ var gEngine = gEngine || { };
 
 /**
  * Input Class
- * @memberOf gEngine.Input
+ * @class gEngine.Input
  * @type Engine_Input_L21.mPublic|Function
  */
 gEngine.Input = (function () {

@@ -10,7 +10,7 @@
 
 /**
  * Information to be updated once per render for efficiency concerns
- * @memberOf PerRenderCache
+ * @class PerRenderCache
  * @returns {PerRenderCache} New instance of PerRenderCache
  */
 function PerRenderCache() {
@@ -27,7 +27,7 @@ function PerRenderCache() {
  *      [0] [1]: (x,y) position of lower left corner on the canvas (in pixel)<p>
  *      [2]: width of viewport<p>
  *      [3]: height of viewport
- * @memberOf Camera
+ * @class Camera
  * @param {vec2} wcCenter Center position of Camera
  * @param {Number} wcWidth Width of Camera
  * @param {Float[]} viewportArray position and size of viewport [x, y, width, height]

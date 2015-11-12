@@ -13,7 +13,7 @@
  * Default Constructor<p>
  * Support for working with a set of GameObjects
  * @returns {GameObjectSet}
- * @memberOf GameObjectSet
+ * @class GameObjectSet
  */
 function GameObjectSet() {
     this.mSet = [];

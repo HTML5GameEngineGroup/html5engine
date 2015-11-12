@@ -8,12 +8,16 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Static refrence to gEngine
+ * @type gEngine
+ */
 var gEngine = gEngine || { };
     // initialize the variable while ensuring it is not redefined
 
 /**
  * 
- * @memberOf gEngine.ParticleSystem
+ * @class gEngine.ParticleSystem
  * @type gEngine.ParticleSystem
  */
 gEngine.ParticleSystem = (function () {

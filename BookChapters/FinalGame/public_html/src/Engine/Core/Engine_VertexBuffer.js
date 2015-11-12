@@ -13,12 +13,16 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Static refrence to gEngine
+ * @type gEngine
+ */
 var gEngine = gEngine || { };
 
 // The VertexBuffer object
 /**
  * 
- * @memberOf gEngine.VertexBuffer
+ * @class gEngine.VertexBuffer
  * @type Engine_VertexBuffer_L22.mPublic|Function
  */
 gEngine.VertexBuffer = (function () {

@@ -17,7 +17,7 @@ var gEngine = gEngine || { };
 
 /**
  * 
- * @memberOf TextureInfo
+ * @class TextureInfo
  * @param {type} name
  * @param {type} w
  * @param {type} h
@@ -34,7 +34,7 @@ function TextureInfo(name, w, h, id) {
 
 /**
  * 
- * @memberOf gEngine.Textures
+ * @class gEngine.Textures
  * @type Function|Engine_Textures_L38.mPublic
  */
 gEngine.Textures = (function () {

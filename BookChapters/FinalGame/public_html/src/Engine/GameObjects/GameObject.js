@@ -12,7 +12,7 @@
 /**
  * Default Constructor<p>
  * Abstracts a game object's behavior and apparance
- * @memberOf GameObject
+ * @class GameObject
  * @param {type} renderableObj
  * @returns {GameObject}
  */
@@ -27,7 +27,7 @@ function GameObject(renderableObj) {
 /**
  * 
  * @memberOf GameObject
- * @returns {GameObject.prototype@pro;mRenderComponent@call;getXform}
+ * @returns {Transform}
  */
 GameObject.prototype.getXform = function () { return this.mRenderComponent.getXform(); };
 

@@ -10,7 +10,7 @@
 
 /**
  * Default Constructor
- * @memberOf CameraState
+ * @class CameraState
  * @param {Float[]} center final value of the center Interpolation
  * @param {Float[]} width final value of the width Interpolation
  * @returns {CameraState} new instance of CameraState

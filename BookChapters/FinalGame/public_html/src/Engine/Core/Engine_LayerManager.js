@@ -32,7 +32,7 @@ gEngine.eLayer = Object.freeze({
 
 /**
  * Global variable EngineLayerManager
- * @memberOf gEngine.eLayer
+ * @class gEngine.eLayer
  * @type gEngine.LayerManager
  */
 gEngine.LayerManager = (function () {

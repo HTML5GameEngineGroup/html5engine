@@ -23,7 +23,7 @@
  *      > 1: farther away, slows down inversely (scale==2 slows down twice)<p>
  *      < 1: closer, speeds up inversely (scale==0.5 speeds up twice)
  * 
- * @memberOf ParallaxGameObject
+ * @class ParallaxGameObject
  * @param {type} renderableObj
  * @param {type} scale
  * @param {type} aCamera

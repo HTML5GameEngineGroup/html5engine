@@ -10,7 +10,7 @@
 
 /**
  * damped simple harmonic shake motion
- * @memberOf CameraShake
+ * @class CameraShake
  * @param {CameraState} state CameraState to be shaked.
  * @param {Number} xDelta  how large a shake
  * @param {Number} yDelta  how large a shake

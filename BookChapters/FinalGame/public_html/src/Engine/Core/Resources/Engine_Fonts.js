@@ -18,7 +18,7 @@ var gEngine = gEngine || { };
 /**
  * for convenenit communication of per-character information<p>
  * all size returned are in normalize unit (range between 0 to 1)
- * @memberOf CharacterInfo
+ * @class CharacterInfo
  * @return {CharacterInfo}
  */
 function CharacterInfo() {
@@ -43,7 +43,7 @@ function CharacterInfo() {
  * Note: font name is the path to the fnt file. (without the fnt extension!)<p>
  *    You must also provide the image file in the exact same folder<p>
  *    with the exact same name, with ".png" extension.
- * @memberOf gEngine.Fonts
+ * @class gEngine.Fonts
  * @type {gEngine.Fonts}
  */
 gEngine.Fonts = (function () {

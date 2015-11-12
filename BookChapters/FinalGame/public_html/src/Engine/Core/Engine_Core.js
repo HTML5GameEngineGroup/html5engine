@@ -19,7 +19,7 @@ var gEngine = gEngine || { };
 
 /**
  * Global variable EngineCore
- * @memberOf gEngine.Core
+ * @class gEngine.Core
  * @type gEngine.Core
  */
 gEngine.Core = (function () {

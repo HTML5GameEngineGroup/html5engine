@@ -9,7 +9,14 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 //<editor-fold desc="constructor">
-// constructor 
+/**
+ * Default Constructor<p>
+ * Subclass from LightShader (to take advantage of light sources)
+ * @param {type} vertexShaderPath
+ * @param {type} fragmentShaderPath
+ * @returns {IllumShader}
+ * @memberOf IllumShader
+ */
 function IllumShader(vertexShaderPath, fragmentShaderPath) {
     // Call super class constructor
     LightShader.call(this, vertexShaderPath, fragmentShaderPath);  // call super class constructor
@@ -32,6 +39,13 @@ gEngine.Core.inheritPrototype(IllumShader, LightShader);
 // <editor-fold desc="Public Methods">
 
 // Overriding the Activation of the shader for rendering
+/**
+ * 
+ * @param {type} pixelColor
+ * @param {type} aCamera
+ * @returns {undefined}
+ * @memberOf IllumShader
+ */
 IllumShader.prototype.activateShader = function(pixelColor, aCamera) {
     // first call the super class's activate
     LightShader.prototype.activateShader.call(this, pixelColor, aCamera);
@@ -44,7 +58,13 @@ IllumShader.prototype.activateShader = function(pixelColor, aCamera) {
     gl.uniform3fv(this.mCameraPosRef, this.mCameraPos);
 };
 
-
+/**
+ * 
+ * @param {type} m
+ * @param {type} p
+ * @returns {undefined}
+ * @memberOf IllumShader
+ */
 IllumShader.prototype.setMaterialAndCameraPos = function(m, p) {
     this.mMaterial = m;
     this.mCameraPos = p;

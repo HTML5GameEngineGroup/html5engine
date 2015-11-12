@@ -9,7 +9,14 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 //<editor-fold desc="constructor">
-// constructor of LineShader object
+/**
+ * Default Constructor<p>
+ * for debugging physics engine
+ * @param {type} vertexShaderPath
+ * @param {type} fragmentShaderPath
+ * @returns {LineShader}
+ * @memberOf LineShader
+ */
 function LineShader(vertexShaderPath, fragmentShaderPath) {
     // Call super class constructor
     SimpleShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
@@ -27,7 +34,13 @@ gEngine.Core.inheritPrototype(LineShader, SimpleShader);
 
 // <editor-fold desc="Public Methods">
 
-// Activate the shader for rendering
+/**
+ * Activate the shader for rendering
+ * @param {type} pixelColor
+ * @param {type} aCamera
+ * @returns {undefined}
+ * @memberOf LineShader
+ */
 LineShader.prototype.activateShader = function (pixelColor, aCamera) {
     // first call the super class's activate
     SimpleShader.prototype.activateShader.call(this, pixelColor, aCamera);
@@ -45,6 +58,13 @@ LineShader.prototype.activateShader = function (pixelColor, aCamera) {
 
     gl.enableVertexAttribArray(this.mShaderVertexPositionAttribute);
 };
+
+/**
+ * 
+ * @param {type} w
+ * @returns {undefined}
+ * @memberOf LineShader
+ */
 LineShader.prototype.setPointSize = function (w) { this.mPointSize = w; };
 
 //-- end of public methods

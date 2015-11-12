@@ -10,7 +10,15 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 //<editor-fold desc="constructor">
-// constructor 
+/**
+ * Default Constructor<p>
+ * Subclass from SpriteShader<p>
+ *          Supports light illumination
+ * @param {type} vertexShaderPath
+ * @param {type} fragmentShaderPath
+ * @returns {LightShader}
+ * @memberOf LightShader
+ */
 function LightShader(vertexShaderPath, fragmentShaderPath) {
     // Call super class constructor
     SpriteShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
@@ -34,6 +42,13 @@ gEngine.Core.inheritPrototype(LightShader, SpriteShader);
 // <editor-fold desc="Public Methods">
 
 // Overriding the Activation of the shader for rendering
+/**
+ * 
+ * @param {type} pixelColor
+ * @param {type} aCamera
+ * @returns {undefined}
+ * @memberOf LightShader
+ */
 LightShader.prototype.activateShader = function (pixelColor, aCamera) {
     // first call the super class's activate
     SpriteShader.prototype.activateShader.call(this, pixelColor, aCamera);
@@ -53,6 +68,12 @@ LightShader.prototype.activateShader = function (pixelColor, aCamera) {
     }
 };
 
+/**
+ * 
+ * @param {type} l
+ * @returns {undefined}
+ * @memberOf LightShader
+ */
 LightShader.prototype.setLights = function (l) {
     this.mLights = l;
 };

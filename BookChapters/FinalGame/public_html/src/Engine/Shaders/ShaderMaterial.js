@@ -11,7 +11,14 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 //<editor-fold desc="constructor">
-// constructor 
+/**
+ * Default Constructor<p>
+ * Knows how to load aMaterial into the IllumShader<p>
+ * Rederences point to uMaterial.
+ * @param {type} aIllumShader
+ * @returns {ShaderMaterial}
+ * @memberOf ShaderMaterial
+ */
 function ShaderMaterial(aIllumShader) {
     // reference to the normal map sampler
     var gl = gEngine.Core.getGL();
@@ -23,7 +30,12 @@ function ShaderMaterial(aIllumShader) {
 //</editor-fold>
 
 // <editor-fold desc="Public Methods">
-// Loads material onto the shader
+/**
+ * Loads material onto the shader
+ * @param {type} aMaterial
+ * @returns {undefined}
+ * @memberOf ShaderMaterial
+ */
 ShaderMaterial.prototype.loadToShader = function (aMaterial) {
     var gl = gEngine.Core.getGL();
     gl.uniform4fv(this.mKaRef, aMaterial.getAmbient());

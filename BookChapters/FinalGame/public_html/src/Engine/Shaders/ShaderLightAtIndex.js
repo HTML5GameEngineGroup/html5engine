@@ -9,11 +9,27 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Default Constructor<p>
+ * support of loading light info to the glsl shader<p>
+ *      references are pointing to uLight[index]
+ * @param {type} shader
+ * @param {type} index
+ * @returns {ShaderLightAtIndex}
+ * @memberOf ShaderLightAtIndex
+ */
 function ShaderLightAtIndex(shader, index) {
     this._setShaderReferences(shader, index);
 }
 
 //<editor-fold desc="public functions">
+/**
+ * 
+ * @param {type} aCamera
+ * @param {type} aLight
+ * @returns {undefined}
+ * @memberOf ShaderLightAtIndex
+ */
 ShaderLightAtIndex.prototype.loadToShader = function (aCamera, aLight) {
     var gl = gEngine.Core.getGL();
     gl.uniform1i(this.mIsOnRef, aLight.isLightOn());
@@ -47,6 +63,11 @@ ShaderLightAtIndex.prototype.loadToShader = function (aCamera, aLight) {
     }
 };
 
+/**
+ * 
+ * @returns {undefined}
+ * @memberOf ShaderLightAtIndex
+ */
 ShaderLightAtIndex.prototype.switchOffLight = function () {
     var gl = gEngine.Core.getGL();
     gl.uniform1i(this.mIsOnRef, false);
@@ -54,6 +75,13 @@ ShaderLightAtIndex.prototype.switchOffLight = function () {
 //</editor-fold>
 
 //<editor-fold desc="private functions">
+/**
+ * 
+ * @param {type} aLightShader
+ * @param {type} index
+ * @returns {undefined}
+ * @memberOf ShaderLightAtIndex
+ */
 ShaderLightAtIndex.prototype._setShaderReferences = function (aLightShader, index) {
     var gl = gEngine.Core.getGL();
     this.mColorRef = gl.getUniformLocation(aLightShader,     "uLights[" + index + "].Color");

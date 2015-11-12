@@ -11,7 +11,14 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 //<editor-fold desc="constructor">
-// constructor
+/**
+ * Default Constructor<p>
+ * Implements a Textured ShaderProgram object.
+ * @param {type} vertexShaderPath
+ * @param {type} fragmentShaderPath
+ * @returns {TextureShader}
+ * @memberOf TextureShader
+ */
 function TextureShader(vertexShaderPath, fragmentShaderPath) {
     // Call super class constructor
     SimpleShader.call(this, vertexShaderPath, fragmentShaderPath);  // call SimpleShader constructor
@@ -35,7 +42,13 @@ gEngine.Core.inheritPrototype(TextureShader, SimpleShader);
 
 // <editor-fold desc="Public Methods">
 
-// Overriding the Activation of the shader for rendering
+/**
+ * Overriding the Activation of the shader for rendering
+ * @param {type} pixelColor
+ * @param {type} aCamera
+ * @returns {undefined}
+ * @memberOf TextureShader
+ */
 TextureShader.prototype.activateShader = function (pixelColor, aCamera) {
     // first call the super class's activate
     SimpleShader.prototype.activateShader.call(this, pixelColor, aCamera);

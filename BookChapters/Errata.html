@@ -505,12 +505,25 @@
 		</ul> <br>
 		</li>
 
-		<li>Page 8, item-2a, top of the game, end of paragraph<ul>
-			<li><em>(aTextureCooridnate, the uv ...)</em>
+		
+		<li>Page 7, Figure 5-5<ul>
+			<li>graphics hardware <em>intepolation</em>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 
 				should be</li>
-			<li><em>(aTextureCoordinate, the uv ...)</em>
+			<li>graphics hardware <strong>interpolation</strong>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+				(replace "intepolation" with "interpolation")</li>
+		</ul><br>
+		</li>
+
+		<li>Page 8, item-2a, top of the game, end of paragraph<ul>
+			<li>(aTextureCoor<em>id</em>nate, the uv ...)
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 
+				should be</li>
+			<li>(aTextureCoor<strong>di</strong>nate, the uv ...)
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 				&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
 				(replace "id" with "di")</li>
@@ -518,14 +531,14 @@
 		</li>
 		
 		<li>Page 11, bottom of page<ul>
-			<li><em> Set up <strong>Up</strong> ... </em>
+			<li><em> Set up Up ... </em>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; 
 				should be</li>
-			<li>set up 
+			<li><strong>set up</strong> 
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -624,7 +637,22 @@
 			</ul><br>
 			</li>
 			
-			
+
+		<li>Page 31, item-6<ul>
+				<li>The <em>SpriteRenderable.draw()</em> function, should not have <em>pixelColor</em> as its paramter: <br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					SpriteRenderable.prototype.draw = function(<em><strong>pixelColor</strong></em>, vpMatrix)
+				<li>The function should be:<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					SpriteRenderable.prototype.draw = function(vpMatrix)</li>
+				<li>Similarly. the call to <em>TextureRenderable.draw()</em> should be (without <em>pixelColor</em>):<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					TextureRenderable.prototype.draw.call(this, vpMatrix);</li>
+
+			</ul><br>
+			</li>
+					
+	
 		<li>Page 46, item-2, code comment:<ul>
 				<li><em>// ... the entier image...</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -649,9 +677,11 @@
 			</li>
 		
             <li>Page 49, bottom of page, code wrap:<ul>
-				<li>var xPos = ... this.mXform.getXPos() - (widthOfOneChar / 2) +<br />
-                    <em><span class="auto-style3">(widthOfOneChar * 0.5);</span></em></li>
+				<li>var xPos = ... this.mXform.getXPos() <strong>- (widthOfOneChar / 2) +<br />
+                    </strong>
+                    <em><span class="auto-style3">(<strong>widthOfOneChar * 0.5);</strong></span></em></li>
 				<li>Wrap-around code should be indented.</li>
+				<li>The bold code is redundant and should be removed.</li>
 			</ul><br>
 			</li>	
 
@@ -670,39 +700,184 @@
 <div data-role="collapsible">
 <h2>Chapter 6:</h2>
 	<ul>
-		<li>Page x, to come<ul>
-			<li><em> ... </em>
+		<li>Page 5, paragraph above last section, first sentence:<ul>
+			<li>With the<em>assessors</em> to the ...
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 				should be</li>
-			<li><strong>something</strong> 
+			<li>With the<strong>accessors</strong> to the ...
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-				(replace something with something)</li>
+				(replace "assessors" with "accessors")</li>
 		</ul><br>
 		</li>
+		
+		<li>Page 6, the paragraph below the last section, second sentence:<ul>
+			<li>... objects, <em>following</em> good source ...
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should be</li>
+			<li>... objects, <strong>follow</strong> good source ...
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;(replace "following" with "follow")</li>
+		</ul><br>
+		</li>
+		
+		<li>Page 6, the last paragraph above the code:<ul>
+			<li>... can be <em>drawn only</em> without ...
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should be</li>
+			<li>... can be <strong>drawn</strong> without ...
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;(remove "only")</li>
+		</ul><br>
+		</li>
+
+		<li>Page 11, Figure 6-4:<ul>
+			<li>Vector <em>(5, 0)</em>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; should be</li>
+			<li>Vector <strong>(0, 5)</strong>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(flip the x/y coordinate values)</li>
+		</ul><br>
+		</li>
+
+		<li>Page 16, bottom of page, item 2 above code:<ul>
+			<li>Add <em>assessor</em> and setter
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; should be</li>
+			<li>Add <strong>accessor</strong> and setter
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;(replace "assessor" with "accessor")</li>
+		</ul><br>
+		</li>
+
+		<li>Page 21, paragraph after section, second sentence:<ul>
+			<li>thus it <em>can</em> stop moving.
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; should be</li>
+			<li>thus it <strong>cannot</strong> stop moving.
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(replace "can" with "cannot")</li>
+		</ul><br>
+		</li>
+
+		<li><strong>Bug:</strong> Page 30, item 3:<ul>
+			<li>when computing <strong>x</strong>, and <strong>y</strong> values: <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    var x = i * this.mXform.getWidth() / (<strong>this.mTexWidth – 1</strong>); <br>
+   				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				var y = j * this.mXform.getHeight() / (<strong>this.mTexHeight – 1</strong>);
+				</li>
+			<li>the denominator should not subtract texture dimension by 1, and should instead be: <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    var x = i * this.mXform.getWidth() / <strong>this.mTexWidth</strong>; <br>
+   				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				var y = j * this.mXform.getHeight() / <strong>this.mTexHeight</strong>;
+				</li>
+		</ul><br>
+		</li>
+
+
+		<li>Page 34, bottom of page, should explain <strong>TextureObject</strong> 
+		is defined to support user interaction with the <em>mCollector </em>and <em>mPortal</em> 
+		objects.
+		</li>
+		<br>
+		
+
 	</ul>
 	
 	<div data-role="collapsible">
 		<h3>Typo in code/comments:</h3>
 		<ul>
 		
-		<li>Page xx, something to come
+		<li>Page 20, bottom of page
 			<ul>
-				<li><em>... </em>
+				<li>this.mMode = <em>'J';=</em>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						should be</li>
-				<li><strong>...</strong>
+				<li>this.mMode = <strong>'J';</strong>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-						(replace "..." with "...")</li>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(remove the "=" at the end)</li>
 			</ul><br>
 			</li>
+			
+			
+		<li>Page 26, code should include the defintion of <strong>hBbox </strong>and 
+				<strong>bBbox </strong>before the <em>switch </em>statement:<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					var hBbox = this.mHero.getBBox();<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					var bBbox = this.mBrain.getBBox();
+		</li>
+		<br>
+		<br>
+		
+		
+		<li>Page 40, middle of page (bold fonts):
+			<ul>
+				<li>otherXDir, <em>therYDir</em>);
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;should be</li>
+				<li>otherXDir, <strong>otherYDir</strong>);
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(add an "o" to "therYDir")</li>
+			</ul><br>
+			</li>
+
+
+		<li>Page 41, top of page, in the <em>else </em>case:
+			<ul>
+				<li><em>hypertenus</em> as radius
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;should be</li>
+				<li><strong>hypotenuse</strong> as radius
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(replace "hypertenus" with "hypotenuse ")</li>
+				<li>In addition, this is a comment wrap around</li>
+			</ul><br>
+			</li>
+
+
 		</ul>
 	</div>
 </div>
@@ -710,37 +885,88 @@
 <div data-role="collapsible">
 <h2>Chapter 7:</h2>
 	<ul>
-		<li>Page x, to come<ul>
-			<li><em> ... </em>
+		<li>Page 5, last paragraph:<ul>
+			<li>The <em>panWidth()</em> function ...
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-				should be</li>
-			<li><strong>something</strong> 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should be</li>
+			<li>The <strong>panWith()</strong> function ...
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-				(replace something with something)</li>
+				(replace "Width" with "with")</li>
 		</ul><br>
 		</li>
 	</ul>
+
+	<ul>
+		<li>Page 10, paragraph after the section, second sentence:<ul>
+			<li>To <em>maintained</em> ...
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; should be</li>
+			<li>To <strong>maintain</strong>...
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(remove the "ed")</li>
+		</ul><br>
+		</li>
+	</ul>
+	
+	<ul>
+		<li>Page 31, item 5:<ul>
+			<li>Define <em>t.e</em> button ...
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;should be</li>
+			<li>Define <strong>the</strong> button ...
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				(replace "t.e" with "the")</li>
+		</ul><br>
+		</li>
+	</ul>
+
+	<ul>
+		<li>Page 32, to disable the right-mouse-button context menu, in code section, before item-7:<ul>
+			<li>After <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				mCanvas = document.getElementById(canvasID);<br>
+				add the following line<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				mCanvas.oncontextmenu = function() { return false; };
+
+			</li>
+			
+		</ul><br>
+		</li>
+	</ul>
+
 	
 	<div data-role="collapsible">
 		<h3>Typo in code/comments:</h3>
 		<ul>
 		
-		<li>Page xx, something to come
+		<li>Page 30, middle of page, code comment
 			<ul>
-				<li><em>... </em>
+				<li>// Inits <em>DefaultResoruces</em>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 						should be</li>
-				<li><strong>...</strong>
+				<li>// Inits <strong>DefaultResources</strong>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-						(replace "..." with "...")</li>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						(replace "ru" with "ur")</li>
 			</ul><br>
 			</li>
 		</ul>

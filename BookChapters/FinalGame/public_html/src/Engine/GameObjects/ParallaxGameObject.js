@@ -42,7 +42,7 @@ gEngine.Core.inheritPrototype(ParallaxGameObject, TiledGameObject);
  * renderableObj xfrom is accessible, it is in WC space!!<p>
  * GameObject parameters: speed and direction are all in WC space
  * @memberOf ParallaxGameObject
- * @returns {undefined}
+ * @returns {void}
  */
 ParallaxGameObject.prototype.update = function () {
     // simple default behavior
@@ -54,7 +54,7 @@ ParallaxGameObject.prototype.update = function () {
 /**
  * 
  * @memberOf ParallaxGameObject
- * @returns {undefined}
+ * @returns {void}
  */
 ParallaxGameObject.prototype._refPosUpdate = function () {
     // now check for reference movement
@@ -77,7 +77,7 @@ ParallaxGameObject.prototype.setWCTranslationBy = function (delta) {
 };
 
 /**
- * 
+ * Return the Paralax scale
  * @memberOf ParallaxGameObject
  * @returns {Number}
  */
@@ -86,10 +86,10 @@ ParallaxGameObject.prototype.getParallaxScale = function () {
 };
 
 /**
- * 
+ * Set the Parallax view scale
  * @memberOf ParallaxGameObject
- * @param {type} s
- * @returns {undefined}
+ * @param {Number} s
+ * @returns {void}
  */
 ParallaxGameObject.prototype.setParallaxScale = function(s) {
     if (s <= 0) {

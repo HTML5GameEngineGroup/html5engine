@@ -16,7 +16,7 @@
  * constructor of SimpleShader object.
  * @class SimpleShader
  * @param {string} vertexShaderPath filepath of the Vertex Shader.
- * @param {string} fragmentShaderPath filrepath of the Fragment Shader.
+ * @param {string} fragmentShaderPath filepath of the Fragment Shader.
  * @returns {SimpleShader} An intsnace of SimpleShader.
  */
 function SimpleShader(vertexShaderPath, fragmentShaderPath) {
@@ -78,7 +78,7 @@ SimpleShader.prototype.getShader = function () { return this.mCompiledShader; };
  * Activate the shader for rendering.
  * @memberOf SimpleShader
  * @param {float[]} pixelColor [R, G, B, A] Sets the shader pixel color.
- * @param {Camera} aCamera 
+ * @param {Camera} aCamera Camera to draw to
  * @returns {void}
  */
 SimpleShader.prototype.activateShader = function (pixelColor, aCamera) {

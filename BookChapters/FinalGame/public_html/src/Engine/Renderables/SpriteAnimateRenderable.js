@@ -10,9 +10,9 @@
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
 /**
- * 
- * @param {type} myTexture
- * @returns {SpriteAnimateRenderable}
+ * Constructor of SpriteAnimateRenderable object.
+ * @param {Texture} myTexture Texture to be associated by object.
+ * @returns {SpriteAnimateRenderable} Instance of this SpriteAnimateRenderable object
  * @class SpriteAnimateRenderable
  */
 function SpriteAnimateRenderable(myTexture) {
@@ -40,11 +40,6 @@ function SpriteAnimateRenderable(myTexture) {
 }
 gEngine.Core.inheritPrototype(SpriteAnimateRenderable, SpriteRenderable);
 
-/**
- * 
- * @returns {undefined}
- * @memberOf SpriteAnimateRenderable
- */
 SpriteAnimateRenderable.prototype._initAnimation = function () {
     // Currently running animation
     this.mCurrentTick = 0;
@@ -65,11 +60,6 @@ SpriteAnimateRenderable.prototype._initAnimation = function () {
     this._setSpriteElement();
 };
 
-/**
- * 
- * @returns {undefined}
- * @memberOf SpriteAnimateRenderable
- */
 SpriteAnimateRenderable.prototype._setSpriteElement = function () {
     var left = this.mFirstElmLeft + (this.mCurrentElm * (this.mElmWidth + this.mWidthPadding));
     SpriteRenderable.prototype.setElementUVCoordinate.call(this, left, left + this.mElmWidth,
@@ -84,6 +74,7 @@ SpriteAnimateRenderable.prototype._setSpriteElement = function () {
 /**
  * Assumption is that the first sprite in an animation is always the left-most element.
  * @memberOf SpriteAnimateRenderable
+ * @type enum|eAnimationType
  */
 SpriteAnimateRenderable.eAnimationType = Object.freeze({
     eAnimateRight: 0,     // Animate from first (left) towards right, when hit the end, start from the left again
@@ -92,14 +83,15 @@ SpriteAnimateRenderable.eAnimationType = Object.freeze({
 });
 
 /**
+ * Set the Sprite animation sequence parameters
  * Always set the left-most element to be the first
- * @param {type} topPixel
- * @param {type} leftPixel
- * @param {type} elmWidthInPixel
- * @param {type} elmHeightInPixel
- * @param {type} numElements
- * @param {type} wPaddingInPixel
- * @returns {undefined}
+ * @param {Number} topPixel Top of the sprite row in pixel
+ * @param {Number} leftPixel left most pixel of the first animation frame in pixel
+ * @param {Number} elmWidthInPixel width of the animation in pixel
+ * @param {Number} elmHeightInPixel height of the animation in pixel
+ * @param {Number} numElements number of animation frames
+ * @param {Number} wPaddingInPixel pixel padding between animation frames
+ * @returns {void}
  * @memberOf SpriteAnimateRenderable
  */
 SpriteAnimateRenderable.prototype.setSpriteSequence = function (
@@ -125,9 +117,9 @@ SpriteAnimateRenderable.prototype.setSpriteSequence = function (
 };
 
 /**
- * 
- * @param {type} tickInterval
- * @returns {undefined}
+ * Set the frame change speed
+ * @param {Number} tickInterval number of update calls between animation frames
+ * @returns {void}
  * @memberOf SpriteAnimateRenderable
  */
 SpriteAnimateRenderable.prototype.setAnimationSpeed = function (
@@ -137,9 +129,9 @@ SpriteAnimateRenderable.prototype.setAnimationSpeed = function (
 };
 
 /**
- * 
- * @param {type} deltaInterval
- * @returns {undefined}
+ * Increment the animation frame change speed
+ * @param {Number} deltaInterval increment by number of update calls between animation frames
+ * @returns {void}
  * @memberOf SpriteAnimateRenderable
  */
 SpriteAnimateRenderable.prototype.incAnimationSpeed = function (
@@ -149,9 +141,9 @@ SpriteAnimateRenderable.prototype.incAnimationSpeed = function (
 };
 
 /**
- * 
- * @param {type} animationType
- * @returns {undefined}
+ * Set animation type (eAnimateRight, eAnimateLeft, eAnimateSwing)
+ * @param {eAnimationType|enum} animationType enum of animation type
+ * @returns {void}
  * @memberOf SpriteAnimateRenderable
  */
 SpriteAnimateRenderable.prototype.setAnimationType = function (animationType) {
@@ -162,8 +154,8 @@ SpriteAnimateRenderable.prototype.setAnimationType = function (animationType) {
 };
 
 /**
- * 
- * @returns {undefined}
+ * Update the animation interval
+ * @returns {void}
  * @memberOf SpriteAnimateRenderable
  */
 SpriteAnimateRenderable.prototype.updateAnimation = function () {

@@ -14,9 +14,9 @@
 /**
  * Default Constructor<p>
  * Implements a Textured ShaderProgram object.
- * @param {type} vertexShaderPath
- * @param {type} fragmentShaderPath
- * @returns {TextureShader}
+ * @param {string} vertexShaderPath filepath of the Vertex Shader.
+ * @param {string} fragmentShaderPath filepath of the Fragment Shader.
+ * @returns {TextureShader} An intsnace of TextureShader.
  * @class TextureShader
  */
 function TextureShader(vertexShaderPath, fragmentShaderPath) {
@@ -43,10 +43,10 @@ gEngine.Core.inheritPrototype(TextureShader, SimpleShader);
 // <editor-fold desc="Public Methods">
 
 /**
- * Overriding the Activation of the shader for rendering
- * @param {type} pixelColor
- * @param {type} aCamera
- * @returns {undefined}
+ * Activate the shader for rendering.
+ * @param {float[]} pixelColor [R, G, B, A] Sets the shader pixel color.
+ * @param {Camera} aCamera Camera to draw to
+ * @returns {void}
  * @memberOf TextureShader
  */
 TextureShader.prototype.activateShader = function (pixelColor, aCamera) {

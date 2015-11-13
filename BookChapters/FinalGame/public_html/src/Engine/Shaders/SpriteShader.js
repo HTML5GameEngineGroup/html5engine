@@ -15,9 +15,9 @@
 /**
  * Default Constructor<p>
  * Implements a Textured ShaderProgram object where texture coordinate can be changed
- * @param {type} vertexShaderPath
- * @param {type} fragmentShaderPath
- * @returns {SpriteShader}
+ * @param {type} vertexShaderPath filepath of the Vertex Shader.
+ * @param {type} fragmentShaderPath filepath of the Fragment Shader.
+ * @returns {SpriteShader} An intsnace of SpriteShader.
  * @class SpriteShader
  */
 function SpriteShader(vertexShaderPath, fragmentShaderPath) {
@@ -50,11 +50,11 @@ gEngine.Core.inheritPrototype(SpriteShader, TextureShader);
 
 // Overriding the Activation of the shader for rendering
 /**
- * Overriding the Activation of the shader for rendering
- * @param {type} pixelColor
- * @param {type} aCamera
+ * Activate the shader for rendering.
+ * @param {type} pixelColor [R, G, B, A] Sets the shader pixel color.
+ * @param {type} aCamera Camera to draw to
  * @returns {undefined}
- * SpriteShader
+ * @memberOf SpriteShader
  */
 SpriteShader.prototype.activateShader = function (pixelColor, aCamera) {
     // first call the super class's activate
@@ -76,7 +76,7 @@ SpriteShader.prototype.activateShader = function (pixelColor, aCamera) {
  * 
  * @param {type} texCoord
  * @returns {undefined}
- * SpriteShader
+ * @memberOf SpriteShader
  */
 SpriteShader.prototype.setTextureCoordinate = function (texCoord) {
     var gl = gEngine.Core.getGL();
@@ -85,9 +85,9 @@ SpriteShader.prototype.setTextureCoordinate = function (texCoord) {
 };
 
 /**
- * 
- * @returns {undefined}
- * SpriteShader
+ * Detaches and removes the shader from the Shader Program
+ * @returns {void}
+ * @memberOf SpriteShader
  */
 SpriteShader.prototype.cleanUp = function () {
     var gl = gEngine.Core.getGL();
@@ -99,21 +99,10 @@ SpriteShader.prototype.cleanUp = function () {
 // make sure these functions are defined, such that
 // this shader can support LightRenderable and IllumRenderable
 
-/**
- * will be override by LightShader
- * @param {type} l
- * @returns {undefined}
- * SpriteShader
- */
+// will be override by LightShader
 SpriteShader.prototype.setLights = function (l) { };
 
-/**
- * will be override by IllumShader
- * @param {type} m
- * @param {type} p
- * @returns {undefined}
- * SpriteShader
- */
+// will be override by IllumShader
 SpriteShader.prototype.setMaterialAndCameraPos = function(m, p) { };
 
 //</editor-fold>

@@ -43,9 +43,9 @@ gEngine.Core.inheritPrototype(LightShader, SpriteShader);
 
 // Overriding the Activation of the shader for rendering
 /**
- * Activate this shader
- * @param {Float[]} pixelColor
- * @param {Camera} aCamera
+ * Activate the shader for rendering.
+ * @param {float[]} pixelColor [R, G, B, A] Sets the shader pixel color.
+ * @param {Camera} aCamera Camera to draw to
  * @returns {void}
  * @memberOf LightShader
  */
@@ -69,8 +69,8 @@ LightShader.prototype.activateShader = function (pixelColor, aCamera) {
 };
 
 /**
- * 
- * @param {Light[]} l
+ * Set the Shader lights
+ * @param {Light[]} l Shader lights
  * @returns {void}
  * @memberOf LightShader
  */

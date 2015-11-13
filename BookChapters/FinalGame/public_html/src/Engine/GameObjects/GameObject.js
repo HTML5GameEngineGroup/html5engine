@@ -68,7 +68,7 @@ GameObject.prototype.setSpeed = function (s) { this.mSpeed = s; };
 /**
  * Return the speed og the GameObject
  * @memberOf GameObject
- * @returns {Number}
+ * @returns {Number} Speed of GameObject
  */
 GameObject.prototype.getSpeed = function () { return this.mSpeed; };
 
@@ -173,7 +173,7 @@ GameObject.prototype.rotateObjPointTo = function (p, rate) {
 /**
  * Update Function called by GameLoop
  * @memberOf GameObject
- * @returns {return}
+ * @returns {void}
  */
 GameObject.prototype.update = function () {
     // simple default behavior

@@ -12,8 +12,8 @@
 
 /**
  * ParticleRenderable specifically for particles (additive blending)
- * @param {type} myTexture
- * @returns {undefined}
+ * @param {Texture} myTexture Texture to be associated by object.
+ * @returns {ParticleRenderable} new instance of ParticleRenderable
  * @class ParticleRenderable
  */
 function ParticleRenderable(myTexture) {

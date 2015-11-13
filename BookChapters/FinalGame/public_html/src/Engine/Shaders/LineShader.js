@@ -12,9 +12,9 @@
 /**
  * Default Constructor<p>
  * for debugging physics engine
- * @param {type} vertexShaderPath
- * @param {type} fragmentShaderPath
- * @returns {LineShader}
+ * @param {string} vertexShaderPath filepath of the Vertex Shader.
+ * @param {string} fragmentShaderPath filepath of the Fragment Shader.
+ * @returns {LineShader} An intsnace of LineShader.
  * @class LineShader
  */
 function LineShader(vertexShaderPath, fragmentShaderPath) {
@@ -35,10 +35,10 @@ gEngine.Core.inheritPrototype(LineShader, SimpleShader);
 // <editor-fold desc="Public Methods">
 
 /**
- * Activate the shader for rendering
- * @param {type} pixelColor
- * @param {type} aCamera
- * @returns {undefined}
+ * Activate the shader for rendering.
+ * @param {float[]} pixelColor [R, G, B, A] Sets the shader pixel color.
+ * @param {Camera} aCamera Camera to draw to
+ * @returns {void}
  * @memberOf LineShader
  */
 LineShader.prototype.activateShader = function (pixelColor, aCamera) {
@@ -60,9 +60,9 @@ LineShader.prototype.activateShader = function (pixelColor, aCamera) {
 };
 
 /**
- * 
- * @param {type} w
- * @returns {undefined}
+ * Set the point size of LineRenderable
+ * @param {type} w new point size
+ * @returns {void}
  * @memberOf LineShader
  */
 LineShader.prototype.setPointSize = function (w) { this.mPointSize = w; };

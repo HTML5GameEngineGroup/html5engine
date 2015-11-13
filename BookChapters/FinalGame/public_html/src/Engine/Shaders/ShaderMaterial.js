@@ -15,8 +15,8 @@
  * Default Constructor<p>
  * Knows how to load aMaterial into the IllumShader<p>
  * Rederences point to uMaterial.
- * @param {type} aIllumShader
- * @returns {ShaderMaterial}
+ * @param {IllumShader} aIllumShader shader to load material into
+ * @returns {ShaderMaterial} new instance of ShaderMaterial
  * @class ShaderMaterial
  */
 function ShaderMaterial(aIllumShader) {
@@ -32,8 +32,8 @@ function ShaderMaterial(aIllumShader) {
 // <editor-fold desc="Public Methods">
 /**
  * Loads material onto the shader
- * @param {type} aMaterial
- * @returns {undefined}
+ * @param {Material} aMaterial Material to load into shader
+ * @returns {void}
  * @memberOf ShaderMaterial
  */
 ShaderMaterial.prototype.loadToShader = function (aMaterial) {

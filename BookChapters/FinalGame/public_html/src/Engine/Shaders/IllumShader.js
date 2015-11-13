@@ -12,9 +12,9 @@
 /**
  * Default Constructor<p>
  * Subclass from LightShader (to take advantage of light sources)
- * @param {type} vertexShaderPath
- * @param {type} fragmentShaderPath
- * @returns {IllumShader}
+ * @param {string} vertexShaderPath filepath of the Vertex Shader.
+ * @param {string} fragmentShaderPath filepath of the Fragment Shader.
+ * @returns {IllumShader} An intsnace of IllumShader.
  * @class IllumShader
  */
 function IllumShader(vertexShaderPath, fragmentShaderPath) {
@@ -40,10 +40,10 @@ gEngine.Core.inheritPrototype(IllumShader, LightShader);
 
 // Overriding the Activation of the shader for rendering
 /**
- * 
- * @param {type} pixelColor
- * @param {type} aCamera
- * @returns {undefined}
+ * Activate the shader for rendering.
+ * @param {float[]} pixelColor [R, G, B, A] Sets the shader pixel color.
+ * @param {Camera} aCamera Camera to draw to
+ * @returns {void}
  * @memberOf IllumShader
  */
 IllumShader.prototype.activateShader = function(pixelColor, aCamera) {
@@ -59,10 +59,10 @@ IllumShader.prototype.activateShader = function(pixelColor, aCamera) {
 };
 
 /**
- * 
- * @param {type} m
- * @param {type} p
- * @returns {undefined}
+ * Set shadder material and camera position
+ * @param {Material} m Material of shader
+ * @param {vec2} p Camera position of shader
+ * @returns {void}
  * @memberOf IllumShader
  */
 IllumShader.prototype.setMaterialAndCameraPos = function(m, p) {

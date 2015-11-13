@@ -16,9 +16,9 @@
  * Subclass from SpriteShader<p>
  *      a little similar to LightShader, except, only defines<p>
  *      one light: the one that casts the shadow
- * @param {type} vertexShaderPath
- * @param {type} fragmentShaderPath
- * @returns {ShadowCasterShader}
+ * @param {string} vertexShaderPath filepath of the Vertex Shader.
+ * @param {string} fragmentShaderPath filepath of the Fragment Shader.
+ * @returns {ShadowCasterShader} An intsnace of ShadowCasterShader.
  * @class ShadowCasterShader
  */
 function ShadowCasterShader(vertexShaderPath, fragmentShaderPath) {
@@ -37,10 +37,10 @@ gEngine.Core.inheritPrototype(ShadowCasterShader, SpriteShader);
 
 // Overriding the Activation of the shader for rendering
 /**
- * 
- * @param {type} pixelColor
- * @param {type} aCamera
- * @returns {undefined}
+ * Activate the shader for rendering.
+ * @param {float[]} pixelColor [R, G, B, A] Sets the shader pixel color.
+ * @param {Camera} aCamera Camera to draw to
+ * @returns {void}
  * @memberOf ShadowCasterShader
  */
 ShadowCasterShader.prototype.activateShader = function (pixelColor, aCamera) {

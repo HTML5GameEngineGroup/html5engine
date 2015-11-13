@@ -14,9 +14,9 @@
 /**
  * Default Constructor<p>
  * LightRenderable with light illumination
- * @param {type} myTexture
- * @param {type} myNormalMap
- * @returns {IllumRenderable}
+ * @param {Texture} myTexture Texture to be associated by object.
+ * @param {type} myNormalMap normal map resource id
+ * @returns {IllumRenderable} new instance of IllumRenderable
  * @class IllumRenderable
  */
 function IllumRenderable(myTexture, myNormalMap) {
@@ -39,9 +39,9 @@ gEngine.Core.inheritPrototype(IllumRenderable, LightRenderable);
 // Public methods
 //**-----------------------------------------
 /**
- * 
- * @param {type} aCamera
- * @returns {undefined}
+ * Draw function called by GameLoop
+ * @param {Camera} aCamera camera to draw to
+ * @returns {void}
  * @memberOf IllumRenderable
  */
 IllumRenderable.prototype.draw = function (aCamera) {
@@ -53,8 +53,8 @@ IllumRenderable.prototype.draw = function (aCamera) {
 };
 
 /**
- * 
- * @returns {Material}
+ * Return the Renderable material
+ * @returns {Material} IllumRenderable material
  * @memberOf IllumRenderable
  */
 IllumRenderable.prototype.getMaterial = function () { return this.mMaterial; };

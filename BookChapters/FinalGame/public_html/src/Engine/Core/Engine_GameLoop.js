@@ -15,7 +15,8 @@
 var gEngine = gEngine || { };
 
 /**
- * Global variable EngineGameLoop
+ * Global variable EngineGameLoop<p>
+ * Implements the game loop functionality of gEngine
  * @class gEngine.GameLoop
  * @type gEngine.GameLoop
  */
@@ -102,9 +103,9 @@ gEngine.GameLoop = (function () {
     };
     
     /**
-     * 
+     * Return the interval time of the GameLoop
      * @memberOf gEngine.GameLoop
-     * @returns {Number}
+     * @returns {Number} Interval time
      */
     var getUpdateIntervalInSeconds = function () {
         return kFrameTime;

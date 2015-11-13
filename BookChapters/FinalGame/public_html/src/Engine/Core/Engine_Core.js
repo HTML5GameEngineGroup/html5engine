@@ -65,7 +65,7 @@ gEngine.Core = (function () {
     /**
      * Loads the scene and starts the gameloop
      * @memberOf gEngine.Core
-     * @param {type} scene  to load
+     * @param {Scene} scene  to load
      * @returns {void}
      */
     var startScene = function (scene) {
@@ -76,8 +76,8 @@ gEngine.Core = (function () {
     /**
      * initialize all of the EngineCore components
      * @memberOf gEngine.Core
-     * @param {type} htmlCanvasID
-     * @param {type} myGame
+     * @param {String} htmlCanvasID
+     * @param {Class} myGame
      * @returns {void}
      */
     var initializeEngineCore = function (htmlCanvasID, myGame) {
@@ -95,7 +95,7 @@ gEngine.Core = (function () {
     /**
      * Clears the draw area and draws one square
      * @memberOf gEngine.Core
-     * @param {type} color
+     * @param {Float} color [R, G, B, A] Color array
      * @returns {void}
      */
     var clearCanvas = function (color) {
@@ -107,8 +107,8 @@ gEngine.Core = (function () {
     /**
      * Inherits a SuperClass prototype functions into the SubClass
      * @memberOf gEngine.Core
-     * @param {type} subClass class to inherit to
-     * @param {type} superClass class to inherit from
+     * @param {Class} subClass class to inherit to
+     * @param {Class} superClass class to inherit from
      * @returns {void}
      */
     var inheritPrototype = function (subClass, superClass) {
@@ -118,9 +118,9 @@ gEngine.Core = (function () {
     };
     
     /**
-     * 
-     * @memberOf gEngine.Core
-     * @returns {void}
+    * Detaches and removes the resources from the DefaultResources Program
+    * @memberOf gEngine.Core
+    * @returns {void}
      */
     var cleanUp = function () {
         gEngine.DefaultResources.cleanUp();

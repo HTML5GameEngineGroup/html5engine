@@ -15,11 +15,11 @@
  * Default Constructor<p>
  * Renderable objects for lines<p>
  * p1, p2: either both there, or none
- * @param {type} x1
- * @param {type} y1
- * @param {type} x2
- * @param {type} y2
- * @returns {LineRenderable}
+ * @param {Number} x1 X position of point 1
+ * @param {Number} y1 Y position of point 1
+ * @param {Number} x2 X position of point 2
+ * @param {Number} y2 Y position of point 2
+ * @returns {LineRenderable} New instance of LineRenderable
  * @class LineRenderable
  */
 function LineRenderable(x1, y1, x2, y2) {
@@ -45,9 +45,9 @@ gEngine.Core.inheritPrototype(LineRenderable, Renderable);
 // Public methods
 //**-----------------------------------------
 /**
- * 
- * @param {type} aCamera
- * @returns {undefined}
+ * Draw function called by GameLoop
+ * @param {Camera} aCamera to draw the Renderable to
+ * @returns {void}
  * @memberOf LineRenderable
  */
 LineRenderable.prototype.draw = function (aCamera) {
@@ -74,36 +74,36 @@ LineRenderable.prototype.draw = function (aCamera) {
 };
 
 /**
- * 
- * @param {type} s
- * @returns {undefined}
+ * Sets the Draw Verticies state of LineRenderable
+ * @param {Boolean} s new draw verticies state
+ * @returns {void}
  * @memberOf LineRenderable
  */
 LineRenderable.prototype.setDrawVertices = function (s) { this.mDrawVertices = s; };
 
 /**
- * 
- * @param {type} s
- * @returns {undefined}
+ * Set the Show Line state of LineRenderable
+ * @param {Boolean} s new show line state
+ * @returns {void}
  * @memberOf LineRenderable
  */
 LineRenderable.prototype.setShowLine = function (s) { this.mShowLine = s; };
 
 /**
- * 
- * @param {type} s
- * @returns {undefined}
+ * Set the point size of LineRenderable
+ * @param {Number} s new point size
+ * @returns {void}
  * @memberOf LineRenderable
  */
 LineRenderable.prototype.setPointSize = function (s) { this.mPointSize = s; };
 
 /**
- * 
- * @param {type} x1
- * @param {type} y1
- * @param {type} x2
- * @param {type} y2
- * @returns {undefined}
+ * Set the vertice drawing points
+ * @param {type} x1 X position of point 1
+ * @param {type} y1 Y position of point 1
+ * @param {type} x2 X position of point 2
+ * @param {type} y2 Y position of point 2
+ * @returns {void}
  * @memberOf LineRenderable
  */
 LineRenderable.prototype.setVertices = function (x1, y1, x2, y2) {
@@ -112,10 +112,10 @@ LineRenderable.prototype.setVertices = function (x1, y1, x2, y2) {
 };
 
 /**
- * 
- * @param {type} x
- * @param {type} y
- * @returns {undefined}
+ * Set the first vertice point
+ * @param {Number} x X position of point 1
+ * @param {Number} y Y position of point 1
+ * @returns {void}
  * @memberOf LineRenderable
  */
 LineRenderable.prototype.setFirstVertex = function (x, y) {
@@ -124,10 +124,10 @@ LineRenderable.prototype.setFirstVertex = function (x, y) {
 };
 
 /**
- * 
- * @param {type} x
- * @param {type} y
- * @returns {undefined}
+ * Set the second vertice point
+ * @param {Number} x X position of point 2
+ * @param {Number} y Y position of point 2
+ * @returns {void}
  * @memberOf LineRenderable
  */
 LineRenderable.prototype.setSecondVertex = function (x, y) {

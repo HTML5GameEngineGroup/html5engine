@@ -14,17 +14,17 @@
 var gEngine = gEngine || { };
 
 /**
- * 
+ * Default Constructor
  * @class gEngine.ResourceMap
  * @type gEngine.ResourceMap
  */
 gEngine.ResourceMap = (function () {
     
     /**
-     * 
+     * ResourceMap node containing name and refrence count of resource
      * @memberOf gEngine.ResourceMap
-     * @param {type} rName
-     * @returns {Engine_ResourceMap_L21.MapEntry}
+     * @param {String} rName
+     * @returns {MapEntry}
      */
     var MapEntry = function (rName) {
         this.mAsset = rName;
@@ -43,8 +43,8 @@ gEngine.ResourceMap = (function () {
    /**
     * Register one more resource to load
     * @memberOf gEngine.ResourceMap
-    * @param {type} rName
-    * @returns {undefined}
+    * @param {String} rName name of resource to load
+    * @returns {void}
     */
     var asyncLoadRequested = function (rName) {
         mResourceMap[rName] = new MapEntry(rName); // place holder for the resource to be loaded
@@ -52,11 +52,11 @@ gEngine.ResourceMap = (function () {
     };
 
     /**
-     * 
+     * Callback for when reource is loaded into the ResourceMap
      * @memberOf gEngine.ResourceMap
-     * @param {type} rName
-     * @param {type} loadedAsset
-     * @returns {undefined}
+     * @param {String} rName
+     * @param {File} loadedAsset asset to load into ResourceMap
+     * @returns {void}
      */
     var asyncLoadCompleted = function (rName, loadedAsset) {
         if (!isAssetLoaded(rName)) {
@@ -67,11 +67,6 @@ gEngine.ResourceMap = (function () {
         _checkForAllLoadCompleted();
     };
 
-    /**
-     * 
-     * @memberOf gEngine.ResourceMap
-     * @returns {undefined}
-     */
     var _checkForAllLoadCompleted = function () {
         if ((mNumOutstandingLoads === 0) && (mLoadCompleteCallback !== null)) {
             // ensures the load complete call back will only be called once!
@@ -84,8 +79,8 @@ gEngine.ResourceMap = (function () {
     /**
      * Make sure to set the callback _AFTER_ all load commands are issued
      * @memberOf gEngine.ResourceMap
-     * @param {type} funct
-     * @returns {undefined}
+     * @param {Function} funct callback Function
+     * @returns {void}
      */
     var setLoadCompleteCallback = function (funct) {
         mLoadCompleteCallback = funct;
@@ -95,10 +90,10 @@ gEngine.ResourceMap = (function () {
 
     //<editor-fold desc="Asset checking functions">
     /**
-     * 
+     * Return the asset of rName
      * @memberOf gEngine.ResourceMap
-     * @param {type} rName
-     * @returns {unresolved}
+     * @param {String} rName name of asset to return
+     * @returns {File} asset associtated to rName
      */
     var retrieveAsset = function (rName) {
         var r = null;
@@ -111,30 +106,31 @@ gEngine.ResourceMap = (function () {
     };
 
     /**
-     * 
+     * Returns if asset is loaded into map
      * @memberOf gEngine.ResourceMap
-     * @param {type} rName
-     * @returns {Engine_ResourceMap_L21.MapEntry}
+     * @param {String} rName name of asset
+     * @returns {Boolean} true if rName is loaded in ResourceMap
      */
     var isAssetLoaded = function (rName) {
         return (rName in mResourceMap);
     };
 
     /**
-     * 
+     * Increment the refrence count of asser rName
      * @memberOf gEngine.ResourceMap
-     * @param {type} rName
-     * @returns {undefined}
+     * @param {String} rName name of asset to increment refrence count
+     * @returns {void}
      */
     var incAssetRefCount = function (rName) {
         mResourceMap[rName].mRefCount += 1;
     };
 
     /**
-     * 
+     * Remove the reference to allow associated memory <p>
+     * be available for subsequent garbage collection
      * @memberOf gEngine.ResourceMap
-     * @param {type} rName
-     * @returns {Number}
+     * @param {String} rName name of asset to unload
+     * @returns {Number} Refrence count of asset
      */
     var unloadAsset = function (rName) {
         var c = 0;

@@ -54,7 +54,7 @@ LightRenderable.prototype.numLights = function () {
 /**
  * Return Light at index
  * @param {type} index of Light to return
- * @returns {Light} 
+ * @returns {Light} light to return
  * @memberOf LightRenderable
  */
 LightRenderable.prototype.getLightAt = function (index) {

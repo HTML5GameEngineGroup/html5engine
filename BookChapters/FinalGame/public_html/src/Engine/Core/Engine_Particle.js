@@ -16,6 +16,7 @@ var gEngine = gEngine || { };
     // initialize the variable while ensuring it is not redefined
 
 /**
+ * Default Constructor
  * Particle System support
  * @class gEngine.Particle
  * @type Engine_Particle_L17.mPublic|Function

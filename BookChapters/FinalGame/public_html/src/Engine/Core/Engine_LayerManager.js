@@ -115,7 +115,7 @@ gEngine.LayerManager = (function () {
     /**
      * Add Renderable to Layer
      * @memberOf gEngine.LayerManager
-     * @param {Number} layerEnum 
+     * @param {Number} layerEnum layer index to add to
      * @param {Renderable} obj to add to Layer
      * @returns {void}
      */
@@ -140,7 +140,7 @@ gEngine.LayerManager = (function () {
      * Remove object from Layer
      * @memberOf gEngine.LayerManager
      * @param {Number} layerEnum layer index to remove from
-     * @param {type} obj to remove from set
+     * @param {Renderable} obj to remove from set
      * @returns {void}
      */
     var removeFromLayer = function(layerEnum, obj) {
@@ -148,11 +148,11 @@ gEngine.LayerManager = (function () {
     };
     
     /**
-     * 
+     * Move an object of layerEnum to the front
      * @memberOf gEngine.LayerManager
-     * @param {type} layerEnum
-     * @param {type} obj
-     * @returns {undefined}
+     * @param {Number} layerEnum layer index to move
+     * @param {Renderanle} obj Object to move
+     * @returns {void}
      */
     var moveToLayerFront = function(layerEnum, obj) {
         mAllLayers[layerEnum].moveToLast(obj);

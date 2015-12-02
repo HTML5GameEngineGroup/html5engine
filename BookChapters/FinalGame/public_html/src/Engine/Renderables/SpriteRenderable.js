@@ -13,8 +13,8 @@
 /**
  * Constructor of SpriteRenderable object.
  * @class SpriteRenderable
- * @param {Texture} myTexture - Texture to be associated by object.
- * @returns {SpriteRenderable} - Instance of this SpriteRenderable object
+ * @param {Texture} myTexture Texture to be associated by object.
+ * @returns {SpriteRenderable} Instance of this SpriteRenderable object
  */
 function SpriteRenderable(myTexture) {
     TextureRenderable.call(this, myTexture);

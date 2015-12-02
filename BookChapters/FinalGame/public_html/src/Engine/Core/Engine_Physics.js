@@ -16,6 +16,7 @@ var gEngine = gEngine || { };
     // initialize the variable while ensuring it is not redefined
 
 /**
+ * Default Constructor<p>
  * Physics engine supporting projection and impulse collision resolution. <p>
  * @class gEngine.Physics
  * @type gEngine.Physics
@@ -32,9 +33,9 @@ gEngine.Physics = (function () {
     var mCollisionInfo = null;                  // information of the current collision
     
     /**
-     * 
+     * Initilize the Engine Physics
      * @memberOf gEngine.Physics
-     * @returns {undefined}
+     * @returns {void}
      */
     var initialize = function() {
         mCollisionInfo = new CollisionInfo(); // to avoid allocating this constantly
@@ -79,10 +80,10 @@ gEngine.Physics = (function () {
     /**
      * 
      * @memberOf gEngine.Physics
-     * @param {type} s1
-     * @param {type} s2
-     * @param {type} collisionInfo
-     * @returns {undefined}
+     * @param {RigidShape} s1 shape 1
+     * @param {RigidShape} s2 shape 2
+     * @param {CollisionInfo} collisionInfo
+     * @returns {void}
      */
     var resolveCollision = function (s1, s2, collisionInfo) {
         // Step A: one collision has been found
@@ -129,9 +130,9 @@ gEngine.Physics = (function () {
     };
     
     /**
-     * 
+     * Start Relaxation
      * @memberOf gEngine.Physics
-     * @returns {undefined}
+     * @returns {void}
      */
     var beginRelaxation = function() { 
         mRelaxationLoopCount = mRelaxationCount; 
@@ -139,9 +140,9 @@ gEngine.Physics = (function () {
     };
     
     /**
-     * 
+     * Continue Relaxation
      * @memberOf gEngine.Physics
-     * @returns {Boolean}
+     * @returns {Boolean} true if Relaxation is active
      */
     var continueRelaxation = function() { 
         var oneCollision = mHasOneCollision;
@@ -153,9 +154,9 @@ gEngine.Physics = (function () {
     /**
      * Rigid Shape interactions: two game objects
      * @memberOf gEngine.Physics
-     * @param {type} obj1
-     * @param {type} obj2
-     * @returns {undefined}
+     * @param {GameObject} obj1 GameObject 1
+     * @param {GameObject} obj2 GameObject 2
+     * @returns {void}
      */
     var processObjObj = function(obj1, obj2) {
         var s1 = obj1.getPhysicsComponent();
@@ -173,9 +174,9 @@ gEngine.Physics = (function () {
     /**
      * Rigid Shape interactions: a game object and a game object set
      * @memberOf gEngine.Physics
-     * @param {type} obj
-     * @param {type} set
-     * @returns {undefined}
+     * @param {GameObject} obj GameObject
+     * @param {GameObjectSet} set GameObjectSet
+     * @returns {void}
      */
     var processObjSet = function(obj, set) {
         var s1 = obj.getPhysicsComponent();
@@ -194,9 +195,9 @@ gEngine.Physics = (function () {
     /**
      * Rigid Shape interactions: two game object sets
      * @memberOf gEngine.Physics
-     * @param {type} set1
-     * @param {type} set2
-     * @returns {undefined}
+     * @param {GameObjectSet} set1 GameObjectSet 1
+     * @param {GameObjectSet} set2 GameObjectSet 2
+     * @returns {void}
      */
     var processSetSet = function(set1, set2) {
         var i, j, s1, s2;
@@ -217,8 +218,8 @@ gEngine.Physics = (function () {
     /**
      * Rigid Shape interactions: a set against itself
      * @memberOf gEngine.Physics
-     * @param {type} set
-     * @returns {undefined}
+     * @param {GameObjectSet} set GameObjectSet
+     * @returns {void}
      */
     var processSelfSet = function(set) {
         var i, j, s1, s2;
@@ -237,32 +238,32 @@ gEngine.Physics = (function () {
     };
     
     /**
-     * 
+     * Return System Acceleration Value [x, y]
      * @memberOf gEngine.Physics
-     * @returns {Array|g}
+     * @returns {Float[]} System Acceleration [x, y]
      */
     var getSystemtAcceleration = function() { return mSystemtAcceleration; };
     
     /**
-     * 
+     * Set System Acceleration Value [x, y]
      * @memberOf gEngine.Physics
-     * @param {type} g
-     * @returns {undefined}
+     * @param {Float[]} g New System Acceleration [x, y]
+     * @returns {void}
      */
     var setSystemtAcceleration = function(g) { mSystemtAcceleration = g; };
     
     /**
-     * 
+     * Return Relaxation Correction Rate Value
      * @memberOf gEngine.Physics
-     * @returns {r|Number}
+     * @returns {Number} Relaxation Correction Rate
      */
     var getRelaxationCorrectionRate = function() { return mPosCorrectionRate; };
     
     /**
-     * 
+     * Set Relaxation Correction Rate Value
      * @memberOf gEngine.Physics
-     * @param {type} r
-     * @returns {undefined}
+     * @param {Number} r Relaxation Correction Rate
+     * @returns {void}
      */
     var setRelaxationCorrectionRate = function(r) {
         if ((r <= 0) || (r>=1)) {
@@ -272,17 +273,17 @@ gEngine.Physics = (function () {
     };
     
     /**
-     * 
+     * Return Relaxation Loop Count
      * @memberOf gEngine.Physics
-     * @returns {c|Number}
+     * @returns {Number} Relaxation Loop Count
      */
     var getRelaxationLoopCount = function() { return mRelaxationCount; };
     
     /**
-     * 
+     * Set Relaxation Loop Count
      * @memberOf gEngine.Physics
-     * @param {type} c
-     * @returns {undefined}
+     * @param {Number} c New Relaxation Loop Count
+     * @returns {void}
      */
     var setRelaxationLoopCount = function(c) { 
         if (c <= 0)

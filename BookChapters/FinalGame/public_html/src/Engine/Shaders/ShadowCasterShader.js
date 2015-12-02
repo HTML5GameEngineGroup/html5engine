@@ -50,9 +50,9 @@ ShadowCasterShader.prototype.activateShader = function (pixelColor, aCamera) {
 };
 
 /**
- * 
- * @param {type} l
- * @returns {undefined}
+ * Set the Shader Light Source
+ * @param {Light} l Light source of Shader
+ * @returns {void}
  * @memberOf ShadowCasterShader
  */
 ShadowCasterShader.prototype.setLight = function (l) {

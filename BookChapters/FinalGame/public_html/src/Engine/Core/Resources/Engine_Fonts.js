@@ -39,6 +39,7 @@ function CharacterInfo() {
 }
 
 /**
+ * Default Constructor<p>
  * Provides support for loading and unloading of font image and font description<p>
  * Note: font name is the path to the fnt file. (without the fnt extension!)<p>
  *    You must also provide the image file in the exact same folder<p>
@@ -48,13 +49,6 @@ function CharacterInfo() {
  */
 gEngine.Fonts = (function () {
     
-    /**
-     * 
-     * gEngine.Fonts
-     * @param {type} fontInfoSourceString
-     * @return {undefined}
-     * 
-     */
     var _storeLoadedFont = function (fontInfoSourceString) {
         var fontName = fontInfoSourceString.slice(0, -4);  // trims the .fnt extension
         var fontInfo = gEngine.ResourceMap.retrieveAsset(fontInfoSourceString);
@@ -63,10 +57,10 @@ gEngine.Fonts = (function () {
     };
 
     /**
-     * 
-     * gEngine.Fonts
-     * @param {type} fontName
-     * @return {undefined}
+     * Load font into resource map
+     * @memberOf gEngine.Fonts
+     * @param {String} fontName
+     * @return {void}
      */
     var loadFont = function (fontName) {
         if (!(gEngine.ResourceMap.isAssetLoaded(fontName))) {
@@ -86,9 +80,9 @@ gEngine.Fonts = (function () {
     /**
      * Remove the reference to allow associated memory <p>
      * be available for subsequent garbage collection
-     * gEngine.Fonts
-     * @param {type} fontName
-     * @return {undefined}
+     * @memberOf gEngine.Fonts
+     * @param {String} fontName
+     * @return {void}
      */
     var unloadFont = function (fontName) {
         gEngine.ResourceMap.unloadAsset(fontName);
@@ -102,11 +96,11 @@ gEngine.Fonts = (function () {
     };
 
     /**
-     * 
-     * gEngine.Fonts
-     * @param {type} fontName
-     * @param {type} aChar
-     * @return {CharacterInfo}
+     * Get Character Information for a char from a font
+     * @memberOf gEngine.Fonts
+     * @param {String} fontName Font to get information from
+     * @param {Char} aChar Character to get information as
+     * @return {CharacterInfo} Char information
      */
     var getCharInfo = function (fontName, aChar) {
         var returnInfo = null;

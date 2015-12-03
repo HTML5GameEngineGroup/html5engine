@@ -15,6 +15,7 @@
  * @class GameObject
  * @param {Renderable} renderableObj Renderable to assotiate to GameObject
  * @returns {GameObject} New instance of GameObject
+ * @memberOf GameObject
  */
 function GameObject(renderableObj) {
     this.mRenderComponent = renderableObj;
@@ -26,15 +27,15 @@ function GameObject(renderableObj) {
 
 /**
  * Return the GameObject's Transform
- * @memberOf GameObject
  * @returns {Transform}
+ * @memberOf GameObject
  */
 GameObject.prototype.getXform = function () { return this.mRenderComponent.getXform(); };
 
 /**
  * Return the GameObject's Bounding Box
- * @memberOf GameObject
  * @returns {BoundingBox} of this GameObject
+ * @memberOf GameObject
  */
 GameObject.prototype.getBBox = function () {
     var xform = this.getXform();
@@ -44,86 +45,86 @@ GameObject.prototype.getBBox = function () {
 
 /**
  * Set the visibility state of the GameObject
- * @memberOf GameObject
  * @param {Boolean} f new state of GameObject
  * @returns {void}
+ * @memberOf GameObject
  */
 GameObject.prototype.setVisibility = function (f) { this.mVisible = f; };
 
 /**
  * Returs the visibility state of the GameObject
- * @memberOf GameObject
  * @returns {Boolean} returns true if this GameObject is visible
+ * @memberOf GameObject
  */
 GameObject.prototype.isVisible = function () { return this.mVisible; };
 
 /**
  * Set the Speed of the GameObject
- * @memberOf GameObject
  * @param {Number} s new speed of GameObject
  * @returns {void}
+ * @memberOf GameObject
  */
 GameObject.prototype.setSpeed = function (s) { this.mSpeed = s; };
 
 /**
  * Return the speed og the GameObject
- * @memberOf GameObject
  * @returns {Number} Speed of GameObject
+ * @memberOf GameObject
  */
 GameObject.prototype.getSpeed = function () { return this.mSpeed; };
 
 /**
  * Increment the speed by delta
- * @memberOf GameObject
  * @param {Number} delta to increment the speed by
  * @returns {void}
+ * @memberOf GameObject
  */
 GameObject.prototype.incSpeedBy = function (delta) { this.mSpeed += delta; };
 
 /**
  * Set the front vector of the GameObject
- * @memberOf GameObject
  * @param {vec2} f new front vector
  * @returns {void}
+ * @memberOf GameObject
  */
 GameObject.prototype.setCurrentFrontDir = function (f) { vec2.normalize(this.mCurrentFrontDir, f); };
 
 /**
  * Return the front vector of the GameObject
- * @memberOf GameObject
  * @returns {vec2} GameObject's front vector
+ * @memberOf GameObject
  */
 GameObject.prototype.getCurrentFrontDir = function () { return this.mCurrentFrontDir; };
 
 /**
  * Return the GameObject Renderable Object
- * @memberOf GameObject
  * @returns {Renderable} current Renderable of the GameObject
+ * @memberOf GameObject
  */
 GameObject.prototype.getRenderable = function () { return this.mRenderComponent; };
 
 /**
  * Set the Physics Component for the GameObject
- * @memberOf GameObject
  * @param {type} p new Physics Compenent of the GameObject
  * @returns {void}
+ * @memberOf GameObject
  */
 GameObject.prototype.setPhysicsComponent = function (p) { this.mPhysicsComponent = p; console.log(p); };
 
 /**
  * Return the Physics Component for the GameObject
- * @memberOf GameObject
  * @returns {type} Physics Compenent of the GameObject
+ * @memberOf GameObject
  */
 GameObject.prototype.getPhysicsComponent = function () { return this.mPhysicsComponent; };
 
 /**
  * Orientate the entire object to point towards point p<p>
  * will rotate Xform() accordingly
- * @memberOf GameObject
  * @param {vec2} p position to rotate to
  * @param {Number} rate rate of turn towards point
  * @returns {void}
+ * @memberOf GameObject
  */
 GameObject.prototype.rotateObjPointTo = function (p, rate) {
     // Step A: determine if reach the destination position p
@@ -172,8 +173,8 @@ GameObject.prototype.rotateObjPointTo = function (p, rate) {
 
 /**
  * Update Function called by GameLoop
- * @memberOf GameObject
  * @returns {void}
+ * @memberOf GameObject
  */
 GameObject.prototype.update = function () {
     // simple default behavior
@@ -187,9 +188,9 @@ GameObject.prototype.update = function () {
 
 /**
  * Draw function called by GameLoop
- * @memberOf GameObject
  * @param {Camera} aCamera Camera to draw too
  * @returns {void}
+ * @memberOf GameObject
  */
 GameObject.prototype.draw = function (aCamera) {
     if (this.isVisible()) {

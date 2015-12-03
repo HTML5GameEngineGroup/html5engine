@@ -14,7 +14,7 @@
  * @param {Number} w Width of rectangle
  * @param {Number} h Height of rectangle
  * @returns {RigidRectangle} New instance of RigidRectangle
- * @memberOf RigidRectangle
+ * @class RigidRectangle
  */
 function RigidRectangle(xform, w, h) {
     RigidShape.call(this, xform);

@@ -12,7 +12,7 @@
 /**
  * Support for working with a set of Lights
  * @returns {LightSet} New instance of LightSet
- * @memberOf LightSet
+ * @class LightSet
  */
 function LightSet() {
     this.mSet = [];

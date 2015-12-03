@@ -31,7 +31,7 @@ Light.eLightType = Object.freeze({
  * Default Constructor<p>
  * Defines a simple light source
  * @returns {Light} New instance of Light
- * @memberOf Light
+ * @class Light
  */
 function Light() {
     this.mColor = vec4.fromValues(1, 1, 1, 1);  // light color

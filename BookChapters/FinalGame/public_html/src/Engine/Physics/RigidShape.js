@@ -24,7 +24,7 @@ RigidShape.eRigidType = Object.freeze({
  * Defines a simple rigid shape
  * @param {Transform} xform Transform object
  * @returns {RigidShape} New instance of RigidShape
- * @memberOf RigidShape
+ * @class RigidShape
  */
 function RigidShape(xform) {
     this.mXform = xform; // this is typically from gameObject

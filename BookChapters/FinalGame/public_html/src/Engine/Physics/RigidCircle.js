@@ -13,7 +13,7 @@
  * @param {Transform} xform Transform object
  * @param {Number} r Radius of circle
  * @returns {RigidCircle} New instance of RigidCircle
- * @memberOf RigidCircle
+ * @class RigidCircle
  */
 function RigidCircle(xform, r) {
     RigidShape.call(this, xform);

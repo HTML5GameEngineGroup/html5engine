@@ -8,11 +8,25 @@
 /* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
+/**
+ * Check if RigidShape contains position
+ * @param {vec2} pos Position to check
+ * @returns {Boolean} true if position is in RigidShape
+ * @memberOf RigidCircle
+ */
 RigidCircle.prototype.containsPos = function(pos) {
     var dist = vec2.distance(this.getPosition(), pos);
     return (dist < this.getRadius());
 };
 
+/**
+ * 
+ * @param {RigidCircle} c1 Circle object to check for collision status
+ * @param {RigidCircle} c2 Circle object to check for collision status against
+ * @param {CollisionInfo} collisionInfo Collision info of collision
+ * @returns {Boolean} true if collision occurs
+ * @memberOf RigidCircle
+ */
 RigidCircle.prototype.collidedCircCirc = function(c1, c2, collisionInfo) {
     var vFrom1to2 = [0, 0];
     vec2.sub(vFrom1to2, c2.getPosition(), c1.getPosition());
@@ -37,7 +51,13 @@ RigidCircle.prototype.collidedCircCirc = function(c1, c2, collisionInfo) {
     return true;
 };
 
-
+/**
+ * Check for collision between this and RigidShape
+ * @param {RigidShape} otherShape RigidShape object to check for collision status against
+ * @param {CollisionInfo} collisionInfo Collision info of collision
+ * @returns {Boolean} true if collision occurs
+ * @memberOf RigidCircle
+ */
 RigidCircle.prototype.collided = function(otherShape, collisionInfo) { 
     var status = false;
     var n;

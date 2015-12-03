@@ -8,11 +8,26 @@
 /* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
-
+/**
+ * Clamp value to min and max
+ * @param {Number} value to clamp
+ * @param {Number} min Minimum value to clamp too
+ * @param {Number} max Maximum value to clamp too
+ * @returns {Number} clamped number of value
+ * @memberOf RigidShape
+ */
 RigidShape.prototype.clamp = function (value, min, max) {
     return Math.min(Math.max(value, min), max);
 };
 
+/**
+ * Check for collision between RigidRectangle and RigidCircle
+ * @param {RigidRectangle} rect1Shape Rectangle object to check for collision status
+ * @param {RigidCircle} circ2Shape Circle object to check for collision status against
+ * @param {CollisionInfo} collisionInfo Collision info of collision
+ * @returns {Boolean} true if collision occurs
+ * @memberOf RigidShape
+ */
 RigidShape.prototype.collidedRectCirc = function(rect1Shape, circ2Shape, collisionInfo) {
     var rect1Pos = rect1Shape.getXform().getPosition();
     var circ2Pos = circ2Shape.getXform().getPosition();
@@ -74,6 +89,12 @@ RigidShape.prototype.collidedRectCirc = function(rect1Shape, circ2Shape, collisi
     return true;
 };
 
+/**
+ * 
+ * @param {Particle} aParticle
+ * @returns {Boolean}
+ * @memberOf RigidShape
+ */
 RigidShape.prototype.resolveParticleCollision = function(aParticle) {
     var status = false;
     switch (this.rigidType()) {

@@ -8,6 +8,12 @@
 /* find out more about jslint: http://www.jslint.com/help.html */
 "use strict";
 
+/**
+ * Check if RigidShape contains position
+ * @param {vec2} pos Position to check
+ * @returns {Boolean} true if position is in RigidShape
+ * @memberOf RigidRectangle
+ */
 RigidRectangle.prototype.containsPos = function (pos) {
     var rPos = this.getPosition();
     var rMinX = rPos[0] - this.getWidth() / 2;
@@ -19,6 +25,14 @@ RigidRectangle.prototype.containsPos = function (pos) {
             (rMinY < pos[1] && rMaxY > pos[1]));
 };
 
+/**
+ * Check for collision between RigidRectangle and RigidRectangle
+ * @param {RigidRectangle} r1 Rectangle object to check for collision status
+ * @param {RigidRectangle} r2 Rectangle object to check for collision status against
+ * @param {CollisionInfo} collisionInfo Collision info of collision
+ * @returns {Boolean} true if collision occurs
+ * @memberOf RigidRectangle
+ */
 RigidRectangle.prototype.collidedRectRect = function(r1, r2, collisionInfo) {
     var vFrom1to2 = vec2.fromValues(0, 0);
     vec2.sub(vFrom1to2, r2.getPosition(), r1.getPosition());
@@ -48,6 +62,13 @@ RigidRectangle.prototype.collidedRectRect = function(r1, r2, collisionInfo) {
     return false;
 };
 
+/**
+ * Check for collision between this and RigidShape
+ * @param {RigidShape} otherShape RigidShape object to check for collision status against
+ * @param {CollisionInfo} collisionInfo Collision info of collision
+ * @returns {Boolean} true if collision occurs
+ * @memberOf RigidRectangle
+ */
 RigidRectangle.prototype.collided = function(otherShape, collisionInfo) {
     var status = false;
     collisionInfo.setDepth(0);

@@ -9,17 +9,37 @@
 
 "use strict";
 
+/**
+ * Default Contsructor<p>
+ * a set of ParticleGameObjects
+ * @returns {ParticleGameObjectSet} New instance of ParticleGameObjectSet
+ * @class ParticleGameObjectSet
+ */
 function ParticleGameObjectSet() {
     GameObjectSet.call(this);
     this.mEmitterSet = [];
 }
 gEngine.Core.inheritPrototype(ParticleGameObjectSet, GameObjectSet);
 
+/**
+ * 
+ * @param {vec2} p Position of Emitter
+ * @param {Number} n Number of particles to be emitted
+ * @param {function} func Creater Function
+ * @returns {void}
+ * @memberOf ParticleGameObjectSet
+ */
 ParticleGameObjectSet.prototype.addEmitterAt = function (p, n, func) {
     var e = new ParticleEmitter(p, n, func);
     this.mEmitterSet.push(e);
 };
 
+/**
+ * Draw function called by GameLoop
+ * @param {Camera} aCamera Camera to draw too
+ * @returns {void}
+ * @memberOf ParticleGameObjectSet
+ */
 ParticleGameObjectSet.prototype.draw = function (aCamera) {
     var gl = gEngine.Core.getGL();
     gl.blendFunc(gl.ONE, gl.ONE);  // for additive blending!
@@ -27,6 +47,11 @@ ParticleGameObjectSet.prototype.draw = function (aCamera) {
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); // restore alpha blending
 };
 
+/**
+ * Update Function called by GameLoop
+ * @returns {void}
+ * @memberOf ParticleGameObjectSet
+ */
 ParticleGameObjectSet.prototype.update = function () {
     GameObjectSet.prototype.update.call(this);
     

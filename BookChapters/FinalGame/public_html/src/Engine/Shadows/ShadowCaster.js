@@ -9,8 +9,16 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-// shadowCaster:    must be GameObject referencing at least a LightRenderable
+// shadowCaster:    must be GameObject referencing at least a LightRenderable  
 // shadowReceiver:  must be GameObject referencing at least a SpriteRenderable
+/**
+ * Default Constructor<p>
+ * Renders a colored image representing the shadowCaster on the receiver
+ * @param {ShadowCaster} shadowCaster must be GameObject referencing at least a LightRenderable
+ * @param {ShadowReceiver} shadowReceiver  must be GameObject referencing at least a SpriteRenderable
+ * @returns {ShadowCaster} New instance of ShadowCaster
+ * @class ShadowCaster
+ */
 function ShadowCaster (shadowCaster, shadowReceiver) {
     this.mShadowCaster = shadowCaster;  
     this.mShadowReceiver = shadowReceiver;
@@ -24,6 +32,12 @@ function ShadowCaster (shadowCaster, shadowReceiver) {
     this.kReceiverDistanceFudge = 0.6; // Reduce the projection size increase of the caster geometry
 }
 
+/**
+ * Set the shadow color
+ * @param {Float[]} c new Color of shadow [R, G, B, A]
+ * @returns {void}
+ * @memberOf ShadowCaster
+ */
 ShadowCaster.prototype.setShadowColor = function (c) {
     this.mShadowColor = c;
 };
@@ -92,6 +106,12 @@ ShadowCaster.prototype._computeShadowGeometry = function(aLight) {
     return true;
 };
 
+/**
+ * Draw function called by GameLoop
+ * @param {Camera} aCamera Camera to draw too
+ * @returns {undefined}
+ * @memberOf ShadowCaster
+ */
 ShadowCaster.prototype.draw = function(aCamera) {
     // loop through each light in this array, if shadow casting on the light is on
     // compute the proper shadow offset

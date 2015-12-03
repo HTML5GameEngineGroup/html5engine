@@ -16,6 +16,13 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
+/**
+ * Default Constructor<p>
+ * Draws the mReceiver, and the shadows of mCasters on this mReceiver
+ * @param {ShadowReceiver} theReceiverObject
+ * @returns {ShadowReceiver} new Instance of ShadowReceiver
+ * @class ShadowReceiver
+ */
 function ShadowReceiver (theReceiverObject) {
     this.kShadowStencilBit = 0x01;              // The stencil bit to switch on/off for shadow
     this.kShadowStencilMask = 0xFF;             // The stencil mask 
@@ -28,6 +35,12 @@ function ShadowReceiver (theReceiverObject) {
 }
     
 // <editor-fold desc="support for setting and removing casters ">
+/**
+ * Associate a ShadowCaster with a LightRenderable
+ * @param {LightRenderable} lgtRenderable to associate 
+ * @returns {void}
+ * @memberOf ShadowReceiver
+ */
 ShadowReceiver.prototype.addShadowCaster = function (lgtRenderable) {
     var c = new ShadowCaster(lgtRenderable, this.mReceiver);
     this.mShadowCaster.push(c);
@@ -36,6 +49,12 @@ ShadowReceiver.prototype.addShadowCaster = function (lgtRenderable) {
 // </editor-fold>
 
 // <editor-fold  desc="shadow drawing support">
+/**
+ * Draw function called by GameLoop
+ * @param {Camera} aCamera Camera to draw too
+ * @returns {void}
+ * @memberOf ShadowReceiver
+ */
 ShadowReceiver.prototype.draw = function (aCamera) {
     var c;
     
@@ -57,7 +76,11 @@ ShadowReceiver.prototype.draw = function (aCamera) {
     this._shadowRecieverStencilDisable();
 };
 
-// 
+/**
+ * Update Function called by GameLoop
+ * @returns {void}
+ * @memberOf ShadowReceiver
+ */
 ShadowReceiver.prototype.update = function () {
     this.mReceiver.update();
 };

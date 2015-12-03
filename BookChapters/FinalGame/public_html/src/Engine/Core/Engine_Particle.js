@@ -18,8 +18,8 @@ var gEngine = gEngine || { };
 /**
  * Default Constructor
  * Particle System support
+ * @type gEngine.Particle
  * @class gEngine.Particle
- * @type Engine_Particle_L17.mPublic|Function
  */
 gEngine.Particle = (function () {
     var mSystemtAcceleration = [0, -50.0];
@@ -108,8 +108,8 @@ gEngine.Particle = (function () {
     /**
      * Rigid Shape interactions: a game object and a set of particle game objects
      * @memberOf gEngine.Particle
-     * @param {type} obj
-     * @param {type} pSet
+     * @param {GameObject} obj
+     * @param {ParticleObjectSet} pSet
      * @returns {undefined}
      */
     var processObjSet = function(obj, pSet) {
@@ -124,9 +124,9 @@ gEngine.Particle = (function () {
     /**
      * Rigid Shape interactions: game object set and a set of particle game objects
      * @memberOf gEngine.Particle
-     * @param {type} objSet
-     * @param {type} pSet
-     * @returns {undefined}
+     * @param {GameObjectSet} objSet
+     * @param {ParticleObjectSet} pSet
+     * @returns {void}
      */
     var processSetSet = function(objSet, pSet) {
         var i;
@@ -136,17 +136,17 @@ gEngine.Particle = (function () {
     };
     
     /**
-     * 
+     * Return Acceleration
      * @memberOf gEngine.Particle
-     * @returns {Array|g}
+     * @returns {Float[]} current Acceleration [X, Y]
      */
     var getSystemtAcceleration = function() { return mSystemtAcceleration; };
     
     /**
-     * 
+     * Set Acceleration
      * @memberOf gEngine.Particle
-     * @param {type} g
-     * @returns {undefined}
+     * @param {Float[]} g new Acceleration [X, Y]
+     * @returns {void}
      */
     var setSystemtAcceleration = function(g) { mSystemtAcceleration = g; };
     

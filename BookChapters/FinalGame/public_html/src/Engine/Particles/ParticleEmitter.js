@@ -34,7 +34,7 @@ ParticleEmitter.prototype.expired = function () { return (this.mNumRemains <= 0)
 
 /**
  * 
- * @param {type} pSet
+ * @param {ParticleObjectSet} pSet Particle to emit
  * @returns {void}
  * @@memberOf ParticleEmitter
  */

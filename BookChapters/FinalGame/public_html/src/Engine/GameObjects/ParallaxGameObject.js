@@ -23,11 +23,11 @@
  *      > 1: farther away, slows down inversely (scale==2 slows down twice)<p>
  *      < 1: closer, speeds up inversely (scale==0.5 speeds up twice)
  * 
- * @class ParallaxGameObject
- * @param {type} renderableObj
- * @param {type} scale
- * @param {type} aCamera
+ * @param {Renderable} renderableObj Renderable to parallax
+ * @param {Number} scale Parallax scale
+ * @param {Camera} aCamera Camera to refrence
  * @returns {ParallaxGameObject}
+ * @class ParallaxGameObject
  */
 function ParallaxGameObject(renderableObj, scale, aCamera) {
     this.mRefCamera = aCamera;
@@ -41,8 +41,8 @@ gEngine.Core.inheritPrototype(ParallaxGameObject, TiledGameObject);
 /**
  * renderableObj xfrom is accessible, it is in WC space!!<p>
  * GameObject parameters: speed and direction are all in WC space
- * @memberOf ParallaxGameObject
  * @returns {void}
+ * @memberOf ParallaxGameObject
  */
 ParallaxGameObject.prototype.update = function () {
     // simple default behavior
@@ -51,11 +51,6 @@ ParallaxGameObject.prototype.update = function () {
     vec2.scaleAndAdd(pos, pos, this.getCurrentFrontDir(), this.getSpeed() * this.mParallaxScale);
 };
 
-/**
- * 
- * @memberOf ParallaxGameObject
- * @returns {void}
- */
 ParallaxGameObject.prototype._refPosUpdate = function () {
     // now check for reference movement
     var deltaT = vec2.fromValues(0, 0);
@@ -65,10 +60,11 @@ ParallaxGameObject.prototype._refPosUpdate = function () {
 };
 
 /**
- * 
+ * Set world coordinate translation delta
  * @memberOf ParallaxGameObject
- * @param {type} delta
+ * @param {Number} delta
  * @returns {undefined}
+ * @memberOf ParallaxGameObject
  */
 ParallaxGameObject.prototype.setWCTranslationBy = function (delta) {
     var f = (1-this.mParallaxScale);
@@ -79,7 +75,8 @@ ParallaxGameObject.prototype.setWCTranslationBy = function (delta) {
 /**
  * Return the Paralax scale
  * @memberOf ParallaxGameObject
- * @returns {Number}
+ * @returns {Number} parallax scale
+ * @memberOf ParallaxGameObject
  */
 ParallaxGameObject.prototype.getParallaxScale = function () {
     return this.mParallaxScale;
@@ -87,9 +84,9 @@ ParallaxGameObject.prototype.getParallaxScale = function () {
 
 /**
  * Set the Parallax view scale
- * @memberOf ParallaxGameObject
- * @param {Number} s
+ * @param {Number} s Scale of parallax
  * @returns {void}
+ * @memberOf ParallaxGameObject
  */
 ParallaxGameObject.prototype.setParallaxScale = function(s) {
     if (s <= 0) {

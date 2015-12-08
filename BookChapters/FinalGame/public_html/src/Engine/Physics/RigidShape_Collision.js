@@ -90,7 +90,7 @@ RigidShape.prototype.collidedRectCirc = function(rect1Shape, circ2Shape, collisi
 };
 
 /**
- * 
+ * pushes a Particle out of a RigidCircle or a RigidRectangle.
  * @param {Particle} aParticle
  * @returns {Boolean}
  * @memberOf RigidShape

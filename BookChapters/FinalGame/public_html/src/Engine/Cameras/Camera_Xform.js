@@ -33,7 +33,7 @@ Camera.prototype.wcPosToPixel = function (p) {
 };
 
 /**
- * 
+ * transform direction in wc space to pixel space
  * @memberOf Camera
  * @param {vec3} d vec3 direction in WC
  * @returns {vec3}

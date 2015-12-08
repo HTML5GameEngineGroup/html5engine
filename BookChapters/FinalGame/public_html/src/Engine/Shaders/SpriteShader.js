@@ -15,8 +15,8 @@
 /**
  * Default Constructor<p>
  * Implements a Textured ShaderProgram object where texture coordinate can be changed
- * @param {type} vertexShaderPath filepath of the Vertex Shader.
- * @param {type} fragmentShaderPath filepath of the Fragment Shader.
+ * @param {String} vertexShaderPath filepath of the Vertex Shader.
+ * @param {String} fragmentShaderPath filepath of the Fragment Shader.
  * @returns {SpriteShader} An intsnace of SpriteShader.
  * @class SpriteShader
  */
@@ -51,9 +51,9 @@ gEngine.Core.inheritPrototype(SpriteShader, TextureShader);
 // Overriding the Activation of the shader for rendering
 /**
  * Activate the shader for rendering.
- * @param {type} pixelColor [R, G, B, A] Sets the shader pixel color.
- * @param {type} aCamera Camera to draw to
- * @returns {undefined}
+ * @param {Float[]} pixelColor [R, G, B, A] Sets the shader pixel color.
+ * @param {Camera} aCamera Camera to draw to
+ * @returns {void}
  * @memberOf SpriteShader
  */
 SpriteShader.prototype.activateShader = function (pixelColor, aCamera) {
@@ -73,9 +73,9 @@ SpriteShader.prototype.activateShader = function (pixelColor, aCamera) {
 };
 
 /**
- * 
- * @param {type} texCoord
- * @returns {undefined}
+ * Sets the texture coordinate that identifies the proper sprite element to be displayed. texCoord is in UV space.
+ * @param {Float[]} texCoord Shader texture coordinate in UV space
+ * @returns {void}
  * @memberOf SpriteShader
  */
 SpriteShader.prototype.setTextureCoordinate = function (texCoord) {

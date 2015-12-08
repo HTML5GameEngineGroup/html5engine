@@ -124,9 +124,9 @@ gEngine.LayerManager = (function () {
     };
     
     /**
-     * 
+     * add the shadow caster objects (obj) to the layer manager.
      * @memberOf gEngine.LayerManager
-     * @param {type} obj
+     * @param {ShadowCaster} obj object to add
      * @returns {void}
      */
     var addAsShadowCaster = function(obj) {
@@ -148,7 +148,7 @@ gEngine.LayerManager = (function () {
     };
     
     /**
-     * Move an object of layerEnum to the front
+     * Move the obj such that it will be drawn on top of all other objects in the layer
      * @memberOf gEngine.LayerManager
      * @param {Number} layerEnum layer index to move
      * @param {Renderanle} obj Object to move

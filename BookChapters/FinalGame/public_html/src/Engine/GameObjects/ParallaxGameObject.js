@@ -60,9 +60,9 @@ ParallaxGameObject.prototype._refPosUpdate = function () {
 };
 
 /**
- * Set world coordinate translation delta
+ * Set world coordinate translation delta to change the position of parallax object.
  * @memberOf ParallaxGameObject
- * @param {Number} delta
+ * @param {Number} delta Amount to change the position of parallax object.
  * @returns {undefined}
  * @memberOf ParallaxGameObject
  */

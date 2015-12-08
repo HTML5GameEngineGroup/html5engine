@@ -32,12 +32,6 @@ function ParticleEmitter(pos, num, createrFunc) {
 }
 ParticleEmitter.prototype.expired = function () { return (this.mNumRemains <= 0); };
 
-/**
- * 
- * @param {ParticleObjectSet} pSet Particle to emit
- * @returns {void}
- * @@memberOf ParticleEmitter
- */
 ParticleEmitter.prototype.emitParticles = function (pSet) {
     var numToEmit = 0;
     if (this.mNumRemains < this.kMinToEmit) {

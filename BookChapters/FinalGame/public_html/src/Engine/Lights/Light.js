@@ -52,7 +52,7 @@ function Light() {
 // simple setters and getters
 /**
  * Set the light color
- * @param {type} c color of light
+ * @param {Float[]} c color of light [R, G, B, A]
  * @returns {void}
  * @memberOf Light
  */
@@ -120,91 +120,93 @@ Light.prototype.setDirection = function (d) { this.mDirection = vec3.clone(d); }
 Light.prototype.getDirection = function () { return this.mDirection; };
 
 /**
- * 
- * @param {type} n
+ * Set near distance. Anything less than this distance is illuminated
+ * @param {Number} n new Near distance
  * @returns {void}
  * @memberOf Light
  */
 Light.prototype.setNear = function (n) { this.mNear = n; };
 
 /**
- * 
- * @returns {Number}
+ * Return near distance
+ * @returns {Number} Current near distance
  * @memberOf Light
  */
 Light.prototype.getNear = function () { return this.mNear; };
 
 /**
- * 
- * @param {type} f
+ * Set far distance. Anything farther than distance will not be illuminated by this light
+ * @param {Number} f new far distance
  * @returns {void}
  * @memberOf Light
  */
 Light.prototype.setFar = function (f) { this.mFar = f; };
 
 /**
- * 
- * @returns {Number}
+ * Return far distance
+ * @returns {Number} Current far distance
  * @memberOf Light
  */
 Light.prototype.getFar = function () { return this.mFar; };
 
 /**
- * 
- * @param {type} r
+ * Set the inner cone angle of the spot light. less than inner angle is illuminated
+ * @param {Number} r new inner angle
  * @returns {void}
  * @memberOf Light
  */
 Light.prototype.setInner = function (r) { this.mInner = r; };
 
 /**
- * 
- * @returns {type|Number}
+ * Return Inner cone angle of spotlight
+ * @returns {Number} Current inner spotlight cone angle
  * @memberOf Light
  */
 Light.prototype.getInner = function () { return this.mInner; };
 
 /**
- * 
- * @param {type} r
- * @returns {undefined}
+ * Set the outer cone angle of the spot light. greater than outter angle is not illuminated
+ * @param {Number} r new outer angle
+ * @returns {void}
  * @memberOf Light
  */
 Light.prototype.setOuter = function (r) { this.mOuter = r; };
 
 /**
- * 
- * @returns {Number|type}
+ * Return outer cone angle of spotlight
+ * @returns {Number} Current outer spotlight cone angle
  * @memberOf Light
  */
 Light.prototype.getOuter = function () { return this.mOuter; };
 
 /**
- * 
- * @param {type} i
- * @returns {undefined}
+ * Set the Intensity of the light.
+ * @param {Number} i new Intensity value
+ * @returns {void}
  * @memberOf Light
  */
 Light.prototype.setIntensity = function (i) { this.mIntensity = i; };
 
 /**
- * 
- * @returns {type|Number}
+ * Return the Intensity of the light
+ * @returns {Number} Current Intensity value
  * @memberOf Light
  */
 Light.prototype.getIntensity = function () { return this.mIntensity; };
 
 /**
- * 
- * @param {type} d
- * @returns {undefined}
+ * Set how quickly does light intensity drops off between inner/outer, Near/Far, 
+ * a larger Drop off number results in “softer/smoother” transition 
+ * from full illumination to no illumination
+ * @param {Number} d new DropOff value
+ * @returns {void}
  * @memberOf Light
  */
 Light.prototype.setDropOff = function (d) { this.mDropOff = d; };
 
 /**
- * 
- * @returns {Number|type}
+ * Return dropoff value
+ * @returns {Number} Current DropOff value
  * @memberOf Light
  */
 Light.prototype.getDropOff = function () { return this.mDropOff; };

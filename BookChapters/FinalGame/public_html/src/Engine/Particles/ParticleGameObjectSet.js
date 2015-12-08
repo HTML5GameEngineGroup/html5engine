@@ -22,8 +22,8 @@ function ParticleGameObjectSet() {
 gEngine.Core.inheritPrototype(ParticleGameObjectSet, GameObjectSet);
 
 /**
- * 
- * @param {vec2} p Position of Emitter
+ * the function to call to generate particles
+ * @param {vec2} p Position of Emitter in WC space
  * @param {Number} n Number of particles to be emitted
  * @param {function} func Creater Function
  * @returns {void}

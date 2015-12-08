@@ -1,0 +1,133 @@
+html5engine source code JSDOCS notes
+Brandan Haertel
+brandan.haertel@gmail.com
+//-------------------------------------------------------------------------
+
+TODO:
+Finish commenting the files: 
+	Engine_particle, Engine_particlesystem, Shaderlightaltindex
+the JSDOCS are stubbed in but need finishing.
+
+//-------------------------------------------------------------------------
+
+COMPILING JSDOC INSTRUCTIONS:
+
+	Follow instructions from readme: https://github.com/jsdoc3/jsdoc
+	
+	OR
+
+	1) installl node.js
+	2)	download jsdocs https://github.com/jsdoc3/jsdoc (skip if using latest development version)
+	3) install (use cmd (WIN) or terminal(MAC))  [-g: install globally. omit of local install]:
+		a) local files: "npm install -g jsdoc"
+		b) latest development version:  "npm install -g git+https://github.com/jsdoc3/jsdoc.git"
+	4) run (use cmd (WIN) or terminal (MAC)):
+		a) local install: ./node_modules/.bin/jsdoc yourJavaScriptFile.js
+		b) global install: jsdoc yourJavaScriptFile.js
+		
+		or
+			run:
+				<local path>jsdoc -r src/engine
+			to recursivly generate the js files in the engine directory
+
+//-------------------------------------------------------------------------
+
+HELPFUL LINKS:
+	http://usejsdoc.org/about-getting-started.html
+	
+//-------------------------------------------------------------------------
+	
+FILES:
+
+	Cameras
+		Camera
+		CameraShake
+		CameraState
+		Camera_Input
+		Camera_Manipulation
+		Camera_Xform
+
+	Core
+		Resources
+			Engine_audioclip
+			Engine_defaultresources
+			Engine_fonts
+			Engine_resourcemap
+			Engine_textfileloader
+			Engine_textures
+		Engine_core
+		Engine_gameloop
+		Engine_input
+		Engine_layermanager
+		Engine_particle				// JSDOCS NOT FINISHED
+		Engine_particlesystem		// JSDOCS NOT FINISHED
+		Engine_physics
+		Engine_vertexbuffer
+		
+	GameObjects
+		Gameobject
+		Gameobjectset
+		Gameobject_pixelCollision
+		parallaxgameobject
+		TiledGameObject
+
+	Lights
+		Light
+		lightset
+
+	Particles
+		Particle
+		Particleemitter
+		Particlegameobject
+		particlegameobjectset
+
+	Physics
+		Rigidcircle
+		Rigidcircle_collision
+		Rigidrectangle
+		Rigidrectangle_collision
+		Rigidshape
+		Rigidshape_behavior
+		Rigidshape_collision
+
+	Renderables
+		Font renderable
+		Illumrenderable
+		Lightrenderable
+		Linerenderable
+		Particlerenderable
+		Renderable
+		Spriteanimaterenderable
+		Spriterenderable
+		Spriterenderable_pixelcollision
+		Texturerenderable
+		Texturerenderable_pixelcollision
+
+	Shaders
+		Illumshader
+		Lightshader
+		Lineshader
+		Shaderlightaltindex		// JSDOCS NOT FINISHED
+		Shadermaterial
+		Shadowcastshader 
+		Simpleshader
+		Spriteshader 
+		textureshader
+
+	Shadows
+		Shadowcaster
+		Shadowreceiver
+		Shadowreceiver_stencil
+
+	Utils
+		Boundingbox
+		Collisioninfo
+		Interpolate
+		interpolateVec2
+		shakeposition
+		transform
+
+	material
+
+	scene
+

@@ -27,7 +27,7 @@ function GameObject(renderableObj) {
 
 /**
  * Return the GameObject's Transform
- * @returns {Transform}
+ * @returns {Transform} Gameobject Transform
  * @memberOf GameObject
  */
 GameObject.prototype.getXform = function () { return this.mRenderComponent.getXform(); };
@@ -105,7 +105,7 @@ GameObject.prototype.getRenderable = function () { return this.mRenderComponent;
 
 /**
  * Set the Physics Component for the GameObject
- * @param {type} p new Physics Compenent of the GameObject
+ * @param {RigidShape} p new Physics Compenent of the GameObject
  * @returns {void}
  * @memberOf GameObject
  */
@@ -113,7 +113,7 @@ GameObject.prototype.setPhysicsComponent = function (p) { this.mPhysicsComponent
 
 /**
  * Return the Physics Component for the GameObject
- * @returns {type} Physics Compenent of the GameObject
+ * @returns {RigidShape} Physics Compenent of the GameObject
  * @memberOf GameObject
  */
 GameObject.prototype.getPhysicsComponent = function () { return this.mPhysicsComponent; };

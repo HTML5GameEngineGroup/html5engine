@@ -59,13 +59,6 @@ TextureRenderable.prototype.setColorArray = function () {
     }
 };
 
-/**
- * Return the pixel alpha value of the index
- * @memberOf TextureRenderable
- * @param {Number} x X pixel index of image
- * @param {Number} y Y pixel index of image
- * @returns {Float[]}
- */
 TextureRenderable.prototype._pixelAlphaValue = function (x, y) {
     y += this.mTexBottomIndex;
     x += this.mTexLeftIndex;
@@ -74,15 +67,6 @@ TextureRenderable.prototype._pixelAlphaValue = function (x, y) {
     return this.mColorArray[(y * this.mTextureInfo.mWidth) + x  + 3];
 };
 
-/**
- * Calculate the image index position from the world coordinate position
- * @memberOf TextureRenderable
- * @param {vec2} returnIndex out var to hold texture index position
- * @param {vec2} wcPos world coordinate position of the pixel
- * @param {vec2} xDir
- * @param {ve2} yDir
- * @returns {void}
- */
 TextureRenderable.prototype._wcPositionToIndex = function (returnIndex, wcPos, xDir, yDir) {
     // use wcPos to compute the corresponding returnIndex[0 and 1]
     var delta = [];
@@ -101,16 +85,6 @@ TextureRenderable.prototype._wcPositionToIndex = function (returnIndex, wcPos, x
     returnIndex[1] = Math.floor(returnIndex[1]);
 };
 
-/**
- * 
- * @memberOf TextureRenderable
- * @param {type} returnWCPos
- * @param {type} i
- * @param {type} j
- * @param {type} xDir
- * @param {type} yDir
- * @returns {undefined}
- */
 TextureRenderable.prototype._indexToWCPosition = function (returnWCPos, i, j, xDir, yDir) {
     var x = i * this.mXform.getWidth() / this.mTexWidth;
     var y = j * this.mXform.getHeight() / this.mTexHeight;

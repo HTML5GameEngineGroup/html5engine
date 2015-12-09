@@ -72,5 +72,12 @@ Hero.prototype.update = function () {
 
 Hero.prototype.onCollisionStay = function (otherObj) {
     this.mDye.mColor[0]+=0.01;
-    console.log("Collision by %s ", this.mDye.mColor[0]);
+};
+Hero.prototype.onCollisionEnter = function (otherObj) {
+    this.mDye.mColor[0]+=0.01;
+    console.log("Collision Enter by %s ", otherObj);
+};
+Hero.prototype.onCollisionExit = function (otherObj) {
+    this.mDye.mColor[0]+=0.01;
+    console.log("Collision Exit by %s ", otherObj);
 };

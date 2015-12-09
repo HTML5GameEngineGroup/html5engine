@@ -16,6 +16,14 @@
             <file>file:/C:/Users/Kelvin/Documents/html5engine/BookChapters/Chapter9/9.4.ParticleEmitters/public_html/src/MyGame/Objects/Particle.js</file>
         </group>
         <group name="AllBookProjects"/>
-        <group/>
+        <group>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters/public_html/src/MyGame/Objects/Hero.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters/public_html/src/MyGame/Objects/DyePack.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters/public_html/src/Engine/HashTable.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters/public_html/src/MyGame/MyGame.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters/public_html/src/Engine/Material.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters/public_html/index.html</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters/public_html/src/Engine/Scene.js</file>
+        </group>
     </open-files>
 </project-private>

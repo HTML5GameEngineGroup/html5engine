@@ -20,7 +20,7 @@ COMPILING JSDOC INSTRUCTIONS:
 	2)	download jsdocs https://github.com/jsdoc3/jsdoc (skip if using latest development version)
 	3) install (use cmd (WIN) or terminal(MAC))  [-g: install globally. omit of local install]:
 		a) local files: "npm install -g jsdoc"
-		b) latest development version:  "npm install -g git+https://github.com/jsdoc3/jsdoc.git"
+		b) latest development version:  "npm install -g https://github.com/jsdoc3/jsdoc.git"
 	4) run (use cmd (WIN) or terminal (MAC)):
 		a) local install: ./node_modules/.bin/jsdoc yourJavaScriptFile.js
 		b) global install: jsdoc yourJavaScriptFile.js
@@ -29,6 +29,11 @@ COMPILING JSDOC INSTRUCTIONS:
 			run:
 				<local path>jsdoc -r src/engine
 			to recursivly generate the js files in the engine directory
+			
+		or
+		
+			run:
+				jsdoc.bat from src/JSDocs/
 
 //-------------------------------------------------------------------------
 

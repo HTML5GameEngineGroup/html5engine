@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="coding.css">
+		<title>Tutorial 2</title>
+	</head>
+
+	<body>
+		<h1> HTML5 Engine: <br>
+		Tutorial 2: Resources, Textures &amp; Collision&nbsp;Detection</h1>
+		<p>Back to the <a href="index.html">main tutorial guide page</a>. </p>
+		
+		
+		<hr>
+		<h2>Introduction</h2>
+		<p>In tutorial 1, we looked at creating the basic structure for our game scene. We created a camera object and a game object with a simple renderable. In this tutorial, we look at more advanced renderable types, collision detection and resource management.</p>
+		
+		
+		<hr>
+		<h2>Loading Resources</h2>
+		<p>To use resources, we request the engine to load files in <b>loadScene()</b>. We can start using them in <b>initialization()</b>.</p>
+
+		<h3>Constructor</h3>
+		<p>To facilitate the loading of resources, we create constants. By convention, we store resource files in the "assets" directory of our game engine hierarchy. The contstants identify the paths.</p>
+
+<blockquote><pre><code>function MyGameScene() {
+	this.mCamera = null;
+	this.mRenderable = null;
+	this.mGameObject = null;
+    
+	<b>this.kTexture = "assets/minion_portal.png"</b>
+};
+gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
+
+		<p>The code above declares three instance variables that will be used in our scene. We do not allocate RAM yet. We just declare and make sure that they are set to null.</p>
+		
+		<h3>loadScene() and unloadScene()</h3>
+		<p>The <b>loadScene()</b> function will queue our texture for loading. The files we identify will load asynchronously. Only after all files have been loaded into RAM, will the engine call our initialization function. We parallel the loading of resources with the cleanup and deallocation of resources in <b>unloadScene()</b>.</p>
+
+<blockquote><pre><code>function loadScene() {
+	<b>gEngine.Textures.loadTexture(this.kTexture);</b>
+};</code></pre></blockquote><blockquote><pre><code>function unloadScene() {
+	<b>gEngine.Textures.unloadTexture(this.kTexture);</b>
+};</code></pre></blockquote>
+
+		<h3>initialization()</h3>
+		<p>The <b>initialization()</b> function is mostly the same as it was in the previous tutorial. Now we create a TextureRenderable instead. This renderable has all of the same functionality as the Renderable but allows us to utilize a bitmap image instead of using a solid color.</p>
+
+<blockquote><pre><code>MyGameScene.prototype.initialize = function () {
+	this.mCamera = new Camera(
+		vec2.fromValues(50, 40),    // position of the camera
+		100,                        // width of camera
+		[0, 0, 500, 400]            // viewport (orgX, orgY, width, height)
+	);
+	// set the background color of our view to medium grey
+	this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
+    <b>
+	// create a new "texture" renderable object
+	this.mRenderable = new TextureRenderable(this.kTexture);</b>
+    
+	// create a new game object with the new renderable
+	this.mGameObject = new GameObject(this.mRenderable);
+	this.mGameObject.getXform().setSize(16, 16);
+	this.mGameObject.getXform().setPosition(30, 50);
+};</code></pre></blockquote>
+
+		<p>The GameObject is created just as before, but now, we have a a reference to our new texture-based renderable. Without changing anything else in our code, viewing this in a web browser should give you the following result...</p>
+		<p><img src="tutorial2-img1.png" width="519" height="417" alt=""/></p>
+		<p></p>
+		<p>In <a href="tutorial3.html">tutorial 3</a>, we will took at renderables that support textures and game objects that support collision detection.</p>
+	</body>
+</html>

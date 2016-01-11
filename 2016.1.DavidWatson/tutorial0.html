@@ -14,7 +14,7 @@
 	<body>
 		<h1> HTML5 Engine: <br>
 		Tutorial 0: Setting Up the Environment</h1>
-		<p>back to the <a href="http://depts.washington.edu/cmmr/Research/XNA_Games/2.XNA_GTC1/Release/XNACS1Lib_Guide/XNACS1Lib_Guide.htm"> main tutorial guide page</a>. </p>
+		<p>Back to the <a href="index.html"> main tutorial guide page</a>. </p>
 		<hr>
 		<h2>Introduction</h2>
 		<p>The game engine consists of numerous files. The details of how the files work is beyond the scope of these tutorials. You can download a bundle of the files <a href="something">here</a>.</p>
@@ -25,11 +25,11 @@
 			<li>Canvas DOM object - This is the section of the web page where all WebGL activity will be encapsulated. It identifies the pixel width and height where the game will be rendered.</li>
 		</ul>
 		<h3>onload</h3>
-		<p>The entry point for your code will be an object you create that is a subclass of the engine's "Scene" object. The object type you are instantiating is the subclass you have created (see <a href="tutorial1.html">tutorial 1</a>).</p>
+		<p>The entry point for your code will be an object you create that is a subclass of the engine's "Scene" object. The object type you are instantiating a subclass of Scene that you will create (see <a href="tutorial1.html">tutorial 1</a>).</p>
 
 <blockquote><pre><code>&lt;body onload="
-	var mainGame = new MyGameScene();
-	gEngine.Core.initializeEngineCore('GLCanvas', mainGame);
+	<b>var mainGame = new MyGameScene();
+	gEngine.Core.initializeEngineCore('GLCanvas', mainGame);</b>
 "&gt;</code></pre></blockquote>
 
 		<h3>JavaScript Includes</h3>

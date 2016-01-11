@@ -20,9 +20,13 @@
 	}
 	h1 span {
 		font-size : 0.5em;
+		line-height : 0.5;
 	}
 	a {
 		color : gray;
+	}
+	p.note {
+		color : red;
 	}
 	/* end of page css - below is for the code highlighter */
 	.javascript .comment, .ruby .comment {

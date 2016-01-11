@@ -8,7 +8,7 @@
 
 	<body>
 		<h1> HTML5 Engine: <br>
-		Tutorial 2: Resources, Textures &amp; Collision&nbsp;Detection</h1>
+		Tutorial 2: Resources, Collision&nbsp;Detection &amp; User&nbsp;Input</h1>
 		<p>Back to the <a href="index.html">main tutorial guide page</a>. </p>
 		
 		
@@ -23,7 +23,7 @@
 
 		<h3>Constructor</h3>
 		<p>To facilitate the loading of resources, we create constants. By convention, we store resource files in the "assets" directory of our game engine hierarchy. The contstants identify the paths.</p>
-
+		<p class="note">[Note: When creating resources for texture maps, the dimensions must be on the order of perfect power of 2.<br>Examples of image size includes 64x64, 512x20248 or 16x128.]</p>
 <blockquote><pre><code>function MyGameScene() {
 	this.mCamera = null;
 	this.mRenderable = null;

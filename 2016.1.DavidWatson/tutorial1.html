@@ -133,6 +133,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 };</code></pre></blockquote>
 
 		<p>In this example, we want our GameObject to move left and right across our game screen. We have two if statements that determine if we hit the edge. At either point, we change the current front direction of the object towards the opposite direction. Note that setting the speed and setting the direction does not change the position. With these parameters set, calling <b>update()</b> on our GameObject will update the position. We have this commented out for the time being.</p>
+        <p>At any point, we can stop the execution of the game loop by calling gEngine.GameLoop.stop().</p>
 		
 		<h3>Drawing</h3>
 		<p>The <b>draw()</b> function is called by the after the update cycle is complete.  On an unencumbered system, this should be 60 times a second.  If there are delays, multiple updates can occur before the draw routine is called.</p>
@@ -149,6 +150,8 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 };</code></pre></blockquote>
 
 		<p>In our draw function, we clear the screen, activate our camera for rendering and draw all of our objects (which is only one at this stage). We send a reference to our camera into the game object which will pull out the information it needs for behavior and send the camera to the enclosed renderable so that it can extract what it needs for drawing.</p>
+        
+        
 		<hr>
 		<h2>Conclusion</h2>
 		<p>When viewing this in a web browser, you should see the following...</p>

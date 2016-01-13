@@ -8,19 +8,20 @@
 	<body>
 		<h1> HTML5 Engine: <br>
 			Tutorial 1: Basic Application Structure</h1>
-		<p>Back to the <a href="index.html">main tutorial guide page</a>. </p>
+		<p align="center"><a href="tutorial0.html">Tutorial 0</a> &lt;-- Tutorial 1 --&gt; <a href="tutorial2.html">Tutorial 2</a><br>
+		  <a href="index.html">Main tutorial guide page</a></p>
 		
 		
 		<hr>
 		<h2>Introduction</h2>
-		<p>When using the engine, we use 4 types of objects.  Scene, camera, renderables and game objects.  Each object type encapsulate different functionality.</p>
+		<p>In this tutorial, we introduce you to the use of 4 types of objects.  Scene, camera, renderables and game objects.  Each object type encapsulate different functionality.</p>
 		<ul>
-			<li>Scene - This object encapsulates the logic of our game. It is the link to the game engine for implementing a runloop.</li>
-			<li>Camera - This object controls the specifics behind our rendering engine. It contains information regarding aspect ratio, origin point, background color and much more.</li>
-			<li>Renderable - These objects control how elements in our scene look. These elements include not only game sprites but backgrounds and text. These objects are only for drawing on the screen. To control behavior and interactivity, the renderable needs to have a game object.</li>
-			<li>GameObject - Dictates how elements in our scene behave and interact with each other. The game object will have a renderable embedded within them. Without the renderable, nothing draws on the screen.  In the same respect, a renderable without an encapsulating game object would not detect collisions with other objects or allow physics elements to be applied (such as gravity effects and elasticity).</li>
+			<li>Scene - Encapsulates the logic of our game. It is the link that the game engine to execute the logic of our code in the form of a runloop. We covered the instantiation in <a href="tutorial0.html">tutorial 0</a>. In this tutorial, we will cover the implementation.</li>
+			<li>Camera - This object controls the specifics behind how the rendering engine does it's job. Aspect ratio, clipping, view panning and perspective are among the things we can control with the camera.</li>
+			<li>Renderable - These are the elements that get drawn on the screen. These elements include not only game sprites but backgrounds and text. These objects only control how an object &quot;looks&quot; on the screen. To control behavior and interactivity, the renderable needs to be associated with a game object.</li>
+			<li>GameObject - Dictates how elements in our scene behave and how they interact with each other. The game object will have a renderable embedded within them. Without the renderable, nothing draws on the screen.  In the same respect, a renderable without an encapsulating game object would not detect collisions with other objects or allow physics elements to be applied (such as gravity effects and elasticity).</li>
 		</ul>
-		<p>Over the course of this tutorial, we will look at each element needed to create games. This tutorial sets up our scene object to create a simple rectangle on our viewport. The source code of this example can be found </p>
+		<p>Over the course of this tutorial, we will look at each element needed to create games. This tutorial sets up our scene object to create a simple rectangle on our viewport. The source code of this example can be found <a href="SOMETHING">here</a>.</p>
 		
 		
 		<hr>
@@ -28,7 +29,7 @@
 		<p>The scene is where game loop logic will reside. By overriding the engine's Scene class wth the functionality you want, you will have a runloop.</p>
 		<p>The HTML5 engine implements a runloop. When you setup a scene object, you must adhere to a certain structure to make sure the runloop executes as expected. The structure of a scene consists of 4 parts. Initialization, update, drawing and cleanup. A skeleton of the functions in a scene object are shown in the following code...</p>
 
-<blockquote><pre><code><b>function MyGameScene() { };
+<pre><strong>function MyGameScene() { };
 gEngine.Core.inheritPrototype(MyGameScene, Scene);
 
 MyGameScene.prototype.loadScene = function () { };
@@ -39,16 +40,16 @@ MyGameScene.prototype.initialize = function () { };
 
 MyGameScene.prototype.update = function () { };
 
-MyGameScene.prototype.draw = function () { };</b></code></pre></blockquote>
+MyGameScene.prototype.draw = function () { };</strong></pre>
 
 		<p>
 		<ul>
-			<li>The <b>constructor</b>, <b>loadScene()</b> and <b>initialize()</b> are where initialization takes place.  These functions run only one time each and is where you define your variables and allocate resources.</li>
-			<li>You update the status of your objects in the <b>update()</b> function.  Update is part of the runloop and executes 60 times per second.</li>
-			<li>Drawing occurs in the <b>draw()</b> function and occurs 60 times per second and always occurs after at least one update call has been made.</li>
-			<li>Cleanup occurs in the <b>unloadScene()</b> function.  It is called one time when you want the game/scene to end.  This is where you free up resources.</li>
+			<li>The <strong>constructor</strong>, <strong>loadScene()</strong> and <strong>initialize()</strong> are where initialization takes place.  These functions run only one time each and is where you define your variables and allocate resources.</li>
+			<li>You update the status of your objects in the <strong>update()</strong> function.  Update is part of the runloop and executes 60 times per second.</li>
+			<li>Drawing occurs in the <strong>draw()</strong> function and occurs 60 times per second and always occurs after at least one update call has been made.</li>
+			<li>Cleanup occurs in the <strong>unloadScene()</strong> function.  It is called one time when you want the game/scene to end.  This is where you free up resources.</li>
 		</ul>
-		<p>Your class needs to inherit from core Scene object type.  This is done by the call to <b>inheritPrototype()</b>.  You must make sure that the name of your subclass matches the class you created in <a href="tutorial0.html">Tutorial 0</a>.</p>
+		<p>Your class needs to inherit from core Scene object type.  This is done by the call to <strong>inheritPrototype()</strong>.  You must make sure that the name of your subclass matches the class you created in <a href="tutorial0.html">Tutorial 0</a>.</p>
 		
 		
 		<hr>
@@ -56,20 +57,19 @@ MyGameScene.prototype.draw = function () { };</b></code></pre></blockquote>
 		
 		<h3>Constructor</h3>
 		<p>Before any game logic or rendering occurs, initialization occurs in three phases.  The constructor gets called first.  This is where you declare any instance variables that you intend to use in the game scene (Note: This is not for memory allocation or loading data from files.).</p>
-<blockquote><pre><code>function MyGameScene() {
+<pre>function MyGameScene() {
 	<b>this.mCamera = null;
 	this.mRenderable = null;
 	this.mGameObject = null;</b>
 };
-gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
+gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
 		<p>The code above declares three instance variables that will be used in our scene. We do not allocate RAM yet. We just declare and make sure that they are set to null.</p>
 		<h3>loadScene()</h3>
 		<p>The loadScene() function is called next.  This is where you request any resources to be loaded into RAM.  You would instruct the engine to load any data (such as images or audio files). We will look at loading resources starting in <a href="tutorial2.html">Tutorial 2</a>.</p>
 		<h3>initialization()</h3>
 		<p>The initialization() function is called by the engine after all resources requested in loadScene() are in RAM and usable by your code and is only called once. This is where you will allocate RAM and setup your objects. In this example, we create our remaining core objects with simple values to aide in comprehension.</p>
 
-<blockquote>
-  <pre><code>MyGameScene.prototype.initialize = function () {
+<pre>MyGameScene.prototype.initialize = function () {
 	<b>this.mCamera = new Camera(
 		vec2.fromValues(50, 40),    // position of the camera
 		100,                        // camera width
@@ -88,7 +88,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 	this.mGameObject.getXform().setPosition(30, 50);
 	this.mGameObject.setCurrentFrontDir(vec2.fromValues(1, 0));
 	this.mGameObject.setSpeed(0.5);</b>
-};</code></pre></blockquote>
+};</pre>
 
 		<p></p>
 		<h4>Camera and Viewport</h4>
@@ -101,7 +101,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 					<li>orgX and orgY are the lower-left coordinates on the canvas where you want the lower-left coordinates of the viewport to be.</li>
 					<li>The width and height are how much of the canvas the viewport will occupy. </li>
 				</ul
-			</li>
+			></li>
 		</ul>
 		<p class="note">[Note: The camera height is not provided. The engine infers the height based on the width and the aspect ratio of the viewport.]</p>
 		</p>
@@ -120,7 +120,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 		<h3>Updating</h3>
 		<p>The <b>update()</b> function is called by the engine 60 times a second. This is where you will check for user interaction (ie: keyboard presses and mouse clicks), check for collisions among GameObjects, update object locations etc. If another process or calculation delays execution, the game engine will compensate for the delay by looking at the current time and executing the update routine multiple times until updates have caught up with current time.</p>
 
-<blockquote><pre><code>MyGameScene.prototype.update = function () {
+<pre>MyGameScene.prototype.update = function () {
 	<b>// Check status of our objects and update them
 	if(this.mGameObject.getXform().getPosition()[0] > 92) {
 		this.mGameObject.setCurrentFrontDir(vec2.fromValues(-1, 0));
@@ -130,7 +130,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 	}
         
 	//this.mGameObject.update();</b>
-};</code></pre></blockquote>
+};</pre>
 
 		<p>In this example, we want our GameObject to move left and right across our game screen. We have two if statements that determine if we hit the edge. At each point, we change the current "front direction" of the object towards the opposite direction. Note that setting the speed and setting the direction does not change the position. With these parameters set, calling <b>update()</b> on our GameObject will update the position. We have commented this line out for the time being so we can inspect our renderable.</p>
         <p class="note">[Note: In a complete game, we would want to be able to end the game. You would trigger the engine to stop the game loop by calling gEngine.GameLoop.stop() within the update() function.]</p>
@@ -138,7 +138,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 		<h3>Drawing</h3>
 		<p>The <b>draw()</b> function is called by the after the update cycle is complete.  On an unencumbered system, this should be 60 times a second.  If there are delays, multiple updates can occur before the draw routine is called.</p>
 
-<blockquote><pre><code>MyGameScene.prototype.draw = function () {
+<pre>MyGameScene.prototype.draw = function () {
 	<b>// Clear the screen
 	gEngine.Core.clearCanvas([0.8, 0.8, 0.8, 1.0]);
     
@@ -147,7 +147,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
     
 	// Draw our objects
 	this.mGameObject.draw(this.mCamera);</b>
-};</code></pre></blockquote>
+};</pre>
 
 		<p>In our draw function, we clear the screen, activate our camera for rendering and draw all of our objects (which is only one at this stage). We send a reference to our camera into the game object which will pull out the information it needs for behavior and send the camera to the enclosed renderable so that it can extract what it needs for drawing.</p>
         
@@ -158,6 +158,10 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 		<p><img src="tutorial1-img1.png" width="518" height="420" alt=""/></p><p></p>
 		<p>To activate motion, uncomment the last line in the <b>update()</b> function. The rectangle should oscillate left and right across the screen. You will also notice that the coloring is darker than you were probably expecting. Our renderable object responds to a "virtual light source".  By default, our only light source is ambient lighting and it is very dim so as not to interfere with other light sources you may define. We will look briefly at adjusting ambient lighting in the next tutorial.</p>
 		<p> In <a href="tutorial2.html">tutorial 2</a>, we will took at renderables that support textures, game objects that support collision detection and game resources.</p>
+        
+        
+        <hr>
+		<p align="center"><a href="tutorial0.html">Tutorial 0</a> &lt;-- Tutorial 1 --&gt; <a href="tutorial2.html">Tutorial 2</a></p>
 
 	</body>
 </html>

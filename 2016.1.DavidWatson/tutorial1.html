@@ -103,7 +103,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 				</ul
 			</li>
 		</ul>
-		<p>Notice that camera height is not given. This is inferred from the aspect ratio of the viewport.</p>
+		<p class="note">[Note: The camera height is not provided. The engine infers the height based on the width and the aspect ratio of the viewport.]</p>
 		</p>
 		<br>
 		<h4>Renderable</h4>
@@ -132,8 +132,8 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 	//this.mGameObject.update();</b>
 };</code></pre></blockquote>
 
-		<p>In this example, we want our GameObject to move left and right across our game screen. We have two if statements that determine if we hit the edge. At either point, we change the current front direction of the object towards the opposite direction. Note that setting the speed and setting the direction does not change the position. With these parameters set, calling <b>update()</b> on our GameObject will update the position. We have this commented out for the time being.</p>
-        <p>At any point, we can stop the execution of the game loop by calling gEngine.GameLoop.stop().</p>
+		<p>In this example, we want our GameObject to move left and right across our game screen. We have two if statements that determine if we hit the edge. At each point, we change the current "front direction" of the object towards the opposite direction. Note that setting the speed and setting the direction does not change the position. With these parameters set, calling <b>update()</b> on our GameObject will update the position. We have commented this line out for the time being so we can inspect our renderable.</p>
+        <p class="note">[Note: In a complete game, we would want to be able to end the game. You would trigger the engine to stop the game loop by calling gEngine.GameLoop.stop() within the update() function.]</p>
 		
 		<h3>Drawing</h3>
 		<p>The <b>draw()</b> function is called by the after the update cycle is complete.  On an unencumbered system, this should be 60 times a second.  If there are delays, multiple updates can occur before the draw routine is called.</p>
@@ -156,7 +156,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 		<h2>Conclusion</h2>
 		<p>When viewing this in a web browser, you should see the following...</p>
 		<p><img src="tutorial1-img1.png" width="518" height="420" alt=""/></p><p></p>
-		<p>To activate motion, uncomment the last line in the <b>update()</b> function. The rectangle should oscillate left and right across the screen. You will also notice that the coloring is darker than you were probably expecting. In the next tutorial, we will be looking at resources and ambient lighting to illuminate the objects in our scene.</p>
+		<p>To activate motion, uncomment the last line in the <b>update()</b> function. The rectangle should oscillate left and right across the screen. You will also notice that the coloring is darker than you were probably expecting. Our renderable object responds to a "virtual light source".  By default, our only light source is ambient lighting and it is very dim so as not to interfere with other light sources you may define. We will look briefly at adjusting ambient lighting in the next tutorial.</p>
 		<p> In <a href="tutorial2.html">tutorial 2</a>, we will took at renderables that support textures, game objects that support collision detection and game resources.</p>
 
 	</body>

@@ -182,16 +182,16 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
     
 	// create a new game object with the new renderable
 	this.mGameObject = new GameObject(this.mRenderable);
-    this.mGameObject.getXform().setSize(16, 16);
+	this.mGameObject.getXform().setSize(16, 16);
 	<b>//this.mGameObject.setCurrentFrontDir(vec2.fromValues(1, 0));
-    //this.mGameObject.getXform().setPosition(30, 50);
+	//this.mGameObject.getXform().setPosition(30, 50);
     
 	this.mMessage = new FontRenderable("Sample Text");
 	this.mMessage.setColor([1, 0, 0, 1]);
 	this.mMessage.getXform().setPosition(10, 50);
 	this.mMessage.setTextHeight(5);
     
-    gEngine.DefaultResources.setGlobalAmbientIntensity(3);</b>
+	gEngine.DefaultResources.setGlobalAmbientIntensity(3);</b>
     
 	this.mMsg.setText("This is splash Screen");
 };</code></pre></blockquote>

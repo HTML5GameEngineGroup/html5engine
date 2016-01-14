@@ -6,7 +6,7 @@
 		<title>Tutorial 1</title>
 	</head>
 	<body>
-		<h1> HTML5 Engine: <br>
+		<h1> GTCS Game Engine: <br>
 			Tutorial 1: Basic Application Structure</h1>
 		<p align="center"><a href="tutorial0.html">Tutorial 0</a> &lt;-- Tutorial 1 --&gt; <a href="tutorial2.html">Tutorial 2</a><br>
 		  <a href="index.html">Main tutorial guide page</a></p>
@@ -69,7 +69,41 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
 		<h3>initialization()</h3>
 		<p>The initialization() function is called by the engine after all resources requested in loadScene() are in RAM and usable by your code and is only called once. This is where you will allocate RAM and setup your objects. In this example, we create our remaining core objects with simple values to aide in comprehension.</p>
 
-<pre>MyGameScene.prototype.initialize = function () {
+
+
+		<p></p>
+		<h4>Camera and Viewport</h4>
+		<p>The camera defines the viewport and is setup with 3 parameters.  The position, the width and the location/size of the viewport.<br>
+		<ul>
+			<li>The position is identifed with a (X,Y) vector representing the point where the camera is centered. This is in world coordinate space (WC).</li>
+			<li>The camera width (also in WC) is the second parameter. The viewport is identified relative to the drawing canvas created in <a href="tutorial0">Tutorial 0</a>.</li>
+			<li>The orgX, orgY, width and height give the dimensions and location in pixel coordinate space for the area on the canvas that the viewport will draw to. It is not required that a viewport cover the entire canvas and you could have multiple viewports (cameras) draw to the same canvas.
+				<ul>
+					<li>orgX and orgY are the lower-left coordinates on the canvas where you want the lower-left coordinates of the viewport to be.</li>
+					<li>The width and height are how much of the canvas the viewport will occupy. </li>
+				</ul
+			></li>
+		</ul>
+        
+        <code>this.mCamera = new Camera(vec2.fromValues(50, 40), 100, [0, 0, 500, 400]);<br>
+	this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);</code>
+		<p class="note">[Note: The camera height is not provided. The engine infers the height based on the width and the aspect ratio of the viewport.]</p>
+		</p>
+		<br>
+		<h4>Renderable</h4>
+		<p>The renderable controls the "look" of objects in our game.  The basic one we create in the above example renders only a solid rectangle. We set it's color to red using RGB + Alpha values. We cannot make interesting games if our renderables are limited to making solid rectangles. In future tutorials, we will look at more advanced renderables that can draw textures, animate and respond to lighting effects. The key take away in this tutorial is that a renderable is just for defining the appearance of the object.</p>
+		<p><code>this.mRenderable = new Renderable();</br>
+	this.mRenderable.setColor([1, 0, 0, 1]);</code></p>
+		<br>
+		<h4>GameObject</h4>
+		<p>The GameObject is created with a reference to our renderable. We give the GameObject it's size and location in the viewport. Once the renderable is fully configured and incorporated into our GameObject, we should need to access it directly unless we want to change the appearance. If you need to modify appearance, you need to work with the renderable. Often, you will subclass GameObject that will automatically create and encapsulate it's renderables. The size and position are in WC space. The position is where the center of the object will be located. In this example, since our size is 16x16 and position is (30,50), this will set our red rectangle from (22,42) at the lower-left corner to (38,58) at the upper-right corner. We also set a front direction. This identifies the direction that the game object will move (not to be confused with rotation). We use a vector (1,0) indicating that it is pointing to the right. We set a speed of 0.5. This will allow the game object to modify it's location by 0.5 units horizontally every update cycle.</p>
+		<p><code>this.mGameObject = new GameObject(this.mRenderable);</br>
+	this.mGameObject.getXform().setSize(16, 16);</br>this.mGameObject.getXform().setPosition(30, 50);</br>
+	    this.mGameObject.setCurrentFrontDir(vec2.fromValues(1, 0));</br>
+		  this.mGameObject.setSpeed(0.5);</code></p>
+        
+		<p class="note">[Note: understanding different coordinate spaces is beyond the scope of these tutorials]</p>
+		<pre>MyGameScene.prototype.initialize = function () {
 	<b>this.mCamera = new Camera(
 		vec2.fromValues(50, 40),    // position of the camera
 		100,                        // camera width
@@ -89,30 +123,6 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
 	this.mGameObject.setCurrentFrontDir(vec2.fromValues(1, 0));
 	this.mGameObject.setSpeed(0.5);</b>
 };</pre>
-
-		<p></p>
-		<h4>Camera and Viewport</h4>
-		<p>The camera defines the viewport and is setup with 3 parameters.  The position, the width and the location/size of the viewport.<br>
-		<ul>
-			<li>The position is identifed with a (X,Y) vector representing the point where the camera is centered. This is in world coordinate space (WC).</li>
-			<li>The camera width (also in WC) is the second parameter. The viewport is identified relative to the drawing canvas created in <a href="tutorial0">Tutorial 0</a>.</li>
-			<li>The orgX, orgY, width and height give the dimensions and location in pixel coordinate space for the area on the canvas that the viewport will draw to. It is not required that a viewport cover the entire canvas and you could have multiple viewports (cameras) draw to the same canvas.
-				<ul>
-					<li>orgX and orgY are the lower-left coordinates on the canvas where you want the lower-left coordinates of the viewport to be.</li>
-					<li>The width and height are how much of the canvas the viewport will occupy. </li>
-				</ul
-			></li>
-		</ul>
-		<p class="note">[Note: The camera height is not provided. The engine infers the height based on the width and the aspect ratio of the viewport.]</p>
-		</p>
-		<br>
-		<h4>Renderable</h4>
-		<p>The renderable controls the "look" of objects in our game.  The basic one we create in the above example renders only a solid rectangle. We set it's color to red using RGB + Alpha values. We cannot make interesting games if our renderables are limited to making solid rectangles. In future tutorials, we will look at more advanced renderables that can draw textures, animate and respond to lighting effects. The key take away in this tutorial is that a renderable is just for defining the appearance of the object.</p>
-		<br>
-		<h4>GameObject</h4>
-		<p>The GameObject is created with a reference to our renderable. We give the GameObject it's size and location in the viewport. Once the renderable is fully configured and incorporated into our GameObject, we should need to access it directly unless we want to change the appearance. If you need to modify appearance, you need to work with the renderable. Often, you will subclass GameObject that will automatically create and encapsulate it's renderables. The size and position are in WC space. The position is where the center of the object will be located. In this example, since our size is 16x16 and position is (30,50), this will set our red rectangle from (22,42) at the lower-left corner to (38,58) at the upper-right corner. We also set a front direction. This identifies the direction that the game object will move (not to be confused with rotation). We use a vector (1,0) indicating that it is pointing to the right. We set a speed of 0.5. This will allow the game object to modify it's location by 0.5 units horizontally every update cycle.</p>
-		<p class="note">[Note: understanding different coordinate spaces is beyond the scope of these tutorials]</p>
-		
 		
 		<hr>
 		<h2>Game Loop</h2>

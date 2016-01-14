@@ -7,15 +7,15 @@
 	</head>
 
 	<body>
-		<h1> HTML5 Engine: <br>
+		<h1> GTCS Game Engine: <br>
 		Tutorial 2: Resources &amp; User&nbsp;Input</h1>
-		<p align="center"><a href="tutorial1.html">Tutorial 1</a> &lt;-- Tutorial 2 --&gt; <a href="tutorial3.html">Tutorial 3</a><br>
+		<p align="center"><a href="tutorial1.html">Tutorial 1</a> &lt;-- Tutorial 2 --&gt; <a href="tutorial3/tutorial3.html">Tutorial 3</a><br>
 		  <a href="index.html">Main tutorial guide page</a><br></p>
 		
 		
 		<hr>
 		<h2>Introduction</h2>
-		<p>In tutorial 1, we looked at creating the basic structure for our game scene. We created a camera object and a game object with a simple renderable. In this tutorial, we will look at more advanced renderable types, collision detection, user input and resource management.</p>
+		<p>In tutorial 1, we looked at creating the basic structure for our game scene. We created a camera object and a game object with a simple renderable. In this tutorial, we will look at  resource management,  a more advanced renderable type and user input .</p>
 		
 		
 		<hr>
@@ -67,7 +67,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 	this.mGameObject.getXform().setPosition(30, 50);
 };</code></pre></blockquote>
 
-		<p>The GameObject is created just as before, but now, we have a a reference to our new texture-based renderable. Without changing anything else in our code, viewing this in a web browser should give you the following result...</p>
+		<p>The GameObject is created just as before, but now, we have a a reference to our new texture-based renderable. We also removed the behavior code for the GameObject. We no longer set a front direction or a speed. We do this so that we the GameObject does not move independently. We will soon be adding code to move the GameObject with keyboard controls. Without changing anything else in our code, viewing this in a web browser should give you the following result...</p>
 		<p><img src="tutorial2-img1.png" width="519" height="417" alt=""/></p>
 		<p></p>
         
@@ -89,6 +89,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 	if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Q)) {
 		gEngine.GameLoop.stop();
 	}</b>
+    this.mGameObject.update()
 };</code></pre></blockquote>
         <p>Notice that we have removed the call to <code>this.mGameObject.update()</code>. Had we left it in, the game object would have moved indefinitely to the right despite our keyboard input due to the speed and direction settings we gave in the <code>initialization()</code> function. Also, when the 'Q' key is pressed, everything comes to a halt. Keyboard input is no longer processed by the game and motion is stopped. After <code>gEngine.GameLoop.stop()</code> is called, the game loop stops and the <code>unloadScene()</code> function is called.</p>
         <p class="note">[Note: When the game loop stops, <b>unloadScene()</b> is called where you can then instantiate a completely different Scene object and call <b>gEngine.Core.startScene(<i>nextScene</i>)</b> to start a new game loop. This is how you can implement a game with multiple levels.]</p>

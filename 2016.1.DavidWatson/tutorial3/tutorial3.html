@@ -30,11 +30,10 @@
         </p>
 
 
-
 	<hr>
 		<h2>Sprites</h2>
 		<p>TextureRenderables have a big advantage over Renderables in being able to render a bitmap. They do have a few significant limitations. Our texture must have dimensions that are powers of 2 and they are static. While this may work fine for backgrounds or or static visual elements, we typically want something more dynamic for the &quot;action&quot; graphics in our game. SpriteRenderables allow us to use a sprite sheet and define the portion of the sheet we want to display for the renderable.</p>
-		<p>In figure 3-1, we see a sample sprite sheet. You will notice that in the bottom row (second from the left), we have the same image we used in tutorial 2. With coordinate location (0,0) being the bottom left of the entire sprite page, the bottom left coordinate for this sub-image is at (0,180). The size of this sub-image is 130 pixels wide by 310 pixels tall. Using the line <code>this.mRenderable.setElementPixelPositions(130, 310, 0, 180);</code> allows us to define the portion of the sheet we want to render.</p>
+		<p>In figure 3-1, we see a sample sprite sheet. You will notice that in the bottom row (second from the left), we have the same image we used in tutorial 2. With coordinate location (0,0) being the bottom left of the entire sprite page, the bottom left coordinate for this sub-image is at (130,0). The size of this sub-image is 180 pixels wide by 180 pixels tall. Using the call <code>setElementPixelPositions(<em>left-x, right-x, lower-y, upper-y</em>);</code> will allow us to define the portion of the sheet we want to render.</p>
 	<figure><pre>function MyGameScene() {
 	this.mCamera = null;
 	this.mRenderable = null;
@@ -73,6 +72,46 @@ MyGameScene.prototype.initialize = function () {
 };
 </pre>
 		<figcaption class="codecaption">Code snippet 3-1: Adding a SpriteRenderable</figcaption>
+        </figure>
+        <p>If you make the above changes to your code, you will notice that the scene looks exactly the same. So far, this doesn't seem very useful until we consider that we can consolidate all of our textures onto a single sprite sheet and that our renderable textures can be of arbitrary dimensions.</p>
+        <p>Unlike a TextureRenderable, SpriteRenderable allows us to change the renderable being shown by changing the element pixel position of the sprite sheet. There is an identical minion facing the opposite direction at (720,0). The size is still 180x180 so calling <code>this.mRenderable.setElementPixelPositions(720, 900, 0, 180);</code> will allow our sprite to appear to change direction.</p>
+        <p>Below, we modify our <strong>update()</strong> function to make the sprite change directions based on the keyboard controls.</p>
+        
+        <figure><pre>MyGameScene.prototype.update = function () {
+	// Check for user keyboard input to control GameObject
+	if (gEngine.Input.isKeyPressed(gEngine.Input.keys.A)) {
+		<b>this.mRenderable.setElementPixelPositions(130, 310, 0, 180);</b>
+		this.mGameObject.getXform().incXPosBy(-0.5);
+	}
+        
+	if (gEngine.Input.isKeyPressed(gEngine.Input.keys.D)) {
+		<b>this.mRenderable.setElementPixelPositions(720, 900, 0, 180);</b>
+		this.mGameObject.getXform().incXPosBy(0.5);
+	}
+     
+	if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Q)) {
+		gEngine.GameLoop.stop();
+	}</b>
+};</pre>
+		<figcaption class="codecaption">Code snippet 3-2: Update</figcaption>
+        </figure>
+
+
+	<hr>
+		<h2>Sprite Animation</h2>
+		<p>We can take our SpriteRenderable concept another step forward by defining and automatic animation for it.</p>
+        
+        <figure>
+          <pre>function MyGameScene() {
+	this.mCamera = null;
+	this.mRenderable = null;
+	this.mGameObject = null;
+	<strong>this.mAnimatedRenderable = null;
+	this.mAnimatedGameObject = null;</strong>
+    
+	this.kTexture = "assets/minion_sprite.png"
+};</pre>
+		<figcaption class="codecaption">Code snippet 3-3: Adding a second GameObject</figcaption>
         </figure>
 
     <hr>

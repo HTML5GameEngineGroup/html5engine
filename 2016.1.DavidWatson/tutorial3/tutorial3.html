@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="../coding.css">
+		<link rel="stylesheet" href="../assets/coding.css">
 		<title>Tutorial 3</title>
 	</head>
 
@@ -17,12 +17,56 @@
 		<h2>Introduction</h2>
 		<p>In this tutorial, we are going to look at more renderables and expand our understanding of game object behavior by using collision detection.</p>
 		
-		
-		<hr>
+        
+        <hr>
+		<h2>Files Used</h2>
+        <p>Source Code can be downloaded here.</p>
+        <p>Image Files</p>
+		<p><img src="assets/minion_sprite.png" width="512" height="256" alt=""/></p>
+
+
+
+	<hr>
 		<h2>Sprites</h2>
-		<p>TextureRenderable have some limitations.</p>
+		<p>TextureRenderables have a big advantage over Renderables in being able to render a bitmap. They do have a few significant limitations. Our texture must have dimensions that are powers of 2 and they are static. While this may work fine for backgrounds or or static visual elements, we typically want something more dynamic for the &quot;action&quot; graphics in our game. SpriteRenderables extend texture renderables allowing us to use a sprite sheet and define the portion of the sheet we want to display for the renderable.</p>
+		
+<pre>function MyGameScene() {
+	this.mCamera = null;
+	this.mRenderable = null;
+	this.mGameObject = null;
+    
+	<b>this.kTexture = "assets/minion_sprite.png"</b>
+};
+gEngine.Core.inheritPrototype(MyGameScene, Scene);
 
+function loadScene() {
+	gEngine.Textures.loadTexture(this.kTexture);
+    
+function unloadScene() {
+	gEngine.Textures.unloadTexture(this.kTexture);
+};
 
+MyGameScene.prototype.initialize = function () {
+	this.mCamera = new Camera(
+		vec2.fromValues(50, 40),    // position of the camera
+		100,                        // width of camera
+		[0, 0, 500, 400]            // viewport (orgX, orgY, width, height)
+	);
+	// set the background color of our view to medium grey
+	this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
+    
+	<b>// we now use a sprite renderable object
+	this.mRenderable = new SpriteRenderable(this.kTexture);
+	this.mRenderable.setElementPixelPositions(130, 310, 0, 180);</b>
+    
+	// create a new game object with the new renderable
+	this.mGameObject = new GameObject(this.mRenderable);
+	this.mGameObject.getXform().setSize(16, 16);
+	this.mGameObject.getXform().setPosition(30, 50);
+    
+	gEngine.DefaultResources.setGlobalAmbientIntensity(3);
+};
+</pre>
 
     <hr>
     <h2>Conclusion</h2>

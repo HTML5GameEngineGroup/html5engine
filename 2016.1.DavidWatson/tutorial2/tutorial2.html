@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="../coding.css">
+		<link rel="stylesheet" href="../assets/coding.css">
 		<title>Tutorial 2</title>
 	</head>
 
@@ -15,7 +15,12 @@
 		
 		<hr>
 		<h2>Introduction</h2>
-		<p>In tutorial 1, we looked at creating the basic structure for our game scene. We created a camera object and a game object with a simple renderable. In this tutorial, we will look at  resource management,  a more advanced renderable type and user input .</p>
+		<p>In tutorial 1, we looked at creating the basic structure for our game scene. We created a camera object and a game object with a simple renderable. In this tutorial, we will look at  resource management,  a more advanced renderable type and user input.</p>
+        <hr>
+		<h2>Files Used</h2>
+		<p>Source Code can be downloaded here.</p>
+		<p>Image Files</p>
+		<p><img src="assets/minion_portal.png" width="64" height="64" alt=""/></p>
 		
 		
 		<hr>
@@ -26,30 +31,32 @@
 		<p>To facilitate the loading of resources, we create constants to identify the file paths for our resources and provide a consistent way for referencing the resource. By convention, we store resource files in the "assets" directory of our game engine file hierarchy. The game engine supports PNG image files, WAV audio files and text files.</p>
 		<p class="note">[Note: When creating resources for texture maps, the dimensions must be on the order of perfect power of 2.<br>
 		Examples of image size includes 64x64, 512x2048 or 16x128.]</p>
-<blockquote><pre><code>function MyGameScene() {
+<pre>function MyGameScene() {
 	this.mCamera = null;
 	this.mRenderable = null;
 	this.mGameObject = null;
     
 	<b>this.kTexture = "assets/minion_portal.png"</b>
 };
-gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
+gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
 
 		<p>The code above declares three instance variables that will be used in our scene as well as a <code>string</code> constant that identifies the path to an image resource file.</p>
 		
 		<h3>loadScene() and unloadScene()</h3>
 		<p>The <b>loadScene()</b> function will queue our texture for loading by using the <code>gEngine.Textures.loadTexture()</code> function. There is also <code>gEngine.Textures.loadAudio()</code> function for loading audio files and a <code>gEngine.Textures.loadTextFile()</code> function for loading text files. The files we identify will load asynchronously. We parallel the loading of resources with the cleanup and deallocation of resources in <b>unloadScene()</b> which will be called on program exit.</p>
 
-<blockquote><pre><code>function loadScene() {
+<pre>function loadScene() {
 	<b>gEngine.Textures.loadTexture(this.kTexture);</b>
-};</code></pre></blockquote><blockquote><pre><code>function unloadScene() {
+};
+
+function unloadScene() {
 	<b>gEngine.Textures.unloadTexture(this.kTexture);</b>
-};</code></pre></blockquote>
+};</pre>
 
 		<h3>initialization()</h3>
 		<p>The <b>initialization()</b> function is mostly the same as it was in the previous tutorial. Now we create a TextureRenderable instead. This renderable has all of the same functionality as the Renderable but allows us to utilize a bitmap image instead of using a solid color.</p>
 
-<blockquote><pre><code>MyGameScene.prototype.initialize = function () {
+<pre>MyGameScene.prototype.initialize = function () {
 	this.mCamera = new Camera(
 		vec2.fromValues(50, 40),    // position of the camera
 		100,                        // width of camera
@@ -65,7 +72,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 	this.mGameObject = new GameObject(this.mRenderable);
 	this.mGameObject.getXform().setSize(16, 16);
 	this.mGameObject.getXform().setPosition(30, 50);
-};</code></pre></blockquote>
+};</pre>
 
 		<p>The GameObject is created just as before, but now, we have a a reference to our new texture-based renderable. We also removed the behavior code for the GameObject. We no longer set a front direction or a speed. We do this so that we the GameObject does not move independently. We will soon be adding code to move the GameObject with keyboard controls. Without changing anything else in our code, viewing this in a web browser should give you the following result...</p>
 		<p><img src="assets/tutorial2-img1.png" width="519" height="417" alt=""/></p>
@@ -76,7 +83,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
     <h2>Keboard Input</h2>
         <p>Tracking user events involves polling for the status of keys and the mouse using a number of functions provided by gEngine.Input. To find the state of a particular key, we use gEngine.Input.isKeyPressed(). To find out if the mouse button is pressed, we use gEngine.Input.isButtonPressed(). In this example, we control movement of our TextureRenderable with the keyboard.</p>
         
-<blockquote><pre><code>MyGameScene.prototype.update = function () {
+<pre>MyGameScene.prototype.update = function () {
 	<b>// Check for user keyboard input to control GameObject
 	if (gEngine.Input.isKeyPressed(gEngine.Input.keys.A)) {
 		this.mGameObject.getXform().incXPosBy(-0.5);
@@ -90,7 +97,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 		gEngine.GameLoop.stop();
 	}</b>
     this.mGameObject.update()
-};</code></pre></blockquote>
+};</pre>
         <p>Notice that we have removed the call to <code>this.mGameObject.update()</code>. Had we left it in, the game object would have moved indefinitely to the right despite our keyboard input due to the speed and direction settings we gave in the <code>initialization()</code> function. Also, when the 'Q' key is pressed, everything comes to a halt. Keyboard input is no longer processed by the game and motion is stopped. After <code>gEngine.GameLoop.stop()</code> is called, the game loop stops and the <code>unloadScene()</code> function is called.</p>
         <p class="note">[Note: When the game loop stops, <b>unloadScene()</b> is called where you can then instantiate a completely different Scene object and call <b>gEngine.Core.startScene(<i>nextScene</i>)</b> to start a new game loop. This is how you can implement a game with multiple levels.]</p>
         
@@ -105,27 +112,27 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
             <li>Free the resource when it is no longer needed in unloadScene()</li>
 		</ol>
         
-        <blockquote><pre><code>function MyGameScene() {
+        <pre>function MyGameScene() {
 	this.mCamera = null;
 	this.mRenderable = null;
 	this.mGameObject = null;
     
-    this.kTexture = "assets/minion_portal.png"
+	this.kTexture = "assets/minion_portal.png"
 	<b>this.kGameSong = "assets/gameSong.mp3"</b>
 };
-gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
+gEngine.Core.inheritPrototype(MyGameScene, Scene);
 
-<blockquote><pre><code>function loadScene() {
+function loadScene() {
 	gEngine.Textures.loadTexture(this.kTexture);
-    <b>gEngine.AudioClips.loadAudio(this.kGameSong);</b>
-};</code></pre></blockquote>
+	<b>gEngine.AudioClips.loadAudio(this.kGameSong);</b>
+};
 
-<blockquote><pre><code>function unloadScene() {
+function unloadScene() {
 	gEngine.Textures.unloadTexture(this.kTexture);
-    <b>gEngine.AudioClips.unloadAudio(this.kGameSong);</b>
-};</code></pre></blockquote>
+	<b>gEngine.AudioClips.unloadAudio(this.kGameSong);</b>
+};</pre>
 
-<blockquote><pre><code>MyGameScene.prototype.update = function () {
+<pre>MyGameScene.prototype.update = function () {
 	// Check for user keyboard input to control GameObject
 	if (gEngine.Input.isKeyPressed(gEngine.Input.keys.A)) {
 		this.mGameObject.getXform().incXPosBy(-0.5);
@@ -145,7 +152,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 		else
 			gEngine.AudioClips.stopBackgroundAudio();
     }</b>
-};</code></pre></blockquote>
+};</pre>
 
     <p>In this example, we check to see if the mouse button is clicked. We then use gEngine.AudioClips functions to determine if background audio is already playing. If it isn't, we do a function call to start playing our background MP3. If the background audio is already playing, we stop it.</p>
         <p class="note">[Note: The mouse input will only respond if the mouse is clicked while hovering over the WebGL canvas in the browser.]</p>
@@ -156,21 +163,21 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
         <p>To create text, we are going to use a special kind of TextureRenderable called a <b>FontRenderable</b>. It uses a texture that has all the characters of a font and will copy the appropriate portions of the texture to the screen based on a string value we provide. Several font textures are automatically loaded by the engine and are available to us.</p>
 		<p>First we declare our new variable for the text we will display.</p>
         
-<blockquote><pre><code>function MyGameScene() {
+<pre>function MyGameScene() {
 	this.mCamera = null;
 	this.mRenderable = null;
 	this.mGameObject = null;
 	<b>this.mMessage = null;</b>
     
-    this.kTexture = "assets/minion_portal.png"
+	this.kTexture = "assets/minion_portal.png"
 	this.kGameSong = "assets/gameSong.mp3"
 };
-gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
+gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
 
-		<p>We initialize the variable by allocating an new <b>FontRenderable</b> object. We also comment out (or delete) the unneeded code that sets the renderables direction and speed (our keyboard controls the location now).</p>
+		<p>We initialize the variable by allocating an new <b>FontRenderable</b> object. We also comment  delete the  code that sets the renderables direction and speed (our keyboard controls the location now). The code below sets the color, size and position of the text.</p>
+		<p>You will also notice a call to <b>gEngine.DefaultResources.setGlobalAmbientIntensity(3);</b>. Unlike the resources we request the engine to load, there are some resources that the engine provides by default. The texture that makes up the default font we use is an example of a default resource that we never need to load or unload. An ambient lighting source is another default resource. This light is always there but it is normally set very dim (we saw this in our previous examples). It is very dim so that when you do define other lighting sources, the ambient wont conflict with your design.</p>
 
-<blockquote>
-  <pre><code>MyGameScene.prototype.initialize = function () {
+<pre>MyGameScene.prototype.initialize = function () {
 	this.mCamera = new Camera(
 		vec2.fromValues(50, 40),    // position of the camera
 		100,                        // width of camera
@@ -185,22 +192,20 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
 	// create a new game object with the new renderable
 	this.mGameObject = new GameObject(this.mRenderable);
 	this.mGameObject.getXform().setSize(16, 16);
-	<b>//this.mGameObject.setCurrentFrontDir(vec2.fromValues(1, 0));
-	//this.mGameObject.getXform().setPosition(30, 50);
+	this.mGameObject.getXform().setPosition(30, 50);
     
-	this.mMessage = new FontRenderable("Sample Text");
+	<b>this.mMessage = new FontRenderable("Sample Text");
 	this.mMessage.setColor([1, 0, 0, 1]);
-	this.mMessage.getXform().setPosition(10, 50);
+	this.mMessage.getXform().setPosition(10, 70);
 	this.mMessage.setTextHeight(5);
+	this.mMessage.setText("This is sample text");
     
 	gEngine.DefaultResources.setGlobalAmbientIntensity(3);</b>
-    
-	this.mMsg.setText("This is splash Screen");
-};</code></pre></blockquote>
+};</pre>
 
 		<p>For the first time in a while, we need to make modifications to our <b>draw()</b> function.  We now have a second renderable.</p>
         
-        <blockquote><pre><code>MyGameScene.prototype.draw = function () {
+        <pre>MyGameScene.prototype.draw = function () {
 	// Clear the screen
 	gEngine.Core.clearCanvas([0.8, 0.8, 0.8, 1.0]);
     
@@ -209,13 +214,13 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</code></pre></blockquote>
     
 	// Draw our objects
 	this.mGameObject.draw(this.mCamera);
-    <b>this.mMessage.draw(this.mCamera);</b>
-};</code></pre></blockquote>
-
-
-
+	<b>this.mMessage.draw(this.mCamera);</b>
+};</pre>
     <hr>
     <h2>Conclusion</h2>
+    <p>When viewing this in a web browser, you should see the following...</p>
+    <h2><img src="assets/tutorial2-img2.png" width="509" height="410" alt=""/></h2>
+    <p>Increasing the ambient lighting intensity has  brightened our sprite. We will keep that for future projects. Use the &quot;A&quot; and &quot;D&quot; keys on the keyboard to move the sprite left and right. Press the mouse button to activate the background music.</p>
         <p>In <a href="../tutorial3.html">tutorial 3</a>, we will took at renderables that support textures and game objects that support collision detection.</p>
         
         

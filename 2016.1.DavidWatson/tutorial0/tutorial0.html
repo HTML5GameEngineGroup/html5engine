@@ -4,15 +4,11 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="../assets/coding.css">
 		<title>Tutorial 0</title>
-		<script type="text/javascript" src="../code-highlighter-master/code_highlighter.js"></script>
-		<script type="text/javascript" src="../code-highlighter-master/javascript.js"></script>
-		<script type="text/javascript" src="../code-highlighter-master/css.js"></script>
-		<script type="text/javascript" src="../code-highlighter-master/html.js"></script>
-		<script type="text/javascript" src="../code-highlighter-master/ruby.js"></script>
 	</head>
 
 	<body>
-		<h1> GTCS Game Engine: <br>
+    	<div id="main-content">
+		<h1>GTCS Game Engine:<br>
 		Tutorial 0: Setting Up the Environment</h1>
 		<p align="center">Tutorial 0 --&gt; <a href="../tutorial1/tutorial1.html">Tutorial 1</a><br>
 		  <a href="../index.html">Main tutorial guide page</a></p>
@@ -27,19 +23,22 @@
 			<li>JavaScript include files - These will be all of the files that are part of the engine and any files you create. The order that these are listed in is important. Modifying this order could break things.</li>
 			<li>Canvas DOM object - This is the section of the web page where all WebGL activity will be encapsulated. It identifies the canvas' pixel width and height where the game will be rendered.</li>
 		</ul>
+        
 		<h3>onload</h3>
 		<p>The entry point for your code will be an object you design that is a subclass of the engine's "Scene" object. You will first allocate a new instance of your class and send it into the game engine as shown in the following code snippet.</p>
 
-<pre>&lt;body onload="
+		<figure><pre>&lt;body onload="
 	<strong>var mainGame = new MyGameScene();</strong>
 	gEngine.Core.initializeEngineCore('GLCanvas', <strong>mainGame</strong>);
 "&gt;</pre>
+		<figcaption class="codecaption">Code snippet 0-1: onload</figcaption>
+        </figure>
 		<p class="note">Note: The portions in bold are the sections that are specific to your game implementation.</p>
 
 		<h3>JavaScript Includes</h3>
 		<p>This code can be dropped into your HTML file as-is for all cases.  The last line is an exception.  This is where your custom code needs to be added. If you have multiple files, you need an include for each file. Again, the order is important so be sure you know what order things are being referenced.</p>
 
-<pre>&lt;!-- the following says there are javascript source code contained in 
+		</div><div id="wide-code"><figure><pre width=1000px>&lt;!-- the following says there are javascript source code contained in 
          the external source files
     --&gt;
     &lt;!-- external library --&gt;
@@ -129,14 +128,19 @@
    
     <b>&lt;!-- Client game code --&gt;
         &lt;script type="text/javascript" src="src/MyGame/MyGameScene.js"&gt;&lt;/script&gt;</b></pre>
+		<figcaption class="codecaption">Code snippet 0-2: Include Files</figcaption>
+        </figure></div>
         
+        <div id="main-content">
 		<h3>Canvas item</h3>
-		<p>The canvas is where the rendering of your game will occur. You need to define the pixel width and height. The engine will look for the DOM object called &quot;GLCanvas&quot; and handle the rest.</p>    
-           <pre>&lt;canvas id="GLCanvas" width="<strong>500</strong>" height="<strong>400</strong>"&gt;
+		<p>The canvas is where the rendering of your game will occur. You need to define the pixel width and height. The engine will look for the DOM object called &quot;GLCanvas&quot; and handle the rest.</p>
+            
+           <figure><pre>&lt;canvas id="GLCanvas" width="<strong>500</strong>" height="<strong>400</strong>"&gt;
         &lt;!-- this message will show only if WebGL failed to load--&gt;
         Your browser does not support the HTML5 canvas.
-&lt;/canvas&gt;
-           </pre>
+&lt;/canvas&gt;</pre>
+		<figcaption class="codecaption">Code snippet 0-3: Canvas</figcaption>
+        </figure>
 
 		
         <hr>
@@ -146,5 +150,6 @@
         
         <hr>
         <p align="center">Tutorial 0 --&gt; <a href="../tutorial1/tutorial1.html">Tutorial 1</a></p>
+    	</div>
 	</body>
 </html>

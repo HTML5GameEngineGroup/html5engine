@@ -1,78 +1,53 @@
-	body {
-		background : #EEE;
-		font-family: Arial, Helvetica, sans-serif;
-		margin : 3em 5em;
-		line-height : 1.5;
-		font-size: 80%;
-	}
-	pre {
-		border: 1px solid black;
-		border-color: #BBB #DDD #DDD #BBB;
-		margin : 2em;
-		padding : 1em;
-		line-height: 1.5;
-		background: white;
-		overflow: auto;
-		font-size: 110%;
-	}
-	
-	code {
-		font-size: 1.2em;
-	}
-	h1 span {
-		font-size : 0.5em;
-	}
-	a {
-		color : gray;
-	}
-	p.note {
-		color : red;
-	}
-	b.code {
-		font-size: 1.2em;
-	}
-	/* end of page css - below is for the code highlighter */
-	.javascript .comment, .ruby .comment {
-		color : green;
-	}
-	.javascript .string, .ruby .string {
-		color : teal;
-	}
-	.javascript .keywords, .ruby .keywords {
-		color : navy;
-	}
-	.javascript .global {
-		color : blue;
-	}
-	.javascript .brackets, .ruby .brackets {
-		color : navy;
-	}
-	.css .comment {
-		color : gray;
-	}
-	.css .properties {
-		color : navy;
-	}
-	.css .selectors {
-		color : maroon;
-		font-weight : bold;
-	}
-	.css .units {
-		color :red;
-	}
-	.css .urls {
-		color :green;
-	}
-	.html .tag {
-		color : purple;
-	}
-	.html .comment {
-		color : gray;
-		font-style: italic;
-	}
-	.html .string {
-		color : navy;
-	}
-	.html .doctype {
-		color : teal;
-	}
+body {
+	background : #EEE;
+	font-family: Arial, Helvetica, sans-serif;
+	margin : 3em 5em;
+	line-height : 1.5;
+	font-size: 80%;
+}
+pre {
+	border: 1px solid black;
+	border-color: #BBB #DDD #DDD #BBB;
+	margin : 2em 2em 0 2em;
+	padding : 1em;
+	line-height: 1.5;
+	background: white;
+	overflow: auto;
+	font-size: 110%;
+}
+
+code {
+	font-size: 1.2em;
+}
+h1 span {
+	font-size : 0.5em;
+}
+a {
+	color : gray;
+}
+figcaption {
+	color: #999;
+	font-size: 0.923em;
+	margin-top: 0;
+}
+p.note {
+	color : red;
+}
+b.code {
+	font-size: 1.2em;
+}
+#main-content {
+	max-width: 800px;
+	min-width: 480px;
+	margin: auto;
+}
+#wide-code {
+	max-width: 950px;
+	min-width: 480px;
+	margin: auto;
+}
+.codecaption {
+	margin : 2em;
+	margin-top: 0;
+	padding-top: 0;
+}

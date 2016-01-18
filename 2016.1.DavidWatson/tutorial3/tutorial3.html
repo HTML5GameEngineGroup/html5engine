@@ -33,6 +33,9 @@
 	<hr>
 		<h2>Sprites</h2>
 		<p>TextureRenderables have a big advantage over Renderables in being able to render a bitmap. They do have a few significant limitations. Our texture must have dimensions that are powers of 2 and they are static. While this may work fine for backgrounds or or static visual elements, we typically want something more dynamic for the &quot;action&quot; graphics in our game. SpriteRenderables allow us to use a sprite sheet and define the portion of the sheet we want to display for the renderable.</p>
+        <p><figure><img src="assets/sprite_sheet.png" width="471" height="276" alt=""/><figcaption>Figure 3-2: Sprite sheet</figcaption>
+            </figure>
+        </p>
 		<p>In figure 3-1, we see a sample sprite sheet. You will notice that in the bottom row (second from the left), we have the same image we used in tutorial 2. With coordinate location (0,0) being the bottom left of the entire sprite page, the bottom left coordinate for this sub-image is at (130,0). The size of this sub-image is 180 pixels wide by 180 pixels tall. Using the call <code>setElementPixelPositions(<em>left-x, right-x, lower-y, upper-y</em>);</code> will allow us to define the portion of the sheet we want to render.</p>
 	<figure><pre>function MyGameScene() {
 	this.mCamera = null;
@@ -99,7 +102,7 @@ MyGameScene.prototype.initialize = function () {
 
 	<hr>
 		<h2>Sprite Animation</h2>
-		<p>We can take our SpriteRenderable concept another step forward by defining and automatic animation for it.</p>
+		<p>We can take our SpriteRenderable concept another step forward by defining how to implement automatic animation. First, we create a variables for a second renderable and game object.</p>
         
         <figure>
           <pre>function MyGameScene() {
@@ -113,6 +116,136 @@ MyGameScene.prototype.initialize = function () {
 };</pre>
 		<figcaption class="codecaption">Code snippet 3-3: Adding a second GameObject</figcaption>
         </figure>
+        
+        <p>During initialization, we use <code>etSpriteSequence(348, 0, 204, 164, 5,	0)</code> to define an animation sequence. Each of the parameters are defined as follows...
+        <ul>
+        	<li>384 - Top Y-coordinate of image (164 pixels down from 512)</li>
+            <li>0 - Left X-Coordinate of image</li>
+			<li>	204 - Width in pixels</li>
+            <li>164 - Height in pixels </li>
+			<li>	5 - Number of elements in this sequence</li>
+			<li>	0 - Horizontal padding in between</li>
+        </ul>
+        <p>After creating renderable, we define what direction the engine should cycle through the images with <code>setAnimationType(SpriteAnimateRenderable.eAnimationType.eAnimateRight)</code> and how fast the cycle should move with <code>setAnimationSpeed(50)</code>. As previously mentioned, the engine calls update and draw 60 times per second. These calls will cycle through 5 images every 50 calls. To have the sequence cycle every second, we make the call with a value of 60.</p>
+        <figure>
+<pre>MyGameScene.prototype.initialize = function () {
+	this.mCamera = new Camera(
+		vec2.fromValues(50, 40),    // position of the camera
+		100,                        // width of camera
+		[0, 0, 500, 400]            // viewport (orgX, orgY, width, height)
+	);
+	// set the background color of our view to medium grey
+	this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
+    
+	// we now use a sprite renderable object
+	this.mRenderable = new SpriteRenderable(this.kTexture);
+	this.mRenderable.setElementPixelPositions(130, 310, 0, 180);
+    
+	// create a new game object with the new renderable
+	this.mGameObject = new GameObject(this.mRenderable);
+	this.mGameObject.getXform().setSize(16, 16);
+	this.mGameObject.getXform().setPosition(30, 50);
+    
+	<b>// we create a second renderable
+	this.mAnimatedRenderable = new SpriteAnimateRenderable(this.kTexture);
+	this.mAnimatedRenderable.setSpriteSequence(348, 0, 204, 164, 5,	0);
+	this.mAnimatedRenderable.setAnimationType(
+    				SpriteAnimateRenderable.eAnimationType.eAnimateRight);
+	this.mAnimatedRenderable.setAnimationSpeed(50);
+    
+	this.mAnimatedGameObject = new GameObject(this.mAnimatedRenderable);
+	this.mAnimatedGameObject.getXform().setSize(16, 12.8);
+	this.mAnimatedGameObject.getXform().setPosition(80, 50);</b>	
+
+	gEngine.DefaultResources.setGlobalAmbientIntensity(3);
+};</pre>		<figcaption class="codecaption">Code snippet 3-4: Initialize</figcaption>
+        </figure>
+        
+        <p>In the <b>update</b> function, we are going to control the motion of the second renderable using the mouse location. The engine's input routines can be used to get the mouse location but the coordinates will be in pixel space. To convert to WC, we need to take information from the camera object and perform math. Fortunately, this is very common so the camera object provides <code>mouseWCX()</code> and <code>mouseWCY()</code> to get the location in the proper coordinate system.</p>
+        <p>We also need to tell the renderable to update the animation with a call to <code>updateAnimation()</code>.</p>
+        
+        <figure><pre>MyGameScene.prototype.update = function () {
+	this.mCamera.update();
+       
+	if (gEngine.Input.isKeyPressed(gEngine.Input.keys.A)) {
+		this.mRenderable.setElementPixelPositions(130, 310, 0, 180);
+		this.mGameObject.getXform().incXPosBy(-0.5);
+	}
+
+	if (gEngine.Input.isKeyPressed(gEngine.Input.keys.D)) {
+		this.mRenderable.setElementPixelPositions(720, 900, 0, 180);
+		this.mGameObject.getXform().incXPosBy(0.5);
+	}
+
+	<b>this.mAnimatedGameObject.getXform().setXPos(this.mCamera.mouseWCX());
+	this.mAnimatedGameObject.getXform().setYPos(this.mCamera.mouseWCY());</b>
+     
+	if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Q)) {
+		gEngine.GameLoop.stop();
+	}
+    
+    this.mGameObject.update();
+    <b>this.mAnimatedRenderable.updateAnimation();</b>
+};</pre>
+		<figcaption class="codecaption">Code snippet 3-5: Update</figcaption>
+        </figure>
+        
+        <p>In the draw routine, of course, we draw our second renderable.</p>
+        
+        <figure><pre>MyGameScene.prototype.draw = function () {
+	// Clear the screen
+	gEngine.Core.clearCanvas([0.8, 0.8, 0.8, 1.0]);
+    
+	// Activate our camera
+	this.mCamera.setupViewProjection();
+    
+	// Draw our objects
+	this.mGameObject.draw(this.mCamera);
+	<b>this.mAnimatedGameObject.draw(this.mCamera);</b>
+};</pre>
+		<figcaption class="codecaption">Code snippet 3-6: Draw</figcaption>
+        </figure>
+        
+        <p><figure><img src="assets/tutorial3-img2.png" width="513" height="414" alt=""/>
+            	<figcaption>Figure 3-3: Two sprites</figcaption></figure></p>
+                
+                
+<hr>
+    <h2>Collision Detection</h2>
+        <p>The code we have created in this tutorial have set us up for looking at collision detection (after all, we need at least two objects to touch to see this in action). We call GameObject's <code>pixelTouches()</code> function to determine if the game object is in contact with another game object. The function returns a boolean and provides the WC coordinates of the point where the collision occurred.</p>
+        
+        <figure>
+          <pre>MyGameScene.prototype.update = function () {
+	this.mCamera.update();
+       
+	if (gEngine.Input.isKeyPressed(gEngine.Input.keys.A)) {
+		this.mRenderable.setElementPixelPositions(130, 310, 0, 180);
+		this.mGameObject.getXform().incXPosBy(-0.5);
+	}
+
+	if (gEngine.Input.isKeyPressed(gEngine.Input.keys.D)) {
+		this.mRenderable.setElementPixelPositions(720, 900, 0, 180);
+		this.mGameObject.getXform().incXPosBy(0.5);
+	}
+
+	this.mAnimatedGameObject.getXform().setXPos(this.mCamera.mouseWCX());
+	this.mAnimatedGameObject.getXform().setYPos(this.mCamera.mouseWCY());
+     
+	if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Q)) {
+		gEngine.GameLoop.stop();
+	}
+    
+	<b>var h = [];
+	if (this.mAnimatedGameObject.pixelTouches(this.mGameObject,h)) {
+		this.mAnimatedRenderable.getXform().incRotationByDegree(2);
+	}</b>
+    
+    this.mGameObject.update();
+    this.mAnimatedRenderable.updateAnimation();
+};</pre>
+		<figcaption class="codecaption">Code snippet 3-5: Update</figcaption>
+        </figure>
+        
 
     <hr>
     <h2>Conclusion</h2>

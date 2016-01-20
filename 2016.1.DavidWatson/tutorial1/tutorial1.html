@@ -22,7 +22,7 @@
 			<li>Renderable - These are the elements that get drawn on the screen. These elements include not only game sprites but backgrounds and text. These objects only control how an object &quot;looks&quot; on the screen. To control behavior and interactivity, the renderable needs to be associated with a game object.</li>
 			<li>GameObject - Dictates how elements in our scene behave and how they interact with each other. The game object will have a renderable embedded within them. Without the renderable, nothing draws on the screen.  In the same respect, a renderable without an encapsulating game object would not detect collisions with other objects or allow physics elements to be applied (such as gravity effects and elasticity).</li>
 		</ul>
-		<p>Over the course of this tutorial, we will look at each element needed to create games. This tutorial sets up our scene to create a simple rectangle on our viewport as shown <a href="../Samples/index1.html">here</a>.</p>
+		<p>Over the course of this tutorial, we will look at each element needed to create games. This tutorial sets up our scene to create a simple rectangle on our viewport as shown <a href="../Samples/index1a.html">here</a>.</p>
 		
 		
 		<hr>
@@ -98,29 +98,35 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
 		<h4>Renderable</h4>
 		<p>The renderable controls the "look" of objects in our game.  The basic one we create in the above example renders only a solid rectangle. We set it's color to red using RGB + Alpha values. We cannot make interesting games if our renderables are limited to making solid rectangles. In future tutorials, we will look at more advanced renderables that can draw textures, animate and respond to lighting effects. The key take away in this tutorial is that a renderable is just for defining the appearance of the object.</p>
 		<p><code>this.mRenderable = new Renderable();<br>
-	this.mRenderable.setColor([1, 0, 0, 1]);</code></p>
+	this.mRenderable.setColor([1.0, 0.0, 0.0, 1.0]);</code></p>
+		<p>These lines will allocate a new renderable object and set it's look (in this case, color). The parameters for <strong>setColor()</strong> is a vector with RGB+Alpha values ranging from 0.0 to 1.0.</p>
 		<br>
 		<h4>GameObject</h4>
-		<p>The GameObject is created with a reference to our renderable. We give the GameObject it's size and location in the viewport. Once the renderable is fully configured and incorporated into our GameObject, we should need to access it directly unless we want to change the appearance. If you need to modify appearance, you need to work with the renderable. Often, you will subclass GameObject that will automatically create and encapsulate it's renderables. The size and position are in WC space. The position is where the center of the object will be located. In this example, since our size is 16x16 and position is (30,50), this will set our red rectangle from (22,42) at the lower-left corner to (38,58) at the upper-right corner. We also set a front direction. This identifies the direction that the game object will move (not to be confused with rotation). We use a vector (1,0) indicating that it is pointing to the right. We set a speed of 0.5. This will allow the game object to modify it's location by 0.5 units horizontally every update cycle.</p>
-		<p><code>this.mGameObject = new GameObject(this.mRenderable);<br>
-	this.mGameObject.getXform().setSize(16, 16);<br>this.mGameObject.getXform().setPosition(30, 50);<br>
+		<p>The GameObject is created with a reference to our renderable. We give the GameObject it's size and location in the viewport. Once the renderable is fully configured and incorporated into our GameObject, we will keep the reference in case we need to access it directly to change the appearance. Often, you will subclass GameObject to  encapsulate it's renderable upon allocation.</p>
+		<p><code>this.mGameObject = new GameObject(this.mRenderable);</code></p>
+		<p> The size and position are in WC space with the position being the center of the object. In this example, since our size is 16x16 and position is (30,50), this will set our red rectangle from (22,42) at the lower-left corner to (38,58) at the upper-right corner.</p>
+		<p><code>this.mGameObject.getXform().setSize(16, 16);<br>
+		  this.mGameObject.getXform().setPosition(30, 50);</code></p>
+		<p> We also set a front direction. This identifies the direction that the game object will move (not to be confused with rotation). We use a vector (1,0) indicating that it is pointing to the right. We set a speed of 0.5. This will allow the game object to modify it's location by 0.5 units horizontally every update cycle.</p>
+		<p><code>
 	    this.mGameObject.setCurrentFrontDir(vec2.fromValues(1, 0));<br>
 		  this.mGameObject.setSpeed(0.5);</code></p>
         
 		<p class="note">[Note: understanding different coordinate spaces is beyond the scope of these tutorials]</p>
 		
-        <figure><pre>MyGameScene.prototype.initialize = function () {
+        <figure>
+		<pre>MyGameScene.prototype.initialize = function () {
 	<b>this.mCamera = new Camera(
 		vec2.fromValues(50, 40),    // position of the camera
 		100,                        // camera width
 		[0, 0, 500, 400]            // viewport (orgX, orgY, width, height)
 	);
 	// set the background color of our view to medium grey
-	this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
+	this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1.0]);
     
 	// create a new renderable object
 	this.mRenderable = new Renderable();
-	this.mRenderable.setColor([1, 0, 0, 1]);
+	this.mRenderable.setColor([1.0, 0.0, 0.0, 1.0]);
     
 	// create a new game object with the new renderable
 	this.mGameObject = new GameObject(this.mRenderable);
@@ -129,7 +135,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
 	this.mGameObject.setCurrentFrontDir(vec2.fromValues(1, 0));
 	this.mGameObject.setSpeed(0.5);</b>
 };</pre>
-		<figcaption class="codecaption">Code snippet 1-3: Initialization</figcaption>
+		<figcaption class="codecaption">Code snippet 1-3: Initialization function including Renderable and GameObject code</figcaption>
         </figure>
 		
 		<hr>
@@ -182,7 +188,10 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
         	<figcaption>figure 1-1: Renderable</figcaption>
         </figure>
         <p></p>
-		<p>To activate motion, uncomment the last line in the <b>update()</b> function. The rectangle should oscillate left and right across the screen. You will also notice that the coloring is darker than you were probably expecting. Our renderable object responds to a "virtual light source".  By default, our only light source is ambient lighting and it is very dim so as not to interfere with other light sources you may define. We will look briefly at adjusting ambient lighting in the next tutorial.</p>
+		<p>- To view this in real-time, click <a href="../Samples/index1a.html">here</a>.</p>
+		<p>To activate motion, uncomment the last line in the <b>update()</b> function. The rectangle should oscillate left and right across the screen.</p>
+		<p>- To view this with motion, click <a href="../Samples/index1b.html">here</a>.</p>
+		<p> You will also notice that the coloring is darker than you were probably expecting. Our renderable object responds to a "virtual light source".  By default, our only light source is ambient lighting and it is very dim so as not to interfere with other light sources you may define. We will look briefly at adjusting ambient lighting in the next tutorial.</p>
 		<p> In <a href="../tutorial2/tutorial2.html">tutorial 2</a>, we will look at renderables that support textures, user input and game resources.</p>
         
         

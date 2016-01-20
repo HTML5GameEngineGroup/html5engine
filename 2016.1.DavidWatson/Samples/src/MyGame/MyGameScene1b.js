@@ -47,5 +47,5 @@ MyGameScene.prototype.draw = function () {
 MyGameScene.prototype.update = function () {
     this.mCamera.update();
 	
-	//this.mGameObject.update();
+	this.mGameObject.update();
 };

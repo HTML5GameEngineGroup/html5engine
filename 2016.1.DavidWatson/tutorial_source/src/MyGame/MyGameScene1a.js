@@ -45,7 +45,13 @@ MyGameScene.prototype.draw = function () {
 // The Update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGameScene.prototype.update = function () {
-    this.mCamera.update();
-	
+    // Check status of our objects and update them
+	if(this.mGameObject.getXform().getPosition()[0] > 92) {
+		this.mGameObject.setCurrentFrontDir(vec2.fromValues(-1, 0));
+	}
+	if(this.mGameObject.getXform().getPosition()[0] < 8) {
+		this.mGameObject.setCurrentFrontDir(vec2.fromValues(1, 0));
+	}
+        
 	//this.mGameObject.update();
 };

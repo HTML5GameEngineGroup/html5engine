@@ -10,7 +10,8 @@ function MyGameScene() {
     this.mRenderable = null;
     this.mGameObject = null;
 	
-	this.kTexture = "assets/minion_portal.png"
+	this.kTexture = "assets/minion_portal.png";
+	
 }
 gEngine.Core.inheritPrototype(MyGameScene, Scene);
 

@@ -17,12 +17,7 @@
 		<hr>
 		<h2>Introduction</h2>
 		<p>In tutorial 1, we looked at creating the basic structure for our game scene. We created a camera object and a game object with a simple renderable. In this tutorial, we will look at  resource management,  a more advanced renderable type and user input.</p>
-		<p> This tutorial sets up our scene to create a simple rectangle on our viewport as shown <a href="../Samples/index2a.html">here</a>.</p>
-        <hr>
-		<h2>Files Used</h2>
-		<p>Source Code can be downloaded here.</p>
-		<p>Image Files</p>
-		<p><img src="assets/minion_portal.png" width="64" height="64" alt=""/></p>
+		<p> This tutorial sets up our scene to create a simple rectangle on our viewport. Source Code can be downloaded here. </p>
 		
 		
 		<hr>
@@ -83,7 +78,8 @@ function unloadScene() {
         </figure>
 
 		<p>The GameObject is created just as before, but now, we have a a reference to our new texture-based renderable. We also removed the behavior code for the GameObject. We no longer set a front direction or a speed. We do this so that we the GameObject does not move independently. We will soon be adding code to move the GameObject with keyboard controls. Without changing anything else in our code, viewing this in a web browser should give you the following result...</p>
-		<p><figure><img src="assets/tutorial2-img1.png" width="519" height="417" alt=""/>
+		<p>View the results <a href="../tutorial_source/index2a.html">here</a>.
+		<figure><img src="assets/tutorial2-img1.png" width="519" height="417" alt=""/>
 		<figcaption>Figure 2-1: Renderable</figcaption>
         </figure></p>
 		<br>
@@ -111,6 +107,7 @@ function unloadScene() {
 		<figcaption class="codecaption">Code snippet 2-4: Update</figcaption>
         </figure>
         <p>Notice that we have removed the call to <code>this.mGameObject.update()</code>. Had we left it in, the game object would have moved indefinitely to the right despite our keyboard input due to the speed and direction settings we gave in the <code>initialization()</code> function. Also, when the 'Q' key is pressed, everything comes to a halt. Keyboard input is no longer processed by the game and motion is stopped. After <code>gEngine.GameLoop.stop()</code> is called, the game loop stops and the <code>unloadScene()</code> function is called.</p>
+        <p>Test the results <a href="../tutorial_source/index2b.html">here</a>.</p>
         <p class="note">[Note: When the game loop stops, <b>unloadScene()</b> is called where you can then instantiate a completely different Scene object and call <b>gEngine.Core.startScene(<i>nextScene</i>)</b> to start a new game loop. This is how you can implement a game with multiple levels.]</p>
         
         
@@ -124,22 +121,23 @@ function unloadScene() {
             <li>Free the resource when it is no longer needed in unloadScene()</li>
 		</ol>
         
-        <figure><pre>function MyGameScene() {
+        <figure>
+		<pre>function MyGameScene() {
 	this.mCamera = null;
 	this.mRenderable = null;
 	this.mGameObject = null;
     
-	this.kTexture = "assets/minion_portal.png"
-	<b>this.kGameSong = "assets/gameSong.mp3"</b>
+	this.kTexture = "assets/minion_portal.png";
+	<b>this.kGameSong = "assets/gameSong.mp3";</b>
 };
 gEngine.Core.inheritPrototype(MyGameScene, Scene);
 
-function loadScene() {
+MyGameScene.loadScene() {
 	gEngine.Textures.loadTexture(this.kTexture);
 	<b>gEngine.AudioClips.loadAudio(this.kGameSong);</b>
 };
 
-function unloadScene() {
+MyGameScene.unloadScene() {
 	gEngine.Textures.unloadTexture(this.kTexture);
 	<b>gEngine.AudioClips.unloadAudio(this.kGameSong);</b>
 };</pre>
@@ -171,6 +169,7 @@ function unloadScene() {
         </figure>
 
     <p>In this example, we check to see if the mouse button is clicked. We then use gEngine.AudioClips functions to determine if background audio is already playing. If it isn't, we do a function call to start playing our background MP3. If the background audio is already playing, we stop it.</p>
+    <p>Test the results <a href="../tutorial_source/index2c.html">here</a>.</p>
         <p class="note">[Note: The mouse input will only respond if the mouse is clicked while hovering over the WebGL canvas in the browser.]</p>
         
         
@@ -242,7 +241,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
         
     <hr>
     <h2>Conclusion</h2>
-    <p>When viewing this in a web browser, you should see the following...</p>
+    <p>Click here to see the results...</p>
     <figure><img src="assets/tutorial2-img2.png" width="509" height="410" alt=""/>
 		<figcaption>Figure 2-2: TextureRenderable with FontRenderable</figcaption>
         </figure>

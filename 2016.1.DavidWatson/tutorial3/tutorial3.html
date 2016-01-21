@@ -17,26 +17,25 @@
 		<hr>
 		<h2>Introduction</h2>
 		<p>In this tutorial, we are going to look at more renderables and expand our understanding of game object behavior by using collision detection.</p>
-		
+		<p>Source Code can be downloaded here.</p>
         
-        <hr>
-		<h2>Files Used</h2>
-        <p>Source Code can be downloaded here.</p>
-        <p>Image Files</p>
-		<p><figure>
+        
+	<hr>
+		<h2>Sprites</h2>
+
+
+		<p>TextureRenderables have a big advantage over Renderables in being able to render a bitmap. They do have a few significant limitations. Our texture must have dimensions that are powers of 2 and they are static. While this may work fine for backgrounds or or static visual elements, we typically want something more dynamic for the &quot;action&quot; graphics in our game. SpriteRenderables allow us to use a sprite sheet and define the portion of the sheet we want to display for the renderable.</p>
+        <p><figure>
         	<img src="assets/minion_sprite.png" width="512" height="256" alt=""/>
             	<figcaption>figure 3-1: Sprite sheet</figcaption>
             </figure>
         </p>
-
-
-	<hr>
-		<h2>Sprites</h2>
-		<p>TextureRenderables have a big advantage over Renderables in being able to render a bitmap. They do have a few significant limitations. Our texture must have dimensions that are powers of 2 and they are static. While this may work fine for backgrounds or or static visual elements, we typically want something more dynamic for the &quot;action&quot; graphics in our game. SpriteRenderables allow us to use a sprite sheet and define the portion of the sheet we want to display for the renderable.</p>
-        <p><figure><img src="assets/sprite_sheet.png" width="471" height="276" alt=""/><figcaption>Figure 3-2: Sprite sheet</figcaption>
+        <p>With this, we can store many if not all of our graphics in a single resource. In figure 3-1, we see a sample sprite sheet. You will notice that the top row has variations of the same image and in the bottom row (second from the left), we have the same image we used in tutorial 2 and a reverse facing copy in the far right. We can use these types of images to simulate motion and infer direction. Figure 3-2 provides more details about our sprite sheet.</p>
+        <p>        
+        <figure><img src="assets/sprite_sheet.png" width="471" height="276" alt=""/><figcaption>Figure 3-2: Sprite sheet</figcaption>
             </figure>
         </p>
-		<p>In figure 3-1, we see a sample sprite sheet. You will notice that in the bottom row (second from the left), we have the same image we used in tutorial 2. With coordinate location (0,0) being the bottom left of the entire sprite page, the bottom left coordinate for this sub-image is at (130,0). The size of this sub-image is 180 pixels wide by 180 pixels tall. Using the call <code>setElementPixelPositions(<em>left-x, right-x, lower-y, upper-y</em>);</code> will allow us to define the portion of the sheet we want to render.</p>
+		<p> With coordinate location (0,0) being the bottom left of the entire sprite page, the bottom left coordinate of our texture from tutorial 2 is at (130,0). The size of this sub-image is 180 pixels wide by 180 pixels tall. Using the call <code>setElementPixelPositions(<em>left-x, right-x, lower-y, upper-y</em>);</code> we can define the specific portion of the sheet we want to render without worrying about the dimensions being powers of 2.</p>
 	<figure><pre>function MyGameScene() {
 	this.mCamera = null;
 	this.mRenderable = null;

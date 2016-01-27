@@ -15,8 +15,17 @@
 		<hr>
         
 	<h2>Introduction</h2>
-		<p>The GTCS Game Engine consists of numerous files in a very specific file hierarchy. The details of how the files work is beyond the scope of these tutorials. In this tutorial, you will  setup the file structure for your game.</p>
-		<p>The run your game, you will need an HTML shell running on a web server. This file must reference all of the files that make up the engine and the fies that are specific to your game.</p>
+		<p>The GTCS Game Engine consists of numerous files in a very specific file hierarchy. The details of how the files work is beyond the scope of these tutorials. In this tutorial, you will learn how to setup an IDE for programming and understand the file structure for the engine and your game.</p>
+    
+        
+	<hr>
+		<h3>IDE</h3>
+        <p>To develop your game, you will want to use an integrated development environment (IDE) and a runtime web browser that is capable of hosting the running game engine. We have found that the most convenient combination is the NetBeans IDE with the Google Chrome web browser. The products are free, work across a multitude of OS platforms and integrate well for web development.</p>
+        
+        
+ 	<hr>       
+        <h3>Components</h3>
+        <p>To run your game, you will need an HTML shell running on a web server. This file must reference all of the files that make up the engine and the fies that are specific to your game.</p>
 		<p>The format of your HTML file can be broken down into three sections...</p>
 		<ul>
 		  <li>Body tag - This will have a JavaScript snippet executed onload that will create a new instance of the Scene object subclass that will be sent into the game engine for execution.</li>
@@ -24,7 +33,7 @@
 			<li>Canvas DOM object - This is the section of the web page where all WebGL activity will be encapsulated. It identifies the canvas' pixel width and height where the game will be rendered.</li>
 		</ul>
         
-		<h3>onload</h3>
+		<h4>onload</h4>
 		<p>The entry point for your code will be an object you design that is a subclass of the engine's "Scene" object. You will first allocate a new instance of your class and send it into the game engine as shown in the following code snippet.</p>
 
 		<figure><pre>&lt;body onload="
@@ -35,7 +44,7 @@
         </figure>
 		<p class="note">Note: The portions in bold are the sections that are specific to your game implementation.</p>
 
-		<h3>JavaScript Includes</h3>
+		<h4>JavaScript Includes</h4>
 		<p>This code can be dropped into your HTML file as-is for all cases.  The last line is an exception.  This is where your custom code needs to be added. If you have multiple files, you need an include for each file. Again, the order is important so be sure you know what order things are being referenced.</p>
 
 		</div><div id="wide-code"><figure><pre width=1000px>&lt;!-- the following says there are javascript source code contained in 
@@ -132,7 +141,7 @@
         </figure></div>
         
         <div id="main-content">
-		<h3>Canvas item</h3>
+		<h4>Canvas item</h4>
 		<p>The canvas is where the rendering of your game will occur. You need to define the pixel width and height. The engine will look for the DOM object called &quot;GLCanvas&quot; and handle the rest.</p>
             
            <figure><pre>&lt;canvas id="GLCanvas" width="<strong>500</strong>" height="<strong>400</strong>"&gt;

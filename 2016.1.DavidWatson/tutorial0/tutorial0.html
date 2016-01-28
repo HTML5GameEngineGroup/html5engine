@@ -19,18 +19,24 @@
     
         
 	<hr>
-		<h3>IDE</h3>
-        <p>To develop your game, you will want to use an integrated development environment (IDE) and a runtime web browser that is capable of hosting the running game engine. We have found that the most convenient combination is the NetBeans IDE with the Google Chrome web browser. The products are free, work across a multitude of OS platforms and integrate well for web development.</p>
+		<h3>Development Environment</h3>
+        <p>To develop your game, you will want to use an integrated development environment (IDE) and a runtime web browser that is capable of hosting the running game engine. We have found that the most convenient combination is the NetBeans IDE with the Google Chrome web browser. The products are free, work across a number of OS platforms and integrate well for web development. Here is a rundown of this combination of tools...</p>
+        <ul>
+        	<li><strong>Netbeans IDE</strong>: You can download and install the bundle for HTML5/JavaScript or PHP from <a href="https://netbeans.org/downloads">https://netbeans.org/downloads</a>.</li>
+        	<li><strong>Google Chrome</strong>: You will execute your game projects in the Google Chrome web browser. You can download and install this browser from <a href="https://www.google.com/chrome/browser/">https://www.google.com/chrome/browser/</a>.</li>
+        	<li><strong>Connector plug-in for Google Chrome</strong>: When using NetBeans IDE for HTML5 development, we need a plug-in to allow NetBeans to connect and interact with the Google Chrome. You can download and install this extension from <a href="https://chrome.google.com/webstore/detail/netbeans-connector/hafdlehgocfcodbgjnpecfajgkeejnaa">https://chrome.google.com/webstore/detail/netbeans-connector/hafdlehgocfcodbgjnpecfajgkeejnaa</a>. Using Chrome do download this will automatically install the plug-in to Google Chrome. You may have to restart your computer to complete the installation.</li>
+        	<li><strong>glMatrix math library</strong>: This is a library that implements the foundational mathematics operations. The engine we supply includes this library but for more information about this component, you can visit <a href="http://glMatrix.net">http://glMatrix.net</a>. To work with the GTCS Game Engine, the gl-matrix.js file needs to be stored within the<em> src/lib/</em> path of the engine.</li>
+        </ul>
         
         
  	<hr>       
         <h3>Components</h3>
-        <p>To run your game, you will need an HTML shell running on a web server. This file must reference all of the files that make up the engine and the fies that are specific to your game.</p>
+        <p>To run your game, you will need an HTML shell running on a web server. This file must reference all of the files that make up the engine and the fies that are specific to your game. By convention, this file is stoed at the same level as the assets folder and src folder of the engine.</p>
 		<p>The format of your HTML file can be broken down into three sections...</p>
 		<ul>
-		  <li>Body tag - This will have a JavaScript snippet executed onload that will create a new instance of the Scene object subclass that will be sent into the game engine for execution.</li>
-			<li>JavaScript include files - These will be all of the files that are part of the engine and any files you create. The order that these are listed in is important. Modifying this order could break things.</li>
-			<li>Canvas DOM object - This is the section of the web page where all WebGL activity will be encapsulated. It identifies the canvas' pixel width and height where the game will be rendered.</li>
+		  <li><strong>Body tag</strong>: This will have a JavaScript snippet executed onload that will create a new instance of the Scene object subclass that will be sent into the game engine for execution.</li>
+			<li><strong>JavaScript include files</strong>: These will be all of the files that are part of the engine and any files you create. The order that these are listed in is important. Modifying this order could break things.</li>
+			<li><strong>Canvas DOM object</strong>: This is the section of the web page where all WebGL activity will be encapsulated. It identifies the canvas' pixel width and height where the game will be rendered.</li>
 		</ul>
         
 		<h4>onload</h4>

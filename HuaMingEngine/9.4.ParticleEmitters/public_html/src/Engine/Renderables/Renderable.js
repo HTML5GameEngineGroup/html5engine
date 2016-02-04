@@ -15,7 +15,7 @@ function Renderable() {
     this.mShader = gEngine.DefaultResources.getConstColorShader();  // this is the default
     this.mXform = new Transform(); // transform that moves this object around
     this.mColor = [1, 1, 1, 1];    // color of pixel   
-    currentScene.mAllRenderable.push(this);
+    gCurrentScene.mAllRenderable.push(this);
 }
 
 //<editor-fold desc="Public Methods">

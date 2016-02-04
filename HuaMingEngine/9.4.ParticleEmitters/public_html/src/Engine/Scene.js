@@ -13,9 +13,7 @@ function Scene() {
     this.mCamera = null;
     this.mAllCamera = null;
     this.mAllObject = null;
-    this.mAllObjectSet = null;
     this.mAllRenderable = null;
-    this.mObjectSetTable=null;
 }
 
 //<editor-fold desc="functions subclass should override">
@@ -32,18 +30,9 @@ Scene.prototype.loadScene = function () {
 //   => Should call gEngine.GameLoop.start(this)!
 Scene.prototype.initialize = function () {
     // initialize the level (called from GameLoop)
-    this.mAllObjectSet = [];
     this.mAllObject = new GameObjectSet();
     this.mAllCamera = [];
     this.mAllRenderable = [];
-    this.mObjectSetTable=new HashTable();
-};
-
-
-Scene.prototype.start = function () {
-
-    this.mAllObject.start();
-
 };
 // update function to be called form EngineCore.GameLoop
 Scene.prototype.update = function () {
@@ -57,7 +46,7 @@ Scene.prototype.update = function () {
         this.mAllCamera[i].update()
     }
     this.mAllObject.update();
-
+    this._physicsSimulation();
 
     // create dye pack and remove the expired ones ...
 
@@ -99,6 +88,12 @@ Scene.prototype.collision = function () {
                 }
             }
         }
+        if (this.mAllObject.mSet[i].mCollidableFlag) {
+            this.mAllObject.mSet[i].collisionExitTest();
+        }
     }
 };
 
+Scene.prototype._physicsSimulation = function () {
+    
+};

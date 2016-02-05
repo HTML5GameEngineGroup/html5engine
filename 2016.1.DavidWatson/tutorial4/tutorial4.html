@@ -17,20 +17,14 @@
 		<hr>
 		<h2>Introduction</h2>
 		<p>In this tutorial, we are going to look at more renderables and expand our understanding of game object behavior by using collision detection.</p>
-		
-        
-        <hr>
-		<h2>Files Used</h2>
-        <p>Source Code can be downloaded here.</p>
-        <p>Image Files</p>
 		<p>
-        </p>
+		  </p>
 
 
 
 	<hr>
 		<h2>Rigid Bodies</h2>
-		<p></p>
+		<p>In tutorial 3, we looked at detecting collisions between our game object. While this is very useful, for most games we need more than to just detect collisions. We need to look at collision resolution where the engine will detect a collision through overlap in the update function and modify the positions and speeds of the game objects to "undo" the overlap before it is drawn to the screen.</p>
         
 	<figure><pre>function MyGameScene() {
 	this.mCamera = null;
@@ -71,6 +65,11 @@ MyGameScene.prototype.initialize = function () {
 </pre>
 		<figcaption class="codecaption">Code snippet 4-1: Adding a SpriteRenderable</figcaption>
         </figure>
+
+
+	<hr>
+		<h2>Particls</h2>
+		<p>Now we look at particles</p> 
 
     <hr>
     <h2>Conclusion</h2>

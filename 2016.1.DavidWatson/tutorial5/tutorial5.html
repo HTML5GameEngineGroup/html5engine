@@ -37,10 +37,34 @@
             <li>Idenfity to each applicable renderable that it should account for the light source when drawing itself.</li>
           </ol>
 		<p class="note">[Note: This second requirement may seem odd but lighting calculations are essentially a manipulation of how pixels are drawn to the screen (how the object looks). Since we are familiar with the fact that the &quot;look&quot; of game elements is under the purview of the renderable, we treat lighting as a parameter we add to the renderable object.]</p>
+        <p>To create a light, we allocate a new Light object and set parameters using accessor methods. There are many settings and certain settings will be used or ignored based on the type of light. An overview of the functions is given below...</p>
+        <ul>
+          <li><code>setLightType()</code> - Identifies what type of light to render as. Valid choices are <strong>Light.eLightType.ePointLight</strong>, <strong>Light.eLightType.eSpotLight</strong> and<strong> Light.eLightType.eDirectionalLight</strong>.</li>
+          <li><code>setColor()</code> - Color of the light using a 4-value vector identifying red, green, blue and alpha values from 0.0 to 1.0</li>
+          <li><code>setIntensity()</code> - A value from 0.0 to 1.0 given the strength of the light.</li>
+        </ul>
+    <figure>
+	  	<pre>	// create the light and setup the parameters we need
+	var aNewLight = new Light();
+	aNewLight.setLightType(Light.eLightType.eDirectionalLight);
+	aNewLight.setColor([1.0, 1.0, 1.0, 1]);
+	aNewLight.setIntensity(1);
+    	</pre>
+    	<figcaption>Code snippet 5-1: Defining a Light Object</figcaption>
+    </figure>
     <h3>Point Lights</h3>
-    <p>A point light has intensity, color, position</p>
+    <p>A point light can be compared to a lightbulb hovering in mid-air illuminating a spherical volume around it. It has intensity, color, size and position. The amount of the game scene that will be illuminated with be determined by the size of the illumination volume (determined by the radius of affect from the center point) and the location of the point. Figure 5-1 provides a visual representation of the affect. To create a point light, we allocate a new Light object and set parameters using accessor methods.</p>
+    <figure>
+    		<img src="assets/tutorial5-img1.png" width="466" height="211">
+        	<figcaption>figure 5-1: Point Light</figcaption>
+        </figure></p>
+    <p>To create a point light, we allocate a new Light object and set parameters using accessor methods.</p>
     <h3>Spot Lights</h3>
-    <p>In tutorial 2, we have seen the use of ambient l</p>
+    <p>Spot lights are more complex than point lights. There have many more parameters that needs to be provided. Figure 5-2 illustrates how a spot light illuminates a surface.</p>
+    <p><figure>
+    		<img src="assets/tutorial5-img2.png" width="370" height="211">
+        	<figcaption>figure 5-2: Spot Light</figcaption>
+        </figure></p>
     <h3>Directional Lights</h3>
 		<p>A directional light is similar to ambient light in that every pixel illunated by it receives the light with equal intensity. However, while the ambient light source allows us to set just the intensity, we can also define direction and color for directional light sources. Since we are dealing with two dimensional renderables, the direction of the light is not going to provide a sense of depth like it would in three dimensional space. We ignore the directional component for now and set the intensity and color using <code>setLightColor()</code> and <code>setLightIntensity()</code>.</p>
         
@@ -93,7 +117,7 @@ MyGameScene.prototype.initialize = function () {
 	gEngine.DefaultResources.setGlobalAmbientIntensity(0);</b>
 };
 </pre>
-		<figcaption class="codecaption">Code snippet 5-1: Using a LightRenderable with Directional Lighting</figcaption>
+		<figcaption class="codecaption">Code snippet 5-2: Using a LightRenderable with Directional Lighting</figcaption>
         </figure>
 
     <h3>&nbsp;</h3>

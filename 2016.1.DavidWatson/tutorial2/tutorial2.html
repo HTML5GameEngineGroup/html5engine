@@ -23,11 +23,13 @@
 		<hr>
 		<h2>Loading Resources</h2>
 		<p>Images, audio and other file types are the resources that your game will use. We make requests to the engine to load files in <b>loadScene()</b> by providing the file paths where the files can be located. The engine will asynchronously load the files into RAM and provide a means of access them so we can start using them. The <b>loadScene()</b> function is always called prior to <b>initialization()</b> and you are guaranteed that the resources have fully loaded when <b>initialization()</b> is called. Once the resources are loaded, different classes of objects will retrieve resources as needed by providing the string path to the resource. These variables identify each unique resource.</p>
+		<p>As a matter of convention, the game engine has a folder in it's hierarchy called &quot;assets&quot;. While you can technically use any folder to store resources (as long as the path is properly referenced in the loading and unloading), we will use this folder to store our resource files. This will keep things consistent and organized.</p>
+		<p class="note">[Note: The assets folder is also used by the game engine for it's own assets such as default fonts. Do not delete, move or modify the existing files or hierarchy]</p>
 
 		<h3>Constructor</h3>
 		<p>To facilitate the loading of resources, we create constants to identify the file paths for our resources and provide a consistent way for referencing the resource. By convention, we store resource files in the "assets" directory of our game engine file hierarchy. The game engine supports PNG image files, WAV audio files and text files.</p>
 		<p class="note">[Note: When creating resources for texture maps, the dimensions must be on the order of perfect power of 2.<br>
-		Examples of image size includes 64x64, 512x2048 or 16x128.]</p>
+		Examples of usable image sizes include 64x64, 512x2048 or 16x128.]</p>
 <figure><pre>function MyGameScene() {
 	this.mCamera = null;
 	this.mRenderable = null;
@@ -120,6 +122,7 @@ function unloadScene() {
             <li>Use the audio</li>
             <li>Free the resource when it is no longer needed in unloadScene()</li>
 		</ol>
+    <p>To play audio, we are going to look at two functions. <code>gEngine.AudioClips.playBackgroundAudio()</code> and <code>gEngine.AudioClips.playAtCue()</code>. The <strong>playBackgroundAudio()</strong> function allows you to play a sound clip and when the end of the clip is reached, it will loop back to the beginning. This continuous play option works well for background music. The <strong>playAtCue()</strong> function plays once and stops when the end of the clip is reached. This works well for quick sound effects like collisions or explosions.</p>
         
         <figure>
 		<pre>function MyGameScene() {
@@ -128,18 +131,21 @@ function unloadScene() {
 	this.mGameObject = null;
     
 	this.kTexture = "assets/minion_portal.png";
-	<b>this.kGameSong = "assets/gameSong.mp3";</b>
+	<b>this.kGameBGSong = "assets/bgSong.mp3";
+	this.kGameCueSound = "assets/cueSound.mp3";</b>
 };
 gEngine.Core.inheritPrototype(MyGameScene, Scene);
 
 MyGameScene.loadScene() {
 	gEngine.Textures.loadTexture(this.kTexture);
-	<b>gEngine.AudioClips.loadAudio(this.kGameSong);</b>
+	<b>gEngine.AudioClips.loadAudio(this.kGameBGSong);
+	gEngine.AudioClips.loadAudio(this.kGameCueSound);</b>
 };
 
 MyGameScene.unloadScene() {
 	gEngine.Textures.unloadTexture(this.kTexture);
-	<b>gEngine.AudioClips.unloadAudio(this.kGameSong);</b>
+	<b>gEngine.AudioClips.unloadAudio(this.kGameBGSong);
+	gEngine.AudioClips.unloadAudio(this.kGameCueSound);</b>
 };</pre>
 		<figcaption class="codecaption">Code snippet 2-5: Scene constructor, Load & Unload</figcaption>
         </figure>
@@ -158,17 +164,21 @@ MyGameScene.unloadScene() {
 		gEngine.GameLoop.stop();
 	}
      
-	<b>if (gEngine.Input.isButtonClicked(gEngine.Input.mouseButton.Left)) {
+	<b>
+	if (gEngine.Input.isKeyClicked(gEngine.Input.keys.P)) {
 		if(!gEngine.AudioClips.isBackgroundAudioPlaying())
-			gEngine.AudioClips.playBackgroundAudio(this.kGameSong);
+			gEngine.AudioClips.playBackgroundAudio(this.kGameBGSong);
 		else
 			gEngine.AudioClips.stopBackgroundAudio();
+    
+    if (gEngine.Input.isButtonClicked(gEngine.Input.mouseButton.Left)) {
+		gEngine.AudioClips.playAtAudio(this.kGameCueSound);
     }</b>
 };</pre>
 		<figcaption class="codecaption">Code snippet 2-6: Update</figcaption>
         </figure>
 
-    <p>In this example, we check to see if the mouse button is clicked. We then use gEngine.AudioClips functions to determine if background audio is already playing. If it isn't, we do a function call to start playing our background MP3. If the background audio is already playing, we stop it.</p>
+    <p>In this example, clicking the mouse button will trigger our cue audio to play. If the "<strong>P</strong>" key is clicked, we use <code>isBackgroundAudioPlaying()</code> function to determine if the background audio is already playing. If it isn't, we do a function call to <code>playBackgrounAudio()</code> to start playing our background sound. If the background audio is already playing, we stop it with <code>stopBackgroundAudio()</code>.</p>
     <p>Test the results <a href="../tutorial_source/index2c.html">here</a>.</p>
         <p class="note">[Note: The mouse input will only respond if the mouse is clicked while hovering over the WebGL canvas in the browser.]</p>
         

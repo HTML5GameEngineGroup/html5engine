@@ -16,21 +16,14 @@
 		
 		<hr>
 		<h2>Introduction</h2>
-		<p>In this tutorial, we are going to look at more renderables and expand our understanding of game object behavior by using collision detection.</p>
-		
-        
-        <hr>
-		<h2>Files Used</h2>
-        <p>Source Code can be downloaded here.</p>
-        <p>Image Files</p>
-		<p>
+		<p>In this tutorial, we are going to continue our understanding of lighting by working with shadow affects.
         </p>
-
 
 
 	<hr>
 		<h2>Shadow</h2>
-		<p></p>
+		<p>Much like lighting, in order for shadow to be rendered, we have to register each renderable to actively draw shadows. A renderable can be a shadow caster, a shadow receiver or both. We will use the IllumRenderable object as well as a new object, ShadowReceiver.</p>
+		<p>We initialize a new ShadowReceiver object with an IllumRenderable object. For each other renderable that we want to add shadows to this object, we call the <code>addShadowCaster()</code> function.</p>
         
 	<figure><pre>function MyGameScene() {
 	this.mCamera = null;

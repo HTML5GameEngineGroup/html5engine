@@ -32,9 +32,10 @@ MyGameScene.prototype.initialize = function () {
 	<em>... Similar code as in previous projects...</em>
 	<strong>// create a physics component for this object
 	var r = new RigidRectangle(this.mGameObject.getXform(), 11, 15);
-	r.setColor([0, 1, 0, 1]);			// bounding rect color
-	r.setDrawBounds(this.mShowBounds);
-	this.mGameObject.setPhysicsComponent(r);</strong>
+	this.mGameObject.setPhysicsComponent(r);
+    
+	r = new RigidRectangle(this.mAnotherObject.getXform(), 30, 4);
+	this.mAnotherObject.setPhysicsComponent(r);</strong>
 <strong></strong>
 	gEngine.DefaultResources.setGlobalAmbientIntensity(3);
 };
@@ -58,7 +59,8 @@ MyGameScene.prototype.update = function () {
 		  <p>Code snippet 4-1: Creating a RigidBody Object</p>
 		</figcaption>
         </figure>
-	<p>In code snippet 4-1, a GameObject is created with a rigid body physics component. In the Update() function, a call to <code>gEngine.Physics.processObjObj()</code> checks our GameObject with another object and will resolve collisions between them. If we were dealing with more than two objects that can possible cross-collide (like balls on a billiard table) that need to be resolved simulataneously with respect to eachother, we need to have a means of handling collisions. For this, we create a set or sets of game objects and use <code>gEngine.Physics.processObjSet()</code> or <code>gEngine.Physics.processSetSet()</code> to resolve collisions with one call.</p>
+	<p>In code snippet 4-1, a GameObject is created with a rigid body physics component. When creating the RigidBody object, we pass in a reference to the GameObject's transform and dimensions of the body. If creating a RigidRectangle, the dimensions are the length and height. If creating a RigidCircle, pass in the transform and the radius.</p>
+	<p>In the Update() function, a call to <code>gEngine.Physics.processObjObj()</code> checks our GameObject with another object and will resolve collisions between them. If we were dealing with more than two objects that can possible cross-collide (like balls on a billiard table) that need to be resolved simulataneously with respect to eachother, we need to have a means of handling collisions. For this, we create a set or sets of game objects and use <code>gEngine.Physics.processObjSet()</code> or <code>gEngine.Physics.processSetSet()</code> to resolve collisions with one call.</p>
 	<p>In <a href="../tutorial_source/index4a.html">example 4a</a>,  we create two GameObjects with RigidBody objects. A minion object nd a platform. The ASWD keys control the movement of the minion. You will notice that if you try to move the minion into the platform, it will be stopped. Pressing the C key will show the RigidBody bounding rectangles of the GameObjects.</p>	
     
 

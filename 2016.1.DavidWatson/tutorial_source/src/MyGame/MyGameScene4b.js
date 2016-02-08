@@ -100,8 +100,7 @@ MyGameScene.prototype.draw = function () {
 // The Update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGameScene.prototype.update = function () {
-    this.mAllParticles.update();
-	
+	// minion control ASWD
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.A)) {
         this.mMinionObject.getXform().incXPosBy(-0.5);
     }
@@ -109,6 +108,7 @@ MyGameScene.prototype.update = function () {
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.D)) {
         this.mMinionObject.getXform().incXPosBy(0.5);
     }
+	
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.W)) {
         this.mMinionObject.getXform().incYPosBy(0.5);
     }
@@ -116,15 +116,11 @@ MyGameScene.prototype.update = function () {
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.S)) {
         this.mMinionObject.getXform().incYPosBy(-0.5);
     }
-    
-    // create particles
-    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Z)) {
-        if (this.mCamera.isMouseInViewport()) {
-            var p = this._createParticle(this.mCamera.mouseWCX(), this.mCamera.mouseWCY());
-            this.mAllParticles.addToSet(p);
-        }
-    }
 	
+	// update particle information
+    this.mAllParticles.update();
+	
+	// toggle the drawing of the bounding regions
 	if (gEngine.Input.isKeyClicked(gEngine.Input.keys.C)) {
         if (this.mShowBounds) {
            this.mMinionObject.getPhysicsComponent().setDrawBounds(false);
@@ -136,7 +132,19 @@ MyGameScene.prototype.update = function () {
         }
         this.mShowBounds = !this.mShowBounds;
     }
+    
+    // create particles
+    if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Z)) {
+        if (this.mCamera.isMouseInViewport()) {
+            var p = this._createParticle(this.mCamera.mouseWCX(), this.mCamera.mouseWCY());
+            this.mAllParticles.addToSet(p);
+        }
+    }
+	
+	// resolve collisions between our two GameObjects
     gEngine.Physics.processObjObj(this.mPlatformObject, this.mMinionObject);
+	
+	// check for and resolve collisions against our other GameObjects
     gEngine.Particle.processObjSet(this.mMinionObject, this.mAllParticles);
     gEngine.Particle.processObjSet(this.mPlatformObject, this.mAllParticles);
 };

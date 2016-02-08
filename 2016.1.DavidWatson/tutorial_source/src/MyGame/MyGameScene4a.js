@@ -46,31 +46,31 @@ MyGameScene.prototype.initialize = function () {
     this.mBg.getXform().setSize(100, 80);
     this.mBg.getXform().setPosition(50, 40);
 
-    // create a renderable for our minion object
+    // create a renderable for our minion texture
     this.mMinionRenderable = new SpriteAnimateRenderable(this.kTexture);
     this.mMinionRenderable.setElementPixelPositions(130, 310, 0, 180);
 
-    // embed the renderable in a GameObject
+    // embed the minion renderable in a GameObject
     this.mMinionObject = new GameObject(this.mMinionRenderable);
     this.mMinionObject.getXform().setSize(16, 16);
     this.mMinionObject.getXform().setPosition(30, 50);
 
-	// create a physics component for this object
+	// create a physics component for this minion
     var r = new RigidRectangle(this.mMinionObject.getXform(), 11, 15);
     r.setColor([0, 1, 0, 1]);			// set a color for our bounding rectangle when drawn
     r.setDrawBounds(this.mShowBounds);
     this.mMinionObject.setPhysicsComponent(r);
 
-	// create a renderable for our platform object
+	// create a renderable for our platform texture
     this.mPlatformRenderable = new TextureRenderable(this.kPlatform);
 
-    // create a new game object with the new renderable
+    // embed the platform renderable in a GameObject
     this.mPlatformObject = new GameObject(this.mPlatformRenderable);
     this.mPlatformObject.getXform().setSize(30, 3.75);
     this.mPlatformObject.getXform().setPosition(50, 20);
 
-	// create a physics component for this object
-    r = new RigidRectangle(this.mPlatformRenderable.getXform(), 30, 3);
+	// create a physics component for the platform
+    r = new RigidRectangle(this.mPlatformObject.getXform(), 30, 3);
     r.setMass(0);  						// ensures no movements!
     r.setColor([1, 0.2, 0.2, 1]);		// set a color for our bounding rectangle when drawn
     r.setDrawBounds(this.mShowBounds);
@@ -94,6 +94,7 @@ MyGameScene.prototype.draw = function () {
 // The Update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGameScene.prototype.update = function () {
+	// minion control ASWD
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.A)) {
         this.mMinionObject.getXform().incXPosBy(-0.5);
     }
@@ -101,6 +102,7 @@ MyGameScene.prototype.update = function () {
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.D)) {
         this.mMinionObject.getXform().incXPosBy(0.5);
     }
+	
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.W)) {
         this.mMinionObject.getXform().incYPosBy(0.5);
     }
@@ -109,6 +111,7 @@ MyGameScene.prototype.update = function () {
         this.mMinionObject.getXform().incYPosBy(-0.5);
     }
 	
+	// toggle the drawing of the bounding regions
 	if (gEngine.Input.isKeyClicked(gEngine.Input.keys.C)) {
         if (this.mShowBounds) {
            this.mMinionObject.getPhysicsComponent().setDrawBounds(false);
@@ -120,5 +123,7 @@ MyGameScene.prototype.update = function () {
         }
         this.mShowBounds = !this.mShowBounds;
     }
+	
+	// resolve collisions between our two GameObjects
     gEngine.Physics.processObjObj(this.mPlatformObject, this.mMinionObject);
 };

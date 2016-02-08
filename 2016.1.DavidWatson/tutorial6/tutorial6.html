@@ -39,9 +39,11 @@ function loadScene() {
     
 function unloadScene() {
 	gEngine.Textures.unloadTexture(this.kTexture);
-};
-
-MyGameScene.prototype.initialize = function () {
+};</pre>
+		<figcaption class="codecaption">Code snippet 6-1: Constructor, Load, Unload</figcaption>
+        </figure>
+        <p></p>
+<figure><pre>MyGameScene.prototype.initialize = function () {
 	this.mCamera = new Camera(
 		vec2.fromValues(50, 40),    // position of the camera
 		100,                        // width of camera
@@ -60,9 +62,8 @@ MyGameScene.prototype.initialize = function () {
 	this.mGameObject.getXform().setPosition(30, 50);
     
 	gEngine.DefaultResources.setGlobalAmbientIntensity(3);
-};
-</pre>
-		<figcaption class="codecaption">Code snippet 6-1: Adding a SpriteRenderable</figcaption>
+};</pre>
+		<figcaption class="codecaption">Code snippet 6-2: Initializing</figcaption>
         </figure>
 
     <hr>
@@ -74,6 +75,6 @@ MyGameScene.prototype.initialize = function () {
         <p align="center"><a href="../tutorial5/tutorial5.html">Tutorial 5</a> &lt;-- Tutorial 6<a href="../tutorial5/tutorial5.html"></a><br>
 		  <a href="../index.html">Main tutorial guide page</a><br></p>
 	</div>
-    <h4><i>3/5/2016</i></h4>
+    <h4><i>2/5/2016</i> - David Watson</h4>
     </body>
 </html>

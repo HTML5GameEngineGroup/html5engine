@@ -17,41 +17,44 @@
 		<hr>
 		<h2>Introduction</h2>
 		<p>As we have already mentioned, GameObjects allow us to control the behavior of the elements in our game as well as the interactions between them. In this tutorial, we look at using rigid bodies to apply physics to our GameObjects and creating particles.</p>
+        
+        <p>Source code for tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
+		<p align="center"><a href="#resolution">Collision Resolution</a> • <a href="#particles">Particles</a></p>
 
 
 	<hr>
-		<h2>Collision Resolution</h2>
+		<h2><a id="resolution"></a>Collision Resolution</h2>
 		<p>In tutorial 3, we looked at detecting collisions between game elements. With per-pixel collision detection, we checked to determine if one element overlaps another. While this is very useful, for most games we need more than to just detect collisions. We need to look at collision resolution where the engine will detect a collision through overlap and "undo" the overlap before it is drawn to the screen.</p>
 		<p> To do this, we will apply an &quot;invisible shape&quot; over our GameObject where physics calculations will occur to simulate objects having mass and not being able to pass through eachother. The game engine supports the use of rectangles and circles as rigid shapes. While these shapes are not as precise as the per-pixel collision detection we saw previously, for determining locations of objects for collision resolution, these shapes work very well. By setting a virutal mass  to these shapes, the engine will calculate what happens when these objects collide.</p>
 		<p>We create a new rigid bodies object, set it's size and apply it to a GameObject using the <code>setPhysicsComponent()</code> function. To simulate the physics of the game, we call the engine's physics processing functions such as <code>gEngine.Physics.processObjObj()</code>for resolving the physics interactions between two bodies.</p>
         <h3>Using Rigid Bodies</h3>
         <p>In the next example, we will create two renderables, a minion and a platform. We will place the platform in the center of our scene and allow keys to control movement of the minion. Using rigid bodies, we will make it so the minion cannot pass through the platform.</p>
-        <p>First, we declare our instance variables and constants. Next, we load in our assets. In this example, we load in graphics for the minion (as part of our minion spritesheet from previous examples), the platform and a background image. We also write our parallel unload calls.</p>
+        <p>First, we declare our instance variables and constants. Next, we load in our assets. In this example, we load in graphics for the minion (as part of our minion spritesheet from previous examples), the platform and a background image (to see something more interesting than a  grey background). We also write our parallel unload calls.</p>
         <p>Though rigid bodies are an abstract representation for behavior, there is an area of effect associated with them called the bounding region. For demonstration purposes, we create a variable, <code>this.mShowBounds</code>, to allow us to control drawing the bounding region.</p>
 		<figure><pre>function MyGameScene() {
 	this.mCamera = null;
-	this.mBg = null;
+	<strong>this.mBg = null;</strong>
 	this.mMinionRenderable = null;
 	this.mMinionObject = null;
-	this.mPlatformRenderable = null;
+	<strong>this.mPlatformRenderable = null;
 	this.mPlatformObject = null;
-	<strong>this.mShowBounds = false;	// we use this to control drawing bounds</strong>
+	this.mShowBounds = false;	// we use this to control drawing bounds</strong>
 	
-	this.kBG = "assets/bg.png";
+	<strong>this.kBG = "assets/bg.png";</strong>
 	this.kTexture = "assets/minion_spritesheet.png";
 	this.kPlatform = "assets/platform.png";
 }
 gEngine.Core.inheritPrototype(MyGameScene, Scene);
 
 MyGameScene.prototype.loadScene = function () {
-	gEngine.Textures.loadTexture(this.kBG);
-	gEngine.Textures.loadTexture(this.kPlatform);
+	<strong>gEngine.Textures.loadTexture(this.kBG);
+	gEngine.Textures.loadTexture(this.kPlatform);</strong>
 	gEngine.Textures.loadTexture(this.kTexture);
 };
 
 MyGameScene.prototype.unloadScene = function () {
-	gEngine.Textures.unloadTexture(this.kBG);
-	gEngine.Textures.unloadTexture(this.kPlatform);
+	<strong>gEngine.Textures.unloadTexture(this.kBG);
+	gEngine.Textures.unloadTexture(this.kPlatform);</strong>
 	gEngine.Textures.unloadTexture(this.kTexture);
 };
       		</pre>
@@ -69,11 +72,11 @@ MyGameScene.prototype.initialize = function () {
     );
     this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
    
-	// create a renderable for our background
+	<strong>// create a renderable for our background
 	this.mBg = new SpriteAnimateRenderable(this.kBG);
 	this.mBg.setElementPixelPositions(0, 1024, 0, 1024);
 	this.mBg.getXform().setSize(100, 80);
-	this.mBg.getXform().setPosition(50, 40);
+	this.mBg.getXform().setPosition(50, 40);</strong>
     
 	// create a renderable for our minion object
 	this.mMinionRenderable = new SpriteAnimateRenderable(this.kTexture);
@@ -126,18 +129,18 @@ MyGameScene.prototype.initialize = function () {
 	
 	this.mCamera.setupViewProjection();
     
-	this.mBg.draw(this.mCamera);
-	this.mPlatformObject.draw(this.mCamera);
+	<strong>this.mBg.draw(this.mCamera);
+	this.mPlatformObject.draw(this.mCamera);</strong>
 	this.mMinionObject.draw(this.mCamera);
 };</pre>
 		<figcaption class="codecaption">
 		  <p>Code snippet 4-4: Draw Function</p>
 		</figcaption>
         </figure>
-        <p>In the update function, we move our minion around based on the ASWD keys. We also have the ability to toggle the viewing of our rigid body bounding regions by pressing the C key. Then we call <code>gEngine.PhysicsprocessObjObj()</code> to check for and resolve collisions between GameObjects.</p>
+        <p>In the update function, we move our minion around based on the WASD keys. We also have the ability to toggle the viewing of our rigid body bounding regions by pressing the C key. Then we call <code>gEngine.PhysicsprocessObjObj()</code> to check for and resolve collisions between GameObjects.</p>
 		<figure>
 		<pre>MyGameScene.prototype.update = function () {
-	// minion control ASWD	
+	// minion control WASD	
 	if (gEngine.Input.isKeyPressed(gEngine.Input.keys.A)) {
 		this.mMinionObject.getXform().incXPosBy(-0.5);
 	}
@@ -179,7 +182,7 @@ MyGameScene.prototype.initialize = function () {
     
 
 	<hr>
-		<h2>Particles</h2>
+		<h2><a id="particles"></a>Particles</h2>
 		<p>Particles are small objects that emit from a point. Over time, the particle will move further away from the emitter and change in size, color and/or opacity until it eventually dissipates. Emitters can be used to simulate smoke, explosions and rain. In the game engine, particles are implemented by another type of game object, <strong>ParticleGameObject</strong>. Since we could be handling hundreds of particle objects, we can group them in a ParticleGameObjectSet to ease the task of tracking and manipulating them.</p>
         <p>In this next example, we are going to create a particle emitter. The particles will emit from our current mouse location and will fall as if under the influence of gravity. We retain all of our code from before and add particle functionality. In our constructor, we identify the texture and load/unload it. We also allocate a new <strong>ParticleGameObjectSet</strong>. We can do this here as opposed to the initialize function because it's allocation does not depend on any loaded resources.</p>
 		<figure>
@@ -285,7 +288,7 @@ MyGameScene.prototype.unloadScene = function () {
 		  <p>Code snippet 4-9: Creating Particles</p>
 		</figcaption>
         </figure>
-        <p>You can view this example <a href="../tutorial_source/index4b.html">here</a> for a demonstration. The ASWD keys move the minion around the screen. The C key will show/hide the rigid rectangles for the GameObjects. The Z key will emit particles from the current mouse location.</p>
+        <p>You can view this example <a href="../tutorial_source/index4b.html">here</a> for a demonstration. The WASD keys move the minion around the screen. The C key will show/hide the rigid rectangles for the GameObjects. The Z key will emit particles from the current mouse location.</p>
 
     <hr>
     <h2>Conclusion</h2>
@@ -296,6 +299,6 @@ MyGameScene.prototype.unloadScene = function () {
         <p align="center"><a href="../tutorial3/tutorial3.html">Tutorial 3</a> &lt;-- Tutorial 4 --&gt; <a href="../tutorial5/tutorial5.html">Tutorial 5</a><br>
 		  <a href="../index.html">Main tutorial guide page</a><br></p>
 	</div>
-    <h4><i>2/7/2016</i> - David Watson</h4>
+    <h4><i>2/11/2016</i> - David Watson</h4>
     </body>
 </html>

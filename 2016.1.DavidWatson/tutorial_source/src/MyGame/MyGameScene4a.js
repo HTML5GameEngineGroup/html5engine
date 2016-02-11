@@ -94,7 +94,7 @@ MyGameScene.prototype.draw = function () {
 // The Update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!
 MyGameScene.prototype.update = function () {
-	// minion control ASWD
+	// minion control WASD
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.A)) {
         this.mMinionObject.getXform().incXPosBy(-0.5);
     }

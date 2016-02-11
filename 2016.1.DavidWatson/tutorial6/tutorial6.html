@@ -9,40 +9,53 @@
 	<body>
     	<div id="main-content">
 		<h1> GTCS Game Engine: <br>
-		Tutorial 6: Shadow</h1>
+		Tutorial 6: Shadows and Parallax</h1>
 		<p align="center"><a href="../tutorial5/tutorial5.html">Tutorial 5</a> &lt;-- Tutorial 6<br>
 		  <a href="../index.html">Main tutorial guide page</a><br></p>
 		
 		
 		<hr>
 		<h2>Introduction</h2>
-		<p>In this tutorial, we are going to continue our understanding of lighting by working with shadow affects.
+		<p>In this tutorial, we are going to continue our understanding of lighting by working with shadow affects. To add more depth to our environment, we are going to also look at layering with parallax.
         </p>
+        
+        <p>Source code for tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
+		<p align="center"><a href="#shadows">Shadows</a> • <a href="#parallax">Parallax</a></p>
 
 
 	<hr>
-		<h2>Shadow</h2>
+		<h2><a id="shadows"></a>Shadows</h2>
 		<p>Much like lighting, in order for shadow to be rendered, we have to register each renderable to actively draw shadows. A renderable can be a shadow caster, a shadow receiver or both. We will use the IllumRenderable object as well as a new object, ShadowReceiver.</p>
-		<p>We initialize a new ShadowReceiver object with an IllumRenderable object. For each other renderable that we want to add shadows to this object, we call the <code>addShadowCaster()</code> function.</p>
+		<p>The general process is as follows...</p>
+        <ol>
+          <li>We initialize a new ShadowReceiver object with an IllumRenderable object that we want to render shadows onto.</li>
+          <li>For every IllumRenderable that we wish to be able to cast shadows onto the receiver, we call the receiver's <code>addShadowCaster()</code> function with a references to the caster renderable.</li>
+          <li>During the draw phase, we draw with the ShadowReceiver object. It will calculate all shadows for it's renderable during drawing		</li>
+        </ol>
+		<p>We</p>
         
 	<figure><pre>function MyGameScene() {
 	this.mCamera = null;
 	this.mRenderable = null;
 	this.mGameObject = null;
     
-	<b>this.kTexture = "assets/minion_sprite.png"</b>
+	this.kBG = "assets/bg.png";
+	this.kTexture = "assets/minion_sprite.png"
 };
 gEngine.Core.inheritPrototype(MyGameScene, Scene);
 
-function loadScene() {
+MyGameScene.prototype.loadScene = function () {
+	gEngine.Textures.loadTexture(this.kBG);
 	gEngine.Textures.loadTexture(this.kTexture);
-    
-function unloadScene() {
+};
+
+MyGameScene.prototype.unloadScene = function () {
+	gEngine.Textures.unloadTexture(this.kBG);
 	gEngine.Textures.unloadTexture(this.kTexture);
 };</pre>
 		<figcaption class="codecaption">Code snippet 6-1: Constructor, Load, Unload</figcaption>
         </figure>
-        <p></p>
+        <p>We</p>
 <figure><pre>MyGameScene.prototype.initialize = function () {
 	this.mCamera = new Camera(
 		vec2.fromValues(50, 40),    // position of the camera
@@ -65,7 +78,14 @@ function unloadScene() {
 };</pre>
 		<figcaption class="codecaption">Code snippet 6-2: Initializing</figcaption>
         </figure>
+        <p><a href="../tutorial_source/index6a.html">Here</a></p>
 
+
+	<hr>
+		<h2><a id="parallax"></a>Parallax</h2>
+		<p>We</p>
+        
+        
     <hr>
     <h2>Conclusion</h2>
         <p>Over the course of this tutorial, we have taken a peek at many aspects of the GTCS Game Engine. For a more indepth look at the commands, be sure to reference the <a href="../../JSDoc/docs">API documentation.</a></p>

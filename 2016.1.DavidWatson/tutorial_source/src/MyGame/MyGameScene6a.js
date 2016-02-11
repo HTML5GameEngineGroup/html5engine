@@ -11,6 +11,7 @@ function MyGameScene() {
     this.mRenderable = null;
     this.mGameObject = null;
 	this.mLight = null;
+	this.mShadow = null;
 	
     this.kBG = "assets/bg.png";
 	this.kTexture = "assets/minion_spritesheet.png";
@@ -59,6 +60,9 @@ MyGameScene.prototype.initialize  = function () {
 	// associate the light with the renderables
 	this.mBg.addLight(this.mLight);
 	this.mRenderable.addLight(this.mLight);
+	
+	this.mShadow = new ShadowReceiver(this.mBg);
+	this.mShadow.addShadowCaster(this.mRenderable);
         
 	// create a new game object with the new renderable
 	this.mGameObject = new GameObject(this.mRenderable);
@@ -83,7 +87,7 @@ MyGameScene.prototype.draw = function () {
 	this.mCamera.setupViewProjection();
     
 	// Draw our objects
-	this.mBg.draw(this.mCamera);
+	this.mShadow.draw(this.mCamera);
 	this.mGameObject.draw(this.mCamera);
 };
 

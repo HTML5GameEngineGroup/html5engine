@@ -16,12 +16,14 @@
 		
 		<hr>
 		<h2>Introduction</h2>
-		<p>In tutorial 1, we looked at creating the basic structure for our game scene. We created a camera object and a game object with a simple renderable. In this tutorial, we will look at  resource management,  a more advanced renderable type and user input.</p>
-		<p> This tutorial sets up our scene to create a simple rectangle on our viewport. Source Code can be downloaded here. </p>
+		<p>In tutorial 1, we looked at creating the basic structure for our game scene. We created a camera object and a game object with a simple renderable. In this tutorial, we will look at  resource management, a more advanced renderable type and user input.</p>
+        
+        <p>Source code for tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
+		<p align="center"><a href="#assets">Loading Resources</a> • <a href="#keyboard">Keyboard input</a> • <a href="#audio_mouse">Audio & Mouse</a> • <a href="#text">Text</a></p>
 		
 		
 		<hr>
-		<h2>Loading Resources</h2>
+		<h2><a id="assets"></a>Loading Resources</h2>
 		<p>Images, audio and other file types are the resources that your game will use. We make requests to the engine to load files in <b>loadScene()</b> by providing the file paths where the files can be located. The engine will asynchronously load the files into RAM and provide a means of access them so we can start using them. The <b>loadScene()</b> function is always called prior to <b>initialization()</b> and you are guaranteed that the resources have fully loaded when <b>initialization()</b> is called. Once the resources are loaded, different classes of objects will retrieve resources as needed by providing the string path to the resource. These variables identify each unique resource.</p>
 		<p>As a matter of convention, the game engine has a folder in it's hierarchy called &quot;assets&quot;. While you can technically use any folder to store resources (as long as the path is properly referenced in the loading and unloading), we will use this folder to store our resource files. This will keep things consistent and organized.</p>
 		<p class="note">[Note: The assets folder is also used by the game engine for it's own assets such as default fonts. Do not delete, move or modify the existing files or hierarchy]</p>
@@ -88,7 +90,7 @@ function unloadScene() {
         
         
     <hr>
-    <h2>Keboard Input</h2>
+    <h2><a id="keyboard"></a>Keboard Input</h2>
         <p>Tracking user events involves polling for the status of keys and the mouse using a number of functions provided by gEngine.Input. To find the state of a particular key, we use gEngine.Input.isKeyPressed(). To find out if the mouse button is pressed, we use gEngine.Input.isButtonPressed(). In this example, we control movement of our TextureRenderable with the keyboard.</p>
         
 	<figure><pre>MyGameScene.prototype.update = function () {
@@ -114,7 +116,7 @@ function unloadScene() {
         
         
 	<hr>
-    <h2>Audio &amp; Mouse Input</h2>
+    <h2><a id="audio_mouse"></a>Audio &amp; Mouse Input</h2>
     <p>Audio implementation is similar to images.</p>
         <ol>
         	<li>Create a string constant to refer to the resource and identify it's file location</li>
@@ -184,7 +186,7 @@ MyGameScene.unloadScene() {
         
         
 	<hr>
-    <h2>Text</h2>
+    <h2><a id="text"></a>Text</h2>
         <p>To create text, we are going to use a special kind of TextureRenderable called a <b>FontRenderable</b>. It uses a texture that has all the characters of a font and will copy the appropriate portions of the texture to the screen based on a string value we provide. Several font textures are automatically loaded by the engine and are available to us.</p>
 		<p>First we declare our new variable for the text we will display.</p>
         
@@ -203,6 +205,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
 
 		<p>We initialize the variable by allocating an new <b>FontRenderable</b> object. We also comment  delete the  code that sets the renderables direction and speed (our keyboard controls the location now). The code below sets the color, size and position of the text.</p>
 		<p>You will also notice a call to <b>gEngine.DefaultResources.setGlobalAmbientIntensity(3);</b>. Unlike the resources we request the engine to load, there are some resources that the engine provides by default. The texture that makes up the default font we use is an example of a default resource that we never need to load or unload. An ambient lighting source is another default resource. This light is always there but it is normally set very dim (we saw this in our previous examples). It is very dim so that when you do define other lighting sources, the ambient wont conflict with your design.</p>
+		<p class="note">[Note: Changing the ambient light intensity only changes drawn renderables on the screen. You will notice that the background color does not dim and brighten with this setting.]</p>
 
 	<figure><pre>MyGameScene.prototype.initialize = function () {
 	this.mCamera = new Camera(
@@ -262,6 +265,6 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
         <hr>
         <p align="center"><a href="../tutorial1/tutorial1.html">Tutorial 1</a> &lt;-- Tutorial 2 --&gt; <a href="../tutorial3/tutorial3.html">Tutorial 3</a></p>
         </div>
-        <h4><i>1/20/2016</i></h4>
+        <h4><i>2/11/2016</i> - David Watson</h4>
 	</body>
 </html>

@@ -16,18 +16,26 @@
 		
 		<hr>
 		<h2>Introduction</h2>
-		<p>In this tutorial, we introduce you to the use of 4 types of objects.  Scene, camera, renderables and game objects.  Each object type encapsulate different functionality.</p>
+		<p>In this tutorial, we will look at the basic building blocks and programming structure to build games. We look at the different types of objects we use and their respective roles with games. We will also gain an understanding of the operation of our game loop.</p>
+        
+		<p>Source code for tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
+		<p align="center"><a href="#object_types">Object Types</a> • <a href="#scene_object">Scene Object</a> • <a href="#initialization">Initialization</a> • <a href="#game_loop">Game Loop</a></p>
+        
+        
+		<hr>
+		<h2><a id="object_types"></a>Object Types</h2>
+		<p> In the GTCS Game Engine, we are concerned with 4 types of objects.  Scene, camera, renderables and game objects.  Each object type encapsulate different functionality.</p>
 		<ul>
-			<li><strong>Scene</strong>: Encapsulates the logic of our game. It is the link that the game engine to execute the logic of our code in the form of a runloop. We covered the instantiation in <a href="../tutorial0/tutorial0.html">tutorial 0</a>. In this tutorial, we will cover the implementation.</li>
+		  <li><strong>Scene</strong>: Encapsulates the logic of our game. It is the link that the game engine to execute the logic of our code in the form of a runloop. We covered the instantiation in <a href="../tutorial0/tutorial0.html">tutorial 0</a>. In this tutorial, we will cover the implementation.</li>
 			<li><strong>Camera</strong>: This object controls the specifics behind how the rendering engine does it's job. Aspect ratio, clipping, view panning and perspective are among the things we can control with the camera.</li>
 			<li><strong>Renderable</strong>: These are the elements that get drawn on the screen. These elements include not only game sprites but backgrounds and text. These objects only control how an object &quot;looks&quot; on the screen. To control behavior and interactivity, the renderable needs to be associated with a game object.</li>
 			<li><strong>GameObject</strong>: Dictates how elements in our scene behave and how they interact with each other. The game object will have a renderable embedded within them. Without the renderable, nothing draws on the screen.  In the same respect, a renderable without an encapsulating game object would not detect collisions with other objects or allow physics elements to be applied (such as gravity effects and elasticity).</li>
 		</ul>
-		<p>Over the course of this tutorial, we will look at each element needed to create games. This tutorial sets up our scene to create a simple rectangle on our viewport as shown <a href="../tutorial_source/index1a.html">here</a>.</p>
+		<p>We will look at each element by building a simple game scene to create a simple rectangle on our viewport as shown <a href="../tutorial_source/index1a.html">here</a>.</p>
 		
 		
 		<hr>
-		<h2>Scene Object Structure</h2>
+		<h2><a id="scene_object"></a>Scene Object Structure</h2>
 		<p>The scene is where game loop logic will reside. By overriding the engine's Scene class wth the functionality you want, you will have a runloop. By convention, this class will be defined in a file located in the <em>src/MyGame/</em> path.</p>
 		<p>The HTML5 engine implements a runloop. When you setup a scene object, you must adhere to a certain structure to make sure the runloop executes as expected. The structure of a scene consists of 4 parts. Initialization, update, drawing and cleanup. A skeleton of the functions in a scene object are shown in the following code...</p>
 <figure>
@@ -57,7 +65,7 @@ MyGameScene.prototype.draw = function () { };</strong></pre>
 		
 		
 		<hr>
-		<h2>Initialization</h2>
+		<h2><a id="initialization"></a>Initialization</h2>
         
 		
 		<h3>Constructor</h3>
@@ -140,7 +148,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
         </figure>
 		
 		<hr>
-		<h2>Game Loop</h2>
+		<h2><a id="game_loop"></a>Game Loop</h2>
 		
 		<h3>Updating</h3>
 		<p>The <b>update()</b> function is called by the engine 60 times a second. This is where you will check for user interaction (ie: keyboard presses and mouse clicks), check for collisions among GameObjects, update object locations etc. If another process or calculation delays execution, the game engine will compensate for the delay by looking at the current time and executing the update routine multiple times until updates have caught up with current time.</p>
@@ -200,6 +208,6 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
 		<p align="center"><a href="../tutorial0/tutorial0.html">Tutorial 0</a> &lt;-- Tutorial 1 --&gt; <a href="../tutorial2/tutorial2.html">Tutorial 2</a></p>
         
 	</div>
-    <h4><i>1/20/2016</i></h4>
+    <h4><i>2/11/2016</i> - David Watson</h4>
 	</body>
 </html>

@@ -41,10 +41,12 @@ ShadowReceiver.prototype.draw = function (aCamera) {
     var c;
     
     // draw receiver as a regular renderable
+  
     this.mReceiver.draw(aCamera);
     
     this._shadowRecieverStencilOn();
     var s = this.mReceiver.getRenderable().swapShader(this.mReceiverShader);
+    this.mReceiver.getRenderable().mDrawed=false;
     this.mReceiver.draw(aCamera);
     this.mReceiver.getRenderable().swapShader(s);
     this._shadowRecieverStencilOff();

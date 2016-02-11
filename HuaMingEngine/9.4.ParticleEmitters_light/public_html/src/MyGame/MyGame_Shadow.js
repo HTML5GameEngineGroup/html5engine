@@ -12,6 +12,7 @@ MyGame.prototype._setupShadow = function () {
     this.mBgShadow.addShadowCaster(this.mLgtHero);
     this.mBgShadow.addShadowCaster(this.mIllumMinion);
     this.mBgShadow.addShadowCaster(this.mLgtMinion);
+    this.mBgShadow.addShadowCaster(this.mIllumHero);
 
     this.mMinionShadow = new ShadowReceiver(this.mIllumMinion);
     this.mMinionShadow.addShadowCaster(this.mIllumHero);

@@ -96,6 +96,7 @@ ShadowCaster.prototype.draw = function(aCamera) {
     // loop through each light in this array, if shadow casting on the light is on
     // compute the proper shadow offset
     var casterRenderable = this.mShadowCaster.getRenderable();
+    var flag=casterRenderable.mDrawed;
     this.mShadowCaster.getXform().cloneTo(this.mSaveXform);
     var s = casterRenderable.swapShader(this.mCasterShader);
     var c = casterRenderable.getColor();
@@ -106,8 +107,10 @@ ShadowCaster.prototype.draw = function(aCamera) {
         if (lgt.isLightOn() && lgt.isLightCastShadow()) {
             this.mSaveXform.cloneTo(this.mShadowCaster.getXform());
             if (this._computeShadowGeometry(lgt)) {
-                this.mCasterShader.setLight(lgt);
+                this.mCasterShader.setLight(lgt);    
+                casterRenderable.mDrawed=false; 
                 SpriteRenderable.prototype.draw.call(casterRenderable, aCamera);
+                casterRenderable.mDrawed=flag; 
             }
         }
     }

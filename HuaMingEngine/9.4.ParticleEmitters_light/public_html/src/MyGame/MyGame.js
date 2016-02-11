@@ -78,7 +78,6 @@ MyGame.prototype.initialize = function () {
 
     // the Background
     var bgR = new IllumRenderable(this.kBg, this.kBgNormal);
-    bgR.mVisible=false;
     bgR.setElementPixelPositions(0, 1024, 0, 1024);
     bgR.getXform().setSize(100, 100);
     bgR.getXform().setPosition(50, 35);
@@ -109,9 +108,8 @@ MyGame.prototype.initialize = function () {
     
     this.mIllumMinion = new Minion(this.kMinionSprite, this.kMinionSpriteNormal, 25, 30);
     this.mIllumMinion.getXform().incSizeBy(20);
-  //  this.mIllumMinion.getRenderable().mVisible=false;
+ //   this.mIllumMinion.getRenderable().mVisible=false;
     this.mLgtMinion = new Minion(this.kMinionSprite, null, 65, 25);
-  //  this.mLgtMinion.getRenderable().mVisible=false;
     for (i = 0; i < 4; i++) {
         this.mIllumHero.getRenderable().addLight(this.mAllLight.getLightAt(i));
         this.mLgtHero.getRenderable().addLight(this.mAllLight.getLightAt(i));

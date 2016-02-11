@@ -61,13 +61,16 @@ Scene.prototype.draw = function () {
     var i;
     var j;
     for (i = 0; i < this.mAllCamera.length; i++) {
-        this.mAllCamera[i].setupViewProjection();
+        this.mAllCamera[i].setupViewProjection();       
         for (j = 0; j < this.mAllShadow.length; j++) {
             this.mAllShadow[j].draw(this.mAllCamera[i]);
         }
         for (j = 0; j < this.mAllRenderable.length; j++) {
-            if (this.mAllRenderable[j].mVisible)
-                this.mAllRenderable[j].draw(this.mAllCamera[i]);
+
+              this.mAllRenderable[j].draw(this.mAllCamera[i]);
+        }
+        for (j = 0; j < this.mAllRenderable.length; j++) {
+              this.mAllRenderable[j].mDrawed=false;
         }
     }
 

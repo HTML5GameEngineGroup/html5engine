@@ -17,8 +17,9 @@
         </group>
         <group name="AllBookProjects"/>
         <group>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters/public_html/src/MyGame/MyGame.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters/public_html/src/Engine/Renderables/Renderable.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters/public_html/src/MyGame/MyGame.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters/public_html/src/MyGame/MyGame_Physics.js</file>
         </group>
     </open-files>
 </project-private>

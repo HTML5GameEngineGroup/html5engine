@@ -43,7 +43,7 @@ MyGameScene.prototype.initialize = function () {
         100,						// width of camera
         [0, 0, 500, 400]			// viewport (orgX, orgY, width, height)
     );
-    this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);    // sets the background to gray
+    this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
     
 	// create a renderable for our background
 	this.mBg = new SpriteAnimateRenderable(this.kBG);
@@ -62,7 +62,7 @@ MyGameScene.prototype.initialize = function () {
 
 	// create a physics component for this object
     var r = new RigidRectangle(this.mMinionObject.getXform(), 11, 15);
-    r.setColor([0, 1, 0, 1]);			// set a color for our bounding rectangle when drawn
+    r.setColor([0, 1, 0, 1]);			// set a bounding rectangle color
     r.setDrawBounds(this.mShowBounds);
     this.mMinionObject.setPhysicsComponent(r);
 
@@ -77,7 +77,7 @@ MyGameScene.prototype.initialize = function () {
 	// create a physics component for this object
     r = new RigidRectangle(this.mPlatformRenderable.getXform(), 30, 3);
     r.setMass(0);  						// ensures no movements!
-    r.setColor([1, 0.2, 0.2, 1]);		// set a color for our bounding rectangle when drawn
+    r.setColor([1, 0.2, 0.2, 1]);		// set a bounding rectangle color
     r.setDrawBounds(this.mShowBounds);
     this.mPlatformObject.setPhysicsComponent(r);
 
@@ -87,7 +87,8 @@ MyGameScene.prototype.initialize = function () {
 // This is the draw function, make sure to setup proper drawing environment, and more
 // importantly, make sure to _NOT_ change any state.
 MyGameScene.prototype.draw = function () {
-    gEngine.Core.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
+    // Clear the screen
+    gEngine.Core.clearCanvas([0.8, 0.8, 0.8, 1.0]);
 	
     this.mCamera.setupViewProjection();
     

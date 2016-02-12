@@ -42,7 +42,7 @@ MyGameScene.prototype.initialize  = function () {
         100,							// width of camera
         [0, 0, 500, 400]				// viewport (orgX, orgY, width, height)
     );
-    this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);    // sets the background to gray
+    this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
     
     // create a background for the scene
 	this.mBg = new LightRenderable(this.kBG);

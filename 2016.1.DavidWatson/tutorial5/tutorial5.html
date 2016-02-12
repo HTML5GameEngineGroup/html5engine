@@ -112,7 +112,6 @@ MyGameScene.prototype.initialize  = function () {
         100,						// width of camera
         [0, 0, 500, 400]			// viewport (orgX, orgY, width, height)
 	);
-	// set the background color of our view to medium grey
 	this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
     
 	// create a background for the scene
@@ -155,8 +154,9 @@ MyGameScene.prototype.initialize  = function () {
     <p>In code snippet 5-2, we created a new point light and set positionNotice in the last line, we set the intensity of the ambient light to 0.4. Ambient light affects all game objects regardless of what type of renderable. We set this low value to dim our scene and to make the point light stand out. </p>
     <p>Next, we draw.</p>
     
-    <figure><pre>MyGameScene.prototype.draw = function () {
-	gEngine.Core.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
+    <figure>
+		<pre>MyGameScene.prototype.draw = function () {
+	gEngine.Core.clearCanvas([0.8, 0.8, 0.8, 1.0]);
 	
 	this.mCamera.setupViewProjection();
     
@@ -266,7 +266,7 @@ MyGameScene.prototype.initialize  = function () {
         100,						// width of camera
         [0, 0, 500, 400]			// viewport (orgX, orgY, width, height)
 	);
-	this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);    // sets the background to gray
+	this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
     
     // create a background for the scene
 	this.mBg = new LightRenderable(this.kBG);

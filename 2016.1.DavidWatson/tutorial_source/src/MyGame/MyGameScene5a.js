@@ -51,7 +51,7 @@ MyGameScene.prototype.initialize  = function () {
 	this.mLight.setColor([1.0, 1.0, 1.0, 1]);
 	this.mLight.setXPos(55);
 	this.mLight.setYPos(61);
-	this.mLight.setZPos(-1);
+	this.mLight.setZPos(1);
 	this.mLight.setNear(8);
 	this.mLight.setFar(10);
 	this.mLight.setIntensity(1);

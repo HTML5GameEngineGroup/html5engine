@@ -38,7 +38,7 @@
             </figure>
         </p>
 		<p> With coordinate location (0,0) being the bottom left of the entire sprite page, the bottom left coordinate of our texture from tutorial 2 is at (130,0). The size of this sub-image is 180 pixels wide by 180 pixels tall. Using the call <code>setElementPixelPositions(<em>left-x, right-x, lower-y, upper-y</em>);</code> we can define the specific portion of the sheet we want to render without worrying about the dimensions being powers of 2.</p>
-	<figure>
+        <figure>
 		<pre>function MyGameScene() {
 	this.mCamera = null;
 	this.mRenderable = null;
@@ -120,7 +120,10 @@ MyGameScene.prototype.initialize = function () {
 	<hr>
 		<h2><a id="animation"></a>Sprite Animation</h2>
 		<p>We can take our SpriteRenderable concept another step forward by defining how to implement automatic animation. First, we create a variables for a second renderable and game object.</p>
-        
+		<p>In our next example, we are going to setup two renderables. Our original renderable will still respond to keyboard input and our second renderable will follow the mouse location. The second renderable will also animate with a sprite sequence. You can see the results <a href="../tutorial_source/index3b.html">here</a>.</p>
+        <figure><img src="assets/tutorial3-img2.png" width="513" height="414" alt=""/>
+            	<figcaption>Figure 3-3: Two sprites</figcaption></figure>
+                <p>First, we declare constants and load our resources.</p>
         <figure>
           <pre>function MyGameScene() {
 	this.mCamera = null;
@@ -223,9 +226,7 @@ MyGameScene.prototype.initialize = function () {
 };</pre>
 		<figcaption class="codecaption">Code snippet 3-7: Drawing Two Renderables</figcaption>
         </figure>
-        <p>We can see the results <a href="../tutorial_source/index3b.html">here</a>. Our original renderable still responds to keyboard input and our second renderable follows the mouse location.
-        <p><figure><img src="assets/tutorial3-img2.png" width="513" height="414" alt=""/>
-            	<figcaption>Figure 3-3: Two sprites</figcaption></figure></p>
+        <p>As long as the mouse is within the canvas area and the browser is in the foreground, the canvas will draw the</p>
                 
                 
 <hr>

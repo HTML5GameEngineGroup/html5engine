@@ -25,38 +25,50 @@
 
 	<hr>
 		<h2><a id="shadows"></a>Shadows</h2>
-		<p>Much like lighting, in order for shadow to be rendered, we have to register each renderable to actively draw shadows. A renderable can be a shadow caster, a shadow receiver or both. We will use the IllumRenderable object as well as a new object, ShadowReceiver.</p>
+		<p>Much like lighting, in order for shadow to be rendered, we have to register each renderable to actively draw shadows. A renderable can be a shadow caster, a shadow receiver or both. We can use a LightRenderable or an IllumRenderable object as a source of shadow. We also need to use a ShadowReceiver. The ShadowReceiver will encapsulate a GameObject and we use it for  drawing.</p>
 		<p>The general process is as follows...</p>
         <ol>
-          <li>We initialize a new ShadowReceiver object with an IllumRenderable object that we want to render shadows onto.</li>
-          <li>For every IllumRenderable that we wish to be able to cast shadows onto the receiver, we call the receiver's <code>addShadowCaster()</code> function with a references to the caster renderable.</li>
-          <li>During the draw phase, we draw with the ShadowReceiver object. It will calculate all shadows for it's renderable during drawing		</li>
+          <li>We create LightRenderable or IllumRenderable objects for the caster and receiver. But also define a Z position for the caster  to indicate a depth offset. This value is used to calculate shadows. As usual, we encapsulate the Renderable into GameObjects.</li>
+          <li>We create our light source making sure to activate the calculation of shadows with the source using the <code>setLightCastShadowTo()</code> function. We apply the light source to the caster and receiver renderables.</li>
+          <li>We initialize a new <strong>ShadowReceiver</strong> object with the receiver's GameObject.</li>
+          <li>For every GameObject that we wish to be able to cast shadows onto the receiver, we call the receiver's <code>addShadowCaster()</code> function with a references to the caster GameObject.</li>
+          <li>During the draw phase, we draw with the ShadowReceiver object. It will calculate all shadows for it's renderable during drawing.	We	need to make sure that we draw the ShadowReceivers before other GameObjects.</li>
         </ol>
-		<p>We</p>
+		<p>We can view the example <a href="../tutorial_source/index6a.html">here</a></p>
+		<p><img src="assets/tutorial6-img1.png" width="501" height="400" alt=""/></p>
+		<p>Declare variables and load resources.</p>
         
 	<figure><pre>function MyGameScene() {
 	this.mCamera = null;
 	this.mRenderable = null;
+	<strong>this.mBgObject = null;</strong>
 	this.mGameObject = null;
+	this.mLight = null;
+	<strong>this.mShadow = null;</strong>
     
 	this.kBG = "assets/bg.png";
+	<strong>this.kBGNormal = "assets/bg_normal.png";</strong>
 	this.kTexture = "assets/minion_sprite.png"
 };
 gEngine.Core.inheritPrototype(MyGameScene, Scene);
 
 MyGameScene.prototype.loadScene = function () {
 	gEngine.Textures.loadTexture(this.kBG);
+	<strong>gEngine.Textures.loadTexture(this.kBGNormal);</strong>
 	gEngine.Textures.loadTexture(this.kTexture);
 };
 
 MyGameScene.prototype.unloadScene = function () {
 	gEngine.Textures.unloadTexture(this.kBG);
+	<strong>gEngine.Textures.unloadTexture(this.kBGNormal);</strong>
 	gEngine.Textures.unloadTexture(this.kTexture);
 };</pre>
 		<figcaption class="codecaption">Code snippet 6-1: Constructor, Load, Unload</figcaption>
         </figure>
-        <p>We</p>
-<figure><pre>MyGameScene.prototype.initialize = function () {
+        <p>In the initialization function, we create a background renderable. We use an IllumRenderable as we have a normal map for this background. It is going to be encapsulated in a GameObject for shadows so we have it as a local variable.</p>
+        <p>We create our light source as normal making sure to enable the calculation of shadows.</p>
+<figure>
+		<pre>MyGameScene.prototype.initialize = function () {
 	this.mCamera = new Camera(
 		vec2.fromValues(50, 40),    // position of the camera
 		100,                        // width of camera
@@ -65,20 +77,100 @@ MyGameScene.prototype.unloadScene = function () {
 	// set the background color of our view to medium grey
 	this.mCamera.setBackgroundColor([0.8, 0.8, 0.8, 1]);
     
-	<b>// we now use a sprite renderable object
-	this.mRenderable = new SpriteRenderable(this.kTexture);
-	this.mRenderable.setElementPixelPositions(130, 310, 0, 180);</b>
+	<b>// create a background for the scene and put it into a GameObject
+	var background;
+	background = new IllumRenderable(this.kBG, this.kBGNormal);
+	background.getXform().setSize(100, 80);
+	background.getXform().setPosition(50, 40);
+	this.mBgObject = new GameObject(background);</b>
+
+	// we use an object type that knows how to render with lights
+	this.mRenderable = new LightRenderable(this.kTexture);
+	this.mRenderable.setElementPixelPositions(130, 310, 0, 180);
+
+	// create the light and setup the parameters we need
+	this.mLight = new Light();
+	this.mLight.setLightType(Light.eLightType.ePointLight);
+	this.mLight.setColor([1.0, 1.0, 1.0, 1]);
+	this.mLight.setXPos(35);
+	this.mLight.setYPos(50);
+	this.mLight.setZPos(10);
+	this.mLight.setNear(18);
+	this.mLight.setFar(20);
+	this.mLight.setIntensity(2);
     
+	<strong>// make sure to set this to true
+	this.mLight.setLightCastShadowTo(true);</strong>
+    
+	<em>// ... Continued in next snippet ... </em></pre>
+		<figcaption class="codecaption">
+		  <p>Code snippet 6-2: Creating Background and Light Source</p>
+		</figcaption>
+        </figure>
+        
+        <p>Next, we add the light source to the renderables. We make sure to apply a Z position to the GameObject that will be casting a shadow. Then we create the ShadowReceiver object sending in the background GameObject. We call <code>addShadowCaster()</code> with the caster's GameObject.</p>
+        
+		<figure><pre>
+	// associate the light with the renderables
+	background.addLight(this.mLight);
+	this.mRenderable.addLight(this.mLight);
+
 	// create a new game object with the new renderable
 	this.mGameObject = new GameObject(this.mRenderable);
 	this.mGameObject.getXform().setSize(16, 16);
 	this.mGameObject.getXform().setPosition(30, 50);
     
-	gEngine.DefaultResources.setGlobalAmbientIntensity(3);
+	<strong>// provide a Z coordinate for the GameObject
+	this.mGameObject.getXform().setZPos(3);</strong>
+
+	<strong>this.mShadow = new ShadowReceiver(this.mBgObject);
+	this.mShadow.addShadowCaster(this.mGameObject);</strong>
+
+	// we set the ambient light low to emphasize light affect
+	gEngine.DefaultResources.setGlobalAmbientIntensity(0.4);
 };</pre>
-		<figcaption class="codecaption">Code snippet 6-2: Initializing</figcaption>
+		<figcaption class="codecaption">Code snippet 6-3: Initializing</figcaption>
         </figure>
-        <p><a href="../tutorial_source/index6a.html">Here</a></p>
+        <p>Our draw and update functions are the same as previous examples except, for those GameObjects that must render shadows,  we draw using the ShadowReceiver objects.</p>
+        <figure>
+		<pre>// This is the draw function, make sure to setup proper drawing environment, and more
+// importantly, make sure to _NOT_ change any state.
+MyGameScene.prototype.draw = function () {
+	// Clear the screen
+	gEngine.Core.clearCanvas([0.8, 0.8, 0.8, 1.0]);
+
+	// Activate our camera
+	this.mCamera.setupViewProjection();
+
+	// Draw our objects
+	<strong>this.mShadow.draw(this.mCamera);</strong>
+	this.mGameObject.draw(this.mCamera);
+};
+
+// The Update function, updates the application state. Make sure to _NOT_ draw
+// anything from this function!
+MyGameScene.prototype.update = function () {
+	if (gEngine.Input.isKeyPressed(gEngine.Input.keys.A)) {
+		var x = this.mLight.getPosition()[0];
+		this.mLight.setXPos(x - 0.5);
+	}
+
+	if (gEngine.Input.isKeyPressed(gEngine.Input.keys.D)) {
+		var x = this.mLight.getPosition()[0];
+		this.mLight.setXPos(x + 0.5);
+	}
+	if (gEngine.Input.isKeyPressed(gEngine.Input.keys.W)) {
+		var y = this.mLight.getPosition()[1];
+		this.mLight.setYPos(y + 0.5);
+	}
+
+	if (gEngine.Input.isKeyPressed(gEngine.Input.keys.S)) {
+		var y = this.mLight.getPosition()[1];
+		this.mLight.setYPos(y - 0.5);
+	}
+};</pre>
+		<figcaption class="codecaption">Code snippet 6-4: Draw and Update</figcaption>
+        </figure>
 
 
 	<hr>

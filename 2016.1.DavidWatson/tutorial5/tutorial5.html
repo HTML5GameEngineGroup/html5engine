@@ -71,7 +71,12 @@
 	<hr>
 		<h2><a id="lightrenderable"></a>LightRenderable</h2>
         
-    <p>To demonstrate the creation of a point light, we will allocate a new Light object and set parameters using accessor methods.</p>
+    <p>To demonstrate the light, in the next example, we will create a point light. We will set the WASD keyboard controls to allow moving the light around the screen. We will set the ambient light intensit to a low level for contrast. You can see the demonstration <a href="../tutorial_source/index5a.html">here</a>. </p>
+    <figure><img src="assets/tutorial5-img3.png" width="500" height="400" alt=""/>
+    <figcaption>Figure 5-3: Point Light Sample</figcaption>
+        </figure>
+    <p>We will allocate a new Light object and set parameters using accessor methods.</p>
+    <p class="note">[Note: The engine is setup to allow a LightRenderable to calculate up to four light sources. To keep managing lights simple due to GameObject overlap, you should limit you game to no more than four lights sources in your project.}</p>
     
     <figure>
       <pre>function MyGameScene() {
@@ -98,7 +103,7 @@ MyGameScene.prototype.unloadScene = function () {
         	<figcaption><p>Code snippet 5-1: Loading Assets</p></figcaption>
       	</figure>
         
-    <p>To illuminate our game objects, we need to use a renderable that knows how to work with lights. The LightRenderable has all of the same functionality as SpriteAnimateRenderable plus the ability to react to lighting affects. You can see the demonstration <a href="../tutorial_source/index5a.html">here</a>.</p>
+    <p>To illuminate our game objects, we need to use a renderable that knows how to work with lights. The LightRenderable has all of the same functionality as SpriteAnimateRenderable plus the ability to react to lighting affects.</p>
     <figure>
 	  	<pre>
 MyGameScene.prototype.initialize  = function () {
@@ -195,12 +200,16 @@ MyGameScene.prototype.update = function () {
         <p>Directional and spot lights include a directional vector component to their definition. While, for spot lights, this setting will provide for a difference in diffusion between the closer and farther edges, it will not affect directional lights at all. This is because our renderables are in 2D.</p>
         <p>A normal map can be used to hint to a renderable how to react to lighting for a given texture image. Below, we see a texture with it's normal. We need to make sure that we have pixel-for-pixel coordination between the two images. Many 3D modeling software packages can generate and export normal images (often called bump maps). Using these two images together, the engine can simulate specularity and diffusion of materials and enhance the lighting affect with regards to light direction.</p>
         <figure>
-    		<img src="assets/tutorial5-img3.png" width="62" height="61">
-            <img src="assets/tutorial5-img4.png" width="62" height="61">
-        	<figcaption>Figure 5-3: Texture / Normal Map</figcaption>
+    		<img src="assets/tutorial5-img4-1.png" width="62" height="61">
+            <img src="assets/tutorial5-img4-2.png" width="62" height="61">
+        	<figcaption>Figure 5-4: Texture / Normal Map</figcaption>
         </figure>
-        <p>To use normal maps, we need another renderable object. The <strong>IllumRenderable</strong> knows how to use normal maps and react to light accordingling. In our next example, we will demonstrate this.</p>
-        <p>First, we declare and load our resources.</p>
+        <p>To use normal maps, we need another renderable object. The <strong>IllumRenderable</strong> knows how to use normal maps and react to light accordingling. In our next example, we will demonstrate this using a spotlight. We continue to use WASD to control the position of the light. You can view the end result <a href="../tutorial_source/index5b.html">here</a>.</p>
+    <figure>
+	  <img src="assets/tutorial5-img5.png">
+   	  <figcaption>Figure 5-5: Texture / Normal Map</figcaption>
+        </figure>
+        <p>First, we setup constants, declare variables and load our resources.</p>
         
         <figure>
       <pre>function MyGameScene() {
@@ -343,12 +352,7 @@ MyGameScene.prototype.update = function () {
     	<figcaption>Code snippet 5-8: Updating the Animation</figcaption>
     </figure>
     
-    <p>With the direction and position that we have declared for the light, our normal map allows the image to respond to light. Below, we have a screenshot of the running example and we can see that we have a shininess depending on the position of the light and a shadow affect. We can view the end result <a href="../tutorial_source/index5b.html">here</a>.</p>
-    <figure>
-	  <img src="assets/tutorial5-img5.png">
-   	  <figcaption>Figure 5-4: Texture / Normal Map</figcaption>
-        </figure>
-        
+    <p>With the direction and position that we have declared for the light, our normal map allows the image to respond to light. Below, we have a screenshot of the running example and we can see that we have a shininess depending on the position of the light and a shadow affect.</p> 
         
     <hr>
     <h2>Conclusion</h2>

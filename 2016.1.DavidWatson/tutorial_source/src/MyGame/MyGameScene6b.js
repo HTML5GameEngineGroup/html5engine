@@ -99,10 +99,10 @@ MyGameScene.prototype.initialize  = function () {
     this.mBgL6.setSpeed(0.06);
     
     bg = new LightRenderable(this.kLayer7);
-    bg.getXform().setSize(200, 100);
+    bg.getXform().setSize(175, 100);
     bg.getXform().setPosition(100, 40);
     bg.getXform().setZPos(0); 
-    this.mBgL7 = new ParallaxGameObject(bg, 8, this.mCamera);
+    this.mBgL7 = new ParallaxGameObject(bg, 7, this.mCamera);
     this.mBgL7.setCurrentFrontDir([-1, 0, 0]);
     this.mBgL7.setSpeed(0.06);
     
@@ -110,9 +110,8 @@ MyGameScene.prototype.initialize  = function () {
     bg.getXform().setSize(200, 100);
     bg.getXform().setPosition(50, 40);
     bg.getXform().setZPos(0); 
-    this.mBgL8 = new ParallaxGameObject(bg, 7, this.mCamera);
+    this.mBgL8 = new ParallaxGameObject(bg, 8, this.mCamera);
     this.mBgL8.setCurrentFrontDir([-1, 0, 0]);
-    this.mBgL8.setSpeed(0.06);
     
     
     gEngine.DefaultResources.setGlobalAmbientIntensity(3);

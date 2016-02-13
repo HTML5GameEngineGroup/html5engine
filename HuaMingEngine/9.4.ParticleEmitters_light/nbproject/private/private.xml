@@ -17,28 +17,28 @@
         </group>
         <group name="AllBookProjects"/>
         <group>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Scene.js</file>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/GameObjects/GameObject.js</file>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Shadows/ShadowReceiver_Stencil.js</file>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Shadows/ShadowCaster.js</file>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/GameObjects/GameObjectSet.js</file>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Renderables/TextureRenderable.js</file>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Physics/RigidCircle.js</file>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Renderables/FontRenderable.js</file>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Renderables/SpriteRenderable.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/MyGame/MyGame_Lights.js</file>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Particles/Particle.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/GameObjects/GameObject.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Renderables/Renderable.js</file>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Shadows/ShadowReceiver.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Scene.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/MyGame/MyGame.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/MyGame/MyGame_Shadow.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Shadows/ShadowCaster.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Shadows/ShadowReceiver.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Renderables/IllumRenderable.js</file>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Shaders/ShaderLightAtIndex.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/MyGame/Objects/Hero.js</file>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Particles/ParticleGameObject.js</file>
-            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Renderables/SpriteAnimateRenderable.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Renderables/LightRenderable.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Renderables/SpriteAnimateRenderable.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Renderables/SpriteRenderable.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Renderables/TextureRenderable.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Shaders/ShaderLightAtIndex.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Shadows/ShadowReceiver_Stencil.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Renderables/FontRenderable.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Particles/Particle.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/GameObjects/GameObjectSet.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Particles/ParticleGameObjectSet.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Particles/ParticleGameObject.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light/public_html/src/Engine/Physics/RigidCircle.js</file>
         </group>
     </open-files>
 </project-private>

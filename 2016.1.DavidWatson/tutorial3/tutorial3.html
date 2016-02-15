@@ -18,15 +18,16 @@
 		<h2>Introduction</h2>
 		<p>In this tutorial, we are going to look at another renderable type that implements animation of the image. We will also expand our understanding of game object behavior by using collision detection to determine when GameObject overlap.</p>
         
-        <p>Source code for tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
 		<p align="center"><a href="#sprites">Sprites</a> • <a href="#animation">Animation</a> • <a href="#collision_detection">Collision Detection</a></p>
+        <p>Source code for tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
+        <p align="center"><a href="../tutorial_source/index3a.html" target="_blank">Sprites</a> • <a href="../tutorial_source/index3b.html" target="_blank">Animated Sprites</a> • <a href="../tutorial_source/index3c.html" target="_blank">Detecting Collisions</a></p>
         
         
 	<hr>
 		<h2><a id="sprites"></a>Sprites</h2>
 
 
-		<p>TextureRenderables have a big advantage over Renderables in being able to render a bitmap. They do have a few significant limitations. Our texture must have dimensions that are powers of 2 and they are static. While this may work fine for backgrounds or static visual elements, we typically want something more dynamic the enhace the &quot;action&quot; of the graphics in our game. SpriteRenderables allow us to use a sprite sheet and define the portion of the sheet we want to display for the renderable.</p>
+		<p>TextureRenderables have a big advantage over Renderables in being able to render a bitmap. They do have a few significant limitations. Our texture must have dimensions that are powers of 2 and they are static. While this may work fine for backgrounds or static visual elements, we typically want something more dynamic the enhace the &quot;action&quot; of the graphics in our game. A <strong>SpriteRenderable</strong> allow us to use a sprite sheet and define the portion of the sheet we want to display for the renderable.</p>
         <p><figure>
         	<img src="assets/minion_sprite.png" width="512" height="256" alt=""/>
             	<figcaption>figure 3-1: Sprite sheet</figcaption>
@@ -114,13 +115,13 @@ MyGameScene.prototype.initialize = function () {
 };</pre>
 		<figcaption class="codecaption">Code snippet 3-3: Update</figcaption>
         </figure>
-       <p>You can see the scene <a href="../tutorial_source/index3a.html">here</a>.</p>
+       <p>You can see the scene <a href="../tutorial_source/index3a.html" target="_blank">here</a>.</p>
 
 
 	<hr>
 		<h2><a id="animation"></a>Sprite Animation</h2>
 		<p>We can take our SpriteRenderable concept another step forward by defining how to implement automatic animation. First, we create a variables for a second renderable and game object.</p>
-		<p>In our next example, we are going to setup two renderables. Our original renderable will still respond to keyboard input and our second renderable will follow the mouse location. The second renderable will also animate with a sprite sequence. You can see the results <a href="../tutorial_source/index3b.html">here</a>.</p>
+		<p>In our next example, we are going to setup two renderables. Our original renderable will still respond to keyboard input and our second renderable will follow the mouse location. The second renderable will also animate with a sprite sequence. You can see the results <a href="../tutorial_source/index3b.html" target="_blank">here</a>.</p>
         <figure><img src="assets/tutorial3-img2.png" width="513" height="414" alt=""/>
             	<figcaption>Figure 3-3: Two sprites</figcaption></figure>
                 <p>First, we declare constants and load our resources.</p>
@@ -137,7 +138,7 @@ MyGameScene.prototype.initialize = function () {
 		<figcaption class="codecaption">Code snippet 3-4: Adding a second GameObject</figcaption>
         </figure>
         
-        <p>During initialization, we use <code>setSpriteSequence(348, 0, 204, 164, 5,	0)</code> to define an animation sequence. Each of the parameters are defined as follows...
+        <p>During initialization, we will use a new renderable object type, <strong>SpriteAnimateRenderable</strong>. This  provides the function <code>setSpriteSequence(348, 0, 204, 164, 5,	0)</code> to define an animation sequence. Each of the parameters are defined as follows...
         <ul>
         	<li>384 - Top Y-coordinate of image (164 pixels down from 512)</li>
             <li>0 - Left X-Coordinate of image</li>
@@ -226,7 +227,7 @@ MyGameScene.prototype.initialize = function () {
 };</pre>
 		<figcaption class="codecaption">Code snippet 3-7: Drawing Two Renderables</figcaption>
         </figure>
-        <p>As long as the mouse is within the canvas area and the browser is in the foreground, the canvas will draw the</p>
+        <p>As long as the mouse is within the canvas area and the browser is in the foreground, the canvas will draw the the second GameObject at the mouse location.</p>
                 
                 
 <hr>
@@ -265,11 +266,11 @@ MyGameScene.prototype.initialize = function () {
 };</pre>
 		<figcaption class="codecaption">Code snippet 3-8: Update with Collision Detection</figcaption>
         </figure>
-        <p>As we can see <a href="../tutorial_source/index3c.html">here</a>, we check to see if there is overlap between the two GameObjects and cause rotation of the animated renderable when overlapping. Notice that our renderable continues to animated while it is rotating.</p>
+        <p>As we can see <a href="../tutorial_source/index3c.html" target="_blank">here</a>, we check to see if there is overlap between the two GameObjects and cause rotation of the animated renderable when overlapping. Notice that our renderable continues to animated while it is rotating.</p>
 
     <hr>
     <h2>Conclusion</h2>
-        <p>In <a href="tutorial4.html">tutorial 4</a>, we will took a look at SpriteRenderables, SpriteAnimateRenderables and collision detection.</p>
+        <p>In <a href="tutorial4.html">tutorial 4</a>, we will take a look at using rigid bodies to resolve GameObject overlap after collisions and creating particle affects.</p>
         
         
         <hr>

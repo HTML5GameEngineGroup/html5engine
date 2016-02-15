@@ -19,8 +19,10 @@
 		<p>In this tutorial, we are going to continue our understanding of lighting by working with shadow affects. To add more depth to our environment, we are going to also look at layering with parallax.
         </p>
         
-        <p>Source code for tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
 		<p align="center"><a href="#shadows">Shadows</a> • <a href="#parallax">Parallax</a></p>
+        <p>Source code for tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
+        <p align="center"><a href="../tutorial_source/index6a.html " target="_blank">Shadows</a> • <a href="../tutorial_source/index6b.html" target="_blank">Parallax</a></p>
+        
 
 
 	<hr>
@@ -174,8 +176,9 @@ MyGameScene.prototype.update = function () {
 
 	<hr>
 		<h2><a id="parallax"></a>Parallax</h2>
-		<p>Parallax is an animation technique used to create an illusion of depth in a 2D environment. This is particularly common in side-scrolling games and is accomplished by making objects in the background scroll at a slower speed than objects in the foreground. For example, you might have cloud in the sky &quot;in the distance&quot; move very slowly while your characters move very quickly.</p>
-		<p>In our next example, we implement parallax as shown <a href="../tutorial_source/index6b.html">here</a>. This image is created with eight layers. We will create a LightRenderable for each layer and encapsulate in a <strong>ParallaxGameObject</strong>. We set the layer number motion direction and speed. If the speed were set the same for all layers, the parallax object will automatically adjust the speed based on the layer. We update the objects and draw in order from farthest to nearest.</p>
+		<p>Parallax is an animation technique used to create an illusion of depth in a 2D environment. This is particularly common in side-scrolling games and is accomplished by making objects in the background scroll at a slower speed than objects in the foreground. For example, you might have cloud in the sky &quot;in the distance&quot; move very slowly while your characters move very quickly.		</p>
+		<p>In our next example, we implement parallax as shown <a href="../tutorial_source/index6b.html" target="_blank">here</a>. This image is created with eight layers. We will create a LightRenderable for each layer and encapsulate in a <strong>ParallaxGameObject</strong>. We set the layer number motion direction and speed. If the speed were set the same for all layers, the parallax object will automatically adjust the speed based on the layer. We update the objects and draw in order from farthest to nearest.</p>
+		<p>The images composing the layers will be automatically tiled making it appear to be ongoing (if you watch the example long enough, the sun will disappear off the left edge of the screen and eventually reappear on the right).</p>
 		<figure><img src="assets/tutorial6-img2.png"/>
 		<figcaption>Figure 6-2: Background with Parallax (Graphics created by <a href="https://mobilegamegraphics.com/product/free-parallax-backgrounds/">Mobile Game Graphics</a>)</figcaption></figure>
         <p>First we declare all variables and constants. We load the resources.</p>
@@ -304,7 +307,7 @@ MyGameScene.prototype.unloadScene = function () {
 };</pre>
 		<figcaption class="codecaption">Code snippet 6-5: Initialize</figcaption>
         </figure>
-        <p>Now we draw and update.</p>
+        <p>Now we draw and update. We draw the layers with furthest (and slowest) first. Calling <code>update()</code> on each layer handles the animation.</p>
         <figure>
 		<pre>// This is the draw function, make sure to setup proper drawing environment, and more
 // importantly, make sure to _NOT_ change any state.

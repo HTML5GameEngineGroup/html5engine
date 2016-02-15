@@ -11,19 +11,25 @@ function MyGameScene() {
     this.mGameObject = null;
 	
 	this.kTexture =  "assets/minion_portal.png";
-	this.kGameSong = "assets/gameSong.mp3";
+	this.kGameBGSong = "assets/BGClip.mp3";
+	this.kGameCueSound = "assets/BlueLevel_cue.wav";
 }
 gEngine.Core.inheritPrototype(MyGameScene, Scene);
 
 MyGameScene.prototype.loadScene = function () {
 	gEngine.Textures.loadTexture(this.kTexture);
-	gEngine.AudioClips.loadAudio(this.kGameSong);
+	gEngine.AudioClips.loadAudio(this.kGameBGSong);
+	gEngine.AudioClips.loadAudio(this.kGameCueSound);
 };
 
 
 MyGameScene.prototype.unloadScene = function () {
+	// need to stop the audio in case it is playing
+	gEngine.AudioClips.stopBackgroundAudio();
+	
 	gEngine.Textures.unloadTexture(this.kTexture);
-	gEngine.AudioClips.unloadAudio(this.kGameSong);
+	gEngine.AudioClips.unloadAudio(this.kGameBGSong);
+	gEngine.AudioClips.unloadAudio(this.kGameCueSound);
 };
 
 MyGameScene.prototype.initialize  = function () {
@@ -68,10 +74,14 @@ MyGameScene.prototype.update = function () {
 		gEngine.GameLoop.stop();
 	}
 	
-	if (gEngine.Input.isButtonClicked(gEngine.Input.mouseButton.Left)) {
+	if (gEngine.Input.isKeyClicked(gEngine.Input.keys.P)) {
 		if(!gEngine.AudioClips.isBackgroundAudioPlaying())
-			gEngine.AudioClips.playBackgroundAudio(this.kGameSong);
+			gEngine.AudioClips.playBackgroundAudio(this.kGameBGSong);
 		else
 			gEngine.AudioClips.stopBackgroundAudio();
+	}
+    
+    if (gEngine.Input.isButtonClicked(gEngine.Input.mouseButton.Left)) {
+		gEngine.AudioClips.playACue(this.kGameCueSound);
     }
 };

@@ -31,10 +31,10 @@
 		<p>We create a new rigid bodies object, set it's size and apply it to a GameObject using the <code>setPhysicsComponent()</code> function. To simulate the physics of the game, we call the engine's physics processing functions such as <code>gEngine.Physics.processObjObj()</code>for resolving the physics interactions between two bodies.</p>
         <h3>Using Rigid Bodies</h3>
         <p>In the next example, we will create two renderables, a minion and a platform. We will place the platform in the center of our scene and allow keys to control movement of the minion. Using rigid bodies, we will make it so the minion cannot pass through the platform.</p>
-        <p>You can see the running example <a href="../tutorial_source/index4a.html" target="_blank">here</a>.</p>
+        <p>You can see the running example <a href="../tutorial_source/index4a.html" target="_blank">here</a>. The WASD keys move the minion around the screen. The 'C' key will show/hide the rigid rectangles for the GameObjects so you can view  the locations of our &quot;rigid&quot; boundaries.</p>
         
         <figure><img src="assets/tutorial4-img1.png" width="500" height="400">
-        	<figcaption>Figure 4-1: GameObjects Using Rigid Bodies</figcaption>
+       	  <figcaption>Figure 4-1: GameObjects Using Rigid Bodies</figcaption>
       	</figure>
         
         <p>First, we declare our instance variables and constants. Next, we load in our assets. In this example, we load in graphics for the minion (as part of our minion spritesheet from previous examples), the platform and a background image (to see something more interesting than a  grey background). We also write our parallel unload calls.</p>
@@ -193,13 +193,13 @@ MyGameScene.prototype.initialize = function () {
 
 	<hr>
 		<h2><a id="particles"></a>Particles</h2>
-		<p>Particles are small objects that emit from a point. Over time, the particle will move further away from the emitter and change in size, color and/or opacity until it eventually dissipates. Emitters can be used to simulate smoke, explosions and rain. In the game engine, particles are implemented by another type of game object, <strong>ParticleGameObject</strong>. Since we could be handling hundreds of particle objects, we can group them in a ParticleGameObjectSet to ease the task of tracking and manipulating them.</p>
+		<p>Particles are small objects that emit from a point. Over time, the particle will move further away from the emitter and change in size, color and/or opacity until it eventually dissipates. Emitters can be used to simulate smoke, explosions and rain. In the game engine, particles are implemented by another type of game object, <strong>ParticleGameObject</strong>. Since we could be handling hundreds of particle objects, we will group them in a <strong>ParticleGameObjectSet</strong> to ease the task of tracking and manipulating them.</p>
         <p>In this next example, we are going to create a particle emitter. The particles will emit from our current mouse location and will fall as if under the influence of gravity. We retain all of our code from before and add particle functionality. </p>
-        <p>You can view this example <a href="../tutorial_source/index4b.html" target="_blank">here</a> for a demonstration. </p>
+        <p>You can view this example <a href="../tutorial_source/index4b.html" target="_blank">here</a> for a demonstration. The WASD keys move the minion around the screen. The 'Z' key will emit particles from the current mouse location. The 'C' key will show/hide the rigid rectangles for the GameObjects.</p>
         <figure><img src="assets/tutorial4-img2.png">
        	  <figcaption>Figure 4-2: Generating Particles</figcaption>
       	</figure>
-        <p>In our constructor, we identify the texture and load/unload it. We also allocate a new ParticleGameObjectSet. We can do this here as opposed to the initialize function because it's allocation does not depend on any loaded resources.</p>
+        <p>In our constructor, we identify the texture and load/unload it. We also allocate a new ParticleGameObjectSet object. We can do this here as opposed to the initialize function because it's allocation does not depend on any loaded resources. The set will store all of our particles so that we can treat them as one object rather than dozens or hundreds.</p>
 		<figure>
 	  <pre>function MyGameScene() {
 <em>... Same code as in the previous example ...</em>
@@ -305,11 +305,10 @@ MyGameScene.prototype.unloadScene = function () {
 		  <p>Code snippet 4-9: Creating Particles</p>
 		</figcaption>
         </figure>
-        <p>The WASD keys move the minion around the screen. The C key will show/hide the rigid rectangles for the GameObjects. The Z key will emit particles from the current mouse location.</p>
-
-    <hr>
+<hr>
     <h2>Conclusion</h2>
-        <p>In <a href="tutorial5.html">tutorial 5</a>, we will take a look at illuminating renderables with custom lighting.</p>
+        <p>Rigid bodies  have a many uses in games. They can be used to simulate floor and walls so that GameObjects can be constrained in their movement. They can also be used to make interactions between GameObjects more realistic. Particles give us impressive visual affects. Aside from explosions, we could simulate smoke or weather affects with particles.</p>
+        <p>In <a href="tutorial5.html">tutorial 5</a>, we will take a look at more visual affects by illuminating renderables with custom lighting.</p>
         
         
         <hr>

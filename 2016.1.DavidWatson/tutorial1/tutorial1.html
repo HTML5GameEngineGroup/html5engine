@@ -187,23 +187,20 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
 		<figcaption class="codecaption">Code snippet 1-5: Draw</figcaption>
         </figure>
 
-		<p>In our draw function, we clear the screen, activate our camera for rendering and draw all of our objects (which is only one at this stage). We send a reference to our camera into the game object which will pull out the information it needs for behavior and send the camera to the enclosed renderable so that it can extract what it needs for drawing.</p>
-        
-        
-		<hr>
-		<h2>Conclusion</h2>
+		<p>In our draw function, we clear the screen, activate our camera for rendering and draw all of our objects (which is only one at this stage). We send a reference to our camera into the game object which will pull out the information it needs for behavior and send the camera to the enclosed renderable so that it can extract what it needs for drawing. Click <a href="../tutorial_source/index1a.html" target="_blank">here</a> to see the results.</p>
+		<p>To activate motion, uncomment the last line in the <b>update()</b> function. The rectangle should oscillate left and right across the screen. To view this with motion, click <a href="../tutorial_source/index1b.html" target="_blank">here</a>.</p>
 		<p>When viewing this in a web browser, you should see the following...</p>
         <figure>
 			<img src="assets/tutorial1-img1.png" width="518" height="420" alt=""/>
         	<figcaption>figure 1-1: Renderable</figcaption>
         </figure>
-        <p></p>
-		<p>- To view this in real-time, click <a href="../tutorial_source/index1a.html" target="_blank">here</a>.</p>
-		<p>To activate motion, uncomment the last line in the <b>update()</b> function. The rectangle should oscillate left and right across the screen.</p>
-		<p>- To view this with motion, click <a href="../tutorial_source/index1b.html" target="_blank">here</a>.</p>
-		<p> You will also notice that the coloring is darker than you were probably expecting. Our renderable object responds to a "virtual light source".  By default, our only light source is ambient lighting and it is very dim so as not to interfere with other light sources you may define. We will look briefly at adjusting ambient lighting in the next tutorial.</p>
-		<p> In <a href="../tutorial2/tutorial2.html">tutorial 2</a>, we will look at renderables that support textures, user input and game resources.</p>
+		<p> You will also notice that the coloring is darker than you were probably expecting. Our renderable object responds to a "virtual light source".  By default, our only light source is ambient lighting and it is very dim so as not to interfere with other light sources you may define. We will look  at adjusting ambient lighting in the next tutorial.</p>
         
+        
+		<hr>
+		<h2>Conclusion</h2>
+		<p> We have learned about the structure of the scene object and create a very basic scene with a single renderable.</p>
+		<p>In <a href="../tutorial2/tutorial2.html">tutorial 2</a>,  we will look at accepting user input and utilizing game resources such as bitmap images and audio. We will build on the renderable concept and look at new types of renderable objects that support bitmap textures.</p>
         
         <hr>
 		<p align="center"><a href="../tutorial0/tutorial0.html">Tutorial 0</a> &lt;-- Tutorial 1 --&gt; <a href="../tutorial2/tutorial2.html">Tutorial 2</a></p>

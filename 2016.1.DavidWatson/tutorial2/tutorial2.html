@@ -93,7 +93,7 @@ function unloadScene() {
         
     <hr>
     <h2><a id="keyboard"></a>Keboard Input</h2>
-        <p>Tracking user events involves polling for the status of keys and the mouse using a number of functions provided by gEngine.Input. To find the state of a particular key, we use gEngine.Input.isKeyPressed(). To find out if the mouse button is pressed, we use gEngine.Input.isButtonPressed(). In this example, we control movement of our TextureRenderable with the keyboard.</p>
+        <p>Tracking user events involves polling for the status of keys and the mouse using a number of functions provided by gEngine.Input. To find the state of a particular key, we use <code>gEngine.Input.isKeyPressed()</code>. To find out if the mouse button is pressed, we use <code>gEngine.Input.isButtonPressed()</code>. In this example, we control movement of our TextureRenderable with the keyboard.</p>
         
 	<figure><pre>MyGameScene.prototype.update = function () {
 	<b>// Check for user keyboard input to control GameObject
@@ -108,11 +108,11 @@ function unloadScene() {
 	if (gEngine.Input.isKeyClicked(gEngine.Input.keys.Q)) {
 		gEngine.GameLoop.stop();
 	}</b>
-    this.mGameObject.update()
+	this.mGameObject.update()
 };</pre>
 		<figcaption class="codecaption">Code snippet 2-4: Update</figcaption>
         </figure>
-        <p>Notice that we have removed the call to <code>this.mGameObject.update()</code>. Had we left it in, the game object would have moved indefinitely to the right despite our keyboard input due to the speed and direction settings we gave in the <code>initialization()</code> function. Also, when the 'Q' key is pressed, everything comes to a halt. Keyboard input is no longer processed by the game and motion is stopped. After <code>gEngine.GameLoop.stop()</code> is called, the game loop stops and the <code>unloadScene()</code> function is called.</p>
+        <p>Now, pressing on the 'A' key will move the GameObject to the left. Pressing the 'D' key moves the GameObject to the right. When the 'Q' key is pressed, keyboard input is no longer processed by the game and motion is stopped. After <code>gEngine.GameLoop.stop()</code> is called, the game loop stops and the <code>unloadScene()</code> function is called and all resources are cleared from memory.</p>
         <p>Test the results <a href="../tutorial_source/index2b.html" target="_blank">here</a>.</p>
         <p class="note">[Note: When the game loop stops, <b>unloadScene()</b> is called where you can then instantiate a completely different Scene object and call <b>gEngine.Core.startScene(<i>nextScene</i>)</b> to start a new game loop. This is how you can implement a game with multiple levels.]</p>
         
@@ -240,7 +240,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
         </figure>
         
 		<p>You will also notice a call to <b>gEngine.DefaultResources.setGlobalAmbientIntensity(3);</b>. Unlike the resources we request the engine to load, there are some resources that the engine provides by default. The texture that makes up the default font we use is an example of a default resource that we never need to load or unload. An ambient lighting source is another default resource. This light is always there but it is normally set very dim (we saw this in our previous examples). It is very dim so that when you do define other lighting sources, the ambient wont conflict with your design.</p>
-		<p class="note">[Note: Changing the ambient light intensity only changes drawn renderables on the screen. You will notice that the background color does not dim and brighten with this setting.]</p>
+		<p class="note">[Note: Changing the ambient light intensity only affects renderables drawn on the canvas. You will notice that the background color neither dims nor brightens with this setting. The background is not a renderable.]</p>
 
 		<p>For the first time in a while, we need to make modifications to our <b>draw()</b> function.  We now have a second renderable.</p>
         
@@ -257,17 +257,17 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
 };</pre>
 		<figcaption class="codecaption">Code snippet 2-10: Draw</figcaption>
         </figure>
+    <p>Click <a href="../tutorial_source/index2d.html" target="_blank">here</a> to see the results or our sample code. Use the 'A' and 'D' keys on the keyboard to move the sprite left and right. Press the mouse button to play a sound cue and press 'P' to activate/deactivate the background music.</p>
+    <figure><img src="assets/tutorial2-img2.png" width="509" height="410" alt=""/>
+	  <figcaption>Figure 2-3: TextureRenderable and FontRenderable with ambient lighting</figcaption>
+        </figure>
+    <p>Increasing the ambient lighting intensity has  brightened our sprite. We will keep that for future projects. </p>
         
         
     <hr>
     <h2>Conclusion</h2>
-    <p>Click <a href="../tutorial_source/index2d.html" target="_blank">here</a> to see the results...</p>
-    <figure><img src="assets/tutorial2-img2.png" width="509" height="410" alt=""/>
-		<figcaption>Figure 2-3: TextureRenderable with FontRenderable with ambient lighting</figcaption>
-        </figure>
-    <p>Increasing the ambient lighting intensity has  brightened our sprite. We will keep that for future projects. Use the &quot;A&quot; and &quot;D&quot; keys on the keyboard to move the sprite left and right. Press the mouse button to activate the background music.</p>
-        <p>In <a href="../tutorial3/tutorial3.html">tutorial 3</a>, we will took at renderables that support sprite sheets and animating textures as well as how to detect collisions between GameObjects.</p>
-        
+        <p>We have learned about user input and working with resources. We have moved from using solid boxes to textures as renderables. Fundamentally, our scene is quite similar to what we've done in the previous tutorial. </p>
+        <p>In <a href="../tutorial3/tutorial3.html">tutorial 3</a>, we will take a look at renderables that support spritesheets and animating textures. We will also see how to detect collisions between GameObjects.</p>
         
         <hr>
         <p align="center"><a href="../tutorial1/tutorial1.html">Tutorial 1</a> &lt;-- Tutorial 2 --&gt; <a href="../tutorial3/tutorial3.html">Tutorial 3</a></p>

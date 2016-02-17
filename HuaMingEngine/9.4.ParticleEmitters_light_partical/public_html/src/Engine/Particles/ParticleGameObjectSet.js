@@ -12,7 +12,8 @@
 function ParticleGameObjectSet() {
     GameObjectSet.call(this);
     this.mEmitterSet = [];
-    this.mDrawed = false;    
+    this.mDrawed = false;
+
 }
 gEngine.Core.inheritPrototype(ParticleGameObjectSet, GameObjectSet);
 
@@ -36,10 +37,10 @@ ParticleGameObjectSet.prototype.update = function () {
 
     // Cleanup Particles
     var i, e, obj;
-    for (i = 0; i < this.size(); i++) {
-        obj = this.getObjectAt(i);
+    for (i = 0; i < gCurrentScene.mAllParticle.size(); i++) {
+        obj = gCurrentScene.mAllParticle.getObjectAt(i);
         if (obj.hasExpired()) {
-            this.removeFromSet(obj);
+            gCurrentScene.mAllParticle.removeFromSet(obj);
         }
     }
 

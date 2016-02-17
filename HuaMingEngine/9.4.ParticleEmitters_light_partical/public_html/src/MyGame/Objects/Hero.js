@@ -60,7 +60,8 @@ Hero.prototype.update = function () {
         obj.rotateObjPointTo(p, 0.8);
         if (obj.pixelTouches(this, collisionPt)) {
             gCurrentScene.mAllDyePacks.removeFromSet(obj);
-            gCurrentScene.mAllParticles.addEmitterAt(collisionPt, 200, func);
+            obj.destory();
+            gCurrentScene.mAllParticle.addEmitterAt(collisionPt, 200, func);
         }
     }
     
@@ -76,7 +77,7 @@ Hero.prototype.update = function () {
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Z)) {
         if (gCurrentScene.mCamera.isMouseInViewport()) {
             var p = this.createParticle(gCurrentScene.mCamera.mouseWCX(), gCurrentScene.mCamera.mouseWCY());
-            gCurrentScene.mAllParticles.addToSet(p);
+          //  gCurrentScene.mAllParticle.addToSet(p);
         }
     }
     

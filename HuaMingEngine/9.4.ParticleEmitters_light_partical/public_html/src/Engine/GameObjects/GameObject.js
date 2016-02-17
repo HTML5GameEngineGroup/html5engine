@@ -20,7 +20,7 @@ function GameObject(renderableObj) {
     this.mCollidableFlag = false;
     this.mCollisionPixelFlag = false;
     this.mCollisionSet = null;
-    gCurrentScene.mAllObject.addToSet(this);
+    gCurrentScene.mAllUpdateSet.push(this);
     this.start();
 }
 GameObject.prototype.getXform = function () {
@@ -177,7 +177,7 @@ GameObject.prototype.collisionExitTest = function () {
     }
     for (i = 0; i < this.mCollisionSet.size(); i++) {
         var otherObj = this.mCollisionSet.mSet[i];
-        if (!gCurrentScene.mAllObject.findObject(otherObj)) {
+        if (!gCurrentScene.mAllUpdateSet.findObject(otherObj)) {
             this.onCollisionExit(otherObj);
             this.mCollisionSet.removeFromSet(otherObj)
             if (otherObj.mCollidableFlag) {
@@ -204,5 +204,7 @@ GameObject.prototype.destory = function () {
     var index = gCurrentScene.mAllDrawSet.indexOf(this.mRenderComponent);
     if (index > -1)
         gCurrentScene.mAllDrawSet.splice(index, 1);
-    gCurrentScene.mAllObject.removeFromSet(this);
+    var index = gCurrentScene.mAllUpdateSet.indexOf(this);
+    if (index > -1)
+        gCurrentScene.mAllUpdateSet.splice(index, 1);
 };

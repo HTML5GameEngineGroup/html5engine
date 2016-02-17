@@ -19,11 +19,13 @@
         <group>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/Engine/Particles/Particle.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/Engine/Renderables/TextureRenderable.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/MyGame/Objects/Minion.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/MyGame/MyGame.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/Engine/Renderables/LineRenderable.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/MyGame/Objects/Hero.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/Engine/Particles/ParticleEmitter.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/Engine/Core/Engine_Particle.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/MyGame/Objects/Wall.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/MyGame/Objects/DyePack.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/Engine/Particles/ParticleGameObject.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/Engine/Particles/ParticleGameObjectSet.js</file>
@@ -32,6 +34,7 @@
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/Engine/GameObjects/GameObjectSet.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/Engine/GameObjects/GameObject.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/MyGame/MyGame_Physics.js</file>
+            <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/MyGame/Objects/Platform.js</file>
             <file>file:/E:/html5engine/HuaMingEngine/9.4.ParticleEmitters_light_partical/public_html/src/Engine/Scene.js</file>
         </group>
     </open-files>

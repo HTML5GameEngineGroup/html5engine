@@ -37,6 +37,6 @@ ParticleEmitter.prototype.emitParticles = function (pSet) {
     var i, p;
     for (i = 0; i < numToEmit; i++) {
         p = this.mParticleCreator(this.mEmitPosition[0], this.mEmitPosition[1]);
-        pSet.addToSet(p);
+       // pSet.addToSet(p);
     }
 };

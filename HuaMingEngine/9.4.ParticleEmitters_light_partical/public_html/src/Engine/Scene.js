@@ -12,7 +12,7 @@ var gCurrentScene;
 function Scene() {
     this.mCamera = null;
     this.mAllCamera = null;
-    this.mAllObject = null;
+    this.mAllUpdateSet = null;
     this.mAllDrawSet = null;
     this.mAllLight = null;
     this.mAllShadow = null;
@@ -33,11 +33,12 @@ Scene.prototype.loadScene = function () {
 //   => Should call gEngine.GameLoop.start(this)!
 Scene.prototype.initialize = function () {
     // initialize the level (called from GameLoop)
-    this.mAllObject = new GameObjectSet();
+    this.mAllUpdateSet = [];
     this.mAllCamera = [];
     this.mAllDrawSet = [];    
     this.mAllParticle=new ParticleGameObjectSet();
     gCurrentScene.mAllDrawSet.push(this.mAllParticle);
+    gCurrentScene.mAllUpdateSet.push(this.mAllParticle);
     this.mAllLight = new LightSet();
     this.mAllShadow = [];
 };
@@ -52,7 +53,9 @@ Scene.prototype.update = function () {
     for (i = 0; i < this.mAllCamera.length; i++) {
         this.mAllCamera[i].update()
     }
-    this.mAllObject.update();
+    for (i = 0; i < this.mAllUpdateSet.length; i++) {
+        this.mAllUpdateSet[i].update();
+    }
     this._physicsSimulation();
 
     // create dye pack and remove the expired ones ...
@@ -90,21 +93,21 @@ Scene.prototype.collision = function () {
 
     var i;
     var j;
-    for (i = 0; i < this.mAllObject.mSet.length; i++) {
-        for (j = 0; j < this.mAllObject.mSet.length; j++) {
+    for (i = 0; i < this.mAllUpdateSet.length; i++) {
+        for (j = 0; j < this.mAllUpdateSet.length; j++) {
             if (i < j) {
-                if (this.mAllObject.mSet[i].mCollidableFlag) {
-                    this.mAllObject.mSet[i].collisionTest(this.mAllObject.mSet[j]);
+                if (this.mAllUpdateSet[i].mCollidableFlag) {
+                    this.mAllUpdateSet[i].collisionTest(this.mAllUpdateSet[j]);
                 }
             }
             else if (i > j) {
-                if (this.mAllObject.mSet[i].mCollidableFlag && !this.mAllObject.mSet[j].mCollidableFlag) {
-                    this.mAllObject.mSet[i].collisionTest(this.mAllObject.mSet[j]);
+                if (this.mAllUpdateSet[i].mCollidableFlag && !this.AllUpdateSet[j].mCollidableFlag) {
+                    this.mAllUpdateSet[i].collisionTest(this.mAllUpdateSet[j]);
                 }
             }
         }
-        if (this.mAllObject.mSet[i].mCollidableFlag) {
-            this.mAllObject.mSet[i].collisionExitTest();
+        if (this.mAllUpdateSet[i].mCollidableFlag) {
+            this.mAllUpdateSet[i].collisionExitTest();
         }
     }
 };

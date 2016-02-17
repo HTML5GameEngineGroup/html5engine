@@ -11,7 +11,7 @@
 
 "use strict";  // Operate in Strict mode such that variables must be declared before used!
 
-
+gEngine.Core.inheritPrototype(MyGame, Scene);
 function MyGame() {
     this.kMinionSprite = "assets/minion_sprite.png";
     this.kPlatformTexture = "assets/platform.png";
@@ -33,10 +33,10 @@ function MyGame() {
     this.mAllPlatforms = new GameObjectSet();
     this.mAllMinions = new GameObjectSet();
     this.mAllDyePacks = new GameObjectSet();
-    this.mAllParticles = new ParticleGameObjectSet();
+
 
 }
-gEngine.Core.inheritPrototype(MyGame, Scene);
+
 
 MyGame.prototype.loadScene = function () {
     gEngine.Textures.loadTexture(this.kMinionSprite);
@@ -178,6 +178,6 @@ MyGame.prototype.update = function () {
     this._physicsSimulation();
     
     this.mMsg.setText(this.kPrompt + ": DyePack=" + this.mAllDyePacks.size() +
-            " Particles=" + this.mAllParticles.size());
+            " Particles=" + this.mAllParticle.size());
 };
 

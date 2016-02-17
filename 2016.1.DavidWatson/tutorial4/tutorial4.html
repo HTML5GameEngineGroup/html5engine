@@ -27,7 +27,7 @@
 	<hr>
 		<h2><a id="resolution"></a>Collision Resolution</h2>
 		<p>In tutorial 3, we looked at detecting collisions between game elements. With per-pixel collision detection, we checked to determine if one element overlaps another. While this is very useful, for most games we need more than to just detect collisions. We need to look at collision resolution where the engine will detect a collision through overlap and "undo" the overlap before it is drawn to the screen.</p>
-		<p> To do this, we will apply an &quot;invisible shape&quot; over our GameObject where physics calculations will occur to simulate objects having mass and not being able to pass through eachother. The game engine supports the use of rectangles and circles as rigid shapes. While these shapes are not as precise as the per-pixel collision detection we saw previously, for determining locations of objects for collision resolution, these shapes work very well. By setting a virutal mass  to these shapes, the engine will calculate what happens when these objects collide.</p>
+		<p> To do this, we will apply an &quot;invisible shape&quot; over our GameObject where physics calculations will occur to simulate objects having mass and not being able to pass through each other. The game engine supports the use of rectangles and circles as rigid shapes. While these shapes are not as precise as the per-pixel collision detection we saw previously, for determining locations of objects for collision resolution, these shapes work very well. By setting a virutal mass  to these shapes, the engine will calculate what happens when these objects collide.</p>
 		<p>We create a new rigid bodies object, set it's size and apply it to a GameObject using the <code>setPhysicsComponent()</code> function. To simulate the physics of the game, we call the engine's physics processing functions such as <code>gEngine.Physics.processObjObj()</code>for resolving the physics interactions between two bodies.</p>
         <h3>Using Rigid Bodies</h3>
         <p>In the next example, we will create two renderables, a minion and a platform. We will place the platform in the center of our scene and allow keys to control movement of the minion. Using rigid bodies, we will make it so the minion cannot pass through the platform.</p>
@@ -68,7 +68,7 @@ MyGameScene.prototype.unloadScene = function () {
       		</pre>
         	<figcaption><p>Code snippet 4-1: Loading Assets</p></figcaption>
       	</figure>
-        <p>In the initialization function, we create our camera as we have done before. We create a background renderable, a minion renderable from the sprie sheet and we create a platform renderable. We embed the minion and platform renderables into GameObjects. We do not need to embed the background renderable as it will not be interacting with any other game element.</p>
+        <p>In the initialization function, we create our camera as we have done before. We create a background renderable, a minion renderable from the spritessheet and we create a platform renderable. We embed the minion and platform renderables into GameObjects. We do not need to embed the background renderable as it will not be interacting with any other game element.</p>
 		<figure>
 	  <pre>
 MyGameScene.prototype.initialize = function () {
@@ -316,6 +316,6 @@ MyGameScene.prototype.unloadScene = function () {
         <p align="center"><a href="../tutorial3/tutorial3.html">Tutorial 3</a> &lt;-- Tutorial 4 --&gt; <a href="../tutorial5/tutorial5.html">Tutorial 5</a><br>
 		  <a href="../index.html">Main tutorial guide page</a><br></p>
 	</div>
-    <h4><i>2/11/2016</i> - David Watson</h4>
+    <h4><i>2/11/2016</i> - David Watson, Proofread by Adedayo Odesile</h4>
     </body>
 </html>

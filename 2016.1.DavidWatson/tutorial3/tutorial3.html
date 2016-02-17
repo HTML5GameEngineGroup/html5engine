@@ -27,15 +27,16 @@
 		<h2><a id="sprites"></a>Sprites</h2>
 
 
-		<p>TextureRenderables have a big advantage over Renderables in being able to render a bitmap. They do have a few significant limitations. Our texture must have dimensions that are powers of 2 and they are static. While this may work fine for backgrounds or static visual elements, we typically want something more dynamic the enhace the &quot;action&quot; of the graphics in our game. A <strong>SpriteRenderable</strong> allow us to use a sprite sheet and define the portion of the sheet we want to display for the renderable.</p>
+		<p>TextureRenderables have a big advantage over Renderables in being able to render a bitmap. They do have a few significant limitations. Our texture must have dimensions that are powers of 2 and they are static. While this may work fine for backgrounds or static visual elements, we typically want something more dynamic to enhance the &quot;action&quot; of the graphics in our game. A <strong>SpriteRenderable</strong> allows us to use a spritesheet and define the portion of the sheet we want to display for the Renderable.</p>
         <p><figure>
         	<img src="assets/minion_sprite.png" width="512" height="256" alt=""/>
-            	<figcaption>figure 3-1: Sprite sheet</figcaption>
+            	<figcaption>figure 3-1: Spritesheet</figcaption>
             </figure>
         </p>
-        <p>With this, we can store many if not all of our graphics in a single resource. In figure 3-1, we see a sample sprite sheet. You will notice that the top row has variations of the same image and in the bottom row (second from the left), we have the same image we used in tutorial 2 and a reverse facing copy in the far right. We can use these types of images to simulate motion and infer direction. Figure 3-2 provides more details about our sprite sheet.</p>
+        <p>With this, we can store many if not all of our graphics in a single resource. In figure 3-1, we see a sample spritesheet. You will notice that the top row has variations of the same image and in the bottom row (second from the left), we have the same image we used in tutorial 2 and a reverse facing copy in the far right. We can use these types of images to simulate motion and infer direction. Figure 3-2 provides more details about our spritesheet.</p>
         <p>        
-        <figure><img src="assets/sprite_sheet.png" width="471" height="276" alt=""/><figcaption>Figure 3-2: Sprite sheet</figcaption>
+        <figure><img src="assets/sprite_sheet.png" width="471" height="276" alt=""/>
+        <figcaption>Figure 3-2: Spritesheet in detail</figcaption>
             </figure>
         </p>
 		<p> With coordinate location (0,0) being the bottom left of the entire sprite page, the bottom left coordinate of our texture from tutorial 2 is at (130,0). The size of this sub-image is 180 pixels wide by 180 pixels tall. Using the call <code>setElementPixelPositions(<em>left-x, right-x, lower-y, upper-y</em>);</code> we can define the specific portion of the sheet we want to render without worrying about the dimensions being powers of 2.</p>
@@ -80,8 +81,8 @@ MyGameScene.prototype.initialize = function () {
 </pre>
 		<figcaption class="codecaption">Code snippet 3-1: Adding a SpriteRenderable</figcaption>
         </figure>
-        <p>If you make the above changes to your code, you will notice that the scene looks exactly the same. So far, this doesn't seem very useful until we consider that we can consolidate all of our textures onto a single sprite sheet and that our renderable textures can be of arbitrary dimensions.</p>
-        <p>Unlike a TextureRenderable, SpriteRenderable allows us to change the renderable being shown by changing the element pixel position of the sprite sheet. There is an identical minion facing the opposite direction at (720,0). The size is still 180x180 so calling <code>this.mRenderable.setElementPixelPositions(720, 900, 0, 180);</code> will allow our sprite to appear to change direction.</p>
+        <p>If you make the above changes to your code, you will notice that the scene looks exactly the same. So far, this doesn't seem very useful until we consider that we can consolidate all of our textures onto a single spritesheet and that our renderable textures can be of arbitrary dimensions.</p>
+        <p>Unlike a TextureRenderable, SpriteRenderable allows us to change the renderable being shown by changing the element pixel position of the spritesheet. There is an identical minion facing the opposite direction at (720,0). The size is still 180x180 so calling <code>this.mRenderable.setElementPixelPositions(720, 900, 0, 180);</code> will allow our sprite to appear to change direction.</p>
         <p>Our <strong>draw()</strong> function is going to be identical to our previous samples.</p>
         <figure><pre>MyGameScene.prototype.draw = function () {
 	<b>// Clear the screen
@@ -93,7 +94,7 @@ MyGameScene.prototype.initialize = function () {
 	// Draw our objects
 	this.mGameObject.draw(this.mCamera);</b>
 };</pre>
-		<figcaption class="codecaption">Code snippet 3-2: Draw(same as code snippet 1-5)</figcaption>
+		<figcaption class="codecaption">Code snippet 3-2: Draw (same as code snippet 1-5)</figcaption>
         </figure>
         <p>Below, we modify our <strong>update()</strong> function to make the sprite change directions based on the keyboard controls.</p>
         
@@ -277,6 +278,6 @@ MyGameScene.prototype.initialize = function () {
         <p align="center"><a href="../tutorial2/tutorial2.html">Tutorial 2</a> &lt;-- Tutorial 3 --&gt; <a href="../tutorial4/tutorial4.html">Tutorial 4</a><br>
 		  <a href="../index.html">Main tutorial guide page</a><br></p>
 	</div>
-    <h4><i>2/11/2016</i> - David Watson</h4>
+    <h4><i>2/11/2016</i> - David Watson, Proofread by Adedayo Odesile</h4>
     </body>
 </html>

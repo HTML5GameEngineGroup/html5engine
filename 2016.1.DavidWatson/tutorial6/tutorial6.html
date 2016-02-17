@@ -27,14 +27,14 @@
 
 	<hr>
 		<h2><a id="shadows"></a>Shadows</h2>
-		<p>Much like lighting, in order for shadow to be rendered, we have to register each renderable to actively draw shadows. A renderable can be a shadow caster, a shadow receiver or both. We can use a LightRenderable or an IllumRenderable object as a source of shadow. We also need to use a ShadowReceiver. The ShadowReceiver will encapsulate a GameObject and we use it for  drawing.</p>
+		<p>Much like lighting, in order for shadow to be rendered, we have to register each renderable to actively draw shadows. A renderable can be a shadow caster, a shadow receiver or both. We can use a LightRenderable or an IllumRenderable object as a source of shadow. To do this, we will need to use a <strong>ShadowReceiver</strong> object. The ShadowReceiver  encapsulates a GameObject to provide shadow functionality. We then use this object for  drawing.</p>
 		<p>The general process is as follows...</p>
         <ol>
           <li>We create LightRenderable or IllumRenderable objects for the caster and receiver. But also define a Z position for the caster  to indicate a depth offset. This value is used to calculate shadows. As usual, we encapsulate the Renderable into GameObjects.</li>
           <li>We create our light source making sure to activate the calculation of shadows with the source using the <code>setLightCastShadowTo()</code> function. We apply the light source to the caster and receiver renderables.</li>
-          <li>We initialize a new <strong>ShadowReceiver</strong> object with the receiver's GameObject.</li>
+          <li>We initialize a new ShadowReceiver object with the receiver's GameObject.</li>
           <li>For every GameObject that we wish to be able to cast shadows onto the receiver, we call the receiver's <code>addShadowCaster()</code> function with a references to the caster GameObject.</li>
-          <li>During the draw phase, we draw with the ShadowReceiver object. It will calculate all shadows for it's renderable during drawing.	We	need to make sure that we draw the ShadowReceivers before other GameObjects.</li>
+          <li>During the draw phase, we draw with the ShadowReceiver object. It will calculate all shadows for its renderable during drawing.	We	need to make sure that we draw the ShadowReceivers before other GameObjects.</li>
         </ol>
 		<p>We can view the example <a href="../tutorial_source/index6a.html">here</a></p>
 		<figure><img src="assets/tutorial6-img1.png" width="501" height="400" alt=""/><figcaption>Figure 6-1: Minion Casting a Shadow</figcaption></figure>
@@ -354,6 +354,6 @@ MyGameScene.prototype.update = function () {
         <p align="center"><a href="../tutorial5/tutorial5.html">Tutorial 5</a> &lt;-- Tutorial 6<a href="../tutorial5/tutorial5.html"></a><br>
 		  <a href="../index.html">Main tutorial guide page</a><br></p>
 	</div>
-    <h4><i>2/5/2016</i> - David Watson</h4>
+    <h4><i>2/16/2016</i> - David Watson, Proofread by Adedayo Odesile</h4>
     </body>
 </html>

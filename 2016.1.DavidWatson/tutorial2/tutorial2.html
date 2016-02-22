@@ -18,9 +18,9 @@
 		<h2>Introduction</h2>
 		<p>In tutorial 1, we looked at creating the basic structure for our game scene. We created a camera object and a game object with a simple renderable. In this tutorial, we will look at  resource management, a more advanced renderable type and user input.</p>
         
-		<p align="center"><a href="#assets">Loading Resources</a> • <a href="#keyboard">Keyboard input</a> • <a href="#audio_mouse">Audio & Mouse</a> • <a href="#text">Text</a></p>
-        <p>Source code for tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
-        <p align="center"><a href="../tutorial_source/index2a.html" target="_blank">Drawing a Texture</a> • <a href="../tutorial_source/index2b.html" target="_blank">Keyboard Input</a> • <a href="../tutorial_source/index2c.html" target="_blank">Audio & Mouse</a> • <a href="../tutorial_source/index2d.html" target="_blank">Text</a></p>
+		<p><strong>Covered Topics</strong>: <a href="#assets">Loading Resources</a> • <a href="#keyboard">Keyboard input</a> • <a href="#audio_mouse">Audio & Mouse</a> • <a href="#text">Text</a></p>
+        <p><strong>Demonstrations</strong>: <a href="../tutorial_source/index2a.html" target="_blank">Drawing with a Texture</a> • <a href="../tutorial_source/index2b.html" target="_blank">Keyboard</a> • <a href="../tutorial_source/index2c.html" target="_blank">Audio & Mouse</a> • <a href="../tutorial_source/index2d.html" target="_blank">Text Renderables</a></p>
+        <p>Complete source code for all tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
 		
 		
 		<hr>
@@ -86,8 +86,8 @@ function unloadScene() {
 		<figcaption class="codecaption">Code snippet 2-3: Initialize</figcaption>
         </figure>
 
-		<p>The GameObject is created just as before, but now, we have a a reference to our new texture-based renderable. We also removed the behavior code for the GameObject. We no longer set a front direction or a speed. We do this so that we the GameObject does not move independently. We will soon be adding code to move the GameObject with keyboard controls. Without changing anything else in our code, viewing this in a web browser will give you results that you can vew <a href="../tutorial_source/index2a.html" target="_blank">here</a>. The image looks darker than we probably expected. We need to add lighting to the scene but that will come shortly.</p><figure><td><img src="assets/tutorial2-img1.png" width="519" height="417" alt=""/>
-		<figcaption>Figure 2-2: TextureRenderable</figcaption></td>
+		<p>The GameObject is created just as before, but now, we have a reference to our new texture-based renderable. We also removed the behavior code for the GameObject. We no longer set a front direction or a speed. We do this so that  the GameObject does not move independently. We will soon be adding code to move the GameObject with keyboard controls. Without changing anything else in our code, viewing this in a web browser will give you results that you can vew <a href="../tutorial_source/index2a.html" target="_blank">here</a>. The image looks darker than we probably expected. We need to add lighting to the scene but that will come shortly.</p><figure><img src="assets/tutorial2-img1.png" width="519" height="417" alt=""/>
+		<figcaption>Figure 2-2: TextureRenderable</figcaption>
         </figure></p>
         
         

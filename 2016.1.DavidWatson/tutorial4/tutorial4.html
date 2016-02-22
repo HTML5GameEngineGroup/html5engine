@@ -18,17 +18,17 @@
 		<h2>Introduction</h2>
 		<p>As we have already mentioned, GameObjects allow us to control the behavior of the elements in our game as well as the interactions between them. In this tutorial, we look at using rigid bodies to apply physics to our GameObjects and creating particles.</p>
         
-		<p align="center"><a href="#resolution">Collision Resolution</a> • <a href="#particles">Particles</a></p>
-        <p>Source code for tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
-        <p align="center"><a href="../tutorial_source/index4a.html" target="_blank">Rigid Bodies</a> • <a href="../tutorial_source/index4b.html" target="_blank">Particles</a></p>
+		<p><strong>Covered Topics</strong>: <a href="#resolution">Collision Resolution</a> • <a href="#particles">Particles</a></p>
+        <p><strong>Demonstrations</strong>: <a href="../tutorial_source/index4a.html" target="_blank">Rigid Bodies</a> • <a href="../tutorial_source/index4b.html" target="_blank">Particle System</a></p>
+        <p>Complete source code for all tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
         
 
 
 	<hr>
 		<h2><a id="resolution"></a>Collision Resolution</h2>
 		<p>In tutorial 3, we looked at detecting collisions between game elements. With per-pixel collision detection, we checked to determine if one element overlaps another. While this is very useful, for most games we need more than to just detect collisions. We need to look at collision resolution where the engine will detect a collision through overlap and "undo" the overlap before it is drawn to the screen.</p>
-		<p> To do this, we will apply an &quot;invisible shape&quot; over our GameObject where physics calculations will occur to simulate objects having mass and not being able to pass through each other. The game engine supports the use of rectangles and circles as rigid shapes. While these shapes are not as precise as the per-pixel collision detection we saw previously, for determining locations of objects for collision resolution, these shapes work very well. By setting a virutal mass  to these shapes, the engine will calculate what happens when these objects collide.</p>
-		<p>We create a new rigid bodies object, set it's size and apply it to a GameObject using the <code>setPhysicsComponent()</code> function. To simulate the physics of the game, we call the engine's physics processing functions such as <code>gEngine.Physics.processObjObj()</code>for resolving the physics interactions between two bodies.</p>
+		<p> To do this, we will apply an &quot;invisible shape&quot; over our GameObject where physics calculations will occur to simulate objects having mass and not being able to pass through each other. The game engine supports the use of rectangles and circles as rigid shapes. While these shapes are not as precise as the per-pixel collision detection we saw previously, for determining locations of objects for collision resolution, these shapes work very well. By setting a virtual mass  to these shapes, the engine will calculate what happens when these objects collide.</p>
+		<p>We create a new rigid bodies object, set its size and apply it to a GameObject using the <code>setPhysicsComponent()</code> function. To simulate the physics of the game, we call the engine's physics processing functions such as <code>gEngine.Physics.processObjObj()</code>for resolving the physics interactions between two bodies.</p>
         <h3>Using Rigid Bodies</h3>
         <p>In the next example, we will create two renderables, a minion and a platform. We will place the platform in the center of our scene and allow keys to control movement of the minion. Using rigid bodies, we will make it so the minion cannot pass through the platform.</p>
         <p>You can see the running example <a href="../tutorial_source/index4a.html" target="_blank">here</a>. The WASD keys move the minion around the screen. The 'C' key will show/hide the rigid rectangles for the GameObjects so you can view  the locations of our &quot;rigid&quot; boundaries.</p>

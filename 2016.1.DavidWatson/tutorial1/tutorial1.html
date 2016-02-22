@@ -18,9 +18,9 @@
 		<h2>Introduction</h2>
 		<p>In this tutorial, we will look at the basic building blocks and programming structure to build games. We look at the different types of objects we use and their respective roles with games. We will also gain an understanding of the operation of our game loop.</p>
         
-		<p align="center"><a href="#object_types">Object Types</a> • <a href="#scene_object">Scene Object</a> • <a href="#initialization">Initialization</a> • <a href="#game_loop">Game Loop</a></p>
-		<p>Source code for tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
-        <p align="center"><a href="../tutorial_source/index1a.html" target="_blank">Drawing a Renderable</a> • <a href="../tutorial_source/index1b.html" target="_blank">Renderable with Motion</a></p>
+		<p><strong>Covered Topics</strong>: <a href="#object_types">Object Types</a> • <a href="#scene_object">Scene Object</a> • <a href="#initialization">Initialization</a> • <a href="#game_loop">Game Loop</a></p>
+        <p><strong>Demonstrations</strong>: <a href="../tutorial_source/index1a.html" target="_blank">Drawing a Renderable</a> • <a href="../tutorial_source/index1b.html" target="_blank">Renderable with Motion</a>        </p>
+        <p>Complete source code for all tutorials can be downloaded from <a href="../assets/tutorials.zip">here</a>.</p>
         
         
 		<hr>
@@ -57,7 +57,7 @@ MyGameScene.prototype.draw = function () { };</strong></pre>
 
 		<p>
 		<ul>
-			<li>The <strong>constructor</strong>, <strong>loadScene()</strong> and <strong>initialize()</strong> are where initialization takes place.  These functions run only one time each and is where you define your variables and allocate resources.</li>
+			<li>The <strong>constructor</strong>, <strong>loadScene()</strong> and <strong>initialize()</strong> are where initialization takes place.  These functions run only one time each and are where you define your variables and allocate resources.</li>
 			<li>You update the status of your objects in the <strong>update()</strong> function.  Update is part of the runloop and executes 60 times per second.</li>
 			<li>Drawing occurs in the <strong>draw()</strong> function and occurs 60 times per second and always occurs after at least one update call has been made.</li>
 			<li>Cleanup occurs in the <strong>unloadScene()</strong> function.  It is called one time when you want the game/scene to end.  This is where you free up resources.</li>
@@ -117,7 +117,7 @@ gEngine.Core.inheritPrototype(MyGameScene, Scene);</pre>
 		<p> The size and position are in WC space with the position being the center of the object. In this example, since our size is 16x16 and position is (30,50), this will set our red rectangle from (22,42) at the lower-left corner to (38,58) at the upper-right corner.</p>
 		<p><code>this.mGameObject.getXform().setSize(16, 16);<br>
 		  this.mGameObject.getXform().setPosition(30, 50);</code></p>
-		<p> We also set a front direction. This identifies the direction that the game object will move (not to be confused with rotation). We use a vector (1,0) indicating that it is pointing to the right. We set a speed of 0.5. This will allow the game object to modify it's location by 0.5 units horizontally every update cycle.</p>
+		<p> We also set a front direction. This identifies the direction that the game object will move when given a speed value (not to be confused with rotation). We use a vector (1,0) indicating that it is pointing to the right. We set a speed of 0.5. This will allow the game object to modify it's location by 0.5 units horizontally every update cycle.</p>
 		<p><code>
 	    this.mGameObject.setCurrentFrontDir(vec2.fromValues(1, 0));<br>
 		  this.mGameObject.setSpeed(0.5);</code></p>

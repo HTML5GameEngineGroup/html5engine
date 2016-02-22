@@ -1,12 +1,12 @@
 <!DOCTYPE html>
+<html>
 <head>
     <title>Example 2.4: The JavaScript Objects Project</title>
     <link rel ="icon" type ="image/x-icon" href="./favicon.png">
-</head>
-<!--Use embedded shader code for now, in order to remove async loading complexity.-->
+  
+    <!-- external library -->
+    <script type="text/javascript" src="src/lib/jquery-2.1.4.min.js"></script>
 
-<body onload="new MyGame('GLCanvas');">
-    
     <!-- everything in-between the <script> tag is javascript -->
     <script type="x-shader/x-vertex" id="VertexShader">
         // this is the vertex shader 
@@ -39,7 +39,11 @@
     
     <!-- Client game code -->
         <script type="text/javascript" src="src/MyGame/MyGame.js"></script>
-    
+        <script type="text/javascript" src="src/main.js"></script>
+</head>
+<!--Use embedded shader code for now, in order to remove async loading complexity.-->
+
+<body>
     <canvas id="GLCanvas" width="640" height="480">
         <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
         Your browser does not support the HTML5 canvas.
@@ -47,3 +51,4 @@
     </canvas>
         
 </body>
+</html>

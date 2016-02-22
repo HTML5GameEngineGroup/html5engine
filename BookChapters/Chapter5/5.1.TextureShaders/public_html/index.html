@@ -2,19 +2,13 @@
 <head>
     <title>Example 5.1: Texture Shaders</title>
     <link rel ="icon" type ="image/x-icon" href="./favicon.png">
-</head>
-<!--Use embedded shader code for now, in order to remove async loading complexity.-->
-
-<body onload="
-        var myGame = new MyGame();
-        gEngine.Core.initializeEngineCore('GLCanvas', myGame);
-            ">
-    
+        
     <!-- the following says there are javascript source code contained in 
          the external source files
     -->
     <!-- external library -->
     <script type="text/javascript" src="src/lib/gl-matrix.js"></script>
+      <script type="text/javascript" src="src/lib/jquery-2.1.4.min.js"></script>
      
     <!-- Engine code -->
         <!-- Core of Engine --> 
@@ -42,9 +36,14 @@
     <!-- Client game code -->
         <script type="text/javascript" src="src/MyGame/MyGame.js"></script>
         <script type="text/javascript" src="src/MyGame/BlueLevel.js"></script>
+          <script type="text/javascript" src="src/main.js"></script>
         <!-- Util -->
         <script type="text/javascript" src="src/MyGame/Util/SceneFileParser.js"></script>
-    
+
+</head>
+<!--Use embedded shader code for now, in order to remove async loading complexity.-->
+
+<body>    
     <canvas id="GLCanvas" width="640" height="480">
         <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
         Your browser does not support the HTML5 canvas.

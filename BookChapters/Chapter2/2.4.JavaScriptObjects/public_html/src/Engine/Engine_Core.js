@@ -42,7 +42,7 @@ gEngine.Core = (function () {
         // now initialize the VertexBuffer
         gEngine.VertexBuffer.initialize();
     };
-
+    
     // Clears the draw area and draws one square
     var clearCanvas = function (color) {
         mGL.clearColor(color[0], color[1], color[2], color[3]);  // set the color to be cleared
@@ -56,6 +56,5 @@ gEngine.Core = (function () {
         initializeWebGL: initializeWebGL,
         clearCanvas: clearCanvas
     };
-
     return mPublic;
 }());

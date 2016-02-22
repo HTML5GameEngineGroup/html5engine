@@ -2,10 +2,14 @@
 <head>
     <title>Example 2.5: The Shader Source Files Project</title>
     <link rel ="icon" type ="image/x-icon" href="./favicon.png">
-</head>
-
-<body onload="new MyGame('GLCanvas');">
     
+    <!-- stylesheet to make the canvas fullscreen -->
+    <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
+    
+    <!-- external library -->
+    <script type="text/javascript" src="src/lib/jquery-2.1.4.min.js"></script>
+    
+        
     <!-- the following says there are javascript source code contained in 
          the external source files
     -->
@@ -16,7 +20,10 @@
     
     <!-- Client game code -->
         <script type="text/javascript" src="src/MyGame/MyGame.js"></script>
-    
+        <script type="text/javascript" src="src/main.js"></script>
+</head>
+
+<body>
     <canvas id="GLCanvas" width="640" height="480">
         <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
         Your browser does not support the HTML5 canvas.

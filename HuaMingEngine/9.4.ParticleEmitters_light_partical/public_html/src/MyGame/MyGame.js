@@ -116,6 +116,7 @@ MyGame.prototype.initialize = function () {
     this.mMsg.setColor([0, 0, 0, 1]);
     this.mMsg.getXform().setPosition(10, 110);
     this.mMsg.setTextHeight(3);
+    this.mDrawRigid=true;
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more

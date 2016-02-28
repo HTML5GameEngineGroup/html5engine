@@ -19,7 +19,7 @@ function RigidShape(xform) {
     this.mXform = xform; // this is typically from gameObject
     this.kPadding = 0.25; // size of the position mark
     
-    this.mPositionMark = new LineRenderable();
+    this.mPositionMark = new LineRenderable(true);
     
     this.mDrawBounds = false;
     
@@ -29,6 +29,8 @@ function RigidShape(xform) {
     this.mVelocity = vec2.fromValues(0, 0);
     this.mFriction = 0.3;
     this.mAcceleration = gEngine.Physics.getSystemtAcceleration();
+    gCurrentScene.mAllRigidShape.push(this)
+    
 }
 
 RigidShape.prototype.rigidType = function () {

@@ -16,7 +16,9 @@ function Scene() {
     this.mAllDrawSet = null;
     this.mAllLight = null;
     this.mAllShadow = null;
-    this.mAllParticle=null;
+    this.mAllParticle = null;
+    this.mAllRigidShape = null;
+    this.mDrawRigid = false;
 }
 
 //<editor-fold desc="functions subclass should override">
@@ -32,23 +34,20 @@ Scene.prototype.loadScene = function () {
 // Performs all initialization functions
 //   => Should call gEngine.GameLoop.start(this)!
 Scene.prototype.initialize = function () {
-    // initialize the level (called from GameLoop)
     this.mAllUpdateSet = [];
     this.mAllCamera = [];
-    this.mAllDrawSet = [];    
-    this.mAllParticle=new ParticleGameObjectSet();
+    this.mAllDrawSet = [];
+    this.mAllParticle = new ParticleGameObjectSet();
     gCurrentScene.mAllDrawSet.push(this.mAllParticle);
     gCurrentScene.mAllUpdateSet.push(this.mAllParticle);
     this.mAllLight = new LightSet();
     this.mAllShadow = [];
+    this.mAllRigidShape = [];
 };
 // update function to be called form EngineCore.GameLoop
 Scene.prototype.update = function () {
     // when done with this level should call:
     // GameLoop.stop() ==> which will call this.unloadScene();
-    var func = function (x, y) {
-        this.createParticle.call(this, x, y);
-    };
     var i;
     for (i = 0; i < this.mAllCamera.length; i++) {
         this.mAllCamera[i].update()
@@ -67,16 +66,21 @@ Scene.prototype.draw = function () {
     var i;
     var j;
     for (i = 0; i < this.mAllCamera.length; i++) {
-        this.mAllCamera[i].setupViewProjection();       
+        this.mAllCamera[i].setupViewProjection();
         for (j = 0; j < this.mAllShadow.length; j++) {
             this.mAllShadow[j].draw(this.mAllCamera[i]);
         }
         for (j = 0; j < this.mAllDrawSet.length; j++) {
-            if(!this.mAllDrawSet[j].mAutoDrawEnable)
+            if (!this.mAllDrawSet[j].mAutoDrawEnable)
                 this.mAllDrawSet[j].draw(this.mAllCamera[i]);
         }
         for (j = 0; j < this.mAllDrawSet.length; j++) {
-              this.mAllDrawSet[j].mDrawed=false;
+            this.mAllDrawSet[j].mDrawed = false;
+        }
+        if (this.mDrawRigid) {
+            for (j = 0; j < this.mAllRigidShape.length; j++) {
+                this.mAllRigidShape[j].draw(this.mAllCamera[i]);
+            }
         }
     }
 

@@ -35,7 +35,6 @@ function Light() {
     this.mLightType = Light.eLightType.ePointLight;
     this.mIsOn = true;
     this.mCastShadow = false;
-    gCurrentScene.mAllLight.addToSet(this);
 }
 
 //<editor-fold desc="public functions">

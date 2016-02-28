@@ -11,8 +11,9 @@
 function RigidCircle(xform, r) {
     RigidShape.call(this, xform);
     this.kNumSides = 16;
-    this.mSides = new LineRenderable();
+    this.mSides = new LineRenderable(true);
     this.mRadius = r;
+    gCurrentScene.mAllRigidShape.push(this)
 }
 gEngine.Core.inheritPrototype(RigidCircle, RigidShape);
 

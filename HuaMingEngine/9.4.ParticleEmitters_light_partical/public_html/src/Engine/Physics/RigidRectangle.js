@@ -10,10 +10,11 @@
 
 function RigidRectangle(xform, w, h) {
     RigidShape.call(this, xform);
-    this.mSides = new LineRenderable();
+    this.mSides = new LineRenderable(true);
     
     this.mWidth = w;
     this.mHeight = h;
+    gCurrentScene.mAllRigidShape.push(this)
 }
 gEngine.Core.inheritPrototype(RigidRectangle, RigidShape);
 

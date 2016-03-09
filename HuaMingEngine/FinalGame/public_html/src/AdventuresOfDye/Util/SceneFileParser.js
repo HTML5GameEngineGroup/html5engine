@@ -105,7 +105,7 @@ SceneFileParser.prototype.parsePlatform = function (texture, normal, lightSet) {
         this._convertToNum(v);
 
         p = new Platform(x, y, v, r, texture, normal, lightSet);
-        gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, p);
+
         gEngine.LayerManager.addAsShadowCaster(p);
 
         allPlatforms.push(p);
@@ -141,7 +141,7 @@ SceneFileParser.prototype.parseMinions = function (texture, normal, lightSet) {
                 m = new ChaserMinion(x, y, v, r, t, texture, normal, lightSet, w, h);
                 break;
         }
-        gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, m);
+
         gEngine.LayerManager.addAsShadowCaster(m);
 
         allMinions.push(m);
@@ -168,7 +168,7 @@ SceneFileParser.prototype.parseBoss = function (texture0, texture1, texture2,
         b = new Boss(x, y, v, r, t, texture0, texture1, texture2,
                 texture3, texture4, texture5, texture6, normal, lightSet, hero);
 
-        gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, b);
+
         gEngine.LayerManager.addAsShadowCaster(b);
     }
 
@@ -186,7 +186,7 @@ SceneFileParser.prototype.parseWall = function (texture, normal, lightSet) {
 
 
         w = new Wall(x, y, texture, normal, lightSet);
-        gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, w);
+
         gEngine.LayerManager.addAsShadowCaster(w);
 
         allWalls.push(w);
@@ -204,7 +204,7 @@ SceneFileParser.prototype.parseDoors = function (texture0, texture1, texture2, l
         y = Number(elm.item(i).attributes.getNamedItem("PosY").value);
 
         d = new Door(x, y, texture0, texture1, texture2, lightSet);
-        gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, d);
+
         gEngine.LayerManager.addAsShadowCaster(d);
 
         allDoors.push(d);
@@ -223,7 +223,7 @@ SceneFileParser.prototype.parseButtons = function (texture, lightSet) {
         t = Number(elm.item(i).attributes.getNamedItem("Type").value);
 
         b = new Button(x, y, texture, t, lightSet);
-        gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, b);
+
         gEngine.LayerManager.addAsShadowCaster(b);
 
         allButtons.push(b);
@@ -268,9 +268,10 @@ SceneFileParser.prototype.parseBackground = function (level, refCam, lightSet) {
         var sr;
         if (s === "true") {
             sr = new ShadowReceiver(bg);
+            gEngine.LayerManager.removeFromLayer(gEngine.eLayer.eActors,bg);
             gEngine.LayerManager.addToLayer(gEngine.eLayer.eShadowReceiver, sr);
-        } else {
-            gEngine.LayerManager.addToLayer(gEngine.eLayer.eBackground, bg);
+        } else {          
+            gEngine.LayerManager.moveToNewLayer(gEngine.eLayer.eActors,gEngine.eLayer.eBackground, bg);
         }
 
     }

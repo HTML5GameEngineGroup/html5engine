@@ -19,7 +19,8 @@ function ParticleGameObjectSet() {
     GameObjectSet.call(this);
     this.mEmitterSet = [];
     this.mDrawed = false;
-
+    this.mLayer=2;
+    gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, this);
 }
 gEngine.Core.inheritPrototype(ParticleGameObjectSet, GameObjectSet);
 
@@ -43,13 +44,10 @@ ParticleGameObjectSet.prototype.addEmitterAt = function (p, n, func) {
  * @memberOf ParticleGameObjectSet
  */
 ParticleGameObjectSet.prototype.draw = function (aCamera) {
-    if (!this.mDrawed) {
-        this.mDrawed=true;
-        var gl = gEngine.Core.getGL();
-        gl.blendFunc(gl.ONE, gl.ONE);  // for additive blending!
-        GameObjectSet.prototype.draw.call(this, aCamera);
-        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); // restore alpha blending
-    }
+    var gl = gEngine.Core.getGL();
+    gl.blendFunc(gl.ONE, gl.ONE);  // for additive blending!
+    GameObjectSet.prototype.draw.call(this, aCamera);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA); // restore alpha blending
 };
 
 /**
@@ -58,19 +56,19 @@ ParticleGameObjectSet.prototype.draw = function (aCamera) {
  * @memberOf ParticleGameObjectSet
  */
 ParticleGameObjectSet.prototype.update = function () {
-
-
-    // Cleanup Particles
+    
+    GameObjectSet.prototype.update.call(this);
+    
     var i, e, obj;
-    for (i = 0; i < gCurrentScene.mAllParticle.size(); i++) {
-        obj = gCurrentScene.mAllParticle.getObjectAt(i);
+    for (i=0; i<this.size(); i++) {
+        obj = this.getObjectAt(i);
         if (obj.hasExpired()) {
-            gCurrentScene.mAllParticle.removeFromSet(obj);
+            this.removeFromSet(obj);
         }
     }
-
+    
     // Emit new particles
-    for (i = 0; i < this.mEmitterSet.length; i++) {
+    for (i=0; i<this.mEmitterSet.length; i++) {
         e = this.mEmitterSet[i];
         e.emitParticles(this);
         if (e.expired()) {

@@ -179,25 +179,12 @@ GameLevel_01.prototype.initialize = function () {
             [0, 0, 320, 180],
             2
             );
-    this.mShowPeek = false;
+    this.mPeekCam.mEnable = false;
 };
 
 // This is the draw function, make sure to setup proper drawing environment, and more
 // importantly, make sure to _NOT_ change any state.
-GameLevel_01.prototype.draw = function () {
-    // Step A: clear the canvas
-    gEngine.Core.clearCanvas([0.9, 0.9, 0.9, 1.0]); // clear to light gray
 
-    this.mCamera.setupViewProjection();
-    gEngine.LayerManager.drawAllLayers(this.mCamera);
-
-    this.mAllParticles.draw(this.mCamera);
-
-    if (this.mShowPeek) {
-        this.mPeekCam.setupViewProjection();
-        gEngine.LayerManager.drawAllLayers(this.mPeekCam);
-    }
-};
 
 // The Update function, updates the application state. Make sure to _NOT_ draw
 // anything from this function!

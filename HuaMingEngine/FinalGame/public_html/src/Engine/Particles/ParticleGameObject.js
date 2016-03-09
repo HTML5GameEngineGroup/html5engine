@@ -23,11 +23,13 @@ function ParticleGameObject(texture, atX, atY, cyclesToLive) {
     var renderableObj = new ParticleRenderable(texture,true);
     var xf = renderableObj.getXform();
     xf.setPosition(atX, atY);
+    
     GameObject.call(this, renderableObj);
+    gEngine.LayerManager.removeFromLayer(gEngine.eLayer.eActors,this);
+    this.mLayer=null;
     
     var p = new Particle(xf.getPosition());
     this.setPhysicsComponent(p);
-    gCurrentScene.mAllParticle.addToSet(this);
     this.mDeltaColor = [0, 0, 0, 0];
     this.mSizeDelta = 0;
     this.mCyclesToLive = cyclesToLive;

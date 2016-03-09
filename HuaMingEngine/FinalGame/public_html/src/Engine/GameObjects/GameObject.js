@@ -30,6 +30,8 @@ function GameObject(renderableObj) {
     this.mCollisionSet = null;
     this.start();
     gCurrentScene.mAllObject.push(this);
+    this.mLayer=2;
+    gEngine.LayerManager.addToLayer(gEngine.eLayer.eActors, this);
 }
 
 /**
@@ -277,10 +279,9 @@ GameObject.prototype.onCollisionExit = function (otherObj) {
 
 };
 GameObject.prototype.destory = function () {
-    var index = gCurrentScene.mAllDrawSet.indexOf(this.mRenderComponent);
-    if (index > -1)
-        gCurrentScene.mAllDrawSet.splice(index, 1);
-    var index = gCurrentScene.mAllUpdateSet.indexOf(this);
+    
+    var index = gCurrentScene.mAllObject.indexOf(this);
     if (index > -1)
         gCurrentScene.mAllUpdateSet.splice(index, 1);
+    gEngine.LayerManager.removeFromLayer(this.mLayer,this);
 };

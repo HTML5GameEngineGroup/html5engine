@@ -1,30 +1,26 @@
 <!DOCTYPE html>
-<head>
-    <title>Example 2.5: The Shader Source Files Project</title>
-    <link rel ="icon" type ="image/x-icon" href="./assets/favicon.png">
+<html>
+    <head>
+        <title>Example 2.5: The Shader Source Files Project</title>
+        <link rel ="icon" type ="image/x-icon" href="./favicon.png">
 
-    <!-- external library -->
-    <script type="text/javascript" src="src/lib/jquery-2.1.4.min.js"></script>
+        <!-- the following says there are javascript source code contained in 
+             the external source files
+        -->
+        <!-- Engine code -->
+        <script type="text/javascript" src="src/Engine/Engine_Core.js"></script>
+        <script type="text/javascript" src="src/Engine/Engine_VertexBuffer.js"></script>
+        <script type="text/javascript" src="src/Engine/SimpleShader.js"></script>
 
+        <!-- Client game code -->
+        <script type="text/javascript" src="src/MyGame/MyGame.js"></script>
+    </head>
 
-    <!-- the following says there are javascript source code contained in 
-         the external source files
-    -->
-    <!-- Engine code -->
-    <script type="text/javascript" src="src/Engine/Engine_Core.js"></script>
-    <script type="text/javascript" src="src/Engine/Engine_VertexBuffer.js"></script>
-    <script type="text/javascript" src="src/Engine/SimpleShader.js"></script>
-
-    <!-- Client game code -->
-    <script type="text/javascript" src="src/MyGame/Main.js"></script>
-    <script type="text/javascript" src="src/MyGame/MyGame.js"></script>
-</head>
-
-<body>
-    <canvas id="GLCanvas" width="640" height="480">
-        <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
-        Your browser does not support the HTML5 canvas.
-        <!-- this message will show only if WebGL clearing failed -->
-    </canvas>
-
-</body>
+    <body onload="new MyGame('GLCanvas');">
+        <canvas id="GLCanvas" width="640" height="480">
+            <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
+            Your browser does not support the HTML5 canvas.
+            <!-- this message will show only if WebGL clearing failed -->
+        </canvas>
+    </body>
+</html>

@@ -2,11 +2,8 @@
 <html>
     <head>
         <title>Example 2.4: The JavaScript Objects Project</title>
-        <link rel ="icon" type ="image/x-icon" href="./assets/favicon.png">
-
-        <!-- external library -->
-        <script type="text/javascript" src="src/lib/jquery-2.1.4.min.js"></script>
-
+        <link rel ="icon" type ="image/x-icon" href="./favicon.png">
+    
         <!-- everything in-between the <script> tag is javascript -->
         <script type="x-shader/x-vertex" id="VertexShader">
             // this is the vertex shader 
@@ -38,17 +35,16 @@
         <script type="text/javascript" src="src/Engine/SimpleShader.js"></script>
 
         <!-- Client game code -->
-        <script type="text/javascript" src="src/MyGame/Main.js"></script>
+        
         <script type="text/javascript" src="src/MyGame/MyGame.js"></script>
+        <!--Use embedded shader code for now, in order to remove async loading complexity.-->
     </head>
-    <!--Use embedded shader code for now, in order to remove async loading complexity.-->
-
-    <body>
+    
+    <body onload="new MyGame('GLCanvas');">
         <canvas id="GLCanvas" width="640" height="480">
             <!-- GLCanvas is the area we will draw in: a 640x480 area. -->
             Your browser does not support the HTML5 canvas.
             <!-- this message will show only if WebGL clearing failed -->
         </canvas>
-
     </body>
 </html>

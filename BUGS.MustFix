@@ -1,0 +1,18 @@
+1. Early chapters: activateShader(): should bind to ArrayBuffer and setAttribute!
+    Must include these two lines
+           gl.bindBuffer(gl.ARRAY_BUFFER, buf);    
+           gl.vertexAttribPointer(this.mShaderVertexPositionAttribute,        
+                            3,              // each element is a 3-float (x,y.z)        
+                            gl.FLOAT,       // data type is FLOAT        
+                            false,          // if the content is normalized vectors        
+                            0,              // number of bytes to skip in between elements        
+                            0);             // offsets to the first element
+
+2. Chapter 7.5: Camera_Input.js:
+      isMouseInViewport(): Left-bottom: must use mViewport[0] and mViewport[1] instead of 0 and 0
+      
+      Camera.prototype.isMouseInViewport = function (dcX, dcY) {    
+          return ((dcX >= this.mViewport[0]) && 
+                  (dcX < (this.mViewport[0] + this.mViewport[2])) &&  // viewport[2] is width            
+                  (dcY >= this.mViewport[2]) && 
+                  (dcY < (this.mViewport[2] + this.mViewport[3])));   // viewport[3] is height};

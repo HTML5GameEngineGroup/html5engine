@@ -14,5 +14,5 @@
       Camera.prototype.isMouseInViewport = function (dcX, dcY) {    
           return ((dcX >= this.mViewport[0]) && 
                   (dcX < (this.mViewport[0] + this.mViewport[2])) &&  // viewport[2] is width            
-                  (dcY >= this.mViewport[2]) && 
-                  (dcY < (this.mViewport[2] + this.mViewport[3])));   // viewport[3] is height};
+                  (dcY >= this.mViewport[1]) && 
+                  (dcY < (this.mViewport[1] + this.mViewport[3])));   // viewport[3] is height};

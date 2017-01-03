@@ -3,6 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group/>
-        <group name="GameEnginePhysicsBook"/>
+        <group name="GameEnginePhysicsBook">
+            <file>file:/C:/Users/Kelvin/Desktop/GitHub/GameEnginePhysicsBook/Chapter4/Chapter4.1RigidShapeMovements/public_html/RigidBody/RigidShape.js</file>
+            <file>file:/C:/Users/Kelvin/Desktop/GitHub/GameEnginePhysicsBook/Chapter4/Chapter4.1RigidShapeMovements/public_html/RigidBody/Circle_collision.js</file>
+            <file>file:/C:/Users/Kelvin/Desktop/GitHub/GameEnginePhysicsBook/Chapter4/Chapter4.1RigidShapeMovements/public_html/RigidBody/Rectangle_collision.js</file>
+        </group>
     </open-files>
 </project-private>

@@ -33,4 +33,8 @@ WASDObj.prototype.keyControl = function () {
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.X)) {
         xform.incRotationByDegree(-1);
     }
+    
+    this.getRigidBody().userSetsState();
+    
+    
 };

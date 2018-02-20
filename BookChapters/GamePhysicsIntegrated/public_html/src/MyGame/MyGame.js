@@ -147,16 +147,11 @@ MyGame.prototype.update = function () {
         this.increasShapeSize(obj, -MyGame.kBoundDelta);
     }
     
-    if (gEngine.Input.isKeyClicked(gEngine.Input.keys.F)) {
-        var x = 20 + Math.random() * 60;
-        var y = 75;
-        var m = new Minion(this.kMinionSprite, x, y, true);
-        this.mAllObjs.addToSet(m);
-    }
     if (gEngine.Input.isKeyClicked(gEngine.Input.keys.G)) {
         var x = 20 + Math.random() * 60;
         var y = 75;
-        var m = new Minion(this.kMinionSprite, x, y, false);
+        var t = Math.random() > 0.5;
+        var m = new Minion(this.kMinionSprite, x, y, t);
         this.mAllObjs.addToSet(m);
     }
         

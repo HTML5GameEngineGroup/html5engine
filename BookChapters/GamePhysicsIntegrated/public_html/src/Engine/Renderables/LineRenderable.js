@@ -135,5 +135,8 @@ LineRenderable.prototype.setSecondVertex = function (x, y) {
     this.mP2[1] = y;
 };
 
+LineRenderable.prototype.getFirstVertex = function() { return this.mP1; };
+LineRenderable.prototype.getSecondVertex = function() { return this.mP2; };
+
 //--- end of Public Methods
 //</editor-fold>

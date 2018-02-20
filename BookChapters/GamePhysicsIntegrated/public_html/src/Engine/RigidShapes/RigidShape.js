@@ -111,7 +111,7 @@ RigidShape.prototype.userSetsState = function() {
         delta = kRigidShapeDelta;
     }
     if (gEngine.Input.isKeyPressed(gEngine.Input.keys.Down)) {
-        delta = -kRigidShapeDelta
+        delta = -kRigidShapeDelta;
     }
     if (delta !== 0) {
         if (gEngine.Input.isKeyPressed(gEngine.Input.keys.M)) {

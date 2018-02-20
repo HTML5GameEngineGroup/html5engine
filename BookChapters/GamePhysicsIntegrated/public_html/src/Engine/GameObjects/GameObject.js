@@ -61,6 +61,7 @@ GameObject.prototype.isVisible = function () { return this.mVisible; };
 
 GameObject.prototype.setCurrentFrontDir = function (f) { vec2.normalize(this.mCurrentFrontDir, f); };
 
+
 /**
  * Return the front vector of the GameObject
  * @returns {vec2} GameObject's front vector
